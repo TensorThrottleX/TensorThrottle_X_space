@@ -245,9 +245,12 @@ interface CognitiveDashboardProps {
 
 /* HOME > COGNITIVE_DASHBOARD > COMPONENT > MAIN_CONTAINER */
 export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps): React.ReactNode {
-    const { uiMode, setUiMode, renderMode } = useUI()
-    const isPrecision = renderMode === 'normal'
+    const { uiMode, setUiMode, renderMode, isPrecision } = useUI()
+    const isNormalTheme = renderMode === 'normal'
     const isBright = renderMode === 'bright'
+
+    // Combining for component logic - using the global isPrecision flag
+    const usePrecisionStyle = isPrecision || (renderMode === 'normal' && !isBright) // Fallback or specific logic if needed
 
     /* HOME > COGNITIVE_DASHBOARD > STATE > TREE_RESET */
     useEffect(() => {
@@ -269,7 +272,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                 className="absolute inset-x-0 top-[260px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
             >
                 <div className="relative pointer-events-auto w-full flex justify-center px-4">
-                    <SystemQuoteRenderer isPrecision={isPrecision} />
+                    <SystemQuoteRenderer isPrecision={usePrecisionStyle} />
                 </div>
             </motion.div>
         )
@@ -302,7 +305,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                             <StackedDeck
                                 mode={mode}
                                 content={currentContent}
-                                isPrecision={isPrecision}
+                                isPrecision={usePrecisionStyle}
                                 isBright={isBright}
                                 onInitialize={() => setUiMode('tree')}
                             />

@@ -5,8 +5,7 @@ import { useUI } from '@/components/providers/UIProvider';
 
 export function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
-    const { renderMode } = useUI();
-    const isPrecision = renderMode === 'precision';
+    const { isPrecision } = useUI();
     const [isActive, setIsActive] = useState(false);
 
     // Lerp state

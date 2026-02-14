@@ -27,7 +27,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   const pathname = usePathname()
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
-  const { renderMode, setRenderMode, setMainView, setUiMode } = useUI()
+  const { renderMode, setRenderMode, setIsPrecision, setMainView, setUiMode } = useUI()
 
   const isActive = (href: string): boolean => {
     if (activeHref) return activeHref === href
@@ -41,6 +41,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     // [CRITICAL_SYNC] – Reset all sectional and immersive states before navigation
     setMainView('dashboard')
     setUiMode('default')
+    setIsPrecision(false)
 
     // Check for native View Transitions support
     if (!(document as any).startViewTransition) {

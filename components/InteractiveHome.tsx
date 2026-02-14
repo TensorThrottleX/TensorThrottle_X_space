@@ -7,7 +7,7 @@ import { useUI } from '@/components/providers/UIProvider'
 
 export function InteractiveHome(): React.ReactNode {
   const router = useRouter()
-  const { renderMode, setRenderMode, setIsTerminalOpen } = useUI()
+  const { renderMode, setRenderMode, isPrecision, setIsPrecision, setIsTerminalOpen } = useUI()
   const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res', text: string }[]>([])
   const [historyLog, setHistoryLog] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -178,27 +178,56 @@ Render Mode: NORMAL (Cinematic)
 Visuals: Standard
 Video: Active`
     }
-    else if (['mode bright', 'render bright', 'bright', 'mode precision', 'focus on'].includes(cleanCmd)) {
+    else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) {
       setRenderMode('bright')
       response = `[SYSTEM_UPDATE]
 Render Mode: BRIGHT (High Clarity)
 Visuals: Inverted/Matte
 Video: Suspended`
     }
-    else if (['mode dark', 'render dark', 'dark', 'focus mode'].includes(cleanCmd)) {
+    else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) {
       setRenderMode('dark')
       response = `[SYSTEM_UPDATE]
 Render Mode: DARK (Deep Focus)
 Visuals: Matte Black
 Video: Suspended`
     }
+    else if (['mode precision', 'focus on', 'precision on'].includes(cleanCmd)) {
+      if (isPrecision) {
+        response = `[SYSTEM_NOTICE]
+Precision Mode already active.`
+      } else {
+        setIsPrecision(true)
+        response = `[SYSTEM_UPDATE]
+Precision Mode: ACTIVE
+Enhancements: Focus Optimized
+Background: Deep Black`
+      }
+    }
+    else if (['focus off', 'precision off', 'focus exit'].includes(cleanCmd)) {
+      if (!isPrecision) {
+        response = `[SYSTEM_NOTICE]
+Precision Mode already inactive.`
+      } else {
+        setIsPrecision(false)
+        response = `[SYSTEM_UPDATE]
+Precision Mode: INACTIVE
+Restoring Standard Visuals...`
+      }
+    }
+    else if (['focus', 'precision'].includes(cleanCmd)) {
+      const nextState = !isPrecision
+      setIsPrecision(nextState)
+      response = `[FORCE_TOGGLE]
+Precision Mode: ${nextState ? 'ACTIVE' : 'INACTIVE'}`
+    }
     else if (['mode', 'render'].includes(cleanCmd)) {
       // Circle toggle
-      setRenderMode(((prev: 'normal' | 'bright' | 'dark') => {
+      setRenderMode((prev: 'normal' | 'bright' | 'dark') => {
         if (prev === 'normal') return 'bright'
         if (prev === 'bright') return 'dark'
         return 'normal'
-      }) as any)
+      })
       response = `[RENDER_TOGGLE]
 Cycling render mode...`
     }
@@ -401,6 +430,12 @@ Cycling render mode...`
              background: rgba(0, 0, 0, 0.05);
              border-color: #000;
              color: #000;
+          }
+          /* Override for precision mode active trigger */
+          body.mode-precision .bgm-trigger.active {
+             background: rgba(34, 211, 238, 0.1);
+             border-color: rgba(34, 211, 238, 0.5);
+             color: #22d3ee;
           }
         `}</style>
 
