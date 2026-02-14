@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --primary: #ffffff;
+    --secondary: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #ffffff;
+}
+
+@layer base {
+    * {
+        box-sizing: border-box;
+        border-color: var(--border);
+    }
+
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        margin: 0;
+        overflow: hidden;
+    }
+}
+
+/* Custom Utilities for the Hero Title */
+@layer components {
+    .hero-title {
+        max-width: 50vw;
+        margin-top: 60px;
+        margin-left: 60px;
+        font-size: clamp(2rem, 5vw, 4.5rem);
+        font-family: var(--font-sans);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: white;
+        transition: letter-spacing 250ms ease, opacity 500ms ease, transform 500ms ease;
+        cursor: default;
+        user-select: none;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    .hero-title:hover {
+        letter-spacing: 0.08em;
+    }
+
+    .fade-in {
+        animation: fadeIn 800ms ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-title {
+        margin-left: 30px;
+        margin-top: 40px;
+        max-width: 80vw;
+    }
+}

@@ -1,0 +1,460 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Custom scrollbar for dark theme */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-white\/20 {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+}
+
+@layer base {
+
+  /* GLOBAL DEFAULTS (NORMAL / CINEMATIC MODE) */
+  :root {
+    /* Base Colors - Cinematic Dark */
+    --bg-primary: 0 0% 0%;
+    /* Video + Overlay logic handled in component, base is black */
+    --background: 0 0% 0%;
+
+    --foreground: 210 20% 90%;
+    /* #e5e7eb */
+    --text-primary: 210 20% 90%;
+
+    --text-secondary: 215 16% 65%;
+    /* #9ca3af */
+    --muted-foreground: 215 16% 65%;
+
+    --card: 0 0% 5%;
+    /* fallback */
+    --card-bg: rgba(0, 0, 0, 0.5);
+    /* Glass in normal mode */
+    --card-foreground: 210 20% 90%;
+    --card-border: rgba(255, 255, 255, 0.1);
+
+    --sidebar-bg: rgba(20, 20, 20, 0.6);
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 210 20% 90%;
+
+    --primary: 180 100% 50%;
+    /* Cyan */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 210 20% 90%;
+
+    --accent: 180 100% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 90%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+
+    --heading-primary: #ffffff;
+
+    /* Custom Tokens */
+    --terminal-bg: rgba(0, 0, 0, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  /* BRIGHT MODE (Engineering Lab - Refined) */
+  .mode-bright {
+    /* Base Background - #f5f6f8 */
+    --bg-primary: 220 14% 96%;
+    --background: 220 14% 96%;
+
+    /* Text - High Contrast */
+    --foreground: 0 0% 6.7%;
+    /* #111111 */
+    --text-primary: 0 0% 6.7%;
+
+    --text-secondary: 0 0% 26.7%;
+    /* #444444 */
+    --muted-foreground: 0 0% 26.7%;
+
+    /* Cards - Clean White, Soft Shadow */
+    --card: 0 0% 100%;
+    /* #ffffff */
+    --card-bg: #ffffff;
+    --card-foreground: 0 0% 6.7%;
+    --card-border: rgba(0, 0, 0, 0.06);
+
+    /* Sidebar - Distinct from bg */
+    --sidebar-bg: #eef1f4;
+    --sidebar-border: rgba(0, 0, 0, 0.06);
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 6.7%;
+
+    --primary: 0 0% 6.7%;
+    /* #111111 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 6.7%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 0 0% 6.7%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 0% 0.06;
+    --input: 0 0% 90%;
+    --ring: 0 0% 6.7%;
+
+    --heading-primary: #111111;
+
+    /* Custom Shadows for Bright Mode - Vital for depth */
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
+
+    --terminal-bg: #ffffff;
+    --glass-border: rgba(0, 0, 0, 0.06);
+  }
+
+  /* DARK MODE (Deep Focus) */
+  .mode-dark {
+    --bg-primary: 220 14% 4%;
+    /* #0b0d10 */
+    --background: 220 14% 4%;
+
+    --foreground: 210 20% 90%;
+    --text-primary: 210 20% 90%;
+
+    --text-secondary: 215 16% 65%;
+    --muted-foreground: 215 16% 65%;
+
+    --card: 220 13% 8%;
+    /* #121417 */
+    --card-bg: #121417;
+    --card-foreground: 210 20% 90%;
+    --card-border: rgba(255, 255, 255, 0.08);
+
+    --sidebar-bg: #0b0d10;
+    --sidebar-border: rgba(255, 255, 255, 0.08);
+
+    --popover: 220 13% 8%;
+    --popover-foreground: 210 20% 90%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 210 20% 90%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 210 20% 90%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 80%;
+
+    --heading-primary: #ffffff;
+
+    --terminal-bg: #000000;
+    --glass-border: rgba(255, 255, 255, 0.08);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .bitcount-heading {
+    margin: 0;
+
+    font-family: "Bitcount", sans-serif;
+    font-weight: 600;
+
+    /* Ensure size is fluid */
+    /* font-size handled by utility classes */
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    /* Color handled by utility classes */
+
+    z-index: 50;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .fade-in {
+    animation: fadeIn 800ms ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* PREMIUM SCROLLBAR UTILITY */
+  .premium-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    transition: background 0.3s ease;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Tree Mode UI State transitions */
+  .layout.tree-active .sidebar {
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+  }
+
+  .layout.tree-active .rightbar {
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+  }
+
+  .layout.tree-active .command-shell {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  /* Redundant but declarative rule for hero title */
+  .layout.tree-active .hero-title {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+
+  /* Precision Mode Global Overrides */
+  body.mode-precision {
+    background-color: #000000;
+  }
+
+  body.mode-precision video {
+    opacity: 0 !important;
+  }
+
+  body.mode-precision .bitcount-heading {
+    color: #ffffff !important;
+  }
+
+  /* Mute secondary text */
+  body.mode-precision p,
+  body.mode-precision span,
+  body.mode-precision div {
+    /* We handle specific components, but this ensures no random colors leak */
+  }
+
+  /* SECURE CHANNEL CONTAINER */
+  .secure-channel-container {
+    overflow-y: auto;
+    max-height: 100vh;
+    padding-bottom: 200px;
+    /* Apply premium scrollbar logic explicitly to avoid @apply warning */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  .secure-channel-container::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .secure-channel-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .secure-channel-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .secure-channel-container {
+      padding-right: 80px;
+      /* Space for sidebar */
+    }
+  }
+
+  .coffee-card {
+    margin-top: 40px;
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    background: rgba(20, 20, 20, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transform: translateY(25px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .coffee-card.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Bright Mode Override for Coffee Card */
+  .mode-bright .coffee-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  .coffee-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: #FFDD00;
+    color: #000000;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 221, 0, 0.2);
+  }
+
+  .coffee-btn:hover {
+    transform: scale(1.02);
+    filter: brightness(1.08);
+    box-shadow: 0 4px 16px rgba(255, 221, 0, 0.3);
+  }
+
+  .coffee-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* SCRUTINIZER UI STATES */
+  .input-scrutiny-0 {
+    border-bottom: 2px solid rgba(34, 197, 94, 0.4) !important;
+  }
+
+  .input-scrutiny-1 {
+    border-color: rgba(245, 158, 11, 0.5) !important;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
+  }
+
+  .input-scrutiny-2 {
+    border-color: rgba(239, 68, 68, 0.5) !important;
+    animation: soft-pulse-red 2s infinite ease-in-out;
+  }
+
+  .input-scrutiny-3 {
+    border-color: rgba(239, 68, 68, 0.8) !important;
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.2);
+  }
+
+  .scrutiny-shake {
+    animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  @keyframes soft-pulse-red {
+
+    0%,
+    100% {
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
+    }
+
+    50% {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+    }
+  }
+
+  @keyframes shake {
+
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+}
