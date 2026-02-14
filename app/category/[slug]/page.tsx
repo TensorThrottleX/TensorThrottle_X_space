@@ -1,4 +1,5 @@
 
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { LabContainer } from '@/components/LabContainer'
 import { LabNavigation } from '@/components/LabNavigation'
@@ -14,6 +15,12 @@ interface CategoryPageProps {
 
 // Allowed categories (lowercase slug)
 const VALID_CATEGORIES = ['thoughts', 'projects', 'experiments', 'manifold']
+
+export async function generateStaticParams() {
+  return VALID_CATEGORIES.map((slug) => ({
+    slug,
+  }))
+}
 
 export async function generateMetadata({ params }: CategoryPageProps) {
   const { slug } = await params
@@ -71,9 +78,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           {/* Posts Archive Stack */}
           {hasPosts ? (
             <div className="space-y-8">
-              {posts.map((post) => (
-                <CategoryPostCard key={post.id} post={post} />
-              ))}
+              <Suspense fallback={<div className="py-10 text-center text-sm text-[var(--muted-foreground)]">Loading articles...</div>}>
+                {posts.map((post) => (
+                  <CategoryPostCard key={post.id} post={post} />
+                ))}
+              </Suspense>
             </div>
           ) : (
             /* Empty State Card */

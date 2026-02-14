@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { LabContainer } from '@/components/LabContainer'
 import { LabNavigation } from '@/components/LabNavigation'
 import { ContentPanel } from '@/components/ContentPanel'
@@ -26,7 +27,9 @@ export default async function FeedPage() {
                 subtitle="Exploring ideas, one post at a time."
                 latestPublishedAt={latestPost}
             >
-                <LabFeed initialPosts={initialPosts} />
+                <Suspense fallback={<div className="py-10 text-center text-sm text-[var(--muted-foreground)]">Loading feed...</div>}>
+                    <LabFeed initialPosts={initialPosts} />
+                </Suspense>
             </ContentPanel>
         </LabContainer>
     )
