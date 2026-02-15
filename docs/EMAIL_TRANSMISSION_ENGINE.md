@@ -111,7 +111,7 @@
 
 **Environment Variables:**
 - `PRIMARY_FROM_EMAIL` — Your verified .in domain sender
-- `FALLBACK_FROM_EMAIL` — Resend default (onboarding@resend.dev)
+- `FALLBACK_FROM_EMAIL` — Resend default (secure@tensorthrottlex.in)
 - `EMAIL_RECIPIENT` — Destination email (tensorthrottleX@proton.me)
 
 ---
@@ -174,7 +174,7 @@ Frontend State Update
 - ✅ Add **calendar expiry reminder**
 
 #### **System-Level Protection:**
-The fallback sender (`FALLBACK_FROM_EMAIL=onboarding@resend.dev`) guarantees email functionality even if:
+The fallback sender (`FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in`) guarantees email functionality even if:
 - ❌ Domain expires
 - ❌ SPF removed
 - ❌ DKIM removed
@@ -200,7 +200,7 @@ The fallback sender (`FALLBACK_FROM_EMAIL=onboarding@resend.dev`) guarantees ema
   "details": [
     "✅ RESEND_API_KEY configured",
     "✅ PRIMARY_FROM_EMAIL: secure@tensorthrottlex.in",
-    "✅ FALLBACK_FROM_EMAIL: onboarding@resend.dev",
+    "✅ FALLBACK_FROM_EMAIL: secure@tensorthrottlex.in",
     "✅ EMAIL_RECIPIENT: tensorthrottleX@proton.me",
     "...",
     "🔒 SECURITY FEATURES",
@@ -232,7 +232,7 @@ The fallback sender (`FALLBACK_FROM_EMAIL=onboarding@resend.dev`) guarantees ema
      EMAIL_SERVICE=resend
      RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
      PRIMARY_FROM_EMAIL=secure@tensorthrottlex.in
-     FALLBACK_FROM_EMAIL=onboarding@resend.dev
+     FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in
      EMAIL_RECIPIENT=tensorthrottleX@proton.me
      ```
 
@@ -338,7 +338,7 @@ You now have:
 - ✅ **Layered security enforcement** (5 security layers)
 - ✅ **Metadata auditing** (IP, timestamp, user agent)
 - ✅ **Domain-expiry resilience** (automatic fallback)
-- ✅ **Fallback email identity** (onboarding@resend.dev)
+- ✅ **Fallback email identity** (secure@tensorthrottlex.in)
 - ✅ **Clean Vercel deployment** (nodejs runtime)
 - ✅ **Zero frontend coupling** to provider
 - ✅ **Production-ready design** (structured logging, error handling)

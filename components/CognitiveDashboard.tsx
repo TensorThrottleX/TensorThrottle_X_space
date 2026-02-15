@@ -269,7 +269,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute inset-x-0 top-[260px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
+                className="absolute inset-x-0 top-[230px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
             >
                 <div className="relative pointer-events-auto w-full flex justify-center px-4">
                     <SystemQuoteRenderer isPrecision={usePrecisionStyle} />
@@ -299,7 +299,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                         animate={{ opacity: 1, filter: 'blur(0px)' }}
                         exit={{ opacity: 0, filter: 'blur(10px)' }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="absolute inset-x-0 top-[260px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
+                        className="absolute inset-x-0 top-[230px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
                     >
                         <div className="relative pointer-events-auto w-full flex justify-center px-4">
                             <StackedDeck
@@ -409,7 +409,7 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
 
             {/* Quote Content */}
             <div className="max-w-2xl min-h-[180px] flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-light leading-relaxed text-white/85 tracking-wide">
+                <h2 className="text-3xl md:text-5xl font-extrabold leading-tight text-white/95 tracking-tighter">
                     "{visibleText}"<span className={cn("inline-block w-2.5 h-8 bg-cyan-500/50 align-middle ml-1", displayPhase === 'display' ? "opacity-0" : "animate-pulse")}></span>
                 </h2>
                 <div className="h-8 mt-8">
@@ -556,7 +556,7 @@ function StackedDeck({
 
                                             {/* Main Info */}
                                             <div className="relative z-10 flex flex-col gap-6 mt-8">
-                                                <h2 className="text-h2 font-bold text-white tracking-tight leading-none">
+                                                <h2 className="text-h2 font-black text-white tracking-tighter leading-none">
                                                     {content.heading}
                                                 </h2>
                                                 <p className="text-base text-gray-300/75 font-light leading-relaxed max-w-md">
@@ -603,7 +603,7 @@ function StackedDeck({
                                                 {/* Scrollable Detail Area for Expanded Content */}
                                                 <div className="flex-1 mt-6 overflow-hidden">
                                                     {/* Card Title */}
-                                                    <h3 className="text-h3 font-bold text-white tracking-tight">
+                                                    <h3 className="text-h3 font-black text-white tracking-tighter">
                                                         {subCard.title}
                                                     </h3>
 

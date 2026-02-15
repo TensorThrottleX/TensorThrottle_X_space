@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
           {/* Header Section */}
           <div className="mb-12">
-            <h1 className="text-4xl font-bold mb-2 transition-colors duration-500"
+            <h1 className="text-4xl font-black tracking-tighter mb-2 transition-colors duration-500"
               style={{ color: 'var(--heading-primary)' }}>
               {displayCategory}
             </h1>
@@ -93,7 +93,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   borderColor: 'var(--border)',
                   boxShadow: 'var(--shadow-soft)'
                 }}>
-                <h3 className="mb-3 text-xl font-medium transition-colors duration-500"
+                <h3 className="mb-3 text-xl font-bold tracking-tight transition-colors duration-500"
                   style={{ color: 'var(--foreground)' }}>
                   Nothing available.
                 </h3>

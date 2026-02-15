@@ -32,7 +32,7 @@ if ($choice -eq "1") {
     Write-Host ""
     Write-Host "1. Sign up at https://resend.com" -ForegroundColor Yellow
     Write-Host "2. Get your API key from the dashboard" -ForegroundColor Yellow
-    Write-Host "3. Verify your domain (or use resend.dev for testing)" -ForegroundColor Yellow
+    Write-Host "3. Verify your domain in the Resend dashboard" -ForegroundColor Yellow
     Write-Host ""
 
     $apiKey = Read-Host "Enter your Resend API key (re_...)"
@@ -42,9 +42,9 @@ if ($choice -eq "1") {
         $primaryEmail = "secure@tensorthrottlex.in"
     }
 
-    $fallbackEmail = Read-Host "Enter fallback sender email (press Enter for default: onboarding@resend.dev)"
+    $fallbackEmail = Read-Host "Enter fallback sender email (press Enter for default: secure@tensorthrottlex.in)"
     if ([string]::IsNullOrWhiteSpace($fallbackEmail)) {
-        $fallbackEmail = "onboarding@resend.dev"
+        $fallbackEmail = "secure@tensorthrottlex.in"
     }
 
     $recipient = Read-Host "Enter recipient email (press Enter for default: tensorthrottleX@proton.me)"
@@ -68,17 +68,18 @@ EMAIL_RECIPIENT=$recipient
     Write-Host ""
     Write-Host "✅ Configuration saved to .env.local" -ForegroundColor Green
 
-} elseif ($choice -eq "2") {
+}
+elseif ($choice -eq "2") {
     # SMTP Configuration
     Write-Host ""
     Write-Host "📧 SMTP Configuration" -ForegroundColor Cyan
     Write-Host "---------------------" -ForegroundColor Cyan
     Write-Host ""
 
-    $host = Read-Host "Enter SMTP host (e.g., smtp.gmail.com)"
-    $port = Read-Host "Enter SMTP port (default: 587)"
-    if ([string]::IsNullOrWhiteSpace($port)) {
-        $port = "587"
+    $smtpHost = Read-Host "Enter SMTP host (e.g., smtp.gmail.com)"
+    $smtpPort = Read-Host "Enter SMTP port (default: 587)"
+    if ([string]::IsNullOrWhiteSpace($smtpPort)) {
+        $smtpPort = "587"
     }
 
     $user = Read-Host "Enter SMTP username/email"
@@ -95,8 +96,8 @@ EMAIL_RECIPIENT=$recipient
 # Email Transmission Engine Configuration
 # Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 
-EMAIL_HOST=$host
-EMAIL_PORT=$port
+EMAIL_HOST=$smtpHost
+EMAIL_PORT=$smtpPort
 EMAIL_USER=$user
 EMAIL_PASS=$passPlain
 EMAIL_RECIPIENT=$recipient
@@ -106,7 +107,8 @@ EMAIL_RECIPIENT=$recipient
     Write-Host ""
     Write-Host "✅ Configuration saved to .env.local" -ForegroundColor Green
 
-} else {
+}
+else {
     Write-Host "❌ Invalid choice. Setup cancelled." -ForegroundColor Red
     exit
 }

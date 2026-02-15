@@ -130,7 +130,7 @@ export function MsgView(): React.ReactNode {
             <div className="max-w-[720px] mx-auto space-y-8">
                 {/* [MSG_PAGE] – Header */}
                 <div className="space-y-2">
-                    <h1 className="text-h1 font-bold tracking-tight" style={{ color: 'var(--heading-primary)' }}>
+                    <h1 className="text-h1 font-black tracking-tighter" style={{ color: 'var(--heading-primary)' }}>
                         Secure Channel
                     </h1>
                     <p className="text-sm font-mono text-cyan-500/60 uppercase tracking-normal">
@@ -191,7 +191,7 @@ export function MsgView(): React.ReactNode {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-normal font-bold ml-1 opacity-40">Identity (Required)</label>
+                            <label className="text-[10px] uppercase tracking-tighter font-black ml-1 opacity-40">Identity (Required)</label>
                             <input
                                 type="text"
                                 placeholder="Your Name"
@@ -205,7 +205,7 @@ export function MsgView(): React.ReactNode {
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-normal font-bold ml-1 opacity-40">Return Email (Optional)</label>
+                            <label className="text-[10px] uppercase tracking-tighter font-black ml-1 opacity-40">Return Email (Optional)</label>
                             <input
                                 type="email"
                                 placeholder="name@domain.com"
@@ -221,7 +221,7 @@ export function MsgView(): React.ReactNode {
                     </div>
 
                     <div className="space-y-2 relative">
-                        <label className="text-[10px] uppercase tracking-normal font-bold ml-1 opacity-40">Transmission Data (Required)</label>
+                        <label className="text-[10px] uppercase tracking-tighter font-black ml-1 opacity-40">Transmission Data (Required)</label>
                         <textarea
                             rows={8}
                             placeholder="Min 5 characters..."
@@ -289,7 +289,7 @@ export function MsgView(): React.ReactNode {
                             ) : (
                                 <Send size={18} className={cn(!canSend ? "" : "group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform")} />
                             )}
-                            <span className="text-xs font-bold uppercase tracking-normal">
+                            <span className="text-xs font-black uppercase tracking-tighter">
                                 {isSending ? 'Transmitting...' : isSent ? 'Sent' : 'Initialize Transmission'}
                             </span>
                         </button>

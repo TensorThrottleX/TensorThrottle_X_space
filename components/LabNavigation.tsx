@@ -93,7 +93,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
               </span>
 
               {/* Label (Tooltip style on hover) */}
-              <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-medium backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
+              <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
                 style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
               >
                 {item.label}

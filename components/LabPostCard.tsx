@@ -158,7 +158,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl font-bold transition-colors"
+          <h3 className="text-2xl font-black tracking-tighter transition-colors"
             style={{ color: 'var(--foreground)' }}
           >
             {post.title}

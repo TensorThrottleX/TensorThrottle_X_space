@@ -47,7 +47,7 @@ export function HomeBento() {
                                 </span>
                                 System Operational
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: 'var(--heading-primary)' }}>
+                            <h1 className="text-4xl md:text-5xl font-black tracking-tighter" style={{ color: 'var(--heading-primary)' }}>
                                 TensorThrottle<span className="text-cyan-500">_X</span>
                             </h1>
                             <p className="mt-4 max-w-sm text-sm md:text-base leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
@@ -55,7 +55,7 @@ export function HomeBento() {
                             </p>
                         </div>
 
-                        <Link href="/feed" className="group/btn inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-cyan-500" style={{ color: 'var(--foreground)' }}>
+                        <Link href="/feed" className="group/btn inline-flex items-center gap-2 text-xs font-black uppercase tracking-tighter transition-colors hover:text-cyan-500" style={{ color: 'var(--foreground)' }}>
                             Enter Feed <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                         </Link>
                     </div>
@@ -78,7 +78,7 @@ export function HomeBento() {
                     </div>
 
                     <div className="relative z-10 flex h-full flex-col justify-end p-8">
-                        <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--foreground)' }}>Projects</h3>
+                        <h3 className="text-2xl font-black tracking-tighter mb-2" style={{ color: 'var(--foreground)' }}>Projects</h3>
                         <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Tangible outputs. The build logs.</p>
                     </div>
                 </Link>
@@ -93,7 +93,7 @@ export function HomeBento() {
                         <Brain className={`h-24 w-24 transition-all duration-500 group-hover:scale-110 ${isBright ? 'text-emerald-600/10 group-hover:text-emerald-600/20' : 'text-emerald-500/20 group-hover:text-emerald-400/40'}`} />
                     </div>
                     <div className="relative z-10 flex h-full flex-col justify-end p-6">
-                        <h3 className="text-xl font-bold" style={{ color: 'var(--foreground)' }}>Thoughts</h3>
+                        <h3 className="text-xl font-black tracking-tighter" style={{ color: 'var(--foreground)' }}>Thoughts</h3>
                         <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Philosophy & Theory.</p>
                     </div>
                 </Link>
@@ -108,7 +108,7 @@ export function HomeBento() {
                         <FlaskConical className={`h-24 w-24 transition-all duration-500 group-hover:rotate-12 ${isBright ? 'text-rose-600/10 group-hover:text-rose-600/20' : 'text-rose-500/20 group-hover:text-rose-400/40'}`} />
                     </div>
                     <div className="relative z-10 flex h-full flex-col justify-end p-6">
-                        <h3 className="text-xl font-bold" style={{ color: 'var(--foreground)' }}>Experiments</h3>
+                        <h3 className="text-xl font-black tracking-tighter" style={{ color: 'var(--foreground)' }}>Experiments</h3>
                         <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Volatile & Unsafe.</p>
                     </div>
                 </Link>

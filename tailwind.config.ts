@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontSize: {
-        h1: ["3rem", { lineHeight: "1.1" }],
-        h2: ["2.25rem", { lineHeight: "1.2" }],
-        h3: ["1.875rem", { lineHeight: "1.3" }],
+        h1: ["3.5rem", { lineHeight: "1", letterSpacing: "-0.04em" }],
+        h2: ["2.75rem", { lineHeight: "1.1", letterSpacing: "-0.03em" }],
+        h3: ["2rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
       },
       colors: {
         background: 'hsl(var(--background))',

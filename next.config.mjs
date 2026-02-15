@@ -10,7 +10,7 @@ const nextConfig = {
   */
   // Ensure Turbopack is not enabled via config
   experimental: {
-    optimizePackageImports: true
+    optimizePackageImports: ['lucide-react', 'framer-motion']
   },
   // Watcher Optimization for Windows disabled for production readiness check
 }

@@ -107,7 +107,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJxxxxx
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_xxxxx
 PRIMARY_FROM_EMAIL=secure@tensorthrottlex.in
-FALLBACK_FROM_EMAIL=onboarding@resend.dev
+FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in
 EMAIL_RECIPIENT=tensorthrottleX@proton.me
 ```
 
@@ -290,7 +290,7 @@ npm run build
 
 #### 5. Test Email Configuration (Optional)
 - [ ] Resend API key is valid
-- [ ] Domain is verified (or using `onboarding@resend.dev`)
+- [ ] Domain is verified (or using `secure@tensorthrottlex.in`)
 - [ ] Test email sends successfully locally
 
 ---
@@ -403,7 +403,7 @@ npm run build  # Run locally to see errors
 | `EMAIL_SERVICE` | Email provider | `resend` | ⚠️ If using contact |
 | `RESEND_API_KEY` | Resend API key | `re_xxxxx` | ⚠️ If using Resend |
 | `PRIMARY_FROM_EMAIL` | Primary sender | `secure@domain.com` | ⚠️ Optional |
-| `FALLBACK_FROM_EMAIL` | Fallback sender | `onboarding@resend.dev` | ⚠️ Optional |
+| `FALLBACK_FROM_EMAIL` | Fallback sender | `secure@tensorthrottlex.in` | ⚠️ Optional |
 | `EMAIL_RECIPIENT` | Where emails go | `you@email.com` | ⚠️ If using contact |
 
 ### Optional

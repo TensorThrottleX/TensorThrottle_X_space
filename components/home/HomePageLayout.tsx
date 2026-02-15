@@ -32,13 +32,13 @@ export function HomePageLayout() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="fixed top-[60px] left-0 w-full flex justify-center z-40 pointer-events-none select-none"
+                            className="fixed top-[40px] left-0 w-full flex justify-center z-40 pointer-events-none select-none"
                         >
                             <motion.h1
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                 animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-h1 font-bold tracking-tight drop-shadow-2xl"
+                                className="text-h1 font-black tracking-tighter drop-shadow-2xl"
                                 style={{ color: 'var(--heading-primary)' }}
                             >
                                 TENSOR THROTTLE X
@@ -58,7 +58,7 @@ export function HomePageLayout() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="fixed top-[120px] md:top-[140px] left-0 w-full flex justify-center z-50 pointer-events-auto"
+                            className="fixed top-[110px] md:top-[125px] left-0 w-full flex justify-center z-50 pointer-events-auto"
                         >
                             <div className="relative flex items-center bg-black/40 backdrop-blur-md rounded-full border border-white/10 p-1 shadow-2xl gap-1">
                                 {/* Sliding Indicator */}
@@ -79,7 +79,7 @@ export function HomePageLayout() {
                                 {/* Purpose Button */}
                                 <button
                                     onClick={() => setContentMode('purpose')}
-                                    className={`relative w-[110px] h-9 text-sm font-medium tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'purpose' ? 'text-white' : 'text-white/50 hover:text-white/80'
+                                    className={`relative w-[110px] h-9 text-xs font-bold tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'purpose' ? 'text-white' : 'text-white/50 hover:text-white/80'
                                         }`}
                                 >
                                     PURPOSE
@@ -88,7 +88,7 @@ export function HomePageLayout() {
                                 {/* About Button */}
                                 <button
                                     onClick={() => setContentMode('about')}
-                                    className={`relative w-[110px] h-9 text-sm font-medium tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'about' ? 'text-white' : 'text-white/50 hover:text-white/80'
+                                    className={`relative w-[110px] h-9 text-xs font-bold tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'about' ? 'text-white' : 'text-white/50 hover:text-white/80'
                                         }`}
                                 >
                                     ABOUT
@@ -97,7 +97,7 @@ export function HomePageLayout() {
                                 {/* Quote Button */}
                                 <button
                                     onClick={() => setContentMode('quote')}
-                                    className={`relative w-[110px] h-9 text-sm font-medium tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'quote' ? 'text-white' : 'text-white/50 hover:text-white/80'
+                                    className={`relative w-[110px] h-9 text-xs font-bold tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'quote' ? 'text-white' : 'text-white/50 hover:text-white/80'
                                         }`}
                                 >
                                     QUOTE

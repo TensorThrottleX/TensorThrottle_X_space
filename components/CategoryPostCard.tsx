@@ -108,7 +108,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-2xl font-bold transition-colors" style={{ color: 'var(--foreground)' }}>
+                        <h3 className="text-2xl font-black tracking-tighter transition-colors" style={{ color: 'var(--foreground)' }}>
                             {post.title}
                         </h3>
 

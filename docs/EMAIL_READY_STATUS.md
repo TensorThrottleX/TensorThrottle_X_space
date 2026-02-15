@@ -32,7 +32,7 @@ Based on your `.env.local.example`, the system expects:
 EMAIL_SERVICE=resend
 RESEND_API_KEY=<your-key>
 PRIMARY_FROM_EMAIL=secure@tensorthrottlex.in
-FALLBACK_FROM_EMAIL=onboarding@resend.dev
+FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in
 EMAIL_RECIPIENT=tensorthrottleX@proton.me
 ```
 
@@ -59,7 +59,7 @@ http://localhost:3000/api/email-health
   "configured": true,
   "details": [
     "✅ RESEND_API_KEY is set",
-    "✅ FROM: onboarding@resend.dev",
+    "✅ FROM: secure@tensorthrottlex.in",
     ...
   ]
 }
@@ -96,7 +96,7 @@ Get-Content .env.local | Select-String "EMAIL|RESEND"
 **Required Variables:**
 - `EMAIL_SERVICE=resend` ✅
 - `RESEND_API_KEY=re_...` ⚠️ (Must have valid key)
-- `RESEND_FROM_EMAIL` or `PRIMARY_FROM_EMAIL` ⚠️ (Optional, defaults to onboarding@resend.dev)
+- `RESEND_FROM_EMAIL` or `PRIMARY_FROM_EMAIL` ⚠️ (Optional, defaults to secure@tensorthrottlex.in)
 
 ### If Email Sending Fails
 

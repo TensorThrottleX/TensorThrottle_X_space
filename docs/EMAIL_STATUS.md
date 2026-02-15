@@ -12,7 +12,7 @@ Your email transmission system is **fully functional** and ready to send emails 
 |-----------|--------|---------|
 | **Backend API** | ✅ Active | `/api/contact` endpoint ready |
 | **Email Provider** | ✅ Configured | Resend API with valid key |
-| **From Address** | ✅ Set | `onboarding@resend.dev` (test domain) |
+| **From Address** | ✅ Set | `secure@tensorthrottlex.in` (test domain) |
 | **Recipient** | ✅ Set | `tensorthrottleX@proton.me` |
 | **Security Layer** | ✅ Active | Rate limiting, profanity filter, validation |
 | **Health Check** | ✅ Available | `/api/email-health` endpoint |
@@ -55,14 +55,14 @@ curl http://localhost:3000/api/email-health
 ```env
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_6fvhuuGv_CsScaQCdfyWaD7iDssPwb2tQ
-RESEND_FROM_EMAIL=onboarding@resend.dev
+RESEND_FROM_EMAIL=secure@tensorthrottlex.in
 ```
 
 ### What This Means:
 - ✅ Using Resend's test domain (no custom domain setup needed)
 - ✅ Can send emails immediately
 - ✅ Free tier: 100 emails/day, 3,000/month
-- ⚠️ Emails come from `onboarding@resend.dev` (Resend's domain)
+- ⚠️ Emails come from `secure@tensorthrottlex.in` (Resend's domain)
 
 ---
 
@@ -79,7 +79,7 @@ If you want emails to come from your own domain (e.g., `secure@tensorthrottlex.i
 ### Step 2: Update `.env.local`
 ```env
 PRIMARY_FROM_EMAIL=secure@tensorthrottlex.in
-FALLBACK_FROM_EMAIL=onboarding@resend.dev
+FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in
 ```
 
 ### Step 3: Restart Server
@@ -103,7 +103,7 @@ pnpm dev
    ```
    EMAIL_SERVICE=resend
    RESEND_API_KEY=re_6fvhuuGv_CsScaQCdfyWaD7iDssPwb2tQ
-   RESEND_FROM_EMAIL=onboarding@resend.dev
+   RESEND_FROM_EMAIL=secure@tensorthrottlex.in
    EMAIL_RECIPIENT=tensorthrottleX@proton.me
    ```
 

@@ -7,7 +7,7 @@ Your email system is **PARTIALLY CONFIGURED** and ready for testing:
 ### ✅ What's Already Set Up:
 - **Provider**: Resend API (Primary)
 - **API Key**: Configured (`re_6fvhuuGv_...`)
-- **From Email**: `onboarding@resend.dev` (Resend test domain)
+- **From Email**: `secure@tensorthrottlex.in` (Resend test domain)
 - **Recipient**: `tensorthrottleX@proton.me`
 - **Backend API**: `/api/contact` (fully functional)
 - **Health Check**: `/api/email-health` (available)
@@ -50,11 +50,11 @@ Your `.env.local` already has:
 ```env
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_6fvhuuGv_CsScaQCdfyWaD7iDssPwb2tQ
-RESEND_FROM_EMAIL=onboarding@resend.dev
+RESEND_FROM_EMAIL=secure@tensorthrottlex.in
 ```
 
 #### Step 2: (Optional) Add Custom Domain
-To use your own domain instead of `onboarding@resend.dev`:
+To use your own domain instead of `secure@tensorthrottlex.in`:
 
 1. **Login to Resend Dashboard**:
    - Go to: https://resend.com/domains
@@ -68,7 +68,7 @@ To use your own domain instead of `onboarding@resend.dev`:
 3. **Update `.env.local`**:
    ```env
    PRIMARY_FROM_EMAIL=secure@tensorthrottlex.in
-   FALLBACK_FROM_EMAIL=onboarding@resend.dev
+   FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in
    ```
 
 4. **Restart Dev Server**:
@@ -85,14 +85,14 @@ To use your own domain instead of `onboarding@resend.dev`:
    ```
    EMAIL_SERVICE=resend
    RESEND_API_KEY=re_6fvhuuGv_CsScaQCdfyWaD7iDssPwb2tQ
-   RESEND_FROM_EMAIL=onboarding@resend.dev
+   RESEND_FROM_EMAIL=secure@tensorthrottlex.in
    EMAIL_RECIPIENT=tensorthrottleX@proton.me
    ```
 
    If using custom domain, also add:
    ```
    PRIMARY_FROM_EMAIL=secure@tensorthrottlex.in
-   FALLBACK_FROM_EMAIL=onboarding@resend.dev
+   FALLBACK_FROM_EMAIL=secure@tensorthrottlex.in
    ```
 
 3. **Redeploy**:
@@ -157,7 +157,7 @@ Located at: `c:\dev\tensorthrottleX\TensorThrottle_X_space\.env.local`
 # Email Transmission
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_6fvhuuGv_CsScaQCdfyWaD7iDssPwb2tQ
-RESEND_FROM_EMAIL=onboarding@resend.dev
+RESEND_FROM_EMAIL=secure@tensorthrottlex.in
 
 # Secure Transmission (Nodemailer - Fallback)
 EMAIL_HOST=smtp.protonmail.ch
@@ -193,7 +193,7 @@ curl http://localhost:3000/api/email-health
   "configured": true,
   "details": [
     "✅ RESEND_API_KEY is set",
-    "✅ FROM: onboarding@resend.dev",
+    "✅ FROM: secure@tensorthrottlex.in",
     "",
     "📧 Destination: tensorthrottleX@proton.me",
     "🔒 Rate Limit: 3 per 5 minutes",
@@ -250,7 +250,7 @@ Your email system includes these automatic protections:
 When a message is sent, check terminal for:
 ```
 [EMAIL] Provider: Resend API
-[EMAIL] Primary Attempt: onboarding@resend.dev
+[EMAIL] Primary Attempt: secure@tensorthrottlex.in
 [EMAIL] Primary Attempt: Success
 [EMAIL] Fallback Used: No
 [EMAIL] IP: 127.0.0.1
@@ -353,7 +353,7 @@ Before going live:
 - ✅ Backend API is production-ready
 - ✅ Resend integration is active
 - ✅ Security features are enabled
-- ✅ Test domain is working (`onboarding@resend.dev`)
+- ✅ Test domain is working (`secure@tensorthrottlex.in`)
 
 **To activate fully**:
 1. Keep current setup for testing

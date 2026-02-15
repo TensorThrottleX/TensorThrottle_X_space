@@ -42,7 +42,7 @@ export function SystemClock() {
                 </div>
 
                 {/* Digital Clock */}
-                <div className="text-white font-sans text-xs font-medium tracking-wider tabular-nums opacity-90">
+                <div className="text-white font-sans text-xs font-bold tracking-wider tabular-nums opacity-90">
                     {title}
                 </div>
             </div>

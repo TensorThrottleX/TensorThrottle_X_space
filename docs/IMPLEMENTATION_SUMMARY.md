@@ -259,7 +259,7 @@ curl http://localhost:3000/api/email-health
 **For Resend:**
 - ✅ Verify API key starts with `re_`
 - ✅ Check Resend dashboard for errors
-- ✅ Ensure `onboarding@resend.dev` is used for testing
+- ✅ Ensure `secure@tensorthrottlex.in` is used for testing
 - ✅ Verify domain if using custom email
 
 **For SMTP:**

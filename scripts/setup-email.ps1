@@ -45,12 +45,11 @@ EMAIL_PASS=$passwordPlain
         $apiKey = Read-Host "Enter your Resend API key (starts with re_)" -AsSecureString
         $apiKeyPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($apiKey))
         
-        Write-Host "`nFor testing, use: onboarding@resend.dev" -ForegroundColor Yellow
-        Write-Host "For production, verify your domain in Resend dashboard`n" -ForegroundColor Yellow
+        Write-Host "`nFor production, verify your domain in Resend dashboard`n" -ForegroundColor Yellow
         
-        $fromEmail = Read-Host "Enter FROM email (default: onboarding@resend.dev)"
+        $fromEmail = Read-Host "Enter FROM email (e.g., secure@tensorthrottlex.in)"
         if ([string]::IsNullOrWhiteSpace($fromEmail)) {
-            $fromEmail = "onboarding@resend.dev"
+            $fromEmail = "secure@tensorthrottlex.in"
         }
         
         $envContent = @"
