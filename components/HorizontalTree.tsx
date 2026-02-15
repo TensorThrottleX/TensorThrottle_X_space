@@ -145,7 +145,7 @@
 //                 .attr("x", 15)
 //                 .attr("text-anchor", "start")
 //                 .text((d: HierarchyNode) => d.data.name)
-//                 .style("font-family", "Inter, sans-serif")
+//                 .style("font-family", "Inter")
 //                 .style("font-size", "14px")
 //                 .style("font-weight", 500)
 //                 .style("fill", "rgba(255,255,255,0.9)")

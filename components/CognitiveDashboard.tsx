@@ -402,7 +402,7 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
                     "w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-colors duration-300",
                     displayPhase === 'typing' ? "bg-white animate-pulse" : "bg-cyan-400"
                 )} />
-                <span className="text-[11px] font-bold tracking-[0.25em] text-cyan-200/70 uppercase">
+                <span className="text-[11px] font-bold tracking-normal text-cyan-200/70 uppercase">
                     SYSTEM_MEMORY
                 </span>
             </div>
@@ -417,7 +417,7 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="text-sm font-medium tracking-widest text-white/40 uppercase"
+                            className="text-sm font-medium tracking-normal text-white/40 uppercase"
                         >
                             — {visibleAuthor}
                         </motion.div>
@@ -549,14 +549,14 @@ function StackedDeck({
                                             {/* Top Label */}
                                             <div className="relative z-10 flex items-center gap-3">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
-                                                <span className="text-[11px] font-medium tracking-[0.15em] text-white/70 uppercase">
+                                                <span className="text-[11px] font-medium tracking-normal text-white/70 uppercase">
                                                     {content.label}
                                                 </span>
                                             </div>
 
                                             {/* Main Info */}
                                             <div className="relative z-10 flex flex-col gap-6 mt-8">
-                                                <h2 className="text-6xl font-bold text-white tracking-tight leading-none">
+                                                <h2 className="text-h2 font-bold text-white tracking-tight leading-none">
                                                     {content.heading}
                                                 </h2>
                                                 <p className="text-base text-gray-300/75 font-light leading-relaxed max-w-md">
@@ -570,8 +570,8 @@ function StackedDeck({
                                             {/* Footer / Action */}
                                             <div className="relative z-10 w-full flex items-center justify-between">
                                                 <div className="flex flex-col">
-                                                    <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">system_protocol</span>
-                                                    <span className="text-[10px] font-mono text-cyan-400/50 tracking-widest mt-1">ACTIVE_EXECUTION</span>
+                                                    <span className="text-[10px] font-mono text-white/30 tracking-normal uppercase">system_protocol</span>
+                                                    <span className="text-[10px] font-mono text-cyan-400/50 tracking-normal mt-1">ACTIVE_EXECUTION</span>
                                                 </div>
 
                                                 <button
@@ -582,7 +582,7 @@ function StackedDeck({
                                                     className="group flex items-center gap-3 px-6 py-2.5 rounded-full bg-[#0B0B0B] hover:bg-[#111] border border-white/10 hover:border-white/20 transition-[background-color,border-color,box-shadow] duration-300 shadow-lg"
                                                 >
                                                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
-                                                    <span className="text-white/80 font-sans text-[11px] tracking-[0.1em] font-medium group-hover:text-white transition-colors">
+                                                    <span className="text-white/80 text-[11px] tracking-normal font-medium group-hover:text-white transition-colors">
                                                         INITIALIZE TREE
                                                     </span>
                                                 </button>
@@ -594,7 +594,7 @@ function StackedDeck({
                                             <div className="w-full h-full flex flex-col">
                                                 {/* Top Label */}
                                                 <div className="flex items-center justify-between pointer-events-none">
-                                                    <span className="text-[10px] font-bold tracking-[0.2em] text-white/30 uppercase">
+                                                    <span className="text-[10px] font-bold tracking-normal text-white/30 uppercase">
                                                         CRITICAL_MODULE 0{content.subCards.findIndex(c => c.id === id) + 1}
                                                     </span>
                                                     <div className="w-12 h-px bg-white/10" />
@@ -603,7 +603,7 @@ function StackedDeck({
                                                 {/* Scrollable Detail Area for Expanded Content */}
                                                 <div className="flex-1 mt-6 overflow-hidden">
                                                     {/* Card Title */}
-                                                    <h3 className="text-3xl font-bold text-white tracking-tight">
+                                                    <h3 className="text-h3 font-bold text-white tracking-tight">
                                                         {subCard.title}
                                                     </h3>
 
@@ -617,7 +617,7 @@ function StackedDeck({
                                                         <div className="flex-1 mt-6 flex flex-col gap-4 overflow-hidden">
                                                             <div className="flex items-center gap-3 mb-1">
                                                                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
-                                                                <span className="text-[11px] font-bold tracking-[0.2em] text-white/90 uppercase">
+                                                                <span className="text-[11px] font-bold tracking-normal text-white/90 uppercase">
                                                                     TensorThrottle X System Core
                                                                 </span>
                                                             </div>
@@ -638,7 +638,7 @@ function StackedDeck({
                                                                     }
                                                                 ].map((section, idx) => (
                                                                     <div key={idx} className="p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm">
-                                                                        <h4 className="text-[10px] font-black uppercase tracking-widest text-cyan-400/70 mb-2">
+                                                                        <h4 className="text-[10px] font-bold uppercase tracking-normal text-cyan-400/70 mb-2">
                                                                             {section.title}
                                                                         </h4>
                                                                         <div className="flex flex-col gap-1">
@@ -657,13 +657,13 @@ function StackedDeck({
                                                         <div className="grid grid-cols-2 gap-8 mt-10">
                                                             {/* Left: Definition Context */}
                                                             <div className="space-y-3">
-                                                                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/50">{subCard.contextLabel}</h4>
+                                                                <h4 className="text-[10px] font-bold uppercase tracking-normal text-white/50">{subCard.contextLabel}</h4>
                                                                 <p className="text-sm text-gray-400 leading-relaxed">{subCard.contextText}</p>
                                                             </div>
 
                                                             {/* Right: Items /details */}
                                                             <div className="space-y-4">
-                                                                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/50">{subCard.detailsLabel}</h4>
+                                                                <h4 className="text-[10px] font-bold uppercase tracking-normal text-white/50">{subCard.detailsLabel}</h4>
                                                                 <ul className="space-y-2">
                                                                     {subCard.details.map((detail, idx) => (
                                                                         <li key={idx} className="flex items-center gap-2 text-xs text-gray-300/80">
@@ -680,7 +680,7 @@ function StackedDeck({
                                                 {/* Footer Area */}
                                                 <div className="mt-auto pt-6 border-t border-white/5 flex items-end justify-between">
                                                     <div className="flex flex-col gap-1">
-                                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">{subCard.footerLabel}</span>
+                                                        <span className="text-[10px] font-bold uppercase tracking-normal text-white/30">{subCard.footerLabel}</span>
                                                         <span className="text-xs text-gray-400 italic">"{subCard.footerText}"</span>
                                                     </div>
 
@@ -693,12 +693,12 @@ function StackedDeck({
                                                             className="group flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#0B0B0B] hover:bg-[#111] border border-white/10 hover:border-white/20 transition-[background-color,border-color] duration-300"
                                                         >
                                                             <div className="w-1 h-1 rounded-full bg-cyan-500/80" />
-                                                            <span className="text-white/60 font-sans text-[9px] tracking-[0.1em] font-medium group-hover:text-white transition-colors">
+                                                            <span className="text-white/60 text-[9px] tracking-normal font-medium group-hover:text-white transition-colors">
                                                                 EXPLORE FULLSCREEN
                                                             </span>
                                                         </button>
                                                     ) : (
-                                                        <span className="text-cyan-500/40 font-mono text-[9px] tracking-widest uppercase">
+                                                        <span className="text-cyan-500/40 font-mono text-[9px] tracking-normal uppercase">
                                                             SECURE_EXPANDED_DATA
                                                         </span>
                                                     )}
@@ -716,7 +716,7 @@ function StackedDeck({
             {/* Background Hint: Moved to relative flow with even lower top margin to move it higher */}
             <div className="mt-4 w-full flex justify-center opacity-30 pointer-events-none">
                 <span className={cn(
-                    "text-[10px] font-mono tracking-[0.3em] uppercase animate-pulse",
+                    "text-[10px] font-mono tracking-normal uppercase animate-pulse",
                     isBright ? "text-black" : "text-white"
                 )}>
                     SHUFFLE_STACK_TO_REVEAL

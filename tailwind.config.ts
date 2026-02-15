@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        h1: ["3rem", { lineHeight: "1.1" }],
+        h2: ["2.25rem", { lineHeight: "1.2" }],
+        h3: ["1.875rem", { lineHeight: "1.3" }],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

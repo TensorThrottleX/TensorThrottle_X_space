@@ -38,7 +38,7 @@ export function HomePageLayout() {
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                 animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-5xl md:text-7xl font-bold tracking-tight drop-shadow-2xl font-sans"
+                                className="text-h1 font-bold tracking-tight drop-shadow-2xl"
                                 style={{ color: 'var(--heading-primary)' }}
                             >
                                 TENSOR THROTTLE X

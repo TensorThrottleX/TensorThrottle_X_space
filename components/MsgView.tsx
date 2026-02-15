@@ -130,10 +130,10 @@ export function MsgView(): React.ReactNode {
             <div className="max-w-[720px] mx-auto space-y-8">
                 {/* [MSG_PAGE] – Header */}
                 <div className="space-y-2">
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: 'var(--heading-primary)' }}>
+                    <h1 className="text-h1 font-bold tracking-tight" style={{ color: 'var(--heading-primary)' }}>
                         Secure Channel
                     </h1>
-                    <p className="text-sm font-mono text-cyan-500/60 uppercase tracking-widest">
+                    <p className="text-sm font-mono text-cyan-500/60 uppercase tracking-normal">
                         CRITICAL_COMM_LINK 01
                     </p>
                 </div>
@@ -149,7 +149,7 @@ export function MsgView(): React.ReactNode {
                         </div>
                         <div className="space-y-4 flex-1 text-left">
                             <div>
-                                <h3 className="text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--foreground)' }}>Transmission Protocol</h3>
+                                <h3 className="text-sm font-bold uppercase tracking-normal" style={{ color: 'var(--foreground)' }}>Transmission Protocol</h3>
                                 <ul className="mt-2 space-y-1 text-xs leading-relaxed list-disc list-inside" style={{ color: renderMode === 'bright' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.5)' }}>
                                     <li>Identity must be at least 2 characters.</li>
                                     <li>Zero tolerance for profanity or abuse (Filtered).</li>
@@ -191,7 +191,7 @@ export function MsgView(): React.ReactNode {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest font-bold ml-1 opacity-40">Identity (Required)</label>
+                            <label className="text-[10px] uppercase tracking-normal font-bold ml-1 opacity-40">Identity (Required)</label>
                             <input
                                 type="text"
                                 placeholder="Your Name"
@@ -205,7 +205,7 @@ export function MsgView(): React.ReactNode {
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest font-bold ml-1 opacity-40">Return Email (Optional)</label>
+                            <label className="text-[10px] uppercase tracking-normal font-bold ml-1 opacity-40">Return Email (Optional)</label>
                             <input
                                 type="email"
                                 placeholder="name@domain.com"
@@ -221,7 +221,7 @@ export function MsgView(): React.ReactNode {
                     </div>
 
                     <div className="space-y-2 relative">
-                        <label className="text-[10px] uppercase tracking-widest font-bold ml-1 opacity-40">Transmission Data (Required)</label>
+                        <label className="text-[10px] uppercase tracking-normal font-bold ml-1 opacity-40">Transmission Data (Required)</label>
                         <textarea
                             rows={8}
                             placeholder="Min 5 characters..."
@@ -244,7 +244,7 @@ export function MsgView(): React.ReactNode {
                                 >
                                     <XOctagon size={14} className="shrink-0" />
                                     <div className="space-y-1">
-                                        <p className="uppercase tracking-widest font-bold text-red-500">Policy Violation</p>
+                                        <p className="uppercase tracking-normal font-bold text-red-500">Policy Violation</p>
                                         <p className="opacity-80">Message contains prohibited language. Transmission blocked.</p>
                                     </div>
                                 </motion.div>
@@ -289,7 +289,7 @@ export function MsgView(): React.ReactNode {
                             ) : (
                                 <Send size={18} className={cn(!canSend ? "" : "group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform")} />
                             )}
-                            <span className="text-xs font-bold uppercase tracking-widest">
+                            <span className="text-xs font-bold uppercase tracking-normal">
                                 {isSending ? 'Transmitting...' : isSent ? 'Sent' : 'Initialize Transmission'}
                             </span>
                         </button>
@@ -309,7 +309,7 @@ export function MsgView(): React.ReactNode {
                                 <motion.p
                                     initial={{ opacity: 0, y: 5 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest"
+                                    className="text-[10px] text-emerald-500 font-bold uppercase tracking-normal"
                                 >
                                     Transmission Successfully Delivered.
                                 </motion.p>

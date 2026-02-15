@@ -19,7 +19,7 @@ export function TrademarkLogo() {
                 `}
             >
                 <span
-                    className={`font-sans font-black text-xl tracking-tighter transition-colors duration-500
+                    className={`font-bold text-xl tracking-tighter transition-colors duration-500
                         ${isBright ? 'text-black group-hover:text-white' : 'text-orange-500'}
                     `}
                 >

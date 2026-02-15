@@ -10,7 +10,7 @@ const nextConfig = {
   */
   // Ensure Turbopack is not enabled via config
   experimental: {
-    // Other experimental options can go here
+    optimizePackageImports: true
   },
   // Watcher Optimization for Windows disabled for production readiness check
 }
