@@ -17,9 +17,15 @@ export const metadata: Metadata = {
   },
   description: 'A production-ready portfolio powered by Notion and Next.js',
   icons: {
-    icon: '/android-chrome-512x512.png',
-    shortcut: '/android-chrome-512x512.png',
-    apple: '/android-chrome-512x512.png',
+    icon: '/media/brand/logo.png',
+    shortcut: '/media/brand/logo.png',
+    apple: '/media/brand/logo.png',
+    other: [
+      {
+        rel: 'icon',
+        url: '/media/brand/favicon.ico',
+      },
+    ],
   },
 }
 

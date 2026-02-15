@@ -5,17 +5,20 @@ import path from 'path';
 
 export async function GET() {
     const publicDir = path.join(process.cwd(), 'public');
-    const videosDir = path.join(publicDir, 'videos');
-    const soundsDir = path.join(publicDir, 'sounds');
+    const mediaBaseDir = path.join(publicDir, 'media');
 
-    const getFiles = (dir: string, extensions: string[]) => {
+    // Hardened deterministic paths
+    const videosDir = path.join(mediaBaseDir, 'videos');
+    const musicDir = path.join(mediaBaseDir, 'music');
+
+    const getFiles = (dir: string, publicPathPart: string, extensions: string[]) => {
         try {
             if (!fs.existsSync(dir)) return [];
             return fs.readdirSync(dir)
                 .filter(file => extensions.includes(path.extname(file).toLowerCase()))
                 .map(file => ({
                     name: formatName(file),
-                    path: `/${path.basename(dir)}/${file}`
+                    path: `/media/${publicPathPart}/${file}`
                 }));
         } catch (error) {
             console.error(`Error reading directory ${dir}:`, error);
@@ -31,8 +34,8 @@ export async function GET() {
             .slice(0, 40) || 'BACKGROUND';
     };
 
-    const videos = getFiles(videosDir, ['.mp4', '.webm']);
-    const sounds = getFiles(soundsDir, ['.mp3', '.wav', '.ogg']);
+    const videos = getFiles(videosDir, 'videos', ['.mp4', '.webm']);
+    const sounds = getFiles(musicDir, 'music', ['.mp3', '.wav', '.ogg']);
 
     return NextResponse.json({ videos, sounds });
 }

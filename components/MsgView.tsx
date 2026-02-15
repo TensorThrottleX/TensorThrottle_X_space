@@ -335,7 +335,7 @@ export function MsgView(): React.ReactNode {
                         {/* BMC Logo - Top Left Corner */}
                         <div className="absolute top-4 left-4 w-10 h-10 hover:opacity-80 transition-opacity">
                             <img
-                                src="/bmc/bmc-logo.svg"
+                                src="/media/brand/bmc-logo.svg"
                                 alt="Buy Me a Coffee"
                                 className="w-full h-full object-contain"
                             />
@@ -352,7 +352,7 @@ export function MsgView(): React.ReactNode {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.5 }}
-                                        src="/bmc/profile.jpg"
+                                        src="/media/brand/profile.jpg"
                                         alt="Author Profile"
                                         className="w-full h-full object-cover"
                                         onError={() => setImgError(true)}
