@@ -1,25 +1,44 @@
-# 🌌 TENSOR THROTTLE X (space)
+<p align="center">
+<img src="./public/logo-tx.png" alt="Tensor Throttle X Logo" width="160" />
+</p>
 
-An experimental, cinematic portfolio lab powered by **Next.js 16**, **Notion CMS**, and **D3.js**. Designed for high-clarity engineering documentation and immersive visual storytelling.
+<h1 align="center">🌌 TENSOR THROTTLE X (space)</h1>
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Notion](https://img.shields.io/badge/Notion-CMS-000000?style=for-the-badge&logo=notion)](https://notion.so/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Notion-CMS-000000?style=for-the-badge&logo=notion" alt="Notion" />
+  <img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase" />
+</p>
+
+<p align="center">
+An experimental, cinematic portfolio lab — not built to showcase flawless implementations, but to process and externalize ungathered thought.
+</p>
+
+<p align="center">
+It transforms raw reasoning into visible structure, layering narrative, motion, and spatial depth to make ideas tangible rather than abstract.
+</p>
+
+<p align="center">
+It is less a showcase of outcomes and more a system for thinking in public.<br/>
+Not perfection — but evolution.
+</p>
 
 ---
 
 ## 🏛️ System Architecture
 
-`TENSOR THROTTLE X` is built on a **Three-Layer Visual Stack** designed to separate atmospheric immersion from functional data density.
+TENSOR THROTTLE X is built on a **Three-Layer Visual Stack** — a deliberate separation of atmosphere, structure, and cognition. The visual system functions as a cognitive scaffold that gives dimensional presence to abstract reasoning.
 
 ### 1. Visual Strategy: The Three-Layer Stack
-- **Layer 0 (Atmosphere)**: High-definition cinematic background video (`/public/background.mp4`) with recursive loops.
-- **Layer 1 (Substrate)**: Translucent glass overlays (`backdrop-blur-xl`) that provide contrast while preserving depth.
-- **Layer 2 (Cognition)**: High-density content panels, interactive knowledge trees, and the `SECURE_SHELL` terminal interface.
+
+- **Layer 0 (Atmosphere)**: High-definition cinematic background video (`/public/background.mp4`) with recursive loops — representing continuous cognitive motion.
+- **Layer 1 (Substrate)**: Translucent glass overlays (`backdrop-blur-xl`) preserving depth while creating structural separation.
+- **Layer 2 (Cognition)**: High-density content panels, interactive knowledge trees, and the **SECURE_SHELL** terminal interface — where fragmented ideas become organized systems.
 
 ### 2. Data Flow Protocol
+
 ```mermaid
 graph TD
     A[Notion Database] -->|API Request| B(Server Side Fetch)
@@ -30,36 +49,50 @@ graph TD
     E -->|D3.js Rendering| F
 ```
 
-### 3. Core Modules
-- **Unified Feed**: A centralized stream of thoughts, projects, and experiments fetched directly from Notion.
-- **Cognitive Dashboard**: The main entry point featuring three distinct viewing modes:
-  - `NORMAL`: Cinematic experience with full video background.
-  - `BRIGHT`: High-clarity "Engineering Lab" mode (inverted/matte).
-  - `DARK`: Deep focus mode with suspended video for zero distraction.
-- **Interactive Tree**: A D3-powered branching visualization for mapping technical journeys and philosophies.
-- **Secure Shell**: A command-line interface for system-wide navigation and secret overrides.
+The pipeline converts thought fragments stored in Notion into normalized structural outputs — rendered either as narrative streams or spatial knowledge graphs.
+
+---
+
+## 3. Core Modules
+
+### Unified Feed
+A centralized stream of thoughts, experiments, and evolving systems — documenting reasoning before resolution.
+
+### Cognitive Dashboard
+Three perception modes:
+- **NORMAL** → Full cinematic immersion.
+- **BRIGHT** → High-clarity Engineering Lab mode.
+- **DARK** → Deep-focus mode with suspended atmospheric motion.
+
+### Interactive Tree
+A D3-powered branching visualization mapping technical journeys and philosophical evolution.
+
+### Secure Shell
+A command-line interface enabling system-wide navigation and hidden overrides.
 
 ---
 
 ## 🛠️ Technical Implementation
 
+The stack is optimized for clarity, modularity, and visual density.
+
 ### Frontend Stack
 - **Framework**: Next.js 16 (App Router)
 - **Styling**: Vanilla CSS Variables + Tailwind CSS 4.0
-- **Animations**: Framer Motion (Orchestration & Micro-interactions)
-- **Visuals**: D3.js (Complex data visualizations)
+- **Animations**: Framer Motion (Micro-interactions & orchestration)
+- **Visual Engine**: D3.js (Complex knowledge visualizations)
 
 ### Integration Layer
-- **CMS**: Notion SDK (Official `@notionhq/client`)
-- **Database**: Supabase (PostgreSQL) for real-time commenting and engagement metrics.
-- **Audio**: Global Spatial Audio system for ambient atmosphere.
+- **CMS**: Notion SDK (`@notionhq/client`)
+- **Database**: Supabase (PostgreSQL) for comments & engagement metrics
+- **Audio**: Global Spatial Audio system for ambient immersion
 
 ---
 
 ## 🚀 Deployment & Environment
 
 ### Environment Variables
-To prevent credential leaks, ensure the following are set in your deployment environment (Vercel) and **never** committed to Git.
+Never commit credentials. Configure in Vercel:
 
 ```bash
 # Notion Integration
@@ -72,13 +105,13 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
 
 ### Local Setup
-1. **Clone & Install**:
+1. **Install dependencies**:
    ```bash
    pnpm install
    ```
-2. **Configure Environment**:
-   Duplicate `.env.example` (if present) to `.env.local` and add your keys.
-3. **Run Laboratory**:
+2. **Configure environment**:
+   Create `.env.local` with the variables above.
+3. **Run laboratory**:
    ```bash
    pnpm dev
    ```
@@ -86,17 +119,19 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ---
 
 ## 🔐 Security & Privacy
-- **Credential Protection**: The project is pre-configured with a robust `.gitignore` blocking all `.env` variants, IDE settings, and build artifacts.
-- **Secure Channel**: Direct communication is routed through a rate-limited secure link to prevent spam/abuse.
-- **Rate Limiting**: Integrated API protection for message transmission and commenting.
+- Robust `.gitignore` protecting `.env` variants and build artifacts.
+- Rate-limited secure communication channel.
+- API-level protection for engagement modules.
 
 ---
 
 ## 📜 Documentation Index
-- [Visual Guide](./VISUAL_GUIDE.md) - Layout & UI mapping
-- [Design System](./DESIGN_SYSTEM.md) - Typography & Tokenomics
-- [Setup Guide](./SETUP.md) - First-time installation details
+- [Visual Guide](./VISUAL_GUIDE.md)
+- [Design System](./DESIGN_SYSTEM.md)
+- [Setup Guide](./SETUP.md)
 
 ---
 
-Developed with absolute precision for **TensorThrottle X**.
+<p align="center">
+Developed with structural intent and atmospheric precision for <strong>TensorThrottle X</strong>.
+</p>
