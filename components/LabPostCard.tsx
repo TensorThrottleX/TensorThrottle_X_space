@@ -94,7 +94,8 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
     const focusParam = focus ? `&focus=${focus}` : ''
 
     // If we represent a category but are NOT on that category page, navigate there
-    if (!pathname.startsWith(targetPath)) {
+    // EXCEPT when we want to focus on comments - comments are EXCLUSIVE to the feed
+    if (!pathname.startsWith(targetPath) && !focus) {
       router.push(`${targetPath}?post=${post.slug}${focusParam}`)
       return
     }
@@ -113,9 +114,15 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
     }
   }
 
-  const onCommentClick = (e: React.MouseEvent) => {
+  const onCommentClick = async (e: React.MouseEvent) => {
     e.stopPropagation()
-    toggleContent(e, 'comments')
+    e.preventDefault()
+
+    // Always expand locally for comments as they are feed-exclusive
+    await expandPost()
+    setTimeout(() => {
+      commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
   }
 
   // Auto-scroll when modal opens from URL param

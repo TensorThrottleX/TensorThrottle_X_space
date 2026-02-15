@@ -1,17 +1,15 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
-import { MessageSquare, Loader2, X } from 'lucide-react'
-import { CommentSection } from './CommentSection'
+import { Loader2, X } from 'lucide-react'
 import { NotionBlockRenderer } from './NotionBlockRenderer'
 import { motion, AnimatePresence } from 'framer-motion'
-import type { Post, Comment } from '@/types/post'
+import type { Post } from '@/types/post'
 
 interface CategoryPostCardProps {
     post: Post
-    commentCount?: number
 }
 
 /**
@@ -19,8 +17,9 @@ interface CategoryPostCardProps {
  * - teaser in category archives with cover image
  * - popup modal for full content
  * - removes cover image in expanded view as per user request
+ * - [REDUCED]: No comments section in category archives (Feed only)
  */
-export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardProps): React.ReactNode {
+export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNode {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -28,27 +27,11 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
     const [content, setContent] = useState<any[]>(post.content || [])
     const [isLoadingContent, setIsLoadingContent] = useState(false)
 
-    // State for comments
-    const [comments, setComments] = useState<Comment[]>([])
-    const [isLoadingComments, setIsLoadingComments] = useState(false)
-    const [hasLoadedComments, setHasLoadedComments] = useState(false)
-
-    // Ref for scrolling
-    const commentsRef = useRef<HTMLDivElement>(null)
-
     // Auto-expand logic based on URL
     useEffect(() => {
         const postSlugParam = searchParams.get('post')
-        const shouldFocusComments = searchParams.get('focus') === 'comments'
-
         if (postSlugParam === post.slug && !isExpanded) {
-            expandPost().then(() => {
-                if (shouldFocusComments) {
-                    setTimeout(() => {
-                        commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
-                    }, 500)
-                }
-            })
+            expandPost()
         }
     }, [searchParams, post.slug, isExpanded])
 
@@ -69,23 +52,6 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
                 setIsLoadingContent(false)
             }
         }
-
-        // Load comments
-        if (!hasLoadedComments) {
-            setIsLoadingComments(true)
-            try {
-                const res = await fetch(`/api/comments?slug=${post.slug}`)
-                if (res.ok) {
-                    const data = await res.json()
-                    setComments(data.comments || [])
-                    setHasLoadedComments(true)
-                }
-            } catch (error) {
-                console.error('Failed to load comments', error)
-            } finally {
-                setIsLoadingComments(false)
-            }
-        }
     }
 
     const toggleExpansion = async (e: React.MouseEvent) => {
@@ -95,15 +61,6 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
         } else {
             await expandPost()
         }
-    }
-
-    const onCommentClick = async (e: React.MouseEvent) => {
-        e.stopPropagation()
-        e.preventDefault()
-        await expandPost()
-        setTimeout(() => {
-            commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
-        }, 100)
     }
 
     return (
@@ -143,8 +100,6 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
                         <p className="text-base leading-relaxed opacity-80 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
                             {post.excerpt}
                         </p>
-
-
                     </div>
                 </div>
             </article>
@@ -205,28 +160,6 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
                                         )}
                                     </div>
                                 )}
-
-                                {/* Discussion Section */}
-                                <div ref={commentsRef} className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
-                                    <div className="flex items-center gap-2 mb-8">
-                                        <MessageSquare size={16} className="text-cyan-500" />
-                                        <h4 className="text-sm font-bold uppercase tracking-tighter">Transmission Discussion</h4>
-                                    </div>
-
-                                    {isLoadingComments ? (
-                                        <div className="flex justify-center py-8">
-                                            <Loader2 className="h-6 w-6 animate-spin opacity-40" />
-                                        </div>
-                                    ) : (
-                                        <CommentSection postSlug={post.slug} initialComments={comments} />
-                                    )}
-                                </div>
-
-                                {/* Discussion context indicator */}
-                                <div className="mt-16 pt-8 border-t flex items-center gap-2 opacity-40 select-none pb-12" style={{ borderColor: 'var(--border)' }}>
-                                    <MessageSquare size={14} />
-                                    <span className="text-[10px] uppercase font-black tracking-widest">End of Transmission</span>
-                                </div>
                             </div>
                         </motion.div>
                     </div>
