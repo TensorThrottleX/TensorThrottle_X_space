@@ -127,13 +127,13 @@ export function MsgView(): React.ReactNode {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex-1 overflow-y-auto px-6 pt-32 pb-20 secure-channel-container"
         >
-            <div className="max-w-[720px] mx-auto space-y-8">
+            <div className="max-w-[600px] mx-auto space-y-8">
                 {/* [MSG_PAGE] – Header */}
                 <div className="space-y-2">
                     <h1 className="text-h1 font-black tracking-tighter" style={{ color: 'var(--heading-primary)' }}>
                         Secure Channel
                     </h1>
-                    <p className="text-sm font-mono text-cyan-500/60 uppercase tracking-normal">
+                    <p className="text-sm font-mono text-cyan-500/60 uppercase tracking-tighter">
                         CRITICAL_COMM_LINK 01
                     </p>
                 </div>
@@ -149,7 +149,7 @@ export function MsgView(): React.ReactNode {
                         </div>
                         <div className="space-y-4 flex-1 text-left">
                             <div>
-                                <h3 className="text-sm font-bold uppercase tracking-normal" style={{ color: 'var(--foreground)' }}>Transmission Protocol</h3>
+                                <h3 className="text-sm font-black uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>Transmission Protocol</h3>
                                 <ul className="mt-2 space-y-1 text-xs leading-relaxed list-disc list-inside" style={{ color: renderMode === 'bright' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.5)' }}>
                                     <li>Identity must be at least 2 characters.</li>
                                     <li>Zero tolerance for profanity or abuse (Filtered).</li>
@@ -173,7 +173,7 @@ export function MsgView(): React.ReactNode {
                                         {isConfirmed && <CheckCircle size={14} className={renderMode === 'bright' ? "text-white" : "text-black"} />}
                                     </div>
                                 </div>
-                                <span className="text-xs font-medium select-none" style={{ color: renderMode === 'bright' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.7)' }}>
+                                <span className="text-[10px] uppercase font-black tracking-tighter select-none" style={{ color: isConfirmed ? 'var(--foreground)' : 'var(--muted-foreground)' }}>
                                     I adhere to the transmission protocol.
                                 </span>
                             </label>
