@@ -58,7 +58,7 @@ export function HomePageLayout() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="fixed top-[110px] md:top-[125px] left-0 w-full flex justify-center z-50 pointer-events-auto"
+                            className="fixed top-[100px] md:top-[115px] left-0 w-full flex justify-center z-50 pointer-events-auto"
                         >
                             <div className="relative flex items-center bg-black/40 backdrop-blur-md rounded-full border border-white/10 p-1 shadow-2xl gap-1">
                                 {/* Sliding Indicator */}
