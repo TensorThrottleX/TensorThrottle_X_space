@@ -4,13 +4,7 @@
 
 <h1 align="center">🌌 TENSOR THROTTLE X (space)</h1>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
-  <img src="https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react" alt="React" />
-  <img src="https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Notion-CMS-000000?style=for-the-badge&logo=notion" alt="Notion" />
-  <img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase" />
-</p>
+
 
 <p align="center">
 An experimental, cinematic portfolio lab — not built to showcase flawless implementations, but to process and externalize ungathered thought.
@@ -73,6 +67,14 @@ A command-line interface enabling system-wide navigation and hidden overrides.
 ---
 
 ## 🛠️ Technical Implementation
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Notion-CMS-000000?style=for-the-badge&logo=notion" alt="Notion" />
+  <img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase" />
+</p>
 
 The stack is optimized for clarity, modularity, and visual density.
 
