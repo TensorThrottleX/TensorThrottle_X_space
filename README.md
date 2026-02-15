@@ -1,23 +1,31 @@
 <p align="center">
-<img src="./public/logo-tx.png" alt="Tensor Throttle X Logo" width="160" />
+  <img src="./public/android-chrome-512x512.png" alt="Tensor Throttle X Logo" width="120" />
 </p>
 
-<h1 align="center">🌌 TENSOR THROTTLE X (space)</h1>
-
-
+<h1 align="center">🌌 TENSOR THROTTLE X Space</h1>
 
 <p align="center">
-An experimental, cinematic portfolio lab — not built to showcase flawless implementations, but to process and externalize ungathered thought.
+  An experimental, cinematic portfolio lab — not built to showcase flawless implementations, but to process and externalize ungathered thought.
 </p>
 
 <p align="center">
-It transforms raw reasoning into visible structure, layering narrative, motion, and spatial depth to make ideas tangible rather than abstract.
+  It transforms raw reasoning into visible structure, layering narrative, motion, and spatial depth to make ideas tangible rather than abstract.
 </p>
 
 <p align="center">
-It is less a showcase of outcomes and more a system for thinking in public.<br/>
-Not perfection — but evolution.
+  It is less a showcase of outcomes and more a system for thinking in public.<br/>
+  <em>Not perfection — but evolution.</em>
 </p>
+
+---
+
+## 🧠 Core Principles: Beyond the Standard Portfolio
+
+Unlike a traditional web portfolio which acts as a static gallery of past achievements, **TENSOR THROTTLE X** is designed as a **Live Cognitive Environment**. It departs from standard portfolio conventions in three fundamental ways:
+
+1.  **Process over Outcome**: Most portfolios show only the finished, polished product. This system captures the evolution of thought—documenting the logic, the failures, and the raw technical journeys.
+2.  **Atmospheric Cognition**: The use of cinematic loops and spatial audio creates a "Laboratory Mode" of focus. The immersive environment transitions the viewer from passive observation to active exploration.
+3.  **Dimensional Structure**: While standard portfolios use flat layouts, this system uses a multi-layer visual stack (Atmosphere, Substrate, Cognition) to mimic the way the human mind layers information.
 
 ---
 
@@ -25,13 +33,14 @@ Not perfection — but evolution.
 
 TENSOR THROTTLE X is built on a **Three-Layer Visual Stack** — a deliberate separation of atmosphere, structure, and cognition. The visual system functions as a cognitive scaffold that gives dimensional presence to abstract reasoning.
 
-### 1. Visual Strategy: The Three-Layer Stack
+### 👁️ Visual Strategy: The Three-Layer Stack
+
 
 - **Layer 0 (Atmosphere)**: High-definition cinematic background video (`/public/background.mp4`) with recursive loops — representing continuous cognitive motion.
 - **Layer 1 (Substrate)**: Translucent glass overlays (`backdrop-blur-xl`) preserving depth while creating structural separation.
 - **Layer 2 (Cognition)**: High-density content panels, interactive knowledge trees, and the **SECURE_SHELL** terminal interface — where fragmented ideas become organized systems.
 
-### 2. Data Flow Protocol
+### ⛓️ Data Flow Protocol
 
 ```mermaid
 graph TD
@@ -47,7 +56,7 @@ The pipeline converts thought fragments stored in Notion into normalized structu
 
 ---
 
-## 3. Core Modules
+## 🏗️ Core Modules
 
 ### Unified Feed
 A centralized stream of thoughts, experiments, and evolving systems — documenting reasoning before resolution.
