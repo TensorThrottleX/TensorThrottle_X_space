@@ -66,7 +66,7 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
       `} />
 
       {/* Layer 3: Floating content and navigation */}
-      <div className={`relative z-10 flex h-full w-full transition-opacity duration-500 ${isTerminalOpen ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`relative flex h-full w-full transition-opacity duration-500 ${isTerminalOpen ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
         {children}
       </div>
     </div>

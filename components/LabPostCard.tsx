@@ -148,8 +148,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
       <AnimatePresence>
         {isExpanded && (
           <div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8"
-            style={{ pointerEvents: 'auto' }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-8 pointer-events-auto"
           >
             {/* Backdrop Blur Overlay */}
             <motion.div
@@ -166,7 +165,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-md bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[92vh]"
+              className="relative z-10 w-full max-w-md bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[92vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}

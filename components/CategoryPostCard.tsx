@@ -114,7 +114,7 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
 
             <AnimatePresence>
                 {isExpanded && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8 pointer-events-auto">
+                    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-8 pointer-events-auto">
                         {/* Backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -130,7 +130,7 @@ export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardPro
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-md h-[92vh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
+                            className="relative z-10 w-full max-w-md h-[92vh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header (No cover image here as per user request) */}
