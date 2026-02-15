@@ -1,12 +1,12 @@
-
 'use client'
 
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
 import type { Post } from '@/types/post'
-import { ChevronDown, ChevronUp, Loader2 } from 'lucide-react'
+import { Loader2, X, MessageSquare } from 'lucide-react'
 import { NotionBlockRenderer } from './NotionBlockRenderer'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface CategoryPostCardProps {
     post: Post
@@ -14,10 +14,9 @@ interface CategoryPostCardProps {
 
 /**
  * CategoryPostCard:
- * - Specific card layout for Category Archives
- * - Bounded, collapsible
- * - Cover Image (16:9)
- * - Auto-expands if query param matches
+ * - teaser in category archives with cover image
+ * - popup modal for full content
+ * - removes cover image in expanded view as per user request
  */
 export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNode {
     const router = useRouter()
@@ -52,14 +51,6 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                 setIsLoadingContent(false)
             }
         }
-        // Scroll into view logic handled by parent or existing mechanism? 
-        // The prompt suggested auto-scroll. We can do it here.
-        setTimeout(() => {
-            const el = document.getElementById(`cat-post-${post.id}`)
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-            }
-        }, 100)
     }
 
     const toggleExpansion = async (e: React.MouseEvent) => {
@@ -72,20 +63,15 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
     }
 
     return (
-        <article
-            id={`cat-post-${post.id}`}
-            className={`group relative overflow-hidden rounded-xl border transition-all duration-500`}
-            style={{
-                backgroundColor: 'var(--card-bg)',
-                borderColor: 'var(--border)',
-                color: 'var(--foreground)'
-            }}
-        >
-            <div onClick={toggleExpansion} className="cursor-pointer">
-                {/* Cover Image */}
+        <>
+            <article
+                id={`cat-post-${post.id}`}
+                className="group relative overflow-hidden rounded-xl border border-[var(--border)] transition-all duration-500 cursor-pointer bg-[var(--card-bg)]"
+                onClick={toggleExpansion}
+            >
+                {/* Teaser Cover Image */}
                 {post.coverImage && (
-                    <div className={`relative w-full overflow-hidden border-b transition-all duration-500 ease-in-out ${isExpanded ? 'aspect-video' : 'h-48'}`}
-                        style={{ borderColor: 'var(--border)' }}>
+                    <div className="relative w-full overflow-hidden border-b h-48" style={{ borderColor: 'var(--border)' }}>
                         <img
                             src={post.coverImage || "/placeholder.svg"}
                             alt={post.title}
@@ -94,66 +80,96 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                     </div>
                 )}
 
-                {/* Card Body */}
+                {/* Card Body teaser */}
                 <div className="p-6">
                     <div className="flex flex-col gap-4">
-                        {/* Meta */}
-                        <div className="flex items-center justify-between text-xs font-medium" style={{ color: 'var(--muted-foreground)' }}>
+                        <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
                             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                            <span className="rounded-full px-3 py-1 transition-colors"
+                            <span className="rounded-full px-2 py-0.5"
                                 style={{ backgroundColor: 'var(--secondary)', color: 'var(--secondary-foreground)' }}
                             >
                                 {post.category}
                             </span>
                         </div>
 
-                        {/* Title */}
-                        <h3 className="text-2xl font-black tracking-tighter transition-colors" style={{ color: 'var(--foreground)' }}>
+                        <h3 className="text-2xl font-black tracking-tighter" style={{ color: 'var(--foreground)' }}>
                             {post.title}
                         </h3>
 
-                        {/* Content */}
-                        <div className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                            {isExpanded ? (
-                                <div className="mt-6 space-y-6 animate-in fade-in duration-500 cursor-text" onClick={(e) => e.stopPropagation()}>
-                                    {isLoadingContent ? (
-                                        <div className="flex justify-center py-10">
-                                            <Loader2 className="h-6 w-6 animate-spin" style={{ color: 'var(--primary)' }} />
-                                        </div>
-                                    ) : (
-                                        <div className="prose max-w-none" style={{ color: 'var(--foreground)' }}>
-                                            {content.length > 0 ? (
-                                                content.map(block => <NotionBlockRenderer key={block.id} block={block} />)
-                                            ) : (
-                                                <p className="italic" style={{ color: 'var(--muted-foreground)' }}>No content found.</p>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            ) : (
-                                <p className="line-clamp-3 opacity-90">{post.excerpt}</p>
-                            )}
-                        </div>
+                        <p className="text-base leading-relaxed opacity-80 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+                            {post.excerpt}
+                        </p>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            {/* Footer / Expand Button */}
-            <div className="border-t px-6 py-4 flex justify-center transition-colors duration-500"
-                style={{ borderColor: 'var(--border)', backgroundColor: 'var(--sidebar-bg)' }}
-            >
-                <button
-                    onClick={toggleExpansion}
-                    className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold transition-transform hover:scale-105"
-                    style={{ color: 'var(--muted-foreground)' }}
-                >
-                    {isExpanded ? (
-                        <>Collapse <ChevronUp className="h-4 w-4" /></>
-                    ) : (
-                        <>Expand <ChevronDown className="h-4 w-4" /></>
-                    )}
-                </button>
-            </div>
-        </article>
+            <AnimatePresence>
+                {isExpanded && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8 pointer-events-auto">
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsExpanded(false)}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer"
+                        />
+
+                        {/* Modal Card */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-xl h-[88vh] bg-[var(--card-bg)] border border-[var(--border)] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Modal Header (No cover image here as per user request) */}
+                            <div className="px-8 py-8 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
+                                <div className="space-y-3">
+                                    <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
+                                        <time>{formatDate(post.publishedAt)}</time>
+                                        <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}>{post.category}</span>
+                                    </div>
+                                    <h2 className="text-3xl sm:text-4xl font-black tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
+                                        {post.title}
+                                    </h2>
+                                </div>
+                                <button
+                                    onClick={() => setIsExpanded(false)}
+                                    className="p-2 rounded-full hover:bg-white/10 transition-colors opacity-60 hover:opacity-100"
+                                    style={{ color: 'var(--foreground)' }}
+                                >
+                                    <X size={20} />
+                                </button>
+                            </div>
+
+                            {/* Modal Content */}
+                            <div className="flex-1 overflow-y-auto px-8 py-8 premium-scrollbar">
+                                {isLoadingContent ? (
+                                    <div className="flex justify-center py-20">
+                                        <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />
+                                    </div>
+                                ) : (
+                                    <div className="prose prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-black prose-headings:tracking-tighter prose-headings:mt-8 prose-headings:mb-4">
+                                        {content.length > 0 ? (
+                                            content.map((block: any) => <NotionBlockRenderer key={block.id} block={block} />)
+                                        ) : (
+                                            <p className="italic opacity-50">No additional content found.</p>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Discussion context indicator */}
+                                <div className="mt-16 pt-8 border-t flex items-center gap-2 opacity-40 select-none" style={{ borderColor: 'var(--border)' }}>
+                                    <MessageSquare size={14} />
+                                    <span className="text-[10px] uppercase font-black tracking-widest">End of Transmission</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+        </>
     )
 }
