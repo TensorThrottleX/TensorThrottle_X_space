@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 interface CategoryPostCardProps {
     post: Post
+    commentCount?: number
 }
 
 /**
@@ -18,7 +19,7 @@ interface CategoryPostCardProps {
  * - popup modal for full content
  * - removes cover image in expanded view as per user request
  */
-export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNode {
+export function CategoryPostCard({ post, commentCount = 0 }: CategoryPostCardProps): React.ReactNode {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -99,6 +100,14 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                         <p className="text-base leading-relaxed opacity-80 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
                             {post.excerpt}
                         </p>
+
+                        {/* Comment Indicator */}
+                        <div className="flex items-center gap-1.5 mt-1 opacity-40 group-hover:opacity-60 transition-opacity">
+                            <MessageSquare size={14} />
+                            <span className="text-[10px] font-bold uppercase tracking-widest">
+                                {commentCount > 0 ? `${commentCount}` : '0'}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -121,7 +130,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-lg h-[90vh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
+                            className="relative w-full max-w-md h-[92vh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header (No cover image here as per user request) */}

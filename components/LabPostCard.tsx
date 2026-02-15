@@ -134,6 +134,14 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
           <p className="text-base leading-relaxed opacity-80 line-clamp-2" style={{ color: 'var(--foreground)' }}>
             {post.excerpt}
           </p>
+
+          {/* Comment Indicator */}
+          <div className="flex items-center gap-1.5 mt-1 opacity-40 group-hover:opacity-60 transition-opacity">
+            <MessageSquare size={14} />
+            <span className="text-[10px] font-bold uppercase tracking-widest">
+              {commentCount > 0 ? `${commentCount}` : '0'}
+            </span>
+          </div>
         </div>
       </article>
 
@@ -158,7 +166,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-lg bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[90vh]"
+              className="relative w-full max-w-md bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[92vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
