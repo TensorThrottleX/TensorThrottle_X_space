@@ -86,7 +86,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
     e.preventDefault()
 
     // Check Navigation Context
-    const categorySlug = post.category.toLowerCase()
+    const categorySlug = post.category.toLowerCase().trim()
     const targetPath = `/category/${categorySlug}`
 
     // If we represent a category but are NOT on that category page, navigate there
@@ -124,7 +124,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl font-black tracking-tighter transition-colors"
+          <h3 className="text-2xl font-bold tracking-tighter transition-colors"
             style={{ color: 'var(--foreground)' }}
           >
             {post.title}
@@ -168,7 +168,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
                     <time>{formatDate(post.publishedAt)}</time>
                     <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}>{post.category}</span>
                   </div>
-                  <h2 className="text-3xl sm:text-4xl font-black tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
+                  <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
                     {post.title}
                   </h2>
                 </div>
@@ -188,7 +188,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
                     <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />
                   </div>
                 ) : (
-                  <div className="prose prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-black prose-headings:tracking-tighter prose-headings:mt-8 prose-headings:mb-4">
+                  <div className="prose prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-headings:tracking-tighter prose-headings:mt-8 prose-headings:mb-4">
                     {content.length > 0 ? (
                       content.map(block => <NotionBlockRenderer key={block.id} block={block} />)
                     ) : (
@@ -201,7 +201,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
                 <div className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
                   <div className="flex items-center gap-2 mb-8">
                     <MessageSquare size={16} className="text-cyan-500" />
-                    <h4 className="text-sm font-black uppercase tracking-tighter">Transmission Discussion</h4>
+                    <h4 className="text-sm font-bold uppercase tracking-tighter">Transmission Discussion</h4>
                   </div>
 
                   {isLoadingComments ? (

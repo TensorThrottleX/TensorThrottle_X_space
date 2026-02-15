@@ -53,7 +53,7 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt }: C
           <div className="px-8 py-8 shrink-0 border-b transition-colors duration-500"
             style={{ borderColor: 'var(--border)' }}
           >
-            <h1 className="text-4xl sm:text-5xl font-black tracking-tighter text-balance"
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tighter text-balance"
               style={{ color: 'var(--heading-primary)' }}
             >
               {title}

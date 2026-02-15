@@ -92,7 +92,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             </span>
                         </div>
 
-                        <h3 className="text-2xl font-black tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                        <h3 className="text-2xl font-bold tracking-tighter" style={{ color: 'var(--foreground)' }}>
                             {post.title}
                         </h3>
 
@@ -131,7 +131,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                                         <time>{formatDate(post.publishedAt)}</time>
                                         <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}>{post.category}</span>
                                     </div>
-                                    <h2 className="text-3xl sm:text-4xl font-black tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
+                                    <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
                                         {post.title}
                                     </h2>
                                 </div>
@@ -151,7 +151,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                                         <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />
                                     </div>
                                 ) : (
-                                    <div className="prose prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-black prose-headings:tracking-tighter prose-headings:mt-8 prose-headings:mb-4">
+                                    <div className="prose prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-headings:tracking-tighter prose-headings:mt-8 prose-headings:mb-4">
                                         {content.length > 0 ? (
                                             content.map((block: any) => <NotionBlockRenderer key={block.id} block={block} />)
                                         ) : (
