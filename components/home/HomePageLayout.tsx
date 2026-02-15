@@ -20,19 +20,17 @@ export function HomePageLayout() {
     const [contentMode, setContentMode] = useState<'purpose' | 'about' | 'quote'>('purpose');
 
     return (
-        <>
-            <LabContainer videoSrc="/background.mp4">
-                {/* [SCREENSHOT]: 'TENSOR THROTTLE X' Title 
-                    - Rendered here as a fixed, animated header.
-                    - Visually dominates the top center of the screen.
-                */}
+        <LabContainer videoSrc="/background.mp4">
+            {/* [FLOW_PLANE]: Main vertical stack */}
+            <div className="flex flex-col items-center w-full min-h-full">
+                {/* 1. Header Title (Flow-based) */}
                 <AnimatePresence>
-                    {mainView === 'dashboard' && (
+                    {mainView === 'dashboard' && uiMode === 'default' && (
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="fixed top-[40px] left-0 w-full flex justify-center z-40 pointer-events-none select-none"
+                            className="relative w-full flex justify-center z-40 pointer-events-none select-none pt-fluid pb-4"
                         >
                             <motion.h1
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
@@ -48,17 +46,14 @@ export function HomePageLayout() {
                 </AnimatePresence>
 
 
-                {/* [SCREENSHOT]: 'PURPOSE | ABOUT' Toggle Switch
-                    - Located directly below the main title.
-                    - Controls the 'contentMode' state which changes the CognitiveDashboard content.
-                */}
+                {/* 2. Content Toggle (Flow-based) */}
                 <AnimatePresence>
-                    {mainView === 'dashboard' && (
+                    {mainView === 'dashboard' && uiMode === 'default' && (
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="fixed top-[100px] md:top-[115px] left-0 w-full flex justify-center z-50 pointer-events-auto"
+                            className="relative w-full flex justify-center z-50 pointer-events-auto py-4"
                         >
                             <div className="relative flex items-center bg-black/40 backdrop-blur-md rounded-full border border-white/10 p-1 shadow-2xl gap-1">
                                 {/* Sliding Indicator */}
@@ -107,23 +102,23 @@ export function HomePageLayout() {
                     )}
                 </AnimatePresence>
 
-                {/* 3. CORE LAYOUT ELEMENTS (Persistent) */}
-
+                {/* 3. INTERFACE_PLANE (Independent fixed layers) */}
                 <LabNavigation />
                 <RightFloatingBar />
 
-                {/* 4. DYNAMIC CENTER CONTENT (Cognitive Dashboard vs MsgView) */}
-                <AnimatePresence mode="wait">
-                    {mainView === 'dashboard' ? (
-                        <CognitiveDashboard key="dashboard" mode={contentMode} />
-                    ) : (
-                        <MsgView key="msg" />
-                    )}
-                </AnimatePresence>
+                {/* 4. DYNAMIC CENTER CONTENT (Participates in flow) */}
+                <div className="relative w-full flex-1 flex flex-col items-center">
+                    <AnimatePresence mode="wait">
+                        {mainView === 'dashboard' ? (
+                            <CognitiveDashboard key="dashboard" mode={contentMode} />
+                        ) : (
+                            <MsgView key="msg" />
+                        )}
+                    </AnimatePresence>
+                </div>
+            </div>
 
-            </LabContainer>
-
-            {/* Terminal Sits ON TOP of the fading container - Restrict to Home Page (Dashboard) Only */}
+            {/* Terminal Sits ON TOP - Restrict to Home Page (Dashboard) Only */}
             <AnimatePresence>
                 {mainView === 'dashboard' && (
                     <motion.div
@@ -131,12 +126,12 @@ export function HomePageLayout() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed inset-0 pointer-events-none z-50"
+                        className="fixed inset-0 pointer-events-none z-[100]"
                     >
                         <InteractiveHome />
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </LabContainer>
     );
 }

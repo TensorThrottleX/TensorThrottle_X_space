@@ -269,7 +269,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute inset-x-0 top-[180px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
+                className="relative w-full flex flex-col items-center justify-start pointer-events-none z-0 py-10"
             >
                 <div className="relative pointer-events-auto w-full flex justify-center px-4">
                     <SystemQuoteRenderer isPrecision={usePrecisionStyle} />
@@ -299,7 +299,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                         animate={{ opacity: 1, filter: 'blur(0px)' }}
                         exit={{ opacity: 0, filter: 'blur(10px)' }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="absolute inset-x-0 top-[180px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
+                        className="relative w-full flex flex-col items-center justify-start pointer-events-none z-0 pb-20"
                     >
                         <div className="relative pointer-events-auto w-full flex justify-center px-4">
                             <StackedDeck
@@ -391,7 +391,7 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
 
     return (
         <div className={cn(
-            "relative w-full max-w-[900px] h-[450px] rounded-[24px] shadow-2xl overflow-hidden border transition-colors duration-300 flex flex-col items-center justify-center text-center p-12",
+            "relative w-full max-w-panel h-panel rounded-[24px] shadow-2xl overflow-hidden border transition-colors duration-300 flex flex-col items-center justify-center text-center p-fluid",
             isPrecision
                 ? "bg-black border-white"
                 : "bg-black/60 backdrop-blur-xl border-white/10"
@@ -490,8 +490,8 @@ function StackedDeck({
     }
 
     return (
-        <div className="relative w-full max-w-[900px] min-h-[520px] perspective-1000 group flex flex-col items-center">
-            <div className="relative w-full h-[480px]">
+        <div className="relative w-full max-w-panel min-h-panel perspective-1000 group flex flex-col items-center">
+            <div className="relative w-full h-panel">
                 <AnimatePresence>
                     {stack.map((id, index) => {
                         // Determine what to render based on ID
@@ -505,7 +505,7 @@ function StackedDeck({
                                 onClick={() => handleCardClick(id, index)}
                                 initial={false}
                                 animate={{
-                                    y: index * 14, // Reduced vertical offset to save space
+                                    y: `calc(${index} * var(--stack-offset-y))`, // Fluid vertical offset
                                     scale: 1 - index * 0.04, // Scale reduction
                                     zIndex: stack.length - index,
                                     filter: index === 0 ? 'brightness(1.05)' : 'brightness(0.6) blur(0.5px)', // Dim lower cards
@@ -516,7 +516,7 @@ function StackedDeck({
                                     damping: 25
                                 }}
                                 className={cn(
-                                    "absolute top-0 left-0 w-full h-[450px] rounded-[24px] cursor-pointer shadow-2xl overflow-hidden border transition-colors duration-300",
+                                    "absolute top-0 left-0 w-full h-panel rounded-[24px] cursor-pointer shadow-2xl overflow-hidden border transition-colors duration-300",
                                     isPrecision
                                         ? "bg-black border-white"
                                         : "bg-black/60 backdrop-blur-xl border-white/10"

@@ -13,7 +13,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  min-height: 100dvh;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -85,6 +85,20 @@ body {
     --radius: 0.5rem;
 
     --heading-primary: #ffffff;
+
+    /* [FLUID_TYPOGRAPHY]: Deterministic scaling hierarchy */
+    --font-size-h1: clamp(2.25rem, 5vw + 1rem, 4rem);
+    --font-size-h2: clamp(1.75rem, 4vw + 1rem, 2.75rem);
+    --font-size-h3: clamp(1.25rem, 3vw + 1rem, 2rem);
+    --font-size-body: clamp(0.875rem, 0.5vw + 0.75rem, 1.125rem);
+
+    /* [FLUID_GEOMETRY]: Space & Panel Normalization */
+    --space-fluid-y: clamp(2rem, 8vh, 6rem);
+    --space-fluid-x: clamp(1.5rem, 5vw, 4rem);
+
+    --panel-max-width: 900px;
+    --panel-height: clamp(400px, 60vh, 650px);
+    --stack-offset-y: clamp(8px, 1.5vh, 16px);
 
     /* Custom Tokens */
     --terminal-bg: rgba(0, 0, 0, 0.9);
@@ -319,27 +333,9 @@ body {
        We handle specific components, but this ensures no random colors leak
      } */
 
-  /* SECURE CHANNEL CONTAINER */
   .secure-channel-container {
-    overflow-y: auto;
-    max-height: 100vh;
     padding-bottom: 200px;
-    /* Apply premium scrollbar logic explicitly to avoid @apply warning */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-  }
-
-  .secure-channel-container::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  .secure-channel-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .secure-channel-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
+    /* Removed overflow constraints to allow Flow Plane to handle scrolling */
   }
 
   @media (min-width: 768px) {

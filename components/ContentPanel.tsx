@@ -38,10 +38,10 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt }: C
   }
 
   return (
-    <div className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 lg:px-8 h-screen w-full">
-      {/* Floating panel with glass effect */}
+    <div className="relative flex flex-1 w-full flex-col items-center justify-start p-fluid">
+      {/* Floating panel with glass effect - Normalized Architecture */}
       <div
-        className="relative w-full max-w-xl h-[94vh] lg:-translate-x-20 rounded-3xl backdrop-blur-2xl backdrop-saturate-150 border shadow-2xl overflow-hidden flex flex-col transition-all duration-500 hover:shadow-cyan-500/5"
+        className="relative w-full max-w-panel rounded-3xl backdrop-blur-2xl backdrop-saturate-150 border shadow-2xl overflow-visible flex flex-col transition-all duration-500 hover:shadow-cyan-500/5 group/panel"
         style={{
           backgroundColor: 'var(--card-bg)',
           borderColor: 'var(--card-border)',

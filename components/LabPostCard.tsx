@@ -199,7 +199,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative z-10 w-full max-w-3xl bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[88vh]"
+              className="relative z-10 w-full max-w-3xl bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[88dvh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}

@@ -57,10 +57,10 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   }
 
   return (
-    <div className="sidebar flex h-full items-center px-4 py-8 pointer-events-auto relative z-40 transition-[opacity,transform] duration-500 ease-in-out">
+    <div className="sidebar fixed left-0 top-0 h-full flex items-center px-4 z-[60] pointer-events-none transition-[opacity,transform] duration-500 ease-in-out">
       {/* Navigation Panel: Floating glass capsule */}
       <div
-        className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border shadow-xl transition-colors duration-300"
+        className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border shadow-xl transition-colors duration-300 pointer-events-auto"
         style={{
           backgroundColor: 'var(--sidebar-bg)',
           borderColor: 'var(--sidebar-border)',

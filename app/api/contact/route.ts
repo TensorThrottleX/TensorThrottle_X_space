@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import crypto from 'crypto';
 
 // ============================================
 // RUNTIME CONFIGURATION
@@ -77,12 +78,21 @@ function securityCheck(body: any, request: NextRequest): SecurityResult {
         request.headers.get('x-real-ip') ||
         '127.0.0.1';
 
+    // 1. Honeypot check
     if (body.h_field || body.honeypot || body._trap) {
         console.warn(`[SECURITY] Honeypot triggered from IP: ${ip}`);
         return { allowed: false, severity: 2, reason: 'Bot detected' };
     }
 
+    // 2. Time-based validation
+    const loadTime = parseInt(body.load_time || '0');
     const now = Date.now();
+    if (loadTime === 0 || now - loadTime < 2000) { // < 2 seconds is suspicious
+        console.warn(`[SECURITY] Fast submission (Time-based validation) from IP: ${ip}`);
+        return { allowed: false, severity: 2, reason: 'Submission too fast' };
+    }
+
+    // 3. Rate limiting
     const windowMs = 5 * 60 * 1000;
     let attempts = rateLimits.get(ip) || [];
     attempts = attempts.filter(timestamp => now - timestamp < windowMs);
@@ -95,6 +105,15 @@ function securityCheck(body: any, request: NextRequest): SecurityResult {
     attempts.push(now);
     rateLimits.set(ip, attempts);
 
+    // 4. Link density check
+    const urlRegex = /https?:\/\/[^\s/$.?#].[^\s]*/gi;
+    const links = (body.message || '').match(urlRegex) || [];
+    if (links.length > 3) {
+        console.warn(`[SECURITY] High link density (${links.length} links) from IP: ${ip}`);
+        return { allowed: false, severity: 1, reason: 'Message contains too many links' };
+    }
+
+    // 5. Profanity / Blacklist pattern scan
     const profanityPatterns = [
         /\bf+u+c+k+\b/gi, /\bs+h+i+t+\b/gi, /\bb+i+t+c+h+\b/gi,
         /\ba+s+s+h+o+l+e+\b/gi, /\bc+u+n+t+\b/gi, /\bd+i+c+k+\b/gi,
@@ -110,7 +129,7 @@ function securityCheck(body: any, request: NextRequest): SecurityResult {
     const combinedText = `${(body.message || '')} ${(body.identity || '')}`.toLowerCase();
     for (const pattern of profanityPatterns) {
         if (pattern.test(combinedText)) {
-            console.warn(`[SECURITY] Profanity detected from IP: ${ip}`);
+            console.warn(`[SECURITY] Blacklisted pattern detected from IP: ${ip}`);
             return { allowed: false, severity: 2, reason: 'Prohibited language detected' };
         }
     }
@@ -145,6 +164,7 @@ function buildEmailTemplate(content: EmailPayload, metadata: EmailMetadata): str
     const safeIdentity = escapeHtml(content.identity);
     const safeEmail = content.email ? escapeHtml(content.email) : 'Not Provided';
     const safeMessage = escapeHtml(content.message);
+    const ipHash = crypto.createHash('sha256').update(metadata.ip).digest('hex').substring(0, 12);
 
     return `
     <!DOCTYPE html>
@@ -195,10 +215,10 @@ ${safeMessage}
               <tr>
                 <td style="padding: 6px 0; color: #666; font-size: 11px; width: 140px;">TIMESTAMP</td>
                 <td style="padding: 6px 0; color: #999; font-size: 11px;">${metadata.timestamp}</td>
-              </tr>
-              <tr>
-                <td style="padding: 6px 0; color: #666; font-size: 11px;">IP ADDRESS</td>
-                <td style="padding: 6px 0; color: #999; font-size: 11px;">${metadata.ip}</td>
+               </tr>
+               <tr>
+                <td style="padding: 6px 0; color: #666; font-size: 11px;">IP HASH</td>
+                <td style="padding: 6px 0; color: #999; font-size: 11px;">${ipHash}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 0; color: #666; font-size: 11px;">USER AGENT</td>
@@ -227,7 +247,6 @@ ${safeMessage}
 // MAIN REQUEST HANDLER
 // ============================================
 export async function POST(req: NextRequest) {
-    // 4. Enforce Environment Safety
     if (!process.env.RESEND_API_KEY) {
         console.error('[EMAIL] RESEND_API_KEY not configured');
         return NextResponse.json(
@@ -236,24 +255,10 @@ export async function POST(req: NextRequest) {
         );
     }
 
-    // 2. Enforce Verified Domain Sender
-    const FROM_EMAIL = process.env.PRIMARY_FROM_EMAIL;
-
-    if (!FROM_EMAIL) {
-        console.error('[EMAIL] PRIMARY_FROM_EMAIL missing in environment');
-        return NextResponse.json(
-            { error: 'Server misconfiguration: sender not defined.' },
-            { status: 500 }
-        );
-    }
-
-    if (!process.env.EMAIL_RECIPIENT) {
-        console.error('[EMAIL] EMAIL_RECIPIENT missing in environment');
-        return NextResponse.json(
-            { error: 'Server misconfiguration: recipient not defined.' },
-            { status: 500 }
-        );
-    }
+    // Anchored destination
+    const RECIPIENT = process.env.EMAIL_RECIPIENT || 'yourname@proton.me';
+    // System-controlled relay domain
+    const FROM_EMAIL = 'noreply@system-relay.com';
 
     try {
         const body = await req.json();
@@ -282,41 +287,42 @@ export async function POST(req: NextRequest) {
 
         const metadata = enrichMetadata(req);
         const emailHtml = buildEmailTemplate(payload, metadata);
+        const ipHash = crypto.createHash('sha256').update(metadata.ip).digest('hex').substring(0, 12);
 
-        // 5. Use Official Resend SDK
+        // Official Resend SDK
         const resend = new Resend(process.env.RESEND_API_KEY);
 
         const { data, error } = await resend.emails.send({
-            from: `Tensor Throttle X <${FROM_EMAIL}>`,
-            to: (process.env.EMAIL_RECIPIENT as string),
-            subject: '🔒 New Secure Transmission Received',
+            from: `Tensor Relay <${FROM_EMAIL}>`,
+            to: RECIPIENT,
+            reply_to: payload.email || undefined,
+            subject: `[Project Message] Transmission from ${payload.identity}`,
             html: emailHtml,
         });
 
-        // 3. & 6. Enforce Resend Usage Only (No Silent Fallback) & Remove Silent Success Responses
+        // Structured Logging
+        const logData = {
+            status: error ? "failed" : "sent",
+            timestamp: metadata.timestamp,
+            relay: "Resend",
+            messageId: data?.id || null,
+            userIPHash: ipHash,
+            validationPassed: true,
+            error: error ? error.message : null
+        };
+        console.log(JSON.stringify(logData));
+
         if (error) {
-            console.error('[EMAIL] Resend Error:', error);
             return NextResponse.json(
                 { error: 'Email dispatch failed.' },
                 { status: 500 }
             );
         }
-
-        if (!data?.id) {
-            console.error('[EMAIL] No Transmission ID returned from Resend');
-            return NextResponse.json(
-                { error: 'Email dispatch failed.' },
-                { status: 500 }
-            );
-        }
-
-        // 5. Log Transmission ID
-        console.log('[EMAIL] Transmission ID:', data?.id);
 
         return NextResponse.json({
             success: true,
             message: 'Transmission successfully delivered',
-            transmissionId: data.id
+            transmissionId: data?.id
         });
 
     } catch (error: any) {

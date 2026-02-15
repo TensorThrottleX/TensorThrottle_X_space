@@ -122,7 +122,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative z-10 w-full max-w-3xl h-[88vh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
+                            className="relative z-10 w-full max-w-3xl h-[88dvh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header (No cover image here as per user request) */}

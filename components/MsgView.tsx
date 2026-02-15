@@ -16,6 +16,7 @@ export function MsgView(): React.ReactNode {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
+    const [loadTime, setLoadTime] = useState<number>(0)
     const [isSending, setIsSending] = useState(false)
     const [sendError, setSendError] = useState<string | null>(null)
     const [isSent, setIsSent] = useState(false)
@@ -29,6 +30,10 @@ export function MsgView(): React.ReactNode {
         const result = analyzeMessage(message)
         setScrutiny(result)
     }, [message])
+
+    useEffect(() => {
+        setLoadTime(Date.now())
+    }, [])
 
     // Visibility observer for Coffee Card
     useEffect(() => {
@@ -92,7 +97,8 @@ export function MsgView(): React.ReactNode {
                     email: email.trim() || undefined,
                     message: message.trim(),
                     protocol: isConfirmed,
-                    h_field: hField
+                    h_field: hField,
+                    load_time: loadTime
                 })
             })
 
@@ -125,7 +131,7 @@ export function MsgView(): React.ReactNode {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="flex-1 overflow-y-auto px-6 pt-32 pb-20 secure-channel-container"
+            className="w-full px-6 pt-10 pb-20"
         >
             <div className="max-w-[600px] mx-auto lg:-translate-x-20 space-y-8">
                 {/* [MSG_PAGE] – Header */}

@@ -38,28 +38,28 @@ async function renderNotionBlock(block: any): Promise<React.ReactNode> {
   switch (type) {
     case 'paragraph':
       return (
-        <p key={block.id} className="leading-relaxed mb-4 transition-colors duration-500" style={{ color: 'var(--text-secondary)' }}>
+        <p key={block.id} className="text-body mb-4 transition-colors duration-500" style={{ color: 'var(--text-secondary)' }}>
           {block.paragraph?.rich_text?.map((text: any) => text.plain_text).join('')}
         </p>
       )
 
     case 'heading_1':
       return (
-        <h2 key={block.id} className="mt-10 mb-6 text-4xl font-bold transition-colors duration-500" style={{ color: 'var(--heading-primary)' }}>
+        <h2 key={block.id} className="mt-10 mb-6 text-h1 font-bold transition-colors duration-500" style={{ color: 'var(--heading-primary)' }}>
           {block.heading_1?.rich_text?.map((text: any) => text.plain_text).join('')}
         </h2>
       )
 
     case 'heading_2':
       return (
-        <h3 key={block.id} className="mt-8 mb-4 text-3xl font-semibold transition-colors duration-500" style={{ color: 'var(--heading-primary)' }}>
+        <h3 key={block.id} className="mt-8 mb-4 text-h2 font-semibold transition-colors duration-500" style={{ color: 'var(--heading-primary)' }}>
           {block.heading_2?.rich_text?.map((text: any) => text.plain_text).join('')}
         </h3>
       )
 
     case 'heading_3':
       return (
-        <h4 key={block.id} className="mt-6 mb-3 text-2xl font-semibold transition-colors duration-500" style={{ color: 'var(--foreground)' }}>
+        <h4 key={block.id} className="mt-6 mb-3 text-h3 font-semibold transition-colors duration-500" style={{ color: 'var(--foreground)' }}>
           {block.heading_3?.rich_text?.map((text: any) => text.plain_text).join('')}
         </h4>
       )

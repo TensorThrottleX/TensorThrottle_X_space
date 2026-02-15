@@ -58,17 +58,17 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <LabNavigation />
 
       {/* Main Content Area - Custom Layout for Category Archive */}
-      <div className="flex-1 h-full overflow-y-auto w-full transition-colors duration-500"
+      <div className="flex-1 w-full relative z-10 transition-colors duration-500 overflow-visible"
         style={{ backgroundColor: 'var(--background)' }}>
-        <div className="max-w-5xl mx-auto px-6 pt-10 pb-16">
+        <div className="max-w-panel mx-auto p-fluid">
 
           {/* Header Section */}
-          <div className="mb-12">
-            <h1 className="text-4xl font-black tracking-tighter mb-2 transition-colors duration-500"
+          <div className="mb-fluid">
+            <h1 className="text-h1 font-black tracking-tighter mb-2 transition-colors duration-500"
               style={{ color: 'var(--heading-primary)' }}>
               {displayCategory}
             </h1>
-            <p className="text-sm font-mono mb-6 transition-colors duration-500"
+            <p className="text-body font-mono mb-6 transition-colors duration-500"
               style={{ color: 'var(--muted-foreground)' }}>
               {hasPosts ? `${posts.length} ${posts.length === 1 ? 'article' : 'articles'}` : '0 articles'}
             </p>

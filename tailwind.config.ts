@@ -9,9 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       fontSize: {
-        h1: ["3.5rem", { lineHeight: "1", letterSpacing: "-0.04em" }],
-        h2: ["2.75rem", { lineHeight: "1.1", letterSpacing: "-0.03em" }],
-        h3: ["2rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        h1: ["var(--font-size-h1)", { lineHeight: "1", letterSpacing: "-0.04em" }],
+        h2: ["var(--font-size-h2)", { lineHeight: "1.1", letterSpacing: "-0.03em" }],
+        h3: ["var(--font-size-h3)", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        body: ["var(--font-size-body)", { lineHeight: "1.6", letterSpacing: "0.01em" }],
+      },
+      spacing: {
+        fluid: "var(--space-fluid-y)",
+        "fluid-x": "var(--space-fluid-x)",
+      },
+      height: {
+        panel: "var(--panel-height)",
+      },
+      maxWidth: {
+        panel: "var(--panel-max-width)",
       },
       colors: {
         background: 'hsl(var(--background))',

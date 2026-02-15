@@ -261,7 +261,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
             {!standalone && (
                 <button
                     onClick={onClose}
-                    className="fixed top-[200px] left-[60px] z-[60] flex items-center gap-3 text-red-400/60 hover:text-red-400 transition-[color,opacity] group"
+                    className="fixed bottom-12 left-12 z-[60] flex items-center gap-3 text-red-400/60 hover:text-red-400 transition-[color,opacity] group"
                 >
                     <div className="w-2 h-2 rounded-full bg-red-900/50 group-hover:bg-red-500 transition-colors" />
                     <span className="text-xs font-mono tracking-normal uppercase opacity-80 group-hover:opacity-100">

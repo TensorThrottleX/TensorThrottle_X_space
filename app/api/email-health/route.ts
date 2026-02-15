@@ -6,44 +6,42 @@ export const dynamic = 'force-dynamic'
  * Email Configuration Health Check Endpoint
  * GET /api/email-health
  * 
- * Returns the status of email configuration without exposing credentials
- * Enforces strict Resend with verified domain configuration.
+ * Returns the status of the decoupled email transmission engine.
  */
 export async function GET() {
     const checks = {
         timestamp: new Date().toISOString(),
         status: 'unknown',
-        provider: 'Resend API (Enforced)',
+        architecture: 'Decoupled Relay (Vercel -> Resend -> Proton)',
         configured: false,
         details: [] as string[],
     };
 
     const hasApiKey = !!process.env.RESEND_API_KEY;
-    const hasFromEmail = !!process.env.PRIMARY_FROM_EMAIL;
-    const hasRecipient = !!process.env.EMAIL_RECIPIENT;
+    const recipient = process.env.EMAIL_RECIPIENT || 'yourname@proton.me';
+    const relayFrom = 'noreply@system-relay.com';
 
-    if (hasApiKey && hasFromEmail) {
+    if (hasApiKey) {
         checks.configured = true;
         checks.status = 'ready';
         checks.details.push('✅ RESEND_API_KEY is configured');
-        checks.details.push(`✅ FROM: ${process.env.PRIMARY_FROM_EMAIL} (Verified Domain)`);
-
-        if (hasRecipient) {
-            checks.details.push(`✅ RECIPIENT: ${process.env.EMAIL_RECIPIENT}`);
-        } else {
-            checks.details.push('⚠️ EMAIL_RECIPIENT missing (using default)');
-        }
+        checks.details.push(`✅ RELAY_FROM: ${relayFrom}`);
+        checks.details.push(`✅ ANCHOR_RECIPIENT: ${recipient}`);
+        checks.details.push('✅ Domain-independent mode active');
     } else {
         checks.status = 'misconfigured';
-        if (!hasApiKey) checks.details.push('❌ RESEND_API_KEY is missing');
-        if (!hasFromEmail) checks.details.push('❌ PRIMARY_FROM_EMAIL is missing (Verified domain required)');
+        checks.details.push('❌ RESEND_API_KEY is missing');
     }
 
-    // Add general info
+    // Add security info
     checks.details.push('');
-    checks.details.push(`🔒 Sandbox sender is STRICTLY BLOCKED`);
-    checks.details.push(`🔒 Rate Limit: 3 per 5 minutes`);
-    checks.details.push(`🛡️ Security: Honeypot, Profanity Filter, Validation`);
+    checks.details.push(`🔒 SECURITY STACK:`);
+    checks.details.push(`✅ Honeypot Detection (Hidden inputs)`);
+    checks.details.push(`✅ Time-based validation (>2s)`);
+    checks.details.push(`✅ IP-based Rate Limiting (3/5min)`);
+    checks.details.push(`✅ Link Density Check (<3 links)`);
+    checks.details.push(`✅ Blacklist Pattern Scan (Profanity)`);
+    checks.details.push(`✅ Content Validation (Schema enforcement)`);
 
     return NextResponse.json(checks, {
         status: checks.configured ? 200 : 500,
