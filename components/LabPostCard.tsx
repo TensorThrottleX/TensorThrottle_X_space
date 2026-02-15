@@ -158,11 +158,11 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-xl bg-[var(--card-bg)] border border-[var(--border)] rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[88vh]"
+              className="relative w-full max-w-lg bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[90vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="px-8 py-8 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
+              <div className="px-10 py-10 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
                 <div className="space-y-3">
                   <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
                     <time>{formatDate(post.publishedAt)}</time>
@@ -182,7 +182,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               </div>
 
               {/* Scrollable Content Area */}
-              <div className="flex-1 overflow-y-auto px-8 py-8 premium-scrollbar">
+              <div className="flex-1 overflow-y-auto px-10 py-10 premium-scrollbar">
                 {isLoadingContent ? (
                   <div className="flex justify-center py-20">
                     <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />
