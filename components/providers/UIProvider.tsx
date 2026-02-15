@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 
 type UIMode = 'default' | 'tree'
-type RenderMode = 'normal' | 'bright' | 'dark'
+export type RenderMode = 'normal' | 'bright' | 'dark' | 'custom'
 type MainView = 'dashboard' | 'msg'
 
 interface UIContextType {
@@ -30,7 +30,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
 
     // Handle Body Class for Render Mode
     useEffect(() => {
-        document.body.classList.remove('mode-normal', 'mode-bright', 'mode-dark')
+        document.body.classList.remove('mode-normal', 'mode-bright', 'mode-dark', 'mode-custom')
         document.body.classList.add(`mode-${renderMode}`)
     }, [renderMode])
 

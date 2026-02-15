@@ -32,29 +32,10 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
   return (
     <div className={`layout relative min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out 
       ${uiMode === 'tree' ? 'tree-active' : ''}
-      ${getBgClass()}
     `}>
-      {/* [LAYER_1]: Canvas Plane (Fixed Atmospheric Background) */}
-      {videoSrc && showVideo && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className={`fixed inset-0 h-full w-full object-cover z-[-1] pointer-events-none transition-opacity duration-700 ease-in-out 
-            ${uiMode === 'tree' ? 'opacity-30' : 'opacity-100'} 
-          `}
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      )}
-
-      {/* Fallback & Mode Overlays (Fixed) */}
-      {!videoSrc && renderMode === 'normal' && (
-        <div className="fixed inset-0 z-[-1] bg-gradient-to-br from-gray-950 via-black to-gray-900" />
-      )}
-
-      {/* [LAYER_2]: Substrate Overlay (Fixed Viewport Blur) */}
+      {/* [LAYER_2]: Substrate Overlay (Fixed Viewport Blur) 
+          - Maintains focus on the Cognitive layer
+      */}
       <div className={`fixed inset-0 z-[-1] transition-all duration-700 ease-in-out
           ${renderMode === 'bright' ? 'bg-transparent' : (uiMode === 'tree' ? 'bg-black/55 backdrop-blur-[3px]' : 'bg-black/40 backdrop-blur-sm')}
           ${isTerminalOpen && renderMode !== 'bright' ? 'bg-black/80 backdrop-blur-md' : ''}

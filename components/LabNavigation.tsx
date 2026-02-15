@@ -2,11 +2,11 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { Home, List, Brain, Folder, FlaskConical, Layers } from 'lucide-react'
 import { useTransition } from 'react'
-import { useUI } from '@/components/providers/UIProvider'
+import { useUI, RenderMode } from '@/components/providers/UIProvider'
+import { useMedia } from '@/components/providers/MediaProvider'
 
 interface NavItem {
   label: string
@@ -28,6 +28,12 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const { renderMode, setRenderMode, setIsPrecision, setMainView, setUiMode } = useUI()
+  const {
+    theme, setTheme,
+    videoState, setVideoIndex, setVideoAudio,
+    soundState, setSoundIndex,
+    config
+  } = useMedia()
 
   const isActive = (href: string): boolean => {
     if (activeHref) return activeHref === href
@@ -56,6 +62,43 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     })
   }
 
+  const handleModeToggle = () => {
+    const modes: RenderMode[] = ['normal', 'bright', 'dark', 'custom']
+    const nextIdx = (modes.indexOf(renderMode as any) + 1) % modes.length
+    const nextMode = modes[nextIdx]
+    setRenderMode(nextMode as any)
+
+    // Sync with MediaEngine theme if it's one of the base themes
+    if (nextMode !== 'custom') {
+      setTheme(nextMode as any)
+    }
+  }
+
+  const handleNextBackground = () => {
+    const totalVideos = config.videos.length
+    let nextIndex = videoState.index + 1
+
+    // Cycle: -2 (white) -> -1 (black) -> 0...n (videos)
+    if (nextIndex >= totalVideos) {
+      nextIndex = -2
+    }
+    setVideoIndex(nextIndex)
+  }
+
+  const handleNextSound = () => {
+    const totalSounds = config.sounds.length
+    let nextIndex = soundState.soundIndex + 1
+
+    // Cycle: -1 (muted) -> 0...n (sounds)
+    if (nextIndex >= totalSounds) {
+      nextIndex = -1
+    }
+    setSoundIndex(nextIndex)
+  }
+
+  const activeVideoName = videoState.index >= 0 ? config.videos[videoState.index]?.name : (videoState.index === -1 ? 'BLACK' : 'WHITE')
+  const activeSoundName = soundState.soundIndex >= 0 ? config.sounds[soundState.soundIndex]?.name : 'MUTED'
+
   return (
     <div className="sidebar fixed left-0 top-0 h-full flex items-center px-4 z-[60] pointer-events-none transition-[opacity,transform] duration-500 ease-in-out">
       {/* Navigation Panel: Floating glass capsule */}
@@ -64,7 +107,6 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
         style={{
           backgroundColor: 'var(--sidebar-bg)',
           borderColor: 'var(--sidebar-border)',
-          viewTransitionName: 'sidebar-nav'
         }}
       >
         {navItems.map((item) => {
@@ -87,19 +129,16 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
               }}
               title={item.label}
             >
-              {/* Icon */}
               <span className="text-lg transition-transform group-hover:-translate-y-0.5" style={{ color: active ? 'var(--foreground)' : 'var(--muted-foreground)' }}>
                 <ActiveIcon size={20} strokeWidth={2} />
               </span>
 
-              {/* Label (Tooltip style on hover) */}
               <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
                 style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
               >
                 {item.label}
               </span>
 
-              {/* Active indicator dot refined */}
               {active && (
                 <div
                   className="absolute -left-1 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full transition-colors duration-300"
@@ -112,45 +151,76 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
             </a>
           )
         })}
-        <div className="h-px w-6 bg-white/10 my-1" />
 
-        {/* Cyclic Render Mode Toggle */}
+        <div className="h-px w-6 bg-white/10 my-1 self-center" />
+
         <button
-          onClick={() => {
-            const nextMode = renderMode === 'normal' ? 'bright' : (renderMode === 'bright' ? 'dark' : 'normal')
-            setRenderMode(nextMode)
-          }}
+          onClick={handleModeToggle}
           className={`group relative flex flex-col items-center justify-center gap-1 rounded-full w-12 h-12 transition-[background-color,border-color,color,box-shadow,transform] duration-300 border
-            ${renderMode === 'normal'
-              ? 'bg-black/40 border-cyan-500/30 text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:text-cyan-300'
-              : (renderMode === 'bright'
-                ? 'bg-[#ffffff] border-black/10 text-black shadow-sm hover:border-black/20'
-                : 'bg-[#111111] border-white/10 text-white hover:bg-[#1a1a1a] shadow-inner')
-            }`}
+            ${renderMode === 'normal' ? 'bg-black/40 border-cyan-500/30 text-cyan-400' :
+              renderMode === 'bright' ? 'bg-[#ffffff] border-black/10 text-black' :
+                renderMode === 'custom' ? 'bg-indigo-900 border-indigo-400/50 text-indigo-100' :
+                  'bg-[#111111] border-white/10 text-white'}
+          `}
           title={`Mode: ${renderMode.toUpperCase()}`}
         >
-          {/* Icon based on Mode */}
-          <div className={`w-4 h-4 rounded-full transition-[background-color,border-color,box-shadow] duration-500 relative flex items-center justify-center
-                ${renderMode === 'normal'
-              ? 'bg-cyan-500/20 shadow-[0_0_10px_rgba(34,211,238,0.4)]'
-              : (renderMode === 'bright'
-                ? 'bg-transparent border-[1.5px] border-black/80'
-                : 'bg-black border border-white/20 shadow-[inset_0_0_8px_rgba(0,0,0,0.8)]')
-            }
-           `}>
+          <div className={`w-4 h-4 rounded-full transition-all duration-500 relative flex items-center justify-center
+                ${renderMode === 'normal' ? 'bg-cyan-500/20 shadow-[0_0_10px_#22d3ee]' :
+              renderMode === 'bright' ? 'border-[1.5px] border-black/80' :
+                renderMode === 'custom' ? 'bg-white shadow-[0_0_15px_#fff]' :
+                  'bg-black border border-white/20'}
+          `}>
             {renderMode === 'normal' && <div className="absolute w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />}
-            {renderMode === 'dark' && <div className="absolute w-full h-full rounded-full border border-blue-500/30 opacity-50" />}
           </div>
+          <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
+            style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
+          >
+            {renderMode} MODE
+          </span>
         </button>
 
-        {/* Dynamic TX Badge (Synced here for layout, handled globally by TrademarkLogo logic or duplicate logic if needed) */}
-        {/* The user confusingly asked to "place the switch above the TX logo badge". 
-            But TX Logo is in TrademarkLogo.tsx which is fixed bottom-left. 
-            LabNavigation is ALSO fixed left. 
-            If they overlap or are separate, we might need to adjust.
-            Assuming LabNavigation is the main "Sidebar". 
-            If TrademarkLogo is separate, we'll leave it there but update its logic if possible or just use this toggle to control the global state which TX logo reads.
-        */}
+        {renderMode === 'custom' && (
+          <>
+            <div className="h-px w-6 bg-white/10 my-1 self-center" />
+
+            <button
+              onClick={handleNextBackground}
+              className="group relative flex flex-col items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white"
+            >
+              <FlaskConical size={18} />
+              <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
+                style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
+              >
+                BG: {activeVideoName}
+              </span>
+            </button>
+
+            <button
+              onClick={handleNextSound}
+              className={`group relative flex flex-col items-center justify-center w-12 h-12 rounded-full border transition-all 
+                ${soundState.soundIndex !== -1 ? 'bg-green-500/20 border-green-500/30 text-green-400' : 'bg-white/5 border-white/10 text-white/40'}
+              `}
+            >
+              <Layers size={18} />
+              <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
+                style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
+              >
+                AUDIO: {activeSoundName}
+              </span>
+            </button>
+
+            {videoState.hasAudioTrack && videoState.index >= 0 && (
+              <button
+                onClick={() => setVideoAudio(!videoState.videoAudioEnabled)}
+                className={`group relative flex flex-col items-center justify-center w-12 h-12 rounded-full border transition-all 
+                  ${videoState.videoAudioEnabled ? 'bg-orange-500/20 border-orange-500/30 text-orange-400' : 'bg-white/5 border-white/10 text-white/40'}
+                `}
+              >
+                <div className="text-[10px] font-bold">V-AUD</div>
+              </button>
+            )}
+          </>
+        )}
       </div>
     </div>
   )

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 }
 
 import { UIProvider } from "@/components/providers/UIProvider"
-import { GlobalAudioPlayer } from "@/components/GlobalAudioPlayer"
+import { MediaEngineProvider } from "@/components/providers/MediaProvider"
 
 import { TrademarkLogo } from "@/components/TrademarkLogo"
 import { GlobalFooter } from "@/components/GlobalFooter"
@@ -39,11 +39,12 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="antialiased">
         <UIProvider>
-          <GlobalAudioPlayer />
-          <SystemClock />
-          <TrademarkLogo />
-          <GlobalFooter />
-          {children}
+          <MediaEngineProvider>
+            <SystemClock />
+            <TrademarkLogo />
+            <GlobalFooter />
+            {children}
+          </MediaEngineProvider>
         </UIProvider>
       </body>
     </html>

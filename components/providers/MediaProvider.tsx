@@ -1,0 +1,209 @@
+
+'use client'
+
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react'
+import { VideoState, SoundState, MediaConfig, BaseTheme } from '@/types/media'
+
+interface MediaContextType {
+    theme: BaseTheme
+    setTheme: (t: BaseTheme) => void
+    videoState: VideoState
+    setVideoIndex: (idx: number) => void
+    setVideoAudio: (enabled: boolean) => void
+    soundState: SoundState
+    setSoundIndex: (idx: number) => void
+    config: MediaConfig
+    isLoading: boolean
+}
+
+const MediaContext = createContext<MediaContextType | undefined>(undefined)
+
+const DEFAULT_VIDEO_STATE: VideoState = {
+    index: 0,
+    hasAudioTrack: false,
+    videoAudioEnabled: false
+}
+
+const DEFAULT_SOUND_STATE: SoundState = {
+    soundIndex: -1
+}
+
+export function MediaEngineProvider({ children }: { children: React.ReactNode }) {
+    // Layer 1: BaseTheme
+    const [theme, setThemeState] = useState<BaseTheme>('normal')
+
+    // States
+    const [videoState, setVideoState] = useState<VideoState>(DEFAULT_VIDEO_STATE)
+    const [soundState, setSoundState] = useState<SoundState>(DEFAULT_SOUND_STATE)
+    const [config, setConfig] = useState<MediaConfig>({ videos: [], sounds: [] })
+    const [isLoading, setIsLoading] = useState(true)
+
+    // Refs for persistent elements
+    const videoRef = useRef<HTMLVideoElement | null>(null)
+    const audioRef = useRef<HTMLAudioElement | null>(null)
+
+    // Initialization & Asset Discovery
+    useEffect(() => {
+        const init = async () => {
+            try {
+                const res = await fetch('/api/media')
+                const data = await res.json()
+                setConfig(data)
+
+                // Persistence Recovery
+                const saved = localStorage.getItem('media_engine_v3')
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved)
+                        if (typeof parsed.theme === 'string') setThemeState(parsed.theme)
+                        if (typeof parsed.videoIndex === 'number') setVideoState(prev => ({ ...prev, index: parsed.videoIndex }))
+                        if (typeof parsed.soundIndex === 'number') setSoundState({ soundIndex: parsed.soundIndex })
+                    } catch (e) {
+                        console.warn('Corruption detected in media storage, resetting.')
+                        localStorage.removeItem('media_engine_v3')
+                    }
+                }
+            } catch (error) {
+                console.error('Media discovery failed:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        init()
+    }, [])
+
+    // Persistence Sync
+    useEffect(() => {
+        if (isLoading) return
+        const state = {
+            theme,
+            videoIndex: videoState.index,
+            soundIndex: soundState.soundIndex
+        }
+        localStorage.setItem('media_engine_v3', JSON.stringify(state))
+    }, [theme, videoState.index, soundState.soundIndex, isLoading])
+
+    // Video Switching Protocol
+    const updateVideoSource = useCallback(async (index: number) => {
+        const video = videoRef.current
+        if (!video) return
+
+        try {
+            video.pause()
+            video.muted = true
+
+            if (index === -1) {
+                video.src = '' // Black
+            } else if (index === -2) {
+                video.src = '' // White handled in CSS
+            } else if (config.videos[index]) {
+                video.src = config.videos[index].path
+                video.load()
+                await video.play().catch(() => {
+                    // Failure Containment
+                    console.warn('Playback blocked or failed.')
+                })
+            }
+
+            setVideoState(prev => ({
+                ...prev,
+                index,
+                videoAudioEnabled: false // Reset audio on switch
+            }))
+        } catch (err) {
+            console.error('Video switch error:', err)
+            video.src = ''
+        }
+    }, [config.videos])
+
+    // Audio Conflict Resolution
+    useEffect(() => {
+        const video = videoRef.current
+        const audio = audioRef.current
+        if (!video || !audio) return
+
+        if (videoState.videoAudioEnabled) {
+            // If video audio enabled, mute background sounds
+            audio.pause()
+            video.muted = false
+        } else {
+            // If video muted, allow background sound if chosen
+            video.muted = true
+            if (soundState.soundIndex !== -1 && config.sounds[soundState.soundIndex]) {
+                if (audio.src !== config.sounds[soundState.soundIndex].path) {
+                    audio.src = config.sounds[soundState.soundIndex].path
+                    audio.load()
+                }
+                audio.play().catch(() => { })
+            } else {
+                audio.pause()
+            }
+        }
+    }, [videoState.videoAudioEnabled, soundState.soundIndex, config.sounds])
+
+    const setVideoIndex = (idx: number) => updateVideoSource(idx)
+    const setVideoAudio = (enabled: boolean) => setVideoState(prev => ({ ...prev, videoAudioEnabled: enabled }))
+    const setSoundIndex = (idx: number) => setSoundState({ soundIndex: idx })
+    const setTheme = (t: BaseTheme) => setThemeState(t)
+
+    return (
+        <MediaContext.Provider value={{
+            theme, setTheme,
+            videoState, setVideoIndex, setVideoAudio,
+            soundState, setSoundIndex,
+            config, isLoading
+        }}>
+            {children}
+
+            {/* Persistent DOM Nodes - Never Unmounted */}
+            <video
+                ref={videoRef}
+                autoPlay
+                loop
+                playsInline
+                muted
+                preload="auto"
+                onLoadedMetadata={(e) => {
+                    const v = e.currentTarget
+                    try {
+                        const hasAudio = (v as any).audioTracks?.length > 0 ||
+                            (v as any).mozHasAudio ||
+                            Boolean((v as any).webkitAudioDecodedByteCount)
+                        setVideoState(prev => ({ ...prev, hasAudioTrack: hasAudio }))
+                    } catch (e) {
+                        setVideoState(prev => ({ ...prev, hasAudioTrack: false }))
+                    }
+                }}
+                className={`fixed inset-0 h-full w-full object-cover z-[-2] pointer-events-none transition-opacity duration-1000 
+          ${videoState.index === -2 ? 'opacity-0' : 'opacity-100'}
+          ${videoState.index === -1 ? 'bg-black' : ''}
+          ${theme === 'bright' ? 'opacity-10' : ''}
+        `}
+                style={{
+                    backgroundColor: videoState.index === -1 ? 'black' : 'transparent',
+                    visibility: videoState.index === -2 ? 'hidden' : 'visible'
+                }}
+            />
+
+            <audio
+                ref={audioRef}
+                loop
+                preload="auto"
+                className="hidden"
+            />
+
+            {/* Layer 1 Theme Overlay (Pure CSS) */}
+            <div className={`fixed inset-0 z-[-1] pointer-events-none transition-colors duration-1000
+        ${theme === 'bright' ? 'bg-white/80' : ''}
+        ${theme === 'dark' ? 'bg-black/40 backdrop-blur-sm' : ''}
+        ${videoState.index === -2 ? 'bg-white z-[-5]' : ''}
+      `} />
+        </MediaContext.Provider>
+    )
+}
+
+export function useMedia() {
+    const context = useContext(MediaContext)
+    if (!context) throw new Error('useMedia must be used within MediaEngineProvider')
+    return context
+}
