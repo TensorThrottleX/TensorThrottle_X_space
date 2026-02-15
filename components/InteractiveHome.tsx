@@ -363,7 +363,7 @@ Cycling render mode...`
     }`
 
   return (
-    <div className="command-shell fixed inset-0 flex flex-col items-center justify-end pb-12 px-4 font-mono z-50 pointer-events-none">
+    <div className="command-shell fixed inset-0 flex flex-col items-center justify-end pb-8 px-4 font-mono z-50 pointer-events-none">
       <div
         ref={containerRef}
         className={containerClasses}

@@ -269,7 +269,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute inset-x-0 top-[230px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
+                className="absolute inset-x-0 top-[180px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
             >
                 <div className="relative pointer-events-auto w-full flex justify-center px-4">
                     <SystemQuoteRenderer isPrecision={usePrecisionStyle} />
@@ -299,7 +299,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                         animate={{ opacity: 1, filter: 'blur(0px)' }}
                         exit={{ opacity: 0, filter: 'blur(10px)' }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="absolute inset-x-0 top-[230px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
+                        className="absolute inset-x-0 top-[180px] bottom-0 flex flex-col items-center justify-start pointer-events-none z-0"
                     >
                         <div className="relative pointer-events-auto w-full flex justify-center px-4">
                             <StackedDeck
@@ -490,7 +490,7 @@ function StackedDeck({
     }
 
     return (
-        <div className="relative w-full max-w-[900px] min-h-[600px] perspective-1000 group flex flex-col items-center">
+        <div className="relative w-full max-w-[900px] min-h-[520px] perspective-1000 group flex flex-col items-center">
             <div className="relative w-full h-[480px]">
                 <AnimatePresence>
                     {stack.map((id, index) => {
@@ -714,7 +714,7 @@ function StackedDeck({
             </div>
 
             {/* Background Hint: Moved to relative flow with even lower top margin to move it higher */}
-            <div className="mt-4 w-full flex justify-center opacity-30 pointer-events-none">
+            <div className="mt-6 w-full flex justify-center opacity-30 pointer-events-none">
                 <span className={cn(
                     "text-[10px] font-mono tracking-normal uppercase animate-pulse",
                     isBright ? "text-black" : "text-white"
