@@ -713,11 +713,11 @@ function StackedDeck({
                 </AnimatePresence>
             </div>
 
-            {/* Background Hint: Moved to relative flow with even lower top margin to move it higher */}
-            <div className="mt-6 w-full flex justify-center opacity-30 pointer-events-none">
+            {/* Background Hint: Positioned closer to cards with adaptive visibility */}
+            <div className="mt-2 w-full flex justify-center pointer-events-none">
                 <span className={cn(
-                    "text-[10px] font-mono tracking-normal uppercase animate-pulse",
-                    isBright ? "text-black" : "text-white"
+                    "text-[10px] font-black font-mono tracking-tighter uppercase animate-pulse",
+                    isBright ? "text-black opacity-70" : "text-white/40"
                 )}>
                     SHUFFLE_STACK_TO_REVEAL
                 </span>
