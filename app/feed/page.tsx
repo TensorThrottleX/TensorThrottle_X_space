@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
-import { LabContainer } from '@/components/LabContainer'
-import { LabNavigation } from '@/components/LabNavigation'
-import { ContentPanel } from '@/components/ContentPanel'
-import { LabFeed } from '@/components/LabFeed'
+import { LabContainer } from '@/components/layout/LabContainer'
+import { LabNavigation } from '@/components/layout/LabNavigation'
+import { ContentPanel } from '@/components/layout/ContentPanel'
+import { LabFeed } from '@/components/content/LabFeed'
 import { getAllPosts } from '@/lib/notion'
 
 // ISR: Revalidate every 5 minutes
@@ -19,7 +19,7 @@ export default async function FeedPage() {
     const latestPost = posts.length > 0 ? posts[0].publishedAt : undefined
 
     return (
-        <LabContainer videoSrc="/background.mp4">
+        <LabContainer videoSrc="/media/videos/default-background.mp4">
 
             <LabNavigation />
             <ContentPanel

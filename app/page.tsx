@@ -1,4 +1,4 @@
-import { HomePageLayout } from '@/components/home/HomePageLayout'
+import { HomePageLayout } from '@/components/layout/HomePageLayout'
 
 export const metadata = {
   title: 'Home',

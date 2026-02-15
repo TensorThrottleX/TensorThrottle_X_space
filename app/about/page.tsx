@@ -1,6 +1,6 @@
-import { LabContainer } from '@/components/LabContainer'
-import { LabNavigation } from '@/components/LabNavigation'
-import { ContentPanel } from '@/components/ContentPanel'
+import { LabContainer } from '@/components/layout/LabContainer'
+import { LabNavigation } from '@/components/layout/LabNavigation'
+import { ContentPanel } from '@/components/layout/ContentPanel'
 
 export const metadata = {
   title: 'About | Portfolio',
@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <LabContainer videoSrc="/background-video.mp4">
+    <LabContainer videoSrc="/media/videos/default-background.mp4">
       {/* Left: Floating navigation panel */}
       <LabNavigation />
 

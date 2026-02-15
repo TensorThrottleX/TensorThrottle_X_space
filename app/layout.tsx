@@ -32,9 +32,9 @@ export const metadata: Metadata = {
 import { UIProvider } from "@/components/providers/UIProvider"
 import { MediaEngineProvider } from "@/components/providers/MediaProvider"
 
-import { TrademarkLogo } from "@/components/TrademarkLogo"
-import { GlobalFooter } from "@/components/GlobalFooter"
-import { SystemClock } from "@/components/SystemClock"
+import { TrademarkLogo } from "@/components/dashboard/TrademarkLogo"
+import { GlobalFooter } from "@/components/layout/GlobalFooter"
+import { SystemClock } from "@/components/dashboard/SystemClock"
 
 export default function RootLayout({
   children,

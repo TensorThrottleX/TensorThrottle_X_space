@@ -109,10 +109,19 @@ Visit `http://localhost:3000` to see your portfolio.
     /posts/route.ts       # Posts pagination API
 
 /components
-  Navbar.tsx              # Navigation with categories
-  Feed.tsx                # Infinite scroll feed
-  PostCard.tsx            # Individual post card
-  CommentSection.tsx      # Comments UI
+  /layout                 # Structural layout components
+    LabNavigation.tsx     # Navigation with categories
+    LabContainer.tsx      # Three-layer background system
+    ContentPanel.tsx      # Floating content workspace
+  /content                # Post and feed components
+    LabFeed.tsx           # Infinite scroll feed
+    LabPostCard.tsx       # Individual post card card
+    CommentSection.tsx    # Comments UI
+  /dashboard              # Dashboard and bento components
+  /visuals                # Interactive and visual elements
+  /forms                  # Form components
+  /providers              # Context providers
+  /ui                     # Shadcn/UI primitives
 
 /lib
   notion.ts               # Notion SDK integration

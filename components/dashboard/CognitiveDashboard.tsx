@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useUI } from '@/components/providers/UIProvider'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { InteractiveTree, TreeNode } from '@/components/InteractiveTree'
+import { InteractiveTree, TreeNode } from '@/components/visuals/InteractiveTree'
 
 // --- Types ---
 

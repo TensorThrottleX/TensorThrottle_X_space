@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { LabContainer } from '@/components/LabContainer';
-import { LabNavigation } from '@/components/LabNavigation';
-import { RightFloatingBar } from '@/components/RightFloatingBar';
-import { InteractiveHome } from '@/components/InteractiveHome';
+import { LabContainer } from '@/components/layout/LabContainer';
+import { LabNavigation } from '@/components/layout/LabNavigation';
+import { RightFloatingBar } from '@/components/layout/RightFloatingBar';
+import { InteractiveHome } from '@/components/visuals/InteractiveHome';
 
-import { CognitiveDashboard } from '@/components/CognitiveDashboard';
-import { MsgView } from '@/components/MsgView';
+import { CognitiveDashboard } from '@/components/dashboard/CognitiveDashboard';
+import { MsgView } from '@/components/forms/MsgView';
 import { useUI } from '@/components/providers/UIProvider';
 import { AnimatePresence } from 'framer-motion';
 
@@ -20,7 +20,7 @@ export function HomePageLayout() {
     const [contentMode, setContentMode] = useState<'purpose' | 'about' | 'quote'>('purpose');
 
     return (
-        <LabContainer videoSrc="/background.mp4">
+        <LabContainer videoSrc="/media/videos/default-background.mp4">
             {/* [FLOW_PLANE]: Main vertical stack */}
             <div className="flex flex-col items-center w-full min-h-full">
                 {/* 1. Header Title (Flow-based) */}

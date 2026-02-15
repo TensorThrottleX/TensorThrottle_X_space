@@ -12,7 +12,7 @@ This document lists every change made to the codebase during the frontend redesi
 
 ### NEW Components (5)
 
-#### 1. `components/LabContainer.tsx`
+#### 1. `components/layout/LabContainer.tsx`
 - **Purpose:** Three-layer background system (video/gradient + overlay + content)
 - **Type:** Client component with 'use client'
 - **Size:** ~47 lines
@@ -22,7 +22,7 @@ This document lists every change made to the codebase during the frontend redesi
   - Relative positioning for layer stacking
   - Accepts `videoSrc` prop (optional)
 
-#### 2. `components/LabNavigation.tsx`
+#### 2. `components/layout/LabNavigation.tsx`
 - **Purpose:** Left-side floating navigation control panel
 - **Type:** Client component with 'use client'
 - **Size:** ~66 lines
@@ -33,7 +33,7 @@ This document lists every change made to the codebase during the frontend redesi
   - Icons with labels (responsive visibility)
   - Smooth hover transitions
 
-#### 3. `components/ContentPanel.tsx`
+#### 3. `components/layout/ContentPanel.tsx`
 - **Purpose:** Centered floating content workspace
 - **Type:** Client component with 'use client'
 - **Size:** ~44 lines
@@ -44,7 +44,7 @@ This document lists every change made to the codebase during the frontend redesi
   - Glass effect styling
   - Rounded corners and shadow depth
 
-#### 4. `components/LabFeed.tsx`
+#### 4. `components/content/LabFeed.tsx`
 - **Purpose:** Timeline-style infinite scroll feed
 - **Type:** Client component with 'use client'
 - **Size:** ~144 lines
@@ -56,7 +56,7 @@ This document lists every change made to the codebase during the frontend redesi
   - Loading indicators
   - End-of-feed message
 
-#### 5. `components/LabPostCard.tsx`
+#### 5. `components/content/LabPostCard.tsx`
 - **Purpose:** Minimal post preview card
 - **Type:** Server component (no 'use client')
 - **Size:** ~55 lines
@@ -69,7 +69,7 @@ This document lists every change made to the codebase during the frontend redesi
 
 ### UPDATED Components (1)
 
-#### 1. `components/CommentSection.tsx`
+#### 1. `components/content/CommentSection.tsx`
 - **Type:** Client component (unchanged)
 - **Changes:**
   - Updated text colors: `text-gray-*` → `text-white/gray-*`
@@ -84,9 +84,9 @@ This document lists every change made to the codebase during the frontend redesi
 ### NO CHANGE Components
 
 All other components remain untouched:
-- `components/Navbar.tsx` — Old navbar (no longer used)
-- `components/Feed.tsx` — Old feed (no longer used)
-- `components/PostCard.tsx` — Old post card (no longer used)
+- `components/layout/Navbar.tsx` — Old navbar (no longer used)
+- `components/content/Feed.tsx` — Old feed (no longer used)
+- `components/content/PostCard.tsx` — Old post card (no longer used)
 - All `/components/ui/*` — Unchanged
 
 Note: Old components are left in place for safety. Can be deleted after confirmation.

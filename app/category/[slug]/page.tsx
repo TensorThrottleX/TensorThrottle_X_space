@@ -1,9 +1,9 @@
 
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
-import { LabContainer } from '@/components/LabContainer'
-import { LabNavigation } from '@/components/LabNavigation'
-import { CategoryPostCard } from '@/components/CategoryPostCard'
+import { LabContainer } from '@/components/layout/LabContainer'
+import { LabNavigation } from '@/components/layout/LabNavigation'
+import { CategoryPostCard } from '@/components/content/CategoryPostCard'
 import { getPostsByCategory } from '@/lib/notion'
 
 // ISR: Revalidate every 5 minutes
@@ -53,7 +53,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const hasPosts = posts.length > 0
 
   return (
-    <LabContainer videoSrc="/background.mp4">
+    <LabContainer videoSrc="/media/videos/default-background.mp4">
       {/* Sidebar remains unchanged */}
       <LabNavigation />
 

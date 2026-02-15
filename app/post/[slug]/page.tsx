@@ -1,10 +1,10 @@
 import React from "react"
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { LabContainer } from '@/components/LabContainer'
-import { LabNavigation } from '@/components/LabNavigation'
-import { ContentPanel } from '@/components/ContentPanel'
-import { CommentSection } from '@/components/CommentSection'
+import { LabContainer } from '@/components/layout/LabContainer'
+import { LabNavigation } from '@/components/layout/LabNavigation'
+import { ContentPanel } from '@/components/layout/ContentPanel'
+import { CommentSection } from '@/components/content/CommentSection'
 import { getPostBySlug } from '@/lib/notion'
 import { getComments } from '@/lib/supabase'
 import { formatDate } from '@/lib/utils'
@@ -133,7 +133,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <LabContainer videoSrc="/background-video.mp4">
+    <LabContainer videoSrc="/media/videos/default-background.mp4">
       {/* Left: Floating navigation panel */}
       <LabNavigation />
 
