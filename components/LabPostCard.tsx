@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
 import type { Post, Comment } from '@/types/post'
@@ -35,6 +35,9 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
   const [comments, setComments] = useState<Comment[]>([])
   const [isLoadingComments, setIsLoadingComments] = useState(false)
   const [hasLoadedComments, setHasLoadedComments] = useState(false)
+
+  // Ref for scrolling
+  const commentsRef = useRef<HTMLDivElement>(null)
 
   // Check if we should auto-expand based on URL
   useEffect(() => {
@@ -82,26 +85,47 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
     }
   }
 
-  const toggleContent = async (e: React.MouseEvent) => {
+  const toggleContent = async (e: React.MouseEvent, focus?: 'comments') => {
     e.preventDefault()
 
     // Check Navigation Context
     const categorySlug = post.category.toLowerCase().trim()
     const targetPath = `/category/${categorySlug}`
+    const focusParam = focus ? `&focus=${focus}` : ''
 
     // If we represent a category but are NOT on that category page, navigate there
     if (!pathname.startsWith(targetPath)) {
-      router.push(`${targetPath}?post=${post.slug}`)
+      router.push(`${targetPath}?post=${post.slug}${focusParam}`)
       return
     }
 
-    if (isExpanded) {
+    if (isExpanded && !focus) {
       setIsExpanded(false)
       return
     }
 
     await expandPost()
+
+    if (focus === 'comments') {
+      setTimeout(() => {
+        commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
   }
+
+  const onCommentClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    toggleContent(e, 'comments')
+  }
+
+  // Auto-scroll when modal opens from URL param
+  useEffect(() => {
+    if (isExpanded && searchParams.get('focus') === 'comments') {
+      setTimeout(() => {
+        commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 500)
+    }
+  }, [isExpanded, searchParams])
 
   return (
     <>
@@ -136,8 +160,11 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
           </p>
 
           {/* Comment Indicator */}
-          <div className="flex items-center gap-1.5 mt-1 opacity-40 group-hover:opacity-60 transition-opacity">
-            <MessageSquare size={14} />
+          <div
+            className="flex items-center gap-1.5 mt-1 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group/comm"
+            onClick={onCommentClick}
+          >
+            <MessageSquare size={14} className="group-hover/comm:text-cyan-500 transition-colors" />
             <span className="text-[10px] font-bold uppercase tracking-widest">
               {commentCount > 0 ? `${commentCount}` : '0'}
             </span>
@@ -205,7 +232,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
                 )}
 
                 {/* Comments Section */}
-                <div className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
+                <div ref={commentsRef} className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
                   <div className="flex items-center gap-2 mb-8">
                     <MessageSquare size={16} className="text-cyan-500" />
                     <h4 className="text-sm font-bold uppercase tracking-tighter">Transmission Discussion</h4>
