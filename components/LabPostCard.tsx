@@ -140,7 +140,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
       {/* Clickable Area for Content Expansion */}
       <div
         onClick={toggleContent}
-        className="block px-8 py-6 cursor-pointer"
+        className="block px-6 py-6 cursor-pointer"
       >
         <div className="flex flex-col gap-3">
 
@@ -199,7 +199,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
       </div>
 
       {/* Footer / Actions Bar */}
-      <div className={`border-t px-8 py-4 flex justify-between items-center transition-opacity duration-300 ${!isExpanded ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}
+      <div className={`border-t px-6 py-4 flex justify-between items-center transition-opacity duration-300 ${!isExpanded ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}
         style={{ borderColor: 'var(--border)' }}
       >
         {/* Comment Trigger */}

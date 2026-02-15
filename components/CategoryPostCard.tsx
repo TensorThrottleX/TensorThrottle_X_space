@@ -95,7 +95,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                 )}
 
                 {/* Card Body */}
-                <div className="p-8">
+                <div className="p-6">
                     <div className="flex flex-col gap-4">
                         {/* Meta */}
                         <div className="flex items-center justify-between text-xs font-medium" style={{ color: 'var(--muted-foreground)' }}>
@@ -139,7 +139,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
             </div>
 
             {/* Footer / Expand Button */}
-            <div className="border-t px-8 py-4 flex justify-center transition-colors duration-500"
+            <div className="border-t px-6 py-4 flex justify-center transition-colors duration-500"
                 style={{ borderColor: 'var(--border)', backgroundColor: 'var(--sidebar-bg)' }}
             >
                 <button

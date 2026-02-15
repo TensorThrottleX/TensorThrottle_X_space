@@ -82,7 +82,7 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
   }, [isLoading, nextCursor, loadMore])
 
   return (
-    <div className="flex flex-col gap-0 w-full max-w-2xl mx-auto">
+    <div className="flex flex-col gap-0 w-full mx-auto">
       {/* Posts Timeline */}
       {posts.length > 0 ? (
         <div className="divide-y transition-colors duration-500"
