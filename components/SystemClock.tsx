@@ -28,7 +28,7 @@ export function SystemClock() {
     const degrees = time.getSeconds() * 6
 
     return (
-        <div className="fixed top-4 right-4 z-50 pointer-events-none select-none">
+        <div className="fixed top-4 right-4 z-[300] pointer-events-none select-none">
             {/* Clock Module */}
             <div className="flex items-center gap-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 shadow-xl">
                 {/* Analog Clock */}
