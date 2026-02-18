@@ -184,6 +184,8 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 preload="auto"
                 onLoadedMetadata={(e) => {
                     const v = e.currentTarget
+                    v.playbackRate = 1.0 // Force normal speed
+                    v.defaultPlaybackRate = 1.0
                     try {
                         const hasAudio = (v as any).audioTracks?.length > 0 ||
                             (v as any).mozHasAudio ||
@@ -192,6 +194,9 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     } catch (e) {
                         setVideoState(prev => ({ ...prev, hasAudioTrack: false }))
                     }
+                }}
+                onPlay={(e) => {
+                    e.currentTarget.playbackRate = 1.0 // Ensure speed is normal on play
                 }}
                 onError={(e) => {
                     console.warn('Video playback error:', e)
@@ -212,6 +217,13 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 loop
                 preload="auto"
                 className="hidden"
+                onLoadedMetadata={(e) => {
+                    e.currentTarget.playbackRate = 1.0
+                    e.currentTarget.defaultPlaybackRate = 1.0
+                }}
+                onPlay={(e) => {
+                    e.currentTarget.playbackRate = 1.0
+                }}
                 onError={(e) => {
                     console.warn('Audio playback error:', e)
                 }}
