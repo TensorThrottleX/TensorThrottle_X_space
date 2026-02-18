@@ -64,72 +64,7 @@ Everything here lives somewhere inside that loop.
 
 Instead of rigid architecture diagrams, here’s the actual flow:
 
-┌───────────────────────┐
-│       NOTION CMS      │
-└───────────────────────┘
-        │
-        ▼
-┌───────────────────────┐
-│  Content Structure    │
-├───────────────────────┤
-│ • Title               │
-│ • Rich Blocks         │
-│ • Tags / Type         │
-│ • Status              │
-│ • Timestamps          │
-└───────────────────────┘
-        │
-        │ API Fetch (Server)
-        ▼
-┌───────────────────────┐
-│       NEXT.JS         │
-└───────────────────────┘
-        │
-        ▼
-┌───────────────────────┐
-│  Server Processing    │
-├───────────────────────┤
-│ 1. Fetch via SDK      │
-│ 2. Normalize blocks   │
-│ 3. Filter (status)    │
-│ 4. Map to schema      │
-│ 5. Prepare SSR data   │
-└───────────────────────┘
-        │
-        │ Render + Route
-        ▼
-┌───────────────────────┐
-│   Application Areas   │
-├───────────────────────┤
-│ • Feed                │
-│ • System Pages        │
-│ • Logs                │
-│ • Entry View          │
-│ • Tag Filtering       │
-└───────────────────────┘
-        │
-        │ Hydration
-        ▼
-┌───────────────────────┐
-│   Client Runtime      │
-├───────────────────────┤
-│ • Navigation          │
-│ • State Updates       │
-│ • Transitions         │
-│ • Engagement Events   │
-└───────────────────────┘
-        │
-        │ Persist / Track
-        ▼
-┌───────────────────────┐
-│       SUPABASE        │
-├───────────────────────┤
-│ • User State          │
-│ • Engagement Logs     │
-│ • Metrics             │
-│ • Session Data        │
-└───────────────────────┘
-
+![Alt text description](https://lh3.googleusercontent.com/gg/AMW1TPq3LwpapzPiomOdZrewcYygkFIWH8uqGAWIJ0Vk9cm5-TCPmzXY6w_FLVRcqqC5f90nCtj9hA-3cFKZ-onh_1C5EzBlZIjHph5XzHaEd_6-CjD3ytstCz6R0yO0_lzshO_SO6e_WgosgTwq20Yx2HuJzS4-V3xZFfzdLHkVxvSX5_l7QVrY3ak68gs0iYzCgDL1gXExgELVzqTknuT-xjoeo1nxQRE9CkSylhi5pPey40a8hUFikUYkavXFrrhxKXaUJbGiOzPJWWAgo1XFWtn9R9G5OhMbu515Xf1rlnptBrpbHZ__SVSBoMaBZCMcpXQzfo_03We6TXMEoQ4cOili=s1024-rj?authuser=2)
 
 ### In plain terms:
 
