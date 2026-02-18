@@ -114,6 +114,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 const videoPath = config.videos[index].path
                 // Use encoded path if not already
                 video.src = videoPath
+                video.playbackRate = 1.0 // Reset to normal speed
                 video.load()
                 await video.play().catch((e) => {
                     // Failure Containment
@@ -151,6 +152,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     audio.src = soundPath
                     audio.load()
                 }
+                audio.playbackRate = 1.0 // Reset to normal speed
                 audio.play().catch((e) => {
                     console.warn("Audio autoplay blocked or failed:", e)
                 })
