@@ -118,8 +118,6 @@ Instead of rigid architecture diagrams, here’s the actual flow:
 └───────────────────────┘
 
 
-
-
 ### In plain terms:
 
 - Thoughts live in Notion.
