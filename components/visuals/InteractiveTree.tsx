@@ -258,14 +258,17 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
         >
             <svg ref={svgRef} className="w-full h-full block" style={{ overflow: 'visible' }} />
 
+            {/* Always show Terminate button when not standalone, or force it if desired */}
             {!standalone && (
                 <button
-                    onClick={onClose}
-                    className="fixed bottom-12 left-12 z-[60] flex items-center gap-3 text-red-400/60 hover:text-red-400 transition-[color,opacity] group"
+                    onClick={() => {
+                        window.location.href = '/'
+                    }}
+                    className="fixed bottom-8 right-8 z-[60] cursor-pointer pointer-events-auto flex items-center gap-3 px-6 py-2 rounded-full bg-red-950/80 border border-red-900/50 text-red-200 hover:bg-red-900 hover:text-white hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all group backdrop-blur-sm"
                 >
-                    <div className="w-2 h-2 rounded-full bg-red-900/50 group-hover:bg-red-500 transition-colors" />
-                    <span className="text-xs font-mono tracking-normal uppercase opacity-80 group-hover:opacity-100">
-                        Terminate
+                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse group-hover:bg-red-400 transition-colors" />
+                    <span className="text-xs font-mono tracking-widest uppercase">
+                        Terminate Process
                     </span>
                 </button>
             )}

@@ -1,4 +1,4 @@
-import { HomePageLayout } from '@/components/layout/HomePageLayout'
+import { ResponsiveHome } from '@/components/layout/ResponsiveHome'
 
 export const metadata = {
   title: 'Home',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function Home() {
-  return <HomePageLayout />
+  return <ResponsiveHome />
 }

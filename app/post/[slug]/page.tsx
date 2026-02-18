@@ -8,6 +8,7 @@ import { CommentSection } from '@/components/content/CommentSection'
 import { getPostBySlug } from '@/lib/notion'
 import { getComments } from '@/lib/supabase'
 import { formatDate } from '@/lib/utils'
+import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 
 // ISR: Revalidate every 5 minutes
 export const revalidate = 300
@@ -133,54 +134,56 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <LabContainer videoSrc="/media/videos/default-background.mp4">
-      {/* Left: Floating navigation panel */}
-      <LabNavigation />
+    <ResponsiveContentWrapper>
+      <LabContainer videoSrc="/media/videos/default-background.mp4">
+        {/* Left: Floating navigation panel */}
+        <LabNavigation />
 
-      {/* Right: Content panel */}
-      <ContentPanel title={post.title} subtitle={post.category}>
-        <article className="space-y-6">
-          {/* Post metadata */}
-          <div className="border-b border-white/10 pb-6">
-            <div className="flex items-center gap-3 flex-wrap">
-              <time className="text-sm text-gray-400">
-                {formatDate(post.publishedAt)}
-              </time>
-              <span className="text-gray-600">•</span>
-              <Link href={`/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`}>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-gray-300 hover:bg-white/20 transition-colors">
-                  {post.category}
-                </span>
-              </Link>
+        {/* Right: Content panel */}
+        <ContentPanel title={post.title} subtitle={post.category}>
+          <article className="space-y-6">
+            {/* Post metadata */}
+            <div className="border-b border-white/10 pb-6">
+              <div className="flex items-center gap-3 flex-wrap">
+                <time className="text-sm text-gray-400">
+                  {formatDate(post.publishedAt)}
+                </time>
+                <span className="text-gray-600">•</span>
+                <Link href={`/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-gray-300 hover:bg-white/20 transition-colors">
+                    {post.category}
+                  </span>
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Cover Image */}
-          {post.coverImage && (
-            <img
-              src={post.coverImage || "/placeholder.svg"}
-              alt={post.title}
-              className="w-full rounded-lg border border-white/10"
-            />
-          )}
-
-          {/* Content */}
-          <div className="space-y-4">
-            {post.content && post.content.length > 0 ? (
-              <>
-                {await Promise.all(post.content.map((block: any) => renderNotionBlock(block)))}
-              </>
-            ) : (
-              <p className="leading-relaxed transition-colors duration-500" style={{ color: 'var(--text-secondary)' }}>{post.excerpt}</p>
+            {/* Cover Image */}
+            {post.coverImage && (
+              <img
+                src={post.coverImage || "/placeholder.svg"}
+                alt={post.title}
+                className="w-full rounded-lg border border-white/10"
+              />
             )}
-          </div>
 
-          {/* Comments Section */}
-          <div className="border-t border-white/10 pt-6">
-            <CommentSection postSlug={slug} initialComments={comments} />
-          </div>
-        </article>
-      </ContentPanel>
-    </LabContainer>
+            {/* Content */}
+            <div className="space-y-4">
+              {post.content && post.content.length > 0 ? (
+                <>
+                  {await Promise.all(post.content.map((block: any) => renderNotionBlock(block)))}
+                </>
+              ) : (
+                <p className="leading-relaxed transition-colors duration-500" style={{ color: 'var(--text-secondary)' }}>{post.excerpt}</p>
+              )}
+            </div>
+
+            {/* Comments Section */}
+            <div className="border-t border-white/10 pt-6">
+              <CommentSection postSlug={slug} initialComments={comments} />
+            </div>
+          </article>
+        </ContentPanel>
+      </LabContainer>
+    </ResponsiveContentWrapper>
   )
 }

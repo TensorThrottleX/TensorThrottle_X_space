@@ -125,6 +125,22 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
     }, 100)
   }
 
+  // Handle close: clear URL params if they exist so we "go back" to the feed state
+  const handleClose = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation()
+
+    setIsExpanded(false)
+
+    // Check if we have params to clear
+    const newParams = new URLSearchParams(searchParams.toString())
+    if (newParams.has('post')) {
+      newParams.delete('post')
+      newParams.delete('focus')
+      // Push the new URL without the params, keeping scroll position if possible
+      router.push(`${pathname}?${newParams.toString()}`, { scroll: false })
+    }
+  }
+
   // Auto-scroll when modal opens from URL param
   useEffect(() => {
     if (isExpanded && searchParams.get('focus') === 'comments') {
@@ -139,7 +155,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
       <article
         id={`post-${post.id}`}
         onClick={toggleContent}
-        className="group relative rounded-xl border border-transparent hover:border-[var(--border)] hover:bg-[var(--sidebar-bg)] transition-all duration-300 cursor-pointer block px-6 py-6"
+        className="group relative rounded-lg border-b border-[var(--border)] hover:bg-[var(--sidebar-bg)] transition-all duration-300 cursor-pointer block px-5 py-5 last:border-0"
       >
         <div className="flex flex-col gap-3">
           {/* Header: Date & Category */}
@@ -155,14 +171,14 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl font-bold tracking-tighter transition-colors"
+          <h3 className="text-xl font-bold tracking-tight transition-colors"
             style={{ color: 'var(--foreground)' }}
           >
             {post.title}
           </h3>
 
           {/* Excerpt */}
-          <p className="text-base leading-relaxed opacity-80 line-clamp-2" style={{ color: 'var(--foreground)' }}>
+          <p className="text-sm leading-relaxed opacity-80 line-clamp-2" style={{ color: 'var(--foreground)' }}>
             {post.excerpt}
           </p>
 
@@ -189,7 +205,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsExpanded(false)}
+              onClick={handleClose}
               className="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer"
             />
 
@@ -203,18 +219,18 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="px-10 py-10 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
+              <div className="px-8 py-8 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
                 <div className="space-y-3">
                   <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
                     <time>{formatDate(post.publishedAt)}</time>
                     <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}>{post.category}</span>
                   </div>
-                  <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter leading-tight" style={{ color: 'var(--heading-primary)' }}>
                     {post.title}
                   </h2>
                 </div>
                 <button
-                  onClick={() => setIsExpanded(false)}
+                  onClick={handleClose}
                   className="p-2 rounded-full hover:bg-white/10 transition-colors opacity-60 hover:opacity-100"
                   style={{ color: 'var(--foreground)' }}
                 >
@@ -223,7 +239,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               </div>
 
               {/* Scrollable Content Area */}
-              <div className="flex-1 overflow-y-auto px-10 py-10 premium-scrollbar">
+              <div className="flex-1 overflow-y-auto px-8 py-8 premium-scrollbar">
                 {isLoadingContent ? (
                   <div className="flex justify-center py-20">
                     <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />

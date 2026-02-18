@@ -85,7 +85,7 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
     <div className="flex flex-col gap-0 w-full mx-auto">
       {/* Posts Timeline */}
       {posts.length > 0 ? (
-        <div className="divide-y transition-colors duration-500"
+        <div className="transition-colors duration-500"
           style={{ borderColor: 'var(--border)' }}
         >
           {posts.map((post) => (

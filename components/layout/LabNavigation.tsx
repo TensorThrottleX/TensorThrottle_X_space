@@ -63,7 +63,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   }
 
   const handleModeToggle = () => {
-    const modes: RenderMode[] = ['normal', 'bright', 'dark', 'custom']
+    const modes: RenderMode[] = ['normal', 'bright', 'custom']
     const nextIdx = (modes.indexOf(renderMode as any) + 1) % modes.length
     const nextMode = modes[nextIdx]
     setRenderMode(nextMode as any)

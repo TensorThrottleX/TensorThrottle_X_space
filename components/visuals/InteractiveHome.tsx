@@ -223,7 +223,7 @@ Precision Mode: ${nextState ? 'ACTIVE' : 'INACTIVE'}`
     }
     else if (['mode', 'render'].includes(cleanCmd)) {
       // Circle toggle
-      setRenderMode((prev: 'normal' | 'bright' | 'dark') => {
+      setRenderMode((prev: any) => {
         if (prev === 'normal') return 'bright'
         if (prev === 'bright') return 'dark'
         return 'normal'
@@ -351,35 +351,58 @@ Cycling render mode...`
   const isBright = renderMode === 'bright'
   // We rely on CSS variables for colors now, so fewer conditional classes needed (but keeping structure)
 
-  const containerClasses = `relative flex flex-col transition-[height,width,transform,opacity] duration-500 overflow-hidden pointer-events-auto border backdrop-blur-xl
+  const containerClasses = `relative flex flex-col transition-[height,width,transform,opacity] duration-500 overflow-hidden pointer-events-auto
     ${isExpanded
-      ? 'h-[450px] w-full max-w-[800px] rounded-md scale-100 translate-y-0 opacity-100 shadow-cyan-500/10'
-      : `h-16 w-[350px] md:w-[450px] rounded-md cursor-text scale-[0.96] translate-y-[8px] opacity-100 shadow-lg 
-         hover:shadow-xl hover:scale-[0.97]`
+      ? 'h-[28rem] w-full max-w-[min(50rem,90vw)] rounded-md scale-100 translate-y-0 opacity-100 shadow-cyan-500/10'
+      : `h-16 w-[min(22rem,90vw)] md:w-[min(28rem,90vw)] rounded-md cursor-text scale-[0.96] translate-y-2 opacity-100 shadow-lg 
+         hover:shadow-xl hover:scale-[0.97] 
+         ${isBright ? 'hover:ring-1 hover:ring-blue-600/40' : 'hover:ring-1 hover:ring-cyan-500/50'}`
     } 
     ${isPlaying && !isBright
-      ? 'ring-1 ring-cyan-500/50 shadow-[0_0_50px_rgba(6,182,212,0.15)]'
-      : (isPlaying && isBright ? 'ring-1 ring-blue-500/30' : '')
+      ? 'ring-1 ring-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
+      : (isPlaying && isBright ? 'ring-1 ring-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.15)]' : '')
     }`
 
   return (
-    <div className="command-shell fixed inset-0 flex flex-col items-center justify-end pb-12 px-4 font-mono z-50 pointer-events-none">
+    <div className="command-shell terminal fixed inset-0 flex flex-col items-center justify-end pb-12 px-4 font-mono z-50 pointer-events-none">
+      {/* Full-Screen Blur Backdrop */}
+      <div
+        className={`fixed inset-0 z-0 transition-opacity duration-500 beauty-blur ${isExpanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        style={{
+          backdropFilter: 'blur(8px)',
+          backgroundColor: isBright ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.4)'
+        }}
+        onClick={() => setIsExpanded(false)}
+      />
+
       <div
         ref={containerRef}
         className={containerClasses}
         style={{
-          backgroundColor: 'var(--terminal-bg)',
-          borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--glass-border)',
+          // Background handling moved to inner layer to prevent content blur bleed
           color: 'var(--foreground)',
           boxShadow: isBright ? '0 20px 50px rgba(0, 0, 0, 0.1)' : undefined,
-          transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease'
+          transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease',
+          zIndex: 51 // Ensure above backdrop
         }}
         onClick={() => {
           if (!isExpanded) setIsExpanded(true)
           inputRef.current?.focus()
         }}
       >
-        <style jsx global>{`
+        {/* Background Layer - Isolated for Blur */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
+          style={{
+            backgroundColor: 'var(--terminal-bg)',
+            borderColor: isBright ? 'rgba(0, 0, 0, 0.8)' : 'var(--glass-border)'
+          }}
+        />
+
+        {/* Content Layer - Z-Index 10 ensures clarity */}
+        <div className="relative z-10 flex flex-col w-full h-full">
+
+          <style jsx global>{`
           .terminal-scroll::-webkit-scrollbar {
             width: 8px;
           }
@@ -439,94 +462,95 @@ Cycling render mode...`
           }
         `}</style>
 
-        {/* Window Header */}
-        <div className="p-2.5 flex items-center justify-between select-none shrink-0 border-b transition-colors duration-500"
-          style={{
-            backgroundColor: 'var(--sidebar-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
-          }}
-        >
-          <div className="flex items-center gap-2 px-1">
-            <div className="w-2 h-2 rounded-full bg-red-500/50" />
-            <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-            <div className="w-2 h-2 rounded-full bg-green-500/50" />
+          {/* Window Header */}
+          <div className="p-2.5 flex items-center justify-between select-none shrink-0 border-b transition-colors duration-500"
+            style={{
+              backgroundColor: 'var(--sidebar-bg)',
+              borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
+            }}
+          >
+            <div className="flex items-center gap-2 px-1">
+              <div className="w-2 h-2 rounded-full bg-red-500/50" />
+              <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+              <div className="w-2 h-2 rounded-full bg-green-500/50" />
+            </div>
+            <div className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-50" style={{ color: 'var(--muted-foreground)' }}>
+              {isExpanded ? 'SYSTEM_CONSOLE_v1.0.4' : 'SECURE_SHELL'}
+            </div>
+            <div className="w-10" />
           </div>
-          <div className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-50" style={{ color: 'var(--muted-foreground)' }}>
-            {isExpanded ? 'SYSTEM_CONSOLE_v1.0.4' : 'SECURE_SHELL'}
-          </div>
-          <div className="w-10" />
-        </div>
 
-        {/* Scroll Output Area */}
-        <div className={`flex-1 relative overflow-hidden transition-opacity duration-500 ${isExpanded ? 'opacity-100 px-6 pt-4' : 'opacity-0 h-0 hidden'}`}>
-          <div className={`absolute top-0 left-0 right-0 h-10 bg-gradient-to-b z-20 pointer-events-none transition-opacity duration-300 ${showScrollFade ? 'opacity-100' : 'opacity-0'}
+          {/* Scroll Output Area */}
+          <div className={`flex-1 relative overflow-hidden transition-opacity duration-500 ${isExpanded ? 'opacity-100 px-6 pt-4' : 'opacity-0 h-0 hidden'}`}>
+            <div className={`absolute top-0 left-0 right-0 h-10 bg-gradient-to-b z-20 pointer-events-none transition-opacity duration-300 ${showScrollFade ? 'opacity-100' : 'opacity-0'}
             ${isBright ? 'from-white to-transparent' : 'from-black to-transparent'}
           `} />
 
-          <div
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="h-full overflow-y-auto terminal-scroll space-y-2 font-mono text-xs md:text-sm"
-          >
-            <div className="text-[10px] mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000"
-              style={{ color: 'var(--muted-foreground)', borderColor: 'var(--border)' }}
+            <div
+              ref={scrollContainerRef}
+              onScroll={handleScroll}
+              className="h-full overflow-y-auto terminal-scroll space-y-2 font-mono text-xs md:text-sm"
             >
-              [CON_ESTABLISHED] <br />
-              SECURE_SHELL_ACTIVE <br />
-              TYPE 'HELP' FOR SYSTEM DIRECTIVES.
-            </div>
-
-            {commandHistory.map((item, i) => (
-              <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
-                style={{ color: item.type === 'cmd' ? (isBright ? '#1d4ed8' : '#22d3ee') : 'var(--foreground)' }}
+              <div className="text-[10px] mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000"
+                style={{ color: 'var(--muted-foreground)', borderColor: 'var(--border)' }}
               >
-                {item.type === 'cmd' ? <span className="opacity-50">sh-3.2$</span> : null}
-                {item.text.replace(/^> /, '')}
+                [CON_ESTABLISHED] <br />
+                SECURE_SHELL_ACTIVE <br />
+                TYPE 'HELP' FOR SYSTEM DIRECTIVES.
               </div>
-            ))}
-            <div ref={historyEndRef} className="h-4" />
-          </div>
-        </div>
 
-        {/* Input Area */}
-        <div className={`flex items-center gap-3 px-6 transition-[height,border-top-width] duration-300 
+              {commandHistory.map((item, i) => (
+                <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
+                  style={{ color: item.type === 'cmd' ? (isBright ? '#1d4ed8' : '#22d3ee') : 'var(--foreground)' }}
+                >
+                  {item.type === 'cmd' ? <span className={`font-bold ${!isBright ? 'opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'opacity-100'}`}>sh-3.2$</span> : null}
+                  {item.text.replace(/^> /, '')}
+                </div>
+              ))}
+              <div ref={historyEndRef} className="h-4" />
+            </div>
+          </div>
+
+          {/* Input Area */}
+          <div className={`flex items-center gap-3 px-6 transition-[height,border-top-width] duration-300 
             ${isExpanded ? 'h-14 border-t' : 'h-full justify-center'}
         `}
-          style={{
-            backgroundColor: isExpanded ? 'var(--sidebar-bg)' : 'transparent',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
-          }}
-        >
-          {isExpanded && <span className={`font-bold opacity-50 transition-opacity duration-500 ${isBright ? 'text-blue-600' : 'text-cyan-500'} ${isPlaying ? 'opacity-100' : ''}`}>sh-3.2$</span>}
+            style={{
+              backgroundColor: isExpanded ? 'var(--sidebar-bg)' : 'transparent',
+              borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
+            }}
+          >
+            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-600 opacity-100' : 'text-cyan-500 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
 
-          <input
-            ref={inputRef}
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={onKeyDown}
-            className={`bg-transparent border-none outline-none placeholder-gray-500 font-mono 
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={onKeyDown}
+              className={`bg-transparent border-none outline-none placeholder-gray-500 font-mono 
                 ${isBright ? 'caret-blue-600' : 'caret-cyan-400'}
                 ${isExpanded ? 'flex-1 text-base' : 'w-full text-sm text-center'}
             `}
-            style={{ color: 'var(--foreground)' }}
-            placeholder={isExpanded ? "" : "[ READY ]"}
-            autoComplete="off"
-          />
-        </div>
+              style={{ color: 'var(--foreground)' }}
+              placeholder={isExpanded ? "" : "[ READY ]"}
+              autoComplete="off"
+            />
+          </div>
 
-        {/* Surprise Trigger (Moved back INSIDE) */}
-        {isExpanded && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation() // Prevent container click event
-              toggleBGM()
-            }}
-            className={`bgm-trigger ${isPlaying ? 'active' : ''} animate-in fade-in duration-500`}
-          >
-            {isPlaying ? "System Active ✦" : "Hit to see changes"}
-          </button>
-        )}
+          {/* Surprise Trigger (Moved back INSIDE) */}
+          {isExpanded && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation() // Prevent container click event
+                toggleBGM()
+              }}
+              className={`bgm-trigger ${isPlaying ? 'active' : ''} animate-in fade-in duration-500`}
+            >
+              {isPlaying ? "System Active ✦" : "Hit to see changes"}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )

@@ -63,6 +63,17 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
         }
     }
 
+    const handleClose = (e?: React.MouseEvent) => {
+        if (e) e.stopPropagation()
+        setIsExpanded(false)
+
+        const newParams = new URLSearchParams(searchParams.toString())
+        if (newParams.has('post')) {
+            newParams.delete('post')
+            router.push(`${window.location.pathname}?${newParams.toString()}`, { scroll: false })
+        }
+    }
+
     return (
         <>
             <article
@@ -112,7 +123,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            onClick={() => setIsExpanded(false)}
+                            onClick={handleClose}
                             className="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer"
                         />
 
@@ -137,7 +148,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                                     </h2>
                                 </div>
                                 <button
-                                    onClick={() => setIsExpanded(false)}
+                                    onClick={handleClose}
                                     className="p-2 rounded-full hover:bg-white/10 transition-colors opacity-60 hover:opacity-100"
                                     style={{ color: 'var(--foreground)' }}
                                 >

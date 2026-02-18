@@ -44,9 +44,9 @@ export function RightFloatingBar(): React.ReactNode {
     const activeIndex = socialItems.findIndex(item => item.isInternal && mainView === item.view)
 
     return (
-        <div className="rightbar fixed right-6 top-1/2 z-[100] -translate-y-1/2 hidden md:flex pointer-events-auto transition-transform duration-300 ease-in-out">
+        <div className="rightbar fixed right-0 top-0 h-full hidden md:flex items-center px-6 z-[100] pointer-events-none transition-transform duration-300 ease-in-out">
             <div
-                className="relative flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-xl backdrop-saturate-150 border shadow-2xl animate-in fade-in slide-in-from-right-8 duration-500 fill-mode-forwards transition-colors duration-300"
+                className="relative flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-xl backdrop-saturate-150 border shadow-2xl animate-in fade-in slide-in-from-right-8 duration-500 fill-mode-forwards transition-colors duration-300 pointer-events-auto"
                 style={{
                     backgroundColor: 'var(--sidebar-bg)',
                     borderColor: 'var(--sidebar-border)',
@@ -57,9 +57,9 @@ export function RightFloatingBar(): React.ReactNode {
                     <div
                         className="absolute left-0 w-[5px] bg-cyan-400 rounded-r-full z-[110] transition-transform duration-400 cubic-bezier(0.4, 0, 0.2, 1) animate-pulse-subtle"
                         style={{
-                            height: '48px', // Matches icon button height
-                            transform: `translateY(${activeIndex * (48 + 12)}px)`, // index * (height + gap)
-                            top: '24px', // Matches container py-6
+                            height: '3rem', // 48px -> 3rem
+                            transform: `translateY(calc(${activeIndex} * 3.75rem + ${activeIndex} * 0px))`, // 3rem + 0.75rem gap
+                            top: '1.5rem', // 24px -> 1.5rem
                             boxShadow: '0 0 8px rgba(0, 200, 255, 0.6)',
                         }}
                     />
@@ -136,7 +136,7 @@ export function RightFloatingBar(): React.ReactNode {
                             )}
 
                             {/* Tooltip */}
-                            <span className="absolute right-14 top-1/2 -translate-y-1/2 hidden whitespace-nowrap rounded-md px-2 py-1 text-[10px] font-medium backdrop-blur-sm group-hover:block transition-opacity duration-200 pointer-events-none"
+                            <span className="absolute right-14 top-1/2 -translate-y-1/2 hidden whitespace-nowrap rounded-md px-2 py-1 text-[10px] font-medium backdrop-blur-sm group-hover:block transition-opacity duration-200 pointer-events-none z-[120]"
                                 style={{
                                     backgroundColor: 'var(--popover)',
                                     color: 'var(--popover-foreground)',

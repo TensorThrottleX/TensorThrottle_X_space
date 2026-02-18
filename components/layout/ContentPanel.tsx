@@ -38,10 +38,10 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt }: C
   }
 
   return (
-    <div className="relative flex flex-1 w-full flex-col items-center justify-start p-fluid">
+    <div className="relative flex flex-1 w-full flex-col items-center justify-center p-4 md:p-8 min-h-screen">
       {/* Floating panel with glass effect - Normalized Architecture */}
       <div
-        className="relative w-full max-w-panel rounded-3xl backdrop-blur-2xl backdrop-saturate-150 border shadow-2xl overflow-visible flex flex-col transition-all duration-500 hover:shadow-cyan-500/5 group/panel"
+        className="relative w-full max-w-2xl rounded-2xl backdrop-blur-2xl backdrop-saturate-150 border shadow-2xl overflow-hidden flex flex-col transition-all duration-500 hover:shadow-cyan-500/5 group/panel h-[85vh]"
         style={{
           backgroundColor: 'var(--card-bg)',
           borderColor: 'var(--card-border)',
@@ -50,10 +50,10 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt }: C
       >
         {/* Header (optional) */}
         {title && (
-          <div className="px-8 py-8 shrink-0 border-b transition-colors duration-500"
+          <div className="px-6 py-6 shrink-0 border-b transition-colors duration-500"
             style={{ borderColor: 'var(--border)' }}
           >
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tighter text-balance"
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tighter text-balance"
               style={{ color: 'var(--heading-primary)' }}
             >
               {title}
@@ -68,7 +68,7 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt }: C
         )}
 
         {/* Scrollable content area */}
-        <div className="flex-1 overflow-y-auto px-8 py-8 premium-scrollbar scroll-smooth">
+        <div className="flex-1 overflow-y-auto px-5 py-6 premium-scrollbar scroll-smooth">
           {children}
         </div>
       </div>

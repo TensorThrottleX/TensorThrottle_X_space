@@ -18,7 +18,7 @@ export async function GET() {
                 .filter(file => extensions.includes(path.extname(file).toLowerCase()))
                 .map(file => ({
                     name: formatName(file),
-                    path: `/media/${publicPathPart}/${file}`
+                    path: `/media/${publicPathPart}/${encodeURIComponent(file)}`
                 }));
         } catch (error) {
             console.error(`Error reading directory ${dir}:`, error);

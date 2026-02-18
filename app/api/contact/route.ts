@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
 // ============================================
@@ -244,77 +245,258 @@ ${safeMessage}
 }
 
 // ============================================
+// LAYER E — DISPATCH LAYER (MULTI-RELAY)
+// ============================================
+
+interface DispatchResult {
+    success: boolean;
+    relay: 'Resend' | 'SendGrid' | 'SMTP' | 'None';
+    messageId?: string;
+    error?: string;
+}
+
+// RELAY 1: Resend (Primary)
+async function sendViaResend(
+    payload: EmailPayload,
+    htmlContent: string,
+    recipients: string[]
+): Promise<DispatchResult> {
+    if (!process.env.RESEND_API_KEY) return { success: false, relay: 'None', error: 'Missing Configuration' };
+
+    try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        // Ensure strictly configured sender identity
+        const SYSTEM_SENDER = process.env.RESEND_FROM || 'noreply@system-relay.com';
+
+        const { data, error } = await resend.emails.send({
+            from: `Tensor Relay <${SYSTEM_SENDER}>`,
+            to: recipients,
+            replyTo: payload.email, // Dynamic user identity
+            subject: `[Project Contact] ${payload.identity}`, // Consistent prefix
+            html: htmlContent,
+            headers: {
+                'X-Entity-Ref-ID': crypto.randomUUID(),
+            },
+            tags: [
+                { name: 'category', value: 'contact_form' },
+                { name: 'environment', value: process.env.NODE_ENV || 'development' }
+            ]
+        });
+
+        if (error) {
+            return {
+                success: false,
+                relay: 'Resend',
+                error: error.message
+            };
+        }
+
+        return {
+            success: true,
+            relay: 'Resend',
+            messageId: data?.id || 'resend-id'
+        };
+    } catch (err: any) {
+        return {
+            success: false,
+            relay: 'Resend',
+            error: err.message || 'Unknown error'
+        };
+    }
+}
+
+// RELAY 2: SendGrid (Secondary Fallback)
+async function sendViaSendGrid(
+    payload: EmailPayload,
+    htmlContent: string,
+    recipients: string[]
+): Promise<DispatchResult> {
+    if (!process.env.SENDGRID_API_KEY) return { success: false, relay: 'None', error: 'Missing SendGrid Configuration' };
+
+    try {
+        const SYSTEM_SENDER = process.env.SENDGRID_FROM || 'noreply@system-relay.com';
+
+        const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                personalizations: [{
+                    to: recipients.map(email => ({ email }))
+                }],
+                from: { email: SYSTEM_SENDER, name: 'Tensor Fallback Relay' },
+                reply_to: { email: payload.email || SYSTEM_SENDER },
+                subject: `[Project Contact] ${payload.identity}`,
+                content: [{
+                    type: 'text/html',
+                    value: htmlContent
+                }],
+                tracking_settings: {
+                    click_tracking: { enable: false },
+                    open_tracking: { enable: false }
+                }
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            return {
+                success: false,
+                relay: 'SendGrid',
+                error: JSON.stringify(errorData.errors || 'Unknown SendGrid Error')
+            };
+        }
+
+        return {
+            success: true,
+            relay: 'SendGrid',
+            messageId: response.headers.get('x-message-id') || 'sendgrid-queued'
+        };
+    } catch (err: any) {
+        return {
+            success: false,
+            relay: 'SendGrid',
+            error: err.message || 'Fetch error'
+        };
+    }
+}
+
+// RELAY 3: Standard SMTP (Gmail, Outlook, etc.)
+async function sendViaSMTP(
+    payload: EmailPayload,
+    htmlContent: string,
+    recipients: string[]
+): Promise<DispatchResult> {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        return { success: false, relay: 'None', error: 'Missing SMTP Configuration' };
+    }
+
+    try {
+        const transport = nodemailer.createTransport({
+            host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+            port: parseInt(process.env.EMAIL_PORT || '587'),
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        const info = await transport.sendMail({
+            from: `"TensorThrottle Contact" <${process.env.EMAIL_USER}>`,
+            to: recipients.join(', '), // Nodemailer supports comma-separated string or array
+            replyTo: payload.email,
+            subject: `[Project Contact] ${payload.identity}`,
+            html: htmlContent,
+        });
+
+        return {
+            success: true,
+            relay: 'SMTP',
+            messageId: info.messageId
+        };
+    } catch (err: any) {
+        return {
+            success: false,
+            relay: 'SMTP',
+            error: err.message || 'SMTP Error'
+        };
+    }
+}
+
+// ============================================
 // MAIN REQUEST HANDLER
 // ============================================
 export async function POST(req: NextRequest) {
-    if (!process.env.RESEND_API_KEY) {
-        console.error('[EMAIL] RESEND_API_KEY not configured');
-        return NextResponse.json(
-            { error: 'Server misconfiguration: email service unavailable.' },
-            { status: 500 }
-        );
-    }
+    // Anchored destination (Support for multiple comma-separated emails)
+    const rawRecipients = process.env.EMAIL_RECIPIENT || 'tensorthrottleX@proton.me';
+    const RECIPIENTS = rawRecipients.split(',').map(e => e.trim()).filter(Boolean);
 
-    // Anchored destination
-    const RECIPIENT = process.env.EMAIL_RECIPIENT || 'yourname@proton.me';
-    // System-controlled relay domain
-    const FROM_EMAIL = 'noreply@system-relay.com';
+    // Structured Logging Placeholder
+    let logData: any = {
+        timestamp: new Date().toISOString(),
+        status: "pending",
+        relayUsed: null,
+        fallbackTriggered: false,
+        validationPassed: false,
+        ipHash: null,
+        error: null
+    };
 
     try {
         const body = await req.json();
 
+        // 1. Validation
         const validation = validateInput(body);
         if (!validation.valid) {
-            return NextResponse.json(
-                { error: validation.errors[0] },
-                { status: 400 }
-            );
+            console.warn(`[EMAIL] Validation Failed: ${validation.errors[0]}`);
+            return NextResponse.json({ error: validation.errors[0] }, { status: 400 });
         }
+        logData.validationPassed = true;
 
+        // 2. Security
         const security = securityCheck(body, req);
+        const metadata = enrichMetadata(req);
+        // Hash IP for logs (Privacy)
+        const ipHash = crypto.createHash('sha256').update(metadata.ip).digest('hex').substring(0, 12);
+        logData.ipHash = ipHash;
+
         if (!security.allowed) {
+            logData.status = "blocked";
+            logData.error = security.reason;
+            console.warn(`[SECURITY] Blocked: ${JSON.stringify(logData)}`);
             return NextResponse.json(
                 { error: security.reason || 'Security check failed' },
                 { status: security.severity === 2 ? 403 : 400 }
             );
         }
 
+        // 3. Preparation
         const payload: EmailPayload = {
             identity: body.identity.trim(),
             email: body.email?.trim() || undefined,
             message: body.message.trim(),
         };
 
-        const metadata = enrichMetadata(req);
         const emailHtml = buildEmailTemplate(payload, metadata);
-        const ipHash = crypto.createHash('sha256').update(metadata.ip).digest('hex').substring(0, 12);
 
-        // Official Resend SDK
-        const resend = new Resend(process.env.RESEND_API_KEY);
+        // 4. Dispatch (Multi-Relay Strategy)
+        let dispatch: DispatchResult;
 
-        const { data, error } = await resend.emails.send({
-            from: `Tensor Relay <${FROM_EMAIL}>`,
-            to: RECIPIENT,
-            reply_to: payload.email || undefined,
-            subject: `[Project Message] Transmission from ${payload.identity}`,
-            html: emailHtml,
-        });
+        // ATTEMPT 1: Resend
+        console.log(`[EMAIL] Attempting primary relay (Resend)...`);
+        dispatch = await sendViaResend(payload, emailHtml, RECIPIENTS);
 
-        // Structured Logging
-        const logData = {
-            status: error ? "failed" : "sent",
-            timestamp: metadata.timestamp,
-            relay: "Resend",
-            messageId: data?.id || null,
-            userIPHash: ipHash,
-            validationPassed: true,
-            error: error ? error.message : null
-        };
-        console.log(JSON.stringify(logData));
+        if (!dispatch.success) {
+            logData.primaryError = dispatch.error;
+            logData.fallbackTriggered = true;
+            console.warn(`[EMAIL] Primary relay failed: ${dispatch.error}. Activating fallback...`);
 
-        if (error) {
+            // ATTEMPT 2: SMTP (Gmail/Custom)
+            console.log(`[EMAIL] Attempting secondary relay (SMTP)...`);
+            dispatch = await sendViaSMTP(payload, emailHtml, RECIPIENTS);
+
+            if (!dispatch.success) {
+                console.warn(`[EMAIL] SMTP relay failed: ${dispatch.error}. Activating tertiary fallback...`);
+                // ATTEMPT 3: SendGrid
+                dispatch = await sendViaSendGrid(payload, emailHtml, RECIPIENTS);
+            }
+        }
+
+        // 5. Final Reporting
+        logData.status = dispatch.success ? "sent" : "failed";
+        logData.relayUsed = dispatch.relay;
+        logData.messageId = dispatch.messageId;
+        logData.error = dispatch.error;
+
+        console.log(JSON.stringify(logData)); // Structured log output
+
+        if (!dispatch.success) {
+            console.error(`[CRITICAL] All relays failed. Last error: ${dispatch.error}`);
             return NextResponse.json(
-                { error: 'Email dispatch failed.' },
+                { error: 'Transmission system unavailable. Please try again later.' },
                 { status: 500 }
             );
         }
@@ -322,11 +504,16 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({
             success: true,
             message: 'Transmission successfully delivered',
-            transmissionId: data?.id
+            transmissionId: dispatch.messageId,
+            relay: dispatch.relay
         });
 
     } catch (error: any) {
         console.error('[API_ERROR]', error);
+        logData.status = "failed";
+        logData.error = error.message;
+        console.log(JSON.stringify(logData));
+
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

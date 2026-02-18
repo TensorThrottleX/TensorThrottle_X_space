@@ -133,7 +133,7 @@ export function MsgView(): React.ReactNode {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="w-full px-6 pt-10 pb-20"
         >
-            <div className="max-w-[600px] mx-auto lg:-translate-x-20 space-y-8">
+            <div className="max-w-2xl mx-auto space-y-8">
                 {/* [MSG_PAGE] – Header */}
                 <div className="space-y-2">
                     <h1 className="text-h1 font-black tracking-tighter" style={{ color: 'var(--heading-primary)' }}>

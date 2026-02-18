@@ -12,30 +12,41 @@ export async function GET() {
     const checks = {
         timestamp: new Date().toISOString(),
         status: 'unknown',
-        architecture: 'Decoupled Relay (Vercel -> Resend -> Proton)',
+        architecture: 'Multi-Relay Fallback (Resend -> SendGrid -> Proton)',
         configured: false,
         details: [] as string[],
     };
 
-    const hasApiKey = !!process.env.RESEND_API_KEY;
-    const recipient = process.env.EMAIL_RECIPIENT || 'yourname@proton.me';
-    const relayFrom = 'noreply@system-relay.com';
+    const hasResend = !!process.env.RESEND_API_KEY;
+    const hasSendGrid = !!process.env.SENDGRID_API_KEY;
+    const recipient = process.env.EMAIL_RECIPIENT || 'tensorthrottleX@proton.me';
 
-    if (hasApiKey) {
+    // Check configuration status
+    if (hasResend) {
         checks.configured = true;
         checks.status = 'ready';
-        checks.details.push('✅ RESEND_API_KEY is configured');
-        checks.details.push(`✅ RELAY_FROM: ${relayFrom}`);
-        checks.details.push(`✅ ANCHOR_RECIPIENT: ${recipient}`);
-        checks.details.push('✅ Domain-independent mode active');
+        checks.details.push('✅ PRIMARY: Resend API configured');
     } else {
-        checks.status = 'misconfigured';
-        checks.details.push('❌ RESEND_API_KEY is missing');
+        checks.details.push('❌ PRIMARY: Resend API missing');
+    }
+
+    if (hasSendGrid) {
+        checks.details.push('✅ SECONDARY: SendGrid Fallback configured');
+    } else {
+        checks.details.push('⚠️ SECONDARY: SendGrid Fallback missing (Single point of failure)');
+    }
+
+    if (hasResend || hasSendGrid) {
+        checks.details.push(`✅ RECIPIENT: ${recipient}`);
+        checks.details.push('✅ Domain-independence active');
+    } else {
+        checks.status = 'critical_failure';
+        checks.details.push('❌ FATAL: No email providers configured');
     }
 
     // Add security info
     checks.details.push('');
-    checks.details.push(`🔒 SECURITY STACK:`);
+    checks.details.push(`🔒 SECURITY MATRIX:`);
     checks.details.push(`✅ Honeypot Detection (Hidden inputs)`);
     checks.details.push(`✅ Time-based validation (>2s)`);
     checks.details.push(`✅ IP-based Rate Limiting (3/5min)`);

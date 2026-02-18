@@ -47,6 +47,9 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
         const init = async () => {
             try {
                 const res = await fetch('/api/media')
+                if (!res.ok) {
+                    throw new Error(`Media API error: ${res.status} ${res.statusText}`)
+                }
                 const data = await res.json()
                 setConfig(data)
 
@@ -56,8 +59,17 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     try {
                         const parsed = JSON.parse(saved)
                         if (typeof parsed.theme === 'string') setThemeState(parsed.theme)
-                        if (typeof parsed.videoIndex === 'number') setVideoState(prev => ({ ...prev, index: parsed.videoIndex }))
-                        if (typeof parsed.soundIndex === 'number') setSoundState({ soundIndex: parsed.soundIndex })
+                        if (typeof parsed.videoIndex === 'number') {
+                            // Validate index exists in new config
+                            if (parsed.videoIndex < data.videos.length) {
+                                setVideoState(prev => ({ ...prev, index: parsed.videoIndex }))
+                            }
+                        }
+                        if (typeof parsed.soundIndex === 'number') {
+                            if (parsed.soundIndex < data.sounds.length) {
+                                setSoundState({ soundIndex: parsed.soundIndex })
+                            }
+                        }
                     } catch (e) {
                         console.warn('Corruption detected in media storage, resetting.')
                         localStorage.removeItem('media_engine_v3')
@@ -65,6 +77,8 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 }
             } catch (error) {
                 console.error('Media discovery failed:', error)
+                // Fallback to empty config to prevent crashes
+                setConfig({ videos: [], sounds: [] })
             } finally {
                 setIsLoading(false)
             }
@@ -97,11 +111,13 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             } else if (index === -2) {
                 video.src = '' // White handled in CSS
             } else if (config.videos[index]) {
-                video.src = config.videos[index].path
+                const videoPath = config.videos[index].path
+                // Use encoded path if not already
+                video.src = videoPath
                 video.load()
-                await video.play().catch(() => {
+                await video.play().catch((e) => {
                     // Failure Containment
-                    console.warn('Playback blocked or failed.')
+                    console.warn('Video playback blocked or failed:', e)
                 })
             }
 
@@ -130,11 +146,14 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             // If video muted, allow background sound if chosen
             video.muted = true
             if (soundState.soundIndex !== -1 && config.sounds[soundState.soundIndex]) {
-                if (audio.src !== config.sounds[soundState.soundIndex].path) {
-                    audio.src = config.sounds[soundState.soundIndex].path
+                const soundPath = config.sounds[soundState.soundIndex].path
+                if (audio.src !== soundPath && audio.src !== window.location.origin + soundPath) {
+                    audio.src = soundPath
                     audio.load()
                 }
-                audio.play().catch(() => { })
+                audio.play().catch((e) => {
+                    console.warn("Audio autoplay blocked or failed:", e)
+                })
             } else {
                 audio.pause()
             }
@@ -153,9 +172,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             soundState, setSoundIndex,
             config, isLoading
         }}>
-            {children}
-
-            {/* Persistent DOM Nodes - Never Unmounted */}
+            {/* 2️⃣ STRUCTURAL LAYER SEPARATION: Background Layers BEFORE Content */}
             <video
                 ref={videoRef}
                 autoPlay
@@ -174,7 +191,10 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                         setVideoState(prev => ({ ...prev, hasAudioTrack: false }))
                     }
                 }}
-                className={`fixed inset-0 h-full w-full object-cover z-[-2] pointer-events-none transition-opacity duration-1000 
+                onError={(e) => {
+                    console.warn('Video playback error:', e)
+                }}
+                className={`bg-video transition-opacity duration-1000 
           ${videoState.index === -2 ? 'opacity-0' : 'opacity-100'}
           ${videoState.index === -1 ? 'bg-black' : ''}
           ${theme === 'bright' ? 'opacity-10' : ''}
@@ -190,14 +210,21 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 loop
                 preload="auto"
                 className="hidden"
+                onError={(e) => {
+                    console.warn('Audio playback error:', e)
+                }}
             />
 
-            {/* Layer 1 Theme Overlay (Pure CSS) */}
-            <div className={`fixed inset-0 z-[-1] pointer-events-none transition-colors duration-1000
+            {/* Layer 1 Theme Overlay (Pure CSS) -> .blur-layer */}
+            <div className={`blur-layer transition-colors duration-1000
         ${theme === 'bright' ? 'bg-white/80' : ''}
         ${theme === 'dark' ? 'bg-black/40 backdrop-blur-sm' : ''}
         ${videoState.index === -2 ? 'bg-white z-[-5]' : ''}
       `} />
+
+            {/* 4️⃣ GLOBAL CONTENT CONTAINER (Injected via children) */}
+            {children}
+
         </MediaContext.Provider>
     )
 }

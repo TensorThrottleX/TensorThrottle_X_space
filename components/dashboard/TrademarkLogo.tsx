@@ -9,7 +9,7 @@ export function TrademarkLogo() {
     const isDark = renderMode === 'dark'
 
     return (
-        <div className="fixed bottom-8 left-8 z-50 pointer-events-auto select-none opacity-100 mix-blend-normal transition-opacity duration-500 group">
+        <div className="fixed bottom-8 left-10 z-50 pointer-events-auto select-none opacity-100 mix-blend-normal transition-opacity duration-500 group">
             <div
                 className={`w-14 h-14 rounded-full border-2 flex items-center justify-center transition-[transform,background-color,border-color,box-shadow] duration-500 cursor-pointer hover:scale-110 active:scale-95
                     ${isBright

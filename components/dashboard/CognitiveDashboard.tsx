@@ -269,7 +269,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
-                className="relative w-full flex flex-col items-center justify-start pointer-events-none z-0 py-10"
+                className="relative w-full flex flex-col items-center justify-start pointer-events-none z-0 pb-20"
             >
                 <div className="relative pointer-events-auto w-full flex justify-center px-4">
                     <SystemQuoteRenderer isPrecision={usePrecisionStyle} />
@@ -326,6 +326,7 @@ export function CognitiveDashboard({ mode = 'purpose' }: CognitiveDashboardProps
 
 /* QUOTE > SYSTEM_QUOTE_RENDERER > COMPONENT > ANIMATION_SYSTEM */
 function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.ReactNode {
+    const { renderMode } = useUI()
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
     const [displayPhase, setDisplayPhase] = useState<'display' | 'erasing' | 'paused' | 'typing'>('display')
     const [visibleText, setVisibleText] = useState(SYSTEM_QUOTES[0].text)
@@ -391,10 +392,12 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
 
     return (
         <div className={cn(
-            "relative w-full max-w-panel h-panel rounded-[24px] shadow-2xl overflow-hidden border transition-colors duration-300 flex flex-col items-center justify-center text-center p-fluid",
+            "primary-card relative overflow-hidden border transition-colors duration-300 items-center justify-center text-center",
             isPrecision
                 ? "bg-black border-white"
-                : "bg-black/60 backdrop-blur-xl border-white/10"
+                : (renderMode === 'bright'
+                    ? "bg-white/90 backdrop-blur-none border-black/10"
+                    : "bg-black/60 backdrop-blur-xl border-white/10")
         )}>
             {/* Quote Label */}
             <div className="absolute top-10 left-10 flex items-center gap-3">
@@ -408,7 +411,7 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
             </div>
 
             {/* Quote Content */}
-            <div className="max-w-2xl min-h-[180px] flex flex-col justify-center">
+            <div className="max-w-2xl min-h-[11.25rem] flex flex-col justify-center">
                 <h2 className="text-3xl md:text-5xl font-extrabold leading-tight text-white/95 tracking-tighter">
                     "{visibleText}"<span className={cn("inline-block w-2.5 h-8 bg-cyan-500/50 align-middle ml-1", displayPhase === 'display' ? "opacity-0" : "animate-pulse")}></span>
                 </h2>
@@ -490,13 +493,16 @@ function StackedDeck({
     }
 
     return (
-        <div className="relative w-full max-w-panel min-h-panel perspective-1000 group flex flex-col items-center">
-            <div className="relative w-full h-panel">
+        /* [PRIMARY_CARD_LAYOUT] -> Defines the shared geometry for the stack */
+        <div className="primary-card relative perspective-1000 group items-center bg-transparent border-none shadow-none p-0 min-h-[33.75rem]">
+            <div className="relative w-full h-full">
                 <AnimatePresence>
                     {stack.map((id, index) => {
                         // Determine what to render based on ID
                         const isCover = id === 'cover'
                         const subCard = content.subCards.find(c => c.id === id)
+
+                        if (!isCover && !subCard) return null;
 
                         return (
                             <motion.div
@@ -516,7 +522,7 @@ function StackedDeck({
                                     damping: 25
                                 }}
                                 className={cn(
-                                    "absolute top-0 left-0 w-full h-panel rounded-[24px] cursor-pointer shadow-2xl overflow-hidden border transition-colors duration-300",
+                                    "absolute top-0 left-0 w-full h-full rounded-[26px] cursor-pointer shadow-2xl overflow-hidden border transition-colors duration-300",
                                     isPrecision
                                         ? "bg-black border-white"
                                         : "bg-black/60 backdrop-blur-xl border-white/10"
@@ -527,7 +533,7 @@ function StackedDeck({
                             >
                                 {/* Card Content Wrapper */}
                                 <div className={cn(
-                                    "w-full h-full p-10 flex flex-col justify-between relative",
+                                    "w-full h-full px-[5rem] py-[4rem] flex flex-col justify-between relative",
                                     isCover && !isPrecision ? "bg-[#050505]" : "" // Deep black for intent protocol
                                 )}>
 

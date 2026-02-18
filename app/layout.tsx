@@ -1,5 +1,5 @@
 import React from "react"
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from "next/font/google";
 
 import './globals.css'
@@ -29,12 +29,22 @@ export const metadata: Metadata = {
   },
 }
 
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  // CSS clamp()-based scaling handles proportional sizing across all viewports.
+  // No need for fixed 1920px — the layout scales via rem units.
+  themeColor: '#000000',
+}
+
 import { UIProvider } from "@/components/providers/UIProvider"
 import { MediaEngineProvider } from "@/components/providers/MediaProvider"
 
 import { TrademarkLogo } from "@/components/dashboard/TrademarkLogo"
 import { GlobalFooter } from "@/components/layout/GlobalFooter"
 import { SystemClock } from "@/components/dashboard/SystemClock"
+import { RenderScaler } from "@/components/layout/RenderScaler"
 
 export default function RootLayout({
   children,
@@ -46,10 +56,19 @@ export default function RootLayout({
       <body className="antialiased">
         <UIProvider>
           <MediaEngineProvider>
-            <SystemClock />
-            <TrademarkLogo />
-            <GlobalFooter />
-            {children}
+            <RenderScaler>
+              {/* Desktop-only fixed elements — hidden on mobile via CSS */}
+              <div className="desktop-only">
+                <SystemClock />
+                <TrademarkLogo />
+              </div>
+              <main className="app-root relative z-10">
+                {children}
+              </main>
+              <div className="desktop-only">
+                <GlobalFooter />
+              </div>
+            </RenderScaler>
           </MediaEngineProvider>
         </UIProvider>
       </body>

@@ -21,16 +21,16 @@ export function HomePageLayout() {
 
     return (
         <LabContainer videoSrc="/media/videos/default-background.mp4">
-            {/* [FLOW_PLANE]: Main vertical stack */}
-            <div className="flex flex-col items-center w-full min-h-full">
-                {/* 1. Header Title (Flow-based) */}
+            {/* [FLOW_PLANE]: Main vertical stack -> .viewport-section for Vertical Balance */}
+            <div className="viewport-section flex-col items-center w-full">
+                {/* 1. Header Title (Flow-based) -> .hero-header for Width Constraint */}
                 <AnimatePresence>
                     {mainView === 'dashboard' && uiMode === 'default' && (
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="relative w-full flex justify-center z-40 pointer-events-none select-none pt-fluid pb-4"
+                            className="hero-header relative w-full flex justify-center z-40 pointer-events-none select-none pb-4"
                         >
                             <motion.h1
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}

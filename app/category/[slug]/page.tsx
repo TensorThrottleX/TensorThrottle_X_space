@@ -5,6 +5,7 @@ import { LabContainer } from '@/components/layout/LabContainer'
 import { LabNavigation } from '@/components/layout/LabNavigation'
 import { CategoryPostCard } from '@/components/content/CategoryPostCard'
 import { getPostsByCategory } from '@/lib/notion'
+import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 
 // ISR: Revalidate every 5 minutes
 export const revalidate = 300
@@ -53,60 +54,62 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const hasPosts = posts.length > 0
 
   return (
-    <LabContainer videoSrc="/media/videos/default-background.mp4">
-      {/* Sidebar remains unchanged */}
-      <LabNavigation />
+    <ResponsiveContentWrapper>
+      <LabContainer videoSrc="/media/videos/default-background.mp4">
+        {/* Sidebar remains unchanged */}
+        <LabNavigation />
 
-      {/* Main Content Area - Custom Layout for Category Archive */}
-      <div className="flex-1 w-full relative z-10 transition-colors duration-500 overflow-visible"
-        style={{ backgroundColor: 'var(--background)' }}>
-        <div className="max-w-panel mx-auto p-fluid">
+        {/* Main Content Area - Custom Layout for Category Archive */}
+        <div className="flex-1 w-full relative z-10 transition-colors duration-500 overflow-visible"
+          style={{ backgroundColor: 'var(--background)' }}>
+          <div className="max-w-panel mx-auto p-fluid">
 
-          {/* Header Section */}
-          <div className="mb-fluid">
-            <h1 className="text-h1 font-black tracking-tighter mb-2 transition-colors duration-500"
-              style={{ color: 'var(--heading-primary)' }}>
-              {displayCategory}
-            </h1>
-            <p className="text-body font-mono mb-6 transition-colors duration-500"
-              style={{ color: 'var(--muted-foreground)' }}>
-              {hasPosts ? `${posts.length} ${posts.length === 1 ? 'article' : 'articles'}` : '0 articles'}
-            </p>
-            <hr style={{ borderColor: 'var(--border)' }} />
-          </div>
-
-          {/* Posts Archive Stack */}
-          {hasPosts ? (
-            <div className="space-y-8">
-              <Suspense fallback={<div className="py-10 text-center text-sm text-[var(--muted-foreground)]">Loading articles...</div>}>
-                {posts.map((post) => (
-                  <CategoryPostCard key={post.id} post={post} />
-                ))}
-              </Suspense>
+            {/* Header Section */}
+            <div className="mb-fluid">
+              <h1 className="text-h1 font-black tracking-tighter mb-2 transition-colors duration-500"
+                style={{ color: 'var(--heading-primary)' }}>
+                {displayCategory}
+              </h1>
+              <p className="text-body font-mono mb-6 transition-colors duration-500"
+                style={{ color: 'var(--muted-foreground)' }}>
+                {hasPosts ? `${posts.length} ${posts.length === 1 ? 'article' : 'articles'}` : '0 articles'}
+              </p>
+              <hr style={{ borderColor: 'var(--border)' }} />
             </div>
-          ) : (
-            /* Empty State Card */
-            <div className="flex flex-col items-center justify-center py-20 text-center">
-              <div className="rounded-2xl border px-10 py-12 backdrop-blur-sm max-w-md w-full transition-all duration-500"
-                style={{
-                  backgroundColor: 'var(--card-bg)',
-                  borderColor: 'var(--border)',
-                  boxShadow: 'var(--shadow-soft)'
-                }}>
-                <h3 className="mb-3 text-xl font-bold tracking-tight transition-colors duration-500"
-                  style={{ color: 'var(--foreground)' }}>
-                  Nothing available.
-                </h3>
-                <p className="text-sm transition-colors duration-500"
-                  style={{ color: 'var(--muted-foreground)' }}>
-                  This topic is quiet for now. Check back later.
-                </p>
+
+            {/* Posts Archive Stack */}
+            {hasPosts ? (
+              <div className="space-y-8">
+                <Suspense fallback={<div className="py-10 text-center text-sm text-[var(--muted-foreground)]">Loading articles...</div>}>
+                  {posts.map((post) => (
+                    <CategoryPostCard key={post.id} post={post} />
+                  ))}
+                </Suspense>
               </div>
-            </div>
-          )}
+            ) : (
+              /* Empty State Card */
+              <div className="flex flex-col items-center justify-center py-20 text-center">
+                <div className="rounded-2xl border px-10 py-12 backdrop-blur-sm max-w-md w-full transition-all duration-500"
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--border)',
+                    boxShadow: 'var(--shadow-soft)'
+                  }}>
+                  <h3 className="mb-3 text-xl font-bold tracking-tight transition-colors duration-500"
+                    style={{ color: 'var(--foreground)' }}>
+                    Nothing available.
+                  </h3>
+                  <p className="text-sm transition-colors duration-500"
+                    style={{ color: 'var(--muted-foreground)' }}>
+                    This topic is quiet for now. Check back later.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </LabContainer>
+      </LabContainer>
+    </ResponsiveContentWrapper>
   )
 }
 

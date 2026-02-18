@@ -2,12 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIEWPORT-PROPORTIONAL SCALING SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════
+   
+   Design Baseline: 1920×1080 @ 16px root font
+   
+   Strategy:
+   - Root font-size is proportional to viewport width via clamp().
+   - ALL spacing, sizing, and typography use rem so they scale with root font.
+   - Fixed-position elements (sidebars, terminal, clock, logo, footer)
+     work naturally — no transform: scale() means no broken positioning.
+   - Browser zoom changes the effective viewport width → layout responds.
+   - Small screens get a proportionally smaller (but identical) layout.
+   
+   Formula: 16px at 1920px viewport → 16 / 1920 = 0.8333vw
+   clamp(10px, 0.8333vw, 18px)
+     - Min 10px prevents illegibility on very small screens
+     - Max 18px prevents over-scaling on ultrawide monitors
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-size: 16px;
+  /* PROPORTIONAL ROOT SCALE — the single source of truth */
+  font-size: clamp(10px, 0.8333vw, 18px);
 }
 
 body {
@@ -18,6 +39,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -86,23 +108,109 @@ body {
 
     --heading-primary: #ffffff;
 
-    /* [FLUID_TYPOGRAPHY]: Deterministic scaling hierarchy */
-    --font-size-h1: clamp(2.25rem, 5vw + 1rem, 4rem);
-    --font-size-h2: clamp(1.75rem, 4vw + 1rem, 2.75rem);
-    --font-size-h3: clamp(1.25rem, 3vw + 1rem, 2rem);
-    --font-size-body: clamp(0.875rem, 0.5vw + 0.75rem, 1.125rem);
+    /* [FLUID_TYPOGRAPHY]: All rem-based → scales with root */
+    --font-size-h1: 3.5rem;
+    --font-size-h2: 2.5rem;
+    --font-size-h3: 1.75rem;
+    --font-size-body: 1rem;
 
-    /* [FLUID_GEOMETRY]: Space & Panel Normalization */
-    --space-fluid-y: clamp(2rem, 8vh, 6rem);
-    --space-fluid-x: clamp(1.5rem, 5vw, 4rem);
+    /* [FLUID_GEOMETRY]: Space & Panel Normalization — all rem */
+    --space-fluid-y: 3.5rem;
+    --space-fluid-x: 2.5rem;
 
-    --panel-max-width: 900px;
-    --panel-height: clamp(400px, 60vh, 650px);
-    --stack-offset-y: clamp(8px, 1.5vh, 16px);
+    --panel-max-width: 100rem;
+    /* 1600px at baseline */
+    --content-max-width: 78rem;
+    /* ~1250px at baseline */
+    --panel-height: 35rem;
+    /* 560px at baseline */
+    --stack-offset-y: 0.75rem;
+    /* 12px at baseline */
 
     /* Custom Tokens */
     --terminal-bg: rgba(0, 0, 0, 0.9);
     --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ═══════════════ STRUCTURAL LAYERS ═══════════════ */
+
+  .bg-video,
+  .blur-layer {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -10;
+  }
+
+  .blur-layer {
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    pointer-events: none;
+  }
+
+  /* GLOBAL CONTENT CONTAINER — rem-based */
+  .app-root {
+    width: 100%;
+    max-width: 100rem;
+    /* 1600px at baseline */
+    margin: 0 auto;
+    padding: 0 4rem;
+    /* 64px at baseline */
+  }
+
+  /* HEADING WIDTH CONSTRAINT */
+  .hero-header {
+    max-width: 56.25rem;
+    /* 900px at baseline */
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* PRIMARY CARD SYSTEM */
+  .primary-card {
+    width: min(62.5rem, 90vw);
+    /* 1000px at baseline, 90vw fallback */
+    min-height: 30rem;
+    /* 480px at baseline */
+
+    padding: 3rem 3.5rem;
+    /* 48px 56px at baseline */
+    border-radius: 1.25rem;
+    /* 20px at baseline */
+
+    margin: 2.5rem auto 0 auto;
+    /* 40px at baseline */
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* VERTICAL BALANCE */
+  .viewport-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 2.5rem;
+    /* 40px at baseline */
+  }
+
+  /* INTERNAL CARD CENTERING */
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* SIDEBAR+TERMINAL STABILITY — fixed elements now work correctly */
+  .sidebar,
+  .terminal,
+  .floating-ui {
+    position: fixed;
   }
 
   /* BRIGHT MODE (Engineering Lab - Refined) */
@@ -224,13 +332,8 @@ body {
     font-family: "Bitcount", "Inter", sans-serif;
     font-weight: 800;
 
-    /* Ensure size is fluid */
-    /* font-size handled by utility classes */
-
     letter-spacing: 0.08em;
     text-transform: uppercase;
-
-    /* Color handled by utility classes */
 
     z-index: 50;
 
@@ -326,32 +429,29 @@ body {
     color: #ffffff !important;
   }
 
-  /* Mute secondary text */
-  /* body.mode-precision p,
-     body.mode-precision span,
-     body.mode-precision div {
-       We handle specific components, but this ensures no random colors leak
-     } */
-
   .secure-channel-container {
-    padding-bottom: 200px;
-    /* Removed overflow constraints to allow Flow Plane to handle scrolling */
+    padding-bottom: 12.5rem;
+    padding-right: 5rem;
+    /* Enforce desktop spacing universally */
   }
 
-  @media (min-width: 768px) {
-    .secure-channel-container {
-      padding-right: 80px;
-      /* Space for sidebar */
-    }
+  /* Force container to match desktop constraint */
+  .container {
+    max-width: 80rem !important;
+    /* 1280px at baseline */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .coffee-card {
-    margin-top: 40px;
-    border-radius: 16px;
+    margin-top: 2.5rem;
+    border-radius: 1rem;
     backdrop-filter: blur(14px);
     background: rgba(20, 20, 20, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateY(25px);
+    transform: translateY(1.5rem);
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -373,13 +473,13 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 28px;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
     background: #FFDD00;
     color: #000000;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     border: none;
@@ -454,5 +554,125 @@ body {
     60% {
       transform: translate3d(4px, 0, 0);
     }
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE LAYOUT SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════
+   
+   Breakpoint: 1024px (lg)
+   - Below 1024px: Mobile layout with header, bottom nav, full-width content
+   - Above 1024px: Desktop layout with floating sidebars, terminal, clock
+   
+   Strategy:
+   - Desktop-only elements hidden via .desktop-only class
+   - Mobile root font-size reset to 16px (no clamp scaling)
+   - Mobile app-root has no side padding
+   - Safe area inset support for modern phones
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Desktop-only elements: hidden below 1024px */
+@media (max-width: 1023px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Reset root font for mobile — use native 16px instead of clamp */
+  html {
+    font-size: 16px !important;
+  }
+
+  /* Remove desktop padding on mobile */
+  .app-root {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide desktop sidebars & terminal that might be rendered */
+  .sidebar,
+  .command-shell,
+  .rightbar {
+    display: none !important;
+  }
+
+  /* Disable viewport-section centering on mobile */
+  .viewport-section {
+    min-height: auto;
+    padding-top: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  /* Full-width primary cards on mobile */
+  .primary-card {
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 1.5rem !important;
+    margin: 0 !important;
+    border-radius: 1rem !important;
+  }
+
+  /* Disable footer fixed position */
+  .footer-bar {
+    display: none !important;
+  }
+}
+
+/* Desktop-only: ensure desktop elements remain visible */
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: contents;
+  }
+
+  /* Hide mobile elements on desktop */
+  .mobile-header,
+  .mobile-bottom-nav,
+  .mobile-layout {
+    display: none !important;
+  }
+}
+
+/* Mobile Layout Structure */
+@media (max-width: 1023px) {
+
+  /* Ensure mobile layout fills viewport */
+  .mobile-layout {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Safe area padding for notched phones */
+  .mobile-header {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* Smooth scrolling for content sections */
+  .mobile-layout>div {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent horizontal overflow on mobile */
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
+/* Mobile Touch Optimizations */
+@media (max-width: 1023px) and (hover: none) and (pointer: coarse) {
+
+  /* Larger touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove hover effects on touch-only devices */
+  .hover\:shadow-2xl:hover,
+  .hover\:-translate-y-1:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
   }
 }

@@ -43,8 +43,9 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
 
       {/* [LAYER_3]: Flow Plane (Deterministic Content Stack)
           - Normalized to allow document flow and zoom resilience
+          - Bounded by --panel-max-width for desktop density consistency
       */}
-      <div className={`relative flex flex-col flex-1 w-full z-10 transition-opacity duration-500 ${isTerminalOpen ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto z-10 transition-opacity duration-500 ${isTerminalOpen ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
         {children}
       </div>
     </div>

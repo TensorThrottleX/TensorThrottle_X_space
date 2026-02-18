@@ -93,12 +93,18 @@ export function Feed({ initialPosts }: FeedProps) {
   }, [isLoading, nextCursor, loadMore])
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Posts Grid */}
+    <div className="flex flex-col items-center w-full max-w-md mx-auto gap-4 py-8">
+      {/* Posts Grid - Vertical Feed Style */}
       {posts.length > 0 ? (
-        <div className="grid gap-6 md:gap-8">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
+        <div className="flex flex-col w-full gap-4">
+          {posts.map((post, index) => (
+            <div 
+              key={post.id}
+              className="w-full transform transition-all duration-500 hover:scale-[1.02]"
+              style={{ zIndex: posts.length - index }} 
+            >
+              <PostCard post={post} />
+            </div>
           ))}
         </div>
       ) : (
