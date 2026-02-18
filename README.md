@@ -1,6 +1,6 @@
 <p align="left">
   <img src="./public/media/brand/logo.png" alt="Tensor Throttle X Logo" width="42" style="vertical-align: middle; margin-right: 10px;" />
-  <strong style="font-size: 26px;">TENSOR THROTTLE X</strong>
+  <strong style="font-size: 26px;">TENSOR THROTTLE X Space</strong>
 </p>
 
 A cognitive sandbox for structured experimentation.  
@@ -10,7 +10,7 @@ Not a portfolio. Not a product. Just a system for thinking out loud.
 
 # 🧭 What This Is
 
-Tensor Throttle X is a live reasoning space.
+Tensor Throttle X Space is a live reasoning space.
 
 It exists to:
 
@@ -19,7 +19,7 @@ It exists to:
 - Document failures and refactors  
 - Track how thinking changes over time  
 
-This project prioritizes **process over presentation**.
+This platform/space prioritizes **process over presentation**.
 
 There are no polished case studies here.  
 Only iteration.
@@ -171,6 +171,13 @@ Abstract ideas should be navigable.
 - **Notion API** — raw thought storage  
 - **Supabase** — interaction persistence  
 
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
+
 Chosen for flexibility and iteration speed.
 
 ---
@@ -180,8 +187,22 @@ Chosen for flexibility and iteration speed.
 ```bash
 pnpm install
 pnpm dev
+```
 
-🧭 Positioning
+---
+
+# 🛑 Why Not A Portfolio?
+
+Portfolios are static museums of finished work. They prioritize polish over process, often hiding the messy reality of engineering. 
+
+This space exists to invert that model. 
+
+By exposing the raw lifecycle of ideas—from inception to refactor to failure—it serves as a dynamic record of cognition rather than a curated gallery of assets. It is a living system, not a brochure.
+
+---
+
+
+# 🧭 Positioning
 
 This is not:
 
@@ -199,17 +220,9 @@ A structural thinking lab
 
 A system under constant refactor
 
-Built for evolution.
+Built for evolution.  
 Not presentation.
-
 
 ---
 
-If you want, I can now:
-
-- Make it more minimal (even sharper, almost manifesto style)
-- Or make it more experimental (graph-style visual network layout)
-- Or tune the tone slightly more technical / slightly more creative
-
-Choose the direction.
-
+© 2026 Tensor Throttle X. A cognitive sandbox.
