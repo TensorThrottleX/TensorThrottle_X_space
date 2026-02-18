@@ -405,14 +405,21 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
                     "w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-colors duration-300",
                     displayPhase === 'typing' ? "bg-white animate-pulse" : "bg-cyan-400"
                 )} />
-                <span className="text-[11px] font-bold tracking-normal text-cyan-200/70 uppercase">
+                <span className={cn(
+                    "text-[11px] font-bold tracking-normal uppercase",
+                    (renderMode === 'bright' && !isPrecision) ? "text-cyan-600/90" : "text-cyan-200/70"
+                )}>
                     SYSTEM_MEMORY
                 </span>
             </div>
 
             {/* Quote Content */}
             <div className="max-w-2xl min-h-[11.25rem] flex flex-col justify-center">
-                <h2 className="text-3xl md:text-5xl font-extrabold leading-tight text-white/95 tracking-tighter">
+                <h2 className={cn(
+                    "text-3xl md:text-5xl font-extrabold leading-tight tracking-tighter",
+                    displayPhase === 'typing' ? "animate-pulse" : "",
+                    (renderMode === 'bright' && !isPrecision) ? "text-black/90" : "text-white/95"
+                )}>
                     "{visibleText}"<span className={cn("inline-block w-2.5 h-8 bg-cyan-500/50 align-middle ml-1", displayPhase === 'display' ? "opacity-0" : "animate-pulse")}></span>
                 </h2>
                 <div className="h-8 mt-8">
@@ -420,7 +427,10 @@ function SystemQuoteRenderer({ isPrecision }: { isPrecision: boolean }): React.R
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="text-sm font-medium tracking-normal text-white/40 uppercase"
+                            className={cn(
+                                "text-sm font-medium tracking-normal uppercase",
+                                (renderMode === 'bright' && !isPrecision) ? "text-black/50" : "text-white/40"
+                            )}
                         >
                             — {visibleAuthor}
                         </motion.div>

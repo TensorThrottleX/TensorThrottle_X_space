@@ -367,7 +367,7 @@ Cycling render mode...`
     <div className="command-shell terminal fixed inset-0 flex flex-col items-center justify-end pb-12 px-4 font-mono z-50 pointer-events-none">
       {/* Full-Screen Blur Backdrop */}
       <div
-        className={`fixed inset-0 z-0 transition-opacity duration-500 beauty-blur ${isExpanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`absolute inset-0 z-0 transition-opacity duration-500 beauty-blur ${isExpanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         style={{
           backdropFilter: 'blur(8px)',
           backgroundColor: isBright ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.4)'
@@ -395,7 +395,7 @@ Cycling render mode...`
           className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
           style={{
             backgroundColor: 'var(--terminal-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.8)' : 'var(--glass-border)'
+            borderColor: isBright ? 'rgba(0, 0, 0, 0.1)' : 'var(--glass-border)'
           }}
         />
 
