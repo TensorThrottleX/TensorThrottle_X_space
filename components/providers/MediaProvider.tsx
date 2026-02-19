@@ -42,109 +42,76 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
-    // Video Switching Protocol
-    const updateVideoSource = useCallback(async (index: number) => {
-        const video = videoRef.current
-        if (!video) return
-
-        try {
-            video.pause()
-            video.muted = true
-
-            if (index === -1) {
-                video.src = '' // Black
-            } else if (index === -2) {
-                video.src = '' // White handled in CSS
-            } else if (config.videos[index]) {
-                const videoPath = config.videos[index].path
-                // Use encoded path if not already
-                video.src = videoPath
-                video.playbackRate = 1.0 // Reset to normal speed
-                video.load()
-                await video.play().catch((e) => {
-                    // Failure Containment
-                    console.warn('Video playback blocked or failed:', e)
-                })
-            }
-
-            setVideoState(prev => ({
-                ...prev,
-                index,
-                videoAudioEnabled: false // Reset audio on switch
-            }))
-        } catch (err) {
-            console.error('Video switch error:', err)
-            video.src = ''
+    // Video Source Logic
+    const activeVideoSrc = React.useMemo(() => {
+        if (videoState.index === -1 || videoState.index === -2) return ''
+        if (config.videos[videoState.index]) {
+            return config.videos[videoState.index].path
         }
-    }, [config.videos])
+        return ''
+    }, [videoState.index, config.videos])
+
+    // Video Switching Protocol ( simplified )
+    const updateVideoSource = useCallback(async (index: number) => {
+        // Just update state, React handles the src prop change
+        setVideoState(prev => ({
+            ...prev,
+            index,
+            videoAudioEnabled: false
+        }))
+    }, [])
 
     // Initialization & Asset Discovery
     useEffect(() => {
         const init = async () => {
             try {
                 const res = await fetch('/api/media')
-                if (!res.ok) {
-                    throw new Error(`Media API error: ${res.status} ${res.statusText}`)
-                }
+                if (!res.ok) throw new Error('Media API error')
                 const data = await res.json()
                 setConfig(data)
 
-                // Persistence Recovery
                 const saved = localStorage.getItem('media_engine_v3')
                 if (saved) {
                     try {
                         const parsed = JSON.parse(saved)
-                        if (typeof parsed.theme === 'string') setThemeState(parsed.theme)
-                        if (typeof parsed.videoIndex === 'number') {
-                            // Validate index exists in new config
-                            if (parsed.videoIndex < data.videos.length) {
-                                setVideoState(prev => ({ ...prev, index: parsed.videoIndex }))
-                            }
+                        if (parsed.theme) setThemeState(parsed.theme)
+                        if (typeof parsed.videoIndex === 'number' && parsed.videoIndex < data.videos.length) {
+                            setVideoState(prev => ({ ...prev, index: parsed.videoIndex }))
                         }
-                        if (typeof parsed.soundIndex === 'number') {
-                            if (parsed.soundIndex < data.sounds.length) {
-                                setSoundState({ soundIndex: parsed.soundIndex })
-                            }
+                        if (typeof parsed.soundIndex === 'number' && parsed.soundIndex < data.sounds.length) {
+                            setSoundState({ soundIndex: parsed.soundIndex })
                         }
                     } catch (e) {
-                        console.warn('Corruption detected in media storage, resetting.')
-                        localStorage.removeItem('media_engine_v3')
+                        console.warn('Corruption detected in media storage')
                     }
                 }
             } catch (error) {
-                console.error('Media discovery failed:', error)
-                // Fallback to empty config to prevent crashes
+                console.error('Media discovery failed', error)
                 setConfig({ videos: [], sounds: [] })
-            } finally {
-                setIsLoading(false)
             }
+            // Note: We leave isLoading true until the video actually loads data
+            // BUT if there is no video to load (index -1/-2 or no config), we must clear it.
         }
         init()
     }, [])
 
+    // Force clear loading if no video selected or available
+    useEffect(() => {
+        if (config.videos.length === 0 || videoState.index < 0) {
+            setIsLoading(false)
+        }
+    }, [config.videos, videoState.index])
+
     // Persistence Sync
     useEffect(() => {
-        if (isLoading) return
+        // ... existing logic ...
         const state = {
             theme,
             videoIndex: videoState.index,
             soundIndex: soundState.soundIndex
         }
         localStorage.setItem('media_engine_v3', JSON.stringify(state))
-    }, [theme, videoState.index, soundState.soundIndex, isLoading])
-
-    // Video Source Initialization (Fix)
-    // Ensures the video element actually gets a src when config loads, if missed during init
-    useEffect(() => {
-        if (!isLoading && config.videos.length > 0 && videoState.index >= 0) {
-            const video = videoRef.current
-            // If video has no src but we have a valid index, force update
-            if (video && !video.getAttribute('src')) {
-                updateVideoSource(videoState.index)
-            }
-        }
-    }, [isLoading, config, videoState.index, updateVideoSource])
-
+    }, [theme, videoState.index, soundState.soundIndex])
 
 
     // Audio Conflict Resolution
@@ -154,22 +121,20 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
         if (!video || !audio) return
 
         if (videoState.videoAudioEnabled) {
-            // If video audio enabled, mute background sounds
             audio.pause()
             video.muted = false
         } else {
-            // If video muted, allow background sound if chosen
             video.muted = true
             if (soundState.soundIndex !== -1 && config.sounds[soundState.soundIndex]) {
                 const soundPath = config.sounds[soundState.soundIndex].path
-                if (audio.src !== soundPath && audio.src !== window.location.origin + soundPath) {
+                // Only change src if different to avoid reload
+                if (!audio.src.endsWith(soundPath)) {
                     audio.src = soundPath
                     audio.load()
+                    audio.play().catch(e => console.warn("Audio autoplay blocked", e))
+                } else if (audio.paused) {
+                    audio.play().catch(e => console.warn("Audio autoplay blocked", e))
                 }
-                audio.playbackRate = 1.0 // Reset to normal speed
-                audio.play().catch((e) => {
-                    console.warn("Audio autoplay blocked or failed:", e)
-                })
             } else {
                 audio.pause()
             }
@@ -191,16 +156,21 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             {/* 2️⃣ STRUCTURAL LAYER SEPARATION: Background Layers BEFORE Content */}
             <video
                 ref={videoRef}
+                src={activeVideoSrc}
                 autoPlay
                 loop
                 playsInline
                 muted
                 preload="auto"
+                onLoadedData={() => setIsLoading(false)}
+                onWaiting={() => setIsLoading(true)}
+                onPlaying={() => setIsLoading(false)}
+                onSuspend={() => setIsLoading(false)} // Assume loaded if suspended (cached)
                 onLoadedMetadata={(e) => {
                     const v = e.currentTarget
-                    v.playbackRate = 1.0 // Force normal speed
-                    v.defaultPlaybackRate = 1.0
+                    v.playbackRate = 1.0
                     try {
+                        // Check for audio tracks
                         const hasAudio = (v as any).audioTracks?.length > 0 ||
                             (v as any).mozHasAudio ||
                             Boolean((v as any).webkitAudioDecodedByteCount)
@@ -209,14 +179,12 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                         setVideoState(prev => ({ ...prev, hasAudioTrack: false }))
                     }
                 }}
-                onPlay={(e) => {
-                    e.currentTarget.playbackRate = 1.0 // Ensure speed is normal on play
-                }}
                 onError={(e) => {
                     console.warn('Video playback error:', e)
+                    setIsLoading(false) // Don't hang app on video error
                 }}
                 className={`bg-video transition-opacity duration-1000 
-          ${(videoState.index === -2 || isLoading) ? 'opacity-0' : 'opacity-100'}
+          ${(videoState.index === -2 || (isLoading && videoState.index >= 0)) ? 'opacity-0' : 'opacity-100'}
           ${videoState.index === -1 ? 'bg-black' : ''}
           ${(theme === 'bright' || theme === 'dark') ? 'opacity-20' : ''}
         `}
