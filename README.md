@@ -168,6 +168,9 @@ A system under constant refactor
 Built for evolution.  
 Not presentation.
 
-<img width="1000" height="700" alt="image" src="https://github.com/user-attachments/assets/672e7a37-ec88-4258-8cae-39ab3ed1f558" />
+<h4 align="center">
+
+ <img width="1000" height="700" alt="image" src="https://github.com/user-attachments/assets/672e7a37-ec88-4258-8cae-39ab3ed1f558" height="55" valign="middle" />
+</h4>
 
 © 2026 Tensor Throttle X. A cognitive sandbox.
