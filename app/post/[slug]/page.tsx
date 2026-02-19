@@ -10,8 +10,8 @@ import { getComments } from '@/lib/supabase'
 import { formatDate } from '@/lib/utils'
 import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 
-// ISR: Revalidate every 5 minutes
-export const revalidate = 300
+// ISR: Revalidate every 1 minute
+export const revalidate = 60
 
 interface PostPageProps {
   params: Promise<{ slug: string }>
