@@ -60,8 +60,8 @@ export default function RootLayout({
               {/* Desktop-only fixed elements — hidden on mobile via CSS */}
               <div className="desktop-only">
                 <SystemClock />
-                <TrademarkLogo />
               </div>
+              <TrademarkLogo />
               <main className="app-root relative z-10">
                 {children}
               </main>
