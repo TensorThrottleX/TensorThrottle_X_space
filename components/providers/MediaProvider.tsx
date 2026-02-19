@@ -42,6 +42,42 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
+    // Video Switching Protocol
+    const updateVideoSource = useCallback(async (index: number) => {
+        const video = videoRef.current
+        if (!video) return
+
+        try {
+            video.pause()
+            video.muted = true
+
+            if (index === -1) {
+                video.src = '' // Black
+            } else if (index === -2) {
+                video.src = '' // White handled in CSS
+            } else if (config.videos[index]) {
+                const videoPath = config.videos[index].path
+                // Use encoded path if not already
+                video.src = videoPath
+                video.playbackRate = 1.0 // Reset to normal speed
+                video.load()
+                await video.play().catch((e) => {
+                    // Failure Containment
+                    console.warn('Video playback blocked or failed:', e)
+                })
+            }
+
+            setVideoState(prev => ({
+                ...prev,
+                index,
+                videoAudioEnabled: false // Reset audio on switch
+            }))
+        } catch (err) {
+            console.error('Video switch error:', err)
+            video.src = ''
+        }
+    }, [config.videos])
+
     // Initialization & Asset Discovery
     useEffect(() => {
         const init = async () => {
@@ -97,41 +133,19 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
         localStorage.setItem('media_engine_v3', JSON.stringify(state))
     }, [theme, videoState.index, soundState.soundIndex, isLoading])
 
-    // Video Switching Protocol
-    const updateVideoSource = useCallback(async (index: number) => {
-        const video = videoRef.current
-        if (!video) return
-
-        try {
-            video.pause()
-            video.muted = true
-
-            if (index === -1) {
-                video.src = '' // Black
-            } else if (index === -2) {
-                video.src = '' // White handled in CSS
-            } else if (config.videos[index]) {
-                const videoPath = config.videos[index].path
-                // Use encoded path if not already
-                video.src = videoPath
-                video.playbackRate = 1.0 // Reset to normal speed
-                video.load()
-                await video.play().catch((e) => {
-                    // Failure Containment
-                    console.warn('Video playback blocked or failed:', e)
-                })
+    // Video Source Initialization (Fix)
+    // Ensures the video element actually gets a src when config loads, if missed during init
+    useEffect(() => {
+        if (!isLoading && config.videos.length > 0 && videoState.index >= 0) {
+            const video = videoRef.current
+            // If video has no src but we have a valid index, force update
+            if (video && !video.getAttribute('src')) {
+                updateVideoSource(videoState.index)
             }
-
-            setVideoState(prev => ({
-                ...prev,
-                index,
-                videoAudioEnabled: false // Reset audio on switch
-            }))
-        } catch (err) {
-            console.error('Video switch error:', err)
-            video.src = ''
         }
-    }, [config.videos])
+    }, [isLoading, config, videoState.index, updateVideoSource])
+
+
 
     // Audio Conflict Resolution
     useEffect(() => {

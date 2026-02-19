@@ -24,6 +24,7 @@ interface QuoteData { text: string; author?: string }
 const SYSTEM_QUOTES: QuoteData[] = [
     { text: "Those who cannot acknowledge themselves will eventually fail.", author: "Itachi Uchiha" },
     { text: "If you don't take risks, you can't create a future.", author: "Monkey D. Luffy" },
+    { text: "Power comes in response to a need, you have to create that need", author: "Son Goku" },
     { text: "Push through the pain. Giving up hurts more.", author: "Vegeta" },
     { text: "No matter how deep the night, it always turns to day.", author: "Brook" },
     { text: "The world isn't perfect. But it's there for us, trying the best it can.", author: "Roy Mustang" },
@@ -31,8 +32,8 @@ const SYSTEM_QUOTES: QuoteData[] = [
     { text: "Stay hungry, stay foolish.", author: "Steve Jobs" },
     { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
     { text: "We suffer more often in imagination than in reality.", author: "Seneca" },
-    { text: "The best revenge is to be unlike him who performed the injury.", author: "Marcus Aurelius" },
-    { text: "Power comes in response to a need, you have to create that need", author: "Son Goku" }
+    { text: "The best revenge is to be unlike him who performed the injury.", author: "Marcus Aurelius" }
+
 ]
 
 const contentMap: Record<'purpose' | 'about', CardContent> = {
