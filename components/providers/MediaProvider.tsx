@@ -216,9 +216,9 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     console.warn('Video playback error:', e)
                 }}
                 className={`bg-video transition-opacity duration-1000 
-          ${videoState.index === -2 ? 'opacity-0' : 'opacity-100'}
+          ${(videoState.index === -2 || isLoading) ? 'opacity-0' : 'opacity-100'}
           ${videoState.index === -1 ? 'bg-black' : ''}
-          ${theme === 'bright' ? 'opacity-10' : ''}
+          ${(theme === 'bright' || theme === 'dark') ? 'opacity-20' : ''}
         `}
                 style={{
                     backgroundColor: videoState.index === -1 ? 'black' : 'transparent',

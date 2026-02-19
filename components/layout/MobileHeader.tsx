@@ -17,8 +17,8 @@ function XIcon({ className }: { className?: string }): React.ReactNode {
 }
 
 const externalLinks = [
-    { label: 'Message', action: 'msg', icon: MessageSquare, isInternal: true },
     { label: 'X (Twitter)', href: 'https://x.com/TensorThrottleX', icon: XIcon, isCustomSvg: true },
+    { label: 'Message', action: 'msg', icon: MessageSquare, isInternal: true },
     { label: 'GitHub', href: 'https://github.com/TensorThrottleX', icon: Github },
     { label: 'Email', href: 'mailto:tensorthrottleX@proton.me', icon: Mail },
     { label: 'Support', href: 'https://buymeacoffee.com/TensorThrottleX', icon: Coffee },
@@ -54,6 +54,11 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [sendError, setSendError] = useState<string | null>(null)
+    const [imgError, setImgError] = useState(false)
+
+    // Security & Honeypot
+    const [loadTime] = useState(Date.now())
+    const [trap, setTrap] = useState('')
 
     useEffect(() => {
         setMounted(true)
@@ -95,7 +100,8 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                     email: email.trim() || undefined,
                     message: message.trim(),
                     protocol: isConfirmed,
-                    load_time: Date.now()
+                    load_time: loadTime, // Use mount time
+                    _trap: trap // Honey pot
                 })
             })
             if (response.ok) {
@@ -271,23 +277,36 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                             <div className={cn("p-4 rounded-xl border flex items-start gap-3", isBright ? "bg-white border-black/5" : "bg-white/5 border-white/10")}>
                                 <ShieldAlert size={20} className="text-cyan-500 shrink-0 mt-0.5" />
                                 <div className="space-y-2">
-                                    <h3 className="text-xs font-bold uppercase tracking-wide">Protocol Guidelines</h3>
-                                    <p className="text-[11px] opacity-70 leading-relaxed">
-                                        Identity verification required. Zero tolerance for prohibited content.
-                                        Keep transmissions concise.
-                                    </p>
-                                    <label className="flex items-center gap-2 mt-2 cursor-pointer touch-manipulation p-1 -ml-1">
+                                    <h3 className="text-xs font-bold uppercase tracking-wide">TRANSMISSION PROTOCOL</h3>
+                                    <ul className="text-[11px] opacity-70 leading-relaxed list-disc list-inside space-y-1">
+                                        <li>Identity must be at least 2 characters.</li>
+                                        <li>Zero tolerance for profanity or abuse (Filtered).</li>
+                                        <li>Limit: 1000 words per transmission.</li>
+                                        <li>Format validation required for return communications.</li>
+                                    </ul>
+                                    <label className="flex items-center gap-2 mt-4 cursor-pointer touch-manipulation p-1 -ml-1">
                                         <div className={cn("w-4 h-4 rounded border flex items-center justify-center transition-colors", isConfirmed ? "bg-cyan-500 border-cyan-500" : "border-gray-500/50")}>
                                             {isConfirmed && <CheckCircle size={10} className="text-white" />}
                                         </div>
                                         <input type="checkbox" checked={isConfirmed} onChange={e => setIsConfirmed(e.target.checked)} className="hidden" />
-                                        <span className={cn("text-[10px] font-bold uppercase", isConfirmed ? "text-cyan-500" : "opacity-60")}>I Confirm Compliance</span>
+                                        <span className={cn("text-[10px] font-bold uppercase", isConfirmed ? "text-cyan-500" : "opacity-60")}>I ADHERE TO THE TRANSMISSION PROTOCOL.</span>
                                     </label>
                                 </div>
                             </div>
 
                             {/* Form */}
                             <div className={cn("space-y-4 transition-opacity duration-300", !isConfirmed && "opacity-50 pointer-events-none")}>
+                                {/* Honeypot Field - Hidden for humans, visible to bots */}
+                                <input
+                                    type="text"
+                                    name="_trap"
+                                    value={trap}
+                                    onChange={e => setTrap(e.target.value)}
+                                    style={{ display: 'none' }}
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                />
+
                                 <div className="space-y-1">
                                     <label className="text-[9px] font-bold uppercase opacity-40 ml-1">Identity</label>
                                     <input
@@ -343,38 +362,74 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
 
                             <div className="w-full h-px bg-current opacity-10" />
 
-                            {/* BMC Card (Mobile Version) - Slide Up Entry */}
-                            <motion.a
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
+                            {/* BMC Card (Full Desktop Style Fidelity) */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
                                 transition={{
                                     duration: 0.8,
-                                    ease: [0.22, 1, 0.36, 1],
-                                    delay: 0.2
+                                    ease: [0.22, 1, 0.36, 1]
                                 }}
-                                href="https://buymeacoffee.com/TensorThrottleX"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={cn("flex flex-col gap-4 p-5 rounded-xl border relative overflow-hidden group transition-all duration-300 active:scale-[0.98]", isBright ? "bg-white border-black/5 shadow-sm" : "bg-white/5 border-white/5")}
+                                className={cn(
+                                    "coffee-card visible w-full relative overflow-hidden",
+                                    // Override margin from global class via inline style or just let it be if it looks good,
+                                    // but global .coffee-card has 'margin-top: 2.5rem' and 'transform' transition.
+                                    // We force visibility here.
+                                )}
+                                style={{ marginTop: 0 }} // Override global margin
                             >
-                                <div className="flex items-start justify-between">
-                                    <div className="space-y-1">
-                                        <h3 className="text-base font-bold">Support Protocols</h3>
-                                        <p className="text-xs opacity-60 leading-relaxed max-w-[200px]">
-                                            Fueling the development of advanced neural architectures.
-                                        </p>
-                                    </div>
-                                    <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-                                        <Coffee size={20} />
+                                {/* BMC Logo - Top Left */}
+                                <div className="absolute top-4 left-4 w-10 h-10 hover:opacity-80 transition-opacity">
+                                    <img
+                                        src="/media/brand/bmc-logo.svg"
+                                        alt="Buy Me a Coffee"
+                                        className="w-full h-full object-contain"
+                                    />
+                                </div>
+
+                                {/* Author Profile Picture - Top Right */}
+                                <div className="absolute top-8 right-8 transition-transform duration-300 hover:scale-105">
+                                    <div className={cn(
+                                        "w-14 h-14 rounded-full border overflow-hidden backdrop-blur-md relative flex items-center justify-center",
+                                        isBright ? "border-black/10 bg-black/5" : "border-white/10 bg-white/5"
+                                    )}>
+                                        {!imgError ? (
+                                            <img
+                                                src="/media/brand/profile.jpg"
+                                                alt="Author Profile"
+                                                className="w-full h-full object-cover"
+                                                onError={() => setImgError(true)}
+                                            />
+                                        ) : (
+                                            <div className="opacity-20">
+                                                <div className="w-6 h-6 rounded-full border-2 border-current animate-pulse" />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
-                                <div className="mt-2">
-                                    <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 w-full justify-center">
-                                        Support via BMC <Coffee size={12} />
-                                    </span>
+                                {/* Content Block */}
+                                <div className="text-left pt-16 pl-6 pb-8 pr-6">
+                                    <h3 className={cn("text-xl font-semibold tracking-tight mb-3", isBright ? "text-black" : "text-white")}>
+                                        Support the Journey
+                                    </h3>
+                                    <p className={cn("text-sm leading-[1.5] mb-6 max-w-[90%]", isBright ? "text-black/80" : "text-white/80")}>
+                                        Currently in a building phase — growing, learning, and contributing.<br />
+                                        Your support is genuinely appreciated.
+                                    </p>
+
+                                    {/* CTA Button */}
+                                    <a
+                                        href="https://buymeacoffee.com/TensorThrottleX"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="coffee-btn"
+                                    >
+                                        <span>Support via BMC</span>
+                                    </a>
                                 </div>
-                            </motion.a>
+                            </motion.div>
                         </div>
                     </motion.div>
                 )}
