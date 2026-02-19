@@ -119,7 +119,7 @@ export function MobileBottomNav() {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: '-100%', opacity: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        className="absolute inset-0 flex items-stretch justify-around px-2 h-16"
+                        className="absolute inset-0 flex items-center overflow-x-auto no-scrollbar px-2"
                     >
                         {mobileNavItems.map((item) => {
                             const Icon = item.icon
@@ -135,7 +135,7 @@ export function MobileBottomNav() {
                                         }
                                         handleNavigation(e, item)
                                     }}
-                                    className="relative flex flex-col items-center justify-center gap-1 flex-1 transition-colors duration-200 active:scale-95"
+                                    className="relative flex flex-col items-center justify-center gap-1 flex-shrink-0 w-[20%] h-full transition-colors duration-200 active:scale-95"
                                     style={{
                                         color: active ? (isBright ? '#111' : '#22d3ee') : 'var(--muted-foreground)',
                                     }}
