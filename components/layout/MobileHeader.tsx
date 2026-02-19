@@ -17,8 +17,8 @@ function XIcon({ className }: { className?: string }): React.ReactNode {
 }
 
 const externalLinks = [
-    { label: 'Message', action: 'msg', icon: MessageSquare, isInternal: true },
     { label: 'X (Twitter)', href: 'https://x.com/TensorThrottleX', icon: XIcon, isCustomSvg: true },
+    { label: 'Message', action: 'msg', icon: MessageSquare, isInternal: true },
     { label: 'GitHub', href: 'https://github.com/TensorThrottleX', icon: Github },
     { label: 'Email', href: 'mailto:tensorthrottleX@proton.me', icon: Mail },
     { label: 'Support', href: 'https://buymeacoffee.com/TensorThrottleX', icon: Coffee },
@@ -54,6 +54,7 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
     const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [sendError, setSendError] = useState<string | null>(null)
+    const [imgError, setImgError] = useState(false)
 
     useEffect(() => {
         setMounted(true)
@@ -343,38 +344,74 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
 
                             <div className="w-full h-px bg-current opacity-10" />
 
-                            {/* BMC Card (Mobile Version) - Slide Up Entry */}
-                            <motion.a
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
+                            {/* BMC Card (Full Desktop Style Fidelity) */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
                                 transition={{
                                     duration: 0.8,
-                                    ease: [0.22, 1, 0.36, 1],
-                                    delay: 0.2
+                                    ease: [0.22, 1, 0.36, 1]
                                 }}
-                                href="https://buymeacoffee.com/TensorThrottleX"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={cn("flex flex-col gap-4 p-5 rounded-xl border relative overflow-hidden group transition-all duration-300 active:scale-[0.98]", isBright ? "bg-white border-black/5 shadow-sm" : "bg-white/5 border-white/5")}
+                                className={cn(
+                                    "coffee-card visible w-full relative overflow-hidden",
+                                    // Override margin from global class via inline style or just let it be if it looks good,
+                                    // but global .coffee-card has 'margin-top: 2.5rem' and 'transform' transition.
+                                    // We force visibility here.
+                                )}
+                                style={{ marginTop: 0 }} // Override global margin
                             >
-                                <div className="flex items-start justify-between">
-                                    <div className="space-y-1">
-                                        <h3 className="text-base font-bold">Support Protocols</h3>
-                                        <p className="text-xs opacity-60 leading-relaxed max-w-[200px]">
-                                            Fueling the development of advanced neural architectures.
-                                        </p>
-                                    </div>
-                                    <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-                                        <Coffee size={20} />
+                                {/* BMC Logo - Top Left */}
+                                <div className="absolute top-4 left-4 w-10 h-10 hover:opacity-80 transition-opacity">
+                                    <img
+                                        src="/media/brand/bmc-logo.svg"
+                                        alt="Buy Me a Coffee"
+                                        className="w-full h-full object-contain"
+                                    />
+                                </div>
+
+                                {/* Author Profile Picture - Top Right */}
+                                <div className="absolute top-8 right-8 transition-transform duration-300 hover:scale-105">
+                                    <div className={cn(
+                                        "w-14 h-14 rounded-full border overflow-hidden backdrop-blur-md relative flex items-center justify-center",
+                                        isBright ? "border-black/10 bg-black/5" : "border-white/10 bg-white/5"
+                                    )}>
+                                        {!imgError ? (
+                                            <img
+                                                src="/media/brand/profile.jpg"
+                                                alt="Author Profile"
+                                                className="w-full h-full object-cover"
+                                                onError={() => setImgError(true)}
+                                            />
+                                        ) : (
+                                            <div className="opacity-20">
+                                                <div className="w-6 h-6 rounded-full border-2 border-current animate-pulse" />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
-                                <div className="mt-2">
-                                    <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 w-full justify-center">
-                                        Support via BMC <Coffee size={12} />
-                                    </span>
+                                {/* Content Block */}
+                                <div className="text-left pt-16 pl-6 pb-8 pr-6">
+                                    <h3 className={cn("text-xl font-semibold tracking-tight mb-3", isBright ? "text-black" : "text-white")}>
+                                        Support the Journey
+                                    </h3>
+                                    <p className={cn("text-sm leading-[1.5] mb-6 max-w-[90%]", isBright ? "text-black/80" : "text-white/80")}>
+                                        Currently in a building phase — growing, learning, and contributing.<br />
+                                        Your support is genuinely appreciated.
+                                    </p>
+
+                                    {/* CTA Button */}
+                                    <a
+                                        href="https://buymeacoffee.com/TensorThrottleX"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="coffee-btn"
+                                    >
+                                        <span>Support via BMC</span>
+                                    </a>
                                 </div>
-                            </motion.a>
+                            </motion.div>
                         </div>
                     </motion.div>
                 )}

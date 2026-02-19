@@ -1,8 +1,8 @@
-'use client'
+// --- MobileBottomNav.tsx Updated ---
 
 import React, { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, SlidersHorizontal, Monitor, Sun, Volume2, Layers, X, Zap } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft } from 'lucide-react'
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
 import { useMedia } from '@/components/providers/MediaProvider'
@@ -22,14 +22,14 @@ const mobileNavItems: MobileNavItem[] = [
     { label: 'Projects', href: '/category/projects', icon: Folder },
     { label: 'Experiments', href: '/category/experiments', icon: FlaskConical },
     { label: 'Manifold', href: '/category/manifold', icon: Layers },
-    { label: 'System', href: '#system', icon: SlidersHorizontal, isAction: true },
+    { label: 'B/W', href: '#bw', icon: ToggleLeft, isAction: true },
 ]
 
 export function MobileBottomNav() {
     const pathname = usePathname()
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
-    const { renderMode, setRenderMode, setMainView, setUiMode, setIsPrecision, isPrecision } = useUI()
+    const { renderMode, setRenderMode, setMainView, setUiMode, setIsPrecision } = useUI()
     const {
         theme, setTheme,
         soundState, setSoundIndex,
@@ -37,8 +37,8 @@ export function MobileBottomNav() {
         config
     } = useMedia()
 
-    // Local state for the controls sheet
     const [showControls, setShowControls] = useState(false)
+    const [clickCount, setClickCount] = useState(0)
     const isBright = renderMode === 'bright'
 
     const isActive = (href: string): boolean => {
@@ -49,14 +49,26 @@ export function MobileBottomNav() {
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, item: MobileNavItem): void => {
         e.preventDefault()
 
-        // Handle System Action
-        if (item.isAction) {
-            setShowControls(!showControls)
+        if (item.isAction && item.label === 'B/W') {
+            const newCount = clickCount + 1
+            setClickCount(newCount)
+
+            // Cycle: Normal -> Bright -> Custom (Dark) -> Normal
+            const modes: RenderMode[] = ['normal', 'bright', 'custom']
+            const nextMode = modes[(modes.indexOf(renderMode as any) + 1) % modes.length]
+
+            handleModeToggle(nextMode as RenderMode)
+
+            // 3rd Click Reveal
+            if (newCount % 3 === 0) {
+                setShowControls(true)
+            }
             return
         }
 
         // Close controls if navigating elsewhere
         setShowControls(false)
+        setClickCount(0) // Reset count on navigation?
 
         setMainView('dashboard')
         setUiMode('default')
@@ -74,11 +86,14 @@ export function MobileBottomNav() {
         })
     }
 
-    // --- Control Handlers (Mirrors LabNavigation) ---
+    // --- Control Handlers ---
 
     const handleModeToggle = (mode: RenderMode) => {
         setRenderMode(mode)
-        if (mode !== 'custom') {
+        // Ensure theme matches for overlay logic
+        if (mode === 'custom') {
+            setTheme('dark')
+        } else {
             setTheme(mode as any)
         }
     }
@@ -163,7 +178,7 @@ export function MobileBottomNav() {
                         })}
                     </motion.div>
                 ) : (
-                    /* SYSTEM CONTROL TRAY */
+                    /* SYSTEM CONTROL TRAY (Revealed on 3rd Click) */
                     <motion.div
                         key="system"
                         initial={{ x: '100%', opacity: 0 }}
@@ -177,6 +192,7 @@ export function MobileBottomNav() {
                             onClick={() => {
                                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
                                 setShowControls(false)
+                                setClickCount(0) // Reset count on close
                             }}
                             className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
                             style={{ color: 'var(--muted-foreground)' }}
@@ -187,52 +203,33 @@ export function MobileBottomNav() {
 
                         <div className="w-px h-8 bg-white/10 self-center mx-1" />
 
-                        {/* 2. Theme Cycle */}
+                        {/* 2. Background Control */}
                         <button
                             onClick={() => {
                                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-                                const modes: RenderMode[] = ['normal', 'bright', 'custom']
-                                const next = modes[(modes.indexOf(renderMode as any) + 1) % modes.length]
-                                handleModeToggle(next as RenderMode)
+                                handleNextBackground()
                             }}
                             className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
-                            style={{ color: isBright ? '#111' : '#22d3ee' }}
+                            style={{ color: 'var(--foreground)' }}
                         >
-                            {renderMode === 'normal' ? <Monitor size={20} /> : (renderMode === 'bright' ? <Sun size={20} /> : <Layers size={20} />)}
-                            <span className="text-[10px] font-semibold tracking-wide uppercase opacity-100">{renderMode}</span>
+                            <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeVideoName}</span>
+                            <FlaskConical size={20} />
+                            <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">BG</span>
                         </button>
 
-                        {/* 3. Removed Precision Toggle */}
-
-                        {/* 4/5. Custom Controls (Conditional) */}
-                        {renderMode === 'custom' && (
-                            <>
-                                <button
-                                    onClick={() => {
-                                        if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-                                        handleNextBackground()
-                                    }}
-                                    className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
-                                    style={{ color: 'var(--foreground)' }}
-                                >
-                                    <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeVideoName}</span>
-                                    <FlaskConical size={20} />
-                                    <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">BG</span>
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-                                        handleNextSound()
-                                    }}
-                                    className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
-                                    style={{ color: soundState.soundIndex !== -1 ? '#22c55e' : 'var(--muted-foreground)' }}
-                                >
-                                    <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
-                                    <Volume2 size={20} />
-                                    <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
-                                </button>
-                            </>
-                        )}
+                        {/* 3. Audio Control */}
+                        <button
+                            onClick={() => {
+                                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
+                                handleNextSound()
+                            }}
+                            className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
+                            style={{ color: soundState.soundIndex !== -1 ? '#22c55e' : 'var(--muted-foreground)' }}
+                        >
+                            <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
+                            <Volume2 size={20} />
+                            <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
+                        </button>
                     </motion.div>
                 )}
             </AnimatePresence>
