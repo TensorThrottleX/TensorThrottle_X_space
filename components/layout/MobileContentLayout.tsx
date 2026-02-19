@@ -21,7 +21,7 @@ export function MobileContentLayout({ children, pageTitle, articleCount }: { chi
         <div
             className="mobile-layout relative min-h-screen w-full flex flex-col"
             style={{
-                backgroundColor: isBright ? '#fafafa' : '#000',
+                backgroundColor: 'transparent',
                 paddingTop: '56px',
                 paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))',
             }}

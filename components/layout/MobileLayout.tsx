@@ -30,7 +30,7 @@ export function MobileHomeLayout() {
         <div
             className="mobile-layout relative min-h-screen w-full flex flex-col"
             style={{
-                backgroundColor: isBright ? '#fafafa' : '#000',
+                backgroundColor: 'transparent',
                 paddingTop: '56px',   // Header height
                 paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))', // Bottom nav height + safe area
             }}
