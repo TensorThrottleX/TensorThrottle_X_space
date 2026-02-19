@@ -56,6 +56,10 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
     const [sendError, setSendError] = useState<string | null>(null)
     const [imgError, setImgError] = useState(false)
 
+    // Security & Honeypot
+    const [loadTime] = useState(Date.now())
+    const [trap, setTrap] = useState('')
+
     useEffect(() => {
         setMounted(true)
         setTime(new Date())
@@ -96,7 +100,8 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                     email: email.trim() || undefined,
                     message: message.trim(),
                     protocol: isConfirmed,
-                    load_time: Date.now()
+                    load_time: loadTime, // Use mount time
+                    _trap: trap // Honey pot
                 })
             })
             if (response.ok) {
@@ -272,23 +277,36 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                             <div className={cn("p-4 rounded-xl border flex items-start gap-3", isBright ? "bg-white border-black/5" : "bg-white/5 border-white/10")}>
                                 <ShieldAlert size={20} className="text-cyan-500 shrink-0 mt-0.5" />
                                 <div className="space-y-2">
-                                    <h3 className="text-xs font-bold uppercase tracking-wide">Protocol Guidelines</h3>
-                                    <p className="text-[11px] opacity-70 leading-relaxed">
-                                        Identity verification required. Zero tolerance for prohibited content.
-                                        Keep transmissions concise.
-                                    </p>
-                                    <label className="flex items-center gap-2 mt-2 cursor-pointer touch-manipulation p-1 -ml-1">
+                                    <h3 className="text-xs font-bold uppercase tracking-wide">TRANSMISSION PROTOCOL</h3>
+                                    <ul className="text-[11px] opacity-70 leading-relaxed list-disc list-inside space-y-1">
+                                        <li>Identity must be at least 2 characters.</li>
+                                        <li>Zero tolerance for profanity or abuse (Filtered).</li>
+                                        <li>Limit: 1000 words per transmission.</li>
+                                        <li>Format validation required for return communications.</li>
+                                    </ul>
+                                    <label className="flex items-center gap-2 mt-4 cursor-pointer touch-manipulation p-1 -ml-1">
                                         <div className={cn("w-4 h-4 rounded border flex items-center justify-center transition-colors", isConfirmed ? "bg-cyan-500 border-cyan-500" : "border-gray-500/50")}>
                                             {isConfirmed && <CheckCircle size={10} className="text-white" />}
                                         </div>
                                         <input type="checkbox" checked={isConfirmed} onChange={e => setIsConfirmed(e.target.checked)} className="hidden" />
-                                        <span className={cn("text-[10px] font-bold uppercase", isConfirmed ? "text-cyan-500" : "opacity-60")}>I Confirm Compliance</span>
+                                        <span className={cn("text-[10px] font-bold uppercase", isConfirmed ? "text-cyan-500" : "opacity-60")}>I ADHERE TO THE TRANSMISSION PROTOCOL.</span>
                                     </label>
                                 </div>
                             </div>
 
                             {/* Form */}
                             <div className={cn("space-y-4 transition-opacity duration-300", !isConfirmed && "opacity-50 pointer-events-none")}>
+                                {/* Honeypot Field - Hidden for humans, visible to bots */}
+                                <input
+                                    type="text"
+                                    name="_trap"
+                                    value={trap}
+                                    onChange={e => setTrap(e.target.value)}
+                                    style={{ display: 'none' }}
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                />
+
                                 <div className="space-y-1">
                                     <label className="text-[9px] font-bold uppercase opacity-40 ml-1">Identity</label>
                                     <input

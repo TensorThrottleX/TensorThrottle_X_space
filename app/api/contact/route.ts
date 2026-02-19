@@ -94,11 +94,11 @@ function securityCheck(body: any, request: NextRequest): SecurityResult {
     }
 
     // 3. Rate limiting
-    const windowMs = 5 * 60 * 1000;
+    const windowMs = 10 * 60 * 1000; // 10 minutes
     let attempts = rateLimits.get(ip) || [];
     attempts = attempts.filter(timestamp => now - timestamp < windowMs);
 
-    if (attempts.length >= 3) {
+    if (attempts.length >= 10) {
         console.warn(`[SECURITY] Rate limit exceeded from IP: ${ip}`);
         return { allowed: false, severity: 2, reason: 'Rate limit exceeded' };
     }
