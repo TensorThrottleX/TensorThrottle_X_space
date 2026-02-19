@@ -21,6 +21,7 @@ const mobileNavItems: MobileNavItem[] = [
     { label: 'Feed', href: '/feed', icon: List },
     { label: 'Projects', href: '/category/projects', icon: Folder },
     { label: 'Experiments', href: '/category/experiments', icon: FlaskConical },
+    { label: 'Manifold', href: '/category/manifold', icon: Layers },
     { label: 'System', href: '#system', icon: SlidersHorizontal, isAction: true },
 ]
 
@@ -238,3 +239,7 @@ export function MobileBottomNav() {
         </nav>
     )
 }
+
+
+
+
