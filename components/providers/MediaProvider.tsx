@@ -161,7 +161,8 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 loop
                 playsInline
                 muted
-                preload="auto"
+                preload="metadata" // Changed from auto to reduce initial memory spike for large/8K videos
+                x-webkit-airplay="allow"
                 onLoadedData={() => setIsLoading(false)}
                 onWaiting={() => setIsLoading(true)}
                 onPlaying={() => setIsLoading(false)}
