@@ -7,8 +7,8 @@ import { CategoryPostCard } from '@/components/content/CategoryPostCard'
 import { getPostsByCategory } from '@/lib/notion'
 import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 
-// ISR: Revalidate every 5 minutes
-export const revalidate = 300
+// ISR: Revalidate every 1 minute
+export const revalidate = 60
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>
