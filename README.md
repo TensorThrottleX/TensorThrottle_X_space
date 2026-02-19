@@ -19,7 +19,7 @@
 <hr>
 
 
-# 🧭 What This Is
+# 🧭 What This Is ?
 
 Tensor Throttle X Space is a live reasoning space.
 
@@ -38,7 +38,7 @@ Only iteration.
 ---
 
 
-# 🛑 Why Not A Portfolio?
+# 🛑 Why Not A Portfolio ?
 
 Portfolios are static museums of finished work. They prioritize polish over process, often hiding the messy reality of engineering. 
 
@@ -54,17 +54,8 @@ By exposing the raw lifecycle of ideas—from inception to refactor to failure�
 
 At its simplest, the system follows this cycle:
 
-Idea
-↓
-Draft
-↓
-Break
-↓
-Refactor
-↓
-Log
-↓
-Repeat
+↺ Idea → Draft → Break → Refactor → Log → Repeat ↻
+
 
 
 Everything here lives somewhere inside that loop.
