@@ -100,7 +100,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   const activeSoundName = soundState.soundIndex >= 0 ? config.sounds[soundState.soundIndex]?.name : 'MUTED'
 
   return (
-    <div className="sidebar fixed left-0 top-0 h-full flex items-center px-4 z-[60] pointer-events-none transition-[opacity,transform] duration-500 ease-in-out">
+    <div className="sidebar hidden md:flex fixed left-0 top-0 h-full items-center px-4 z-[60] pointer-events-none transition-[opacity,transform] duration-500 ease-in-out">
       {/* Navigation Panel: Floating glass capsule */}
       <div
         className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border shadow-xl transition-colors duration-300 pointer-events-auto"

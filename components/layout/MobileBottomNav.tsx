@@ -150,7 +150,7 @@ export function MobileBottomNav() {
                                         }
                                         handleNavigation(e, item)
                                     }}
-                                    className="relative flex flex-col items-center justify-center gap-1 flex-shrink-0 w-[20%] h-full transition-colors duration-200 active:scale-95"
+                                    className="relative flex flex-col items-center justify-center gap-1 flex-shrink-0 w-[20%] min-w-[20%] h-full transition-colors duration-200 active:scale-95"
                                     style={{
                                         color: active ? (isBright ? '#111' : '#22d3ee') : 'var(--muted-foreground)',
                                     }}
