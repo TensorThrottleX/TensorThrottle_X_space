@@ -1,6 +1,6 @@
-<p align="left">
+<p align="centre">
   <img src="./public/media/brand/logo.png" alt="Tensor Throttle X Logo" width="42" style="vertical-align: middle; margin-right: 10px;" />
-  <strong style="font-size: 26px;">TENSOR THROTTLE X Space</strong>
+  <strong style="font-size: 52px;">TENSOR THROTTLE X Space</strong>
 </p>
 
 A cognitive sandbox for structured experimentation.  
