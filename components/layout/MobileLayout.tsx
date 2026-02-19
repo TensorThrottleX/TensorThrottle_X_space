@@ -32,7 +32,7 @@ export function MobileHomeLayout() {
             style={{
                 backgroundColor: isBright ? '#fafafa' : '#000',
                 paddingTop: '56px',   // Header height
-                paddingBottom: '64px', // Bottom nav height
+                paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))', // Bottom nav height + safe area
             }}
         >
             {/* Mobile Header */}

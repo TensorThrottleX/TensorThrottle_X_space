@@ -366,6 +366,15 @@ body {
     scrollbar-width: none;
   }
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   /* PREMIUM SCROLLBAR UTILITY */
   .premium-scrollbar {
     scrollbar-width: thin;

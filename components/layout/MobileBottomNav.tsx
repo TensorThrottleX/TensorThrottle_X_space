@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft, ToggleRight } from 'lucide-react'
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
 import { useMedia } from '@/components/providers/MediaProvider'
@@ -155,12 +155,24 @@ export function MobileBottomNav() {
                                         color: active ? (isBright ? '#111' : '#22d3ee') : 'var(--muted-foreground)',
                                     }}
                                 >
-                                    <Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
+                                    {item.label === 'B/W' ? (
+                                        <motion.div
+                                            key={isBright ? 'bright' : 'dark'}
+                                            initial={{ rotate: -180, scale: 0.8, opacity: 0 }}
+                                            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                        >
+                                            {isBright ? <ToggleRight size={24} strokeWidth={2} /> : <ToggleLeft size={24} strokeWidth={2} />}
+                                        </motion.div>
+                                    ) : (
+                                        <Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
+                                    )}
+
                                     <span className={cn(
                                         "text-[10px] font-semibold tracking-wide uppercase",
                                         active ? 'opacity-100' : 'opacity-60'
                                     )}>
-                                        {item.label}
+                                        {item.label === 'B/W' ? (isBright ? 'W' : 'B') : item.label}
                                     </span>
 
                                     {active && (
