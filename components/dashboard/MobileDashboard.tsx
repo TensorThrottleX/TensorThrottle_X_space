@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
 import { InteractiveTree, TreeNode } from '@/components/visuals/InteractiveTree'
-import { X as XClose, ChevronRight } from 'lucide-react'
+import { X as XClose } from 'lucide-react'
 
 // ─── TYPES ───
 interface SubCardContent {
@@ -103,34 +103,16 @@ export function MobileDashboard({ mode = 'purpose' }: MobileDashboardProps) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="w-full px-4 pb-8"
+                        className="w-full px-4"
                     >
-                        {/* Main Card */}
-                        <MobilePrimaryCard content={currentContent} isPrecision={usePrecisionStyle} isBright={isBright} />
-
-                        {/* Sub Cards */}
-                        <div className="mt-4 flex flex-col gap-3">
-                            {currentContent.subCards.map((sub, idx) => (
-                                <MobileSubCard key={sub.id} subCard={sub} index={idx} isPrecision={usePrecisionStyle} isBright={isBright} />
-                            ))}
-                        </div>
-
-                        {/* Tree Button */}
-                        <motion.button
-                            onClick={() => setUiMode('tree')}
-                            className="fixed bottom-24 left-5 z-[180] flex items-center gap-2 px-5 py-3 rounded-full shadow-2xl active:scale-90 transition-transform"
-                            style={{
-                                backgroundColor: isBright ? '#fff' : '#0f0f0f',
-                                border: isBright ? '1px solid rgba(0,0,0,0.1)' : '1px solid rgba(16,185,129,0.3)',
-                                boxShadow: isBright ? '0 8px 30px rgba(0,0,0,0.1)' : '0 8px 30px rgba(0,0,0,0.5), 0 0 15px rgba(16,185,129,0.1)',
-                            }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
-                            <span className="text-[11px] font-bold tracking-wide uppercase" style={{ color: isBright ? '#111' : '#a5f3fc' }}>
-                                View Tree
-                            </span>
-                        </motion.button>
+                        {/* Mobile Stacked Deck replacing the previous list */}
+                        <MobileStackedDeck
+                            content={currentContent}
+                            mode={mode as 'purpose' | 'about'}
+                            isPrecision={usePrecisionStyle}
+                            isBright={isBright}
+                            onInitialize={() => setUiMode('tree')}
+                        />
                     </motion.div>
                 ) : (
                     /* Full-Screen Tree Modal */
@@ -173,122 +155,253 @@ export function MobileDashboard({ mode = 'purpose' }: MobileDashboardProps) {
     )
 }
 
+// ─── MOBILE STACKED DECK ───
+function MobileStackedDeck({
+    mode,
+    content,
+    isPrecision,
+    isBright,
+    onInitialize
+}: {
+    mode: 'purpose' | 'about';
+    content: CardContent;
+    isPrecision: boolean;
+    isBright: boolean;
+    onInitialize: () => void;
+}) {
+    const [stack, setStack] = useState<string[]>([])
 
-// ─── MOBILE PRIMARY CARD ───
-function MobilePrimaryCard({ content, isPrecision, isBright }: { content: CardContent; isPrecision: boolean; isBright: boolean }) {
+    // Initialize/Reset Stack on mode change
+    useEffect(() => {
+        setStack(['cover', ...content.subCards.map(c => c.id)])
+    }, [mode, content])
+
+    if (stack.length === 0) return null
+
+    const handleCardClick = (clickedId: string, index: number) => {
+        // Haptic feedback for card interaction
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+            navigator.vibrate(10)
+        }
+
+        if (index === 0) {
+            // Cycle top to bottom
+            setStack([...stack.slice(1), stack[0]])
+        } else {
+            // Bring to top
+            setStack([clickedId, ...stack.filter(id => id !== clickedId)])
+        }
+    }
+
+    // Fixed height for mobile stack
+    const STACK_HEIGHT = "min-h-[500px]"
+
     return (
-        <div className={cn(
-            "w-full rounded-2xl overflow-hidden border transition-colors duration-300 px-6 py-8",
-            isPrecision ? "bg-black border-white" : (isBright ? "bg-white/90 border-black/10 shadow-xl" : "bg-black/60 backdrop-blur-xl border-white/10")
-        )}>
-            {/* Label */}
-            <div className="flex items-center gap-2 mb-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
-                <span className="text-[10px] font-medium tracking-wider text-white/70 uppercase">{content.label}</span>
-            </div>
+        <div className={cn("relative w-full perspective-1000 group", STACK_HEIGHT)} style={{ marginBottom: '100px' }}>
+            <AnimatePresence>
+                {stack.map((id, index) => {
+                    const isCover = id === 'cover'
+                    const subCard = content.subCards.find(c => c.id === id)
 
-            {/* Heading */}
-            <h2 className="text-3xl font-black tracking-tighter leading-none" style={{ color: 'var(--heading-primary)' }}>
-                {content.heading}
-            </h2>
+                    if (!isCover && !subCard) return null
 
-            {/* Intro */}
-            <p className="mt-4 text-sm text-gray-300/75 font-light leading-relaxed">
-                {content.intro}
-            </p>
+                    return (
+                        <motion.div
+                            key={id}
+                            layoutId={`mobile-${mode}-${id}`}
+                            onClick={() => handleCardClick(id, index)}
+                            initial={false}
+                            animate={{
+                                y: index * 12, // Subtle overflow stack effect
+                                scale: 1 - index * 0.05,
+                                zIndex: stack.length - index,
+                                filter: index === 0 ? 'brightness(1.05)' : 'brightness(0.6) blur(0.5px)',
+                            }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 25
+                            }}
+                            className={cn(
+                                "absolute top-0 left-0 w-full rounded-2xl cursor-pointer shadow-xl overflow-hidden border transition-colors duration-300",
+                                STACK_HEIGHT,
+                                isPrecision
+                                    ? "bg-black border-white"
+                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white/10")
+                            )}
+                            style={{
+                                transformOrigin: 'top center'
+                            }}
+                        >
+                            {/* Card Content Wrapper */}
+                            <div className={cn(
+                                "w-full h-full px-6 py-8 flex flex-col justify-between relative",
+                                isCover && !isPrecision && !isBright ? "bg-[#050505]" : ""
+                            )}>
+                                {/* Inner Shadow for Cover (Dark Mode) */}
+                                {isCover && !isPrecision && !isBright && (
+                                    <>
+                                        <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
+                                        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+                                    </>
+                                )}
 
-            {/* Footer */}
-            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                <div className="flex flex-col">
-                    <span className="text-[9px] font-mono text-white/30 tracking-wider uppercase">system_protocol</span>
-                    <span className="text-[9px] font-mono text-cyan-400/50 tracking-wider mt-0.5">ACTIVE_EXECUTION</span>
-                </div>
+                                {isCover ? (
+                                    // --- COVER CARD ---
+                                    <>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                onInitialize()
+                                            }}
+                                            className={cn(
+                                                "absolute top-6 right-6 z-50 group flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 shadow-lg",
+                                                isBright
+                                                    ? "bg-[#111] text-white border-transparent hover:bg-black"
+                                                    : "bg-[#0B0B0B] border-white/10 hover:border-white/20 hover:bg-[#111]"
+                                            )}
+                                        >
+                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
+                                            <span className="text-[10px] tracking-normal font-medium">
+                                                VIEW TREE
+                                            </span>
+                                        </button>
+
+                                        <div>
+                                            {/* Label */}
+                                            <div className="relative z-10 flex items-center gap-2 mb-6">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
+                                                <span className={cn(
+                                                    "text-[10px] font-medium tracking-wide uppercase",
+                                                    isBright ? "text-black/60" : "text-white/70"
+                                                )}>
+                                                    {content.label}
+                                                </span>
+                                            </div>
+
+                                            {/* Main Info */}
+                                            <h2 className={cn(
+                                                "relative z-10 text-3xl font-black tracking-tighter leading-none mb-4",
+                                                isBright ? "text-black" : "text-white"
+                                            )}>
+                                                {content.heading}
+                                            </h2>
+                                            <p className={cn(
+                                                "relative z-10 text-sm font-light leading-relaxed",
+                                                isBright ? "text-gray-600" : "text-gray-300/75"
+                                            )}>
+                                                {content.intro}
+                                            </p>
+                                        </div>
+
+                                        {/* Footer / Action */}
+                                        <div className="relative z-10 mt-auto pt-6 border-t border-white/5 w-full flex items-center justify-between">
+                                            <div className="flex flex-col">
+                                                <span className="text-[9px] font-mono text-white/30 tracking-wider uppercase">system_protocol</span>
+                                                <span className="text-[9px] font-mono text-cyan-400/50 tracking-wider mt-0.5">ACTIVE_EXECUTION</span>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    // --- SUB CARD ---
+                                    subCard && (
+                                        <>
+                                            <div className="flex-1 overflow-y-auto pr-1">
+                                                {/* Top Label */}
+                                                <div className="flex items-center justify-between mb-6 pointer-events-none">
+                                                    <span className={cn(
+                                                        "text-[9px] font-bold tracking-wider uppercase",
+                                                        isBright ? "text-black/40" : "text-white/30"
+                                                    )}>
+                                                        MODULE 0{content.subCards.findIndex(c => c.id === id) + 1}
+                                                    </span>
+                                                    <div className={cn("w-8 h-px", isBright ? "bg-black/10" : "bg-white/10")} />
+                                                </div>
+
+                                                {/* Card Title */}
+                                                <h3 className={cn(
+                                                    "text-2xl font-black tracking-tighter mb-3",
+                                                    isBright ? "text-black" : "text-white"
+                                                )}>
+                                                    {subCard.title}
+                                                </h3>
+
+                                                {/* Front Text */}
+                                                <p className={cn(
+                                                    "text-sm leading-relaxed mb-6 font-medium",
+                                                    isBright ? "text-cyan-700/80" : "text-cyan-200/60"
+                                                )}>
+                                                    {subCard.frontText}
+                                                </p>
+
+                                                <div className="space-y-6">
+                                                    {/* Context */}
+                                                    <div>
+                                                        <h4 className={cn(
+                                                            "text-[9px] font-bold uppercase tracking-wider mb-2",
+                                                            isBright ? "text-black/50" : "text-white/50"
+                                                        )}>{subCard.contextLabel}</h4>
+                                                        <p className={cn(
+                                                            "text-xs leading-relaxed",
+                                                            isBright ? "text-gray-600" : "text-gray-400"
+                                                        )}>{subCard.contextText}</p>
+                                                    </div>
+
+                                                    {/* Details */}
+                                                    <div>
+                                                        <h4 className={cn(
+                                                            "text-[9px] font-bold uppercase tracking-wider mb-2",
+                                                            isBright ? "text-black/50" : "text-white/50"
+                                                        )}>{subCard.detailsLabel}</h4>
+                                                        <ul className="space-y-2">
+                                                            {subCard.details.map((detail, idx) => (
+                                                                <li key={idx} className={cn(
+                                                                    "flex items-center gap-2 text-xs",
+                                                                    isBright ? "text-gray-700" : "text-gray-300/80"
+                                                                )}>
+                                                                    <div className="w-1 h-1 rounded-full bg-cyan-500/50" />
+                                                                    {detail}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Footer */}
+                                            <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between shrink-0">
+                                                <div>
+                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-white/30">{subCard.footerLabel}</span>
+                                                    <span className="block text-[10px] text-gray-400 italic">"{subCard.footerText}"</span>
+                                                </div>
+                                                <span className="text-cyan-500/40 font-mono text-[8px] tracking-wider uppercase">EXPANDED</span>
+                                            </div>
+                                        </>
+                                    )
+                                )}
+                            </div>
+                        </motion.div>
+                    )
+                })}
+            </AnimatePresence>
+
+            {/* Instruction Hint */}
+            <div className="absolute -bottom-10 left-0 w-full flex justify-center pointer-events-none">
+                <span className={cn(
+                    "text-[9px] font-black font-mono tracking-tighter uppercase animate-pulse",
+                    isBright ? "text-black opacity-50" : "text-white/30"
+                )}>
+                    TAP_TO_SHUFFLE_STACK
+                </span>
             </div>
         </div>
     )
 }
 
-
-// ─── MOBILE SUB CARD ───
-function MobileSubCard({ subCard, index, isPrecision, isBright }: {
-    subCard: SubCardContent; index: number; isPrecision: boolean; isBright: boolean
-}) {
-    const [expanded, setExpanded] = useState(false)
-
-    return (
-        <motion.div
-            layout
-            className={cn(
-                "w-full rounded-xl overflow-hidden border transition-colors duration-300",
-                isPrecision ? "bg-black border-white/20" : (isBright ? "bg-white border-black/8 shadow-md" : "bg-black/40 backdrop-blur-md border-white/8")
-            )}
-        >
-            {/* Header - Tap to expand */}
-            <button
-                onClick={() => setExpanded(!expanded)}
-                className="w-full flex items-center justify-between px-5 py-4 text-left active:opacity-80"
-            >
-                <div className="flex items-center gap-3">
-                    <span className="text-[9px] font-bold tracking-wider text-white/30 uppercase">
-                        MODULE 0{index + 1}
-                    </span>
-                    <span className="text-sm font-bold tracking-tight" style={{ color: 'var(--foreground)' }}>
-                        {subCard.title}
-                    </span>
-                </div>
-                <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
-                    <ChevronRight size={16} style={{ color: 'var(--muted-foreground)' }} />
-                </motion.div>
-            </button>
-
-            {/* Expandable Content */}
-            <AnimatePresence>
-                {expanded && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="overflow-hidden"
-                    >
-                        <div className="px-5 pb-5 space-y-4">
-                            <p className="text-xs text-cyan-200/60 leading-relaxed">{subCard.frontText}</p>
-
-                            <div>
-                                <h4 className="text-[10px] font-bold uppercase tracking-wider text-white/50 mb-1">{subCard.contextLabel}</h4>
-                                <p className="text-xs text-gray-400 leading-relaxed">{subCard.contextText}</p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-[10px] font-bold uppercase tracking-wider text-white/50 mb-2">{subCard.detailsLabel}</h4>
-                                <ul className="space-y-1.5">
-                                    {subCard.details.map((d, i) => (
-                                        <li key={i} className="flex items-center gap-2 text-[11px] text-gray-300/80">
-                                            <div className="w-1 h-1 rounded-full bg-cyan-500/50" /> {d}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <div className="pt-3 border-t border-white/5 flex items-center justify-between">
-                                <div>
-                                    <span className="text-[9px] font-bold uppercase tracking-wider text-white/30">{subCard.footerLabel}</span>
-                                    <span className="block text-[10px] text-gray-400 italic">"{subCard.footerText}"</span>
-                                </div>
-                                <span className="text-cyan-500/40 font-mono text-[8px] tracking-wider uppercase">EXPANDED</span>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.div>
-    )
-}
-
-
-// ─── MOBILE QUOTE RENDERER ───
+// ─── MOBILE QUOTE RENDERER (Unchanged) ───
 function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
     const { renderMode } = useUI()
+    const isBright = renderMode === 'bright'
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
     const [displayPhase, setDisplayPhase] = useState<'display' | 'erasing' | 'paused' | 'typing'>('display')
     const [visibleText, setVisibleText] = useState(SYSTEM_QUOTES[0].text)
@@ -329,9 +442,9 @@ function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
     }, [displayPhase, visibleText, currentQuoteIndex])
 
     return (
-        <div className="w-full px-4 pb-8">
+        <div className="w-full px-4 pb-8 h-[500px] flex items-center">
             <div className={cn(
-                "w-full rounded-2xl overflow-hidden border transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center min-h-[280px]",
+                "w-full rounded-2xl overflow-hidden border transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full",
                 isPrecision ? "bg-black border-white"
                     : (renderMode === 'bright' ? "bg-white/90 border-black/10" : "bg-black/60 backdrop-blur-xl border-white/10")
             )}>
@@ -343,13 +456,19 @@ function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
                 </div>
 
                 <div className="max-w-lg">
-                    <h2 className="text-2xl font-extrabold leading-tight text-white/95 tracking-tighter">
+                    <h2 className={cn(
+                        "text-2xl font-extrabold leading-tight tracking-tighter",
+                        isBright ? "text-black/95" : "text-white/95"
+                    )}>
                         "{visibleText}"
                         <span className={cn("inline-block w-2 h-6 bg-cyan-500/50 align-middle ml-1", displayPhase === 'display' ? "opacity-0" : "animate-pulse")} />
                     </h2>
                     <div className="h-6 mt-4">
                         {visibleAuthor && (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-medium text-white/40 uppercase">
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={cn(
+                                "text-xs font-medium uppercase",
+                                isBright ? "text-black/40" : "text-white/40"
+                            )}>
                                 — {visibleAuthor}
                             </motion.div>
                         )}
