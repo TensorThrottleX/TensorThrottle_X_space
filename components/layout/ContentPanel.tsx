@@ -8,9 +8,10 @@ interface ContentPanelProps {
   title?: string
   subtitle?: string
   latestPublishedAt?: string
+  hideTitleOnMobile?: boolean
 }
 
-export function ContentPanel({ children, title, subtitle, latestPublishedAt }: ContentPanelProps) {
+export function ContentPanel({ children, title, subtitle, latestPublishedAt, hideTitleOnMobile }: ContentPanelProps) {
   // Calculate status color based on recency
   let StatusIndicator = null
 
@@ -50,7 +51,7 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt }: C
       >
         {/* Header (optional) */}
         {title && (
-          <div className="px-6 py-6 shrink-0 border-b transition-colors duration-500"
+          <div className={`px-6 py-6 shrink-0 border-b transition-colors duration-500 ${hideTitleOnMobile ? 'hidden md:block' : ''}`}
             style={{ borderColor: 'var(--border)' }}
           >
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tighter text-balance"

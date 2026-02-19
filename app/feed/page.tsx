@@ -20,7 +20,7 @@ export default async function FeedPage() {
     const latestPost = posts.length > 0 ? posts[0].publishedAt : undefined
 
     return (
-        <ResponsiveContentWrapper>
+        <ResponsiveContentWrapper pageTitle="Feed" articleCount={posts.length}>
             <LabContainer videoSrc="/media/videos/default-background.mp4">
 
                 <LabNavigation />
@@ -28,6 +28,7 @@ export default async function FeedPage() {
                     title="Feed"
                     subtitle="Exploring ideas, one post at a time."
                     latestPublishedAt={latestPost}
+                    hideTitleOnMobile={true}
                 >
                     <Suspense fallback={<div className="py-10 text-center text-sm text-[var(--muted-foreground)]">Loading feed...</div>}>
                         <LabFeed initialPosts={initialPosts} />

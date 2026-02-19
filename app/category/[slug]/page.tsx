@@ -54,7 +54,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const hasPosts = posts.length > 0
 
   return (
-    <ResponsiveContentWrapper>
+    <ResponsiveContentWrapper pageTitle={displayCategory} articleCount={hasPosts ? posts.length : 0}>
       <LabContainer videoSrc="/media/videos/default-background.mp4">
         {/* Sidebar remains unchanged */}
         <LabNavigation />
@@ -64,8 +64,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           style={{ backgroundColor: 'var(--background)' }}>
           <div className="max-w-panel mx-auto p-fluid">
 
-            {/* Header Section */}
-            <div className="mb-fluid">
+            {/* Header Section (Desktop Only) */}
+            <div className="hidden md:block mb-fluid">
               <h1 className="text-h1 font-black tracking-tighter mb-2 transition-colors duration-500"
                 style={{ color: 'var(--heading-primary)' }}>
                 {displayCategory}

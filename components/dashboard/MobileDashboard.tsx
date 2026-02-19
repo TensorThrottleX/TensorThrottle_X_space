@@ -227,7 +227,7 @@ function MobileStackedDeck({
                                 STACK_HEIGHT,
                                 isPrecision
                                     ? "bg-black border-white"
-                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white/10")
+                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white")
                             )}
                             style={{
                                 transformOrigin: 'top center'
@@ -255,7 +255,7 @@ function MobileStackedDeck({
                                                 onInitialize()
                                             }}
                                             className={cn(
-                                                "absolute top-6 right-6 z-50 group flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 shadow-lg",
+                                                "absolute top-6 left-6 z-50 group flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 shadow-lg",
                                                 isBright
                                                     ? "bg-[#111] text-white border-transparent hover:bg-black"
                                                     : "bg-[#0B0B0B] border-white/10 hover:border-white/20 hover:bg-[#111]"
@@ -263,22 +263,22 @@ function MobileStackedDeck({
                                         >
                                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
                                             <span className="text-[10px] tracking-normal font-medium">
-                                                VIEW TREE
+                                                ELABORATE
                                             </span>
                                         </button>
 
-                                        <div>
-                                            {/* Label */}
-                                            <div className="relative z-10 flex items-center gap-2 mb-6">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
-                                                <span className={cn(
-                                                    "text-[10px] font-medium tracking-wide uppercase",
-                                                    isBright ? "text-black/60" : "text-white/70"
-                                                )}>
-                                                    {content.label}
-                                                </span>
-                                            </div>
+                                        {/* Label (Moved to Right) */}
+                                        <div className="absolute top-7 right-6 z-10 flex items-center gap-2">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
+                                            <span className={cn(
+                                                "text-[10px] font-medium tracking-wide uppercase",
+                                                isBright ? "text-black/60" : "text-white/70"
+                                            )}>
+                                                {content.label}
+                                            </span>
+                                        </div>
 
+                                        <div className="mt-14">
                                             {/* Main Info */}
                                             <h2 className={cn(
                                                 "relative z-10 text-3xl font-black tracking-tighter leading-none mb-4",
@@ -394,7 +394,7 @@ function MobileStackedDeck({
                     TAP_TO_SHUFFLE_STACK
                 </span>
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -446,7 +446,7 @@ function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
             <div className={cn(
                 "w-full rounded-2xl overflow-hidden border transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full",
                 isPrecision ? "bg-black border-white"
-                    : (renderMode === 'bright' ? "bg-white/90 border-black/10" : "bg-black/60 backdrop-blur-xl border-white/10")
+                    : (renderMode === 'bright' ? "bg-white/90 border-black/10" : "bg-black/60 backdrop-blur-xl border-white")
             )}>
                 <div className="absolute top-6 left-6 flex items-center gap-2">
                     <div className={cn("w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]",

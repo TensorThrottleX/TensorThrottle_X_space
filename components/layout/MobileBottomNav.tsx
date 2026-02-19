@@ -21,6 +21,7 @@ const mobileNavItems: MobileNavItem[] = [
     { label: 'Feed', href: '/feed', icon: List },
     { label: 'Projects', href: '/category/projects', icon: Folder },
     { label: 'Experiments', href: '/category/experiments', icon: FlaskConical },
+    { label: 'Manifold', href: '/category/manifold', icon: Layers },
     { label: 'System', href: '#system', icon: SlidersHorizontal, isAction: true },
 ]
 
@@ -201,18 +202,7 @@ export function MobileBottomNav() {
                             <span className="text-[10px] font-semibold tracking-wide uppercase opacity-100">{renderMode}</span>
                         </button>
 
-                        {/* 3. Precision Toggle */}
-                        <button
-                            onClick={() => {
-                                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-                                setIsPrecision(!isPrecision)
-                            }}
-                            className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95 transition-colors"
-                            style={{ color: isPrecision ? '#10b981' : 'var(--muted-foreground)' }}
-                        >
-                            <Zap size={20} className={isPrecision ? "fill-current" : ""} />
-                            <span className="text-[10px] font-semibold tracking-wide uppercase" style={{ opacity: isPrecision ? 1 : 0.6 }}>OLED</span>
-                        </button>
+                        {/* 3. Removed Precision Toggle */}
 
                         {/* 4/5. Custom Controls (Conditional) */}
                         {renderMode === 'custom' && (
@@ -225,6 +215,7 @@ export function MobileBottomNav() {
                                     className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
                                     style={{ color: 'var(--foreground)' }}
                                 >
+                                    <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeVideoName}</span>
                                     <FlaskConical size={20} />
                                     <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">BG</span>
                                 </button>
@@ -236,8 +227,9 @@ export function MobileBottomNav() {
                                     className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
                                     style={{ color: soundState.soundIndex !== -1 ? '#22c55e' : 'var(--muted-foreground)' }}
                                 >
+                                    <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
                                     <Volume2 size={20} />
-                                    <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Vol</span>
+                                    <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
                                 </button>
                             </>
                         )}
@@ -247,3 +239,7 @@ export function MobileBottomNav() {
         </nav>
     )
 }
+
+
+
+

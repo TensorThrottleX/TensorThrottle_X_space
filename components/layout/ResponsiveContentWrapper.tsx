@@ -11,13 +11,13 @@ import { MobileContentLayout } from '@/components/layout/MobileContentLayout'
  * On mobile: wraps children in MobileContentLayout (mobile chrome).
  * On desktop: passes children through unchanged (desktop layout is handled by each page).
  */
-export function ResponsiveContentWrapper({ children }: { children: React.ReactNode }) {
+export function ResponsiveContentWrapper({ children, pageTitle, articleCount }: { children: React.ReactNode; pageTitle?: string; articleCount?: number }) {
     const isMobile = useIsMobile()
 
     if (typeof window === 'undefined') return <>{children}</>
 
     return isMobile ? (
-        <MobileContentLayout>{children}</MobileContentLayout>
+        <MobileContentLayout pageTitle={pageTitle} articleCount={articleCount}>{children}</MobileContentLayout>
     ) : (
         <>{children}</>
     )

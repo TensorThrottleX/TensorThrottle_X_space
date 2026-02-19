@@ -36,7 +36,7 @@ function getPageTitle(pathname: string): string {
     return 'TensorThrottle X'
 }
 
-export function MobileHeader() {
+export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOverride?: string; articleCount?: number }) {
     const pathname = usePathname()
     const { renderMode, mainView } = useUI()
     const [menuOpen, setMenuOpen] = useState(false)
@@ -113,7 +113,7 @@ export function MobileHeader() {
         }
     }
 
-    const pageTitle = mainView === 'msg' ? 'Message' : getPageTitle(pathname)
+    const pageTitle = pageTitleOverride || (mainView === 'msg' ? 'Message' : getPageTitle(pathname))
 
     return (
         <>
@@ -122,16 +122,27 @@ export function MobileHeader() {
                 style={{
                     backgroundColor: isBright ? 'rgba(255,255,255,0.92)' : 'rgba(10,10,10,0.92)',
                     borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
+                    height: '56px'
                 }}
             >
-                <div className="flex items-center justify-between h-14 px-4">
-                    {/* Page Title */}
-                    <h1
-                        className="text-sm font-black tracking-tight uppercase"
-                        style={{ color: 'var(--heading-primary)' }}
-                    >
-                        {pageTitle}
-                    </h1>
+                <div className="flex items-center justify-between h-full px-4">
+                    {/* Left Section: Page Title & Article Count */}
+                    <div className="flex flex-col justify-center">
+                        <h1
+                            className="text-sm font-black tracking-tight uppercase leading-none"
+                            style={{ color: 'var(--heading-primary)' }}
+                        >
+                            {pageTitle}
+                        </h1>
+                        {articleCount !== undefined && (
+                            <span
+                                className="text-[10px] font-mono font-medium tracking-wide mt-0.5 opacity-60"
+                                style={{ color: 'var(--muted-foreground)' }}
+                            >
+                                {articleCount} {articleCount === 1 ? 'article' : 'articles'}
+                            </span>
+                        )}
+                    </div>
 
                     {/* Right Section: Clock + Menu */}
                     <div className="flex items-center gap-3">
