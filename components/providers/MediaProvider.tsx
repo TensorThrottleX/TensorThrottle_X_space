@@ -42,14 +42,27 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
+    const [isMobileFallback, setIsMobileFallback] = useState(false)
+
+    // Reset fallback on video change
+    useEffect(() => {
+        setIsMobileFallback(false)
+    }, [videoState.index])
+
     // Video Source Logic
     const activeVideoSrc = React.useMemo(() => {
         if (videoState.index === -1 || videoState.index === -2) return ''
+
+        // [MOBILE FALLBACK]: If current video crashed/unsafe, use Default (Index 0)
+        if (isMobileFallback && config.videos.length > 0) {
+            return config.videos[0].path
+        }
+
         if (config.videos[videoState.index]) {
             return config.videos[videoState.index].path
         }
         return ''
-    }, [videoState.index, config.videos])
+    }, [videoState.index, config.videos, isMobileFallback])
 
     // Video Switching Protocol ( simplified )
     const updateVideoSource = useCallback(async (index: number) => {
@@ -59,6 +72,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             index,
             videoAudioEnabled: false
         }))
+        setIsMobileFallback(false) // Reset safety flag
     }, [])
 
     // Initialization & Asset Discovery
@@ -181,10 +195,9 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                         // Actually, 8K will crash. Let's be safe.
                         // Better strategy: If it's > 4K, definitely stop.
                         if (v.videoWidth > 3840 || v.videoHeight > 3840) {
-                            console.error('[Auto-Safe] 8K/4K+ detected. Blocking playback to save device.');
-                            v.pause();
-                            // Use minimal fallback
-                            setVideoState(prev => ({ ...prev, index: -1 })); // Switch to Black background
+                            console.warn('[Auto-Safe] 8K/4K+ detected on mobile. Switching to optimized fallback.');
+                            // Do NOT pause. Just switch source.
+                            setIsMobileFallback(true);
                             return;
                         }
                     }
