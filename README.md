@@ -1,12 +1,24 @@
-<p align="centre">
-  <img src="./public/media/brand/logo.png" alt="Tensor Throttle X Logo" width="42" style="vertical-align: middle; margin-right: 10px;" />
-  <strong style="font-size: 52px;">TENSOR THROTTLE X Space</strong>
+<div align="center">
+
+<span>
+  <img src="public/media/brand/logo.png"
+       alt="TX Logo"
+       height="48"
+       style="vertical-align:middle; margin-right:12px;">
+  <span style="font-size:68px; font-weight:1400; vertical-align:middle;">
+    TENSOR THROTTLE X Space
+  </span>
+</span>
+
+<p>
+A cognitive sandbox for structured experimentation.<br>
+Not a portfolio. Not a product. Just a system for thinking out loud.
 </p>
 
-A cognitive sandbox for structured experimentation.  
-Not a portfolio. Not a product. Just a system for thinking out loud.
+</div>
 
----
+<hr>
+
 
 # 🧭 What This Is
 
@@ -64,7 +76,7 @@ Everything here lives somewhere inside that loop.
 
 Instead of rigid architecture diagrams, here’s the actual flow:
 
-![Alt text description](https://lh3.googleusercontent.com/gg/AMW1TPq3LwpapzPiomOdZrewcYygkFIWH8uqGAWIJ0Vk9cm5-TCPmzXY6w_FLVRcqqC5f90nCtj9hA-3cFKZ-onh_1C5EzBlZIjHph5XzHaEd_6-CjD3ytstCz6R0yO0_lzshO_SO6e_WgosgTwq20Yx2HuJzS4-V3xZFfzdLHkVxvSX5_l7QVrY3ak68gs0iYzCgDL1gXExgELVzqTknuT-xjoeo1nxQRE9CkSylhi5pPey40a8hUFikUYkavXFrrhxKXaUJbGiOzPJWWAgo1XFWtn9R9G5OhMbu515Xf1rlnptBrpbHZ__SVSBoMaBZCMcpXQzfo_03We6TXMEoQ4cOili=s1024-rj?authuser=2)
+![Alt text](public/media/workflow/workflow.png) 
 
 ### In plain terms:
 
