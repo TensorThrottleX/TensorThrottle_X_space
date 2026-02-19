@@ -16,8 +16,14 @@
 
 
 
-<hr>
+---
 
+# Alternates
+
+alt links : https://tensorthrottlexspace.vercel.app/ <br></br>
+alt links : https://www.tensorthrottlex.in/
+
+#
 
 # 🧭 What This Is ?
 
