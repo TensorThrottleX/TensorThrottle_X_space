@@ -23,7 +23,7 @@ export function MobileContentLayout({ children, pageTitle, articleCount }: { chi
             style={{
                 backgroundColor: isBright ? '#fafafa' : '#000',
                 paddingTop: '56px',
-                paddingBottom: '64px',
+                paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))',
             }}
         >
             <MobileHeader pageTitleOverride={pageTitle} articleCount={articleCount} />

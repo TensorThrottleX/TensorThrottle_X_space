@@ -141,7 +141,6 @@ export function MobileBottomNav() {
                             const active = !item.isAction && isActive(item.href)
 
                             return (
-                            return (
                                 <a
                                     key={item.label}
                                     href={item.href}
