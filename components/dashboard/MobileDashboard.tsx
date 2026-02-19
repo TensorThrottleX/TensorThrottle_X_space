@@ -227,7 +227,7 @@ function MobileStackedDeck({
                                 STACK_HEIGHT,
                                 isPrecision
                                     ? "bg-black border-white"
-                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white/10")
+                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white")
                             )}
                             style={{
                                 transformOrigin: 'top center'
@@ -394,7 +394,7 @@ function MobileStackedDeck({
                     TAP_TO_SHUFFLE_STACK
                 </span>
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -446,7 +446,7 @@ function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
             <div className={cn(
                 "w-full rounded-2xl overflow-hidden border transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full",
                 isPrecision ? "bg-black border-white"
-                    : (renderMode === 'bright' ? "bg-white/90 border-black/10" : "bg-black/60 backdrop-blur-xl border-white/10")
+                    : (renderMode === 'bright' ? "bg-white/90 border-black/10" : "bg-black/60 backdrop-blur-xl border-white")
             )}>
                 <div className="absolute top-6 left-6 flex items-center gap-2">
                     <div className={cn("w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]",
