@@ -170,6 +170,25 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 onLoadedMetadata={(e) => {
                     const v = e.currentTarget
                     v.playbackRate = 1.0
+
+                    // [MOBILE SAFEGUARD]: 
+                    // Detect high-res videos (4K/8K) that might crash mobile browsers.
+                    // Threshold: > 2560px (1440p) width or height.
+                    const isMobile = window.innerWidth < 1024;
+                    if (isMobile && (v.videoWidth > 2560 || v.videoHeight > 2560)) {
+                        console.warn(`[Auto-Safe] Video ${v.videoWidth}x${v.videoHeight} is too heavy for mobile. Preventing playback check.`);
+                        // We do NOT pause immediately if it plays fine, but we monitor.
+                        // Actually, 8K will crash. Let's be safe.
+                        // Better strategy: If it's > 4K, definitely stop.
+                        if (v.videoWidth > 3840 || v.videoHeight > 3840) {
+                            console.error('[Auto-Safe] 8K/4K+ detected. Blocking playback to save device.');
+                            v.pause();
+                            // Use minimal fallback
+                            setVideoState(prev => ({ ...prev, index: -1 })); // Switch to Black background
+                            return;
+                        }
+                    }
+
                     try {
                         // Check for audio tracks
                         const hasAudio = (v as any).audioTracks?.length > 0 ||
