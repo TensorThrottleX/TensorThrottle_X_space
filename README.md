@@ -1,21 +1,20 @@
-<div align="center">
+<!-- TX HERO -->
+<h1 align="center">
+  <img src="public/media/brand/logo.png" alt="TX Logo" height="55" valign="middle">
+  TENSOR THROTTLE X Space
+</h1>
 
-<span>
-  <img src="public/media/brand/logo.png"
-       alt="TX Logo"
-       height="48"
-       style="vertical-align:middle; margin-right:12px;">
-  <span style="font-size:68px; font-weight:1400; vertical-align:middle;">
-    TENSOR THROTTLE X Space
-  </span>
-</span>
+<h3 align="center">
+  A cognitive sandbox for structured experimentation.<br>
+  Not a portfolio. Not a product. Just a system for thinking out loud.
+</h3>
 
-<p>
-A cognitive sandbox for structured experimentation.<br>
-Not a portfolio. Not a product. Just a system for thinking out loud.
+
+<p align="center">
+  
 </p>
 
-</div>
+
 
 <hr>
 
