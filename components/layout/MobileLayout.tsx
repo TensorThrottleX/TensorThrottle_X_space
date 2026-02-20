@@ -56,7 +56,7 @@ export function MobileHomeLayout() {
                                     animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                     transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                                     className="text-4xl font-black tracking-tighter"
-                                    style={{ color: isBright ? '#111111' : 'var(--heading-primary)' }}
+                                    style={{ color: isBright ? '#000000' : 'var(--heading-primary)' }}
                                 >
                                     TENSOR{'\n'}THROTTLE X
                                 </motion.h1>
