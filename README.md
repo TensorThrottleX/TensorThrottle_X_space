@@ -1,14 +1,31 @@
-<p align="left">
-  <img src="./public/media/brand/logo.png" alt="Tensor Throttle X Logo" width="42" style="vertical-align: middle; margin-right: 10px;" />
-  <strong style="font-size: 26px;">TENSOR THROTTLE X Space</strong>
+<!-- TX HERO -->
+<h1 align="center">
+  <img src="public/media/brand/logo.png" alt="TX Logo" height="55" valign="middle">
+  TENSOR THROTTLE X Space
+</h1>
+
+<h3 align="center">
+  A cognitive sandbox for structured experimentation.<br>
+  Not a portfolio. Not a product. Just a system for thinking out loud.
+</h3>
+
+
+<p align="center">
+  
 </p>
 
-A cognitive sandbox for structured experimentation.  
-Not a portfolio. Not a product. Just a system for thinking out loud.
+
 
 ---
 
-# 🧭 What This Is
+# Alternates
+
+alt links : https://tensorthrottlexspace.vercel.app/ <br></br>
+alt links : https://www.tensorthrottlex.in/
+
+#
+
+# 🧭 What This Is ?
 
 Tensor Throttle X Space is a live reasoning space.
 
@@ -27,7 +44,7 @@ Only iteration.
 ---
 
 
-# 🛑 Why Not A Portfolio?
+# 🛑 Why Not A Portfolio ?
 
 Portfolios are static museums of finished work. They prioritize polish over process, often hiding the messy reality of engineering. 
 
@@ -43,17 +60,8 @@ By exposing the raw lifecycle of ideas—from inception to refactor to failure�
 
 At its simplest, the system follows this cycle:
 
-Idea
-↓
-Draft
-↓
-Break
-↓
-Refactor
-↓
-Log
-↓
-Repeat
+↺ Idea → Draft → Break → Refactor → Log → Repeat ↻
+
 
 
 Everything here lives somewhere inside that loop.
@@ -64,7 +72,7 @@ Everything here lives somewhere inside that loop.
 
 Instead of rigid architecture diagrams, here’s the actual flow:
 
-![Alt text description](https://lh3.googleusercontent.com/gg/AMW1TPq3LwpapzPiomOdZrewcYygkFIWH8uqGAWIJ0Vk9cm5-TCPmzXY6w_FLVRcqqC5f90nCtj9hA-3cFKZ-onh_1C5EzBlZIjHph5XzHaEd_6-CjD3ytstCz6R0yO0_lzshO_SO6e_WgosgTwq20Yx2HuJzS4-V3xZFfzdLHkVxvSX5_l7QVrY3ak68gs0iYzCgDL1gXExgELVzqTknuT-xjoeo1nxQRE9CkSylhi5pPey40a8hUFikUYkavXFrrhxKXaUJbGiOzPJWWAgo1XFWtn9R9G5OhMbu515Xf1rlnptBrpbHZ__SVSBoMaBZCMcpXQzfo_03We6TXMEoQ4cOili=s1024-rj?authuser=2)
+![Alt text](public/media/workflow/workflow.png) 
 
 ### In plain terms:
 
@@ -160,6 +168,11 @@ A system under constant refactor
 Built for evolution.  
 Not presentation.
 
----
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/672e7a37-ec88-4258-8cae-39ab3ed1f558"
+       width="600" />
+</div>
 
-© 2026 Tensor Throttle X. A cognitive sandbox.
+<div align="center">
+  © 2026 Tensor Throttle X. A cognitive sandbox.
+</div>
