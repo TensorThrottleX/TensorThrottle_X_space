@@ -139,20 +139,23 @@ export function MobileHeader({
                     email: email.trim() || undefined,
                     message: message.trim(),
                     protocol: isConfirmed,
-                    load_time: loadTime, // Use mount time
-                    _trap: trap // Honey pot
+                    load_time: loadTime,
+                    _trap: trap
                 })
             })
+
+            const data = await response.json().catch(() => ({}))
+
             if (response.ok) {
                 setIsSent(true)
                 setName('')
                 setEmail('')
                 setMessage('')
             } else {
-                setSendError('Transmission failed.')
+                setSendError(data.error || 'Transmission failed.')
             }
-        } catch (e) {
-            setSendError('Network error.')
+        } catch (e: any) {
+            setSendError('Network error: ' + (e?.message || 'Unknown'))
         } finally {
             setIsSending(false)
         }
