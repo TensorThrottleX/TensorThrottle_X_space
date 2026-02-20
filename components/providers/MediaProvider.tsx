@@ -19,7 +19,7 @@ interface MediaContextType {
 const MediaContext = createContext<MediaContextType | undefined>(undefined)
 
 const DEFAULT_VIDEO_STATE: VideoState = {
-    index: 0,
+    index: -2,
     hasAudioTrack: false,
     videoAudioEnabled: false
 }
@@ -30,7 +30,7 @@ const DEFAULT_SOUND_STATE: SoundState = {
 
 export function MediaEngineProvider({ children }: { children: React.ReactNode }) {
     // Layer 1: BaseTheme
-    const [theme, setThemeState] = useState<BaseTheme>('normal')
+    const [theme, setThemeState] = useState<BaseTheme>('bright')
 
     // States
     const [videoState, setVideoState] = useState<VideoState>(DEFAULT_VIDEO_STATE)
@@ -217,9 +217,13 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     setIsLoading(false) // Don't hang app on video error
                 }}
                 className={`bg-video transition-opacity duration-1000 
-          ${(videoState.index === -2 || (isLoading && videoState.index >= 0)) ? 'opacity-0' : 'opacity-100'}
+          ${(videoState.index === -2 || (isLoading && videoState.index >= 0))
+                        ? 'opacity-0'
+                        : (theme === 'bright' || theme === 'dark')
+                            ? 'opacity-35'
+                            : 'opacity-100'
+                    }
           ${videoState.index === -1 ? 'bg-black' : ''}
-          ${(theme === 'bright' || theme === 'dark') ? 'opacity-35' : ''}
         `}
                 style={{
                     backgroundColor: videoState.index === -1 ? 'black' : 'transparent',

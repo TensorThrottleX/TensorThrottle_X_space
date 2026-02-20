@@ -63,14 +63,17 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   }
 
   const handleModeToggle = () => {
-    const modes: RenderMode[] = ['normal', 'bright', 'custom']
+    const modes: RenderMode[] = ['bright', 'dark', 'custom']
     const nextIdx = (modes.indexOf(renderMode as any) + 1) % modes.length
     const nextMode = modes[nextIdx]
     setRenderMode(nextMode as any)
 
     // Sync with MediaEngine theme if it's one of the base themes
-    if (nextMode !== 'custom') {
-      setTheme(nextMode as any)
+    // Sync with MediaEngine theme
+    if (nextMode === 'bright' || nextMode === 'dark') {
+      setTheme(nextMode)
+    } else if (nextMode === 'custom') {
+      setTheme('dark')
     }
   }
 
@@ -96,7 +99,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     setSoundIndex(nextIndex)
   }
 
-  const activeVideoName = videoState.index >= 0 ? config.videos[videoState.index]?.name : (videoState.index === -1 ? 'BLACK' : 'WHITE')
+  const activeVideoName = videoState.index >= 0 ? config.videos[videoState.index]?.name : (videoState.index === -1 ? 'BLACK' : 'OFF')
   const activeSoundName = soundState.soundIndex >= 0 ? config.sounds[soundState.soundIndex]?.name : 'MUTED'
 
   return (
@@ -157,20 +160,20 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
         <button
           onClick={handleModeToggle}
           className={`group relative flex flex-col items-center justify-center gap-1 rounded-full w-12 h-12 transition-[background-color,border-color,color,box-shadow,transform] duration-300 border
-            ${renderMode === 'normal' ? 'bg-black/40 border-cyan-500/30 text-cyan-400' :
-              renderMode === 'bright' ? 'bg-[#ffffff] border-black/10 text-black' :
-                renderMode === 'custom' ? 'bg-indigo-900 border-indigo-400/50 text-indigo-100' :
-                  'bg-[#111111] border-white/10 text-white'}
+            ${renderMode === 'bright' ? 'bg-[#ffffff] border-black/10 text-black shadow-lg shadow-black/5' :
+              renderMode === 'dark' ? 'bg-[#111111] border-white/10 text-white' :
+                renderMode === 'custom' ? 'bg-indigo-900 border-indigo-400/50 text-indigo-100 shadow-xl shadow-indigo-500/20' :
+                  'bg-black/40 border-cyan-500/30 text-cyan-400'}
           `}
           title={`Mode: ${renderMode.toUpperCase()}`}
         >
           <div className={`w-4 h-4 rounded-full transition-all duration-500 relative flex items-center justify-center
-                ${renderMode === 'normal' ? 'bg-cyan-500/20 shadow-[0_0_10px_#22d3ee]' :
-              renderMode === 'bright' ? 'border-[1.5px] border-black/80' :
+                ${renderMode === 'bright' ? 'border-[1.5px] border-black/80' :
+              renderMode === 'dark' ? 'bg-black border border-white/20' :
                 renderMode === 'custom' ? 'bg-white shadow-[0_0_15px_#fff]' :
-                  'bg-black border border-white/20'}
+                  'bg-cyan-500/20 shadow-[0_0_10px_#22d3ee]'}
           `}>
-            {renderMode === 'normal' && <div className="absolute w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />}
+            {renderMode === 'custom' && <div className="absolute w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse" />}
           </div>
           <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
             style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}

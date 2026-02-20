@@ -53,8 +53,8 @@ export function MobileBottomNav() {
             const newCount = clickCount + 1
             setClickCount(newCount)
 
-            // Cycle: Normal -> Bright -> Custom (Dark) -> Normal
-            const modes: RenderMode[] = ['normal', 'bright', 'custom']
+            // Cycle: Bright -> Dark -> Custom (with video) -> Bright
+            const modes: RenderMode[] = ['bright', 'dark', 'custom']
             const nextMode = modes[(modes.indexOf(renderMode as any) + 1) % modes.length]
 
             handleModeToggle(nextMode as RenderMode)
@@ -91,10 +91,10 @@ export function MobileBottomNav() {
     const handleModeToggle = (mode: RenderMode) => {
         setRenderMode(mode)
         // Ensure theme matches for overlay logic
-        if (mode === 'custom') {
+        if (mode === 'custom' || mode === 'dark') {
             setTheme('dark')
         } else {
-            setTheme(mode as any)
+            setTheme('bright')
         }
     }
 
@@ -113,7 +113,7 @@ export function MobileBottomNav() {
     }
 
     const activeSoundName = soundState.soundIndex >= 0 ? config.sounds[soundState.soundIndex]?.name : 'MUTED'
-    const activeVideoName = videoState.index >= 0 ? config.videos[videoState.index]?.name : (videoState.index === -1 ? 'BLACK' : 'WHITE')
+    const activeVideoName = videoState.index >= 0 ? config.videos[videoState.index]?.name : (videoState.index === -1 ? 'BLACK' : 'OFF')
 
     return (
         <nav
@@ -172,7 +172,7 @@ export function MobileBottomNav() {
                                         "text-[10px] font-semibold tracking-wide uppercase",
                                         active ? 'opacity-100' : 'opacity-60'
                                     )}>
-                                        {item.label === 'B/W' ? (isBright ? 'W' : 'B') : item.label}
+                                        {item.label === 'B/W' ? (isBright ? 'Bright' : 'Dark') : item.label}
                                     </span>
 
                                     {active && (
