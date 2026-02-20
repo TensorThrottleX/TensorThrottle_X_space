@@ -1,8 +1,10 @@
-import { pipeline, env } from '@xenova/transformers';
+// Lazy-loaded classifier — avoids importing @xenova/transformers at build time
+// which causes native module failures on Vercel's serverless build environment.
 
-// Configure environment
-env.allowLocalModels = false;
-env.useBrowserCache = false;
+export interface ToxicityScore {
+    label: string;
+    score: number;
+}
 
 // Timeout for model loading / inference (ms)
 const MODEL_TIMEOUT_MS = 15_000; // 15 seconds max wait per request
@@ -35,6 +37,7 @@ class ToxicityClassifier {
     static instance: any = null;
     static loadingPromise: Promise<any> | null = null;
     static isReady: boolean = false;
+    static loadFailed: boolean = false;
 
     // Using Xenova/multilingual-toxic-xlm-roberta for multilingual support
     // If not available, fallback to Xenova/toxic-bert
@@ -42,6 +45,7 @@ class ToxicityClassifier {
 
     static async getInstance(timeoutMs: number = MODEL_TIMEOUT_MS) {
         if (this.instance) return this.instance;
+        if (this.loadFailed) return null; // Don't retry after permanent failure
 
         // If already loading, wait for the existing promise (avoids duplicate downloads)
         if (this.loadingPromise) {
@@ -65,6 +69,7 @@ class ToxicityClassifier {
                     console.log('[Classifier] Background model load completed.');
                 }).catch(() => {
                     this.loadingPromise = null;
+                    this.loadFailed = true;
                     console.error('[Classifier] Background model load failed permanently.');
                 });
             }
@@ -74,6 +79,13 @@ class ToxicityClassifier {
 
     private static async _loadModel() {
         try {
+            // Dynamic import to avoid importing native modules at build time
+            const { pipeline, env } = await import('@xenova/transformers');
+
+            // Configure environment for serverless compatibility (Vercel)
+            env.allowLocalModels = false;
+            env.useBrowserCache = false;
+
             console.log(`[Classifier] Loading model: ${this.modelName}...`);
             const inst = await pipeline('text-classification', this.modelName, {
                 quantized: true,
@@ -83,6 +95,7 @@ class ToxicityClassifier {
         } catch (error) {
             console.warn(`[Classifier] Failed to load ${this.modelName}, falling back to toxic-bert:`, error);
             try {
+                const { pipeline } = await import('@xenova/transformers');
                 const inst = await pipeline('text-classification', 'Xenova/toxic-bert', {
                     quantized: true,
                 });
@@ -112,11 +125,6 @@ class ToxicityClassifier {
     }
 }
 
-export interface ToxicityScore {
-    label: string;
-    score: number;
-}
-
 /**
  * Classify text for toxicity. Returns empty array if model isn't ready
  * or times out (graceful degradation — heuristics still protect).
@@ -126,6 +134,8 @@ export async function classifyText(text: string): Promise<ToxicityScore[]> {
 
     try {
         const classifier = await ToxicityClassifier.getInstance();
+        if (!classifier) return []; // Model failed to load, degrade gracefully
+
         const results = await withTimeout(
             classifier(text, { topk: null }),
             MODEL_TIMEOUT_MS,

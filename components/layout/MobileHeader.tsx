@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useModeration } from '@/hooks/use-moderation'
 import { useScrutiny } from '@/hooks/use-scrutiny'
+import { differenceInWeeks, isValid } from 'date-fns'
 
 // X (Twitter) Icon
 function XIcon({ className }: { className?: string }): React.ReactNode {
@@ -38,7 +39,15 @@ function getPageTitle(pathname: string): string {
     return 'TensorThrottle X'
 }
 
-export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOverride?: string; articleCount?: number }) {
+export function MobileHeader({
+    pageTitleOverride,
+    articleCount,
+    latestPublishedAt
+}: {
+    pageTitleOverride?: string;
+    articleCount?: number;
+    latestPublishedAt?: string
+}) {
     const pathname = usePathname()
     const { renderMode, mainView } = useUI()
     const [menuOpen, setMenuOpen] = useState(false)
@@ -47,6 +56,13 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
     const [mounted, setMounted] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
     const isBright = renderMode === 'bright'
+
+    // Status logic for mobile blinker
+    const pubDate = latestPublishedAt ? new Date(latestPublishedAt) : null
+    const isValidDate = pubDate && isValid(pubDate)
+    const weeksDiff = isValidDate ? differenceInWeeks(new Date(), pubDate!) : Infinity
+    const isActive = weeksDiff < 3
+    const blinkerColor = isActive ? 'bg-emerald-500' : 'bg-red-500'
 
     // Message Form State
     const [name, setName] = useState('')
@@ -157,20 +173,35 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                 <div className="flex items-center justify-between h-full px-4">
                     {/* Left Section: Page Title & Article Count */}
                     <div className="flex flex-col justify-center">
-                        <h1
-                            className="text-sm font-black tracking-tight uppercase leading-none"
-                            style={{ color: 'var(--heading-primary)' }}
-                        >
-                            {pageTitle}
-                        </h1>
-                        {articleCount !== undefined && (
-                            <span
-                                className="text-[10px] font-mono font-medium tracking-wide mt-0.5 opacity-60"
-                                style={{ color: 'var(--muted-foreground)' }}
+                        <div className="flex items-center gap-1.5">
+                            <h1
+                                className="text-sm font-black tracking-tight uppercase leading-none"
+                                style={{ color: 'var(--heading-primary)' }}
                             >
-                                {articleCount} {articleCount === 1 ? 'article' : 'articles'}
-                            </span>
-                        )}
+                                {pageTitle}
+                            </h1>
+                        </div>
+                        <div className="flex items-center gap-2 mt-1">
+                            {articleCount !== undefined && (
+                                <span
+                                    className="text-[10px] font-mono font-bold tracking-tight opacity-50"
+                                    style={{ color: 'var(--muted-foreground)' }}
+                                >
+                                    {articleCount} {articleCount === 1 ? 'article' : 'articles'}
+                                </span>
+                            )}
+                            {pathname !== '/' && (
+                                <div className="flex items-center gap-1.5 opacity-80">
+                                    <div className="flex h-1.5 w-1.5 relative">
+                                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
+                                        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
+                                    </div>
+                                    <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                        {isActive ? 'Active' : 'WHILE_AGO'}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Right Section: Clock + Menu */}

@@ -13,7 +13,17 @@ import { useUI } from '@/components/providers/UIProvider'
  * Provides the same header + bottom nav chrome while allowing children
  * to be full-width scrollable content.
  */
-export function MobileContentLayout({ children, pageTitle, articleCount }: { children: React.ReactNode; pageTitle?: string; articleCount?: number }) {
+export function MobileContentLayout({
+    children,
+    pageTitle,
+    articleCount,
+    latestPublishedAt
+}: {
+    children: React.ReactNode;
+    pageTitle?: string;
+    articleCount?: number;
+    latestPublishedAt?: string;
+}) {
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
 
@@ -26,7 +36,11 @@ export function MobileContentLayout({ children, pageTitle, articleCount }: { chi
                 paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))',
             }}
         >
-            <MobileHeader pageTitleOverride={pageTitle} articleCount={articleCount} />
+            <MobileHeader
+                pageTitleOverride={pageTitle}
+                articleCount={articleCount}
+                latestPublishedAt={latestPublishedAt}
+            />
 
             <div className="flex-1 w-full overflow-x-hidden">
                 {children}

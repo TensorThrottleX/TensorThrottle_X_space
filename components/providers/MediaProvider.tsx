@@ -219,7 +219,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 className={`bg-video transition-opacity duration-1000 
           ${(videoState.index === -2 || (isLoading && videoState.index >= 0)) ? 'opacity-0' : 'opacity-100'}
           ${videoState.index === -1 ? 'bg-black' : ''}
-          ${(theme === 'bright' || theme === 'dark') ? 'opacity-20' : ''}
+          ${(theme === 'bright' || theme === 'dark') ? 'opacity-35' : ''}
         `}
                 style={{
                     backgroundColor: videoState.index === -1 ? 'black' : 'transparent',
@@ -246,8 +246,8 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
 
             {/* Layer 1 Theme Overlay (Pure CSS) -> .blur-layer */}
             <div className={`blur-layer transition-colors duration-1000
-        ${theme === 'bright' ? 'bg-white/80' : ''}
-        ${theme === 'dark' ? 'bg-black/40 backdrop-blur-sm' : ''}
+        ${theme === 'bright' ? 'bg-white/60 backdrop-blur-[10px]' : ''}
+        ${theme === 'dark' ? 'bg-black/20 backdrop-blur-sm' : ''}
         ${videoState.index === -2 ? 'bg-white z-[-5]' : ''}
       `} />
 

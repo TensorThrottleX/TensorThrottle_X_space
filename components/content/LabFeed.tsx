@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { LabPostCard } from './LabPostCard'
+import { RefreshCcw } from 'lucide-react'
 import type { Post } from '@/types/post'
 
 interface LabFeedProps {
@@ -93,8 +94,13 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
-          <p style={{ color: 'var(--muted-foreground)' }}>No posts yet.</p>
+        <div className="flex flex-col items-center justify-center gap-6 py-24 text-center">
+          <div className="h-16 w-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl transition-all duration-500 hover:border-white/20 group/empty">
+            <RefreshCcw className="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-40 group-hover/empty:opacity-80 transition-opacity" style={{ color: 'var(--muted-foreground)' }} />
+          </div>
+          <p className="text-sm font-medium tracking-tight opacity-60" style={{ color: 'var(--muted-foreground)' }}>
+            No posts found in this frequency.
+          </p>
         </div>
       )}
 

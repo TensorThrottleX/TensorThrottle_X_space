@@ -20,7 +20,11 @@ export default async function FeedPage() {
     const latestPost = posts.length > 0 ? posts[0].publishedAt : undefined
 
     return (
-        <ResponsiveContentWrapper pageTitle="Feed" articleCount={posts.length}>
+        <ResponsiveContentWrapper
+            pageTitle="Feed"
+            articleCount={posts.length}
+            latestPublishedAt={latestPost}
+        >
             <LabContainer videoSrc="/media/videos/default-background.mp4">
 
                 <LabNavigation />

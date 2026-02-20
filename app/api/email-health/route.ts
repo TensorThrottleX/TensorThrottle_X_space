@@ -12,7 +12,7 @@ export async function GET() {
     const checks = {
         timestamp: new Date().toISOString(),
         status: 'unknown',
-        architecture: 'Multi-Relay Fallback (Resend -> SendGrid -> Proton)',
+        architecture: 'Dual-Relay Fallback (Resend -> Proton/SMTP) [SendGrid Dormant]',
         configured: false,
         details: [] as string[],
     };
@@ -31,9 +31,9 @@ export async function GET() {
     }
 
     if (hasSendGrid) {
-        checks.details.push('✅ SECONDARY: SendGrid Fallback configured');
+        checks.details.push('✅ BACKUP: SendGrid configured');
     } else {
-        checks.details.push('⚠️ SECONDARY: SendGrid Fallback missing (Single point of failure)');
+        checks.details.push('ℹ️ BACKUP: SendGrid not active (Planned for future redundancy)');
     }
 
     if (hasResend || hasSendGrid) {

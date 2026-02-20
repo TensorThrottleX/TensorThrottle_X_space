@@ -477,12 +477,6 @@ export async function POST(req: NextRequest) {
             // ATTEMPT 2: SMTP (Gmail/Custom)
             console.log(`[EMAIL] Attempting secondary relay (SMTP)...`);
             dispatch = await sendViaSMTP(payload, emailHtml, RECIPIENTS);
-
-            if (!dispatch.success) {
-                console.warn(`[EMAIL] SMTP relay failed: ${dispatch.error}. Activating tertiary fallback...`);
-                // ATTEMPT 3: SendGrid
-                dispatch = await sendViaSendGrid(payload, emailHtml, RECIPIENTS);
-            }
         }
 
         // 5. Final Reporting

@@ -22,5 +22,9 @@ export function ResponsiveHome() {
         return <HomePageLayout />
     }
 
-    return isMobile ? <MobileHomeLayout /> : <HomePageLayout />
+    return isMobile ? (
+        <MobileHomeLayout />
+    ) : (
+        <HomePageLayout />
+    )
 }

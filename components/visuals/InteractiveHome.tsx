@@ -369,8 +369,8 @@ Cycling render mode...`
       <div
         className={`absolute inset-0 z-0 transition-opacity duration-500 beauty-blur ${isExpanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         style={{
-          backdropFilter: 'blur(8px)',
-          backgroundColor: isBright ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.4)'
+          backdropFilter: 'blur(4px)',
+          backgroundColor: isBright ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.3)'
         }}
         onClick={() => setIsExpanded(false)}
       />
