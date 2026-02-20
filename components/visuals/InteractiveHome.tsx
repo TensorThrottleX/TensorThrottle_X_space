@@ -354,9 +354,9 @@ Cycling render mode...`
   const containerClasses = `relative flex flex-col transition-[height,width,transform,opacity] duration-500 overflow-hidden pointer-events-auto
     ${isExpanded
       ? 'h-[28rem] w-full max-w-[min(50rem,90vw)] rounded-md scale-100 translate-y-0 opacity-100 shadow-cyan-500/10'
-      : `h-16 w-[min(22rem,90vw)] md:w-[min(28rem,90vw)] rounded-md cursor-text scale-[0.96] translate-y-2 opacity-100 shadow-lg 
-         hover:shadow-xl hover:scale-[0.97] 
-         ${isBright ? 'hover:ring-1 hover:ring-blue-600/40' : 'hover:ring-1 hover:ring-cyan-500/50'}`
+      : `h-16 w-[min(22rem,90vw)] md:w-[min(28rem,90vw)] rounded-md cursor-text scale-[0.96] translate-y-2 opacity-100 shadow-[0_10px_40px_rgba(0,0,0,0.06)] 
+         hover:shadow-[0_15px_50px_rgba(0,0,0,0.12)] hover:scale-[0.97] 
+         ${isBright ? 'hover:ring-[1.5px] hover:ring-black' : 'hover:ring-1 hover:ring-cyan-500/50'}`
     } 
     ${isPlaying && !isBright
       ? 'ring-1 ring-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
@@ -381,7 +381,7 @@ Cycling render mode...`
         style={{
           // Background handling moved to inner layer to prevent content blur bleed
           color: 'var(--foreground)',
-          boxShadow: isBright ? '0 20px 50px rgba(0, 0, 0, 0.1)' : undefined,
+          boxShadow: isBright ? '0 10px 40px rgba(0, 0, 0, 0.06)' : undefined,
           transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease',
           zIndex: 51 // Ensure above backdrop
         }}
@@ -395,7 +395,7 @@ Cycling render mode...`
           className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
           style={{
             backgroundColor: 'var(--terminal-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.1)' : 'var(--glass-border)'
+            borderColor: isBright ? 'rgba(0, 0, 0, 0.08)' : 'var(--glass-border)'
           }}
         />
 

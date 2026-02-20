@@ -216,8 +216,9 @@ body {
   /* BRIGHT MODE (Engineering Lab - Refined) */
   .mode-bright {
     /* Base Background - #f5f6f8 */
-    --bg-primary: 0 0% 100%;
-    --background: 0 0% 100%;
+    --bg-primary: 0 0% 98%;
+    /* #fafafa - Smoother shade */
+    --background: 0 0% 98%;
 
     /* Text - High Contrast */
     --foreground: 0 0% 6.7%;
@@ -236,7 +237,7 @@ body {
     --card-border: rgba(0, 0, 0, 0.06);
 
     /* Sidebar - Distinct from bg */
-    --sidebar-bg: #ffffff;
+    --sidebar-bg: #fafafa;
     --sidebar-border: rgba(0, 0, 0, 0.04);
 
     --popover: 0 0% 100%;
