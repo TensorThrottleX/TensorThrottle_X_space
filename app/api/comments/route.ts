@@ -1,60 +1,76 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getComments, createComment } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { moderateComment } from '@/lib/moderation'
 
 export const dynamic = 'force-dynamic'
 
-/**
- * Rate limiting: 1 comment per IP per 5 minutes
- * NOTE: This is best-effort in-memory limiting. In serverless, requests may hit different
- * instances. For production, consider storing rate limit state in Supabase.
- */
+// ─── HYBRID RATE LIMITING ─────────────────────────────────────────
+// Layer 1: In-memory Map (fast, catches rapid repeats within same instance)
+// Layer 2: Supabase query (persistent, catches repeats across serverless cold starts)
+
+const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000 // 5 minutes
+
+// Layer 1: In-memory (best-effort, resets on cold start)
 const rateLimitMap = new Map<string, number>()
-const CLEANUP_INTERVAL = 10 * 60 * 1000 // 10 minutes
-
-// Periodic cleanup of stale entries
-if (typeof globalThis !== 'undefined') {
-  // @ts-ignore - Global state in serverless is best-effort
-  if (!globalThis._rateLimitCleanupScheduled) {
-    // @ts-ignore
-    globalThis._rateLimitCleanupScheduled = true
-    setInterval(() => {
-      const now = Date.now()
-      const maxAge = 10 * 60 * 1000 // Keep entries for 10 minutes
-
-      for (const [ip, timestamp] of rateLimitMap.entries()) {
-        if (now - timestamp > maxAge) {
-          rateLimitMap.delete(ip)
-        }
-      }
-    }, CLEANUP_INTERVAL)
-  }
-}
 
 function getClientIp(request: NextRequest): string {
-  return request.headers.get('x-forwarded-for')?.split(',')[0] ||
+  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
     request.headers.get('cf-connecting-ip') ||
     'unknown'
 }
 
-function isRateLimited(ip: string): boolean {
+/**
+ * Layer 1: Fast in-memory check.
+ * Returns true if rate-limited (same instance hit within window).
+ */
+function isMemoryRateLimited(ip: string): boolean {
   const now = Date.now()
   const lastRequest = rateLimitMap.get(ip)
 
-  if (!lastRequest) {
-    rateLimitMap.set(ip, now)
-    return false
+  if (lastRequest && (now - lastRequest) < RATE_LIMIT_WINDOW_MS) {
+    return true
   }
 
-  const timeSinceLastRequest = now - lastRequest
-  const fiveMinutes = 5 * 60 * 1000
-
-  if (timeSinceLastRequest < fiveMinutes) {
-    return true
+  // Lazy cleanup: remove old entries when we check
+  if (rateLimitMap.size > 1000) {
+    for (const [key, ts] of rateLimitMap.entries()) {
+      if (now - ts > RATE_LIMIT_WINDOW_MS * 2) rateLimitMap.delete(key)
+    }
   }
 
   rateLimitMap.set(ip, now)
   return false
+}
+
+/**
+ * Layer 2: Persistent Supabase check.
+ * Queries the comments table for recent entries from the same IP.
+ * The IP is stored in the `metadata` JSONB column.
+ */
+async function isDbRateLimited(ip: string): Promise<boolean> {
+  if (ip === 'unknown') return false // Can't rate-limit unknown IPs via DB
+
+  try {
+    const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString()
+
+    const { data, error } = await supabase
+      .from('comments')
+      .select('id')
+      .gte('created_at', windowStart)
+      .contains('metadata', { ip })
+      .limit(1)
+
+    if (error) {
+      console.warn('[RateLimit] Supabase check failed, allowing request:', error.message)
+      return false // Fail open — don't block users if DB check fails
+    }
+
+    return (data && data.length > 0)
+  } catch (err) {
+    console.warn('[RateLimit] Supabase check errored, allowing request:', err)
+    return false // Fail open
+  }
 }
 
 export async function GET(request: NextRequest) {
@@ -91,8 +107,17 @@ export async function POST(request: NextRequest) {
     const ip = getClientIp(request)
     const userAgent = request.headers.get('user-agent') || 'unknown'
 
-    // 1. Rate limiting (IP based)
-    if (isRateLimited(ip)) {
+    // 1. Rate limiting — Hybrid (memory + DB)
+    // Layer 1: Fast in-memory check (same instance)
+    if (isMemoryRateLimited(ip)) {
+      return NextResponse.json(
+        { error: 'Too many comments. Please try again later.' },
+        { status: 429 }
+      )
+    }
+
+    // Layer 2: Persistent DB check (cross-instance)
+    if (await isDbRateLimited(ip)) {
       return NextResponse.json(
         { error: 'Too many comments. Please try again later.' },
         { status: 429 }

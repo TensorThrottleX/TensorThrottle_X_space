@@ -1,3 +1,5 @@
+import { moderateContent } from './moderation/decision'
+
 // Enterprise Moderation Dataset
 const MODERATION_DATASET = {
     severity_3_extreme: [
@@ -160,6 +162,25 @@ export async function moderateComment(
             profanityCount: 0,
             severityMatches: { sev1: 0, sev2: 0, sev3: 0, spam: 0 }
         }
+    }
+
+    // ML Based Check (Multilingual Toxicity)
+    try {
+        const mlAnalysis = await moderateContent(message + " " + name);
+        if (!mlAnalysis.allow) {
+            if (mlAnalysis.severity === 'high') {
+                result.riskScore += 20; // Ensure hard block
+                result.reason.push('ML Detected High Toxicity');
+                result.metadata.severityMatches.sev3++;
+            } else {
+                result.riskScore += 10; // Ensure block or severe warning
+                result.reason.push('ML Detected Moderate Toxicity');
+                result.metadata.severityMatches.sev2++;
+            }
+        }
+    } catch (e) {
+        // Fail open for ML if it crashes, rely on heuristics
+        console.warn('ML Moderation skipped due to error:', e);
     }
 
     // 1. TEXT ANALYSIS

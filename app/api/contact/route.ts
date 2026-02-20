@@ -496,7 +496,7 @@ export async function POST(req: NextRequest) {
         if (!dispatch.success) {
             console.error(`[CRITICAL] All relays failed. Last error: ${dispatch.error}`);
             return NextResponse.json(
-                { error: 'Transmission system unavailable. Please try again later.' },
+                { error: `Transmission failed: ${dispatch.error || 'All relays unavailable'}` },
                 { status: 500 }
             );
         }
@@ -515,7 +515,7 @@ export async function POST(req: NextRequest) {
         console.log(JSON.stringify(logData));
 
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: `Internal Error: ${error.message}` },
             { status: 500 }
         );
     }
