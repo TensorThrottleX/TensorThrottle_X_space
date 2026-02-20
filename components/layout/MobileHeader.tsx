@@ -175,38 +175,41 @@ export function MobileHeader({
             >
                 <div className="flex items-center justify-between h-full px-4">
                     {/* Left Section: Page Title & Article Count */}
-                    <div className="flex flex-col justify-center">
-                        <div className="flex items-center gap-1.5">
-                            <h1
-                                className="text-sm font-black tracking-tight uppercase leading-none"
-                                style={{ color: 'var(--heading-primary)' }}
-                            >
-                                {pageTitle}
-                            </h1>
-                        </div>
-                        <div className="flex items-center gap-2 mt-1">
-                            {articleCount !== undefined && (
+                    <div className="flex flex-col">
+                        <h1
+                            className="text-sm font-black tracking-tight uppercase leading-none"
+                            style={{ color: 'var(--heading-primary)' }}
+                        >
+                            {pageTitle}
+                        </h1>
+
+                        {/* Line 1: Status + Dot + Time */}
+                        {pathname !== '/' && (
+                            <div className="flex items-center gap-1.5 mt-1.5">
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                    {isActive ? 'Active' : 'Inactive'}
+                                </span>
+                                <div className="flex h-1.5 w-1.5 relative mx-0.5">
+                                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
+                                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
+                                </div>
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                    {isValidDate && isActive ? formatIST(pubDate!) : 'WHILE_AGO'}
+                                </span>
+                            </div>
+                        )}
+
+                        {/* Line 2: Article Count */}
+                        {articleCount !== undefined && (
+                            <div className="mt-0.5 opacity-40">
                                 <span
-                                    className="text-[10px] font-mono font-bold tracking-tight opacity-50"
+                                    className="text-[9px] font-mono font-bold tracking-tight uppercase"
                                     style={{ color: 'var(--muted-foreground)' }}
                                 >
                                     {articleCount} {articleCount === 1 ? 'article' : 'articles'}
                                 </span>
-                            )}
-                            {pathname !== '/' && (
-                                <div className="flex items-center gap-1.5 opacity-80">
-                                    <div className="flex h-1.5 w-1.5 relative">
-                                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
-                                        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
-                                    </div>
-                                    <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
-                                        {isActive && pubDate ? (
-                                            <>Active | {formatIST(pubDate).split('|')[1].trim()}</>
-                                        ) : 'WHILE_AGO'}
-                                    </span>
-                                </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Right Section: Clock + Menu */}
