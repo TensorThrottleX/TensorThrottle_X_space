@@ -201,7 +201,7 @@ export function MobileHeader({
                                     </div>
                                     <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
                                         {isActive && pubDate ? (
-                                            <>Active // {format(pubDate, 'MM.dd')}</>
+                                            <>Active // {format(pubDate, 'MM.dd // HH:mm')} UTC</>
                                         ) : 'WHILE_AGO'}
                                     </span>
                                 </div>

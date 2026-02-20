@@ -60,7 +60,7 @@ export function StatusButton({
                     </p>
                     <p className="text-[10px] font-mono tracking-tight opacity-70" style={{ color: 'var(--foreground)' }}>
                         {isValidDate && isActive
-                            ? `SEC_FRAGMENT > ${format(pubDate!, 'yyyy.MM.dd // HH:mm')} UTC`
+                            ? `${format(pubDate!, 'yyyy.MM.dd // HH:mm')} UTC`
                             : 'WHILE_AGO'
                         }
                     </p>
