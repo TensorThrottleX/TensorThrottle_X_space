@@ -13,30 +13,38 @@ interface ContentPanelProps {
 
 export function ContentPanel({ children, title, subtitle, latestPublishedAt, hideTitleOnMobile }: ContentPanelProps) {
   // Calculate status color based on recency
-  let StatusIndicator = null
+  const pubDate = latestPublishedAt ? new Date(latestPublishedAt) : null
+  const isValidDate = pubDate && isValid(pubDate)
+  const weeksDiff = isValidDate ? differenceInWeeks(new Date(), pubDate!) : Infinity
+  const isPostActive = weeksDiff < 3
 
-  if (latestPublishedAt) {
-    const pubDate = new Date(latestPublishedAt)
-    // Only render if date is valid
-    if (isValid(pubDate)) {
-      const weeksDiff = differenceInWeeks(new Date(), pubDate)
-      const isActive = weeksDiff < 3 // 2-3 weeks active window
-      const colorClass = isActive ? 'bg-green-500' : 'bg-red-500';
-      const textColorClass = isActive ? 'text-green-500' : 'text-red-500';
+  const StatusIndicator = (
+    <div className="mt-6 flex flex-wrap items-center gap-6 border-t pt-4 border-[var(--border)] opacity-80">
+      {/* Primary Status: Frequency Recency */}
+      <div className="flex items-center gap-2">
+        <div className={`h-1.5 w-1.5 rounded-full ${isValidDate && isPostActive ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-amber-500/50'}`} />
+        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--muted-foreground)' }}>
+          Frequency: {isValidDate ? (isPostActive ? 'Active' : 'Idle') : 'Standby'}
+        </span>
+      </div>
 
-      StatusIndicator = (
-        <div className="mt-4 flex items-center gap-2">
-          <div className="relative flex h-2.5 w-2.5">
-            <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${colorClass}`}></span>
-            <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${colorClass}`}></span>
-          </div>
-          <span className={`text-xs font-medium uppercase tracking-wider ${textColorClass}`}>
-            {isActive ? 'Active' : 'Idle'}
-          </span>
+      {/* Secondary Status: Live Engine / Connection */}
+      <div className="flex items-center gap-2">
+        <div className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-500"></span>
         </div>
-      )
-    }
-  }
+        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--muted-foreground)' }}>
+          Engine: Tracking
+        </span>
+      </div>
+
+      {/* Tertiary: Last Checked */}
+      <div className="flex items-center gap-2 ml-auto text-[9px] font-mono opacity-40" style={{ color: 'var(--muted-foreground)' }}>
+        <span>REF_ID: {new Date().getTime().toString(16).slice(-6).toUpperCase()}</span>
+      </div>
+    </div>
+  )
 
   return (
     <div className="relative flex flex-1 w-full flex-col items-center justify-center p-4 md:p-8 min-h-screen">

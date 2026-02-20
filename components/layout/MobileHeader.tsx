@@ -157,12 +157,18 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                 <div className="flex items-center justify-between h-full px-4">
                     {/* Left Section: Page Title & Article Count */}
                     <div className="flex flex-col justify-center">
-                        <h1
-                            className="text-sm font-black tracking-tight uppercase leading-none"
-                            style={{ color: 'var(--heading-primary)' }}
-                        >
-                            {pageTitle}
-                        </h1>
+                        <div className="flex items-center gap-1.5">
+                            <h1
+                                className="text-sm font-black tracking-tight uppercase leading-none"
+                                style={{ color: 'var(--heading-primary)' }}
+                            >
+                                {pageTitle}
+                            </h1>
+                            <div className="flex h-1.5 w-1.5 relative">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-500"></span>
+                            </div>
+                        </div>
                         {articleCount !== undefined && (
                             <span
                                 className="text-[10px] font-mono font-medium tracking-wide mt-0.5 opacity-60"
