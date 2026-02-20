@@ -94,10 +94,10 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
-          <div className="h-12 w-12 rounded-full border border-dashed flex items-center justify-center opacity-20"
+          <div className="h-12 w-12 rounded-full border border-dashed flex items-center justify-center animate-[spin_3s_linear_infinite] opacity-30"
             style={{ borderColor: 'var(--muted-foreground)' }}
           >
-            <span className="text-xl">○</span>
+            <div className="h-2 w-2 rounded-full bg-current" style={{ color: 'var(--muted-foreground)' }} />
           </div>
           <p className="text-sm font-medium tracking-tight opacity-60" style={{ color: 'var(--muted-foreground)' }}>
             No posts found in this frequency.

@@ -14,13 +14,17 @@ import { HomePageLayout } from '@/components/layout/HomePageLayout'
  * 
  * No shared floating positioning. Only presentation layer changes.
  */
-export function ResponsiveHome() {
+export function ResponsiveHome({ latestPublishedAt }: { latestPublishedAt?: string }) {
     const isMobile = useIsMobile()
 
     // Server-render fallback: render desktop by default, mobile takes over on client
     if (typeof window === 'undefined') {
-        return <HomePageLayout />
+        return <HomePageLayout latestPublishedAt={latestPublishedAt} />
     }
 
-    return isMobile ? <MobileHomeLayout /> : <HomePageLayout />
+    return isMobile ? (
+        <MobileHomeLayout latestPublishedAt={latestPublishedAt} />
+    ) : (
+        <HomePageLayout latestPublishedAt={latestPublishedAt} />
+    )
 }
