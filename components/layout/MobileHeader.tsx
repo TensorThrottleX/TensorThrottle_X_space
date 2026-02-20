@@ -5,7 +5,7 @@ import { MoreVertical, X as XClose, Github, Mail, Coffee, MessageSquare, Send, S
 import { usePathname } from 'next/navigation'
 import { useUI } from '@/components/providers/UIProvider'
 import { AnimatePresence, motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn, formatIST } from '@/lib/utils'
 import { useModeration } from '@/hooks/use-moderation'
 import { useScrutiny } from '@/hooks/use-scrutiny'
 import { differenceInWeeks, isValid } from 'date-fns'
@@ -139,20 +139,23 @@ export function MobileHeader({
                     email: email.trim() || undefined,
                     message: message.trim(),
                     protocol: isConfirmed,
-                    load_time: loadTime, // Use mount time
-                    _trap: trap // Honey pot
+                    load_time: loadTime,
+                    _trap: trap
                 })
             })
+
+            const data = await response.json().catch(() => ({}))
+
             if (response.ok) {
                 setIsSent(true)
                 setName('')
                 setEmail('')
                 setMessage('')
             } else {
-                setSendError('Transmission failed.')
+                setSendError(data.error || 'Transmission failed.')
             }
-        } catch (e) {
-            setSendError('Network error.')
+        } catch (e: any) {
+            setSendError('Network error: ' + (e?.message || 'Unknown'))
         } finally {
             setIsSending(false)
         }
@@ -172,36 +175,42 @@ export function MobileHeader({
             >
                 <div className="flex items-center justify-between h-full px-4">
                     {/* Left Section: Page Title & Article Count */}
-                    <div className="flex flex-col justify-center">
-                        <div className="flex items-center gap-1.5">
-                            <h1
-                                className="text-sm font-black tracking-tight uppercase leading-none"
-                                style={{ color: 'var(--heading-primary)' }}
-                            >
-                                {pageTitle}
-                            </h1>
-                        </div>
-                        <div className="flex items-center gap-2 mt-1">
-                            {articleCount !== undefined && (
+                    <div className="flex flex-col">
+                        <h1
+                            className="text-sm font-black tracking-tight uppercase leading-none"
+                            style={{ color: 'var(--heading-primary)' }}
+                        >
+                            {pageTitle}
+                        </h1>
+
+                        {/* Line 1: [•] Status Time */}
+                        {pathname !== '/' && (
+                            <div className="flex items-center gap-1.5 mt-1.5">
+                                {/* Dot First */}
+                                <div className="flex h-1.5 w-1.5 relative mr-0.5">
+                                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
+                                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
+                                </div>
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                    {isActive ? 'Active' : 'Inactive'}
+                                </span>
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter ml-1" style={{ color: 'var(--foreground)' }}>
+                                    {isValidDate && isActive ? formatIST(pubDate!) : 'WHILE_AGO'}
+                                </span>
+                            </div>
+                        )}
+
+                        {/* Line 2: Article Count */}
+                        {articleCount !== undefined && (
+                            <div className="mt-0.5 opacity-40">
                                 <span
-                                    className="text-[10px] font-mono font-bold tracking-tight opacity-50"
+                                    className="text-[9px] font-mono font-bold tracking-tight uppercase"
                                     style={{ color: 'var(--muted-foreground)' }}
                                 >
                                     {articleCount} {articleCount === 1 ? 'article' : 'articles'}
                                 </span>
-                            )}
-                            {pathname !== '/' && (
-                                <div className="flex items-center gap-1.5 opacity-80">
-                                    <div className="flex h-1.5 w-1.5 relative">
-                                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
-                                        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
-                                    </div>
-                                    <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
-                                        {isActive ? 'Active' : 'WHILE_AGO'}
-                                    </span>
-                                </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Right Section: Clock + Menu */}
@@ -427,10 +436,12 @@ export function MobileHeader({
                                     onClick={handleSend}
                                     disabled={!name || !message || isSending || isSent || isProfane}
                                     className={cn(
-                                        "w-full h-14 mt-2 rounded-xl flex items-center justify-center gap-2 font-black uppercase text-xs tracking-wider transition-all shadow-lg active:scale-[0.98]",
-                                        isSent
-                                            ? "bg-emerald-500 text-white shadow-emerald-500/20"
-                                            : (isBright ? "bg-black text-white hover:bg-black/80 shadow-black/10" : "bg-white text-black hover:bg-white/90 shadow-white/5")
+                                        "w-full h-14 mt-2 rounded-xl flex items-center justify-center gap-2 font-black uppercase text-xs tracking-wider transition-all active:scale-[0.98]",
+                                        (isSent)
+                                            ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20"
+                                            : (!name || !message || isSending || isProfane || scrutiny.level >= 2)
+                                                ? (isBright ? "bg-black/5 text-black/30 border-black/5 shadow-none" : "bg-white/5 text-white/20 border-white/5 shadow-none")
+                                                : (isBright ? "bg-black text-white hover:bg-black/80 shadow-lg shadow-black/10" : "bg-white text-black hover:bg-white/90 shadow-xl shadow-white/5")
                                     )}
                                 >
                                     {isSending ? <Loader2 size={16} className="animate-spin" /> : (isSent ? <CheckCircle size={16} /> : <Send size={16} />)}

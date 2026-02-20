@@ -49,7 +49,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   // 2. Fetch posts
   const displayCategory = slug.charAt(0).toUpperCase() + slug.slice(1)
-  const posts = await getPostsByCategory(displayCategory)
+  const posts = await getPostsByCategory(slug)
 
   // 3. Handle Empty State (Zero posts) - Do NOT 404
   const hasPosts = posts.length > 0
