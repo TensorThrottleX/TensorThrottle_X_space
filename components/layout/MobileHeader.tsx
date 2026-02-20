@@ -168,7 +168,7 @@ export function MobileHeader({
             <header
                 className="mobile-header fixed top-0 left-0 right-0 z-[200] backdrop-blur-xl border-b transition-colors duration-300"
                 style={{
-                    backgroundColor: isBright ? 'rgba(255,255,255,0.92)' : 'rgba(10,10,10,0.92)',
+                    backgroundColor: isBright ? '#ffffff' : '#000000',
                     borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
                     height: '68px'
                 }}
@@ -178,7 +178,7 @@ export function MobileHeader({
                     <div className="flex flex-col justify-center py-2">
                         <h1
                             className="text-[13px] font-black tracking-tight uppercase leading-none"
-                            style={{ color: 'var(--heading-primary)' }}
+                            style={{ color: isBright ? '#000000' : '#ffffff' }}
                         >
                             {pageTitle}
                         </h1>

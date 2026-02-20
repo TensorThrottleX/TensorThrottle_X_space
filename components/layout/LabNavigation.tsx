@@ -146,7 +146,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
                 <div
                   className="absolute -left-1 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full transition-colors duration-300"
                   style={{
-                    backgroundColor: renderMode === 'bright' ? '#111' : '#22d3ee',
+                    backgroundColor: renderMode === 'bright' ? '#000000' : '#22d3ee',
                     boxShadow: renderMode === 'bright' ? 'none' : '0 0 8px rgba(34,211,238,0.8)'
                   }}
                 />

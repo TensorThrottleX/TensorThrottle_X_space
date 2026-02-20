@@ -220,14 +220,15 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
           ${(videoState.index === -2 || (isLoading && videoState.index >= 0))
                         ? 'opacity-0'
                         : (theme === 'bright' || theme === 'dark')
-                            ? 'opacity-35'
+                            ? 'opacity-0'
                             : 'opacity-100'
                     }
           ${videoState.index === -1 ? 'bg-black' : ''}
         `}
                 style={{
                     backgroundColor: videoState.index === -1 ? 'black' : 'transparent',
-                    visibility: videoState.index === -2 ? 'hidden' : 'visible'
+                    visibility: (videoState.index === -2 || theme === 'bright' || theme === 'dark') ? 'hidden' : 'visible',
+                    display: (videoState.index === -2 || theme === 'bright' || theme === 'dark') ? 'none' : 'block'
                 }}
             />
 
