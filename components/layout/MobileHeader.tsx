@@ -170,14 +170,14 @@ export function MobileHeader({
                 style={{
                     backgroundColor: isBright ? 'rgba(255,255,255,0.92)' : 'rgba(10,10,10,0.92)',
                     borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
-                    height: '56px'
+                    height: '68px'
                 }}
             >
                 <div className="flex items-center justify-between h-full px-4">
                     {/* Left Section: Page Title & Article Count */}
-                    <div className="flex flex-col">
+                    <div className="flex flex-col justify-center py-2">
                         <h1
-                            className="text-sm font-black tracking-tight uppercase leading-none"
+                            className="text-[13px] font-black tracking-tight uppercase leading-none"
                             style={{ color: 'var(--heading-primary)' }}
                         >
                             {pageTitle}
@@ -185,16 +185,16 @@ export function MobileHeader({
 
                         {/* Line 1: [•] Status Time */}
                         {pathname !== '/' && (
-                            <div className="flex items-center gap-1.5 mt-1.5">
+                            <div className="flex items-center gap-1.5 mt-2">
                                 {/* Dot First */}
                                 <div className="flex h-1.5 w-1.5 relative mr-0.5">
                                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
                                     <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
                                 </div>
-                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                <span className="text-[8.5px] font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--foreground)' }}>
                                     {isActive ? 'Active' : 'Inactive'}
                                 </span>
-                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter ml-1" style={{ color: 'var(--foreground)' }}>
+                                <span className="text-[8.5px] font-mono font-bold uppercase tracking-widest ml-1" style={{ color: 'var(--foreground)' }}>
                                     {isValidDate && isActive ? formatIST(pubDate!) : 'WHILE_AGO'}
                                 </span>
                             </div>
@@ -202,9 +202,9 @@ export function MobileHeader({
 
                         {/* Line 2: Article Count */}
                         {articleCount !== undefined && (
-                            <div className="mt-0.5 opacity-40">
+                            <div className="mt-1 opacity-50">
                                 <span
-                                    className="text-[9px] font-mono font-bold tracking-tight uppercase"
+                                    className="text-[8px] font-mono font-bold tracking-[0.05em] uppercase"
                                     style={{ color: 'var(--muted-foreground)' }}
                                 >
                                     {articleCount} {articleCount === 1 ? 'article' : 'articles'}

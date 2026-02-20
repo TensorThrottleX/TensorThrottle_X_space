@@ -32,8 +32,8 @@ export function MobileContentLayout({
             className="mobile-layout relative min-h-screen w-full flex flex-col"
             style={{
                 backgroundColor: 'transparent',
-                paddingTop: '56px',
-                paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))',
+                paddingTop: '68px',   // Header height
+                paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))', // Bottom nav height + safe area
             }}
         >
             <MobileHeader
