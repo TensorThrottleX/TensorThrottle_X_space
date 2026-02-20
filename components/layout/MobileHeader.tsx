@@ -5,10 +5,10 @@ import { MoreVertical, X as XClose, Github, Mail, Coffee, MessageSquare, Send, S
 import { usePathname } from 'next/navigation'
 import { useUI } from '@/components/providers/UIProvider'
 import { AnimatePresence, motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn, formatIST } from '@/lib/utils'
 import { useModeration } from '@/hooks/use-moderation'
 import { useScrutiny } from '@/hooks/use-scrutiny'
-import { differenceInWeeks, isValid, format } from 'date-fns'
+import { differenceInWeeks, isValid } from 'date-fns'
 
 // X (Twitter) Icon
 function XIcon({ className }: { className?: string }): React.ReactNode {
@@ -201,7 +201,7 @@ export function MobileHeader({
                                     </div>
                                     <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
                                         {isActive && pubDate ? (
-                                            <>Active // {format(pubDate, 'MM.dd // HH:mm')} UTC</>
+                                            <>Active | {formatIST(pubDate).split('|')[1].trim()}</>
                                         ) : 'WHILE_AGO'}
                                     </span>
                                 </div>

@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-import { differenceInWeeks, isValid, format } from 'date-fns'
+import { differenceInWeeks, isValid } from 'date-fns'
+import { formatIST } from '@/lib/utils'
 
 interface StatusButtonProps {
     latestPublishedAt?: string
@@ -60,7 +61,7 @@ export function StatusButton({
                     </p>
                     <p className="text-[10px] font-mono tracking-tight opacity-70" style={{ color: 'var(--foreground)' }}>
                         {isValidDate && isActive
-                            ? `${format(pubDate!, 'yyyy.MM.dd // HH:mm')} UTC`
+                            ? formatIST(pubDate!)
                             : 'WHILE_AGO'
                         }
                     </p>
