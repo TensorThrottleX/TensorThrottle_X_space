@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import type { Comment } from '@/types/post'
 import { getBrowserFingerprint } from '@/lib/fingerprint' // Ensure you create this file or adapt
+import { useModeration } from '@/hooks/use-moderation'
 
 interface CommentSectionProps {
   postSlug: string
@@ -87,6 +88,8 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
     metrics.current.pasteCount++
   }
 
+  const { checkContent, isChecking } = useModeration()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
@@ -107,31 +110,43 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
     if (!message) return setError('Message is required')
     if (message.length > MAX_MESSAGE_LENGTH) return setError(`Message too long`)
 
-    // 3. Client-Side Toxic Check (Hard Block)
-    if (TOXIC_PATTERNS.some(p => p.test(message) || p.test(name))) {
-      setError("Your comment violates community guidelines.")
-      return
-    }
-
+    // 3. ML-Based Toxicity Check (Server-Side)
     setIsSubmitting(true)
 
-    // Calculate final metrics
-    const endTime = Date.now()
-    const typingDuration = endTime - metrics.current.startTime
-
-    const payload = {
-      postSlug,
-      name,
-      message,
-      fingerprint,
-      metrics: {
-        ...metrics.current,
-        typingTime: typingDuration,
-        finalCharCount: message.length
-      }
-    }
-
     try {
+      const moderation = await checkContent(message + " " + name, { context: 'comment', userId: fingerprint }); // Check both
+
+      if (!moderation) {
+        throw new Error('Moderation check failed. Please try again.');
+      }
+
+      if (!moderation.allow) {
+        // Block submission based on severity
+        if (moderation.severity === 'high') {
+          setError("Severe or offensive language is not allowed.");
+        } else {
+          setError("Your message contains abusive language. Please revise.");
+        }
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Calculate final metrics
+      const endTime = Date.now()
+      const typingDuration = endTime - metrics.current.startTime
+
+      const payload = {
+        postSlug,
+        name,
+        message,
+        fingerprint,
+        metrics: {
+          ...metrics.current,
+          typingTime: typingDuration,
+          finalCharCount: message.length
+        }
+      }
+
       const response = await fetch('/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -210,7 +225,7 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
             type="text"
             placeholder="Your name"
             maxLength={50}
-            disabled={isSubmitting}
+            disabled={isSubmitting || isChecking}
             onFocus={handleFocus}
             onKeyDown={handleKeyDown}
             className="mt-1 w-full rounded-lg border px-4 py-2 text-sm placeholder-gray-500 focus:outline-none disabled:opacity-50 transition-colors"
@@ -235,7 +250,7 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
             placeholder="Share your thoughts..."
             maxLength={MAX_MESSAGE_LENGTH}
             rows={4}
-            disabled={isSubmitting}
+            disabled={isSubmitting || isChecking}
             onFocus={handleFocus}
             onKeyDown={handleKeyDown}
             onChange={(e) => {
@@ -257,7 +272,7 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
 
         <button
           type="submit"
-          disabled={isSubmitting || !!toxicWarning}
+          disabled={isSubmitting || isChecking || !!toxicWarning}
           className="rounded-lg border px-6 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80"
           style={{
             backgroundColor: 'var(--secondary)',
@@ -265,7 +280,7 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
             color: 'var(--secondary-foreground)'
           }}
         >
-          {isSubmitting ? 'Posting...' : 'Post Comment'}
+          {isSubmitting || isChecking ? 'Verifying...' : 'Post Comment'}
         </button>
       </form>
 

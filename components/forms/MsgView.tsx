@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { AlertCircle, CheckCircle, Loader2, Send, ShieldAlert, XOctagon } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
-import { analyzeMessage, ScrutinyResult } from '@/lib/scrutiny'
+import { useScrutiny } from '@/hooks/use-scrutiny'
+import { useModeration } from '@/hooks/use-moderation'
 
 
 
@@ -20,16 +21,10 @@ export function MsgView(): React.ReactNode {
     const [isSending, setIsSending] = useState(false)
     const [sendError, setSendError] = useState<string | null>(null)
     const [isSent, setIsSent] = useState(false)
-    const [scrutiny, setScrutiny] = useState<ScrutinyResult>({ level: 0, score: 0, violations: [], offendingWords: [] })
+    const { scrutiny, isProfane } = useScrutiny(message, 0) // 0ms debounce on desktop for instant feedback
     const [hField, setHField] = useState('') // Honeypot
     const [imgError, setImgError] = useState(false)
     const coffeeCardRef = useRef<HTMLDivElement>(null)
-
-    // [MSG_PAGE] – Real-time Message Scrutiny
-    useEffect(() => {
-        const result = analyzeMessage(message)
-        setScrutiny(result)
-    }, [message])
 
     useEffect(() => {
         setLoadTime(Date.now())
@@ -66,7 +61,6 @@ export function MsgView(): React.ReactNode {
     const isNameValid = name.trim().length >= 2 && name.trim().length <= 100
     const isMessageValid = message.trim().length >= 5 && wordCount <= maxWords
     const isEmailValid = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    const isProfane = scrutiny.level >= 2
     const canSend = isConfirmed && isNameValid && isMessageValid && isEmailValid && !isProfane && !isSending && !isSent
 
     // [MSG_PAGE] – Enforces word limit on input
@@ -82,6 +76,8 @@ export function MsgView(): React.ReactNode {
     }
 
     // [MSG_PAGE] – Handles the core email sending logic
+    const { checkContent, isChecking } = useModeration()
+
     const handleSend = async () => {
         if (!canSend) return
 
@@ -89,6 +85,24 @@ export function MsgView(): React.ReactNode {
         setSendError(null)
 
         try {
+            // 1. Server-Side Scrutiny (ML)
+            const moderation = await checkContent(message + " " + name, { context: 'chat', userId: name });
+
+            if (!moderation) {
+                throw new Error('Security check unavailable.');
+            }
+
+            if (!moderation.allow) {
+                if (moderation.severity === 'high') {
+                    setSendError("Severe or offensive language is not allowed.");
+                } else {
+                    setSendError("Your message contains abusive language. Please revise.");
+                }
+                setIsSending(false);
+                return;
+            }
+
+            // 2. Transmission
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -119,7 +133,7 @@ export function MsgView(): React.ReactNode {
             }
         } catch (err) {
             console.error('[FRONTEND_ERROR]', err);
-            setSendError('Transmission link failure. High-latency or connection unstable.');
+            setSendError('Transmission link failure. (Details: ' + (err instanceof Error ? err.message : 'Unknown') + ')');
         } finally {
             setIsSending(false)
         }
@@ -227,7 +241,32 @@ export function MsgView(): React.ReactNode {
                     </div>
 
                     <div className="space-y-2 relative">
-                        <label className="text-[10px] uppercase tracking-tighter font-black ml-1 opacity-40">Transmission Data (Required)</label>
+                        <div className="flex justify-between items-end mb-1">
+                            <label className="text-[10px] uppercase tracking-tighter font-black ml-1 opacity-40">Transmission Data (Required)</label>
+
+                            {/* Scrutiny Status Indicator (Top Right of Textarea) */}
+                            <AnimatePresence>
+                                {scrutiny.level > 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: 10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        className={cn(
+                                            "flex items-center gap-2 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-wide border backdrop-blur-md z-10",
+                                            scrutiny.level === 1
+                                                ? "bg-amber-500/10 border-amber-500/30 text-amber-500"
+                                                : "bg-red-500/10 border-red-500/30 text-red-500"
+                                        )}
+                                    >
+                                        {scrutiny.level === 1 ? <AlertCircle size={10} /> : <XOctagon size={10} />}
+                                        <span>
+                                            {scrutiny.level === 1 ? "Advisory: " : "Violation: "}
+                                            {scrutiny.violations.join(", ")}
+                                        </span>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                         <textarea
                             rows={8}
                             placeholder="Min 5 characters..."
@@ -235,27 +274,13 @@ export function MsgView(): React.ReactNode {
                             onChange={handleMessageChange}
                             className={cn(
                                 "w-full border rounded-2xl px-4 py-4 text-sm focus:outline-none transition-all resize-none",
-                                scrutiny.level >= 2 ? "border-red-500/50 bg-red-500/5" : (renderMode === 'bright' ? "bg-[#f4f4f4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white")
+                                scrutiny.level >= 2
+                                    ? "border-red-500/50 bg-red-500/5 focus:border-red-500"
+                                    : scrutiny.level === 1
+                                        ? "border-amber-500/50 bg-amber-500/5 focus:border-amber-500"
+                                        : (renderMode === 'bright' ? "bg-[#f4f4f4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white")
                             )}
                         />
-
-                        {/* Scrutiny Warning */}
-                        <AnimatePresence>
-                            {scrutiny.level >= 2 && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -5 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -5 }}
-                                    className="mt-2 p-3 rounded-xl border bg-red-500/5 border-red-500/20 text-red-400 flex items-start gap-3 text-[10px] font-medium"
-                                >
-                                    <XOctagon size={14} className="shrink-0" />
-                                    <div className="space-y-1">
-                                        <p className="uppercase tracking-normal font-bold text-red-500">Policy Violation</p>
-                                        <p className="opacity-80">Message contains prohibited language. Transmission blocked.</p>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
 
                         {/* Word Counter */}
                         <div className={cn(
@@ -303,13 +328,20 @@ export function MsgView(): React.ReactNode {
                         {/* Status Messages */}
                         <AnimatePresence>
                             {sendError && (
-                                <motion.p
+                                <motion.div
                                     initial={{ opacity: 0, y: 5 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="text-[10px] text-red-500 font-medium tracking-wide flex items-center gap-1.5"
+                                    exit={{ opacity: 0, y: 5 }}
+                                    className="max-w-md px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 flex flex-col items-center text-center gap-1"
                                 >
-                                    <AlertCircle size={12} /> {sendError}
-                                </motion.p>
+                                    <div className="flex items-center gap-2 font-bold text-[10px] uppercase tracking-wider">
+                                        <AlertCircle size={12} />
+                                        <span>Transmission Failure</span>
+                                    </div>
+                                    <p className="text-[11px] opacity-90 font-medium">
+                                        {sendError}
+                                    </p>
+                                </motion.div>
                             )}
                             {isSent && (
                                 <motion.p

@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation'
 import { useUI } from '@/components/providers/UIProvider'
 import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useModeration } from '@/hooks/use-moderation'
+import { useScrutiny } from '@/hooks/use-scrutiny'
 
 // X (Twitter) Icon
 function XIcon({ className }: { className?: string }): React.ReactNode {
@@ -60,6 +62,9 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
     const [loadTime] = useState(Date.now())
     const [trap, setTrap] = useState('')
 
+    // Real-time Scrutiny (debounced for mobile perf)
+    const { scrutiny, isProfane } = useScrutiny(message, 300)
+
     useEffect(() => {
         setMounted(true)
         setTime(new Date())
@@ -85,6 +90,8 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
         return `${h}:${m}:${s}`
     }
 
+    const { checkContent, isChecking } = useModeration()
+
     const handleSend = async () => {
         if (!name || !message || !isConfirmed) return
         setIsSending(true)
@@ -92,6 +99,22 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
 
         // Simulate sending (replace with actual API call if needed, mirroring MsgView)
         try {
+            // 1. Server-Side Scrutiny (ML)
+            const moderation = await checkContent(message + " " + name, { context: 'chat', userId: name });
+            if (!moderation) {
+                throw new Error('Security check unavailable.');
+            }
+
+            if (!moderation.allow) {
+                if (moderation.severity === 'high') {
+                    setSendError("Severe or offensive language is not allowed.");
+                } else {
+                    setSendError("Your message contains abusive language. Please revise.");
+                }
+                setIsSending(false);
+                return;
+            }
+
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -328,19 +351,50 @@ export function MobileHeader({ pageTitleOverride, articleCount }: { pageTitleOve
                                     />
                                 </div>
                                 <div className="space-y-1">
-                                    <label className="text-[9px] font-bold uppercase opacity-40 ml-1">Transmission</label>
+                                    <div className="flex justify-between items-end">
+                                        <label className="text-[9px] font-bold uppercase opacity-40 ml-1">Transmission</label>
+                                        {/* Scrutiny Warning Badge */}
+                                        <AnimatePresence>
+                                            {scrutiny.level > 0 && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, x: 10 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    exit={{ opacity: 0, x: 10 }}
+                                                    className={cn(
+                                                        "flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-wide border backdrop-blur-md",
+                                                        scrutiny.level === 1
+                                                            ? "bg-amber-500/10 border-amber-500/30 text-amber-500"
+                                                            : "bg-red-500/10 border-red-500/30 text-red-500"
+                                                    )}
+                                                >
+                                                    {scrutiny.level === 1 ? <AlertCircle size={9} /> : <XClose size={9} />}
+                                                    <span>
+                                                        {scrutiny.level === 1 ? "Advisory: " : "Violation: "}
+                                                        {scrutiny.violations.join(", ")}
+                                                    </span>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                     <textarea
                                         rows={6}
                                         placeholder="ENTER MESSAGE DATA..."
                                         value={message}
                                         onChange={e => setMessage(e.target.value)}
-                                        className={cn("w-full p-4 rounded-xl border bg-transparent text-sm focus:outline-none focus:border-cyan-500/50 resize-none transition-colors", isBright ? "border-black/10 bg-white" : "border-white/10 bg-white/5")}
+                                        className={cn(
+                                            "w-full p-4 rounded-xl border bg-transparent text-sm focus:outline-none resize-none transition-all",
+                                            scrutiny.level >= 2
+                                                ? "border-red-500/50 bg-red-500/5 focus:border-red-500"
+                                                : scrutiny.level === 1
+                                                    ? "border-amber-500/50 bg-amber-500/5 focus:border-amber-500"
+                                                    : (isBright ? "border-black/10 bg-white focus:border-cyan-500/50" : "border-white/10 bg-white/5 focus:border-cyan-500/50")
+                                        )}
                                     />
                                 </div>
 
                                 <button
                                     onClick={handleSend}
-                                    disabled={!name || !message || isSending || isSent}
+                                    disabled={!name || !message || isSending || isSent || isProfane}
                                     className={cn(
                                         "w-full h-14 mt-2 rounded-xl flex items-center justify-center gap-2 font-black uppercase text-xs tracking-wider transition-all shadow-lg active:scale-[0.98]",
                                         isSent
