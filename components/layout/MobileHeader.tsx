@@ -195,7 +195,7 @@ export function MobileHeader({
                                     {isActive ? 'Active' : 'Inactive'}
                                 </span>
                                 <span className="text-[8.5px] font-mono font-bold uppercase tracking-widest ml-1" style={{ color: 'var(--foreground)' }}>
-                                    {isValidDate && isActive ? formatIST(pubDate!) : 'WHILE_AGO'}
+                                    {isValidDate && isActive ? formatIST(time || new Date()) : 'WHILE_AGO'}
                                 </span>
                             </div>
                         )}
