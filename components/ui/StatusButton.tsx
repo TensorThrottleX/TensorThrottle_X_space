@@ -21,12 +21,12 @@ export function StatusButton({ latestPublishedAt, compact = false, showTimestamp
 
     if (compact) {
         return (
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 border border-white/10 backdrop-blur-md shadow-2xl">
-                <div className="relative flex h-1.5 w-1.5">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/10 backdrop-blur-md shadow-2xl">
+                <div className="relative flex h-1 w-1">
                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colorClass} opacity-75`}></span>
-                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${colorClass} ${shadowClass}`}></span>
+                    <span className={`relative inline-flex h-1 w-1 rounded-full ${colorClass} ${shadowClass}`}></span>
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">
+                <span className="text-[10px] font-bold uppercase tracking-tight text-white leading-none">
                     {statusText}
                 </span>
             </div>
@@ -36,13 +36,13 @@ export function StatusButton({ latestPublishedAt, compact = false, showTimestamp
     return (
         <div className="flex flex-col items-start gap-3 mt-4">
             {/* 3D Status Button */}
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-black/40 border border-white/10 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 hover:border-white/20 group/status">
-                <div className="relative flex h-2 w-2">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/50 border border-white/10 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 hover:border-white/20 group/status">
+                <div className="relative flex h-1.5 w-1.5">
                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colorClass} opacity-75`}></span>
-                    <span className={`relative inline-flex h-2 w-2 rounded-full ${colorClass} ${shadowClass} transition-transform duration-300 group-hover/status:scale-110`}></span>
+                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${colorClass} ${shadowClass} transition-transform duration-300 group-hover/status:scale-110`}></span>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white transition-opacity duration-300 group-hover/status:opacity-100">
-                    {statusText} Frequency
+                <span className="text-[11px] font-bold uppercase tracking-tight text-white transition-opacity duration-300 group-hover/status:opacity-100 leading-none">
+                    {statusText}
                 </span>
             </div>
 

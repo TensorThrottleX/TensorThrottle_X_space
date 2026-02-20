@@ -21,7 +21,7 @@ import { MsgView } from '@/components/forms/MsgView'
  * - MobileBottomNav (fixed bottom)
  * - MobileTerminal (FAB + overlay)
  */
-export function MobileHomeLayout({ latestPublishedAt }: { latestPublishedAt?: string }) {
+export function MobileHomeLayout() {
     const { uiMode, mainView, renderMode } = useUI()
     const [contentMode, setContentMode] = useState<'purpose' | 'about' | 'quote'>('purpose')
     const isBright = renderMode === 'bright'

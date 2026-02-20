@@ -14,7 +14,7 @@ import { AnimatePresence } from 'framer-motion';
 import { StatusButton } from '@/components/ui/StatusButton';
 
 /* HOME > LAYOUT > COMPONENT > MAIN_PAGE_CONTROLLER */
-export function HomePageLayout({ latestPublishedAt }: { latestPublishedAt?: string }) {
+export function HomePageLayout() {
     // [SCREENSHOT]: Used as the main layout controller. 
     // It manages the state for 'Purpose' vs 'About' and renders the global persistent elements (Title, Toggle).
     const { uiMode, mainView } = useUI();
@@ -31,20 +31,17 @@ export function HomePageLayout({ latestPublishedAt }: { latestPublishedAt?: stri
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="hero-header relative w-full flex flex-col items-center z-40 pointer-events-none select-none pb-4"
+                            className="hero-header relative w-full flex justify-center z-40 pointer-events-none select-none pb-4"
                         >
                             <motion.h1
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                 animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-h1 font-black tracking-tighter drop-shadow-2xl mb-2"
+                                className="text-h1 font-black tracking-tighter drop-shadow-2xl"
                                 style={{ color: 'var(--heading-primary)' }}
                             >
                                 TENSOR THROTTLE X
                             </motion.h1>
-                            <div className="pointer-events-auto">
-                                <StatusButton latestPublishedAt={latestPublishedAt} compact={true} showTimestamp={false} />
-                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>

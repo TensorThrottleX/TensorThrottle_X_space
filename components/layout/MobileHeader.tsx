@@ -180,10 +180,12 @@ export function MobileHeader({
                             >
                                 {pageTitle}
                             </h1>
-                            <div className="flex h-1.5 w-1.5 relative">
-                                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
-                                <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
-                            </div>
+                            {pathname !== '/' && (
+                                <div className="flex h-1.5 w-1.5 relative">
+                                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
+                                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
+                                </div>
+                            )}
                         </div>
                         {articleCount !== undefined && (
                             <span
