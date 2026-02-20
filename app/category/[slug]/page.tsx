@@ -6,6 +6,7 @@ import { LabNavigation } from '@/components/layout/LabNavigation'
 import { CategoryPostCard } from '@/components/content/CategoryPostCard'
 import { getPostsByCategory } from '@/lib/notion'
 import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
+import { StatusButton } from '@/components/ui/StatusButton'
 
 // ISR: Revalidate every 1 minute
 export const revalidate = 60
@@ -52,9 +53,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   // 3. Handle Empty State (Zero posts) - Do NOT 404
   const hasPosts = posts.length > 0
+  const latestPost = hasPosts ? posts[0].publishedAt : undefined
 
   return (
-    <ResponsiveContentWrapper pageTitle={displayCategory} articleCount={hasPosts ? posts.length : 0}>
+    <ResponsiveContentWrapper
+      pageTitle={displayCategory}
+      articleCount={hasPosts ? posts.length : 0}
+      latestPublishedAt={latestPost}
+    >
       <LabContainer videoSrc="/media/videos/default-background.mp4">
         {/* Sidebar remains unchanged */}
         <LabNavigation />
@@ -74,6 +80,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 style={{ color: 'var(--muted-foreground)' }}>
                 {hasPosts ? `${posts.length} ${posts.length === 1 ? 'article' : 'articles'}` : '0 articles'}
               </p>
+              <div className="mb-8">
+                <StatusButton latestPublishedAt={latestPost} />
+              </div>
               <hr style={{ borderColor: 'var(--border)' }} />
             </div>
 
