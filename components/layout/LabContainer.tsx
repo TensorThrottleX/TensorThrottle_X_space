@@ -32,6 +32,7 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
   return (
     <div className={`layout relative min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out 
       ${uiMode === 'tree' ? 'tree-active' : ''}
+      ${getBgClass()}
     `}>
       {/* [LAYER_2]: Substrate Overlay (Fixed Viewport Blur) 
           - Maintains focus on the Cognitive layer
