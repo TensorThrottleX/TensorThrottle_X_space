@@ -168,7 +168,7 @@ export function MobileHeader({
             <header
                 className="mobile-header fixed top-0 left-0 right-0 z-[200] backdrop-blur-xl border-b transition-colors duration-300"
                 style={{
-                    backgroundColor: isBright ? '#ffffff' : '#000000',
+                    backgroundColor: isBright ? '#fafafa' : '#000000',
                     borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
                     height: '68px'
                 }}

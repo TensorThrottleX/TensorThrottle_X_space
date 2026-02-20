@@ -175,12 +175,12 @@ export function MobileTerminal() {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.2 }}
                         onClick={() => setIsTerminalOpen(true)}
-                        className="fixed bottom-24 right-5 z-[190] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-transform"
+                        className="fixed bottom-24 right-5 z-[190] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-all duration-300 hover:ring-[1.5px] hover:ring-black"
                         style={{
-                            backgroundColor: isBright ? '#111' : '#0f0f0f',
-                            border: isBright ? '1px solid rgba(0,0,0,0.2)' : '1px solid rgba(34,211,238,0.3)',
+                            backgroundColor: isBright ? '#fafafa' : '#0f0f0f',
+                            border: isBright ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(34,211,238,0.3)',
                             boxShadow: isBright
-                                ? '0 8px 30px rgba(0,0,0,0.15)'
+                                ? '0 10px 40px rgba(0,0,0,0.06)'
                                 : '0 8px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34,211,238,0.15)',
                         }}
                         aria-label="Open Terminal"
@@ -200,7 +200,7 @@ export function MobileTerminal() {
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                         className="fixed inset-0 z-[250] flex flex-col font-mono"
                         style={{
-                            backgroundColor: isBright ? '#ffffff' : '#0a0a0a',
+                            backgroundColor: isBright ? '#fafafa' : '#0a0a0a',
                         }}
                     >
                         {/* Mac-style Header */}
