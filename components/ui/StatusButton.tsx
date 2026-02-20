@@ -7,9 +7,15 @@ interface StatusButtonProps {
     latestPublishedAt?: string
     compact?: boolean
     showTimestamp?: boolean
+    align?: 'start' | 'end'
 }
 
-export function StatusButton({ latestPublishedAt, compact = false, showTimestamp = true }: StatusButtonProps) {
+export function StatusButton({
+    latestPublishedAt,
+    compact = false,
+    showTimestamp = true,
+    align = 'start'
+}: StatusButtonProps) {
     const pubDate = latestPublishedAt ? new Date(latestPublishedAt) : null
     const isValidDate = pubDate && isValid(pubDate)
     const weeksDiff = isValidDate ? differenceInWeeks(new Date(), pubDate!) : Infinity
@@ -34,7 +40,7 @@ export function StatusButton({ latestPublishedAt, compact = false, showTimestamp
     }
 
     return (
-        <div className="flex flex-col items-start gap-3 mt-4">
+        <div className={`flex flex-col ${align === 'end' ? 'items-end' : 'items-start'} gap-2`}>
             {/* 3D Status Button */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/50 border border-white/10 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 hover:border-white/20 group/status">
                 <div className="relative flex h-1.5 w-1.5">
@@ -48,11 +54,11 @@ export function StatusButton({ latestPublishedAt, compact = false, showTimestamp
 
             {/* Last Updated Metadata */}
             {showTimestamp && (
-                <div className="flex flex-col gap-0.5 ml-1">
-                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40" style={{ color: 'var(--muted-foreground)' }}>
+                <div className={`flex flex-col gap-0.5 ${align === 'end' ? 'items-end' : 'items-start ml-1'}`}>
+                    <p className="text-[9px] font-bold uppercase tracking-widest opacity-40" style={{ color: 'var(--muted-foreground)' }}>
                         Last Updated
                     </p>
-                    <p className="text-[11px] font-mono tracking-tight opacity-70" style={{ color: 'var(--foreground)' }}>
+                    <p className="text-[10px] font-mono tracking-tight opacity-70" style={{ color: 'var(--foreground)' }}>
                         {isValidDate && isActive
                             ? `SEC_FRAGMENT > ${format(pubDate!, 'yyyy.MM.dd // HH:mm')} UTC`
                             : 'WHILE_AGO'

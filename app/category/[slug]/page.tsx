@@ -68,22 +68,26 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         {/* Main Content Area - Custom Layout for Category Archive */}
         <div className="flex-1 w-full relative z-10 transition-colors duration-500 overflow-visible"
           style={{ backgroundColor: 'var(--background)' }}>
-          <div className="max-w-panel mx-auto p-fluid">
+          <div className="max-w-[42rem] mx-auto p-fluid">
 
             {/* Header Section (Desktop Only) */}
-            <div className="hidden md:block mb-fluid">
-              <h1 className="text-h1 font-black tracking-tighter mb-2 transition-colors duration-500"
-                style={{ color: 'var(--heading-primary)' }}>
-                {displayCategory}
-              </h1>
-              <p className="text-body font-mono mb-6 transition-colors duration-500"
-                style={{ color: 'var(--muted-foreground)' }}>
-                {hasPosts ? `${posts.length} ${posts.length === 1 ? 'article' : 'articles'}` : '0 articles'}
-              </p>
-              <div className="mb-8">
-                <StatusButton latestPublishedAt={latestPost} />
+            <div className="hidden md:block mb-fluid border-b pb-8 transition-colors duration-500"
+              style={{ borderColor: 'var(--border)' }}>
+              <div className="flex justify-between items-start gap-10">
+                <div className="flex flex-col gap-1.5">
+                  <h1 className="text-3xl font-black tracking-tighter transition-colors duration-500"
+                    style={{ color: 'var(--heading-primary)' }}>
+                    {displayCategory}
+                  </h1>
+                  <p className="text-[11px] font-mono uppercase tracking-widest transition-colors duration-500"
+                    style={{ color: 'var(--muted-foreground)' }}>
+                    {hasPosts ? `${posts.length} ${posts.length === 1 ? 'article' : 'articles'}` : '0 articles'}
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <StatusButton latestPublishedAt={latestPost} align="end" />
+                </div>
               </div>
-              <hr style={{ borderColor: 'var(--border)' }} />
             </div>
 
             {/* Posts Archive Stack */}

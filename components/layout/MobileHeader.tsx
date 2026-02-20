@@ -180,21 +180,28 @@ export function MobileHeader({
                             >
                                 {pageTitle}
                             </h1>
+                        </div>
+                        <div className="flex items-center gap-2 mt-1">
+                            {articleCount !== undefined && (
+                                <span
+                                    className="text-[10px] font-mono font-bold tracking-tight opacity-50"
+                                    style={{ color: 'var(--muted-foreground)' }}
+                                >
+                                    {articleCount} {articleCount === 1 ? 'article' : 'articles'}
+                                </span>
+                            )}
                             {pathname !== '/' && (
-                                <div className="flex h-1.5 w-1.5 relative">
-                                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
-                                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
+                                <div className="flex items-center gap-1.5 opacity-80">
+                                    <div className="flex h-1.5 w-1.5 relative">
+                                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
+                                        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
+                                    </div>
+                                    <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                        {isActive ? 'Active' : 'WHILE_AGO'}
+                                    </span>
                                 </div>
                             )}
                         </div>
-                        {articleCount !== undefined && (
-                            <span
-                                className="text-[10px] font-mono font-medium tracking-wide mt-0.5 opacity-60"
-                                style={{ color: 'var(--muted-foreground)' }}
-                            >
-                                {articleCount} {articleCount === 1 ? 'article' : 'articles'}
-                            </span>
-                        )}
                     </div>
 
                     {/* Right Section: Clock + Menu */}
