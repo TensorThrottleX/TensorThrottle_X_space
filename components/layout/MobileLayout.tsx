@@ -36,7 +36,7 @@ export function MobileHomeLayout() {
             }}
         >
             {/* Mobile Header */}
-            <MobileHeader latestPublishedAt={latestPublishedAt} />
+            <MobileHeader />
 
             {/* Main Content Area */}
             <div className="flex-1 w-full overflow-x-hidden">

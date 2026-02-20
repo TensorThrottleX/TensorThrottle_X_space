@@ -11,7 +11,6 @@ import { CognitiveDashboard } from '@/components/dashboard/CognitiveDashboard';
 import { MsgView } from '@/components/forms/MsgView';
 import { useUI } from '@/components/providers/UIProvider';
 import { AnimatePresence } from 'framer-motion';
-import { StatusButton } from '@/components/ui/StatusButton';
 
 /* HOME > LAYOUT > COMPONENT > MAIN_PAGE_CONTROLLER */
 export function HomePageLayout() {
