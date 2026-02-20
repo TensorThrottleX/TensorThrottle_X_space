@@ -138,10 +138,11 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
  * Uses in-memory filtering for robustness against Notion schema types (Select vs Text)
  */
 export async function getPostsByCategory(category: string): Promise<Post[]> {
-  // Use the robust getAllPosts which handles different property types
   const allPosts = await getAllPosts();
-  // Filter by the specific category case-insensitively
-  const realPosts = allPosts.filter(post => post.category.toLowerCase() === category.toLowerCase());
+  // Filter by category case-insensitively and trim for robustness
+  const realPosts = allPosts.filter(post =>
+    post.category.trim().toLowerCase() === category.trim().toLowerCase()
+  );
 
   return realPosts;
 }
@@ -216,9 +217,9 @@ function normalizePage(page: any): Post {
   // Helper to extract category regardless of type (Select, Multi-Select, or Rich Text)
   const extractCategory = (prop: any): string => {
     if (!prop) return 'Uncategorized';
-    if (prop.type === 'select') return prop.select?.name || 'Uncategorized';
-    if (prop.type === 'multi_select') return prop.multi_select?.[0]?.name || 'Uncategorized';
-    if (prop.type === 'rich_text') return extractText(prop.rich_text) || 'Uncategorized';
+    if (prop.type === 'select') return prop.select?.name?.trim() || 'Uncategorized';
+    if (prop.type === 'multi_select') return prop.multi_select?.[0]?.name?.trim() || 'Uncategorized';
+    if (prop.type === 'rich_text') return extractText(prop.rich_text)?.trim() || 'Uncategorized';
     return 'Uncategorized';
   };
 

@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useModeration } from '@/hooks/use-moderation'
 import { useScrutiny } from '@/hooks/use-scrutiny'
-import { differenceInWeeks, isValid } from 'date-fns'
+import { differenceInWeeks, isValid, format } from 'date-fns'
 
 // X (Twitter) Icon
 function XIcon({ className }: { className?: string }): React.ReactNode {
@@ -200,7 +200,9 @@ export function MobileHeader({
                                         <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
                                     </div>
                                     <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
-                                        {isActive ? 'Active' : 'WHILE_AGO'}
+                                        {isActive && pubDate ? (
+                                            <>Active // {format(pubDate, 'MM.dd')}</>
+                                        ) : 'WHILE_AGO'}
                                     </span>
                                 </div>
                             )}
