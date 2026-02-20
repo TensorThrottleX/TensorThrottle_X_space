@@ -25,7 +25,7 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
     switch (renderMode) {
       case 'bright': return 'bg-[#fafafa]' // Clean engineering white
       case 'dark': return 'bg-[#050505]'   // Deep matte black
-      default: return 'bg-black'           // Video background base
+      default: return 'bg-transparent'     // Allow global video transparency
     }
   }
 
