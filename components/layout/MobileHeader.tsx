@@ -430,10 +430,12 @@ export function MobileHeader({
                                     onClick={handleSend}
                                     disabled={!name || !message || isSending || isSent || isProfane}
                                     className={cn(
-                                        "w-full h-14 mt-2 rounded-xl flex items-center justify-center gap-2 font-black uppercase text-xs tracking-wider transition-all shadow-lg active:scale-[0.98]",
-                                        isSent
-                                            ? "bg-emerald-500 text-white shadow-emerald-500/20"
-                                            : (isBright ? "bg-black text-white hover:bg-black/80 shadow-black/10" : "bg-white text-black hover:bg-white/90 shadow-white/5")
+                                        "w-full h-14 mt-2 rounded-xl flex items-center justify-center gap-2 font-black uppercase text-xs tracking-wider transition-all active:scale-[0.98]",
+                                        (isSent)
+                                            ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20"
+                                            : (!name || !message || isSending || isProfane || scrutiny.level >= 2)
+                                                ? (isBright ? "bg-black/5 text-black/30 border-black/5 shadow-none" : "bg-white/5 text-white/20 border-white/5 shadow-none")
+                                                : (isBright ? "bg-black text-white hover:bg-black/80 shadow-lg shadow-black/10" : "bg-white text-black hover:bg-white/90 shadow-xl shadow-white/5")
                                     )}
                                 >
                                     {isSending ? <Loader2 size={16} className="animate-spin" /> : (isSent ? <CheckCircle size={16} /> : <Send size={16} />)}
