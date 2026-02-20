@@ -183,17 +183,18 @@ export function MobileHeader({
                             {pageTitle}
                         </h1>
 
-                        {/* Line 1: Status + Dot + Time */}
+                        {/* Line 1: [•] Status Time */}
                         {pathname !== '/' && (
                             <div className="flex items-center gap-1.5 mt-1.5">
-                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
-                                    {isActive ? 'Active' : 'Inactive'}
-                                </span>
-                                <div className="flex h-1.5 w-1.5 relative mx-0.5">
+                                {/* Dot First */}
+                                <div className="flex h-1.5 w-1.5 relative mr-0.5">
                                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>
                                     <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${blinkerColor}`}></span>
                                 </div>
                                 <span className="text-[9px] font-mono font-bold uppercase tracking-tighter" style={{ color: 'var(--foreground)' }}>
+                                    {isActive ? 'Active' : 'Inactive'}
+                                </span>
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-tighter ml-1" style={{ color: 'var(--foreground)' }}>
                                     {isValidDate && isActive ? formatIST(pubDate!) : 'WHILE_AGO'}
                                 </span>
                             </div>
