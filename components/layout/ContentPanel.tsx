@@ -42,9 +42,10 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt, hid
     <div className="relative flex flex-1 w-full flex-col items-center justify-center p-4 md:p-8 min-h-screen">
       {/* Floating panel with glass effect - Normalized Architecture */}
       <div
-        className="relative w-full max-w-2xl rounded-2xl backdrop-blur-2xl backdrop-saturate-150 border shadow-2xl overflow-hidden flex flex-col transition-all duration-500 hover:shadow-cyan-500/5 group/panel h-[85vh]"
+        className="relative w-full max-w-2xl rounded-2xl backdrop-blur-3xl backdrop-saturate-150 border shadow-2xl overflow-hidden flex flex-col transition-all duration-500 hover:shadow-cyan-500/10 group/panel h-[85vh]"
         style={{
           backgroundColor: 'var(--card-bg)',
+          backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05), transparent)',
           borderColor: 'var(--card-border)',
           boxShadow: 'var(--shadow-soft)'
         }}
@@ -68,9 +69,11 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt, hid
           </div>
         )}
 
-        {/* Scrollable content area */}
-        <div className="flex-1 overflow-y-auto px-5 py-6 premium-scrollbar scroll-smooth">
-          {children}
+        {/* Scrollable content area - Force scroll effect even if empty */}
+        <div className="flex-1 overflow-y-scroll px-5 py-6 premium-scrollbar scroll-smooth">
+          <div className="min-h-[101%] flex flex-col">
+            {children}
+          </div>
         </div>
       </div>
     </div>

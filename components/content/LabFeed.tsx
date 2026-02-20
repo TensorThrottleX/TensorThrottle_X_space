@@ -93,8 +93,15 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
-          <p style={{ color: 'var(--muted-foreground)' }}>No posts yet.</p>
+        <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
+          <div className="h-12 w-12 rounded-full border border-dashed flex items-center justify-center opacity-20"
+            style={{ borderColor: 'var(--muted-foreground)' }}
+          >
+            <span className="text-xl">○</span>
+          </div>
+          <p className="text-sm font-medium tracking-tight opacity-60" style={{ color: 'var(--muted-foreground)' }}>
+            No posts found in this frequency.
+          </p>
         </div>
       )}
 
