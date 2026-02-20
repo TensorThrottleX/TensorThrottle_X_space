@@ -53,9 +53,9 @@ export function StatusButton({ latestPublishedAt, compact = false, showTimestamp
                         Last Updated
                     </p>
                     <p className="text-[11px] font-mono tracking-tight opacity-70" style={{ color: 'var(--foreground)' }}>
-                        {isValidDate
+                        {isValidDate && isActive
                             ? `SEC_FRAGMENT > ${format(pubDate!, 'yyyy.MM.dd // HH:mm')} UTC`
-                            : 'NO_DATA_STREAM_DETECTED'
+                            : 'WHILE_AGO'
                         }
                     </p>
                 </div>
