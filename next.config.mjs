@@ -8,10 +8,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   */
-  // Ensure Turbopack is not enabled via config
 
-  // Watcher Optimization for Windows disabled for production readiness check
-  serverExternalPackages: ['@xenova/transformers', 'onnxruntime-node'],
+  // Mark native packages as external so they're not bundled into serverless functions
+  serverExternalPackages: ['@xenova/transformers', 'onnxruntime-node', 'sharp'],
 }
 
 export default nextConfig
