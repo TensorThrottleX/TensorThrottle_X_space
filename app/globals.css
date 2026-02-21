@@ -216,8 +216,9 @@ body {
   /* BRIGHT MODE (Engineering Lab - Refined) */
   .mode-bright {
     /* Base Background - #f5f6f8 */
-    --bg-primary: 220 14% 96%;
-    --background: 220 14% 96%;
+    --bg-primary: 0 0% 98%;
+    /* #fafafa - Smoother shade */
+    --background: 0 0% 98%;
 
     /* Text - High Contrast */
     --foreground: 0 0% 6.7%;
@@ -236,8 +237,8 @@ body {
     --card-border: rgba(0, 0, 0, 0.06);
 
     /* Sidebar - Distinct from bg */
-    --sidebar-bg: #eef1f4;
-    --sidebar-border: rgba(0, 0, 0, 0.06);
+    --sidebar-bg: #fafafa;
+    --sidebar-border: rgba(0, 0, 0, 0.04);
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 6.7%;
@@ -259,7 +260,7 @@ body {
     --input: 0 0% 90%;
     --ring: 0 0% 6.7%;
 
-    --heading-primary: #111111;
+    --heading-primary: #000000;
 
     /* Custom Shadows for Bright Mode - Vital for depth */
     --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
@@ -270,9 +271,9 @@ body {
 
   /* DARK MODE (Deep Focus) */
   .mode-dark {
-    --bg-primary: 220 14% 4%;
-    /* #0b0d10 */
-    --background: 220 14% 4%;
+    --bg-primary: 0 0% 0%;
+    /* #000000 */
+    --background: 0 0% 0%;
 
     --foreground: 210 20% 90%;
     --text-primary: 210 20% 90%;
@@ -286,8 +287,8 @@ body {
     --card-foreground: 210 20% 90%;
     --card-border: rgba(255, 255, 255, 0.08);
 
-    --sidebar-bg: #0b0d10;
-    --sidebar-border: rgba(255, 255, 255, 0.08);
+    --sidebar-bg: #000000;
+    --sidebar-border: rgba(255, 255, 255, 0.06);
 
     --popover: 220 13% 8%;
     --popover-foreground: 210 20% 90%;
@@ -322,6 +323,7 @@ body {
 
   body {
     @apply bg-background text-foreground;
+    background-color: hsl(var(--background)) !important;
   }
 }
 

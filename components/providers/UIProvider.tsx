@@ -23,7 +23,7 @@ const UIContext = createContext<UIContextType | undefined>(undefined)
 
 export function UIProvider({ children }: { children: ReactNode }) {
     const [uiMode, setUiMode] = useState<UIMode>('default')
-    const [renderMode, setRenderMode] = useState<RenderMode>('normal')
+    const [renderMode, setRenderMode] = useState<RenderMode>('bright')
     const [isPrecision, setIsPrecision] = useState(false)
     const [isTerminalOpen, setIsTerminalOpen] = useState(false)
     const [mainView, setMainView] = useState<MainView>('dashboard')

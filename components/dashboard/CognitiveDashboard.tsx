@@ -572,10 +572,16 @@ function StackedDeck({
 
                                             {/* Main Info */}
                                             <div className="relative z-10 flex flex-col gap-6 mt-8">
-                                                <h2 className="text-h2 font-black text-white tracking-tighter leading-none">
+                                                <h2 className={cn(
+                                                    "text-h2 font-black tracking-tighter leading-none transition-colors duration-300",
+                                                    isBright ? "text-black" : "text-white"
+                                                )}>
                                                     {content.heading}
                                                 </h2>
-                                                <p className="text-base text-gray-300/75 font-light leading-relaxed max-w-md">
+                                                <p className={cn(
+                                                    "text-base font-light leading-relaxed max-w-md",
+                                                    isBright ? "text-gray-600" : "text-gray-300/75"
+                                                )}>
                                                     {content.intro}
                                                 </p>
                                             </div>

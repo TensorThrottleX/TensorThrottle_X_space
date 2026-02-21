@@ -61,7 +61,7 @@ export function StatusButton({
                     </p>
                     <p className="text-[10px] font-mono tracking-tight opacity-70" style={{ color: 'var(--foreground)' }}>
                         {isValidDate && isActive
-                            ? formatIST(pubDate!)
+                            ? formatIST(new Date())
                             : 'WHILE_AGO'
                         }
                     </p>
