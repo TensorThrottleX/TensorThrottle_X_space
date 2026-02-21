@@ -36,7 +36,7 @@ function getPageTitle(pathname: string): string {
     if (pathname.startsWith('/category/manifold')) return 'Manifold'
     if (pathname.startsWith('/post/')) return 'Post'
     if (pathname.startsWith('/about')) return 'About'
-    return 'TensorThrottle X'
+    return 'TensorThrottleX'
 }
 
 export function MobileHeader({
@@ -178,14 +178,14 @@ export function MobileHeader({
                     <div className="flex flex-col justify-center py-2">
                         <h1
                             className="text-[13px] font-black tracking-tight uppercase leading-none"
-                            style={{ color: isBright ? '#000000' : '#ffffff' }}
+                            style={{ color: isBright ? 'var(--heading-primary)' : '#ffffff' }}
                         >
                             {pageTitle}
                         </h1>
 
                         {/* Line 1: [•] Status Time */}
                         {pathname !== '/' && (
-                            <div className="flex items-center gap-1.5 mt-2">
+                            <div className="flex items-center gap-1.5 mt-1">
                                 {/* Dot First */}
                                 <div className="flex h-1.5 w-1.5 relative mr-0.5">
                                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${blinkerColor} opacity-75`}></span>

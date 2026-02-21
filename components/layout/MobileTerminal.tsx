@@ -185,7 +185,7 @@ export function MobileTerminal() {
                         }}
                         aria-label="Open Terminal"
                     >
-                        <Terminal size={20} className={isBright ? 'text-white' : 'text-cyan-400'} />
+                        <Terminal size={20} className={isBright ? 'text-black' : 'text-cyan-400'} />
                     </motion.button>
                 )}
             </AnimatePresence>

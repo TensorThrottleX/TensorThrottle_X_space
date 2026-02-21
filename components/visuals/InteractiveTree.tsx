@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { TREE_ANIMATION_CONFIG } from '@/lib/tree-animations'
+import { useUI } from '@/components/providers/UIProvider'
 
 export interface TreeNode {
     name: string
@@ -24,6 +25,14 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
     const containerRef = useRef<HTMLDivElement>(null)
     const isTransitioning = useRef(false)
     const lockTimer = useRef<NodeJS.Timeout | null>(null)
+
+    const { renderMode } = useUI()
+    const isBright = renderMode === 'bright'
+
+    const nodeFill = isBright ? '#ffffff' : '#2b2f36'
+    const nodeStroke = isBright ? 'rgba(0,0,0,0.1)' : '#2e4b43'
+    const textColor = isBright ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.9)'
+    const linkColor = isBright ? 'rgba(0,0,0,0.15)' : '#2e4b43'
 
     // Config: Exact match to requirements
     const margin = standalone
@@ -104,7 +113,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
                     return diagonal(o, o)
                 })
                 .style("fill", "none")
-                .style("stroke", "#2e4b43")
+                .style("stroke", linkColor)
                 .style("stroke-width", "1.6px")
                 .style("stroke-opacity", 0)
                 .style("stroke-dasharray", "1000")
@@ -118,7 +127,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
                 .delay(TREE_ANIMATION_CONFIG.DELAY.CONNECTOR * 1000)
                 .ease(d3.easeCubic) // Approximation of [0.4, 0, 0.2, 1]
                 .attr('d', (d: any) => diagonal(d.source as any, d.target as any))
-                .style("stroke-opacity", 0.35)
+                .style("stroke-opacity", isBright ? 0.5 : 0.35)
                 .style("stroke-dashoffset", "0")
 
             link.exit().transition()
@@ -152,9 +161,10 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
                     const multiplier = standalone ? 8 : 9;
                     return Math.max(standalone ? 140 : 180, textLen * multiplier + 40);
                 })
-                .style("fill", "#2b2f36")
-                .style("stroke", "#2e4b43")
+                .style("fill", nodeFill)
+                .style("stroke", nodeStroke)
                 .style("stroke-width", "1.6px")
+                .style("box-shadow", isBright ? "0 4px 12px rgba(0,0,0,0.05)" : "none")
 
             // Text
             nodeEnter.append('text')
@@ -165,7 +175,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
                 .style("font-family", "Inter, sans-serif")
                 .style("font-size", standalone ? "12px" : "14px")
                 .style("font-weight", 500)
-                .style("fill", "rgba(255,255,255,0.9)")
+                .style("fill", textColor)
                 .style("pointer-events", "none")
 
             // Indicator
@@ -181,7 +191,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
                 .text((d: HierarchyNode) => d._children ? '>' : (d.children ? '<' : ''))
                 .style("font-family", "monospace")
                 .style("font-size", standalone ? "11px" : "14px")
-                .style("fill", "#2e4b43")
+                .style("fill", isBright ? 'rgba(0,0,0,0.3)' : "#2e4b43")
 
             // Phase 1 & 3: Movement & Reveal
             const nodeUpdate = nodeEnter.merge(node)
@@ -235,7 +245,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
             function mouseout(event: any, d: HierarchyNode) {
                 d3.select(event.currentTarget).select('rect')
                     .transition().duration(200)
-                    .style("stroke", "#2e4b43")
+                    .style("stroke", isBright ? 'rgba(0,0,0,0.1)' : "#2e4b43")
                     .style("filter", "none")
                     .attr("transform", "scale(1)")
             }
@@ -244,7 +254,7 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
         update(root, true)
         setTimeout(() => update(root), 100)
 
-    }, [data, standalone])
+    }, [data, standalone, isBright, nodeFill, nodeStroke, textColor, linkColor, margin.left, nodeHeight, nodeWidth])
 
     return (
         <div
