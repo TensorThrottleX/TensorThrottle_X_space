@@ -224,11 +224,11 @@ function MobileStackedDeck({
                                 damping: 25
                             }}
                             className={cn(
-                                "absolute top-0 left-0 w-full rounded-2xl cursor-pointer shadow-xl overflow-hidden border transition-colors duration-300",
+                                "absolute top-0 left-0 w-full rounded-2xl cursor-pointer shadow-[var(--shadow-main)] overflow-hidden border transition-all duration-500",
                                 STACK_HEIGHT,
                                 isPrecision
                                     ? "bg-black border-white"
-                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white")
+                                    : (isBright ? "bg-white/95 border-black/10" : "bg-[#050505] backdrop-blur-3xl border-white/10")
                             )}
                             style={{
                                 transformOrigin: 'top center'
@@ -239,35 +239,17 @@ function MobileStackedDeck({
                                 "w-full h-full px-6 py-8 flex flex-col justify-between relative",
                                 isCover && !isPrecision && !isBright ? "bg-[#050505]" : ""
                             )}>
-                                {/* Inner Shadow for Cover (Dark Mode) */}
-                                {isCover && !isPrecision && !isBright && (
+                                {/* Inner Shadow & Texture for Premium Dark Mode */}
+                                {!isPrecision && !isBright && (
                                     <>
-                                        <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-                                        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+                                        <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.9)] pointer-events-none" />
+                                        <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
                                     </>
                                 )}
 
                                 {isCover ? (
                                     // --- COVER CARD ---
                                     <>
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                                onInitialize()
-                                            }}
-                                            className={cn(
-                                                "absolute top-6 left-6 z-50 group flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 shadow-lg",
-                                                isBright
-                                                    ? "bg-[#111] text-white border-transparent hover:bg-black"
-                                                    : "bg-[#0B0B0B] border-white/10 hover:border-white/20 hover:bg-[#111]"
-                                            )}
-                                        >
-                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
-                                            <span className="text-[10px] tracking-normal font-medium">
-                                                ELABORATE
-                                            </span>
-                                        </button>
-
                                         {/* Label (Moved to Right) */}
                                         <div className="absolute top-7 right-6 z-10 flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
@@ -301,6 +283,25 @@ function MobileStackedDeck({
                                                 <span className="text-[9px] font-mono text-white/30 tracking-wider uppercase">system_protocol</span>
                                                 <span className="text-[9px] font-mono text-cyan-400/50 tracking-wider mt-0.5">ACTIVE_EXECUTION</span>
                                             </div>
+
+                                            {/* Action Button: Moved to Bottom Right */}
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    onInitialize()
+                                                }}
+                                                className={cn(
+                                                    "group flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 shadow-xl active:scale-95",
+                                                    isBright
+                                                        ? "bg-[#111] text-white border-transparent hover:bg-black"
+                                                        : "bg-[#111111] border-white/20 text-white hover:border-white/40 hover:bg-black"
+                                                )}
+                                            >
+                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] group-hover:animate-pulse" />
+                                                <span className="text-[10px] tracking-tight font-black uppercase">
+                                                    ELABORATE
+                                                </span>
+                                            </button>
                                         </div>
                                     </>
                                 ) : (

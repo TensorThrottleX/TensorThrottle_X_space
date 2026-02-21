@@ -46,10 +46,11 @@ export function RightFloatingBar(): React.ReactNode {
     return (
         <div className="rightbar fixed right-0 top-0 h-full hidden md:flex items-center px-6 z-[100] pointer-events-none transition-transform duration-300 ease-in-out">
             <div
-                className="relative flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-xl backdrop-saturate-150 border shadow-2xl animate-in fade-in slide-in-from-right-8 duration-500 fill-mode-forwards transition-colors duration-300 pointer-events-auto"
+                className="relative flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-xl backdrop-saturate-150 border animate-in fade-in slide-in-from-right-8 duration-500 fill-mode-forwards transition-colors duration-300 pointer-events-auto"
                 style={{
                     backgroundColor: 'var(--sidebar-bg)',
                     borderColor: 'var(--sidebar-border)',
+                    boxShadow: 'var(--shadow-main)'
                 }}
             >
                 {/* [CRITICAL_FIX] – Active Route Indicator (Blue Pointer) */}

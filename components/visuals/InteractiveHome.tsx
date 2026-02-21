@@ -394,8 +394,11 @@ Cycling render mode...`
         <div
           className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
           style={{
-            backgroundColor: 'var(--terminal-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.08)' : 'var(--glass-border)'
+            backgroundColor: isExpanded
+              ? (isBright ? '#ffffff' : '#000000')
+              : 'var(--terminal-bg)',
+            borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--glass-border)',
+            boxShadow: 'var(--shadow-main)'
           }}
         />
 
@@ -466,7 +469,7 @@ Cycling render mode...`
           <div className="p-2.5 flex items-center justify-between select-none shrink-0 border-b transition-colors duration-500"
             style={{
               backgroundColor: 'var(--sidebar-bg)',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
+              borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--sidebar-border)'
             }}
           >
             <div className="flex items-center gap-2 px-1">
@@ -517,10 +520,10 @@ Cycling render mode...`
         `}
             style={{
               backgroundColor: isExpanded ? 'var(--sidebar-bg)' : 'transparent',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
+              borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--sidebar-border)'
             }}
           >
-            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-600 opacity-100' : 'text-cyan-500 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
+            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-700 opacity-100' : 'text-cyan-400 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
 
             <input
               ref={inputRef}
@@ -529,7 +532,7 @@ Cycling render mode...`
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={onKeyDown}
               className={`bg-transparent border-none outline-none placeholder-gray-500 font-mono 
-                ${isBright ? 'caret-blue-600' : 'caret-cyan-400'}
+                ${isBright ? 'caret-blue-700' : 'caret-cyan-400'}
                 ${isExpanded ? 'flex-1 text-base' : 'w-full text-sm text-center'}
             `}
               style={{ color: 'var(--foreground)' }}

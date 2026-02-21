@@ -185,7 +185,11 @@ export function MobileTerminal() {
                         }}
                         aria-label="Open Terminal"
                     >
-                        <Terminal size={20} className={isBright ? 'text-black' : 'text-cyan-400'} />
+                        <Terminal
+                            size={20}
+                            className={isBright ? 'text-[#111111]' : 'text-cyan-400'}
+                            style={{ filter: isBright ? 'none' : 'drop-shadow(0 0 4px rgba(34,211,238,0.4))' }}
+                        />
                     </motion.button>
                 )}
             </AnimatePresence>
@@ -208,7 +212,7 @@ export function MobileTerminal() {
                             className="flex items-center justify-between px-4 h-12 shrink-0 border-b"
                             style={{
                                 backgroundColor: isBright ? '#f5f5f5' : '#141414',
-                                borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)',
+                                borderColor: isBright ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.08)',
                             }}
                         >
                             <div className="flex items-center gap-2">
@@ -260,11 +264,11 @@ export function MobileTerminal() {
                             className="flex items-center gap-3 px-4 h-14 shrink-0 border-t"
                             style={{
                                 backgroundColor: isBright ? '#f5f5f5' : '#141414',
-                                borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)',
+                                borderColor: isBright ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.08)',
                                 paddingBottom: 'env(safe-area-inset-bottom, 0px)',
                             }}
                         >
-                            <span className={`font-bold text-sm ${isBright ? 'text-blue-600' : 'text-cyan-500'}`}>$</span>
+                            <span className={`font-bold text-sm ${isBright ? 'text-blue-700' : 'text-cyan-400'}`}>$</span>
                             <input
                                 ref={inputRef}
                                 type="text"

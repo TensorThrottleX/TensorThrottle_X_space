@@ -160,7 +160,7 @@ export function MsgView(): React.ReactNode {
 
                 {/* [MSG_PAGE] – Guidelines */}
                 <div className={cn(
-                    "p-6 rounded-2xl border backdrop-blur-md transition-all duration-500",
+                    "p-6 rounded-2xl border backdrop-blur-md transition-all duration-500 shadow-[var(--shadow-main)]",
                     renderMode === 'bright' ? "bg-[#f4f4f4] border-black/5" : "bg-black/40 border-white/5"
                 )}>
                     <div className="flex items-start gap-4">

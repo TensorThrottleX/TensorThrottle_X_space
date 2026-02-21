@@ -119,8 +119,8 @@ export function MobileBottomNav() {
         <nav
             className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-[200] backdrop-blur-xl border-t transition-colors duration-300 overflow-hidden"
             style={{
-                backgroundColor: isBright ? 'rgba(255,255,255,0.95)' : 'rgba(10,10,10,0.95)',
-                borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
+                backgroundColor: isBright ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.98)',
+                borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)',
                 paddingBottom: 'env(safe-area-inset-bottom, 0px)',
                 height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' // h-16 + safe area
             }}

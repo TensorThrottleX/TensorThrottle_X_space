@@ -106,10 +106,11 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     <div className="sidebar hidden md:flex fixed left-0 top-0 h-full items-center px-4 z-[60] pointer-events-none transition-[opacity,transform] duration-500 ease-in-out">
       {/* Navigation Panel: Floating glass capsule */}
       <div
-        className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border shadow-xl transition-colors duration-300 pointer-events-auto"
+        className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border transition-colors duration-300 pointer-events-auto"
         style={{
           backgroundColor: 'var(--sidebar-bg)',
           borderColor: 'var(--sidebar-border)',
+          boxShadow: 'var(--shadow-main)'
         }}
       >
         {navItems.map((item) => {

@@ -252,7 +252,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             {/* Layer 1 Theme Overlay (Pure CSS) -> .blur-layer */}
             <div className={`blur-layer transition-colors duration-1000
         ${theme === 'bright' ? 'bg-white/60 backdrop-blur-[10px]' : ''}
-        ${theme === 'dark' ? 'bg-black/20 backdrop-blur-sm' : ''}
+        ${theme === 'dark' ? 'bg-black/95 backdrop-blur-md' : ''}
         ${videoState.index === -2 ? 'bg-white z-[-5]' : ''}
       `} />
 

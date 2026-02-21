@@ -30,7 +30,7 @@ export function SystemClock() {
     return (
         <div className="fixed top-8 right-10 z-[300] pointer-events-none select-none">
             {/* Clock Module */}
-            <div className="flex items-center gap-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 shadow-xl">
+            <div className="flex items-center gap-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 shadow-[var(--shadow-main)]">
                 {/* Analog Clock */}
                 <div className="relative w-6 h-6 rounded-full border-[1.5px] border-white flex items-center justify-center shadow-inner">
                     <div

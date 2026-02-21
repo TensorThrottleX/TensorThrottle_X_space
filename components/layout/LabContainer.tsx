@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react'
 import { useUI } from '@/components/providers/UIProvider'
+import { cn } from '@/lib/utils'
 
 interface LabContainerProps {
   children: ReactNode
@@ -41,11 +42,19 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
           ${isTerminalOpen && renderMode !== 'bright' ? 'bg-black/75 backdrop-blur-md md:bg-black/75 md:backdrop-blur-md' : ''}
       `} />
 
+      {/* [DIM_OVERLAY]: Isolated layer to dim content when terminal is open 
+          - Sits at z-index 20, above content (z-10) but below terminal system (z-50+)
+      */}
+      <div className={cn(
+        "fixed inset-0 z-[20] transition-all duration-500 ease-in-out pointer-events-none",
+        isTerminalOpen ? "opacity-100 backdrop-blur-sm bg-black/40" : "opacity-0 backdrop-blur-0 bg-transparent"
+      )} />
+
       {/* [LAYER_3]: Flow Plane (Deterministic Content Stack)
           - Normalized to allow document flow and zoom resilience
           - Bounded by --panel-max-width for desktop density consistency
       */}
-      <div className={`relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto z-10 transition-opacity duration-500 ${isTerminalOpen ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto z-10 transition-opacity duration-500`}>
         {children}
       </div>
     </div>

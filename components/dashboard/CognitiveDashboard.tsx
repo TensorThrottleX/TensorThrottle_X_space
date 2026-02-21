@@ -532,10 +532,10 @@ function StackedDeck({
                                     damping: 25
                                 }}
                                 className={cn(
-                                    "absolute top-0 left-0 w-full h-full rounded-[26px] cursor-pointer shadow-2xl overflow-hidden border transition-colors duration-300",
+                                    "absolute top-0 left-0 w-full h-full rounded-[26px] cursor-pointer shadow-[var(--shadow-main)] overflow-hidden border transition-all duration-500",
                                     isPrecision
                                         ? "bg-black border-white"
-                                        : "bg-black/60 backdrop-blur-xl border-white/10"
+                                        : (isBright ? "bg-white/95 border-black/10" : "bg-[#050505] backdrop-blur-3xl border-white/10")
                                 )}
                                 style={{
                                     transformOrigin: 'top center'
@@ -546,12 +546,11 @@ function StackedDeck({
                                     "w-full h-full px-[5rem] py-[4rem] flex flex-col justify-between relative",
                                     isCover && !isPrecision ? "bg-[#050505]" : "" // Deep black for intent protocol
                                 )}>
-
-                                    {/* Inner Shadow & Noise for Cover */}
-                                    {isCover && !isPrecision && (
+                                    {/* Inner Shadow & Texture for Premium Dark Mode */}
+                                    {!isPrecision && !isBright && (
                                         <>
-                                            <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.8)] pointer-events-none rounded-[24px]" />
-                                            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none rounded-[24px]" />
+                                            <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.9)] pointer-events-none rounded-[24px]" />
+                                            <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none rounded-[24px]" />
                                         </>
                                     )}
 
