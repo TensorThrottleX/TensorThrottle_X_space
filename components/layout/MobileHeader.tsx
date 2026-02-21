@@ -255,7 +255,7 @@ export function MobileHeader({
                                         transition={{ duration: 0.15, ease: 'easeOut' }}
                                         className="absolute top-full right-0 mt-2 w-52 rounded-xl border overflow-hidden shadow-[var(--shadow-main)] z-[300]"
                                         style={{
-                                            backgroundColor: isBright ? '#ffffff' : '#080808',
+                                            backgroundColor: isBright ? '#ffffff' : 'var(--card-bg)',
                                             borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
                                         }}
                                     >

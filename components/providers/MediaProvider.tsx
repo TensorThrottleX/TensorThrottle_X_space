@@ -253,8 +253,10 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             <div className={`blur-layer transition-colors duration-1000
         ${theme === 'bright' ? 'bg-white/60 backdrop-blur-[10px]' : ''}
         ${theme === 'dark' ? 'bg-black/95 backdrop-blur-md' : ''}
-        ${videoState.index === -2 ? 'bg-white z-[-5]' : ''}
-      `} />
+        ${videoState.index === -2 ? (theme === 'bright' ? 'bg-white' : 'bg-[#050505]') : ''}
+      `}
+                style={{ zIndex: videoState.index === -2 ? -5 : -10 }}
+            />
 
             {/* 4️⃣ GLOBAL CONTENT CONTAINER (Injected via children) */}
             {children}

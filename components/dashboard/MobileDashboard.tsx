@@ -228,7 +228,7 @@ function MobileStackedDeck({
                                 STACK_HEIGHT,
                                 isPrecision
                                     ? "bg-black border-white"
-                                    : (isBright ? "bg-white/95 border-black/10" : "bg-[#050505] backdrop-blur-3xl border-white/10")
+                                    : (isBright ? "bg-white/95 border-black/10" : "bg-[var(--card-bg)] backdrop-blur-3xl border-white/10")
                             )}
                             style={{
                                 transformOrigin: 'top center'
@@ -237,7 +237,7 @@ function MobileStackedDeck({
                             {/* Card Content Wrapper */}
                             <div className={cn(
                                 "w-full h-full px-6 py-8 flex flex-col justify-between relative",
-                                isCover && !isPrecision && !isBright ? "bg-[#050505]" : ""
+                                isCover && !isPrecision && !isBright ? "bg-[var(--card-bg)]" : ""
                             )}>
                                 {/* Inner Shadow & Texture for Premium Dark Mode */}
                                 {!isPrecision && !isBright && (

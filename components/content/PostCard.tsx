@@ -14,13 +14,13 @@ export function PostCard({ post }: { post: Post }) {
         "group relative w-full overflow-hidden border rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 shadow-[var(--shadow-main)]",
         isBright
           ? "bg-[#fafafa] border-black/5 hover:border-black/10"
-          : "bg-[#050505] border-white/10 hover:border-white/20"
+          : "bg-[var(--card-bg)] border-white/10 hover:border-white/20"
       )}>
 
         {/* Header - Instagram Style */}
         <div className={cn(
           "flex items-center justify-between px-4 py-3 border-b backdrop-blur-sm",
-          isBright ? "bg-white/50 border-black/5" : "bg-[#080808]/50 border-white/5"
+          isBright ? "bg-white/50 border-black/5" : "bg-[var(--card-bg)]/50 border-white/5"
         )}>
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 p-[2px]">

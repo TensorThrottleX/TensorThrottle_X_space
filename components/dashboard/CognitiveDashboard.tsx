@@ -535,7 +535,7 @@ function StackedDeck({
                                     "absolute top-0 left-0 w-full h-full rounded-[26px] cursor-pointer shadow-[var(--shadow-main)] overflow-hidden border transition-all duration-500",
                                     isPrecision
                                         ? "bg-black border-white"
-                                        : (isBright ? "bg-white/95 border-black/10" : "bg-[#050505] backdrop-blur-3xl border-white/10")
+                                        : (isBright ? "bg-white/95 border-black/10" : "bg-[var(--card-bg)] backdrop-blur-3xl border-white/10")
                                 )}
                                 style={{
                                     transformOrigin: 'top center'
@@ -544,7 +544,7 @@ function StackedDeck({
                                 {/* Card Content Wrapper */}
                                 <div className={cn(
                                     "w-full h-full px-[5rem] py-[4rem] flex flex-col justify-between relative",
-                                    isCover && !isPrecision ? "bg-[#050505]" : "" // Deep black for intent protocol
+                                    isCover && !isPrecision ? "bg-[var(--card-bg)]" : "" // Deep charcoal for intent protocol
                                 )}>
                                     {/* Inner Shadow & Texture for Premium Dark Mode */}
                                     {!isPrecision && !isBright && (

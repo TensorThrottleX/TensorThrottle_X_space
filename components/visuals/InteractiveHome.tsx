@@ -396,7 +396,7 @@ Cycling render mode...`
           className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
           style={{
             backgroundColor: isExpanded
-              ? (isBright ? '#ffffff' : '#000000')
+              ? (isBright ? '#ffffff' : '#050505')
               : 'var(--terminal-bg)',
             borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
             boxShadow: 'var(--shadow-main)'
