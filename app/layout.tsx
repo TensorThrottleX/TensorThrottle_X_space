@@ -12,8 +12,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: 'TensorThrottle_X_space | %s',
-    default: 'TensorThrottle_X_space',
+    template: 'TensorThrottleX|%s',
+    default: 'TensorThrottleX',
   },
   description: 'A production-ready portfolio powered by Notion and Next.js',
   icons: {

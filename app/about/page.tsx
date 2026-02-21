@@ -4,7 +4,7 @@ import { ContentPanel } from '@/components/layout/ContentPanel'
 import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 
 export const metadata = {
-  title: 'About | Portfolio',
+  title: 'About',
   description: 'Learn more about this experimental portfolio interface.',
 }
 

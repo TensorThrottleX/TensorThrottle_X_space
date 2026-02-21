@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PostPageProps) {
   }
 
   return {
-    title: `${post.title} | Portfolio`,
+    title: post.title,
     description: post.excerpt,
   }
 }
