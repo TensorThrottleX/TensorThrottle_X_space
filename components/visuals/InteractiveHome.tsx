@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Terminal } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
+import { cn } from '@/lib/utils'
 
 export function InteractiveHome(): React.ReactNode {
   const router = useRouter()
@@ -397,7 +398,7 @@ Cycling render mode...`
             backgroundColor: isExpanded
               ? (isBright ? '#ffffff' : '#000000')
               : 'var(--terminal-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--glass-border)',
+            borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
             boxShadow: 'var(--shadow-main)'
           }}
         />
@@ -468,16 +469,19 @@ Cycling render mode...`
           {/* Window Header */}
           <div className="p-2.5 flex items-center justify-between select-none shrink-0 border-b transition-colors duration-500"
             style={{
-              backgroundColor: 'var(--sidebar-bg)',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--sidebar-border)'
+              backgroundColor: isBright ? '#ebebeb' : 'var(--sidebar-bg)',
+              borderColor: isBright ? 'rgba(0, 0, 0, 0.3)' : 'var(--sidebar-border)'
             }}
           >
             <div className="flex items-center gap-2 px-1">
-              <div className="w-2 h-2 rounded-full bg-red-500/50" />
-              <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-              <div className="w-2 h-2 rounded-full bg-green-500/50" />
+              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-red-500/80" : "bg-red-500/50")} />
+              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-yellow-500/80" : "bg-yellow-500/50")} />
+              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-green-500/80" : "bg-green-500/50")} />
             </div>
-            <div className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-50" style={{ color: 'var(--muted-foreground)' }}>
+            <div className={cn(
+              "text-[8px] font-bold uppercase tracking-[0.3em] transition-opacity duration-500",
+              isBright ? "text-black opacity-100" : "text-white opacity-50"
+            )}>
               {isExpanded ? 'SYSTEM_CONSOLE_v1.0.4' : 'SECURE_SHELL'}
             </div>
             <div className="w-10" />
@@ -494,9 +498,10 @@ Cycling render mode...`
               onScroll={handleScroll}
               className="h-full overflow-y-auto terminal-scroll space-y-2 font-mono text-xs md:text-sm"
             >
-              <div className="text-[10px] mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000"
-                style={{ color: 'var(--muted-foreground)', borderColor: 'var(--border)' }}
-              >
+              <div className={cn(
+                "text-[10px] mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000",
+                isBright ? "text-gray-950 border-black/50" : "text-gray-500 border-white/10"
+              )}>
                 [CON_ESTABLISHED] <br />
                 SECURE_SHELL_ACTIVE <br />
                 TYPE 'HELP' FOR SYSTEM DIRECTIVES.
@@ -504,7 +509,7 @@ Cycling render mode...`
 
               {commandHistory.map((item, i) => (
                 <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
-                  style={{ color: item.type === 'cmd' ? (isBright ? '#1d4ed8' : '#22d3ee') : 'var(--foreground)' }}
+                  style={{ color: item.type === 'cmd' ? (isBright ? '#1e40af' : '#22d3ee') : 'var(--foreground)' }}
                 >
                   {item.type === 'cmd' ? <span className={`font-bold ${!isBright ? 'opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'opacity-100'}`}>sh-3.2$</span> : null}
                   {item.text.replace(/^> /, '')}
@@ -519,11 +524,11 @@ Cycling render mode...`
             ${isExpanded ? 'h-14 border-t' : 'h-full justify-center'}
         `}
             style={{
-              backgroundColor: isExpanded ? 'var(--sidebar-bg)' : 'transparent',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.15)' : 'var(--sidebar-border)'
+              backgroundColor: isExpanded ? (isBright ? '#ebebeb' : 'var(--sidebar-bg)') : 'transparent',
+              borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'var(--sidebar-border)'
             }}
           >
-            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-700 opacity-100' : 'text-cyan-400 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
+            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-800 opacity-100' : 'text-cyan-400 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
 
             <input
               ref={inputRef}
@@ -532,10 +537,10 @@ Cycling render mode...`
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={onKeyDown}
               className={`bg-transparent border-none outline-none placeholder-gray-500 font-mono 
-                ${isBright ? 'caret-blue-700' : 'caret-cyan-400'}
+                ${isBright ? 'caret-blue-800' : 'caret-cyan-400'}
                 ${isExpanded ? 'flex-1 text-base' : 'w-full text-sm text-center'}
             `}
-              style={{ color: 'var(--foreground)' }}
+              style={{ color: isBright ? '#030712' : 'var(--foreground)' }}
               placeholder={isExpanded ? "" : "[ READY ]"}
               autoComplete="off"
             />

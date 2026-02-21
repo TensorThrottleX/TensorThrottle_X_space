@@ -211,8 +211,8 @@ export function MobileTerminal() {
                         <div
                             className="flex items-center justify-between px-4 h-12 shrink-0 border-b"
                             style={{
-                                backgroundColor: isBright ? '#f5f5f5' : '#141414',
-                                borderColor: isBright ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.08)',
+                                backgroundColor: isBright ? '#ebebeb' : '#141414',
+                                borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.08)',
                             }}
                         >
                             <div className="flex items-center gap-2">
@@ -241,7 +241,7 @@ export function MobileTerminal() {
                             className="flex-1 overflow-y-auto px-4 py-4 space-y-2 text-xs leading-relaxed"
                         >
                             <div className="text-[10px] mb-4 leading-relaxed uppercase tracking-wider border-l-2 pl-3 transition-colors duration-500"
-                                style={{ color: 'var(--muted-foreground)', borderColor: 'var(--border)' }}
+                                style={{ color: isBright ? '#030712' : 'var(--muted-foreground)', borderColor: isBright ? 'rgba(0,0,0,0.4)' : 'var(--border)' }}
                             >
                                 [CON_ESTABLISHED]<br />
                                 SECURE_SHELL_ACTIVE<br />
@@ -250,7 +250,7 @@ export function MobileTerminal() {
 
                             {commandHistory.map((item, i) => (
                                 <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
-                                    style={{ color: item.type === 'cmd' ? (isBright ? '#1d4ed8' : '#22d3ee') : 'var(--foreground)' }}
+                                    style={{ color: item.type === 'cmd' ? (isBright ? '#1e40af' : '#22d3ee') : 'var(--foreground)' }}
                                 >
                                     {item.type === 'cmd' ? <span className={`font-bold ${!isBright ? 'opacity-80' : ''}`}>sh-3.2$</span> : null}
                                     {item.text.replace(/^> /, '')}
@@ -263,20 +263,20 @@ export function MobileTerminal() {
                         <div
                             className="flex items-center gap-3 px-4 h-14 shrink-0 border-t"
                             style={{
-                                backgroundColor: isBright ? '#f5f5f5' : '#141414',
-                                borderColor: isBright ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.08)',
+                                backgroundColor: isBright ? '#ebebeb' : '#141414',
+                                borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.08)',
                                 paddingBottom: 'env(safe-area-inset-bottom, 0px)',
                             }}
                         >
-                            <span className={`font-bold text-sm ${isBright ? 'text-blue-700' : 'text-cyan-400'}`}>$</span>
+                            <span className={`font-bold text-sm ${isBright ? 'text-blue-800' : 'text-cyan-400'}`}>$</span>
                             <input
                                 ref={inputRef}
                                 type="text"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 onKeyDown={onKeyDown}
-                                className={`flex-1 bg-transparent border-none outline-none text-sm font-mono ${isBright ? 'caret-blue-600' : 'caret-cyan-400'}`}
-                                style={{ color: 'var(--foreground)' }}
+                                className={`flex-1 bg-transparent border-none outline-none text-sm font-mono ${isBright ? 'caret-blue-800' : 'caret-cyan-400'}`}
+                                style={{ color: isBright ? '#030712' : 'var(--foreground)' }}
                                 placeholder="Type a command..."
                                 autoComplete="off"
                                 autoCorrect="off"

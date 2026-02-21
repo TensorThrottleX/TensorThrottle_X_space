@@ -54,7 +54,7 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
           - Normalized to allow document flow and zoom resilience
           - Bounded by --panel-max-width for desktop density consistency
       */}
-      <div className={`relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto z-10 transition-opacity duration-500`}>
+      <div className={`relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto transition-opacity duration-500`}>
         {children}
       </div>
     </div>
