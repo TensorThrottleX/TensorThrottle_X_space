@@ -17,10 +17,14 @@ import React from 'react'
  * - No JS measurement — avoids height miscalculation / layout jumps
  * - Zoom-resilient: browser zoom changes vw, so layout responds naturally
  */
+import { useUI } from '@/components/providers/UIProvider'
+
 export function RenderScaler({ children }: { children: React.ReactNode }) {
+    const { uiMode } = useUI()
+
     return (
         <div
-            className="render-scaler-root"
+            className={`render-scaler-root ${uiMode === 'tree' ? 'tree-active' : ''}`}
             style={{
                 width: '100%',
                 minHeight: '100dvh',

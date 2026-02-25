@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAllPosts } from '@/lib/notion'
+import { getAllCommentCounts } from '@/lib/supabase'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 300
+// ISR: revalidate every 60 seconds (matches Notion cache TTL)
+// Removed conflicting `dynamic = 'force-dynamic'` which disabled caching entirely
+export const revalidate = 60
 
 interface PostsResponse {
   posts: any[]
@@ -20,8 +22,11 @@ export async function GET(request: NextRequest): Promise<NextResponse<PostsRespo
     // Fallback to page-based for backward compatibility
     const page = parseInt(searchParams.get('page') || '1', 10)
 
-    // Fetch all posts
-    const allPosts = await getAllPosts()
+    // Fetch posts and comment counts in parallel (both are cached internally)
+    const [allPosts, commentCounts] = await Promise.all([
+      getAllPosts(),
+      getAllCommentCounts()
+    ])
 
     if (allPosts.length === 0) {
       return NextResponse.json({ posts: [], nextCursor: null })
@@ -43,17 +48,26 @@ export async function GET(request: NextRequest): Promise<NextResponse<PostsRespo
     const endIndex = startIndex + limit
     const paginatedPosts = allPosts.slice(startIndex, endIndex)
 
+    // Attach comment counts
+    const postsWithCounts = paginatedPosts.map(post => ({
+      ...post,
+      commentCount: commentCounts[post.slug] || 0
+    }))
+
     // Determine if there are more posts
     const hasMore = endIndex < allPosts.length
     const nextCursor = hasMore ? endIndex.toString() : null
 
-    return NextResponse.json({
-      posts: paginatedPosts,
-      nextCursor,
-    })
+    return NextResponse.json(
+      { posts: postsWithCounts, nextCursor },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
+        }
+      }
+    )
   } catch (error) {
     console.error('Posts API error:', error)
-    // Return structured error response instead of empty array
     return NextResponse.json(
       { posts: [], nextCursor: null },
       { status: 500 }

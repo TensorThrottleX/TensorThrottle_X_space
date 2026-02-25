@@ -11,7 +11,7 @@ export function PostCard({ post }: { post: Post }) {
   return (
     <Link href={`/post/${post.slug}`} className="block w-full">
       <article className={cn(
-        "group relative w-full overflow-hidden border rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 shadow-[var(--shadow-main)]",
+        "group relative w-full overflow-hidden border rounded-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 shadow-[var(--shadow-premium)]",
         isBright
           ? "bg-[#fafafa] border-black/5 hover:border-black/10"
           : "bg-[var(--card-bg)] border-white/10 hover:border-white/20"
@@ -98,7 +98,7 @@ export function PostCard({ post }: { post: Post }) {
         {/* Content Footer */}
         <div className="px-4 pb-4">
           <h3 className={cn(
-            "text-sm font-bold mb-1 group-hover:text-cyan-600 transition-colors",
+            "text-lg font-bold mb-1 group-hover:text-cyan-600 transition-colors",
             isBright ? "text-black" : "text-white"
           )}>
             {post.title}

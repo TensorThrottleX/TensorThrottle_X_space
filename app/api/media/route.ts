@@ -37,5 +37,9 @@ export async function GET() {
     const videos = getFiles(videosDir, 'videos', ['.mp4', '.webm']);
     const sounds = getFiles(musicDir, 'music', ['.mp3', '.wav', '.ogg']);
 
-    return NextResponse.json({ videos, sounds });
+    return NextResponse.json({ videos, sounds }, {
+        headers: {
+            'Cache-Control': 'public, max-age=300, stale-while-revalidate=600',
+        }
+    });
 }

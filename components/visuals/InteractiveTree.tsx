@@ -2,10 +2,44 @@
 
 import React, { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
+import 'd3-transition' // CRITICAL: side-effect patches Selection.prototype.transition
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { TREE_ANIMATION_CONFIG } from '@/lib/tree-animations'
 import { useUI } from '@/components/providers/UIProvider'
+import { TREE_ANIMATION_CONFIG } from '@/lib/tree-animations'
+
+console.log("__INTERACTIVE_TREE_V12_LOADED__");
+
+// Chainable instant fallback for when d3-transition isn't available
+function createInstantChainable(sel: any) {
+    const chainable: any = {
+        duration: () => chainable,
+        delay: () => chainable,
+        ease: () => chainable,
+        attr: (...args: any[]) => { sel.attr(...args); return chainable; },
+        style: (...args: any[]) => { sel.style(...args); return chainable; },
+        remove: () => { sel.remove(); return chainable; },
+        on: () => chainable,
+        call: (fn: any) => { fn(sel); return chainable; },
+    };
+    return chainable;
+}
+
+// Utility: safe transition wrapper with try-catch fallback
+function safeTransition(sel: any, duration: number): any {
+    try {
+        if (typeof sel?.transition === 'function') {
+            const trans = sel.transition();
+            if (trans && typeof trans.duration === 'function') {
+                return trans.duration(duration);
+            }
+        }
+    } catch (e) {
+        console.warn('[InteractiveTree] transition() call failed, using instant fallback:', e);
+    }
+    // Fallback: instant chainable (no animation)
+    return createInstantChainable(sel);
+}
 
 export interface TreeNode {
     name: string
@@ -29,259 +63,258 @@ export function InteractiveTree({ data, onClose, standalone = false }: Interacti
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
 
-    const nodeFill = isBright ? '#ffffff' : '#2b2f36'
-    const nodeStroke = isBright ? 'rgba(0,0,0,0.1)' : '#2e4b43'
-    const textColor = isBright ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.9)'
-    const linkColor = isBright ? 'rgba(0,0,0,0.15)' : '#2e4b43'
+    const nodeFill = isBright ? '#ffffff' : '#0a0a0a'
+    const nodeStroke = isBright ? 'rgba(0,0,0,0.35)' : 'rgba(34, 211, 238, 0.3)'
+    const textColor = isBright ? '#000000' : '#ffffff'
+    const linkColor = isBright ? '#333333' : 'rgba(34, 211, 238, 0.5)'
 
-    // Config: Exact match to requirements
     const margin = standalone
-        ? { top: 10, right: 40, bottom: 10, left: 40 }
-        : { top: 20, right: 120, bottom: 20, left: 160 }
+        ? { top: 40, right: 40, bottom: 40, left: 60 }
+        : { top: 60, right: 120, bottom: 60, left: 180 }
 
-    const nodeWidth = standalone ? 220 : 280
-    const nodeHeight = standalone ? 70 : 90
+    const nodeWidth = 260
+    const nodeHeight = 85
+
+    // Use centralized animation config
+    const { DURATION, LOCK_BUFFER } = TREE_ANIMATION_CONFIG
 
     useEffect(() => {
         if (!svgRef.current || !containerRef.current) return
 
-        const width = containerRef.current.clientWidth
-        const height = containerRef.current.clientHeight
+        // 1. Initial State Capture
+        let width = containerRef.current.clientWidth
+        let height = containerRef.current.clientHeight
 
-        // Clear existing
-        d3.select(svgRef.current).selectAll("*").remove()
+        // 2. SVG Initialization
+        const baseSvg = d3.select(svgRef.current)
+            .attr("width", "100%")
+            .attr("height", "100%")
 
-        const svg = d3.select(svgRef.current)
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("class", "main-g")
-            .attr("transform", `translate(${margin.left},${height / 2})`)
+        baseSvg.selectAll("*").remove()
 
-        // Interaction Guard
-        const setLock = (durationMs: number) => {
+        const g = baseSvg.append("g")
+            .attr("class", "main-viewport")
+            .attr("transform", `translate(${margin.left}, ${height / 2 || 400})`)
+
+        // Interaction Guardian
+        const setLock = (ms: number) => {
             isTransitioning.current = true
             if (lockTimer.current) clearTimeout(lockTimer.current)
-            lockTimer.current = setTimeout(() => {
-                isTransitioning.current = false
-            }, durationMs)
+            lockTimer.current = setTimeout(() => isTransitioning.current = false, ms)
         }
 
-        // Helper type for D3 hierarchy node
-        type HierarchyNode = d3.HierarchyPointNode<TreeNode> & {
+        // Helper Type for Hierarchy
+        type HierarchyPointNode = d3.HierarchyPointNode<TreeNode> & {
             x0?: number
             y0?: number
-            _children?: HierarchyNode[]
+            _children?: HierarchyPointNode[]
         }
 
-        // Process data
-        const root = d3.hierarchy(JSON.parse(JSON.stringify(data))) as unknown as HierarchyNode
+        // Data Setup
+        let rootData;
+        try {
+            rootData = JSON.parse(JSON.stringify(data));
+        } catch (e) {
+            console.error('[InteractiveTree] Data parse error:', e);
+            return;
+        }
+
+        const root = d3.hierarchy(rootData) as unknown as HierarchyPointNode
         root.x0 = 0
         root.y0 = 0
 
-        const collapse = (d: HierarchyNode) => {
+        // Collapse helper: moves children to _children (hidden)
+        const collapse = (d: HierarchyPointNode) => {
             if (d.children) {
-                d._children = d.children as HierarchyNode[]
+                d._children = d.children as HierarchyPointNode[]
                 d._children.forEach(collapse)
                 d.children = undefined
             }
         }
 
+        // Initially show ONLY root node
+        // Move root's children to _children so they're hidden
+        // User clicks root to reveal first-level, clicks those to reveal second-level, etc.
         if (root.children) {
-            root.children.forEach((d: any) => collapse(d))
+            root._children = root.children as HierarchyPointNode[]
+            root._children.forEach(collapse) // Also collapse all deeper levels
+            root.children = undefined
         }
 
-        const update = (source: HierarchyNode, isFirstLoad = false) => {
+        /**
+         * [CORE_UPDATE_FUNCTION]
+         */
+        const updateTree = (source: HierarchyPointNode) => {
+            // Re-measure height in case it shifted during mount animation
+            const currentHeight = containerRef.current?.clientHeight || height
+            if (currentHeight !== height) {
+                height = currentHeight
+                g.attr("transform", `translate(${margin.left}, ${height / 2})`)
+            }
+
             const treeLayout = d3.tree<TreeNode>().nodeSize([nodeHeight, nodeWidth])
-            const treeData = treeLayout(root as any) as HierarchyNode
-            const nodes = treeData.descendants() as HierarchyNode[]
-            const links = treeData.links()
+            treeLayout(root as any)
 
-            nodes.forEach((d) => { d.y = d.depth * nodeWidth })
+            const nodes = root.descendants() as HierarchyPointNode[]
+            const links = root.links()
 
-            // Lock during update
-            setLock(TREE_ANIMATION_CONFIG.DURATION.CONTAINER * 1000 + 400)
+            nodes.forEach(d => { d.y = d.depth * nodeWidth })
 
-            // ****************** Links ******************
-            const link = svg.selectAll<SVGPathElement, d3.HierarchyLink<TreeNode>>('path.link')
+            setLock(DURATION.CONTAINER + LOCK_BUFFER)
+
+            // --- LINKS ---
+            const link = g.selectAll<SVGPathElement, d3.HierarchyLink<TreeNode>>('path.link')
                 .data(links, (d: any) => d.target.data.name + d.target.depth)
 
             const linkEnter = link.enter().insert('path', "g")
                 .attr("class", "link")
-                .attr('d', (d: any) => {
+                .attr('d', () => {
                     const o = { x: source.x0 || 0, y: source.y0 || 0 }
-                    return diagonal(o, o)
+                    return diagonalPath(o, o)
                 })
                 .style("fill", "none")
                 .style("stroke", linkColor)
-                .style("stroke-width", "1.6px")
+                .style("stroke-width", isBright ? "2px" : "1.5px")
                 .style("stroke-opacity", 0)
-                .style("stroke-dasharray", "1000")
-                .style("stroke-dashoffset", "1000")
 
             const linkUpdate = linkEnter.merge(link)
+            // [TRANSITION] Link update - make links visible on expansion
+            safeTransition(linkUpdate, DURATION.CONNECTOR)
+                .attr('d', (d: any) => diagonalPath(d.source as any, d.target as any))
+                .style("stroke-opacity", isBright ? 0.7 : 0.6)
 
-            // Phase 2: Connector Extension (Expansion) or Retraction (Collapse)
-            linkUpdate.transition()
-                .duration(TREE_ANIMATION_CONFIG.DURATION.CONNECTOR * 1000)
-                .delay(TREE_ANIMATION_CONFIG.DELAY.CONNECTOR * 1000)
-                .ease(d3.easeCubic) // Approximation of [0.4, 0, 0.2, 1]
-                .attr('d', (d: any) => diagonal(d.source as any, d.target as any))
-                .style("stroke-opacity", isBright ? 0.5 : 0.35)
-                .style("stroke-dashoffset", "0")
-
-            link.exit().transition()
-                .duration(TREE_ANIMATION_CONFIG.DURATION.COLLAPSE_CONNECTOR * 1000)
-                .style("stroke-dashoffset", "1000")
+            // [TRANSITION] Link exit
+            safeTransition(link.exit(), DURATION.COLLAPSE_CONNECTOR)
+                .attr('d', () => diagonalPath({ x: source.x, y: source.y }, { x: source.x, y: source.y }))
                 .style("stroke-opacity", 0)
                 .remove()
 
-            // ****************** Nodes ******************
-            const node = svg.selectAll<SVGGElement, HierarchyNode>('g.node')
-                .data(nodes, (d: HierarchyNode) => d.data.name + d.depth)
+            // --- NODES ---
+            const node = g.selectAll<SVGGElement, HierarchyPointNode>('g.node')
+                .data(nodes, (d: HierarchyPointNode) => d.data.name + d.depth)
 
             const nodeEnter = node.enter().append('g')
                 .attr('class', 'node')
                 .attr("transform", `translate(${source.y0},${source.x0})`)
-                .on('click', (e, d) => !isTransitioning.current && click(e, d))
-                .on('mouseenter', mouseover as any)
-                .on('mouseleave', mouseout as any)
-                .style("cursor", "pointer")
                 .style("opacity", 0)
+                .on('click', (e, d) => !isTransitioning.current && handleToggle(e, d))
+                .style("cursor", "pointer")
 
-            // Capsule/Rect
+            // Node Shape
             nodeEnter.append('rect')
-                .attr('rx', 20)
-                .attr('ry', 20)
-                .attr('height', standalone ? 36 : 44)
-                .attr('y', standalone ? -18 : -22)
-                .attr('x', -10)
-                .attr('width', (d: HierarchyNode) => {
-                    const textLen = d.data.name.length;
-                    const multiplier = standalone ? 8 : 9;
-                    return Math.max(standalone ? 140 : 180, textLen * multiplier + 40);
-                })
+                .attr('rx', 18)
+                .attr('ry', 18)
+                .attr('y', -20)
+                .attr('x', -8)
+                .attr('height', 40)
+                .attr('width', (d) => Math.max(160, d.data.name.length * 9 + 40))
                 .style("fill", nodeFill)
                 .style("stroke", nodeStroke)
-                .style("stroke-width", "1.6px")
-                .style("box-shadow", isBright ? "0 4px 12px rgba(0,0,0,0.05)" : "none")
+                .style("stroke-width", "1px")
 
-            // Text
+            // Node Text
             nodeEnter.append('text')
                 .attr("dy", ".35em")
                 .attr("x", 15)
-                .attr("text-anchor", "start")
-                .text((d: HierarchyNode) => d.data.name)
+                .text(d => d.data.name)
                 .style("font-family", "Inter, sans-serif")
-                .style("font-size", standalone ? "12px" : "14px")
-                .style("font-weight", 500)
+                .style("font-size", "13px")
+                .style("font-weight", 600)
                 .style("fill", textColor)
                 .style("pointer-events", "none")
+                .style("letter-spacing", "-0.01em")
 
-            // Indicator
+            // Indicator (>)
             nodeEnter.append('text')
-                .attr('class', 'indicator')
+                .attr('class', 'toggle-hint')
                 .attr('dy', '.35em')
-                .attr('x', (d: HierarchyNode) => {
-                    const textLen = d.data.name.length;
-                    const multiplier = standalone ? 8 : 9;
-                    return Math.max(standalone ? 140 : 180, textLen * multiplier + 40) - 25;
-                })
-                .attr('text-anchor', 'end')
-                .text((d: HierarchyNode) => d._children ? '>' : (d.children ? '<' : ''))
-                .style("font-family", "monospace")
-                .style("font-size", standalone ? "11px" : "14px")
-                .style("fill", isBright ? 'rgba(0,0,0,0.3)' : "#2e4b43")
+                .attr('x', d => Math.max(160, d.data.name.length * 9 + 40) - 20)
+                .text(d => d._children ? '>' : d.children ? '<' : '')
+                .style("font-size", "14px")
+                .style("fill", isBright ? "rgba(0,0,0,0.3)" : "rgba(34,211,238,0.5)")
 
-            // Phase 1 & 3: Movement & Reveal
             const nodeUpdate = nodeEnter.merge(node)
 
-            nodeUpdate.transition()
-                .duration(TREE_ANIMATION_CONFIG.DURATION.CONTAINER * 1000)
-                .ease(d3.easeCubic)
-                .attr("transform", (d: HierarchyNode) => `translate(${d.y},${d.x})`)
+            // [TRANSITION] Node update
+            safeTransition(nodeUpdate, DURATION.CONTAINER)
+                .attr("transform", (d: any) => `translate(${d.y},${d.x})`)
                 .style("opacity", 1)
 
-            nodeUpdate.select('.indicator')
-                .text((d: any) => d._children ? '>' : (d.children ? '<' : ''))
-                .style("opacity", (d: any) => (d.children || d._children) ? 1 : 0)
+            nodeUpdate.select('.toggle-hint')
+                .text(d => d._children ? '>' : d.children ? '<' : '')
 
-            // Exit (Collapse Phase 1 & 3)
-            const nodeExit = node.exit().transition()
-                .duration(TREE_ANIMATION_CONFIG.DURATION.COLLAPSE_CONTAINER * 1000)
-                .attr("transform", `translate(${source.y},${source.x})`)
+            // [TRANSITION] Node exit
+            safeTransition(node.exit(), DURATION.COLLAPSE_CONTAINER)
+                .attr("transform", () => `translate(${source.y},${source.x})`)
                 .style("opacity", 0)
                 .remove()
 
-            nodes.forEach((d) => {
+            // Save Position for Next Update
+            nodes.forEach(d => {
                 d.x0 = d.x
                 d.y0 = d.y
             })
-
-            function diagonal(s: { x: number, y: number }, d: { x: number, y: number }) {
-                return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`
-            }
-
-            function click(event: any, d: HierarchyNode) {
-                if (d.children) {
-                    d._children = d.children as HierarchyNode[]
-                    d.children = undefined
-                } else if (d._children) {
-                    d.children = d._children
-                    d._children = undefined
-                }
-                update(d)
-            }
-
-            function mouseover(event: any, d: HierarchyNode) {
-                if (isTransitioning.current) return
-                d3.select(event.currentTarget).select('rect')
-                    .transition().duration(200)
-                    .style("stroke", "#4fd1c5")
-                    .style("filter", "drop-shadow(0 0 8px rgba(79, 209, 197, 0.3))")
-                    .attr("transform", "scale(1.02)")
-            }
-
-            function mouseout(event: any, d: HierarchyNode) {
-                d3.select(event.currentTarget).select('rect')
-                    .transition().duration(200)
-                    .style("stroke", isBright ? 'rgba(0,0,0,0.1)' : "#2e4b43")
-                    .style("filter", "none")
-                    .attr("transform", "scale(1)")
-            }
         }
 
-        update(root, true)
-        setTimeout(() => update(root), 100)
+        // Interaction Handlers
+        function handleToggle(event: any, d: HierarchyPointNode) {
+            if (d.children) {
+                d._children = d.children as HierarchyPointNode[]
+                d.children = undefined
+            } else if (d._children) {
+                d.children = d._children
+                d._children = undefined
+            }
+            updateTree(d)
+        }
 
-    }, [data, standalone, isBright, nodeFill, nodeStroke, textColor, linkColor, margin.left, nodeHeight, nodeWidth])
+        function diagonalPath(s: { x: number, y: number }, d: { x: number, y: number }) {
+            return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`
+        }
+
+        // Start it up
+        updateTree(root)
+
+        // Delayed check for layout stability
+        const timer = setTimeout(() => updateTree(root), 250)
+        
+        return () => {
+            clearTimeout(timer)
+            // Clear lock timer on unmount
+            if (lockTimer.current) {
+                clearTimeout(lockTimer.current)
+                lockTimer.current = null
+            }
+            isTransitioning.current = false
+        }
+
+    }, [data, isBright, renderMode, nodeFill, nodeStroke, textColor, linkColor])
 
     return (
-        <div
-            ref={containerRef}
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className={cn(
-                "tree-container flex items-center justify-center animate-in fade-in duration-500",
-                standalone
-                    ? "w-full h-full relative p-4 bg-transparent backdrop-blur-none"
-                    : "fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
+                "tree-overlay fixed inset-0 flex flex-col items-center justify-center p-0",
+                "bg-black/95 backdrop-blur-[32px]", // Ultra isolated
+                "z-[250]" // Top of the world
             )}
         >
-            <svg ref={svgRef} className="w-full h-full block" style={{ overflow: 'visible' }} />
+            <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-visible">
+                <svg ref={svgRef} className="w-full h-full block" style={{ overflow: 'visible' }} />
+            </div>
 
-            {/* Always show Terminate button when not standalone, or force it if desired */}
-            {!standalone && (
-                <button
-                    onClick={() => {
-                        window.location.href = '/'
-                    }}
-                    className="fixed bottom-8 right-8 z-[60] cursor-pointer pointer-events-auto flex items-center gap-3 px-6 py-2 rounded-full bg-red-950/80 border border-red-900/50 text-red-200 hover:bg-red-900 hover:text-white hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all group backdrop-blur-sm"
-                >
-                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse group-hover:bg-red-400 transition-colors" />
-                    <span className="text-xs font-mono tracking-widest uppercase">
-                        Terminate Process
-                    </span>
-                </button>
-            )}
-        </div>
+            {/* EXIT_UI */}
+            <button
+                onClick={onClose}
+                className="absolute bottom-12 right-12 flex items-center gap-4 px-8 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all group backdrop-blur-md shadow-2xl pointer-events-auto"
+            >
+                <div className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+                <span className="text-[10px] font-black font-mono tracking-[0.2em] text-white/40 group-hover:text-white transition-colors">
+                    TERMINATE_VIEW
+                </span>
+            </button>
+        </motion.div>
     )
 }

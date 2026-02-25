@@ -66,7 +66,7 @@ class ToxicityClassifier {
                 this.loadingPromise.then((inst) => {
                     this.instance = inst;
                     this.isReady = true;
-                    console.log('[Classifier] Background model load completed.');
+                    console.warn('[Classifier] Background model load completed.');
                 }).catch(() => {
                     this.loadingPromise = null;
                     this.loadFailed = true;
@@ -86,11 +86,11 @@ class ToxicityClassifier {
             env.allowLocalModels = false;
             env.useBrowserCache = false;
 
-            console.log(`[Classifier] Loading model: ${this.modelName}...`);
+            console.warn(`[Classifier] Loading model: ${this.modelName}...`);
             const inst = await pipeline('text-classification', this.modelName, {
                 quantized: true,
             });
-            console.log('[Classifier] Multilingual model loaded successfully.');
+            console.warn('[Classifier] Multilingual model loaded successfully.');
             return inst;
         } catch (error) {
             console.warn(`[Classifier] Failed to load ${this.modelName}, falling back to toxic-bert:`, error);
@@ -99,7 +99,7 @@ class ToxicityClassifier {
                 const inst = await pipeline('text-classification', 'Xenova/toxic-bert', {
                     quantized: true,
                 });
-                console.log('[Classifier] Fallback model loaded successfully.');
+                console.warn('[Classifier] Fallback model loaded successfully.');
                 return inst;
             } catch (fallbackError) {
                 console.error('[Classifier] Failed to load fallback model:', fallbackError);
@@ -114,9 +114,9 @@ class ToxicityClassifier {
      */
     static async warmUp(): Promise<boolean> {
         try {
-            console.log('[Classifier] Warm-up: Starting model pre-load...');
+            console.warn('[Classifier] Warm-up: Starting model pre-load...');
             await this.getInstance(WARMUP_TIMEOUT_MS);
-            console.log('[Classifier] Warm-up: Model ready.');
+            console.warn('[Classifier] Warm-up: Model ready.');
             return true;
         } catch (error) {
             console.warn('[Classifier] Warm-up: Model not ready yet, will continue loading in background.');

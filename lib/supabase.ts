@@ -2,13 +2,17 @@ import { createClient } from '@supabase/supabase-js'
 import type { Comment } from '@/types/post'
 
 // Initialize Supabase client
-// IMPORTANT: Add to .env.local:
-// SUPABASE_URL=your_supabase_url
-// SUPABASE_ANON_KEY=your_anon_key
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+// ═══════════════════════════════════════════════════════════════
+// COMMENT COUNTS CACHE — avoids redundant Supabase calls
+// TTL: 30s (comments change more frequently than posts)
+// ═══════════════════════════════════════════════════════════════
+let commentCountsCache: { data: Record<string, number>; timestamp: number } | null = null
+const COMMENT_CACHE_TTL = 30_000 // 30 seconds
 
 /**
  * Fetch active comments for a post (not expired)
@@ -38,6 +42,51 @@ export async function getComments(postSlug: string): Promise<Comment[]> {
   } catch (error) {
     console.error('Error fetching comments:', error)
     return []
+  }
+}
+/**
+ * Fetch comment counts for all posts (used in feed)
+ * Optimized: 30s in-memory cache + only selects post_slug (minimal payload)
+ */
+export async function getAllCommentCounts(): Promise<Record<string, number>> {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return {}
+  }
+
+  // Return cached data if valid
+  if (commentCountsCache && Date.now() - commentCountsCache.timestamp < COMMENT_CACHE_TTL) {
+    return commentCountsCache.data
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('post_slug')
+      .eq('is_shadow_banned', false)
+      .gt('expires_at', new Date().toISOString())
+
+    if (error) {
+      if (error.message?.includes('fetch')) {
+        console.warn('[Supabase] Comment counts fetch unavailable (likely network or invalid URL)')
+      } else {
+        console.error('Failed to fetch comment counts:', error.message)
+      }
+      return commentCountsCache?.data ?? {}
+    }
+
+    const counts: Record<string, number> = {}
+    if (data) {
+      for (const c of data) {
+        counts[c.post_slug] = (counts[c.post_slug] || 0) + 1
+      }
+    }
+
+    // Cache the result
+    commentCountsCache = { data: counts, timestamp: Date.now() }
+    return counts
+  } catch (error) {
+    console.error('Error fetching comment counts:', error)
+    return commentCountsCache?.data ?? {}
   }
 }
 

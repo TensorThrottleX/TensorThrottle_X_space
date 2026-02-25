@@ -14,7 +14,7 @@ export function HomeBento() {
     const cardStyle = {
         backgroundColor: 'var(--card-bg)',
         borderColor: 'var(--card-border)',
-        boxShadow: isBright ? 'var(--shadow-soft)' : 'none',
+        boxShadow: 'var(--shadow-premium)',
         color: 'var(--foreground)'
     }
 

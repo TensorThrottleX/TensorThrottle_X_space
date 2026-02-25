@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, memo } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
 import type { Post, Comment } from '@/types/post'
@@ -9,6 +9,7 @@ import { CommentSection } from './CommentSection'
 import { NotionBlockRenderer } from './NotionBlockRenderer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useUI } from '@/components/providers/UIProvider'
 
 interface LabPostCardProps {
   post: Post
@@ -21,7 +22,9 @@ interface LabPostCardProps {
  * - Popup Modal for full content (Premium transition)
  * - Backdrop blur and click-out to close
  */
-export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
+export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
+  const { renderMode } = useUI()
+  const isBright = renderMode === 'bright'
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -155,14 +158,23 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
       <article
         id={`post-${post.id}`}
         onClick={toggleContent}
-        className="group relative rounded-lg border-b border-[var(--border)] hover:bg-[var(--sidebar-bg)] transition-all duration-300 cursor-pointer block px-5 py-5 last:border-0"
+        className={cn(
+          "group relative rounded-2xl border transition-all duration-500 cursor-pointer block px-6 py-6",
+          "hover:scale-[1.01] hover:-translate-y-0.5",
+          isBright
+            ? "bg-white border-black/5 shadow-[var(--shadow-premium)] hover:shadow-[var(--shadow-premium)] hover:border-black/10"
+            : "bg-[#0c0c0c] border-white/5 shadow-[var(--shadow-premium)] hover:shadow-[var(--shadow-premium)] hover:border-white/10"
+        )}
       >
         <div className="flex flex-col gap-3">
           {/* Header: Date & Category */}
-          <div className="flex items-center justify-between text-[10px] uppercase font-bold tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
-            <time dateTime={post.publishedAt}>
-              {formatDate(post.publishedAt)}
-            </time>
+          <div className="flex items-center justify-between text-[10px] uppercase font-bold tracking-tight">
+            <div className="flex items-center gap-2">
+              <div className="w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)] animate-pulse" />
+              <time dateTime={post.publishedAt} className={cn(isBright ? "text-black/60" : "text-white/60")}>
+                {formatDate(post.publishedAt)}
+              </time>
+            </div>
             <span className="rounded-full px-2 py-0.5 transition-colors"
               style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}
             >
@@ -188,7 +200,7 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
             onClick={onCommentClick}
           >
             <MessageSquare size={14} className="group-hover/comm:text-cyan-500 transition-colors" />
-            <span className="text-[10px] font-bold uppercase tracking-widest">
+            <span className="text-xs font-bold uppercase tracking-widest">
               {commentCount > 0 ? `${commentCount}` : '0'}
             </span>
           </div>
@@ -215,13 +227,13 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative z-10 w-full max-w-3xl bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col h-[88dvh]"
+              className="relative z-10 w-full max-w-3xl bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-[var(--shadow-premium)] overflow-hidden flex flex-col h-[88dvh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
               <div className="px-8 py-8 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
+                  <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
                     <time>{formatDate(post.publishedAt)}</time>
                     <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}>{post.category}</span>
                   </div>
@@ -276,4 +288,4 @@ export function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
       </AnimatePresence>
     </>
   )
-}
+})

@@ -50,7 +50,7 @@ export function RightFloatingBar(): React.ReactNode {
                 style={{
                     backgroundColor: 'var(--sidebar-bg)',
                     borderColor: 'var(--sidebar-border)',
-                    boxShadow: 'var(--shadow-main)'
+                    boxShadow: 'var(--shadow-premium)'
                 }}
             >
                 {/* [CRITICAL_FIX] – Active Route Indicator (Blue Pointer) */}

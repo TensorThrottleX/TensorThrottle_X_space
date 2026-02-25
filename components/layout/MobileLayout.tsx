@@ -55,7 +55,7 @@ export function MobileHomeLayout() {
                                     initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                     animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                     transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                    className="text-4xl font-black tracking-tighter"
+                                    className="bitcount-heading text-4xl"
                                     style={{ color: isBright ? 'var(--heading-primary)' : '#ffffff' }}
                                 >
                                     TENSOR{'\n'}THROTTLE X

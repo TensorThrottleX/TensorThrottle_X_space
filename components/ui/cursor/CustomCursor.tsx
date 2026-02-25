@@ -5,7 +5,8 @@ import { useUI } from '@/components/providers/UIProvider';
 
 export function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
-    const { isPrecision } = useUI();
+    const { renderMode } = useUI();
+    const isBright = renderMode === 'bright';
     const [isActive, setIsActive] = useState(false);
 
     // Lerp state
@@ -119,7 +120,7 @@ export function CustomCursor() {
                 ref={cursorRef}
                 className={`fixed top-0 left-0 w-6 h-6 pointer-events-none z-[9999] transition-opacity duration-150 ease-out will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}
                 style={{
-                    mixBlendMode: isPrecision ? 'normal' : 'screen'
+                    mixBlendMode: isBright ? 'difference' : 'screen'
                 }}
             >
                 {/* Arrow SVG */}
@@ -129,7 +130,7 @@ export function CustomCursor() {
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`drop-shadow-md transition-transform duration-200 ${isPrecision ? 'text-white' : 'text-cyan-400'} ${isActive ? 'scale-110' : 'scale-100'}`}
+                    className={`drop-shadow-md transition-transform duration-200 ${isBright ? 'text-black' : 'text-cyan-400'} ${isActive ? 'scale-110' : 'scale-100'}`}
                 >
                     <path
                         d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"

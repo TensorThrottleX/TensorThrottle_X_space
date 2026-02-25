@@ -24,7 +24,7 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
   // Background base classes
   const getBgClass = () => {
     switch (renderMode) {
-      case 'bright': return 'bg-[#fafafa]' // Clean engineering white
+      case 'bright': return 'bg-[var(--background)]' // Use variable for intended contrast
       default: return 'bg-transparent'     // Allow global video transparency
     }
   }

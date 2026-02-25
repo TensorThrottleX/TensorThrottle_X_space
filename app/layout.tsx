@@ -45,6 +45,8 @@ import { TrademarkLogo } from "@/components/dashboard/TrademarkLogo"
 import { GlobalFooter } from "@/components/layout/GlobalFooter"
 import { SystemClock } from "@/components/dashboard/SystemClock"
 import { RenderScaler } from "@/components/layout/RenderScaler"
+import { LabNavigation } from "@/components/layout/LabNavigation"
+import { RightFloatingBar } from "@/components/layout/RightFloatingBar"
 
 export default function RootLayout({
   children,
@@ -62,6 +64,8 @@ export default function RootLayout({
                 <SystemClock />
               </div>
               <TrademarkLogo />
+              <LabNavigation />
+              <RightFloatingBar />
               <main className="app-root relative z-10">
                 {children}
               </main>

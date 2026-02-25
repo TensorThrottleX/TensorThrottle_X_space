@@ -169,7 +169,8 @@ export function MobileHeader({
                 className="mobile-header fixed top-0 left-0 right-0 z-[200] backdrop-blur-xl border-b transition-colors duration-300"
                 style={{
                     backgroundColor: isBright ? '#fafafa' : '#000000',
-                    borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
+                    borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
+                    boxShadow: 'var(--shadow-premium)',
                     height: '68px'
                 }}
             >
@@ -253,7 +254,7 @@ export function MobileHeader({
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -8 }}
                                         transition={{ duration: 0.15, ease: 'easeOut' }}
-                                        className="absolute top-full right-0 mt-2 w-52 rounded-xl border overflow-hidden shadow-[var(--shadow-main)] z-[300]"
+                                        className="absolute top-full right-0 mt-2 w-52 rounded-xl border overflow-hidden shadow-[var(--shadow-premium)] z-[300]"
                                         style={{
                                             backgroundColor: isBright ? '#ffffff' : 'var(--card-bg)',
                                             borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
