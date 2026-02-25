@@ -1,10 +1,9 @@
 import { LabContainer } from '@/components/layout/LabContainer'
-import { LabNavigation } from '@/components/layout/LabNavigation'
 import { ContentPanel } from '@/components/layout/ContentPanel'
 import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 
 export const metadata = {
-  title: 'About | Portfolio',
+  title: 'About',
   description: 'Learn more about this experimental portfolio interface.',
 }
 
@@ -12,8 +11,7 @@ export default function AboutPage() {
   return (
     <ResponsiveContentWrapper>
       <LabContainer videoSrc="/media/videos/default-background.mp4">
-        {/* Left: Floating navigation panel */}
-        <LabNavigation />
+        {/* Left: Floating navigation panel (Now in Root Layout) */}
 
         {/* Right: Content panel */}
         <ContentPanel title="About" subtitle="This experimental portfolio">

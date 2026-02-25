@@ -169,7 +169,8 @@ export function MobileHeader({
                 className="mobile-header fixed top-0 left-0 right-0 z-[200] backdrop-blur-xl border-b transition-colors duration-300"
                 style={{
                     backgroundColor: isBright ? '#fafafa' : '#000000',
-                    borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
+                    borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
+                    boxShadow: 'var(--shadow-premium)',
                     height: '68px'
                 }}
             >
@@ -253,10 +254,10 @@ export function MobileHeader({
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -8 }}
                                         transition={{ duration: 0.15, ease: 'easeOut' }}
-                                        className="absolute top-full right-0 mt-2 w-52 rounded-xl border overflow-hidden shadow-2xl z-[300]"
+                                        className="absolute top-full right-0 mt-2 w-52 rounded-xl border overflow-hidden shadow-[var(--shadow-premium)] z-[300]"
                                         style={{
-                                            backgroundColor: isBright ? '#ffffff' : '#141414',
-                                            borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
+                                            backgroundColor: isBright ? '#ffffff' : 'var(--card-bg)',
+                                            borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
                                         }}
                                     >
                                         <div className="p-2 flex flex-col gap-0.5">
@@ -321,8 +322,8 @@ export function MobileHeader({
                         {/* Overlay Header */}
                         <div className="sticky top-0 left-0 right-0 h-14 flex items-center justify-between px-4 border-b z-[260] backdrop-blur-xl shrink-0"
                             style={{
-                                backgroundColor: isBright ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)',
-                                borderColor: isBright ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'
+                                backgroundColor: isBright ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.98)',
+                                borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)',
                             }}>
                             <span className="text-sm font-black uppercase tracking-tight">Secure Channel</span>
                             <button

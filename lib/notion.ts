@@ -2,14 +2,38 @@ import { Client } from '@notionhq/client'
 import type { Post } from '@/types/post'
 
 // Initialize Notion client
-// IMPORTANT: Add to .env.local:
-// NOTION_TOKEN=your_notion_integration_token
-// NOTION_DATABASE_ID=your_database_id
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
 const DATABASE_ID = process.env.NOTION_DATABASE_ID || ''
+
+// ═══════════════════════════════════════════════════════════════
+// IN-MEMORY CACHE — avoids redundant Notion API calls
+// TTL: 60s (matches ISR revalidation period)
+// This prevents N+1 calls when feed, category, and posts API
+// all call getAllPosts() within the same revalidation window.
+// ═══════════════════════════════════════════════════════════════
+interface CacheEntry<T> {
+  data: T
+  timestamp: number
+}
+
+const CACHE_TTL_MS = 60_000 // 60 seconds
+let postsCache: CacheEntry<Post[]> | null = null
+
+function getCachedPosts(): Post[] | null {
+  if (!postsCache) return null
+  if (Date.now() - postsCache.timestamp > CACHE_TTL_MS) {
+    postsCache = null
+    return null
+  }
+  return postsCache.data
+}
+
+function setCachedPosts(posts: Post[]): void {
+  postsCache = { data: posts, timestamp: Date.now() }
+}
 
 /**
  * Fetch all published posts from Notion database with pagination
@@ -22,6 +46,10 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID || ''
  * - Fetches all pages until has_more is false
  */
 export async function getAllPosts(): Promise<Post[]> {
+  // Return cached data if valid
+  const cached = getCachedPosts()
+  if (cached) return cached
+
   if (!DATABASE_ID || !process.env.NOTION_TOKEN) {
     console.error('Notion configuration missing')
     return []
@@ -68,12 +96,16 @@ export async function getAllPosts(): Promise<Post[]> {
     // Normalize all findings
     const ALLOWED_CATEGORIES = ['thoughts', 'projects', 'experiments', 'manifold'];
 
-    return allResults
+    const posts = allResults
       .map((page: any) => normalizePage(page))
       .filter(post => {
         const cat = post.category ? post.category.trim().toLowerCase() : '';
         return ALLOWED_CATEGORIES.includes(cat);
       });
+
+    // Cache the result
+    setCachedPosts(posts)
+    return posts
 
   } catch (error) {
     console.error('Failed to fetch posts from Notion:', error)
@@ -149,47 +181,18 @@ export async function getPostsByCategory(category: string): Promise<Post[]> {
 
 /**
  * Get all unique categories
+ * Optimized: Reuses cached getAllPosts() instead of making a separate API call
  */
 export async function getAllCategories(): Promise<string[]> {
-  if (!DATABASE_ID || !process.env.NOTION_TOKEN) {
-    console.error('Notion configuration missing')
-    return []
-  }
-
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter: {
-        property: 'published',
-        checkbox: {
-          equals: true,
-        },
-      },
-    })
-
+    const allPosts = await getAllPosts();
     const categories = new Set<string>()
-    response.results.forEach((page: any) => {
-      // 1. Find the CATEGORY property robustly
-      const properties = page.properties;
-      const categoryKey = Object.keys(properties).find(key => key.toLowerCase() === 'category') || 'category';
-      const categoryProp = properties[categoryKey];
-
-      let category: string | undefined;
-
-      if (categoryProp) {
-        if (categoryProp.type === 'select') category = categoryProp.select?.name;
-        else if (categoryProp.type === 'multi_select') category = categoryProp.multi_select?.[0]?.name;
-        else if (categoryProp.type === 'rich_text') category = extractText(categoryProp.rich_text);
-      }
-
-      if (category) {
-        categories.add(category)
-      }
+    allPosts.forEach(post => {
+      if (post.category) categories.add(post.category)
     })
-
     return Array.from(categories).sort()
   } catch (error) {
-    console.error('Failed to fetch categories from Notion:', error)
+    console.error('Failed to fetch categories:', error)
     return []
   }
 }

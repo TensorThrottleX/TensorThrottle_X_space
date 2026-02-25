@@ -2,7 +2,6 @@ import React from "react"
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { LabContainer } from '@/components/layout/LabContainer'
-import { LabNavigation } from '@/components/layout/LabNavigation'
 import { ContentPanel } from '@/components/layout/ContentPanel'
 import { CommentSection } from '@/components/content/CommentSection'
 import { getPostBySlug } from '@/lib/notion'
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }: PostPageProps) {
   }
 
   return {
-    title: `${post.title} | Portfolio`,
+    title: post.title,
     description: post.excerpt,
   }
 }
@@ -136,8 +135,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <ResponsiveContentWrapper>
       <LabContainer videoSrc="/media/videos/default-background.mp4">
-        {/* Left: Floating navigation panel */}
-        <LabNavigation />
+        {/* Left: Floating navigation panel (Now in Root Layout) */}
 
         {/* Right: Content panel */}
         <ContentPanel title={post.title} subtitle={post.category}>
@@ -148,6 +146,10 @@ export default async function PostPage({ params }: PostPageProps) {
                 <time className="text-sm text-gray-400">
                   {formatDate(post.publishedAt)}
                 </time>
+                <span className="text-gray-600">•</span>
+                <span className="text-sm text-gray-400">
+                  {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
+                </span>
                 <span className="text-gray-600">•</span>
                 <Link href={`/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`}>
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-gray-300 hover:bg-white/20 transition-colors">

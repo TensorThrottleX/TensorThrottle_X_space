@@ -46,7 +46,9 @@ export function getProfanityBoost(normalizedText: string): { high: number, moder
     }
 
     if (found) {
-        return { high: 0.25, moderate: 0.15 };
+        // High boost (0.5) is now greater than the decision threshold (0.4)
+        // This ensures protection even if the ML model fails to load.
+        return { high: 0.50, moderate: 0.20 };
     }
 
     return { high: 0, moderate: 0 };

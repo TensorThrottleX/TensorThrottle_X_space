@@ -78,7 +78,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
         <>
             <article
                 id={`cat-post-${post.id}`}
-                className="group relative overflow-hidden rounded-xl border border-[var(--border)] transition-all duration-500 cursor-pointer bg-[var(--card-bg)]"
+                className="group relative overflow-hidden rounded-xl border border-[var(--border)] transition-all duration-500 cursor-pointer bg-[var(--card-bg)] shadow-[var(--shadow-premium)]"
                 onClick={toggleExpansion}
             >
                 {/* Teaser Cover Image */}
@@ -95,7 +95,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                 {/* Card Body teaser */}
                 <div className="p-6">
                     <div className="flex flex-col gap-4">
-                        <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
+                        <div className="flex items-center justify-between text-xs font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
                             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
                             <span className="rounded-full px-2 py-0.5"
                                 style={{ backgroundColor: 'var(--secondary)', color: 'var(--secondary-foreground)' }}
@@ -133,13 +133,13 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative z-10 w-full max-w-3xl h-[88dvh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-2xl overflow-hidden flex flex-col"
+                            className="relative z-10 w-full max-w-3xl h-[88dvh] bg-[var(--card-bg)] border border-[var(--border)] rounded-[32px] shadow-[var(--shadow-premium)] overflow-hidden flex flex-col"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header (No cover image here as per user request) */}
                             <div className="px-10 py-10 border-b shrink-0 flex justify-between items-start" style={{ borderColor: 'var(--border)' }}>
                                 <div className="space-y-3">
-                                    <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
+                                    <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-tight" style={{ color: 'var(--muted-foreground)' }}>
                                         <time>{formatDate(post.publishedAt)}</time>
                                         <span className="rounded-full px-2 py-0.5" style={{ backgroundColor: 'var(--secondary)', color: 'var(--primary-foreground)' }}>{post.category}</span>
                                     </div>

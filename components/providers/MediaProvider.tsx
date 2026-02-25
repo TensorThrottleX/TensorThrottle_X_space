@@ -3,6 +3,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react'
 import { VideoState, SoundState, MediaConfig, BaseTheme } from '@/types/media'
+import { cn } from '@/lib/utils'
 
 interface MediaContextType {
     theme: BaseTheme
@@ -36,7 +37,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
     const [videoState, setVideoState] = useState<VideoState>(DEFAULT_VIDEO_STATE)
     const [soundState, setSoundState] = useState<SoundState>(DEFAULT_SOUND_STATE)
     const [config, setConfig] = useState<MediaConfig>({ videos: [], sounds: [] })
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     // Refs for persistent elements
     const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -51,7 +52,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
 
     // Video Source Logic
     const activeVideoSrc = React.useMemo(() => {
-        if (videoState.index === -1 || videoState.index === -2) return ''
+        if (videoState.index === -1 || videoState.index === -2) return undefined
 
         // [MOBILE FALLBACK]: If current video crashed/unsafe, use Default (Index 0)
         if (isMobileFallback && config.videos.length > 0) {
@@ -61,7 +62,7 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
         if (config.videos[videoState.index]) {
             return config.videos[videoState.index].path
         }
-        return ''
+        return undefined
     }, [videoState.index, config.videos, isMobileFallback])
 
     // Video Switching Protocol ( simplified )
@@ -77,11 +78,17 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
 
     // Initialization & Asset Discovery
     useEffect(() => {
+        const controller = new AbortController();
+        let isMounted = true;
+
         const init = async () => {
             try {
-                const res = await fetch('/api/media')
+                const res = await fetch('/api/media', { signal: controller.signal })
                 if (!res.ok) throw new Error('Media API error')
                 const data = await res.json()
+                
+                if (!isMounted) return; // Don't update state if unmounted
+                
                 setConfig(data)
 
                 const saved = localStorage.getItem('media_engine_v3')
@@ -100,13 +107,22 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     }
                 }
             } catch (error) {
+                // Don't log abort errors (expected on unmount)
+                if (error instanceof Error && error.name === 'AbortError') return;
                 console.error('Media discovery failed', error)
-                setConfig({ videos: [], sounds: [] })
+                if (isMounted) {
+                    setConfig({ videos: [], sounds: [] })
+                }
             }
             // Note: We leave isLoading true until the video actually loads data
             // BUT if there is no video to load (index -1/-2 or no config), we must clear it.
         }
         init()
+
+        return () => {
+            isMounted = false;
+            controller.abort();
+        };
     }, [])
 
     // Force clear loading if no video selected or available
@@ -127,6 +143,19 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
         localStorage.setItem('media_engine_v3', JSON.stringify(state))
     }, [theme, videoState.index, soundState.soundIndex])
 
+
+    // Video Playback Restoration after visibility switch
+    useEffect(() => {
+        const video = videoRef.current
+        if (!video) return
+
+        if (videoState.index >= 0 && (theme === 'custom' || theme === 'normal')) {
+            // Give the DOM a tiny bit of time to update display: block
+            setTimeout(() => {
+                video.play().catch(e => console.warn("Video resume blocked:", e))
+            }, 50)
+        }
+    }, [theme, videoState.index])
 
     // Audio Conflict Resolution
     useEffect(() => {
@@ -216,19 +245,23 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     console.warn('Video playback error:', e)
                     setIsLoading(false) // Don't hang app on video error
                 }}
-                className={`bg-video transition-opacity duration-1000 
-          ${(videoState.index === -2 || (isLoading && videoState.index >= 0))
+                className={cn(
+                    "bg-video transition-opacity duration-1000",
+                    (videoState.index < 0 || (isLoading && videoState.index >= 0))
                         ? 'opacity-0'
                         : (theme === 'bright' || theme === 'dark')
                             ? 'opacity-0'
                             : 'opacity-100'
-                    }
-          ${videoState.index === -1 ? 'bg-black' : ''}
-        `}
+                )}
                 style={{
-                    backgroundColor: videoState.index === -1 ? 'black' : 'transparent',
-                    visibility: (videoState.index === -2 || theme === 'bright' || theme === 'dark') ? 'hidden' : 'visible',
-                    display: (videoState.index === -2 || theme === 'bright' || theme === 'dark') ? 'none' : 'block'
+                    visibility: (videoState.index < 0 || theme === 'bright' || theme === 'dark') ? 'hidden' : 'visible',
+                    display: (videoState.index < 0 || theme === 'bright' || theme === 'dark') ? 'none' : 'block',
+                    pointerEvents: 'none'
+                }}
+                onCanPlay={(e) => {
+                    if (theme === 'custom' || theme === 'normal') {
+                        e.currentTarget.play().catch(() => { })
+                    }
                 }}
             />
 
@@ -250,11 +283,16 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
             />
 
             {/* Layer 1 Theme Overlay (Pure CSS) -> .blur-layer */}
-            <div className={`blur-layer transition-colors duration-1000
-        ${theme === 'bright' ? 'bg-white/60 backdrop-blur-[10px]' : ''}
-        ${theme === 'dark' ? 'bg-black/20 backdrop-blur-sm' : ''}
-        ${videoState.index === -2 ? 'bg-white z-[-5]' : ''}
-      `} />
+            <div className={cn(
+                "blur-layer transition-all duration-1000",
+                theme === 'bright' ? 'bg-white/60 backdrop-blur-[10px]' : '',
+                theme === 'dark' ? 'bg-black/95 backdrop-blur-md' : '',
+                theme === 'custom' ? 'bg-black/20 backdrop-blur-[2px]' : '', // Subtle dim for cinematic
+                videoState.index === -1 ? 'bg-black' : '', // BLACK background via blur-layer
+                videoState.index === -2 ? (theme === 'bright' ? 'bg-white' : 'bg-[#050505]') : ''
+            )}
+                style={{ zIndex: videoState.index < 0 ? -5 : -10 }}
+            />
 
             {/* 4️⃣ GLOBAL CONTENT CONTAINER (Injected via children) */}
             {children}

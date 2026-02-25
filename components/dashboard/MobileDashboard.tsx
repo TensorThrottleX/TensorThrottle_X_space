@@ -78,13 +78,12 @@ const contentMap: Record<'purpose' | 'about', CardContent> = {
 interface MobileDashboardProps { mode?: 'purpose' | 'about' | 'quote' }
 
 export function MobileDashboard({ mode = 'purpose' }: MobileDashboardProps) {
-    const { uiMode, setUiMode, renderMode, isPrecision } = useUI()
+    const { uiMode, setUiMode, renderMode } = useUI()
     const isBright = renderMode === 'bright'
-    const usePrecisionStyle = isPrecision || (renderMode === 'normal' && !isBright)
 
     useEffect(() => { if (uiMode === 'tree') setUiMode('default') }, [mode])
 
-    if (mode === 'quote') return <MobileQuoteRenderer isPrecision={usePrecisionStyle} />
+    if (mode === 'quote') return <MobileQuoteRenderer />
 
     const currentContent = contentMap[mode as 'purpose' | 'about']
     if (!currentContent) return null
@@ -110,7 +109,6 @@ export function MobileDashboard({ mode = 'purpose' }: MobileDashboardProps) {
                         <MobileStackedDeck
                             content={currentContent}
                             mode={mode as 'purpose' | 'about'}
-                            isPrecision={usePrecisionStyle}
                             isBright={isBright}
                             onInitialize={() => setUiMode('tree')}
                         />
@@ -160,13 +158,11 @@ export function MobileDashboard({ mode = 'purpose' }: MobileDashboardProps) {
 function MobileStackedDeck({
     mode,
     content,
-    isPrecision,
     isBright,
     onInitialize
 }: {
     mode: 'purpose' | 'about';
     content: CardContent;
-    isPrecision: boolean;
     isBright: boolean;
     onInitialize: () => void;
 }) {
@@ -224,11 +220,12 @@ function MobileStackedDeck({
                                 damping: 25
                             }}
                             className={cn(
-                                "absolute top-0 left-0 w-full rounded-2xl cursor-pointer shadow-xl overflow-hidden border transition-colors duration-300",
+                                "absolute top-0 left-0 w-full rounded-2xl cursor-pointer overflow-hidden transition-all duration-500",
                                 STACK_HEIGHT,
-                                isPrecision
-                                    ? "bg-black border-white"
-                                    : (isBright ? "bg-white/95 border-black/10" : "bg-black/80 backdrop-blur-xl border-white")
+                                "border-[1.5px] border-b-[4px] border-r-[2px]",
+                                isBright
+                                    ? "bg-white border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
+                                    : (isCover ? "bg-black border-white/20 border-b-white/30 border-r-white/25 shadow-[var(--shadow-premium)]" : "bg-[var(--card-bg)] backdrop-blur-3xl border-white/10 border-b-white/20 border-r-white/15 shadow-[var(--shadow-premium)]")
                             )}
                             style={{
                                 transformOrigin: 'top center'
@@ -237,43 +234,25 @@ function MobileStackedDeck({
                             {/* Card Content Wrapper */}
                             <div className={cn(
                                 "w-full h-full px-6 py-8 flex flex-col justify-between relative",
-                                isCover && !isPrecision && !isBright ? "bg-[#050505]" : ""
+                                isCover && !isBright ? "bg-[var(--card-bg)]" : ""
                             )}>
-                                {/* Inner Shadow for Cover (Dark Mode) */}
-                                {isCover && !isPrecision && !isBright && (
+                                {/* Inner Shadow & Texture for Premium Dark Mode */}
+                                {!isBright && (
                                     <>
-                                        <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-                                        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+                                        <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.9)] pointer-events-none" />
+                                        <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
                                     </>
                                 )}
 
                                 {isCover ? (
                                     // --- COVER CARD ---
                                     <>
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                                onInitialize()
-                                            }}
-                                            className={cn(
-                                                "absolute top-6 left-6 z-50 group flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 shadow-lg",
-                                                isBright
-                                                    ? "bg-[#111] text-white border-transparent hover:bg-black"
-                                                    : "bg-[#0B0B0B] border-white/10 hover:border-white/20 hover:bg-[#111]"
-                                            )}
-                                        >
-                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
-                                            <span className="text-[10px] tracking-normal font-medium">
-                                                ELABORATE
-                                            </span>
-                                        </button>
-
                                         {/* Label (Moved to Right) */}
                                         <div className="absolute top-7 right-6 z-10 flex items-center gap-2">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
+                                            <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)] animate-pulse" />
                                             <span className={cn(
-                                                "text-[10px] font-medium tracking-wide uppercase",
-                                                isBright ? "text-black/60" : "text-white/70"
+                                                "text-sm font-bold tracking-tight uppercase",
+                                                isBright ? "text-black/60" : "text-white/80"
                                             )}>
                                                 {content.label}
                                             </span>
@@ -282,14 +261,14 @@ function MobileStackedDeck({
                                         <div className="mt-14">
                                             {/* Main Info */}
                                             <h2 className={cn(
-                                                "relative z-10 text-3xl font-black tracking-tighter leading-none mb-4",
+                                                "relative z-10 text-4xl font-black tracking-tighter leading-none mb-4",
                                                 isBright ? "text-black" : "text-white"
                                             )}>
                                                 {content.heading}
                                             </h2>
                                             <p className={cn(
-                                                "relative z-10 text-sm font-light leading-relaxed",
-                                                isBright ? "text-gray-600" : "text-gray-300/75"
+                                                "relative z-10 text-base font-medium leading-relaxed",
+                                                isBright ? "text-gray-600" : "text-gray-300"
                                             )}>
                                                 {content.intro}
                                             </p>
@@ -298,9 +277,34 @@ function MobileStackedDeck({
                                         {/* Footer / Action */}
                                         <div className="relative z-10 mt-auto pt-6 border-t border-white/5 w-full flex items-center justify-between">
                                             <div className="flex flex-col">
-                                                <span className="text-[9px] font-mono text-white/30 tracking-wider uppercase">system_protocol</span>
-                                                <span className="text-[9px] font-mono text-cyan-400/50 tracking-wider mt-0.5">ACTIVE_EXECUTION</span>
+                                                <span className={cn(
+                                                    "text-xs font-bold font-mono tracking-wider uppercase",
+                                                    isBright ? "text-black/30" : "text-white/30"
+                                                )}>system_protocol</span>
+                                                <span className={cn(
+                                                    "text-xs font-bold font-mono tracking-wider mt-0.5",
+                                                    isBright ? "text-cyan-600" : "text-cyan-400/50"
+                                                )}>ACTIVE_EXECUTION</span>
                                             </div>
+
+                                            {/* Action Button: Moved to Bottom Right */}
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    onInitialize()
+                                                }}
+                                                className={cn(
+                                                    "group flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 shadow-xl active:scale-95",
+                                                    isBright
+                                                        ? "bg-[#111] text-white border-transparent hover:bg-black"
+                                                        : "bg-[#111111] border-white/20 text-white hover:border-white/40 hover:bg-black"
+                                                )}
+                                            >
+                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] group-hover:animate-pulse" />
+                                                <span className="text-xs tracking-tight font-bold uppercase">
+                                                    ELABORATE
+                                                </span>
+                                            </button>
                                         </div>
                                     </>
                                 ) : (
@@ -310,12 +314,15 @@ function MobileStackedDeck({
                                             <div className="flex-1 overflow-y-auto pr-1">
                                                 {/* Top Label */}
                                                 <div className="flex items-center justify-between mb-6 pointer-events-none">
-                                                    <span className={cn(
-                                                        "text-[9px] font-bold tracking-wider uppercase",
-                                                        isBright ? "text-black/40" : "text-white/30"
-                                                    )}>
-                                                        MODULE 0{content.subCards.findIndex(c => c.id === id) + 1}
-                                                    </span>
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)] animate-pulse" />
+                                                        <span className={cn(
+                                                            "text-[10px] font-bold tracking-wider uppercase",
+                                                            isBright ? "text-black/60" : "text-white/60"
+                                                        )}>
+                                                            CRITICAL_MODULE 0{content.subCards.findIndex(c => c.id === id) + 1}
+                                                        </span>
+                                                    </div>
                                                     <div className={cn("w-8 h-px", isBright ? "bg-black/10" : "bg-white/10")} />
                                                 </div>
 
@@ -330,7 +337,7 @@ function MobileStackedDeck({
                                                 {/* Front Text */}
                                                 <p className={cn(
                                                     "text-sm leading-relaxed mb-6 font-medium",
-                                                    isBright ? "text-cyan-700/80" : "text-cyan-200/60"
+                                                    isBright ? "text-cyan-900" : "text-cyan-200/60"
                                                 )}>
                                                     {subCard.frontText}
                                                 </p>
@@ -339,19 +346,19 @@ function MobileStackedDeck({
                                                     {/* Context */}
                                                     <div>
                                                         <h4 className={cn(
-                                                            "text-[9px] font-bold uppercase tracking-wider mb-2",
+                                                            "text-xs font-bold uppercase tracking-wider mb-2",
                                                             isBright ? "text-black/50" : "text-white/50"
                                                         )}>{subCard.contextLabel}</h4>
                                                         <p className={cn(
                                                             "text-xs leading-relaxed",
-                                                            isBright ? "text-gray-600" : "text-gray-400"
+                                                            isBright ? "text-gray-700 font-medium" : "text-gray-400"
                                                         )}>{subCard.contextText}</p>
                                                     </div>
 
                                                     {/* Details */}
                                                     <div>
                                                         <h4 className={cn(
-                                                            "text-[9px] font-bold uppercase tracking-wider mb-2",
+                                                            "text-xs font-bold uppercase tracking-wider mb-2",
                                                             isBright ? "text-black/50" : "text-white/50"
                                                         )}>{subCard.detailsLabel}</h4>
                                                         <ul className="space-y-2">
@@ -360,7 +367,7 @@ function MobileStackedDeck({
                                                                     "flex items-center gap-2 text-xs",
                                                                     isBright ? "text-gray-700" : "text-gray-300/80"
                                                                 )}>
-                                                                    <div className="w-1 h-1 rounded-full bg-cyan-500/50" />
+                                                                    <div className={cn("w-1 h-1 rounded-full", isBright ? "bg-cyan-600" : "bg-cyan-500/50")} />
                                                                     {detail}
                                                                 </li>
                                                             ))}
@@ -370,12 +377,24 @@ function MobileStackedDeck({
                                             </div>
 
                                             {/* Footer */}
-                                            <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between shrink-0">
+                                            <div className={cn(
+                                                "mt-4 pt-4 border-t flex items-center justify-between shrink-0",
+                                                isBright ? "border-black/5" : "border-white/5"
+                                            )}>
                                                 <div>
-                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-white/30">{subCard.footerLabel}</span>
-                                                    <span className="block text-[10px] text-gray-400 italic">"{subCard.footerText}"</span>
+                                                    <span className={cn(
+                                                        "text-xs font-bold uppercase tracking-wider",
+                                                        isBright ? "text-black/50" : "text-white/30"
+                                                    )}>{subCard.footerLabel}</span>
+                                                    <span className={cn(
+                                                        "block text-xs font-bold italic",
+                                                        isBright ? "text-gray-700" : "text-gray-400"
+                                                    )}>"{subCard.footerText}"</span>
                                                 </div>
-                                                <span className="text-cyan-500/40 font-mono text-[8px] tracking-wider uppercase">EXPANDED</span>
+                                                <span className={cn(
+                                                    "font-mono text-xs tracking-wider uppercase",
+                                                    isBright ? "text-cyan-800" : "text-cyan-500/40"
+                                                )}>EXPANDED</span>
                                             </div>
                                         </>
                                     )
@@ -389,7 +408,7 @@ function MobileStackedDeck({
             {/* Instruction Hint */}
             <div className="absolute -bottom-10 left-0 w-full flex justify-center pointer-events-none">
                 <span className={cn(
-                    "text-[9px] font-black font-mono tracking-tighter uppercase animate-pulse",
+                    "text-xs font-bold font-mono tracking-tighter uppercase animate-pulse",
                     isBright ? "text-black opacity-50" : "text-white/30"
                 )}>
                     TAP_TO_SHUFFLE_STACK
@@ -400,7 +419,7 @@ function MobileStackedDeck({
 }
 
 // ─── MOBILE QUOTE RENDERER (Unchanged) ───
-function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
+function MobileQuoteRenderer() {
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
@@ -445,15 +464,17 @@ function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
     return (
         <div className="w-full px-4 pb-8 h-[500px] flex items-center">
             <div className={cn(
-                "w-full rounded-2xl overflow-hidden border transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full",
-                isPrecision ? "bg-black border-white"
-                    : (renderMode === 'bright' ? "bg-white/90 border-black/10" : "bg-black/60 backdrop-blur-xl border-white")
+                "w-full rounded-2xl overflow-hidden transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full",
+                "border-[1.5px] border-b-[4px] border-r-[2px] shadow-[var(--shadow-premium)]",
+                renderMode === 'bright'
+                    ? "bg-white/90 border-black/10 border-b-black/20 border-r-black/15"
+                    : "bg-black/60 backdrop-blur-xl border-white/10 border-b-white/20 border-r-white/15"
             )}>
                 <div className="absolute top-6 left-6 flex items-center gap-2">
                     <div className={cn("w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]",
                         displayPhase === 'typing' ? "bg-white animate-pulse" : "bg-cyan-400"
                     )} />
-                    <span className="text-[10px] font-bold tracking-wider text-cyan-200/70 uppercase">SYSTEM_MEMORY</span>
+                    <span className="text-xs font-bold tracking-wider text-cyan-200/70 uppercase">SYSTEM_MEMORY</span>
                 </div>
 
                 <div className="max-w-lg">
@@ -467,7 +488,7 @@ function MobileQuoteRenderer({ isPrecision }: { isPrecision: boolean }) {
                     <div className="h-6 mt-4">
                         {visibleAuthor && (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={cn(
-                                "text-xs font-medium uppercase",
+                                "text-sm font-medium uppercase",
                                 isBright ? "text-black/40" : "text-white/40"
                             )}>
                                 — {visibleAuthor}

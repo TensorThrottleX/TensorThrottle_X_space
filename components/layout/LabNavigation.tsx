@@ -1,9 +1,35 @@
-
 'use client'
 
 import React from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Brain, Folder, FlaskConical, Layers } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Globe, Maximize, Target, Crosshair, Brain, Layers, Monitor } from 'lucide-react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+
+// Animated rotating vinyl disk using PNG image
+function RotatingVinyl({ size = 18, isActive = false, isBright = false }: { size?: number; isActive?: boolean; isBright?: boolean }) {
+  return (
+    <motion.div
+      className="relative"
+      style={{ width: size, height: size }}
+      animate={isActive ? { rotate: 360 } : { rotate: 0 }}
+      transition={isActive ? { duration: 3, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
+    >
+      <Image
+        src="/media/icons/vinyl.png"
+        alt="Audio"
+        width={size}
+        height={size}
+        className="object-contain"
+        style={{
+          filter: isBright 
+            ? 'brightness(0.3) contrast(1.2)' // Dark vinyl on bright background
+            : 'brightness(1.4) contrast(1.1) drop-shadow(0 0 4px rgba(34, 211, 238, 0.5))', // Bright vinyl with glow in dark mode
+        }}
+      />
+    </motion.div>
+  )
+}
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
 import { useMedia } from '@/components/providers/MediaProvider'
@@ -27,10 +53,10 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   const pathname = usePathname()
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
-  const { renderMode, setRenderMode, setIsPrecision, setMainView, setUiMode } = useUI()
+  const { renderMode, setRenderMode, isTerminalOpen, setIsTerminalOpen, setMainView, setUiMode } = useUI()
   const {
     theme, setTheme,
-    videoState, setVideoIndex, setVideoAudio,
+    videoState, setVideoIndex,
     soundState, setSoundIndex,
     config
   } = useMedia()
@@ -47,7 +73,6 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     // [CRITICAL_SYNC] – Reset all sectional and immersive states before navigation
     setMainView('dashboard')
     setUiMode('default')
-    setIsPrecision(false)
 
     // Check for native View Transitions support
     if (!(document as any).startViewTransition) {
@@ -73,7 +98,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     if (nextMode === 'bright' || nextMode === 'dark') {
       setTheme(nextMode)
     } else if (nextMode === 'custom') {
-      setTheme('dark')
+      setTheme('custom')
     }
   }
 
@@ -106,10 +131,11 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     <div className="sidebar hidden md:flex fixed left-0 top-0 h-full items-center px-4 z-[60] pointer-events-none transition-[opacity,transform] duration-500 ease-in-out">
       {/* Navigation Panel: Floating glass capsule */}
       <div
-        className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border shadow-xl transition-colors duration-300 pointer-events-auto"
+        className="flex flex-col gap-3 rounded-full px-3 py-6 backdrop-blur-lg backdrop-saturate-150 border transition-colors duration-300 pointer-events-auto"
         style={{
           backgroundColor: 'var(--sidebar-bg)',
           borderColor: 'var(--sidebar-border)',
+          boxShadow: 'var(--shadow-premium)'
         }}
       >
         {navItems.map((item) => {
@@ -186,11 +212,13 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
           <>
             <div className="h-px w-6 bg-white/10 my-1 self-center" />
 
+
+
             <button
               onClick={handleNextBackground}
               className="group relative flex flex-col items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white"
             >
-              <FlaskConical size={18} />
+              <Monitor size={18} />
               <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
                 style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
               >
@@ -204,7 +232,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
                 ${soundState.soundIndex !== -1 ? 'bg-green-500/20 border-green-500/30 text-green-400' : 'bg-white/5 border-white/10 text-white/40'}
               `}
             >
-              <Layers size={18} />
+              <RotatingVinyl size={24} isActive={soundState.soundIndex !== -1} isBright={false} />
               <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
                 style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
               >
@@ -212,16 +240,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
               </span>
             </button>
 
-            {videoState.hasAudioTrack && videoState.index >= 0 && (
-              <button
-                onClick={() => setVideoAudio(!videoState.videoAudioEnabled)}
-                className={`group relative flex flex-col items-center justify-center w-12 h-12 rounded-full border transition-all 
-                  ${videoState.videoAudioEnabled ? 'bg-orange-500/20 border-orange-500/30 text-orange-400' : 'bg-white/5 border-white/10 text-white/40'}
-                `}
-              >
-                <div className="text-[10px] font-bold">V-AUD</div>
-              </button>
-            )}
+
           </>
         )}
       </div>

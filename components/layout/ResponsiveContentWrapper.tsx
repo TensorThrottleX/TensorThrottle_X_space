@@ -1,8 +1,14 @@
 'use client'
 
 import React from 'react'
+import dynamic from 'next/dynamic'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { MobileContentLayout } from '@/components/layout/MobileContentLayout'
+
+// Lazy-load mobile layout — desktop users skip this entire bundle
+const MobileContentLayout = dynamic(
+    () => import('@/components/layout/MobileContentLayout').then(m => ({ default: m.MobileContentLayout })),
+    { ssr: false }
+)
 
 /**
  * ResponsiveContentWrapper

@@ -61,10 +61,9 @@ body {
 
   /* GLOBAL DEFAULTS (NORMAL / CINEMATIC MODE) */
   :root {
-    /* Base Colors - Cinematic Dark */
-    --bg-primary: 0 0% 0%;
-    /* Video + Overlay logic handled in component, base is black */
-    --background: 0 0% 0%;
+    /* Base Colors - Cinematic Dark (Now Ultra-Deep Charcoal) */
+    --bg-primary: 0 0% 2%;
+    --background: 0 0% 2%;
 
     --foreground: 210 20% 90%;
     /* #e5e7eb */
@@ -128,7 +127,7 @@ body {
     /* 12px at baseline */
 
     /* Custom Tokens */
-    --terminal-bg: rgba(0, 0, 0, 0.9);
+    --terminal-bg: #050505;
     --glass-border: rgba(255, 255, 255, 0.1);
   }
 
@@ -166,6 +165,7 @@ body {
     /* 900px at baseline */
     margin: 0 auto;
     text-align: center;
+    filter: drop-shadow(var(--shadow-main));
   }
 
   /* PRIMARY CARD SYSTEM */
@@ -185,6 +185,7 @@ body {
 
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-main);
   }
 
   /* VERTICAL BALANCE */
@@ -209,16 +210,17 @@ body {
   /* SIDEBAR+TERMINAL STABILITY — fixed elements now work correctly */
   .sidebar,
   .terminal,
-  .floating-ui {
+  .floating-ui,
+  .rightbar {
     position: fixed;
+    will-change: transform, opacity;
   }
 
   /* BRIGHT MODE (Engineering Lab - Refined) */
   .mode-bright {
-    /* Base Background - #f5f6f8 */
-    --bg-primary: 0 0% 98%;
-    /* #fafafa - Smoother shade */
-    --background: 0 0% 98%;
+    /* Base Background - Slightly deeper for shadow contrast */
+    --bg-primary: 210 20% 96%;
+    --background: 210 20% 96%;
 
     /* Text - High Contrast */
     --foreground: 0 0% 6.7%;
@@ -229,16 +231,16 @@ body {
     /* #444444 */
     --muted-foreground: 0 0% 26.7%;
 
-    /* Cards - Clean White, Soft Shadow */
+    /* Cards - Clean White, Strong Shadow */
     --card: 0 0% 100%;
     /* #ffffff */
     --card-bg: #ffffff;
     --card-foreground: 0 0% 6.7%;
-    --card-border: rgba(0, 0, 0, 0.06);
+    --card-border: rgba(0, 0, 0, 0.08);
 
     /* Sidebar - Distinct from bg */
-    --sidebar-bg: #fafafa;
-    --sidebar-border: rgba(0, 0, 0, 0.04);
+    --sidebar-bg: #ffffff;
+    --sidebar-border: rgba(0, 0, 0, 0.06);
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 6.7%;
@@ -256,63 +258,88 @@ body {
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 0% 0.06;
+    --border: 0 0% 0% / 0.08;
     --input: 0 0% 90%;
     --ring: 0 0% 6.7%;
 
     --heading-primary: #000000;
 
-    /* Custom Shadows for Bright Mode - Vital for depth */
-    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
+    /* Custom Shadows for Bright Mode - Significantly amplified for "Floating" effect */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05), 0 0 10px rgba(0, 0, 0, 0.05);
+    --shadow-main: 0 35px 70px -15px rgba(0, 0, 0, 0.18), 0 15px 30px -15px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 80px 160px -30px rgba(0, 0, 0, 0.2), 0 40px 80px -40px rgba(0, 0, 0, 0.25), 0 0 80px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 0 40px rgba(0, 0, 0, 0.06);
 
     --terminal-bg: #ffffff;
-    --glass-border: rgba(0, 0, 0, 0.06);
+    --glass-border: rgba(0, 0, 0, 0.15);
   }
 
-  /* DARK MODE (Deep Focus) */
+  /* DARK MODE (Deep Focus - Premium Pitch Dark) */
   .mode-dark {
-    --bg-primary: 0 0% 0%;
-    /* #000000 */
-    --background: 0 0% 0%;
+    --bg-primary: 0 0% 2%;
+    /* #050505 - Ultra-Deep Charcoal */
+    --background: 0 0% 2%;
 
-    --foreground: 210 20% 90%;
-    --text-primary: 210 20% 90%;
+    --foreground: 210 20% 98%;
+    /* Brighter white for high contrast */
+    --text-primary: 210 20% 98%;
 
-    --text-secondary: 215 16% 65%;
-    --muted-foreground: 215 16% 65%;
+    --text-secondary: 215 16% 75%;
+    /* Slightly more visible secondary text */
+    --muted-foreground: 215 16% 75%;
 
-    --card: 220 13% 8%;
-    /* #121417 */
-    --card-bg: #121417;
-    --card-foreground: 210 20% 90%;
-    --card-border: rgba(255, 255, 255, 0.08);
+    --card: 0 0% 4.5%;
+    /* #0b0b0b - Slightly elevated charcoal */
+    --card-bg: #0b0b0b;
+    --card-foreground: 210 20% 98%;
+    --card-border: rgba(255, 255, 255, 0.18);
+    /* Precisely visible edges */
 
-    --sidebar-bg: #000000;
-    --sidebar-border: rgba(255, 255, 255, 0.06);
+    --sidebar-bg: #050505;
+    --sidebar-border: rgba(255, 255, 255, 0.1);
 
-    --popover: 220 13% 8%;
-    --popover-foreground: 210 20% 90%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 0 0% 98%;
+    --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 210 20% 90%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 210 20% 98%;
 
-    --accent: 0 0% 15%;
-    --accent-foreground: 210 20% 90%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 210 20% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 80%;
+    --border: 0 0% 12%;
+    --input: 0 0% 10%;
+    --ring: 0 0% 100%;
 
     --heading-primary: #ffffff;
 
-    --terminal-bg: #000000;
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --terminal-bg: #050505;
+    --glass-border: rgba(255, 255, 255, 0.18);
+
+    /* Shadow for Dark Mode - subtle but present for isolation */
+    --shadow-main: 0 35px 70px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    --shadow-premium: 0 80px 160px -30px rgba(0, 0, 0, 0.85), 0 40px 80px -40px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    --shadow-soft: 0 12px 24px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    --shadow-card: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+}
+
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--heading-primary);
+    transition: color 0.5s ease;
   }
 }
 
@@ -401,17 +428,30 @@ body {
     background: rgba(255, 255, 255, 0.15);
   }
 
-  /* Tree Mode UI State transitions */
-  .layout.tree-active .sidebar {
-    opacity: 0;
-    transform: translateX(-20px);
+  /* Tree Mode UI State transitions (Targeting root-level classes) */
+  .tree-active .sidebar {
+    opacity: 0.2;
+    filter: blur(8px);
+    transform: translateX(-40px);
     pointer-events: none;
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .layout.tree-active .rightbar {
-    opacity: 0;
-    transform: translateX(20px);
+  .tree-active .rightbar {
+    opacity: 0.2;
+    filter: blur(8px);
+    transform: translateX(40px);
     pointer-events: none;
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tree-active .desktop-only,
+  .tree-active .clock-panel,
+  .tree-active .trademark-logo {
+    filter: blur(6px);
+    opacity: 0.3;
+    pointer-events: none;
+    transition: all 0.7s ease;
   }
 
   .layout.tree-active .command-shell {
@@ -429,15 +469,43 @@ body {
 
   /* Precision Mode Global Overrides */
   body.mode-precision {
-    background-color: #000000;
+    background-color: #050505 !important;
+    color: #ffffff !important;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --accent: 0 0% 100%;
+    --card: 0 0% 4.5%;
+    --card-bg: #0b0b0b;
+    --border: 0 0% 100% / 0.25;
+    --ring: 0 0% 100%;
+    --heading-primary: #ffffff;
   }
 
-  body.mode-precision video {
+  body.mode-precision video,
+  body.mode-precision .blur-layer {
     opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
   }
 
   body.mode-precision .bitcount-heading {
     color: #ffffff !important;
+  }
+
+  body.mode-precision .primary-card {
+    background-color: #050505 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  body.mode-precision .sidebar,
+  body.mode-precision .rightbar,
+  body.mode-precision .mobile-bottom-nav {
+    backdrop-filter: none !important;
+    background-color: #050505 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
   }
 
   .secure-channel-container {
@@ -464,7 +532,8 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     transform: translateY(1.5rem);
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
@@ -686,4 +755,52 @@ body {
     transform: none !important;
     box-shadow: inherit !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PERFORMANCE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Reduce GPU-heavy backdrop-blur on small mobile devices */
+@media (max-width: 768px) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+
+  .backdrop-blur-2xl,
+  .backdrop-blur-xl {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+
+  .blur-layer {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+}
+
+/* Honor reduced-motion preference — critical for low-end devices and accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-pulse,
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+/* Promote frequently-animated elements to their own compositing layer */
+.primary-card,
+.coffee-card {
+  will-change: transform, opacity;
+  contain: layout style;
 }

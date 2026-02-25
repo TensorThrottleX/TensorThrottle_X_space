@@ -4,10 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Terminal } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
+import { cn } from '@/lib/utils'
 
 export function InteractiveHome(): React.ReactNode {
   const router = useRouter()
-  const { renderMode, setRenderMode, isPrecision, setIsPrecision, setIsTerminalOpen } = useUI()
+  const { renderMode, setRenderMode, setIsTerminalOpen, setUiMode } = useUI()
   const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res', text: string }[]>([])
   const [historyLog, setHistoryLog] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -37,6 +38,10 @@ export function InteractiveHome(): React.ReactNode {
   // Sync Global Terminal State
   useEffect(() => {
     setIsTerminalOpen(isExpanded)
+    // CRITICAL: Reset terminal state on unmount to prevent persistent blur on other pages
+    return () => {
+      setIsTerminalOpen(false)
+    }
   }, [isExpanded, setIsTerminalOpen])
 
   const toggleBGM = (force?: boolean) => {
@@ -124,7 +129,11 @@ export function InteractiveHome(): React.ReactNode {
       }
       return newHistory;
     })
-    setHistoryLog(prev => [...prev, cmd])
+    setHistoryLog(prev => {
+      // Don't log help/clear to history log for arrow up/down
+      if (['help', 'clear', 'cls'].includes(cmd.toLowerCase().trim())) return prev;
+      return [...prev, cmd];
+    })
     setHistoryIndex(null)
     setHistoryDraft('')
   }
@@ -152,8 +161,7 @@ Social:
 Utility:
   home        Minimize terminal
   explain     View system motives
-  system      Check system status
-  focus       [ON/OFF] Toggle precision mode`
+  system      Check system status`
     }
     else if (cleanCmd === 'system') {
       response = `System diagnostics ready.
@@ -191,35 +199,6 @@ Video: Suspended`
 Render Mode: DARK (Deep Focus)
 Visuals: Matte Black
 Video: Suspended`
-    }
-    else if (['mode precision', 'focus on', 'precision on'].includes(cleanCmd)) {
-      if (isPrecision) {
-        response = `[SYSTEM_NOTICE]
-Precision Mode already active.`
-      } else {
-        setIsPrecision(true)
-        response = `[SYSTEM_UPDATE]
-Precision Mode: ACTIVE
-Enhancements: Focus Optimized
-Background: Deep Black`
-      }
-    }
-    else if (['focus off', 'precision off', 'focus exit'].includes(cleanCmd)) {
-      if (!isPrecision) {
-        response = `[SYSTEM_NOTICE]
-Precision Mode already inactive.`
-      } else {
-        setIsPrecision(false)
-        response = `[SYSTEM_UPDATE]
-Precision Mode: INACTIVE
-Restoring Standard Visuals...`
-      }
-    }
-    else if (['focus', 'precision'].includes(cleanCmd)) {
-      const nextState = !isPrecision
-      setIsPrecision(nextState)
-      response = `[FORCE_TOGGLE]
-Precision Mode: ${nextState ? 'ACTIVE' : 'INACTIVE'}`
     }
     else if (['mode', 'render'].includes(cleanCmd)) {
       // Circle toggle
@@ -266,8 +245,9 @@ Cycling render mode...`
       // Check if this is a tree expansion command (e.g., origin.journey)
       const treeRoots = ['origin', 'focus', 'build', 'philosophy']
       if (treeRoots.some(root => target.startsWith(root))) {
+        setUiMode('tree') // Ensure tree is open
         window.dispatchEvent(new CustomEvent('tree-expand', { detail: { path: target } }))
-        logCommand(cleanCmd, `Expanding tree path: ${target}`)
+        logCommand(cleanCmd, `Expanding data node: ${target}`)
         if (!isExpanded) setIsExpanded(true)
         return
       }
@@ -308,6 +288,10 @@ Cycling render mode...`
       if (path.startsWith('http') || path.startsWith('mailto')) {
         window.open(path, '_blank')
       } else {
+        // [CRITICAL_SYNC] – Reset all sectional and immersive states before navigation
+        setUiMode('default')
+        setIsExpanded(false)
+        setIsTerminalOpen(false)
         setTimeout(() => router.push(path), 600)
       }
       return true
@@ -354,13 +338,13 @@ Cycling render mode...`
   const containerClasses = `relative flex flex-col transition-[height,width,transform,opacity] duration-500 overflow-hidden pointer-events-auto
     ${isExpanded
       ? 'h-[28rem] w-full max-w-[min(50rem,90vw)] rounded-md scale-100 translate-y-0 opacity-100 shadow-cyan-500/10'
-      : `h-16 w-[min(22rem,90vw)] md:w-[min(28rem,90vw)] rounded-md cursor-text scale-[0.96] translate-y-2 opacity-100 shadow-[0_10px_40px_rgba(0,0,0,0.06)] 
-         hover:shadow-[0_15px_50px_rgba(0,0,0,0.12)] hover:scale-[0.97] 
-         ${isBright ? 'hover:ring-[1.5px] hover:ring-black' : 'hover:ring-1 hover:ring-cyan-500/50'}`
+      : `h-16 w-[min(22rem,90vw)] md:w-[min(28rem,90vw)] rounded-md cursor-text scale-[0.96] translate-y-2 opacity-100 
+         hover:scale-[0.97] 
+         ${isBright ? 'hover:ring-[1.5px] hover:ring-black' : 'hover:ring-2 hover:ring-blue-500/80 shadow-[0_0_15px_rgba(59,130,246,0.3)]'}`
     } 
     ${isPlaying && !isBright
       ? 'ring-1 ring-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
-      : (isPlaying && isBright ? 'ring-1 ring-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.15)]' : '')
+      : (isPlaying && isBright ? 'ring-1 ring-black/10 shadow-[0_0_25px_rgba(0,0,0,0.08)]' : '')
     }`
 
   return (
@@ -381,7 +365,6 @@ Cycling render mode...`
         style={{
           // Background handling moved to inner layer to prevent content blur bleed
           color: 'var(--foreground)',
-          boxShadow: isBright ? '0 10px 40px rgba(0, 0, 0, 0.06)' : undefined,
           transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease',
           zIndex: 51 // Ensure above backdrop
         }}
@@ -394,8 +377,11 @@ Cycling render mode...`
         <div
           className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
           style={{
-            backgroundColor: 'var(--terminal-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.08)' : 'var(--glass-border)'
+            backgroundColor: isExpanded
+              ? (isBright ? '#ffffff' : '#050505')
+              : 'var(--terminal-bg)',
+            borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
+            boxShadow: 'var(--shadow-premium)'
           }}
         />
 
@@ -454,27 +440,24 @@ Cycling render mode...`
              border-color: #000;
              color: #000;
           }
-          /* Override for precision mode active trigger */
-          body.mode-precision .bgm-trigger.active {
-             background: rgba(34, 211, 238, 0.1);
-             border-color: rgba(34, 211, 238, 0.5);
-             color: #22d3ee;
-          }
         `}</style>
 
           {/* Window Header */}
           <div className="p-2.5 flex items-center justify-between select-none shrink-0 border-b transition-colors duration-500"
             style={{
-              backgroundColor: 'var(--sidebar-bg)',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
+              backgroundColor: isBright ? '#ebebeb' : 'var(--sidebar-bg)',
+              borderColor: isBright ? 'rgba(0, 0, 0, 0.3)' : 'var(--sidebar-border)'
             }}
           >
             <div className="flex items-center gap-2 px-1">
-              <div className="w-2 h-2 rounded-full bg-red-500/50" />
-              <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-              <div className="w-2 h-2 rounded-full bg-green-500/50" />
+              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-red-500/80" : "bg-red-500/50")} />
+              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-yellow-500/80" : "bg-yellow-500/50")} />
+              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-green-500/80" : "bg-green-500/50")} />
             </div>
-            <div className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-50" style={{ color: 'var(--muted-foreground)' }}>
+            <div className={cn(
+              "text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity duration-500",
+              isBright ? "text-black opacity-100" : "text-white opacity-50"
+            )}>
               {isExpanded ? 'SYSTEM_CONSOLE_v1.0.4' : 'SECURE_SHELL'}
             </div>
             <div className="w-10" />
@@ -491,9 +474,10 @@ Cycling render mode...`
               onScroll={handleScroll}
               className="h-full overflow-y-auto terminal-scroll space-y-2 font-mono text-xs md:text-sm"
             >
-              <div className="text-[10px] mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000"
-                style={{ color: 'var(--muted-foreground)', borderColor: 'var(--border)' }}
-              >
+              <div className={cn(
+                "text-xs mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000",
+                isBright ? "text-gray-950 border-black/50" : "text-gray-500 border-white/10"
+              )}>
                 [CON_ESTABLISHED] <br />
                 SECURE_SHELL_ACTIVE <br />
                 TYPE 'HELP' FOR SYSTEM DIRECTIVES.
@@ -501,10 +485,67 @@ Cycling render mode...`
 
               {commandHistory.map((item, i) => (
                 <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
-                  style={{ color: item.type === 'cmd' ? (isBright ? '#1d4ed8' : '#22d3ee') : 'var(--foreground)' }}
+                  style={{ color: item.type === 'cmd' ? (isBright ? '#1e40af' : '#22d3ee') : 'var(--foreground)' }}
                 >
-                  {item.type === 'cmd' ? <span className={`font-bold ${!isBright ? 'opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'opacity-100'}`}>sh-3.2$</span> : null}
-                  {item.text.replace(/^> /, '')}
+                  {item.type === 'cmd' ? (
+                    <span className={cn(
+                      "font-bold select-none shrink-0",
+                      !isBright ? 'opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'opacity-100'
+                    )}>
+                      sh-3.2$
+                    </span>
+                  ) : null}
+                  <div className="flex-1">
+                    {item.text.replace(/^> /, '').split('\n').map((line, li) => {
+                      const isHeader = line.trim().endsWith(':');
+
+                      // Match "  command    description"
+                      const cmdDescMatch = line.match(/^(\s{2,})([a-z0-9\s]+?)\s{3,}(.+)$/i);
+                      // Match "  open command"
+                      const openMatch = line.match(/^(\s{2,})(open\s+[a-z]+)$/i);
+                      // Match "  command" (short commands like twitter, email)
+                      const shortMatch = line.match(/^(\s{2,})([a-z]{3,})$/i);
+
+                      if (isHeader) {
+                        return <div key={li} className="select-none font-bold opacity-60 mt-3 mb-1 tracking-widest text-[10px] uppercase">{line}</div>;
+                      }
+
+                      if (cmdDescMatch || openMatch || shortMatch) {
+                        const cmdPart = cmdDescMatch ? cmdDescMatch[2] : (openMatch ? openMatch[2] : shortMatch![2]);
+                        const descPart = cmdDescMatch ? cmdDescMatch[3] : null;
+                        const prefix = cmdDescMatch ? cmdDescMatch[1] : (openMatch ? openMatch[1] : shortMatch![1]);
+
+                        return (
+                          <div key={li} className="group flex items-center">
+                            <span className="select-none opacity-0 whitespace-pre">{prefix}</span>
+                            <span
+                              onClick={() => {
+                                setInputValue(cmdPart.trim());
+                                inputRef.current?.focus();
+                              }}
+                              className="cursor-pointer hover:underline decoration-cyan-500/50 underline-offset-4 hover:text-white transition-colors min-w-[85px] inline-block"
+                            >
+                              {cmdPart}
+                            </span>
+                            {descPart && (
+                              <span className="select-none opacity-40 ml-4 italic text-[11px] whitespace-nowrap">
+                                {descPart}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <div key={li} className={cn(
+                          line.trim() === '' ? "h-2" : "",
+                          (line.startsWith(' ') || line.match(/^[0-9]\./)) && "select-none opacity-50 text-[11px]"
+                        )}>
+                          {line}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               ))}
               <div ref={historyEndRef} className="h-4" />
@@ -516,11 +557,11 @@ Cycling render mode...`
             ${isExpanded ? 'h-14 border-t' : 'h-full justify-center'}
         `}
             style={{
-              backgroundColor: isExpanded ? 'var(--sidebar-bg)' : 'transparent',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.12)' : 'var(--sidebar-border)'
+              backgroundColor: isExpanded ? (isBright ? '#ebebeb' : 'var(--sidebar-bg)') : 'transparent',
+              borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'var(--sidebar-border)'
             }}
           >
-            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-600 opacity-100' : 'text-cyan-500 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
+            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-800 opacity-100' : 'text-cyan-400 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
 
             <input
               ref={inputRef}
@@ -529,10 +570,10 @@ Cycling render mode...`
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={onKeyDown}
               className={`bg-transparent border-none outline-none placeholder-gray-500 font-mono 
-                ${isBright ? 'caret-blue-600' : 'caret-cyan-400'}
+                ${isBright ? 'caret-blue-800' : 'caret-cyan-400'}
                 ${isExpanded ? 'flex-1 text-base' : 'w-full text-sm text-center'}
             `}
-              style={{ color: 'var(--foreground)' }}
+              style={{ color: isBright ? '#030712' : 'var(--foreground)' }}
               placeholder={isExpanded ? "" : "[ READY ]"}
               autoComplete="off"
             />

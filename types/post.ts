@@ -8,6 +8,7 @@ export type Post = {
   coverImage?: string
   publishedAt: string
   content: any // Notion blocks
+  commentCount?: number
 }
 
 export type Comment = {

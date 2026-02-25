@@ -1,16 +1,29 @@
 'use client';
+// Force rebuild: v1
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { LabContainer } from '@/components/layout/LabContainer';
 import { LabNavigation } from '@/components/layout/LabNavigation';
 import { RightFloatingBar } from '@/components/layout/RightFloatingBar';
-import { InteractiveHome } from '@/components/visuals/InteractiveHome';
-
-import { CognitiveDashboard } from '@/components/dashboard/CognitiveDashboard';
-import { MsgView } from '@/components/forms/MsgView';
 import { useUI } from '@/components/providers/UIProvider';
 import { AnimatePresence } from 'framer-motion';
+
+// Lazy-load heavy components — reduces initial JS bundle by ~80KB
+// These are only rendered after user interaction or initial hydration
+const CognitiveDashboard = dynamic<{ mode?: 'purpose' | 'about' | 'quote' }>(
+    () => import('@/components/dashboard/CognitiveDashboard').then(m => ({ default: m.CognitiveDashboard })),
+    { ssr: false }
+)
+const MsgView = dynamic<{ userId?: string }>(
+    () => import('@/components/forms/MsgView').then(m => ({ default: m.MsgView })),
+    { ssr: false }
+)
+const InteractiveHome = dynamic<{}>(
+    () => import('@/components/visuals/InteractiveHome').then(m => ({ default: m.InteractiveHome })),
+    { ssr: false }
+)
 
 /* HOME > LAYOUT > COMPONENT > MAIN_PAGE_CONTROLLER */
 export function HomePageLayout() {
@@ -37,7 +50,7 @@ export function HomePageLayout() {
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                 animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-h1 font-black tracking-tighter drop-shadow-2xl"
+                                className="bitcount-heading text-h1 drop-shadow-2xl"
                                 style={{ color: isBright ? '#000000' : 'var(--heading-primary)' }}
                             >
                                 TENSOR THROTTLE X
@@ -56,7 +69,7 @@ export function HomePageLayout() {
                             exit={{ opacity: 0, y: -20 }}
                             className="relative w-full flex justify-center z-50 pointer-events-auto py-4"
                         >
-                            <div className="relative flex items-center rounded-full border p-1 shadow-2xl gap-1 transition-colors duration-500"
+                            <div className="relative flex items-center rounded-full border p-1 shadow-[var(--shadow-premium)] gap-1 transition-colors duration-500"
                                 style={{
                                     backgroundColor: isBright ? 'rgba(0,0,0,0.05)' : 'rgba(0,0,0,0.4)',
                                     borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
@@ -117,9 +130,7 @@ export function HomePageLayout() {
                     )}
                 </AnimatePresence>
 
-                {/* 3. INTERFACE_PLANE (Independent fixed layers) */}
-                <LabNavigation />
-                <RightFloatingBar />
+                {/* 3. INTERFACE_PLANE (Independent fixed layers now in Root Layout) */}
 
                 {/* 4. DYNAMIC CENTER CONTENT (Participates in flow) */}
                 <div className="relative w-full flex-1 flex flex-col items-center">

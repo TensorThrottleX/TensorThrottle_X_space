@@ -5,6 +5,7 @@ import { Terminal, X as XClose } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 /**
  * MobileTerminal: A full-screen overlay terminal for mobile.
@@ -13,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion'
  */
 export function MobileTerminal() {
     const router = useRouter()
-    const { renderMode, setRenderMode, isPrecision, setIsPrecision, isTerminalOpen, setIsTerminalOpen } = useUI()
+    const { renderMode, setRenderMode, isTerminalOpen, setIsTerminalOpen } = useUI()
     const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res'; text: string }[]>([])
     const [historyLog, setHistoryLog] = useState<string[]>([])
     const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -40,7 +41,11 @@ export function MobileTerminal() {
         if (isTerminalOpen) {
             setTimeout(() => inputRef.current?.focus(), 200)
         }
-    }, [isTerminalOpen])
+        // Reset global terminal state on unmount to prevent blur artifacts
+        return () => {
+            if (isTerminalOpen) setIsTerminalOpen(false)
+        }
+    }, [isTerminalOpen, setIsTerminalOpen])
 
     // Auto-scroll
     useEffect(() => {
@@ -59,7 +64,10 @@ export function MobileTerminal() {
             if (response) newHistory.push({ type: 'res' as const, text: response })
             return newHistory
         })
-        setHistoryLog(prev => [...prev, cmd])
+        setHistoryLog(prev => {
+            if (['help', 'clear', 'cls'].includes(cmd.toLowerCase().trim())) return prev
+            return [...prev, cmd]
+        })
         setHistoryIndex(null)
         setHistoryDraft('')
     }
@@ -80,6 +88,7 @@ export function MobileTerminal() {
             if (path.startsWith('http') || path.startsWith('mailto')) {
                 window.open(path, '_blank')
             } else {
+                setUiMode('default') // Reset tree state on navigation
                 setTimeout(() => { router.push(path); setIsTerminalOpen(false) }, 600)
             }
             return true
@@ -92,7 +101,7 @@ export function MobileTerminal() {
         let response = ''
 
         if (cleanCmd === 'help') {
-            response = `Available Commands:\n\nNavigation:\n  open about\n  open feed\n  open thoughts\n  open projects\n  open experiments\n  open manifold\n\nSocial:\n  twitter\n  github\n  email\n\nUtility:\n  home        Minimize terminal\n  explain     View system motives\n  system      Check system status\n  focus       [ON/OFF] Toggle precision mode`
+            response = `Available Commands:\n\nNavigation:\n  open about\n  open feed\n  open thoughts\n  open projects\n  open experiments\n  open manifold\n\nSocial:\n  twitter\n  github\n  email\n\nUtility:\n  home        Minimize terminal\n  explain     View system motives\n  system      Check system status`
         }
         else if (cleanCmd === 'system') {
             response = `System diagnostics ready.\nKernel: Vercel_Standard_v2\nModules: Notion_API, Framer_Motion\nHidden states may be toggled.`
@@ -104,15 +113,6 @@ export function MobileTerminal() {
         else if (['mode normal', 'render normal', 'normal'].includes(cleanCmd)) { setRenderMode('normal'); response = `[SYSTEM_UPDATE]\nRender Mode: NORMAL (Cinematic)` }
         else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) { setRenderMode('bright'); response = `[SYSTEM_UPDATE]\nRender Mode: BRIGHT (High Clarity)` }
         else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) { setRenderMode('dark'); response = `[SYSTEM_UPDATE]\nRender Mode: DARK (Deep Focus)` }
-        else if (['mode precision', 'focus on', 'precision on'].includes(cleanCmd)) {
-            if (isPrecision) { response = `[SYSTEM_NOTICE]\nPrecision Mode already active.` }
-            else { setIsPrecision(true); response = `[SYSTEM_UPDATE]\nPrecision Mode: ACTIVE` }
-        }
-        else if (['focus off', 'precision off', 'focus exit'].includes(cleanCmd)) {
-            if (!isPrecision) { response = `[SYSTEM_NOTICE]\nPrecision Mode already inactive.` }
-            else { setIsPrecision(false); response = `[SYSTEM_UPDATE]\nPrecision Mode: INACTIVE` }
-        }
-        else if (['focus', 'precision'].includes(cleanCmd)) { const next = !isPrecision; setIsPrecision(next); response = `[FORCE_TOGGLE]\nPrecision Mode: ${next ? 'ACTIVE' : 'INACTIVE'}` }
         else if (['mode', 'render'].includes(cleanCmd)) {
             setRenderMode((prev: any) => { if (prev === 'normal') return 'bright'; if (prev === 'bright') return 'dark'; return 'normal' })
             response = `[RENDER_TOGGLE]\nCycling render mode...`
@@ -126,8 +126,9 @@ export function MobileTerminal() {
             const target = cleanCmd.replace(/^open\s+/, '').trim()
             const treeRoots = ['origin', 'focus', 'build', 'philosophy']
             if (treeRoots.some(root => target.startsWith(root))) {
+                setUiMode('tree') // Ensure tree is visible on mobile
                 window.dispatchEvent(new CustomEvent('tree-expand', { detail: { path: target } }))
-                logCommand(cleanCmd, `Expanding tree path: ${target}`)
+                logCommand(cleanCmd, `Expanding data node: ${target}`)
                 return
             }
             const handled = handleNavigation(target, cleanCmd)
@@ -177,15 +178,17 @@ export function MobileTerminal() {
                         onClick={() => setIsTerminalOpen(true)}
                         className="fixed bottom-24 right-5 z-[190] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-all duration-300 hover:ring-[1.5px] hover:ring-black"
                         style={{
-                            backgroundColor: isBright ? '#fafafa' : '#0f0f0f',
-                            border: isBright ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(34,211,238,0.3)',
-                            boxShadow: isBright
-                                ? '0 10px 40px rgba(0,0,0,0.06)'
-                                : '0 8px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34,211,238,0.15)',
+                            backgroundColor: 'var(--card-bg)',
+                            borderColor: 'var(--card-border)',
+                            boxShadow: 'var(--shadow-premium)',
                         }}
                         aria-label="Open Terminal"
                     >
-                        <Terminal size={20} className={isBright ? 'text-black' : 'text-cyan-400'} />
+                        <Terminal
+                            size={20}
+                            className={isBright ? 'text-[#111111]' : 'text-cyan-400'}
+                            style={{ filter: isBright ? 'none' : 'drop-shadow(0 0 4px rgba(34,211,238,0.4))' }}
+                        />
                     </motion.button>
                 )}
             </AnimatePresence>
@@ -200,15 +203,15 @@ export function MobileTerminal() {
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                         className="fixed inset-0 z-[250] flex flex-col font-mono"
                         style={{
-                            backgroundColor: isBright ? '#fafafa' : '#0a0a0a',
+                            backgroundColor: isBright ? '#fafafa' : '#050505',
                         }}
                     >
                         {/* Mac-style Header */}
                         <div
                             className="flex items-center justify-between px-4 h-12 shrink-0 border-b"
                             style={{
-                                backgroundColor: isBright ? '#f5f5f5' : '#141414',
-                                borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)',
+                                backgroundColor: isBright ? '#ebebeb' : '#080808',
+                                borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.12)',
                             }}
                         >
                             <div className="flex items-center gap-2">
@@ -237,7 +240,7 @@ export function MobileTerminal() {
                             className="flex-1 overflow-y-auto px-4 py-4 space-y-2 text-xs leading-relaxed"
                         >
                             <div className="text-[10px] mb-4 leading-relaxed uppercase tracking-wider border-l-2 pl-3 transition-colors duration-500"
-                                style={{ color: 'var(--muted-foreground)', borderColor: 'var(--border)' }}
+                                style={{ color: isBright ? '#030712' : 'var(--muted-foreground)', borderColor: isBright ? 'rgba(0,0,0,0.4)' : 'var(--border)' }}
                             >
                                 [CON_ESTABLISHED]<br />
                                 SECURE_SHELL_ACTIVE<br />
@@ -246,10 +249,61 @@ export function MobileTerminal() {
 
                             {commandHistory.map((item, i) => (
                                 <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
-                                    style={{ color: item.type === 'cmd' ? (isBright ? '#1d4ed8' : '#22d3ee') : 'var(--foreground)' }}
+                                    style={{ color: item.type === 'cmd' ? (isBright ? '#1e40af' : '#22d3ee') : 'var(--foreground)' }}
                                 >
-                                    {item.type === 'cmd' ? <span className={`font-bold ${!isBright ? 'opacity-80' : ''}`}>sh-3.2$</span> : null}
-                                    {item.text.replace(/^> /, '')}
+                                    {item.type === 'cmd' ? (
+                                        <span className="font-bold select-none opacity-80 shrink-0">
+                                            sh-3.2$
+                                        </span>
+                                    ) : null}
+                                    <div className="flex-1">
+                                        {item.text.replace(/^> /, '').split('\n').map((line, li) => {
+                                            const isHeader = line.trim().endsWith(':');
+
+                                            // Match patterns similar to InteractiveHome
+                                            const cmdDescMatch = line.match(/^(\s{2,})([a-z0-9\s]+?)\s{3,}(.+)$/i);
+                                            const openMatch = line.match(/^(\s{2,})(open\s+[a-z]+)$/i);
+                                            const shortMatch = line.match(/^(\s{2,})([a-z]{3,})$/i);
+
+                                            if (isHeader) {
+                                                return <div key={li} className="select-none font-bold opacity-60 mt-3 mb-1 tracking-widest text-[10px] uppercase">{line}</div>;
+                                            }
+
+                                            if (cmdDescMatch || openMatch || shortMatch) {
+                                                const cmdPart = cmdDescMatch ? cmdDescMatch[2] : (openMatch ? openMatch[2] : shortMatch![2]);
+                                                const descPart = cmdDescMatch ? cmdDescMatch[3] : null;
+                                                const prefix = cmdDescMatch ? cmdDescMatch[1] : (openMatch ? openMatch[1] : shortMatch![1]);
+
+                                                return (
+                                                    <div key={li} className="flex items-center active:bg-white/5 rounded px-1 -ml-1 transition-colors"
+                                                        onClick={() => {
+                                                            setInputValue(cmdPart.trim());
+                                                            inputRef.current?.focus();
+                                                        }}
+                                                    >
+                                                        <span className="select-none opacity-0 whitespace-pre text-[8px]">{prefix}</span>
+                                                        <span className="underline decoration-cyan-500/30 underline-offset-4 min-w-[70px] inline-block">
+                                                            {cmdPart}
+                                                        </span>
+                                                        {descPart && (
+                                                            <span className="select-none opacity-40 ml-3 italic text-[10px] whitespace-nowrap">
+                                                                {descPart}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                );
+                                            }
+
+                                            return (
+                                                <div key={li} className={cn(
+                                                    line.trim() === '' ? "h-1" : "",
+                                                    (line.startsWith(' ') || line.match(/^[0-9]\./)) && "select-none opacity-50 text-[10px]"
+                                                )}>
+                                                    {line}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             ))}
                             <div ref={historyEndRef} className="h-4" />
@@ -259,20 +313,20 @@ export function MobileTerminal() {
                         <div
                             className="flex items-center gap-3 px-4 h-14 shrink-0 border-t"
                             style={{
-                                backgroundColor: isBright ? '#f5f5f5' : '#141414',
-                                borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)',
+                                backgroundColor: isBright ? '#ebebeb' : '#080808',
+                                borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.12)',
                                 paddingBottom: 'env(safe-area-inset-bottom, 0px)',
                             }}
                         >
-                            <span className={`font-bold text-sm ${isBright ? 'text-blue-600' : 'text-cyan-500'}`}>$</span>
+                            <span className={`font-bold text-sm ${isBright ? 'text-blue-800' : 'text-cyan-400'}`}>$</span>
                             <input
                                 ref={inputRef}
                                 type="text"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 onKeyDown={onKeyDown}
-                                className={`flex-1 bg-transparent border-none outline-none text-sm font-mono ${isBright ? 'caret-blue-600' : 'caret-cyan-400'}`}
-                                style={{ color: 'var(--foreground)' }}
+                                className={`flex-1 bg-transparent border-none outline-none text-sm font-mono ${isBright ? 'caret-blue-800' : 'caret-cyan-400'}`}
+                                style={{ color: isBright ? '#030712' : 'var(--foreground)' }}
                                 placeholder="Type a command..."
                                 autoComplete="off"
                                 autoCorrect="off"

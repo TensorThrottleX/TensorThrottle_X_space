@@ -2,11 +2,11 @@
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { LabContainer } from '@/components/layout/LabContainer'
-import { LabNavigation } from '@/components/layout/LabNavigation'
 import { CategoryPostCard } from '@/components/content/CategoryPostCard'
 import { getPostsByCategory } from '@/lib/notion'
 import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentWrapper'
 import { StatusButton } from '@/components/ui/StatusButton'
+
 
 // ISR: Revalidate every 1 minute
 export const revalidate = 60
@@ -62,8 +62,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       latestPublishedAt={latestPost}
     >
       <LabContainer videoSrc="/media/videos/default-background.mp4">
-        {/* Sidebar remains unchanged */}
-        <LabNavigation />
+        {/* Sidebar remains unchanged (Now in Root Layout) */}
 
         {/* Main Content Area - Custom Layout for Category Archive */}
         <div className="flex-1 w-full relative z-10 transition-colors duration-500 overflow-visible"
@@ -89,6 +88,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 </div>
               </div>
             </div>
+
+
 
             {/* Posts Archive Stack */}
             {hasPosts ? (

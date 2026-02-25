@@ -83,14 +83,14 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
   }, [isLoading, nextCursor, loadMore])
 
   return (
-    <div className="flex flex-col gap-0 w-full mx-auto">
+    <div className="flex flex-col gap-4 w-full mx-auto">
       {/* Posts Timeline */}
       {posts.length > 0 ? (
         <div className="transition-colors duration-500"
           style={{ borderColor: 'var(--border)' }}
         >
           {posts.map((post) => (
-            <LabPostCard key={post.id} post={post} />
+            <LabPostCard key={post.id} post={post} commentCount={post.commentCount} />
           ))}
         </div>
       ) : (

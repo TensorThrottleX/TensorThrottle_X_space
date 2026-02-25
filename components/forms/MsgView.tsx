@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AlertCircle, CheckCircle, Loader2, Send, ShieldAlert, XOctagon } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
@@ -8,7 +8,8 @@ import { cn } from '@/lib/utils'
 import { useScrutiny } from '@/hooks/use-scrutiny'
 import { useModeration } from '@/hooks/use-moderation'
 
-
+// Request timeout for contact API
+const CONTACT_TIMEOUT_MS = 30_000;
 
 // [MSG_PAGE] – Main container for the messaging interface
 export function MsgView(): React.ReactNode {
@@ -25,6 +26,20 @@ export function MsgView(): React.ReactNode {
     const [hField, setHField] = useState('') // Honeypot
     const [imgError, setImgError] = useState(false)
     const coffeeCardRef = useRef<HTMLDivElement>(null)
+    const abortControllerRef = useRef<AbortController | null>(null)
+    const isMountedRef = useRef(true)
+
+    // Track mounted state for async operations
+    useEffect(() => {
+        isMountedRef.current = true
+        return () => {
+            isMountedRef.current = false
+            // Abort any pending request on unmount
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort()
+            }
+        }
+    }, [])
 
     useEffect(() => {
         setLoadTime(Date.now())
@@ -78,8 +93,17 @@ export function MsgView(): React.ReactNode {
     // [MSG_PAGE] – Handles the core email sending logic
     const { checkContent, isChecking } = useModeration()
 
-    const handleSend = async () => {
+    const handleSend = useCallback(async () => {
         if (!canSend) return
+
+        // Abort previous request if still pending
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort()
+        }
+
+        const controller = new AbortController()
+        abortControllerRef.current = controller
+        const timeoutId = setTimeout(() => controller.abort(), CONTACT_TIMEOUT_MS)
 
         setIsSending(true)
         setSendError(null)
@@ -87,6 +111,9 @@ export function MsgView(): React.ReactNode {
         try {
             // 1. Server-Side Scrutiny (ML)
             const moderation = await checkContent(message + " " + name, { context: 'chat', userId: name });
+
+            // Check if component unmounted during moderation
+            if (!isMountedRef.current) return;
 
             if (!moderation) {
                 throw new Error('Security check unavailable.');
@@ -113,8 +140,14 @@ export function MsgView(): React.ReactNode {
                     protocol: isConfirmed,
                     h_field: hField,
                     load_time: loadTime
-                })
+                }),
+                signal: controller.signal
             })
+
+            clearTimeout(timeoutId)
+
+            // Check if component unmounted during fetch
+            if (!isMountedRef.current) return;
 
             const data = await response.json()
 
@@ -132,12 +165,25 @@ export function MsgView(): React.ReactNode {
                 setSendError(data.error || 'Transmission engine reported an anomaly. Please try again.');
             }
         } catch (err) {
+            clearTimeout(timeoutId)
+            // Don't log/show error for intentional aborts
+            if (err instanceof Error && err.name === 'AbortError') {
+                if (isMountedRef.current) {
+                    setSendError('Request timed out. Please try again.');
+                }
+                return;
+            }
             console.error('[FRONTEND_ERROR]', err);
-            setSendError('Transmission link failure. (Details: ' + (err instanceof Error ? err.message : 'Unknown') + ')');
+            if (isMountedRef.current) {
+                setSendError('Transmission link failure. (Details: ' + (err instanceof Error ? err.message : 'Unknown') + ')');
+            }
         } finally {
-            setIsSending(false)
+            clearTimeout(timeoutId)
+            if (isMountedRef.current) {
+                setIsSending(false)
+            }
         }
-    }
+    }, [canSend, checkContent, message, name, email, isConfirmed, hField, loadTime])
 
     return (
         <motion.div
@@ -160,7 +206,7 @@ export function MsgView(): React.ReactNode {
 
                 {/* [MSG_PAGE] – Guidelines */}
                 <div className={cn(
-                    "p-6 rounded-2xl border backdrop-blur-md transition-all duration-500",
+                    "p-6 rounded-2xl border backdrop-blur-md transition-all duration-500 shadow-[var(--shadow-premium)]",
                     renderMode === 'bright' ? "bg-[#f4f4f4] border-black/5" : "bg-black/40 border-white/5"
                 )}>
                     <div className="flex items-start gap-4">
@@ -362,7 +408,7 @@ export function MsgView(): React.ReactNode {
                 <div className="flex justify-center py-6">
                     <div
                         ref={coffeeCardRef}
-                        className="coffee-card w-full max-w-[540px] relative overflow-hidden"
+                        className="coffee-card w-full max-w-[540px] relative overflow-hidden shadow-[var(--shadow-premium)]"
                     >
                         {/* BMC Logo - Top Left Corner */}
                         <div className="absolute top-4 left-4 w-10 h-10 hover:opacity-80 transition-opacity">

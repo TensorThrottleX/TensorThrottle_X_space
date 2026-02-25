@@ -1,3 +1,4 @@
 {
+    "description": "Migrated to eslint.config.mjs. This file is no longer used by Next.js 15+ flat config.",
     "extends": "next/core-web-vitals"
 }

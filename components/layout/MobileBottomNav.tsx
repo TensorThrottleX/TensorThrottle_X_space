@@ -2,12 +2,38 @@
 
 import React, { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft, ToggleRight } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft, ToggleRight, Monitor } from 'lucide-react'
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
 import { useMedia } from '@/components/providers/MediaProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+
+// Animated rotating vinyl disk for mobile
+function RotatingVinyl({ size = 20, isActive = false, isBright = false }: { size?: number; isActive?: boolean; isBright?: boolean }) {
+  return (
+    <motion.div
+      className="relative"
+      style={{ width: size, height: size }}
+      animate={isActive ? { rotate: 360 } : { rotate: 0 }}
+      transition={isActive ? { duration: 3, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
+    >
+      <Image
+        src="/media/icons/vinyl.png"
+        alt="Audio"
+        width={size}
+        height={size}
+        className="object-contain"
+        style={{
+          filter: isBright 
+            ? 'brightness(0.3) contrast(1.2)' 
+            : 'brightness(1.4) contrast(1.1) drop-shadow(0 0 4px rgba(34, 211, 238, 0.5))',
+        }}
+      />
+    </motion.div>
+  )
+}
 
 interface MobileNavItem {
     label: string
@@ -29,7 +55,7 @@ export function MobileBottomNav() {
     const pathname = usePathname()
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
-    const { renderMode, setRenderMode, setMainView, setUiMode, setIsPrecision } = useUI()
+    const { renderMode, setRenderMode, setMainView, setUiMode } = useUI()
     const {
         theme, setTheme,
         soundState, setSoundIndex,
@@ -72,7 +98,6 @@ export function MobileBottomNav() {
 
         setMainView('dashboard')
         setUiMode('default')
-        setIsPrecision(false)
 
         if (!(document as any).startViewTransition) {
             router.push(item.href)
@@ -91,7 +116,9 @@ export function MobileBottomNav() {
     const handleModeToggle = (mode: RenderMode) => {
         setRenderMode(mode)
         // Ensure theme matches for overlay logic
-        if (mode === 'custom' || mode === 'dark') {
+        if (mode === 'custom') {
+            setTheme('custom')
+        } else if (mode === 'dark') {
             setTheme('dark')
         } else {
             setTheme('bright')
@@ -117,12 +144,11 @@ export function MobileBottomNav() {
 
     return (
         <nav
-            className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-[200] backdrop-blur-xl border-t transition-colors duration-300 overflow-hidden"
+            className="mobile-bottom-nav fixed bottom-8 left-4 right-4 z-[200] backdrop-blur-3xl border rounded-full transition-colors duration-300 overflow-hidden shadow-[var(--shadow-premium)] mx-auto max-w-[400px]"
             style={{
-                backgroundColor: isBright ? 'rgba(255,255,255,0.95)' : 'rgba(10,10,10,0.95)',
-                borderColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)',
-                paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-                height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' // h-16 + safe area
+                backgroundColor: isBright ? 'rgba(255,255,255,0.85)' : 'rgba(15,15,15,0.85)',
+                borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
+                height: '4.5rem'
             }}
         >
             <AnimatePresence mode="popLayout" initial={false}>
@@ -225,7 +251,7 @@ export function MobileBottomNav() {
                             style={{ color: 'var(--foreground)' }}
                         >
                             <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeVideoName}</span>
-                            <FlaskConical size={20} />
+                            <Monitor size={20} />
                             <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">BG</span>
                         </button>
 
@@ -239,7 +265,7 @@ export function MobileBottomNav() {
                             style={{ color: soundState.soundIndex !== -1 ? '#22c55e' : 'var(--muted-foreground)' }}
                         >
                             <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
-                            <Volume2 size={20} />
+                            <RotatingVinyl size={24} isActive={soundState.soundIndex !== -1} isBright={renderMode === 'bright'} />
                             <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
                         </button>
                     </motion.div>
