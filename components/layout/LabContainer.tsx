@@ -38,7 +38,9 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
           - Maintains focus on the Cognitive layer
       */}
       <div className={`fixed inset-0 z-[-1] transition-all duration-700 ease-in-out
-          ${renderMode === 'bright' ? 'bg-transparent' : (uiMode === 'tree' ? 'bg-black/45 backdrop-blur-[2px]' : 'bg-black/20 backdrop-blur-[1px]')}
+          ${renderMode === 'bright' 
+            ? (isTerminalOpen ? 'bg-white/60 backdrop-blur-md' : 'bg-transparent') 
+            : (uiMode === 'tree' ? 'bg-black/45 backdrop-blur-[2px]' : 'bg-black/20 backdrop-blur-[1px]')}
           ${isTerminalOpen && renderMode !== 'bright' ? 'bg-black/75 backdrop-blur-md md:bg-black/75 md:backdrop-blur-md' : ''}
       `} />
 
@@ -47,7 +49,11 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
       */}
       <div className={cn(
         "fixed inset-0 z-[20] transition-all duration-500 ease-in-out pointer-events-none",
-        isTerminalOpen ? "opacity-100 backdrop-blur-sm bg-black/40" : "opacity-0 backdrop-blur-0 bg-transparent"
+        isTerminalOpen 
+          ? renderMode === 'bright' 
+            ? "opacity-100 backdrop-blur-sm bg-white/50" 
+            : "opacity-100 backdrop-blur-sm bg-black/40" 
+          : "opacity-0 backdrop-blur-0 bg-transparent"
       )} />
 
       {/* [LAYER_3]: Flow Plane (Deterministic Content Stack)
