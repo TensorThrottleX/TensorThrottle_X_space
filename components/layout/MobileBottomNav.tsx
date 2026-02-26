@@ -2,37 +2,45 @@
 
 import React, { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft, ToggleRight, Monitor } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft, ToggleRight, Monitor, VolumeX } from 'lucide-react'
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
 import { useMedia } from '@/components/providers/MediaProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
+
+// SVG Data URL for the Vinyl Icon
+const VINYL_SVG_DATA_URL = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9IiMxMjEyMTIiIC8+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MiIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzOCIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzNCIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyNiIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxOCIgZmlsbD0iI0VFRUVFRSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxOCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4xIiAvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjIiIGZpbGw9IiMwMDAiIC8+PHBhdGggZD0iTSA1MCAxMCBBIDQwIDQwIDAgMCAxIDkwIDUwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4zIiAvPjwvc3ZnPg==`;
 
 // Animated rotating vinyl disk for mobile
 function RotatingVinyl({ size = 20, isActive = false, isBright = false }: { size?: number; isActive?: boolean; isBright?: boolean }) {
-  return (
-    <motion.div
-      className="relative"
-      style={{ width: size, height: size }}
-      animate={isActive ? { rotate: 360 } : { rotate: 0 }}
-      transition={isActive ? { duration: 3, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
-    >
-      <Image
-        src="/media/icons/vinyl.png"
-        alt="Audio"
-        width={size}
-        height={size}
-        className="object-contain"
-        style={{
-          filter: isBright 
-            ? 'brightness(0.3) contrast(1.2)' 
-            : 'brightness(1.4) contrast(1.1) drop-shadow(0 0 4px rgba(34, 211, 238, 0.5))',
-        }}
-      />
-    </motion.div>
-  )
+    return (
+        <motion.div
+            className="relative flex items-center justify-center p-1"
+            style={{ width: size, height: size }}
+            animate={isActive ? { rotate: 360 } : { rotate: 0 }}
+            transition={isActive ? { duration: 8, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
+        >
+            <img
+                src={VINYL_SVG_DATA_URL}
+                alt="Audio"
+                className="w-full h-full object-contain"
+                style={{
+                    filter: isBright
+                        ? 'brightness(0.3) contrast(1.2)'
+                        : 'brightness(1.5) contrast(1.1) drop-shadow(0 0 8px rgba(34, 211, 238, 0.4))',
+                }}
+            />
+            {isActive && (
+                <motion.div
+                    className="absolute inset-0 rounded-full bg-cyan-400/10"
+                    animate={{
+                        boxShadow: isBright ? "0 0 15px rgba(0,0,0,0.1)" : "0 0 20px rgba(34, 211, 238, 0.3)"
+                    }}
+                />
+            )}
+        </motion.div>
+    )
 }
 
 interface MobileNavItem {
@@ -265,7 +273,29 @@ export function MobileBottomNav() {
                             style={{ color: soundState.soundIndex !== -1 ? '#22c55e' : 'var(--muted-foreground)' }}
                         >
                             <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
-                            <RotatingVinyl size={24} isActive={soundState.soundIndex !== -1} isBright={renderMode === 'bright'} />
+                            <div className="w-10 h-10 flex items-center justify-center overflow-hidden">
+                                <AnimatePresence mode="wait">
+                                    {soundState.soundIndex === -1 ? (
+                                        <motion.div
+                                            key="muted-mobile"
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.8 }}
+                                        >
+                                            <VolumeX size={24} />
+                                        </motion.div>
+                                    ) : (
+                                        <motion.div
+                                            key="playing-mobile"
+                                            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                        >
+                                            <RotatingVinyl size={38} isActive={true} isBright={isBright} />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                             <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
                         </button>
                     </motion.div>

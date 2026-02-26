@@ -4,25 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-export interface SubCardContent {
-    id: string
-    title: string
-    frontText: string
-    contextLabel: string
-    contextText: string
-    detailsLabel: string
-    details: string[]
-    footerLabel: string
-    footerText: string
-}
-
-export interface CardContent {
-    label: string
-    heading: string
-    intro: string
-    subCards: SubCardContent[]
-    treeData: any
-}
+import { SubCardContent, CardContent } from '@/lib/dashboard-data'
 
 interface StackedDeckProps {
     mode: 'purpose' | 'about'

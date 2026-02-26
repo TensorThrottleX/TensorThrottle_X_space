@@ -21,14 +21,27 @@ const UIContext = createContext<UIContextType | undefined>(undefined)
 
 export function UIProvider({ children }: { children: ReactNode }) {
     const [uiMode, setUiMode] = useState<UIMode>('default')
-    const [renderMode, setRenderMode] = useState<RenderMode>('bright')
+    const [renderMode, setRenderMode] = useState<RenderMode>('dark') // Default to 'dark' for consistency
     const [isTerminalOpen, setIsTerminalOpen] = useState(false)
     const [mainView, setMainView] = useState<MainView>('dashboard')
 
-    // Handle Body Class for Render Mode
+    // Initialize from localStorage
     useEffect(() => {
-        document.body.classList.remove('mode-normal', 'mode-bright', 'mode-dark', 'mode-custom')
-        document.body.classList.add(`mode-${renderMode}`)
+        if (typeof window !== 'undefined') {
+            const savedMode = localStorage.getItem('renderMode') as RenderMode
+            if (savedMode && ['normal', 'bright', 'dark', 'custom'].includes(savedMode)) {
+                setRenderMode(savedMode)
+            }
+        }
+    }, [])
+
+    // Handle Body Class and Persistence
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            document.body.classList.remove('mode-normal', 'mode-bright', 'mode-dark', 'mode-custom')
+            document.body.classList.add(`mode-${renderMode}`)
+            localStorage.setItem('renderMode', renderMode)
+        }
     }, [renderMode])
 
 

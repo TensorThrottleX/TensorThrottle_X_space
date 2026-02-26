@@ -2,31 +2,39 @@
 
 import React from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, Globe, Maximize, Target, Crosshair, Brain, Layers, Monitor } from 'lucide-react'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { Home, List, Folder, FlaskConical, Globe, Maximize, Target, Crosshair, Brain, Layers, Monitor, VolumeX } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
-// Animated rotating vinyl disk using PNG image
+// SVG Data URL for the Vinyl Icon (Ensures visibility despite local server asset loading issues)
+const VINYL_SVG_DATA_URL = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9IiMxMjEyMTIiIC8+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MiIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzOCIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzNCIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyNiIgc3Ryb2tlPSIjMUExQTFBIiBzdHJva2Utd2lkdGg9IjAuNSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxOCIgZmlsbD0iI0VFRUVFRSIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxOCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4xIiAvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjIiIGZpbGw9IiMwMDAiIC8+PHBhdGggZD0iTSA1MCAxMCBBIDQwIDQwIDAgMCAxIDkwIDUwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4zIiAvPjwvc3ZnPg==`;
+
+// Animated rotating vinyl disk
 function RotatingVinyl({ size = 18, isActive = false, isBright = false }: { size?: number; isActive?: boolean; isBright?: boolean }) {
   return (
     <motion.div
-      className="relative"
+      className="relative flex items-center justify-center p-1"
       style={{ width: size, height: size }}
       animate={isActive ? { rotate: 360 } : { rotate: 0 }}
-      transition={isActive ? { duration: 3, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
+      transition={isActive ? { duration: 8, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
     >
-      <Image
-        src="/media/icons/vinyl.png"
+      <img
+        src={VINYL_SVG_DATA_URL}
         alt="Audio"
-        width={size}
-        height={size}
-        className="object-contain"
+        className="w-full h-full object-contain"
         style={{
-          filter: isBright 
-            ? 'brightness(0.3) contrast(1.2)' // Dark vinyl on bright background
-            : 'brightness(1.4) contrast(1.1) drop-shadow(0 0 4px rgba(34, 211, 238, 0.5))', // Bright vinyl with glow in dark mode
+          filter: isBright
+            ? 'brightness(0.3) contrast(1.2)'
+            : 'brightness(1.5) contrast(1.1) drop-shadow(0 0 8px rgba(34, 211, 238, 0.4))',
         }}
       />
+      {isActive && (
+        <motion.div
+          className="absolute inset-0 rounded-full bg-cyan-400/10"
+          animate={{
+            boxShadow: isBright ? "0 0 15px rgba(0,0,0,0.1)" : "0 0 20px rgba(34, 211, 238, 0.3)"
+          }}
+        />
+      )}
     </motion.div>
   )
 }
@@ -226,19 +234,43 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
               </span>
             </button>
 
-            <button
-              onClick={handleNextSound}
-              className={`group relative flex flex-col items-center justify-center w-12 h-12 rounded-full border transition-all 
-                ${soundState.soundIndex !== -1 ? 'bg-green-500/20 border-green-500/30 text-green-400' : 'bg-white/5 border-white/10 text-white/40'}
-              `}
-            >
-              <RotatingVinyl size={24} isActive={soundState.soundIndex !== -1} isBright={false} />
+            <div className="group relative">
+              <button
+                onClick={handleNextSound}
+                className={`flex flex-col items-center justify-center w-12 h-12 rounded-full border transition-all duration-500 overflow-hidden
+                  ${soundState.soundIndex !== -1 ? 'border-green-500/30' : 'bg-white/5 border-white/10 text-white/40'}
+                `}
+              >
+                <AnimatePresence mode="wait">
+                  {soundState.soundIndex === -1 ? (
+                    <motion.div
+                      key="muted"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                    >
+                      <VolumeX size={20} strokeWidth={1.5} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="playing"
+                      initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                      exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                      className="w-full h-full flex items-center justify-center"
+                    >
+                      <RotatingVinyl size={44} isActive={true} isBright={false} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+
               <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
                 style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
               >
                 AUDIO: {activeSoundName}
               </span>
-            </button>
+            </div>
 
 
           </>
