@@ -19,7 +19,7 @@ function RotatingVinyl({ size = 20, isActive = false, isBright = false }: { size
             className="relative flex items-center justify-center p-1"
             style={{ width: size, height: size }}
             animate={isActive ? { rotate: 360 } : { rotate: 0 }}
-            transition={isActive ? { duration: 3, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
+            transition={isActive ? { duration: 8, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
         >
             <img
                 src={VINYL_SVG_DATA_URL}

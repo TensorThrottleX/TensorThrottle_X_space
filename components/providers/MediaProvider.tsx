@@ -86,9 +86,9 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                 const res = await fetch('/api/media', { signal: controller.signal })
                 if (!res.ok) throw new Error('Media API error')
                 const data = await res.json()
-                
+
                 if (!isMounted) return; // Don't update state if unmounted
-                
+
                 setConfig(data)
 
                 const saved = localStorage.getItem('media_engine_v3')
@@ -240,6 +240,9 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
                     } catch (e) {
                         setVideoState(prev => ({ ...prev, hasAudioTrack: false }))
                     }
+                }}
+                onPlay={(e) => {
+                    e.currentTarget.playbackRate = 1.0
                 }}
                 onError={(e) => {
                     console.warn('Video playback error:', e)
