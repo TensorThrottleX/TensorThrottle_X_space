@@ -155,7 +155,8 @@ export function MobileHeader({
                 setSendError(data.error || 'Transmission failed.')
             }
         } catch (e: any) {
-            setSendError('Network error: ' + (e?.message || 'Unknown'))
+            console.error('[CONTACT_FORM_ERROR]', e)
+            setSendError('Network error: Unable to establish a connection. Please investigate active network states.')
         } finally {
             setIsSending(false)
         }

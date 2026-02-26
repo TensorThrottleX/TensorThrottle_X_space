@@ -527,7 +527,7 @@ export async function POST(req: NextRequest) {
         console.log(JSON.stringify(logData));
 
         return NextResponse.json(
-            { error: `Internal Error: ${error.message}` },
+            { error: 'An unexpected system error occurred. Please try again later.' },
             { status: 500 }
         );
     }

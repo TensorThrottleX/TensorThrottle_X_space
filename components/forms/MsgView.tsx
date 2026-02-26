@@ -175,7 +175,7 @@ export function MsgView(): React.ReactNode {
             }
             console.error('[FRONTEND_ERROR]', err);
             if (isMountedRef.current) {
-                setSendError('Transmission link failure. (Details: ' + (err instanceof Error ? err.message : 'Unknown') + ')');
+                setSendError('Transmission link failure. Unable to establish a secure connection.');
             }
         } finally {
             clearTimeout(timeoutId)
