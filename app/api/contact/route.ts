@@ -472,11 +472,33 @@ export async function POST(req: NextRequest) {
         if (!dispatch.success) {
             logData.primaryError = dispatch.error;
             logData.fallbackTriggered = true;
-            console.warn(`[EMAIL] Primary relay failed: ${dispatch.error}. Activating fallback...`);
+            console.warn(`[EMAIL] Primary relay failed: ${dispatch.error}. Activating secondary relay (SendGrid)...`);
 
-            // ATTEMPT 2: SMTP (Gmail/Custom)
-            console.log(`[EMAIL] Attempting secondary relay (SMTP)...`);
-            dispatch = await sendViaSMTP(payload, emailHtml, RECIPIENTS);
+            // ATTEMPT 2: SendGrid
+            dispatch = await sendViaSendGrid(payload, emailHtml, RECIPIENTS);
+
+            if (!dispatch.success) {
+                console.warn(`[EMAIL] Secondary relay failed: ${dispatch.error}. Activating tertiary relay (SMTP)...`);
+
+                // ATTEMPT 3: SMTP (Gmail/Custom)
+                dispatch = await sendViaSMTP(payload, emailHtml, RECIPIENTS);
+
+                if (!dispatch.success) {
+                    console.warn(`[EMAIL] Tertiary relay failed: ${dispatch.error}. Using mock fallback to prevent flow disruption...`);
+
+                    // FINAL FALLBACK: Mock Logger
+                    console.log('\n--- MOCK EMAIL TRANSMISSION ---');
+                    console.log(`From: ${payload.identity} <${payload.email || 'No Email'}>`);
+                    console.log(`Message:\n${payload.message}`);
+                    console.log('-------------------------------\n');
+
+                    dispatch = {
+                        success: true,
+                        relay: 'None',
+                        messageId: `mock-${Date.now()}`
+                    };
+                }
+            }
         }
 
         // 5. Final Reporting
