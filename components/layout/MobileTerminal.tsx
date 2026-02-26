@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
  */
 export function MobileTerminal() {
     const router = useRouter()
-    const { renderMode, setRenderMode, isTerminalOpen, setIsTerminalOpen } = useUI()
+    const { renderMode, setRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
     const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res'; text: string }[]>([])
     const [historyLog, setHistoryLog] = useState<string[]>([])
     const [historyIndex, setHistoryIndex] = useState<number | null>(null)

@@ -19,6 +19,9 @@ const nextConfig = {
   },
 
   experimental: {
+    // Limit concurrency to reduce memory usage
+    cpus: 1,
+    workerThreads: false,
     // Tree-shake heavy libraries — only bundle used exports
     optimizePackageImports: [
       'lucide-react',
