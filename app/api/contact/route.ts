@@ -484,19 +484,15 @@ export async function POST(req: NextRequest) {
                 dispatch = await sendViaSMTP(payload, emailHtml, RECIPIENTS);
 
                 if (!dispatch.success) {
-                    console.warn(`[EMAIL] Tertiary relay failed: ${dispatch.error}. Using mock fallback to prevent flow disruption...`);
+                    console.warn(`[EMAIL] Tertiary relay failed: ${dispatch.error}.`);
 
-                    // FINAL FALLBACK: Mock Logger
-                    console.log('\n--- MOCK EMAIL TRANSMISSION ---');
+                    // Log the unsent message locally so it's not lost out of nowhere
+                    console.log('\n--- FAILED EMAIL TRANSMISSION SINK ---');
                     console.log(`From: ${payload.identity} <${payload.email || 'No Email'}>`);
                     console.log(`Message:\n${payload.message}`);
-                    console.log('-------------------------------\n');
+                    console.log('--------------------------------------\n');
 
-                    dispatch = {
-                        success: true,
-                        relay: 'None',
-                        messageId: `mock-${Date.now()}`
-                    };
+                    dispatch.error = 'Secure channel routing is currently unavailable. Please try again later.';
                 }
             }
         }
@@ -510,10 +506,10 @@ export async function POST(req: NextRequest) {
         console.log(JSON.stringify(logData)); // Structured log output
 
         if (!dispatch.success) {
-            console.error(`[CRITICAL] All relays failed. Last error: ${dispatch.error}`);
+            console.error(`[CRITICAL] All relays failed. Client given normalized error.`);
             return NextResponse.json(
-                { error: `Transmission failed: ${dispatch.error || 'All relays unavailable'}` },
-                { status: 500 }
+                { error: dispatch.error || 'Transmission routing unavailable' },
+                { status: 503 }
             );
         }
 
