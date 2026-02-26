@@ -49,7 +49,7 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
 
   useEffect(() => {
     isMountedRef.current = true
-    
+
     // Generate fingerprint on mount (async)
     getBrowserFingerprint().then(fp => {
       if (isMountedRef.current) setFingerprint(fp)
@@ -296,14 +296,19 @@ export function CommentSection({ postSlug, initialComments }: CommentSectionProp
           {/* Note: Char count logic remains as is, visual only update */}
           <label className="flex justify-between text-sm font-medium mb-1" style={{ color: 'var(--foreground)' }}>
             <span>Message</span>
-            <span className={cn(
-              "text-[10px] font-bold tracking-widest transition-colors duration-300",
-              messageLength > MAX_MESSAGE_LENGTH * 0.9 ? "text-red-400" :
-                messageLength > MAX_MESSAGE_LENGTH * 0.7 ? "text-yellow-400" :
-                  "text-white/30"
-            )}>
-              {messageLength} / {MAX_MESSAGE_LENGTH}
-            </span>
+            <div className="flex gap-3">
+              <span className={cn(
+                "text-[10px] font-bold tracking-widest transition-colors duration-300",
+                messageLength > MAX_MESSAGE_LENGTH * 0.9 ? "text-red-400" :
+                  messageLength > MAX_MESSAGE_LENGTH * 0.7 ? "text-yellow-400" :
+                    "text-white/30"
+              )}>
+                {messageLength} / {MAX_MESSAGE_LENGTH} CHARS
+              </span>
+              <span className="text-[10px] font-bold tracking-widest text-cyan-500/40">
+                {messageLength === 0 ? 0 : (messageRef.current?.value.trim().split(/\s+/).length || 0)} WORDS
+              </span>
+            </div>
           </label>
           <textarea
             ref={messageRef}

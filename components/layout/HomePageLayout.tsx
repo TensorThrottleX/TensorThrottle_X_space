@@ -1,5 +1,5 @@
 'use client';
-// Force rebuild: v1
+// Force rebuild: v2 (Consolidated Chunks)
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';

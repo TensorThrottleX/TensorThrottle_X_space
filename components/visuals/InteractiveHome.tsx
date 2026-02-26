@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { Terminal } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
+import { NAV_COMMANDS, SYSTEM_MOTIVES, HELP_TEXT } from '@/lib/terminal-commands'
 
 export function InteractiveHome(): React.ReactNode {
   const router = useRouter()
@@ -38,7 +38,6 @@ export function InteractiveHome(): React.ReactNode {
   // Sync Global Terminal State
   useEffect(() => {
     setIsTerminalOpen(isExpanded)
-    // CRITICAL: Reset terminal state on unmount to prevent persistent blur on other pages
     return () => {
       setIsTerminalOpen(false)
     }
@@ -47,23 +46,19 @@ export function InteractiveHome(): React.ReactNode {
   const toggleBGM = (force?: boolean) => {
     const nextState = force !== undefined ? force : !isPlaying
     setIsPlaying(nextState)
-    // Dispatch to global player
     window.dispatchEvent(new CustomEvent('toggle-bgm', { detail: { force: nextState } }))
   }
 
-  // Handle Scroll to Bottom
   const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
     historyEndRef.current?.scrollIntoView({ behavior })
   }
 
-  // Auto-scroll terminal logic
   useEffect(() => {
     if (isExpanded && isAtBottom) {
       scrollToBottom()
     }
   }, [commandHistory, isExpanded])
 
-  // Scroll listener to track position
   const handleScroll = () => {
     if (!scrollContainerRef.current) return
     const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current
@@ -72,7 +67,6 @@ export function InteractiveHome(): React.ReactNode {
     setIsAtBottom(atBottom)
   }
 
-  // Focus input on expand
   useEffect(() => {
     if (isExpanded) {
       inputRef.current?.focus()
@@ -80,7 +74,6 @@ export function InteractiveHome(): React.ReactNode {
     }
   }, [isExpanded])
 
-  // Click Outside & Escape Logic
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -123,14 +116,13 @@ export function InteractiveHome(): React.ReactNode {
 
   const logCommand = (cmd: string, response?: string) => {
     setCommandHistory(prev => {
-      const newHistory = [...prev, { type: 'cmd' as const, text: `> ${cmd}` }];
+      const newHistory = [...prev, { type: 'cmd' as const, text: `sh-3.2$ ${cmd}` }];
       if (response) {
         newHistory.push({ type: 'res' as const, text: response });
       }
       return newHistory;
     })
     setHistoryLog(prev => {
-      // Don't log help/clear to history log for arrow up/down
       if (['help', 'clear', 'cls'].includes(cmd.toLowerCase().trim())) return prev;
       return [...prev, cmd];
     })
@@ -142,73 +134,32 @@ export function InteractiveHome(): React.ReactNode {
     const cleanCmd = cmd.trim().toLowerCase()
     let response = ''
 
+    // Haptic Feedback for execution
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(5)
+    }
+
     if (cleanCmd === 'help') {
-      response = `Available Commands:
-
-Navigation:
-  open about
-  open feed
-  open thoughts
-  open projects
-  open experiments
-  open manifold
-
-Social:
-  twitter
-  github
-  email
-
-Utility:
-  home        Minimize terminal
-  explain     View system motives
-  system      Check system status`
+      response = HELP_TEXT
     }
     else if (cleanCmd === 'system') {
-      response = `System diagnostics ready.
-Kernel: Vercel_Standard_v2
-Modules: Notion_API, Framer_Motion
-Hidden states may be toggled.`
+      response = `System diagnostics ready.\nKernel: Vercel_Standard_v2\nModules: Notion_API, Framer_Motion, Tree_Engine_v2\nStatus: ACCELERATED`
     }
-    // Secret BGM Triggers
-    else if (
-      cleanCmd.includes('awaken') || cleanCmd.includes('override') || (cleanCmd.includes('system') && cleanCmd.includes('boost'))
-    ) {
+    else if (cleanCmd.includes('awaken') || cleanCmd.includes('override')) {
       toggleBGM(true)
-      response = `[CRITICAL_UPDATE]
-System mode elevated. 
-Enhancements active.`
+      response = `[CRITICAL_UPDATE]\nSystem mode elevated.\nEnhancements active.`
     }
-    // Mode Switching Logic
     else if (['mode normal', 'render normal', 'normal'].includes(cleanCmd)) {
       setRenderMode('normal')
-      response = `[SYSTEM_UPDATE]
-Render Mode: NORMAL (Cinematic)
-Visuals: Standard
-Video: Active`
+      response = `[SYSTEM_UPDATE]\nRender Mode: NORMAL (Cinematic)`
     }
     else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) {
       setRenderMode('bright')
-      response = `[SYSTEM_UPDATE]
-Render Mode: BRIGHT (High Clarity)
-Visuals: Inverted/Matte
-Video: Suspended`
+      response = `[SYSTEM_UPDATE]\nRender Mode: BRIGHT (High Clarity)`
     }
     else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) {
       setRenderMode('dark')
-      response = `[SYSTEM_UPDATE]
-Render Mode: DARK (Deep Focus)
-Visuals: Matte Black
-Video: Suspended`
-    }
-    else if (['mode', 'render'].includes(cleanCmd)) {
-      // Circle toggle
-      setRenderMode((prev: any) => {
-        if (prev === 'normal') return 'bright'
-        if (prev === 'bright') return 'dark'
-        return 'normal'
-      })
-      response = `[RENDER_TOGGLE]
-Cycling render mode...`
+      response = `[SYSTEM_UPDATE]\nRender Mode: DARK (Deep Focus)`
     }
     else if (cleanCmd === 'clear' || cleanCmd === 'cls') {
       setCommandHistory([])
@@ -218,85 +169,38 @@ Cycling render mode...`
       response = 'Minimizing terminal...'
       setTimeout(() => setIsExpanded(false), 500)
     }
-    else if (cleanCmd === 'explain' || cleanCmd === 'explanation') {
-      response = `System Motives:
-
-1. FEED
-   To capture raw, transient ideas in real-time.
-
-2. PROJECTS
-   Tangible proof of engineering and execution.
-
-3. THOUGHTS
-   Structured analysis and long-form philosophy.
-
-4. EXPERIMENTS
-   Volatile prototypes and unstable code.
-
-5. MANIFOLD
-   The intersection of AI, systems, and design.
-
-6. ABOUT
-   Core identity and operator context.`
+    else if (cleanCmd === 'explain') {
+      response = SYSTEM_MOTIVES
     }
     else {
       const target = cleanCmd.replace(/^open\s+/, '').trim()
 
-      // Check if this is a tree expansion command (e.g., origin.journey)
+      // Tree expansion deep-linking
       const treeRoots = ['origin', 'focus', 'build', 'philosophy']
       if (treeRoots.some(root => target.startsWith(root))) {
-        setUiMode('tree') // Ensure tree is open
+        setUiMode('tree')
         window.dispatchEvent(new CustomEvent('tree-expand', { detail: { path: target } }))
         logCommand(cleanCmd, `Expanding data node: ${target}`)
-        if (!isExpanded) setIsExpanded(true)
         return
       }
 
-      const handled = handleNavigation(target, cleanCmd)
-      if (!handled) {
-        response = 'Command not recognized.\nType "help" to see available commands.'
-      } else {
-        logCommand(cleanCmd)
+      const path = NAV_COMMANDS[target]
+      if (path) {
+        logCommand(cleanCmd, path.startsWith('http') || path.startsWith('mailto') ? 'Opening external...' : `Redirecting to /${target}...`)
+        if (path.startsWith('http') || path.startsWith('mailto')) {
+          window.open(path, '_blank')
+        } else {
+          setUiMode('default')
+          setIsExpanded(false)
+          setTimeout(() => router.push(path), 600)
+        }
         return
+      } else {
+        response = 'Command not recognized.\nType "help" to see available commands.'
       }
     }
 
     logCommand(cleanCmd, response)
-  }
-
-  const handleNavigation = (target: string, originalCmd: string): boolean => {
-    const map: Record<string, string> = {
-      'about': '/about',
-      'work': '/category/projects',
-      'interests': '/category/thoughts',
-      'connect': 'mailto:tensorthrottleX@proton.me',
-      'feed': '/feed',
-      'thoughts': '/category/thoughts',
-      'projects': '/category/projects',
-      'experiments': '/category/experiments',
-      'manifold': '/category/manifold',
-      'twitter': 'https://x.com/TensorThrottleX',
-      'x': 'https://x.com/TensorThrottleX',
-      'github': 'https://github.com/TensorThrottleX',
-      'gh': 'https://github.com/TensorThrottleX',
-      'email': 'mailto:tensorthrottleX@proton.me'
-    }
-
-    const path = map[target]
-    if (path) {
-      logCommand(originalCmd, path.startsWith('http') || path.startsWith('mailto') ? 'Opening...' : `Redirecting to /${target}...`)
-      if (path.startsWith('http') || path.startsWith('mailto')) {
-        window.open(path, '_blank')
-      } else {
-        // [CRITICAL_SYNC] – Reset all sectional and immersive states before navigation
-        setUiMode('default')
-        setIsExpanded(false)
-        setIsTerminalOpen(false)
-        setTimeout(() => router.push(path), 600)
-      }
-      return true
-    }
-    return false
   }
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -319,9 +223,8 @@ Cycling render mode...`
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
-      if (historyIndex === null) return
-      const newIndex = historyIndex + 1
-      if (newIndex >= historyLog.length) {
+      const newIndex = historyIndex === null ? null : historyIndex + 1
+      if (newIndex === null || newIndex >= historyLog.length) {
         setHistoryIndex(null)
         setInputValue(historyDraft)
       } else {
@@ -331,268 +234,104 @@ Cycling render mode...`
     }
   }
 
-  // Visual Classes based on RenderMode - Now simplified to use CSS Variables
   const isBright = renderMode === 'bright'
-  // We rely on CSS variables for colors now, so fewer conditional classes needed (but keeping structure)
-
-  const containerClasses = `relative flex flex-col transition-[height,width,transform,opacity] duration-500 overflow-hidden pointer-events-auto
-    ${isExpanded
-      ? 'h-[28rem] w-full max-w-[min(50rem,90vw)] rounded-md scale-100 translate-y-0 opacity-100 shadow-cyan-500/10'
-      : `h-16 w-[min(22rem,90vw)] md:w-[min(28rem,90vw)] rounded-md cursor-text scale-[0.96] translate-y-2 opacity-100 
-         hover:scale-[0.97] 
-         ${isBright ? 'hover:ring-[1.5px] hover:ring-black' : 'hover:ring-2 hover:ring-blue-500/80 shadow-[0_0_15px_rgba(59,130,246,0.3)]'}`
-    } 
-    ${isPlaying && !isBright
-      ? 'ring-1 ring-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
-      : (isPlaying && isBright ? 'ring-1 ring-black/10 shadow-[0_0_25px_rgba(0,0,0,0.08)]' : '')
-    }`
 
   return (
-    <div className="command-shell terminal fixed inset-0 flex flex-col items-center justify-end pb-12 px-4 font-mono z-50 pointer-events-none">
-      {/* Full-Screen Blur Backdrop */}
+    <div className="terminal-shell-fixed fixed inset-0 flex flex-col items-center justify-end pb-12 px-4 font-mono z-50 pointer-events-none">
+      {/* Background Blur */}
       <div
-        className={`absolute inset-0 z-0 transition-opacity duration-500 beauty-blur ${isExpanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={cn(
+          "absolute inset-0 z-0 transition-opacity duration-500",
+          isExpanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}
         style={{
-          backdropFilter: 'blur(4px)',
-          backgroundColor: isBright ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.3)'
+          backdropFilter: 'blur(8px)',
+          backgroundColor: isBright ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)'
         }}
         onClick={() => setIsExpanded(false)}
       />
 
       <div
         ref={containerRef}
-        className={containerClasses}
-        style={{
-          // Background handling moved to inner layer to prevent content blur bleed
-          color: 'var(--foreground)',
-          transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease',
-          zIndex: 51 // Ensure above backdrop
-        }}
-        onClick={() => {
-          if (!isExpanded) setIsExpanded(true)
-          inputRef.current?.focus()
-        }}
+        className={cn(
+          "relative flex flex-col transition-all duration-500 overflow-hidden pointer-events-auto",
+          isExpanded
+            ? "h-[28rem] w-full max-w-[50rem] rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.3)]"
+            : "h-14 w-[18rem] md:w-[24rem] rounded-lg cursor-text hover:scale-[1.02]",
+          isBright ? "bg-white border-black/20" : "bg-[#050505] border-white/10",
+          "border shadow-2xl"
+        )}
+        onClick={() => { if (!isExpanded) setIsExpanded(true) }}
       >
-        {/* Background Layer - Isolated for Blur */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0 border transition-[background-color,border-color] duration-500"
-          style={{
-            backgroundColor: isExpanded
-              ? (isBright ? '#ffffff' : '#050505')
-              : 'var(--terminal-bg)',
-            borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
-            boxShadow: 'var(--shadow-premium)'
-          }}
-        />
-
-        {/* Content Layer - Z-Index 10 ensures clarity */}
-        <div className="relative z-10 flex flex-col w-full h-full">
-
-          <style jsx global>{`
-          .terminal-scroll::-webkit-scrollbar {
-            width: 8px;
-          }
-          .terminal-scroll::-webkit-scrollbar-track {
-            background: var(--sidebar-bg);
-            border-radius: 4px;
-          }
-          .terminal-scroll::-webkit-scrollbar-thumb {
-            background: var(--text-secondary); /* or muted-foreground */
-            border-radius: 4px;
-            background-clip: content-box;
-            border: 2px solid transparent;
-            opacity: 0.5;
-          }
-          .terminal-scroll::-webkit-scrollbar-thumb:hover {
-            background-color: var(--text-primary);
-          }
-          .bgm-trigger {
-            position: absolute;
-            bottom: 12px;
-            right: 16px;
-            padding: 8px 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--muted-foreground);
-            font-size: 9px;
-            letter-spacing: 1.5px;
-            border-radius: 12px;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-            transition: transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            z-index: 60;
-            text-transform: uppercase;
-            pointer-events: auto;
-          }
-          .bgm-trigger:hover {
-            transform: translateY(-1px);
-            color: var(--foreground);
-            border-color: var(--foreground);
-          }
-          .bgm-trigger.active {
-            background: rgba(6, 182, 212, 0.1); 
-            border-color: rgba(6, 182, 212, 0.5);
-            color: #06b6d4;
-          }
-          /* Override for bright mode active trigger */
-          body.mode-bright .bgm-trigger.active {
-             background: rgba(0, 0, 0, 0.05);
-             border-color: #000;
-             color: #000;
-          }
-        `}</style>
-
-          {/* Window Header */}
-          <div className="p-2.5 flex items-center justify-between select-none shrink-0 border-b transition-colors duration-500"
-            style={{
-              backgroundColor: isBright ? '#ebebeb' : 'var(--sidebar-bg)',
-              borderColor: isBright ? 'rgba(0, 0, 0, 0.3)' : 'var(--sidebar-border)'
-            }}
-          >
-            <div className="flex items-center gap-2 px-1">
-              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-red-500/80" : "bg-red-500/50")} />
-              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-yellow-500/80" : "bg-yellow-500/50")} />
-              <div className={cn("w-2 h-2 rounded-full", isBright ? "bg-green-500/80" : "bg-green-500/50")} />
-            </div>
-            <div className={cn(
-              "text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity duration-500",
-              isBright ? "text-black opacity-100" : "text-white opacity-50"
-            )}>
-              {isExpanded ? 'SYSTEM_CONSOLE_v1.0.4' : 'SECURE_SHELL'}
-            </div>
-            <div className="w-10" />
+        {/* Header */}
+        <div className={cn(
+          "flex items-center justify-between px-4 py-2 border-b select-none",
+          isBright ? "bg-gray-100 border-gray-200" : "bg-white/5 border-white/10"
+        )}>
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           </div>
+          <span className={cn(
+            "text-[10px] font-bold tracking-widest uppercase opacity-40",
+            isBright ? "text-black" : "text-white"
+          )}>
+            {isExpanded ? "system_console_v2.0" : "secure_shell"}
+          </span>
+          <div className="w-10" />
+        </div>
 
-          {/* Scroll Output Area */}
-          <div className={`flex-1 relative overflow-hidden transition-opacity duration-500 ${isExpanded ? 'opacity-100 px-6 pt-4' : 'opacity-0 h-0 hidden'}`}>
-            <div className={`absolute top-0 left-0 right-0 h-10 bg-gradient-to-b z-20 pointer-events-none transition-opacity duration-300 ${showScrollFade ? 'opacity-100' : 'opacity-0'}
-            ${isBright ? 'from-white to-transparent' : 'from-black to-transparent'}
-          `} />
-
-            <div
-              ref={scrollContainerRef}
-              onScroll={handleScroll}
-              className="h-full overflow-y-auto terminal-scroll space-y-2 font-mono text-xs md:text-sm"
-            >
-              <div className={cn(
-                "text-xs mb-6 leading-relaxed uppercase tracking-wider border-l pl-3 transition-colors duration-1000",
-                isBright ? "text-gray-950 border-black/50" : "text-gray-500 border-white/10"
+        {/* Output */}
+        <div className={cn(
+          "flex-1 overflow-hidden relative",
+          isExpanded ? "opacity-100" : "opacity-0"
+        )}>
+          <div className={cn(
+            "absolute inset-0 overflow-y-auto terminal-scroll p-6 space-y-3 text-xs md:text-sm",
+            isBright ? "text-black" : "text-cyan-50/90"
+          )} ref={scrollContainerRef} onScroll={handleScroll}>
+            {commandHistory.map((item, i) => (
+              <div key={i} className={cn(
+                "whitespace-pre-wrap leading-relaxed",
+                item.type === 'cmd' ? "font-bold text-cyan-500" : "opacity-80"
               )}>
-                [CON_ESTABLISHED] <br />
-                SECURE_SHELL_ACTIVE <br />
-                TYPE 'HELP' FOR SYSTEM DIRECTIVES.
+                {item.text}
               </div>
-
-              {commandHistory.map((item, i) => (
-                <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
-                  style={{ color: item.type === 'cmd' ? (isBright ? '#1e40af' : '#22d3ee') : 'var(--foreground)' }}
-                >
-                  {item.type === 'cmd' ? (
-                    <span className={cn(
-                      "font-bold select-none shrink-0",
-                      !isBright ? 'opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'opacity-100'
-                    )}>
-                      sh-3.2$
-                    </span>
-                  ) : null}
-                  <div className="flex-1">
-                    {item.text.replace(/^> /, '').split('\n').map((line, li) => {
-                      const isHeader = line.trim().endsWith(':');
-
-                      // Match "  command    description"
-                      const cmdDescMatch = line.match(/^(\s{2,})([a-z0-9\s]+?)\s{3,}(.+)$/i);
-                      // Match "  open command"
-                      const openMatch = line.match(/^(\s{2,})(open\s+[a-z]+)$/i);
-                      // Match "  command" (short commands like twitter, email)
-                      const shortMatch = line.match(/^(\s{2,})([a-z]{3,})$/i);
-
-                      if (isHeader) {
-                        return <div key={li} className="select-none font-bold opacity-60 mt-3 mb-1 tracking-widest text-[10px] uppercase">{line}</div>;
-                      }
-
-                      if (cmdDescMatch || openMatch || shortMatch) {
-                        const cmdPart = cmdDescMatch ? cmdDescMatch[2] : (openMatch ? openMatch[2] : shortMatch![2]);
-                        const descPart = cmdDescMatch ? cmdDescMatch[3] : null;
-                        const prefix = cmdDescMatch ? cmdDescMatch[1] : (openMatch ? openMatch[1] : shortMatch![1]);
-
-                        return (
-                          <div key={li} className="group flex items-center">
-                            <span className="select-none opacity-0 whitespace-pre">{prefix}</span>
-                            <span
-                              onClick={() => {
-                                setInputValue(cmdPart.trim());
-                                inputRef.current?.focus();
-                              }}
-                              className="cursor-pointer hover:underline decoration-cyan-500/50 underline-offset-4 hover:text-white transition-colors min-w-[85px] inline-block"
-                            >
-                              {cmdPart}
-                            </span>
-                            {descPart && (
-                              <span className="select-none opacity-40 ml-4 italic text-[11px] whitespace-nowrap">
-                                {descPart}
-                              </span>
-                            )}
-                          </div>
-                        );
-                      }
-
-                      return (
-                        <div key={li} className={cn(
-                          line.trim() === '' ? "h-2" : "",
-                          (line.startsWith(' ') || line.match(/^[0-9]\./)) && "select-none opacity-50 text-[11px]"
-                        )}>
-                          {line}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-              <div ref={historyEndRef} className="h-4" />
-            </div>
+            ))}
+            <div ref={historyEndRef} className="h-4" />
           </div>
+        </div>
 
-          {/* Input Area */}
-          <div className={`flex items-center gap-3 px-6 transition-[height,border-top-width] duration-300 
-            ${isExpanded ? 'h-14 border-t' : 'h-full justify-center'}
-        `}
-            style={{
-              backgroundColor: isExpanded ? (isBright ? '#ebebeb' : 'var(--sidebar-bg)') : 'transparent',
-              borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'var(--sidebar-border)'
-            }}
-          >
-            {isExpanded && <span className={`font-bold transition-opacity duration-500 ${isBright ? 'text-blue-800 opacity-100' : 'text-cyan-400 opacity-80 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]'} ${isPlaying ? '!opacity-100' : ''}`}>sh-3.2$</span>}
-
-            <input
-              ref={inputRef}
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={onKeyDown}
-              className={`bg-transparent border-none outline-none placeholder-gray-500 font-mono 
-                ${isBright ? 'caret-blue-800' : 'caret-cyan-400'}
-                ${isExpanded ? 'flex-1 text-base' : 'w-full text-sm text-center'}
-            `}
-              style={{ color: isBright ? '#030712' : 'var(--foreground)' }}
-              placeholder={isExpanded ? "" : "[ READY ]"}
-              autoComplete="off"
-            />
-          </div>
-
-          {/* Surprise Trigger (Moved back INSIDE) */}
-          {isExpanded && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation() // Prevent container click event
-                toggleBGM()
-              }}
-              className={`bgm-trigger ${isPlaying ? 'active' : ''} animate-in fade-in duration-500`}
-            >
-              {isPlaying ? "System Active ✦" : "Hit to see changes"}
-            </button>
-          )}
+        {/* Input */}
+        <div className={cn(
+          "flex items-center gap-2 px-6 border-t transition-all duration-300",
+          isExpanded ? "h-14" : "h-full justify-center border-t-0"
+        )}>
+          {isExpanded && <span className="text-cyan-500 font-bold">sh-3.2$</span>}
+          <input
+            ref={inputRef}
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={onKeyDown}
+            placeholder={isExpanded ? "" : "[ READY ]"}
+            className={cn(
+              "bg-transparent border-none outline-none flex-1 font-mono",
+              isExpanded ? "text-base" : "text-center text-sm",
+              isBright ? "text-black caret-black" : "text-white caret-cyan-400"
+            )}
+            autoComplete="off"
+          />
         </div>
       </div>
+
+      {/* Hint overlay */}
+      {!isExpanded && (
+        <div className="absolute top-[-30px] opacity-40 text-[10px] tracking-widest uppercase animate-pulse">
+          Press [/] to search or command
+        </div>
+      )}
     </div>
   )
 }

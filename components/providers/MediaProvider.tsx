@@ -31,7 +31,7 @@ const DEFAULT_SOUND_STATE: SoundState = {
 
 export function MediaEngineProvider({ children }: { children: React.ReactNode }) {
     // Layer 1: BaseTheme
-    const [theme, setThemeState] = useState<BaseTheme>('bright')
+    const [theme, setThemeState] = useState<BaseTheme>('dark')
 
     // States
     const [videoState, setVideoState] = useState<VideoState>(DEFAULT_VIDEO_STATE)
