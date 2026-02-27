@@ -804,3 +804,12 @@ body {
   will-change: transform, opacity;
   contain: layout style;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIEW TRANSITION API - SPATIAL THEME SWITCHING
+   ═══════════════════════════════════════════════════════════════════════════ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

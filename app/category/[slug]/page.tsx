@@ -34,7 +34,6 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1)
 
   return {
-    title: categoryName,
     description: `Articles in the ${categoryName} category`,
   }
 }

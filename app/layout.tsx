@@ -11,10 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: {
-    template: 'TensorThrottleX|%s',
-    default: 'TensorThrottleX',
-  },
+  title: 'TensorThrottleX Space',
   description: 'A production-ready portfolio powered by Notion and Next.js',
   icons: {
     icon: '/media/brand/logo.png',
@@ -47,6 +44,7 @@ import { SystemClock } from "@/components/dashboard/SystemClock"
 import { RenderScaler } from "@/components/layout/RenderScaler"
 import { LabNavigation } from "@/components/layout/LabNavigation"
 import { RightFloatingBar } from "@/components/layout/RightFloatingBar"
+import { BootLoader } from "@/components/visuals/BootLoader"
 
 export default function RootLayout({
   children,
@@ -55,9 +53,15 @@ export default function RootLayout({
 }>): React.ReactNode {
   return (
     <html lang="en" className={inter.className}>
-      <body className="antialiased">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Alfa+Slab+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Bitcount+Grid+Single:wght@100..900&family=Bitcount+Single+Ink:wght@100..900&family=Bitcount:wght@100..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet" />
+      </head>
+      <body className="antialiased mode-bright">
         <UIProvider>
           <MediaEngineProvider>
+            <BootLoader />
             <RenderScaler>
               {/* Desktop-only fixed elements — hidden on mobile via CSS */}
               <div className="desktop-only">

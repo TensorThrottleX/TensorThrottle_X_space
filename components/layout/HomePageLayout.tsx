@@ -50,8 +50,12 @@ export function HomePageLayout() {
                                 initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                 animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                className="bitcount-heading text-h1 drop-shadow-2xl"
-                                style={{ color: isBright ? '#000000' : 'var(--heading-primary)' }}
+                                className="text-4xl md:text-6xl lg:text-7xl tracking-tight m-0 drop-shadow-2xl uppercase select-none"
+                                style={{ 
+                                    fontFamily: '"Alfa Slab One", serif',
+                                    color: isBright ? '#000000' : 'var(--heading-primary)',
+                                    fontWeight: 'normal'
+                                }}
                             >
                                 TENSOR THROTTLE X
                             </motion.h1>

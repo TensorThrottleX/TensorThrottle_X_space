@@ -251,7 +251,7 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
               </div>
 
               {/* Scrollable Content Area */}
-              <div className="flex-1 overflow-y-auto px-8 py-8 premium-scrollbar">
+              <div className="flex-1 overflow-y-auto px-8 py-8 premium-scrollbar scroll-smooth touch-pan-y transform-gpu will-change-transform" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {isLoadingContent ? (
                   <div className="flex justify-center py-20">
                     <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />

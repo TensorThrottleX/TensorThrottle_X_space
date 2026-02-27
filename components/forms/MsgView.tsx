@@ -139,7 +139,7 @@ export function MsgView(): React.ReactNode {
                     message: message.trim(),
                     protocol: isConfirmed,
                     h_field: hField,
-                    load_time: loadTime
+                    load_time: Date.now() - loadTime
                 }),
                 signal: controller.signal
             })

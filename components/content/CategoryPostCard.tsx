@@ -88,6 +88,8 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             src={post.coverImage || "/placeholder.svg"}
                             alt={post.title}
                             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            decoding="async"
+                            loading="lazy"
                         />
                     </div>
                 )}
@@ -157,7 +159,7 @@ export function CategoryPostCard({ post }: CategoryPostCardProps): React.ReactNo
                             </div>
 
                             {/* Modal Content */}
-                            <div className="flex-1 overflow-y-auto px-10 py-10 premium-scrollbar">
+                            <div className="flex-1 overflow-y-auto px-10 py-10 premium-scrollbar scroll-smooth touch-pan-y transform-gpu will-change-transform" style={{ WebkitOverflowScrolling: 'touch' }}>
                                 {isLoadingContent ? (
                                     <div className="flex justify-center py-20">
                                         <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--primary)' }} />

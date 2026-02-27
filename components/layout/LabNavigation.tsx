@@ -61,7 +61,7 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
   const pathname = usePathname()
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
-  const { renderMode, setRenderMode, isTerminalOpen, setIsTerminalOpen, setMainView, setUiMode } = useUI()
+  const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setMainView, setUiMode } = useUI()
   const {
     theme, setTheme,
     videoState, setVideoIndex,
@@ -95,11 +95,11 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     })
   }
 
-  const handleModeToggle = () => {
+  const handleModeToggle = (e: React.MouseEvent) => {
     const modes: RenderMode[] = ['bright', 'dark', 'custom']
     const nextIdx = (modes.indexOf(renderMode as any) + 1) % modes.length
     const nextMode = modes[nextIdx]
-    setRenderMode(nextMode as any)
+    toggleRenderMode(e, nextMode as any)
 
     // Sync with MediaEngine theme if it's one of the base themes
     // Sync with MediaEngine theme

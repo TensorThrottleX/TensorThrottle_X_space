@@ -39,9 +39,11 @@ const socialItems: SocialItem[] = [
 ]
 
 export function RightFloatingBar(): React.ReactNode {
-    const { renderMode, mainView, setMainView, setUiMode } = useUI()
+    const { renderMode, mainView, setMainView, setUiMode, isBooting } = useUI()
 
     const activeIndex = socialItems.findIndex(item => item.isInternal && mainView === item.view)
+
+    if (isBooting) return null;
 
     return (
         <div className="rightbar fixed right-0 top-0 h-full hidden md:flex items-center px-6 z-[100] pointer-events-none transition-transform duration-300 ease-in-out">

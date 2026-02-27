@@ -63,7 +63,7 @@ export function MobileBottomNav() {
     const pathname = usePathname()
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
-    const { renderMode, setRenderMode, setMainView, setUiMode } = useUI()
+    const { renderMode, toggleRenderMode, setMainView, setUiMode } = useUI()
     const {
         theme, setTheme,
         soundState, setSoundIndex,
@@ -91,7 +91,7 @@ export function MobileBottomNav() {
             const modes: RenderMode[] = ['bright', 'dark', 'custom']
             const nextMode = modes[(modes.indexOf(renderMode as any) + 1) % modes.length]
 
-            handleModeToggle(nextMode as RenderMode)
+            handleModeToggle(e, nextMode as RenderMode)
 
             // 3rd Click Reveal
             if (newCount % 3 === 0) {
@@ -121,8 +121,8 @@ export function MobileBottomNav() {
 
     // --- Control Handlers ---
 
-    const handleModeToggle = (mode: RenderMode) => {
-        setRenderMode(mode)
+    const handleModeToggle = (e: React.MouseEvent, mode: RenderMode) => {
+        toggleRenderMode(e, mode)
         // Ensure theme matches for overlay logic
         if (mode === 'custom') {
             setTheme('custom')

@@ -5,7 +5,7 @@ import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
 
 export function SystemClock() {
-    const { renderMode } = useUI()
+    const { renderMode, isBooting } = useUI()
     const isBright = renderMode === 'bright'
     const [mounted, setMounted] = useState(false)
     const [time, setTime] = useState<Date | null>(null)
@@ -19,7 +19,7 @@ export function SystemClock() {
         return () => clearInterval(timer)
     }, [])
 
-    if (!mounted || !time) return null
+    if (!mounted || !time || isBooting) return null
 
     const formatTime = (date: Date) => {
         const h = date.getHours().toString().padStart(2, '0')

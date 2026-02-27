@@ -8,7 +8,7 @@ import { NAV_COMMANDS, SYSTEM_MOTIVES, HELP_TEXT } from '@/lib/terminal-commands
 
 export function InteractiveHome(): React.ReactNode {
   const router = useRouter()
-  const { renderMode, setRenderMode, setIsTerminalOpen, setUiMode } = useUI()
+  const { renderMode, toggleRenderMode, setIsTerminalOpen, setUiMode } = useUI()
   const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res', text: string }[]>([])
   const [historyLog, setHistoryLog] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -150,15 +150,15 @@ export function InteractiveHome(): React.ReactNode {
       response = `[CRITICAL_UPDATE]\nSystem mode elevated.\nEnhancements active.`
     }
     else if (['mode normal', 'render normal', 'normal'].includes(cleanCmd)) {
-      setRenderMode('normal')
+      toggleRenderMode(null, 'normal')
       response = `[SYSTEM_UPDATE]\nRender Mode: NORMAL (Cinematic)`
     }
     else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) {
-      setRenderMode('bright')
+      toggleRenderMode(null, 'bright')
       response = `[SYSTEM_UPDATE]\nRender Mode: BRIGHT (High Clarity)`
     }
     else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) {
-      setRenderMode('dark')
+      toggleRenderMode(null, 'dark')
       response = `[SYSTEM_UPDATE]\nRender Mode: DARK (Deep Focus)`
     }
     else if (cleanCmd === 'clear' || cleanCmd === 'cls') {
@@ -291,12 +291,74 @@ export function InteractiveHome(): React.ReactNode {
             "absolute inset-0 overflow-y-auto terminal-scroll p-6 space-y-3 text-xs md:text-sm",
             isBright ? "text-black" : "text-cyan-50/90"
           )} ref={scrollContainerRef} onScroll={handleScroll}>
+            <div className={cn(
+              "text-[10px] pb-2 leading-relaxed uppercase tracking-widest border-l-2 pl-3 transition-colors duration-500 select-none",
+              isBright ? "text-gray-500 border-gray-300" : "text-cyan-500/50 border-cyan-500/30"
+            )}>
+              [CON_ESTABLISHED]<br />
+              SYSTEM_CONSOLE_ACTIVE<br />
+              TYPE &apos;HELP&apos; FOR SYSTEM DIRECTIVES.
+            </div>
             {commandHistory.map((item, i) => (
-              <div key={i} className={cn(
-                "whitespace-pre-wrap leading-relaxed",
-                item.type === 'cmd' ? "font-bold text-cyan-500" : "opacity-80"
-              )}>
-                {item.text}
+              <div key={i} className="whitespace-pre-wrap leading-relaxed flex items-start gap-2"
+                style={{ color: item.type === 'cmd' ? (isBright ? '#1e40af' : '#22d3ee') : 'inherit' }}
+              >
+                {item.type === 'cmd' ? (
+                  <span className={cn("font-bold select-none opacity-80 shrink-0", isBright ? "text-blue-800" : "text-cyan-500")}>
+                    sh-3.2$
+                  </span>
+                ) : null}
+                <div className={cn("flex-1", item.type === 'cmd' ? "" : "opacity-80")}>
+                  {item.text.replace(/^sh-3\.2\$\s/, '').split('\n').map((line, li) => {
+                    const isHeader = line.trim().endsWith(':');
+                    const isTitle = line.trim().startsWith('[');
+
+                    const cmdDescMatch = line.match(/^(\s{2,})([a-z0-9\s]+?)\s{3,}(.+)$/i);
+                    const openMatch = line.match(/^(\s{2,})(open\s+[a-z]+)$/i);
+                    const shortMatch = line.match(/^(\s{2,})([a-z]{3,})$/i);
+
+                    if (isTitle) {
+                      return <div key={li} className="select-none font-black opacity-90 mt-2 mb-2 tracking-widest text-[11px] uppercase">{line}</div>;
+                    }
+                    if (isHeader) {
+                      return <div key={li} className="select-none font-bold opacity-60 mt-3 mb-1 tracking-widest text-[10px] uppercase">{line}</div>;
+                    }
+
+                    if (cmdDescMatch || openMatch || shortMatch) {
+                      const cmdPart = cmdDescMatch ? cmdDescMatch[2] : (openMatch ? openMatch[2] : shortMatch![2]);
+                      const descPart = cmdDescMatch ? cmdDescMatch[3] : null;
+                      const prefix = cmdDescMatch ? cmdDescMatch[1] : (openMatch ? openMatch[1] : shortMatch![1]);
+
+                      return (
+                        <div key={li} className="flex items-center hover:bg-white/5 rounded px-1 -ml-1 transition-colors cursor-pointer"
+                          onClick={() => {
+                            setInputValue(cmdPart.trim());
+                            inputRef.current?.focus();
+                          }}
+                        >
+                          <span className="select-none opacity-0 whitespace-pre text-[8px]">{prefix}</span>
+                          <span className="underline decoration-cyan-500/30 hover:decoration-cyan-400 underline-offset-4 min-w-[110px] inline-block font-semibold">
+                            {cmdPart}
+                          </span>
+                          {descPart && (
+                            <span className="select-none opacity-50 ml-6 italic text-[11px] whitespace-nowrap">
+                              {descPart}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div key={li} className={cn(
+                        line.trim() === '' ? "h-1" : "",
+                        (line.startsWith(' ') || line.match(/^[0-9]\./)) && "select-none opacity-60 text-[11px]"
+                      )}>
+                        {line}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             ))}
             <div ref={historyEndRef} className="h-4" />

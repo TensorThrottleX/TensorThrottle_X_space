@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Terminal, X as XClose } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 import { useRouter } from 'next/navigation'
+import { HELP_TEXT } from '@/lib/terminal-commands'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -14,7 +15,7 @@ import { cn } from '@/lib/utils'
  */
 export function MobileTerminal() {
     const router = useRouter()
-    const { renderMode, setRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
+    const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
     const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res'; text: string }[]>([])
     const [historyLog, setHistoryLog] = useState<string[]>([])
     const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -101,7 +102,7 @@ export function MobileTerminal() {
         let response = ''
 
         if (cleanCmd === 'help') {
-            response = `Available Commands:\n\nNavigation:\n  open about\n  open feed\n  open thoughts\n  open projects\n  open experiments\n  open manifold\n\nSocial:\n  twitter\n  github\n  email\n\nUtility:\n  home        Minimize terminal\n  explain     View system motives\n  system      Check system status`
+            response = HELP_TEXT
         }
         else if (cleanCmd === 'system') {
             response = `System diagnostics ready.\nKernel: Vercel_Standard_v2\nModules: Notion_API, Framer_Motion\nHidden states may be toggled.`
@@ -110,11 +111,12 @@ export function MobileTerminal() {
             toggleBGM(true)
             response = `[CRITICAL_UPDATE]\nSystem mode elevated.\nEnhancements active.`
         }
-        else if (['mode normal', 'render normal', 'normal'].includes(cleanCmd)) { setRenderMode('normal'); response = `[SYSTEM_UPDATE]\nRender Mode: NORMAL (Cinematic)` }
-        else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) { setRenderMode('bright'); response = `[SYSTEM_UPDATE]\nRender Mode: BRIGHT (High Clarity)` }
-        else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) { setRenderMode('dark'); response = `[SYSTEM_UPDATE]\nRender Mode: DARK (Deep Focus)` }
+        else if (['mode normal', 'render normal', 'normal'].includes(cleanCmd)) { toggleRenderMode(null, 'normal'); response = `[SYSTEM_UPDATE]\nRender Mode: NORMAL (Cinematic)` }
+        else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) { toggleRenderMode(null, 'bright'); response = `[SYSTEM_UPDATE]\nRender Mode: BRIGHT (High Clarity)` }
+        else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) { toggleRenderMode(null, 'dark'); response = `[SYSTEM_UPDATE]\nRender Mode: DARK (Deep Focus)` }
         else if (['mode', 'render'].includes(cleanCmd)) {
-            setRenderMode((prev: any) => { if (prev === 'normal') return 'bright'; if (prev === 'bright') return 'dark'; return 'normal' })
+            const nextMode = renderMode === 'normal' ? 'bright' : renderMode === 'bright' ? 'dark' : 'normal'
+            toggleRenderMode(null, nextMode)
             response = `[RENDER_TOGGLE]\nCycling render mode...`
         }
         else if (cleanCmd === 'clear' || cleanCmd === 'cls') { setCommandHistory([]); return }
@@ -237,7 +239,8 @@ export function MobileTerminal() {
                         {/* Scrollable Output */}
                         <div
                             ref={scrollContainerRef}
-                            className="flex-1 overflow-y-auto px-4 py-4 space-y-2 text-xs leading-relaxed"
+                            className="flex-1 overflow-y-auto px-4 py-4 space-y-2 text-xs leading-relaxed scroll-smooth touch-pan-y transform-gpu will-change-transform"
+                            style={{ WebkitOverflowScrolling: 'touch' }}
                         >
                             <div className="text-[10px] mb-4 leading-relaxed uppercase tracking-wider border-l-2 pl-3 transition-colors duration-500"
                                 style={{ color: isBright ? '#030712' : 'var(--muted-foreground)', borderColor: isBright ? 'rgba(0,0,0,0.4)' : 'var(--border)' }}
@@ -264,6 +267,12 @@ export function MobileTerminal() {
                                             const cmdDescMatch = line.match(/^(\s{2,})([a-z0-9\s]+?)\s{3,}(.+)$/i);
                                             const openMatch = line.match(/^(\s{2,})(open\s+[a-z]+)$/i);
                                             const shortMatch = line.match(/^(\s{2,})([a-z]{3,})$/i);
+
+                                            const isTitle = line.trim().startsWith('[');
+
+                                            if (isTitle) {
+                                                return <div key={li} className="select-none font-black opacity-90 mt-2 mb-2 tracking-widest text-[11px] uppercase">{line}</div>;
+                                            }
 
                                             if (isHeader) {
                                                 return <div key={li} className="select-none font-bold opacity-60 mt-3 mb-1 tracking-widest text-[10px] uppercase">{line}</div>;

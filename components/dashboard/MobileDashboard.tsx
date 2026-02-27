@@ -75,7 +75,7 @@ export function MobileDashboard({ mode = 'purpose' }: MobileDashboardProps) {
                                 <XClose size={18} />
                             </button>
                         </div>
-                        <div className="flex-1 overflow-auto">
+                        <div className="flex-1 overflow-auto scroll-smooth touch-pan-y transform-gpu will-change-transform" style={{ WebkitOverflowScrolling: 'touch' }}>
                             <InteractiveTree
                                 data={currentContent.treeData}
                                 onClose={() => setUiMode('default')}
@@ -246,7 +246,7 @@ function MobileStackedDeck({
                                     // --- SUB CARD ---
                                     subCard && (
                                         <>
-                                            <div className="flex-1 overflow-y-auto pr-1">
+                                            <div className="flex-1 overflow-y-auto pr-1 scroll-smooth touch-pan-y transform-gpu will-change-transform" style={{ WebkitOverflowScrolling: 'touch' }}>
                                                 {/* Top Label */}
                                                 <div className="flex items-center justify-between mb-6 pointer-events-none">
                                                     <div className="flex items-center gap-2">

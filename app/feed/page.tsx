@@ -10,7 +10,6 @@ import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentW
 export const revalidate = 60
 
 export const metadata = {
-    title: 'Feed',
     description: 'Exploring ideas, one post at a time.',
 }
 

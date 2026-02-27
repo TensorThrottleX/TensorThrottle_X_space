@@ -85,16 +85,16 @@ function securityCheck(body: any, request: NextRequest): SecurityResult {
         return { allowed: false, severity: 2, reason: 'Bot detected' };
     }
 
-    // 2. Time-based validation
-    const loadTime = parseInt(body.load_time || '0');
-    const now = Date.now();
-    if (loadTime === 0 || now - loadTime < 2000) { // < 2 seconds is suspicious
-        console.warn(`[SECURITY] Fast submission (Time-based validation) from IP: ${ip}`);
+    // 2. Time-based validation (requires form to be active for at least 2s)
+    const elapsedMs = parseInt(body.load_time || '0', 10);
+    if (isNaN(elapsedMs) || elapsedMs < 2000) { // < 2 seconds is suspicious
+        console.warn(`[SECURITY] Fast submission (Time-based validation) from IP: ${ip}. Elapsed: ${elapsedMs}ms`);
         return { allowed: false, severity: 2, reason: 'Submission too fast' };
     }
 
     // 3. Rate limiting
     const windowMs = 10 * 60 * 1000; // 10 minutes
+    const now = Date.now();
     let attempts = rateLimits.get(ip) || [];
     attempts = attempts.filter(timestamp => now - timestamp < windowMs);
 

@@ -54,6 +54,8 @@ export function PostCard({ post }: { post: Post }) {
               src={post.coverImage}
               alt={post.title}
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              decoding="async"
+              loading="lazy"
             />
           ) : (
             <div className={cn(

@@ -15,6 +15,7 @@ const renderContent = (text: string) => {
                 src={trimmed}
                 alt="Embedded content"
                 className="my-4 rounded-lg border border-white/10 max-w-full h-auto"
+                decoding="async"
                 loading="lazy"
             />
         );
@@ -108,6 +109,7 @@ export function NotionBlockRenderer({ block }: { block: any }) {
                         alt="Content image"
                         className="my-6 rounded-lg max-w-full h-auto transition-colors duration-500"
                         style={{ borderColor: 'var(--border)' }}
+                        decoding="async"
                         loading="lazy"
                     />
                 )
