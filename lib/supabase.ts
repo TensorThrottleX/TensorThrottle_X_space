@@ -1,11 +1,27 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import type { Comment } from '@/types/post'
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+// [STORAGE_SYSTEM] – Safe Supabase Client Initializer
+// Prevents app-wide crashes if environment variables are desynced in Vercel
+function createClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn('[SUPABASE_CONFIG_WARNING] Missing URL or Anon Key. Database features will be disabled.');
+    return null;
+  }
+
+  try {
+    return createSupabaseClient(supabaseUrl, supabaseAnonKey);
+  } catch (err) {
+    console.error('[SUPABASE_INIT_ERROR]', err);
+    return null;
+  }
+}
+
+// Global instance to ensure singleton pattern
+export const supabase = createClient();
 
 // ═══════════════════════════════════════════════════════════════
 // COMMENT COUNTS CACHE — avoids redundant Supabase calls
@@ -19,8 +35,7 @@ const COMMENT_CACHE_TTL = 30_000 // 30 seconds
  * Sorted by newest first
  */
 export async function getComments(postSlug: string): Promise<Comment[]> {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Supabase configuration missing')
+  if (!supabase) {
     return []
   }
 
@@ -49,7 +64,7 @@ export async function getComments(postSlug: string): Promise<Comment[]> {
  * Optimized: 30s in-memory cache + only selects post_slug (minimal payload)
  */
 export async function getAllCommentCounts(): Promise<Record<string, number>> {
-  if (!supabaseUrl || !supabaseAnonKey) {
+  if (!supabase) {
     return {}
   }
 
@@ -105,8 +120,7 @@ export async function createComment(
     metadata?: any
   } = {}
 ): Promise<Comment | null> {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Supabase configuration missing')
+  if (!supabase) {
     return null
   }
 
