@@ -12,7 +12,7 @@ export async function GET() {
     const checks = {
         timestamp: new Date().toISOString(),
         status: 'unknown',
-        architecture: 'Dual-Relay Fallback (Resend -> Proton/SMTP) [SendGrid Dormant]',
+        architecture: 'Decoupled Single-Relay Engine (Resend Primary)',
         configured: false,
         details: [] as string[],
     };
@@ -32,11 +32,11 @@ export async function GET() {
         checks.provider = provider;
 
         if (hasResend) checks.details.push('✅ PRIMARY: Resend API configured');
-        if (hasSendGrid) checks.details.push('✅ BACKUP: SendGrid configured');
-        if (hasSMTP) checks.details.push('✅ FALLBACK: SMTP configured');
+        if (hasSendGrid) checks.details.push('⚠️ OBSOLETE: SendGrid (Dormant)');
+        if (hasSMTP) checks.details.push('⚠️ OBSOLETE: SMTP (Dormant)');
     } else {
         checks.status = 'critical_failure';
-        checks.details.push('❌ FATAL: No email providers configured');
+        checks.details.push('❌ FATAL: Resend API not configured');
     }
 
     if (checks.configured) {

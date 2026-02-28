@@ -5,8 +5,7 @@ import { sanitizeContent, enrichMetadata } from './email-guard';
 import { NextRequest } from 'next/server';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_EMAIL = process.env.PRIMARY_FROM_EMAIL || 'onboarding@resend.dev';
-// Fixed Identity with .env override support
+const FROM_EMAIL = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || process.env.PRIMARY_FROM_EMAIL || 'onboarding@resend.dev';
 
 export interface SendResult {
   success: boolean;
