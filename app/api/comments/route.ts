@@ -54,6 +54,8 @@ async function isDbRateLimited(ip: string): Promise<boolean> {
   try {
     const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString()
 
+    if (!supabase) return false
+
     const { data, error } = await supabase
       .from('comments')
       .select('id')

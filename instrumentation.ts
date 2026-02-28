@@ -13,13 +13,23 @@
 export async function register() {
     // Only warm up on the server (Node.js runtime), not on Edge
     if (process.env.NEXT_RUNTIME === 'nodejs') {
-        // Skip warm-up during build phase
-        if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
-            return;
+        // [OPTIMIZATION] Skip warm-up during the Build Phase on Vercel
+        // Vercel build environment is resource-constrained. Loading a 500MB+ model 
+        // during build can cause OOM (Out Of Memory) errors or 15min timeouts.
+        if (process.env.NODE_ENV === 'production') {
+            // Vercel sets these during build
+            if (process.env.VERCEL && !process.env.NEXT_RUNTIME_REAL) {
+                // NEXT_RUNTIME_REAL is usually only present at actual runtime in some setups,
+                // but a better check is just avoiding it if we suspect a build.
+                // Let's use a more robust check: skip if it's Vercel but we don't have a port yet (build time)
+                if (process.env.PORT === undefined) {
+                    console.log('[Instrumentation] Vercel Build Phase — Skipping ML warm-up.');
+                    return;
+                }
+            }
         }
 
         // DEV: Skip warm-up — model loads lazily on first moderation request.
-        // This saves ~15s startup time and ~500MB memory during compilation.
         if (process.env.NODE_ENV === 'development') {
             console.warn('[Instrumentation] DEV mode — ML warm-up deferred to first use.');
             return;
