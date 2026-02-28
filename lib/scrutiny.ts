@@ -28,6 +28,9 @@ const HINDI_PROFANITY = [
 
 // --- UTILITIES ---
 
+// Cache for pre-compiled obfuscation regexes to avoid expensive runtime creation
+const OBFUSCATED_REGEX_CACHE = new Map<string, RegExp>();
+
 /**
  * Advanced normalization for abuse detection
  */
@@ -51,15 +54,22 @@ function normalizeForScrutiny(text: string): string {
 }
 
 /**
- * Generates a regex for detecting obfuscated words
+ * Generates or retrieves a cached regex for detecting obfuscated words
  */
-function createObfuscatedRegex(word: string): RegExp {
+function getObfuscatedRegex(word: string): RegExp {
+    if (OBFUSCATED_REGEX_CACHE.has(word)) {
+        return OBFUSCATED_REGEX_CACHE.get(word)!;
+    }
+
     // Escape word and add optional separators between every character
     const pattern = word
         .split('')
         .map(char => `${char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\W_]*`)
         .join('');
-    return new RegExp(pattern, 'gi');
+
+    const regex = new RegExp(pattern, 'gi');
+    OBFUSCATED_REGEX_CACHE.set(word, regex);
+    return regex;
 }
 
 // --- ENGINES ---
@@ -118,7 +128,7 @@ function runProfanityEngine(text: string): { score: number; violations: string[]
 
     // Pattern Scan: Check for character-separated variants in original text
     SEVERE_PROFANITY.forEach(word => {
-        const regex = createObfuscatedRegex(word);
+        const regex = getObfuscatedRegex(word);
         if (regex.test(text)) {
             // Already counted if caught by normalizedMerged if it was just symbols, 
             // but this catches complex spacing

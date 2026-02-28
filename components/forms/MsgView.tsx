@@ -22,7 +22,7 @@ export function MsgView(): React.ReactNode {
     const [isSending, setIsSending] = useState(false)
     const [sendError, setSendError] = useState<string | null>(null)
     const [isSent, setIsSent] = useState(false)
-    const { scrutiny, isProfane } = useScrutiny(message, 0) // 0ms debounce on desktop for instant feedback
+    const { scrutiny, isProfane } = useScrutiny(message, 150) // 150ms debounce for smoother UI on desktop
     const [hField, setHField] = useState('') // Honeypot
     const [imgError, setImgError] = useState(false)
     const coffeeCardRef = useRef<HTMLDivElement>(null)
