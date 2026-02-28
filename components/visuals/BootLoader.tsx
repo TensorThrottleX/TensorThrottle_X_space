@@ -336,7 +336,7 @@ export function BootLoader() {
 
                                         {/* Main Hero Image */}
                                         <div className={`w-full md:w-10/12 aspect-[4/3] md:aspect-[21/9] rounded-sm overflow-hidden mt-32 md:mt-24 relative shadow-2xl border ${isBright ? 'border-black/5' : 'border-white/5'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/2" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-&lsqb;2000ms&rsqb;" alt="System Architecture" />
+                                            <AdaptiveImage basePath="/media/roadmap/2" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[2000ms]" alt="System Architecture" />
                                             <div className={`absolute inset-0 bg-gradient-to-t ${isBright ? 'from-white/50' : 'from-black/80'} via-transparent to-transparent opacity-60 pointer-events-none`}></div>
                                         </div>
 
@@ -362,7 +362,7 @@ export function BootLoader() {
                                         className="relative w-full flex flex-col md:flex-row md:justify-end items-center mb-32 md:mb-56 z-20 will-change-transform"
                                     >
                                         <div className={`relative w-full md:w-7/12 aspect-[4/5] md:aspect-[3/4] z-10 shadow-2xl border transform-gpu ${isBright ? 'border-black/5' : 'border-white/5'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/3" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-&lsqb;2000ms&rsqb;" alt="Fluid Traversal" />
+                                            <AdaptiveImage basePath="/media/roadmap/3" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[2000ms]" alt="Fluid Traversal" />
                                             {/* Top corner label */}
                                             <div className={`absolute top-6 right-6 px-4 py-2 text-xs md:text-sm border uppercase tracking-widest backdrop-blur-md ${isBright ? 'bg-white/80 border-black/20 text-black' : 'bg-black/80 border-white/20 text-white'}`}>
                                                 Vector
@@ -423,7 +423,7 @@ export function BootLoader() {
                                     >
                                         {/* Image Box */}
                                         <div className={`relative w-[95%] md:w-6/12 aspect-square z-10 shadow-2xl border transform-gpu ${isBright ? 'border-black/5' : 'border-white/5'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/4" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-&lsqb;2000ms&rsqb;" alt="Localized State Persistence" />
+                                            <AdaptiveImage basePath="/media/roadmap/4" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[2000ms]" alt="Localized State Persistence" />
                                         </div>
 
                                         {/* Typography Elements */}

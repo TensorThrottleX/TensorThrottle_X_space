@@ -47,7 +47,7 @@ export function MobileHeader({
     latestPublishedAt?: string
 }) {
     const pathname = usePathname()
-    const { renderMode, mainView, isBooting } = useUI()
+    const { renderMode, mainView, isBooting, setMainView } = useUI()
     const [menuOpen, setMenuOpen] = useState(false)
     const [time, setTime] = useState<Date | null>(null)
     const [mounted, setMounted] = useState(false)
@@ -196,7 +196,7 @@ export function MobileHeader({
                                                         onClick={() => {
                                                             setMenuOpen(false)
                                                             if (link.action === 'msg') {
-                                                                useUI().setMainView('msg')
+                                                                setMainView('msg')
                                                             } else if (link.href) {
                                                                 window.open(link.href, '_blank')
                                                             }
