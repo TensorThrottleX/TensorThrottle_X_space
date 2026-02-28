@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getEnv } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic'
 
@@ -17,10 +18,10 @@ export async function GET() {
         details: [] as string[],
     };
 
-    const hasResend = !!process.env.RESEND_API_KEY;
-    const hasSendGrid = !!process.env.SENDGRID_API_KEY;
-    const hasSMTP = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
-    const recipient = process.env.EMAIL_RECIPIENT || 'tensorthrottleX@proton.me';
+    const hasResend = !!getEnv('RESEND_API_KEY');
+    const hasSendGrid = !!getEnv('SENDGRID_API_KEY');
+    const hasSMTP = !!(getEnv('EMAIL_USER') && getEnv('EMAIL_PASS'));
+    const recipient = getEnv('EMAIL_RECIPIENT', 'tensorthrottleX@proton.me');
 
     const provider = hasResend ? 'Resend' : (hasSendGrid ? 'SendGrid' : (hasSMTP ? 'SMTP' : 'None'));
 

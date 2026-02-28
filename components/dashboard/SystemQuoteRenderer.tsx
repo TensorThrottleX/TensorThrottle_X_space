@@ -25,10 +25,10 @@ const SYSTEM_QUOTES: QuoteData[] = [
 
 export function SystemQuoteRenderer() {
     const { renderMode } = useUI()
-    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
-    const [displayPhase, setDisplayPhase] = useState<'display' | 'erasing' | 'paused' | 'typing'>('display')
-    const [visibleText, setVisibleText] = useState(SYSTEM_QUOTES[0].text)
-    const [visibleAuthor, setVisibleAuthor] = useState(SYSTEM_QUOTES[0].author)
+    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(-1)
+    const [displayPhase, setDisplayPhase] = useState<'display' | 'erasing' | 'paused' | 'typing'>('paused')
+    const [visibleText, setVisibleText] = useState("")
+    const [visibleAuthor, setVisibleAuthor] = useState("")
 
     // Animation Constants
     const ERASE_SPEED_MS = 20
@@ -36,7 +36,17 @@ export function SystemQuoteRenderer() {
     const PAUSE_DURATION_MS = 150
     const DISPLAY_DURATION_MS = 10000
 
+    // [RANDOMIZER] – Pick a random starting quote on mount to avoid hydration mismatch
     useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * SYSTEM_QUOTES.length)
+        setCurrentQuoteIndex(randomIndex)
+        setDisplayPhase('typing')
+    }, [])
+
+
+    useEffect(() => {
+        if (displayPhase === 'paused' && visibleText === "" && visibleAuthor === "") return // Wait for hydration effect
+
         let timeoutId: NodeJS.Timeout
 
         const runCycle = () => {
@@ -56,21 +66,27 @@ export function SystemQuoteRenderer() {
                 }
             }
             else if (displayPhase === 'paused') {
+                // If we've finished erasing, pick a NEW random quote
                 timeoutId = setTimeout(() => {
-                    const nextIndex = (currentQuoteIndex + 1) % SYSTEM_QUOTES.length
+                    let nextIndex = currentQuoteIndex
+                    // Avoid picking the same quote twice in a row
+                    while (nextIndex === currentQuoteIndex && SYSTEM_QUOTES.length > 1) {
+                        nextIndex = Math.floor(Math.random() * SYSTEM_QUOTES.length)
+                    }
+
                     setCurrentQuoteIndex(nextIndex)
                     setVisibleAuthor('')
                     setDisplayPhase('typing')
                 }, PAUSE_DURATION_MS)
             }
-            else if (displayPhase === 'typing') {
+            else if (displayPhase === 'typing' && currentQuoteIndex !== -1) {
                 const targetQuote = SYSTEM_QUOTES[currentQuoteIndex]
                 if (visibleText.length < targetQuote.text.length) {
                     timeoutId = setTimeout(() => {
                         setVisibleText(targetQuote.text.slice(0, visibleText.length + 1))
                     }, TYPE_SPEED_MS)
                 } else {
-                    setVisibleAuthor(targetQuote.author)
+                    setVisibleAuthor(targetQuote.author || "")
                     setDisplayPhase('display')
                 }
             }
@@ -79,6 +95,7 @@ export function SystemQuoteRenderer() {
         runCycle()
         return () => clearTimeout(timeoutId)
     }, [displayPhase, visibleText, currentQuoteIndex])
+
 
     return (
         <div className={cn(

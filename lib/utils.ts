@@ -42,3 +42,15 @@ export function formatIST(dateInput: string | Date | undefined): string {
 
   return `${p.year}.${p.month}.${p.day} | ${p.hour}:${p.minute}`;
 }
+
+/**
+ * Safely retrieve and sanitize environment variables.
+ * Automatically strips whitespace and hidden characters (like \r from scripts).
+ */
+export function getEnv(key: string, defaultValue = ''): string {
+  const value = process.env[key];
+  if (!value) return defaultValue;
+  // Strip control characters, whitespace, and carriage returns
+  return value.replace(/[\x00-\x1F\x7F]/g, "").trim();
+}
+
