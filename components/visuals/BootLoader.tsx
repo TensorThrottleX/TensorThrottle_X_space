@@ -494,7 +494,6 @@ export function BootLoader() {
                                         { title: "The Live Heartbeat", text: "I share my work while it’s still in motion.\nThese live feeds aren't snapshots—they are the real-time heartbeat of my experiments as they form.\n\nWatch my thoughts stabilize into something functional as the telemetry updates live.", img: "8", align: "left" },
                                         { title: "The Atmospheric Shift", text: "I change the air in this room depending on the work I’m doing.\nHigh clarity for deep logic, and a noise-free darkness for pure creation.\n\nThis modulation keeps me focused for long hours, and you can see my work in either light.", img: "9", align: "right" }
                                     ].map((item, idx, array) => {
-
                                         const isLeft = item.align === 'left';
                                         const isRight = item.align === 'right';
                                         const isCenter = item.align === 'center';
@@ -518,56 +517,13 @@ export function BootLoader() {
                                             }
                                         }
 
-                                        // Rendering logic for text and image blocks
-                                        const TextBlock = () => (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 30 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true, margin: "-50px" }}
-                                                className={`flex flex-col w-full max-w-lg will-change-transform ${isLeft ? 'items-start text-left' : 'items-end text-right'}`}
-                                            >
-                                                <h3 className={`text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5 md:mb-8 leading-tight ${isBright ? 'text-black' : 'text-white'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif', fontWeight: 500 }}>
-                                                    {item.title}
-                                                </h3>
-                                                <div className={`space-y-4 md:space-y-6 leading-relaxed text-balance text-lg md:text-xl font-light ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
-                                                    {item.text.split('\n').map((para, i) => (
-                                                        para && <p key={i}>{para}</p>
-                                                    ))}
-                                                </div>
-                                            </motion.div>
-                                        );
-
-                                        const ImageBlock = () => {
-                                            const isImageLeft = isRight || isCenter;
-                                            return (
-                                                <motion.div
-                                                    initial={{ opacity: 0, scale: 0.95 }}
-                                                    whileInView={{ opacity: 1, scale: 1 }}
-                                                    transition={{ duration: 0.8 }}
-                                                    viewport={{ once: true, margin: "-50px" }}
-                                                    className={`w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[4/5] sm:aspect-[3/4] max-h-[50vh] md:max-h-[65vh] rounded-3xl overflow-hidden relative shadow-2xl backdrop-blur-md border transform-gpu will-change-transform ${isBright ? 'bg-white/60 border-black/10' : 'bg-black/40 border-white/10'}`}
-                                                >
-                                                    {/* Blinking Beacon Marker */}
-                                                    <div className={`absolute top-6 ${isImageLeft ? 'left-6' : 'right-6'} z-30 flex items-center justify-center`}>
-                                                        <div className="w-6 h-6 bg-green-500 rounded-full animate-ping absolute opacity-60" />
-                                                        <div className="w-3 h-3 bg-green-400 rounded-full relative z-10 shadow-[0_0_8px_rgba(74,222,128,0.8)] border border-green-200" />
-                                                    </div>
-
-                                                    <div className={`absolute inset-0 bg-gradient-to-t ${isBright ? 'from-white/20' : 'from-black/40'} to-transparent z-10 pointer-events-none`} />
-                                                    <AdaptiveImage basePath={`/media/roadmap/${item.img}`} className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000" alt={item.title} />
-                                                </motion.div>
-                                            );
-                                        };
-
                                         return (
                                             <div key={idx} className="relative w-full flex flex-col justify-center min-h-[90vh] md:min-h-[85vh] py-16 md:py-20 z-10">
                                                 {/* Curved SVG Bridge connecting to next section */}
                                                 {svgPath && (
                                                     <div className="hidden md:block absolute -bottom-[25%] left-0 right-0 h-[50%] pointer-events-none z-0" style={{ color: isBright ? '#444' : '#fff' }}>
                                                         <svg className="w-full h-[120%] -mt-[10%]" preserveAspectRatio="none" viewBox="0 0 100 100">
-                                                            {/* Faint static dashed track indicating path */}
                                                             <path d={svgPath} fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 6" vectorEffect="non-scaling-stroke" className="opacity-20" />
-                                                            {/* Animated solid line tracing downward */}
                                                             <motion.path
                                                                 d={svgPath}
                                                                 fill="none"
@@ -615,22 +571,77 @@ export function BootLoader() {
                                                 {/* Alternating Left/Right Layout */}
                                                 {!isCenter && (
                                                     <div className="flex flex-col md:flex-row items-center justify-between w-full h-full z-10 gap-12 md:gap-0">
+                                                        {/* Text and Image as inline blocks to avoid type-recreation crash */}
                                                         {isLeft ? (
                                                             <>
                                                                 <div className="w-full md:w-1/2 flex justify-start md:pr-16">
-                                                                    <TextBlock />
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, y: 30 }}
+                                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                                        viewport={{ once: true, margin: "-50px" }}
+                                                                        className={`flex flex-col w-full max-w-lg will-change-transform items-start text-left`}
+                                                                    >
+                                                                        <h3 className={`text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5 md:mb-8 leading-tight ${isBright ? 'text-black' : 'text-white'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif', fontWeight: 500 }}>
+                                                                            {item.title}
+                                                                        </h3>
+                                                                        <div className={`space-y-4 md:space-y-6 leading-relaxed text-balance text-lg md:text-xl font-light ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
+                                                                            {item.text.split('\n').map((para, i) => (
+                                                                                para && <p key={i}>{para}</p>
+                                                                            ))}
+                                                                        </div>
+                                                                    </motion.div>
                                                                 </div>
                                                                 <div className="w-full md:w-1/2 flex justify-end md:pl-16">
-                                                                    <ImageBlock />
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, scale: 0.95 }}
+                                                                        whileInView={{ opacity: 1, scale: 1 }}
+                                                                        transition={{ duration: 0.8 }}
+                                                                        viewport={{ once: true, margin: "-50px" }}
+                                                                        className={`w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[4/5] sm:aspect-[3/4] max-h-[50vh] md:max-h-[65vh] rounded-3xl overflow-hidden relative shadow-2xl backdrop-blur-md border transform-gpu will-change-transform ${isBright ? 'bg-white/60 border-black/10' : 'bg-black/40 border-white/10'}`}
+                                                                    >
+                                                                        <div className={`absolute top-6 left-6 z-30 flex items-center justify-center`}>
+                                                                            <div className="w-6 h-6 bg-green-500 rounded-full animate-ping absolute opacity-60" />
+                                                                            <div className="w-3 h-3 bg-green-400 rounded-full relative z-10 shadow-[0_0_8px_rgba(74,222,128,0.8)] border border-green-200" />
+                                                                        </div>
+                                                                        <div className={`absolute inset-0 bg-gradient-to-t ${isBright ? 'from-white/20' : 'from-black/40'} to-transparent z-10 pointer-events-none`} />
+                                                                        <AdaptiveImage basePath={`/media/roadmap/${item.img}`} className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000" alt={item.title} />
+                                                                    </motion.div>
                                                                 </div>
                                                             </>
                                                         ) : (
                                                             <>
                                                                 <div className="w-full md:w-1/2 flex justify-start md:pr-16">
-                                                                    <ImageBlock />
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, scale: 0.95 }}
+                                                                        whileInView={{ opacity: 1, scale: 1 }}
+                                                                        transition={{ duration: 0.8 }}
+                                                                        viewport={{ once: true, margin: "-50px" }}
+                                                                        className={`w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[4/5] sm:aspect-[3/4] max-h-[50vh] md:max-h-[65vh] rounded-3xl overflow-hidden relative shadow-2xl backdrop-blur-md border transform-gpu will-change-transform ${isBright ? 'bg-white/60 border-black/10' : 'bg-black/40 border-white/10'}`}
+                                                                    >
+                                                                        <div className={`absolute top-6 right-6 z-30 flex items-center justify-center`}>
+                                                                            <div className="w-6 h-6 bg-green-500 rounded-full animate-ping absolute opacity-60" />
+                                                                            <div className="w-3 h-3 bg-green-400 rounded-full relative z-10 shadow-[0_0_8px_rgba(74,222,128,0.8)] border border-green-200" />
+                                                                        </div>
+                                                                        <div className={`absolute inset-0 bg-gradient-to-t ${isBright ? 'from-white/20' : 'from-black/40'} to-transparent z-10 pointer-events-none`} />
+                                                                        <AdaptiveImage basePath={`/media/roadmap/${item.img}`} className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000" alt={item.title} />
+                                                                    </motion.div>
                                                                 </div>
                                                                 <div className="w-full md:w-1/2 flex justify-end md:pl-16">
-                                                                    <TextBlock />
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, y: 30 }}
+                                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                                        viewport={{ once: true, margin: "-50px" }}
+                                                                        className={`flex flex-col w-full max-w-lg will-change-transform items-end text-right`}
+                                                                    >
+                                                                        <h3 className={`text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5 md:mb-8 leading-tight ${isBright ? 'text-black' : 'text-white'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif', fontWeight: 500 }}>
+                                                                            {item.title}
+                                                                        </h3>
+                                                                        <div className={`space-y-4 md:space-y-6 leading-relaxed text-balance text-lg md:text-xl font-light ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
+                                                                            {item.text.split('\n').map((para, i) => (
+                                                                                para && <p key={i}>{para}</p>
+                                                                            ))}
+                                                                        </div>
+                                                                    </motion.div>
                                                                 </div>
                                                             </>
                                                         )}
