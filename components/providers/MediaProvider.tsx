@@ -17,8 +17,6 @@ interface MediaContextType {
     isLoading: boolean
 }
 
-const MediaContext = createContext<MediaContextType | undefined>(undefined)
-
 const DEFAULT_VIDEO_STATE: VideoState = {
     index: -2,
     hasAudioTrack: false,
@@ -28,6 +26,20 @@ const DEFAULT_VIDEO_STATE: VideoState = {
 const DEFAULT_SOUND_STATE: SoundState = {
     soundIndex: -1
 }
+
+const DEFAULT_CONTEXT: MediaContextType = {
+    theme: 'dark',
+    setTheme: () => { },
+    videoState: DEFAULT_VIDEO_STATE,
+    setVideoIndex: () => { },
+    setVideoAudio: () => { },
+    soundState: DEFAULT_SOUND_STATE,
+    setSoundIndex: () => { },
+    config: { videos: [], sounds: [] },
+    isLoading: false
+}
+
+const MediaContext = createContext<MediaContextType>(DEFAULT_CONTEXT)
 
 export function MediaEngineProvider({ children }: { children: React.ReactNode }) {
     // Layer 1: BaseTheme
@@ -306,6 +318,5 @@ export function MediaEngineProvider({ children }: { children: React.ReactNode })
 
 export function useMedia() {
     const context = useContext(MediaContext)
-    if (!context) throw new Error('useMedia must be used within MediaEngineProvider')
     return context
 }

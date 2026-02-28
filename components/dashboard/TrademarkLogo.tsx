@@ -1,12 +1,20 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useUI } from '@/components/providers/UIProvider'
 
 export function TrademarkLogo() {
-    const { renderMode } = useUI()
+    const { renderMode, isBooting } = useUI()
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
     const isBright = renderMode === 'bright'
     const isDark = renderMode === 'dark'
+
+    if (!mounted || isBooting) return null
 
     return (
         <div className="fixed bottom-24 left-5 lg:bottom-8 lg:left-10 z-[150] pointer-events-auto select-none opacity-100 mix-blend-normal transition-opacity duration-500 group">

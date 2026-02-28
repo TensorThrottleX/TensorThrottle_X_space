@@ -410,6 +410,8 @@ async function sendViaSMTP(
 // MAIN REQUEST HANDLER
 // ============================================
 export async function POST(req: NextRequest) {
+    console.log('[API_CONTACT] Request received');
+
     // Anchored destination (Support for multiple comma-separated emails)
     const rawRecipients = process.env.EMAIL_RECIPIENT || 'tensorthrottleX@proton.me';
     const RECIPIENTS = rawRecipients.split(',').map(e => e.trim()).filter(Boolean);

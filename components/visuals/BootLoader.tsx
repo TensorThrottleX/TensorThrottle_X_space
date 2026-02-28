@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Terminal, Sun, Moon, Map } from 'lucide-react'
+import { ArrowRight, Terminal, Sun, Moon, Map, Volume2, VolumeX } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 
 const AdaptiveImage = ({ basePath, alt, className }: { basePath: string; alt?: string; className?: string }) => {
@@ -26,10 +26,11 @@ const AdaptiveImage = ({ basePath, alt, className }: { basePath: string; alt?: s
 };
 
 export function BootLoader() {
-    const { setIsBooting } = useUI()
+    const { setIsBooting, renderMode, toggleRenderMode } = useUI()
+    const isBright = renderMode === 'bright'
     const [stage, setStage] = useState<'booting' | 'intro' | 'done'>('booting')
     const [progress, setProgress] = useState(0)
-    const [isBright, setIsBright] = useState(true)
+    const [isMuted, setIsMuted] = useState(true)
 
     // Boot sequence effect - Unpredictable and slower natural loading
     useEffect(() => {
@@ -176,39 +177,49 @@ export function BootLoader() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1 }}
-                            className={`absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth touch-pan-y no-scrollbar z-20 w-full transition-colors duration-700 transform-gpu ${isBright ? 'text-black' : 'text-white'}`}
+                            className={`absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth touch-pan-y premium-scrollbar z-20 w-full transition-colors duration-700 transform-gpu ${isBright ? 'text-black' : 'text-white'}`}
                             style={{ WebkitOverflowScrolling: 'touch', willChange: 'transform, background-color' }}
                         >
-                            {/* Top Bar with Switch */}
-                            <div className="w-full flex justify-between items-center p-6 md:px-12 md:py-8 sticky top-0 z-50">
-                                <span className={`text-sm md:text-base font-semibold tracking-wide uppercase opacity-70 ${isBright ? 'text-black' : 'text-white'}`}>
-                                    Conceptual overview and SOP
-                                </span>
-                                <button
-                                    onClick={() => setIsBright(!isBright)}
-                                    className={`p-3 rounded-full border transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg ${isBright ? 'bg-white border-black/10 shadow-black/5 text-black' : 'bg-black/40 border-white/20 shadow-black/50 backdrop-blur-md text-white'}`}
-                                    aria-label="Toggle Theme"
+                            {/* Top Header Layout (Fixed to screen) */}
+                            <div className="fixed top-0 left-0 w-full p-6 md:px-12 md:pt-10 z-[100] pointer-events-none flex flex-col border-b border-current backdrop-blur-sm" style={{ borderColor: isBright ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)', backgroundColor: isBright ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)' }}>
+                                <div className="w-full flex justify-between items-center mb-2">
+                                    <div className="pointer-events-auto flex items-center gap-3">
+                                        <div
+                                            className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${isBright ? 'bg-black border-black text-white' : 'bg-black border-white/20 text-orange-500'}`}
+                                            title="TensorThrottle X"
+                                        >
+                                            <span className="font-black text-sm md:text-base tracking-tighter">TX</span>
+                                        </div>
+                                        <span className={`text-[10px] md:text-sm font-bold tracking-[0.15em] uppercase opacity-70 ${isBright ? 'text-black' : 'text-white'}`}>
+                                            Conceptual overview and SOP
+                                        </span>
+                                    </div>
+                                    <button
+                                        onClick={(e) => toggleRenderMode(e)}
+                                        className={`pointer-events-auto p-3 rounded-full border transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg ${isBright ? 'bg-white border-black/10 shadow-black/5 text-black' : 'bg-black/40 border-white/20 shadow-black/50 backdrop-blur-md text-white'}`}
+                                        aria-label="Toggle Theme"
+                                    >
+                                        {isBright ? <Moon size={16} /> : <Sun size={16} />}
+                                    </button>
+                                </div>
+                                <h1
+                                    className={`w-full text-center text-4xl md:text-5xl lg:text-7xl uppercase transition-colors duration-700 ${isBright ? 'text-black' : 'text-white'}`}
+                                    style={{
+                                        fontFamily: '"Playfair Display", serif',
+                                        fontWeight: 900,
+                                        letterSpacing: '-0.02em',
+                                        WebkitTextStroke: isBright ? 'none' : '1.5px rgba(255,255,255,0.95)'
+                                    }}
                                 >
-                                    {isBright ? <Moon size={16} /> : <Sun size={16} />}
-                                </button>
+                                    TENSOR THROTTLEX SPACE
+                                </h1>
                             </div>
 
                             {/* Journey Layout */}
                             <div className="mx-auto w-full flex flex-col items-center overflow-x-hidden">
 
                                 {/* Section 1 - Hero */}
-                                <div className="min-h-[85vh] flex flex-col items-center justify-center text-center px-6 relative w-full mb-12">
-                                    <h1
-                                        className="text-4xl md:text-5xl lg:text-7xl mt-8 mb-16 uppercase text-center border-b border-current pb-4 px-12 tracking-[0.1em] transition-all duration-700 font-black"
-                                        style={{
-                                            fontFamily: '"Playfair Display", serif',
-                                            color: isBright ? '#000000' : '#ffffff',
-                                            opacity: isBright ? 1 : 0.9
-                                        }}
-                                    >
-                                        TENSOR THROTTLEX
-                                        <span className="ml-3">SPACE</span>
-                                    </h1>
+                                <div className="min-h-[85vh] flex flex-col items-center justify-center text-center px-6 relative w-full mb-12 mt-48 md:mt-60">
 
                                     {/* ABOUT SEPARATOR */}
                                     <div className={`w-full max-w-[1200px] mx-auto flex items-center justify-start gap-4 mb-8 md:mb-16 opacity-80 px-6 ${isBright ? 'text-black' : 'text-white'}`}>
@@ -220,10 +231,35 @@ export function BootLoader() {
                                         initial={{ opacity: 0, y: 30 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.2, duration: 1 }}
-                                        className="max-w-4xl flex flex-col items-center z-10 will-change-transform"
+                                        className="w-full max-w-6xl flex flex-col items-center z-10 will-change-transform"
                                     >
-                                        <div className={`w-full max-w-3xl aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden mb-10 shadow-2xl border ${isBright ? 'border-black/10' : 'border-white/10'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/1" className="w-full h-full object-cover mix-blend-normal opacity-90" alt="Atmospheric Horizon" />
+                                        <div
+                                            className={`w-full max-w-[1100px] aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden mb-10 shadow-2xl border relative ${isBright ? 'border-black/10' : 'border-white/10'}`}
+                                            style={{
+                                                maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                                                WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
+                                            }}
+                                        >
+                                            <video
+                                                className="w-full h-full object-cover mix-blend-normal opacity-90"
+                                                autoPlay
+                                                loop
+                                                muted={isMuted}
+                                                playsInline
+                                            >
+                                                <source src="/media/roadmap/1.mp4" type="video/mp4" />
+                                                <source src="/media/roadmap/1.webm" type="video/webm" />
+                                                {/* Fallback image if video is unavailable */}
+                                                <AdaptiveImage basePath="/media/roadmap/1" className="w-full h-full object-cover mix-blend-normal opacity-90" alt="Atmospheric Horizon" />
+                                            </video>
+
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }}
+                                                className={`absolute bottom-6 right-6 p-3 rounded-full border transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg z-50 pointer-events-auto ${isBright ? 'bg-white/80 border-black/10 text-black' : 'bg-black/60 border-white/20 text-white hover:bg-black/80'}`}
+                                                aria-label={isMuted ? "Unmute" : "Mute"}
+                                            >
+                                                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                                            </button>
                                         </div>
                                         <h1 className={`text-4xl md:text-5xl lg:text-6xl tracking-tight leading-tight mb-6 ${isBright ? 'text-black' : 'text-white'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif', fontWeight: 500 }}>
                                             A Calm Space for Deep Technical Exploration
@@ -259,15 +295,17 @@ export function BootLoader() {
                                         <div
                                             className="absolute top-0 md:-top-12 left-5 md:left-[5%] z-20 pointer-events-none"
                                             style={{
-                                                filter: isBright ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(255,255,255,1))' : 'drop-shadow(0px 10px 20px rgba(0,0,0,0.8))'
+                                                filter: isBright ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(255,255,255,1))' : 'drop-shadow(0px 0px 12px rgba(0,0,0,0.95)) drop-shadow(0px 0px 4px rgba(0,0,0,1))'
                                             }}
                                         >
                                             <div className="flex items-start">
                                                 <h2
-                                                    className="text-7xl md:text-9xl font-bold tracking-tighter"
+                                                    className="text-4xl sm:text-5xl md:text-6xl tracking-tight m-0 drop-shadow-lg uppercase select-none"
                                                     style={{
-                                                        fontFamily: '"Alfa Slab One", serif',
-                                                        color: '#000',
+                                                        color: 'var(--heading-primary)',
+                                                        fontFamily: '"Playfair Display", serif',
+                                                        fontWeight: 900,
+                                                        letterSpacing: '-0.02em',
                                                         WebkitTextStroke: isBright ? 'none' : '1.5px rgba(255,255,255,0.95)'
                                                     }}
                                                 >
@@ -298,19 +336,21 @@ export function BootLoader() {
 
                                         {/* Main Hero Image */}
                                         <div className={`w-full md:w-10/12 aspect-[4/3] md:aspect-[21/9] rounded-sm overflow-hidden mt-32 md:mt-24 relative shadow-2xl border ${isBright ? 'border-black/5' : 'border-white/5'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/2" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[2000ms]" alt="System Architecture" />
+                                            <AdaptiveImage basePath="/media/roadmap/2" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-&lsqb;2000ms&rsqb;" alt="System Architecture" />
                                             <div className={`absolute inset-0 bg-gradient-to-t ${isBright ? 'from-white/50' : 'from-black/80'} via-transparent to-transparent opacity-60 pointer-events-none`}></div>
                                         </div>
 
                                         {/* Overlapping Info Box */}
-                                        <div className={`absolute bottom-[-15%] right-0 md:right-[10%] w-[90%] md:w-[400px] p-6 md:p-10 backdrop-blur-xl z-30 shadow-2xl transition-all ${isBright ? 'bg-white/95 border-r-4 border-r-red-600 border border-black/10' : 'bg-[#111]/95 border-r-4 border-r-red-600 border border-white/10'}`}>
+                                        <div className={`relative md:absolute md:bottom-[-15%] md:right-[10%] w-[95%] md:w-[400px] -mt-10 md:mt-0 p-6 md:p-10 backdrop-blur-xl z-30 shadow-2xl transition-all ${isBright ? 'bg-white/95 border-r-4 border-r-red-600 border border-black/10' : 'bg-[#111]/95 border-r-4 border-r-red-600 border border-white/10'}`}>
                                             <div className="text-xs uppercase tracking-widest mb-6 opacity-60 flex justify-between font-bold border-b border-current pb-2">
                                                 <span>Reasoning</span>
                                                 <span>+</span>
                                             </div>
-                                            <p className={`text-base md:text-lg leading-relaxed ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
-                                                An operational layer engineered to expose intent, architectural decisions, and system thinking in motion. Built to trace thought processes rather than just finalized outputs.
-                                            </p>
+                                            <div className={`space-y-4 text-base md:text-lg leading-relaxed ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
+                                                <p>Every idea starts unshaped.<br />This space helps to slow down and mould it clearly.</p>
+                                                <p>Clarify what I'm building.<br />Set direction before I move.</p>
+                                                <p className="font-bold">Ground first. Build next.</p>
+                                            </div>
                                         </div>
                                     </motion.div>
 
@@ -319,10 +359,10 @@ export function BootLoader() {
                                         initial={{ opacity: 0, y: 50 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-50px" }}
-                                        className="relative w-full flex justify-start md:justify-end mb-32 md:mb-56 z-20 will-change-transform"
+                                        className="relative w-full flex flex-col md:flex-row md:justify-end items-center mb-32 md:mb-56 z-20 will-change-transform"
                                     >
-                                        <div className={`relative w-full md:w-7/12 aspect-[4/5] md:aspect-[3/4] z-10 shadow-y-2xl border transform-gpu ${isBright ? 'border-black/5' : 'border-white/5'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/3" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[2000ms]" alt="Fluid Traversal" />
+                                        <div className={`relative w-full md:w-7/12 aspect-[4/5] md:aspect-[3/4] z-10 shadow-2xl border transform-gpu ${isBright ? 'border-black/5' : 'border-white/5'}`}>
+                                            <AdaptiveImage basePath="/media/roadmap/3" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-&lsqb;2000ms&rsqb;" alt="Fluid Traversal" />
                                             {/* Top corner label */}
                                             <div className={`absolute top-6 right-6 px-4 py-2 text-xs md:text-sm border uppercase tracking-widest backdrop-blur-md ${isBright ? 'bg-white/80 border-black/20 text-black' : 'bg-black/80 border-white/20 text-white'}`}>
                                                 Vector
@@ -333,7 +373,7 @@ export function BootLoader() {
                                         <div
                                             className="absolute top-[-5%] left-5 md:left-[15%] z-30 pointer-events-none"
                                             style={{
-                                                filter: isBright ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(255,255,255,1))' : 'drop-shadow(0px 10px 20px rgba(0,0,0,0.8))'
+                                                filter: isBright ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(255,255,255,1))' : 'drop-shadow(0px 0px 12px rgba(0,0,0,0.95)) drop-shadow(0px 0px 4px rgba(0,0,0,1))'
                                             }}
                                         >
                                             <div className="flex flex-col">
@@ -361,14 +401,16 @@ export function BootLoader() {
                                         </div>
 
                                         {/* Overlapping Info Box */}
-                                        <div className={`absolute bottom-[10%] left-[5%] md:left-[10%] w-[90%] md:w-[420px] p-6 md:p-10 border backdrop-blur-xl z-30 shadow-2xl transition-all ${isBright ? 'bg-white/95 border-l-4 border-l-red-600 border-[1px] border-black/10' : 'bg-[#0a0a0a]/95 border-l-4 border-l-red-600 border-[1px] border-white/10'}`}>
+                                        <div className={`relative md:absolute md:bottom-[10%] md:left-[10%] w-[95%] md:w-[420px] -mt-12 md:mt-0 p-6 md:p-10 border backdrop-blur-xl z-30 shadow-2xl transition-all ${isBright ? 'bg-white/95 border-l-4 border-l-red-600 border-[1px] border-black/10' : 'bg-[#0a0a0a]/95 border-l-4 border-l-red-600 border-[1px] border-white/10'}`}>
                                             <div className="w-full flex pb-3 mb-6 border-b border-current opacity-60 justify-between font-bold">
                                                 <span className="text-xs uppercase tracking-widest">Fluidity</span>
                                                 <span>+</span>
                                             </div>
-                                            <p className={`text-base md:text-lg leading-relaxed ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
-                                                A live environment where ideas traverse from pure abstraction to tangible execution. Navigation reflects this fluidity, showcasing the active refinement of experimental frameworks.
-                                            </p>
+                                            <div className={`space-y-4 text-base md:text-lg leading-relaxed ${isBright ? 'text-black/80' : 'text-white/80'}`} style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
+                                                <p>Ideas don’t stay abstract here.<br />They begin to take structure.</p>
+                                                <p>Sketch the system.<br />Arrange components.<br />Test how parts connect.</p>
+                                                <p className="font-bold">Thoughts start forming into something real.</p>
+                                            </div>
                                         </div>
                                     </motion.div>
 
@@ -377,25 +419,27 @@ export function BootLoader() {
                                         initial={{ opacity: 0, y: 50 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-50px" }}
-                                        className="relative w-full flex justify-center md:justify-start mb-12 md:mb-32 z-30 md:pl-16 will-change-transform"
+                                        className="relative w-full flex flex-col md:flex-row items-center md:items-start md:justify-start mb-12 md:mb-32 z-30 md:pl-16 will-change-transform"
                                     >
                                         {/* Image Box */}
                                         <div className={`relative w-[95%] md:w-6/12 aspect-square z-10 shadow-2xl border transform-gpu ${isBright ? 'border-black/5' : 'border-white/5'}`}>
-                                            <AdaptiveImage basePath="/media/roadmap/4" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[2000ms]" alt="Localized State Persistence" />
+                                            <AdaptiveImage basePath="/media/roadmap/4" className="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-&lsqb;2000ms&rsqb;" alt="Localized State Persistence" />
                                         </div>
 
                                         {/* Typography Elements */}
                                         <div
                                             className="absolute top-[10%] md:top-[15%] right-5 md:right-[20%] flex flex-col items-end text-right z-20 pointer-events-none"
                                             style={{
-                                                filter: isBright ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(255,255,255,1))' : 'drop-shadow(0px 10px 20px rgba(0,0,0,0.8))'
+                                                filter: isBright ? 'drop-shadow(0px 0px 8px rgba(255,255,255,0.9)) drop-shadow(0px 0px 2px rgba(255,255,255,1))' : 'drop-shadow(0px 0px 12px rgba(0,0,0,0.95)) drop-shadow(0px 0px 4px rgba(0,0,0,1))'
                                             }}
                                         >
                                             <h3
-                                                className="text-7xl md:text-9xl font-bold tracking-tighter opacity-40"
+                                                className={`text-7xl md:text-9xl font-bold tracking-tighter ${isBright ? 'opacity-40' : 'opacity-90'}`}
                                                 style={{
-                                                    fontFamily: '"Alfa Slab One", serif',
-                                                    color: '#000',
+                                                    fontFamily: '"Playfair Display", serif',
+                                                    color: 'var(--heading-primary)',
+                                                    fontWeight: 900,
+                                                    letterSpacing: '-0.02em',
                                                     WebkitTextStroke: isBright ? 'none' : '1.5px rgba(255,255,255,0.95)'
                                                 }}
                                             >
@@ -414,14 +458,16 @@ export function BootLoader() {
                                         </div>
 
                                         {/* Red Solid Focus Box */}
-                                        <div className="absolute bottom-[-15%] md:bottom-[15%] right-[5%] md:-right-[5%] w-[90%] md:w-[350px] p-8 md:p-10 shadow-[0_20px_50px_rgba(153,27,27,0.4)] z-30 bg-[#8b1818] text-white">
+                                        <div className="relative md:absolute md:bottom-[15%] w-[95%] md:-right-[5%] md:w-[350px] -mt-16 md:mt-0 p-8 md:p-10 shadow-[0_20px_50px_rgba(153,27,27,0.4)] z-30 bg-[#8b1818] text-white">
                                             <div className="flex justify-between items-center mb-6 border-b border-white/20 pb-4">
                                                 <span className="text-xs uppercase tracking-widest font-bold">LOGIC</span>
                                                 <div className="w-8 h-8 border border-white/40 flex items-center justify-center rounded-full text-xs font-serif">P</div>
                                             </div>
-                                            <p className="text-base md:text-lg leading-relaxed text-white/95" style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
-                                                Traceable actions from idea conception to operational outcome. The system preserves context across iterations, revealing the reasoning and logic behind half-built structures.
-                                            </p>
+                                            <div className="space-y-4 text-base md:text-lg leading-relaxed text-white/95" style={{ fontFamily: '"Alegreya Sans SC", sans-serif' }}>
+                                                <p>Nothing stays vague.<br />Each step is visible and trackable.</p>
+                                                <p>See what changed.<br />See what worked.<br />Refine based on real feedback.</p>
+                                                <p className="font-bold">Experiments become shaped outcomes.</p>
+                                            </div>
 
                                             {/* Micro-table decorative */}
                                             <div className="flex flex-col gap-4 mt-8 pt-6 border-t border-white/10 opacity-80 text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold">
@@ -442,11 +488,11 @@ export function BootLoader() {
                                 <div className="relative w-full max-w-[1400px] px-6 pb-12 flex flex-col items-center">
                                     {/* Render Blocks */}
                                     {[
-                                        { title: "Unbounded Execution Space", text: "A boundless spatial canvas to visually map half-built systems and active prototypes.\nPan, zoom, and arrange architectural nodes to explore the raw reasoning behind complex frameworks.", img: "5", align: "right" },
-                                        { title: "Direct System Interface", text: "An embedded command-line terminal providing immediate access to the core logic layer.\nExecute system commands to interact deeply with the operational workflow and uncover underlying data.", img: "6", align: "left" },
-                                        { title: "Live Trace Telemetry", text: "Live execution feeds and system decisions rendered synchronously.\nMonitor the active performance and iterations of models as they evolve from drafts into stable components.", img: "7", align: "right" },
-                                        { title: "Deep Logic Trees", text: "Traverse complex frameworks through interactive, spatial tree architectures.\nExpand logic nodes to uncover the detailed hierarchy of decisions, trade-offs, and system motives.", img: "8", align: "left" },
-                                        { title: "Cognitive State Modulator", text: "Shift environment parameters between deep, noise-free darkness and high-clarity brightness.\nDesigned to optimize visual processing and reduce cognitive load during prolonged technical exploration.", img: "9", align: "right" }
+                                        { title: "The Spatial Map", text: "I lay out my raw, unshaped ideas across this open field.\nIt’s where my unordered thoughts finally find their place as visual nodes.\n\nYou can zoom in to see a single detail or pull back to witness the entire arc of my creation.", img: "5", align: "right" },
+                                        { title: "The Active Shell", text: "I talk to the system directly through this interface.\nIt’s the bridge between my intention and the actual code running underneath.\n\nThis command line isn't just for me—it's how the entire space stays alive and reactive.", img: "6", align: "left" },
+                                        { title: "The Genealogy of Logic", text: "I use these branching trees to show you how my ideas grow.\nEvery complex result has a root, and I want you to see the path I took to get there.\n\nPeel away the layers to see the trade-offs and decisions that shaped the final system.", img: "7", align: "right" },
+                                        { title: "The Live Heartbeat", text: "I share my work while it’s still in motion.\nThese live feeds aren't snapshots—they are the real-time heartbeat of my experiments as they form.\n\nWatch my thoughts stabilize into something functional as the telemetry updates live.", img: "8", align: "left" },
+                                        { title: "The Atmospheric Shift", text: "I change the air in this room depending on the work I’m doing.\nHigh clarity for deep logic, and a noise-free darkness for pure creation.\n\nThis modulation keeps me focused for long hours, and you can see my work in either light.", img: "9", align: "right" }
                                     ].map((item, idx, array) => {
 
                                         const isLeft = item.align === 'left';
@@ -533,6 +579,12 @@ export function BootLoader() {
                                                                 transition={{ duration: 1.5, ease: "easeInOut" }}
                                                                 viewport={{ once: true, margin: "-25%" }}
                                                                 strokeLinecap="round"
+                                                                style={{
+                                                                    color: 'var(--heading-primary)',
+                                                                    fontFamily: '"Playfair Display", serif',
+                                                                    fontWeight: 900,
+                                                                    letterSpacing: '-0.02em'
+                                                                }}
                                                             />
                                                         </svg>
                                                     </div>
@@ -597,12 +649,12 @@ export function BootLoader() {
                                     className="min-h-[90vh] flex flex-col items-center justify-center text-center px-6 relative w-full pb-32 z-10 will-change-transform"
                                 >
                                     <div className="max-w-4xl w-full">
-                                        <div className={`w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden mb-12 relative shadow-2xl border flex flex-col items-center justify-center p-8 md:p-16 transform-gpu ${isBright ? 'border-black/10 bg-white/60' : 'border-white/10 bg-black/40'}`}>
+                                        <div className={`w-full min-h-[500px] md:min-h-0 sm:aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden mb-12 relative shadow-2xl border flex flex-col items-center justify-center px-4 py-12 md:p-16 transform-gpu ${isBright ? 'border-black/10 bg-white/60' : 'border-white/10 bg-black/40'}`}>
                                             <div className="absolute inset-0 overflow-hidden rounded-3xl">
                                                 <AdaptiveImage basePath="/media/roadmap/10" className="absolute inset-0 w-full h-full object-cover opacity-40 hover:scale-105 transition-transform duration-1000" alt="Closing Horizon" />
                                             </div>
                                             <motion.div
-                                                className="relative z-10 flex flex-col items-center max-w-2xl"
+                                                className="relative z-10 flex flex-col items-center max-w-2xl px-2"
                                                 initial="hidden"
                                                 whileInView="visible"
                                                 viewport={{ once: true, margin: "-50px" }}
@@ -610,14 +662,14 @@ export function BootLoader() {
                                             >
                                                 <motion.p
                                                     variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } }}
-                                                    className={`text-2xl md:text-4xl mb-4 leading-relaxed drop-shadow-sm ${isBright ? 'text-black' : 'text-white'}`}
+                                                    className={`text-xl sm:text-2xl md:text-4xl mb-4 md:mb-6 leading-relaxed drop-shadow-sm ${isBright ? 'text-black' : 'text-white'}`}
                                                     style={{ fontFamily: '"Alegreya Sans SC", sans-serif', fontWeight: 300 }}
                                                 >
                                                     TensorThrottleX Space is not a portfolio.
                                                 </motion.p>
                                                 <motion.p
                                                     variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } }}
-                                                    className={`text-xl md:text-3xl mb-10 leading-relaxed drop-shadow-sm opacity-80 ${isBright ? 'text-black' : 'text-white'}`}
+                                                    className={`text-[1.1rem] sm:text-xl md:text-3xl mb-8 md:mb-10 leading-relaxed drop-shadow-sm opacity-80 ${isBright ? 'text-black' : 'text-white'}`}
                                                     style={{ fontFamily: '"Alegreya Sans SC", sans-serif', fontWeight: 300 }}
                                                 >
                                                     It is a place to wander through thought, creation, and exploration — as if moving through a living system.
@@ -637,7 +689,7 @@ export function BootLoader() {
                                 </motion.div>
 
                                 {/* Footer as requested */}
-                                <div className={`w-full py-8 flex items-center justify-center text-xs md:text-sm tracking-[0.15em] font-semibold ${isBright ? 'bg-[#f5f5f7] text-[#555] border-t border-black/10' : 'bg-[#050505] text-[#8b8b8b] border-t border-white/5'}`}>
+                                <div className={`w-full py-8 px-4 flex items-center justify-center text-center text-xs md:text-sm tracking-[0.15em] font-semibold ${isBright ? 'bg-[#f5f5f7] text-[#555] border-t border-black/10' : 'bg-[#050505] text-[#8b8b8b] border-t border-white/5'}`}>
                                     © 2026 TENSORTHROTTLE X. ALL RIGHTS RESERVED.
                                 </div>
                             </div>

@@ -63,7 +63,7 @@ export function MobileBottomNav() {
     const pathname = usePathname()
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
-    const { renderMode, toggleRenderMode, setMainView, setUiMode } = useUI()
+    const { renderMode, toggleRenderMode, setMainView, setUiMode, isBooting } = useUI()
     const {
         theme, setTheme,
         soundState, setSoundIndex,
@@ -74,6 +74,8 @@ export function MobileBottomNav() {
     const [showControls, setShowControls] = useState(false)
     const [clickCount, setClickCount] = useState(0)
     const isBright = renderMode === 'bright'
+
+    if (isBooting) return null;
 
     const isActive = (href: string): boolean => {
         if (href === '/') return pathname === '/'

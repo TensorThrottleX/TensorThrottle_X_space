@@ -41,7 +41,7 @@ export function MobileHomeLayout() {
             {/* Main Content Area */}
             <div className="flex-1 w-full overflow-x-hidden">
                 <AnimatePresence mode="wait">
-                    {mainView === 'dashboard' ? (
+                    {mainView === 'dashboard' && (
                         <motion.div
                             key="mobile-dashboard-view"
                             initial={{ opacity: 0, x: -20 }}
@@ -55,10 +55,16 @@ export function MobileHomeLayout() {
                                     initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
                                     animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                     transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                    className="bitcount-heading text-4xl"
-                                    style={{ color: isBright ? 'var(--heading-primary)' : '#ffffff' }}
+                                    className="text-4xl sm:text-5xl md:text-6xl tracking-tight m-0 drop-shadow-lg uppercase select-none"
+                                    style={{
+                                        color: 'var(--heading-primary)',
+                                        fontFamily: '"Playfair Display", serif',
+                                        fontWeight: 900,
+                                        letterSpacing: '-0.02em',
+                                        WebkitTextStroke: isBright ? 'none' : '1.5px rgba(255,255,255,0.95)'
+                                    }}
                                 >
-                                    TENSOR{'\n'}THROTTLE X
+                                    TENSOR THROTTLEX SPACE
                                 </motion.h1>
                             </div>
 
@@ -107,17 +113,6 @@ export function MobileHomeLayout() {
                                 <MobileDashboard key={contentMode} mode={contentMode} />
                             </AnimatePresence>
 
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="mobile-msg-view"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                            className="px-4 pt-4"
-                        >
-                            <MsgView />
                         </motion.div>
                     )}
                 </AnimatePresence>

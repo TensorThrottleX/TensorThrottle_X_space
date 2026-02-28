@@ -18,14 +18,15 @@ interface LabContainerProps {
 export function LabContainer({ children, videoSrc }: LabContainerProps) {
   const { uiMode, renderMode, isTerminalOpen } = useUI()
 
-  // Video only active in Normal mode
-  const showVideo = renderMode === 'normal'
+  // Video background removed to support bright/dark only
+  const showVideo = false
 
   // Background base classes
   const getBgClass = () => {
     switch (renderMode) {
-      case 'bright': return 'bg-[var(--background)]' // Use variable for intended contrast
-      default: return 'bg-transparent'     // Allow global video transparency
+      case 'bright': return 'bg-[var(--background)]'
+      case 'dark': return 'bg-[var(--background)]'
+      default: return 'bg-[var(--background)]'
     }
   }
 
@@ -38,9 +39,9 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
           - Maintains focus on the Cognitive layer
       */}
       <div className={`fixed inset-0 z-[-1] transition-all duration-700 ease-in-out
-          ${renderMode === 'bright' 
-            ? (isTerminalOpen ? 'bg-white/60 backdrop-blur-md' : 'bg-transparent') 
-            : (uiMode === 'tree' ? 'bg-black/45 backdrop-blur-[2px]' : 'bg-black/20 backdrop-blur-[1px]')}
+          ${renderMode === 'bright'
+          ? (isTerminalOpen ? 'bg-white/60 backdrop-blur-md' : 'bg-transparent')
+          : (uiMode === 'tree' ? 'bg-black/45 backdrop-blur-[2px]' : 'bg-black/20 backdrop-blur-[1px]')}
           ${isTerminalOpen && renderMode !== 'bright' ? 'bg-black/75 backdrop-blur-md md:bg-black/75 md:backdrop-blur-md' : ''}
       `} />
 
@@ -49,10 +50,10 @@ export function LabContainer({ children, videoSrc }: LabContainerProps) {
       */}
       <div className={cn(
         "fixed inset-0 z-[20] transition-all duration-500 ease-in-out pointer-events-none",
-        isTerminalOpen 
-          ? renderMode === 'bright' 
-            ? "opacity-100 backdrop-blur-sm bg-white/50" 
-            : "opacity-100 backdrop-blur-sm bg-black/40" 
+        isTerminalOpen
+          ? renderMode === 'bright'
+            ? "opacity-100 backdrop-blur-sm bg-white/50"
+            : "opacity-100 backdrop-blur-sm bg-black/40"
           : "opacity-0 backdrop-blur-0 bg-transparent"
       )} />
 

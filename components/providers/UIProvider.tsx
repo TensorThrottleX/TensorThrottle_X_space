@@ -20,11 +20,25 @@ interface UIContextType {
     setIsBooting: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const UIContext = createContext<UIContextType | undefined>(undefined)
+const DEFAULT_CONTEXT: UIContextType = {
+    uiMode: 'default',
+    setUiMode: () => { },
+    renderMode: 'bright',
+    setRenderMode: () => { },
+    toggleRenderMode: () => { },
+    isTerminalOpen: false,
+    setIsTerminalOpen: () => { },
+    mainView: 'dashboard',
+    setMainView: () => { },
+    isBooting: true,
+    setIsBooting: () => { }
+}
+
+const UIContext = createContext<UIContextType>(DEFAULT_CONTEXT)
 
 export function UIProvider({ children }: { children: ReactNode }) {
     const [uiMode, setUiMode] = useState<UIMode>('default')
-    const [renderMode, setRenderMode] = useState<RenderMode>('bright') // Default to 'bright' for consistency
+    const [renderMode, setRenderMode] = useState<RenderMode>('bright')
     const [isTerminalOpen, setIsTerminalOpen] = useState(false)
     const [mainView, setMainView] = useState<MainView>('dashboard')
     const [isBooting, setIsBooting] = useState<boolean>(true)
@@ -64,26 +78,31 @@ export function UIProvider({ children }: { children: ReactNode }) {
             Math.max(y, window.innerHeight - y)
         )
 
-        const transition = document.startViewTransition(() => {
+        try {
+            const transition = document.startViewTransition(() => {
+                setRenderMode(nextMode)
+            })
+
+            transition.ready.then(() => {
+                const clipPath = [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`,
+                ]
+
+                document.documentElement.animate(
+                    { clipPath: clipPath },
+                    {
+                        duration: 600,
+                        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                        pseudoElement: '::view-transition-new(root)',
+                    }
+                )
+            }).catch(() => {
+                // If transition fails to be ready (e.g. timeout), the state is already set
+            })
+        } catch (err) {
             setRenderMode(nextMode)
-        })
-
-        transition.ready.then(() => {
-            const clipPath = [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`,
-            ]
-
-            // Only animate the new view, while the old view stays in place
-            document.documentElement.animate(
-                { clipPath: clipPath },
-                {
-                    duration: 600,
-                    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-                    pseudoElement: '::view-transition-new(root)',
-                }
-            )
-        })
+        }
     }
 
     return (
@@ -102,8 +121,5 @@ export function UIProvider({ children }: { children: ReactNode }) {
 
 export function useUI() {
     const context = useContext(UIContext)
-    if (context === undefined) {
-        throw new Error('useUI must be used within a UIProvider')
-    }
     return context
 }

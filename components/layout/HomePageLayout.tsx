@@ -51,13 +51,15 @@ export function HomePageLayout() {
                                 animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                                 className="text-4xl md:text-6xl lg:text-7xl tracking-tight m-0 drop-shadow-2xl uppercase select-none"
-                                style={{ 
-                                    fontFamily: '"Alfa Slab One", serif',
-                                    color: isBright ? '#000000' : 'var(--heading-primary)',
-                                    fontWeight: 'normal'
+                                style={{
+                                    color: 'var(--heading-primary)',
+                                    fontFamily: '"Playfair Display", serif',
+                                    fontWeight: 900,
+                                    letterSpacing: '-0.02em',
+                                    WebkitTextStroke: isBright ? 'none' : '1.5px rgba(255,255,255,0.95)'
                                 }}
                             >
-                                TENSOR THROTTLE X
+                                TENSOR THROTTLEX SPACE
                             </motion.h1>
                         </motion.div>
                     )}
@@ -139,10 +141,8 @@ export function HomePageLayout() {
                 {/* 4. DYNAMIC CENTER CONTENT (Participates in flow) */}
                 <div className="relative w-full flex-1 flex flex-col items-center">
                     <AnimatePresence mode="wait">
-                        {mainView === 'dashboard' ? (
+                        {mainView === 'dashboard' && (
                             <CognitiveDashboard key="dashboard" mode={contentMode} />
-                        ) : (
-                            <MsgView key="msg" />
                         )}
                     </AnimatePresence>
                 </div>

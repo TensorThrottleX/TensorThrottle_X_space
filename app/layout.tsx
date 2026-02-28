@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'TensorThrottleX Space',
-  description: 'A production-ready portfolio powered by Notion and Next.js',
+  title: 'TensorThrottleX Space | Digital Laboratory',
+  description: 'An operational layer for deep technical exploration, mapping unshaped ideas into structured systems.',
   icons: {
     icon: '/media/brand/logo.png',
     shortcut: '/media/brand/logo.png',
@@ -46,6 +46,8 @@ import { LabNavigation } from "@/components/layout/LabNavigation"
 import { RightFloatingBar } from "@/components/layout/RightFloatingBar"
 import { BootLoader } from "@/components/visuals/BootLoader"
 
+import { GlobalMessageOverlay } from "@/components/layout/GlobalMessageOverlay"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -62,17 +64,21 @@ export default function RootLayout({
         <UIProvider>
           <MediaEngineProvider>
             <BootLoader />
+            <TrademarkLogo />
             <RenderScaler>
               {/* Desktop-only fixed elements — hidden on mobile via CSS */}
               <div className="desktop-only">
                 <SystemClock />
               </div>
-              <TrademarkLogo />
               <LabNavigation />
               <RightFloatingBar />
+
               <main className="app-root relative z-10">
                 {children}
               </main>
+
+              <GlobalMessageOverlay />
+
               <div className="desktop-only">
                 <GlobalFooter />
               </div>

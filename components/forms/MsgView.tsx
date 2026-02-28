@@ -112,19 +112,17 @@ export function MsgView(): React.ReactNode {
             // 1. Server-Side Scrutiny (ML)
             const moderation = await checkContent(message + " " + name, { context: 'chat', userId: name });
 
-            // Check if component unmounted during moderation
             if (!isMountedRef.current) return;
+            if (controller.signal.aborted) return;
 
             if (!moderation) {
                 throw new Error('Security check unavailable.');
             }
 
             if (!moderation.allow) {
-                if (moderation.severity === 'high') {
-                    setSendError("Severe or offensive language is not allowed.");
-                } else {
-                    setSendError("Your message contains abusive language. Please revise.");
-                }
+                setSendError(moderation.severity === 'high'
+                    ? "Severe or offensive language is not allowed."
+                    : "Your message contains abusive language. Please revise.");
                 setIsSending(false);
                 return;
             }
@@ -132,55 +130,55 @@ export function MsgView(): React.ReactNode {
             // 2. Transmission
             const response = await fetch('/api/contact', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
                 body: JSON.stringify({
                     identity: name.trim(),
                     email: email.trim() || undefined,
                     message: message.trim(),
                     protocol: isConfirmed,
                     h_field: hField,
-                    load_time: Date.now() - loadTime
+                    load_time: Math.max(0, Date.now() - loadTime)
                 }),
-                signal: controller.signal
-            })
+                signal: controller.signal,
+                cache: 'no-store'
+            });
 
-            clearTimeout(timeoutId)
+            clearTimeout(timeoutId);
 
-            // Check if component unmounted during fetch
             if (!isMountedRef.current) return;
 
-            const data = await response.json()
+            const data = await response.json();
 
             if (response.ok) {
-                setIsSent(true)
-                // Clear form but keep sent state
-                setName('')
-                setEmail('')
-                setMessage('')
-
-                // Keep success state visible briefly before allowing new transmission logic
-                // (though project spec implies it stays "Sent")
+                setIsSent(true);
+                setName('');
+                setEmail('');
+                setMessage('');
             } else {
-                // Return structured error message from backend
                 setSendError(data.error || 'Transmission engine reported an anomaly. Please try again.');
             }
-        } catch (err) {
-            clearTimeout(timeoutId)
-            // Don't log/show error for intentional aborts
-            if (err instanceof Error && err.name === 'AbortError') {
-                if (isMountedRef.current) {
-                    setSendError('Request timed out. Please try again.');
-                }
+        } catch (err: any) {
+            clearTimeout(timeoutId);
+            if (err.name === 'AbortError') {
+                if (isMountedRef.current) setSendError('Request timed out or cancelled. Please try again.');
                 return;
             }
-            console.error('[FRONTEND_ERROR]', err);
+
+            console.error('[MSG_VIEW_FETCH_ERROR]', err);
             if (isMountedRef.current) {
-                setSendError('Transmission link failure. Unable to establish a secure connection.');
+                setSendError(
+                    err.message === 'Failed to fetch'
+                        ? 'Network error: The transmission link was disconnected. Check your connection.'
+                        : 'System error: Unable to initialize secure channel.'
+                );
             }
         } finally {
-            clearTimeout(timeoutId)
+            clearTimeout(timeoutId);
             if (isMountedRef.current) {
-                setIsSending(false)
+                setIsSending(false);
             }
         }
     }, [canSend, checkContent, message, name, email, isConfirmed, hField, loadTime])

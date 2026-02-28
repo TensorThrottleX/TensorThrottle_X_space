@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Home, List, Folder, FlaskConical, Globe, Maximize, Target, Crosshair, Brain, Layers, Monitor, VolumeX } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -68,6 +68,12 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     soundState, setSoundIndex,
     config
   } = useMedia()
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const isActive = (href: string): boolean => {
     if (activeHref) return activeHref === href
@@ -170,11 +176,13 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
                 <ActiveIcon size={20} strokeWidth={2} />
               </span>
 
-              <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
-                style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
-              >
-                {item.label}
-              </span>
+              {mounted && (
+                <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
+                  style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
+                >
+                  {item.label}
+                </span>
+              )}
 
               {active && (
                 <div
@@ -209,14 +217,16 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
           `}>
             {renderMode === 'custom' && <div className="absolute w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse" />}
           </div>
-          <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
-            style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
-          >
-            {renderMode} MODE
-          </span>
+          {mounted && (
+            <span className="absolute left-14 hidden rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-tighter backdrop-blur-sm group-hover:block whitespace-nowrap z-50 animate-in fade-in slide-in-from-left-2 duration-200"
+              style={{ backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)' }}
+            >
+              {renderMode} MODE
+            </span>
+          )}
         </button>
 
-        {renderMode === 'custom' && (
+        {mounted && renderMode === 'custom' && (
           <>
             <div className="h-px w-6 bg-white/10 my-1 self-center" />
 
@@ -279,3 +289,4 @@ export function LabNavigation({ activeHref }: { activeHref?: string }): React.Re
     </div>
   )
 }
+
