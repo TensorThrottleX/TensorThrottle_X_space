@@ -688,11 +688,11 @@ export function BootLoader() {
                                                 <motion.button
                                                     variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } }}
                                                     onClick={() => { setStage('done'); setIsBooting(false); }}
-                                                    className={`group relative overflow-hidden px-12 py-5 rounded-full font-medium tracking-wide transition-all shadow-xl hover:-translate-y-1 active:scale-95 ${isBright ? 'bg-black text-white hover:bg-black/90' : 'bg-white text-black hover:bg-white/90'}`}
+                                                    className={`group relative overflow-hidden px-14 py-5 rounded-full font-medium tracking-wide transition-all shadow-xl hover:-translate-y-1 active:scale-95 flex items-center justify-center min-w-[200px] ${isBright ? 'bg-black text-white hover:bg-black/90' : 'bg-white text-black hover:bg-white/90'}`}
                                                     style={{ fontFamily: '"Alfa Slab One", serif', letterSpacing: '0.1em' }}
                                                 >
-                                                    <span className="block group-hover:hidden">Enter the Space</span>
-                                                    <span className="hidden group-hover:block px-2">Deep Dive</span>
+                                                    <span className="transition-all duration-300 group-hover:opacity-0 group-hover:scale-90">Enter the Space</span>
+                                                    <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-110 group-hover:scale-100 pointer-events-none">Deep Dive</span>
                                                 </motion.button>
                                             </motion.div>
                                         </div>
