@@ -266,7 +266,7 @@ async function sendViaResend(
     try {
         const resend = new Resend(process.env.RESEND_API_KEY);
         // Ensure strictly configured sender identity
-        const SYSTEM_SENDER = process.env.RESEND_FROM || 'noreply@system-relay.com';
+        const SYSTEM_SENDER = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || process.env.PRIMARY_FROM_EMAIL || 'noreply@system-relay.com';
 
         const { data, error } = await resend.emails.send({
             from: `Tensor Relay <${SYSTEM_SENDER}>`,
@@ -494,7 +494,8 @@ export async function POST(req: NextRequest) {
                     console.log(`Message:\n${payload.message}`);
                     console.log('--------------------------------------\n');
 
-                    dispatch.error = 'Secure channel routing is currently unavailable. Please try again later.';
+                    // Provide a more detailed error if possible, but keep it clean for the user
+                    dispatch.error = `Secure channel routing is currently unavailable. (Primary: ${logData.primaryError || 'Service Error'})`;
                 }
             }
         }

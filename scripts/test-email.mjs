@@ -40,9 +40,11 @@ async function sendTestEmail() {
     console.log('📧 Sending test email...\n');
 
     const testData = {
-        name: 'Test User',
+        identity: 'Test User',
         email: 'test@example.com',
         message: 'This is an automated test message from the TensorThrottleX email system. If you receive this, the system is working correctly!',
+        protocol: true,
+        load_time: 3000,
         h_field: '' // Honeypot field
     };
 

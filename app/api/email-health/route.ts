@@ -19,29 +19,29 @@ export async function GET() {
 
     const hasResend = !!process.env.RESEND_API_KEY;
     const hasSendGrid = !!process.env.SENDGRID_API_KEY;
+    const hasSMTP = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
     const recipient = process.env.EMAIL_RECIPIENT || 'tensorthrottleX@proton.me';
 
+    const provider = hasResend ? 'Resend' : (hasSendGrid ? 'SendGrid' : (hasSMTP ? 'SMTP' : 'None'));
+
     // Check configuration status
-    if (hasResend) {
+    if (hasResend || hasSendGrid || hasSMTP) {
         checks.configured = true;
         checks.status = 'ready';
-        checks.details.push('✅ PRIMARY: Resend API configured');
-    } else {
-        checks.details.push('❌ PRIMARY: Resend API missing');
-    }
+        // @ts-ignore - Adding provider for the test script
+        checks.provider = provider;
 
-    if (hasSendGrid) {
-        checks.details.push('✅ BACKUP: SendGrid configured');
-    } else {
-        checks.details.push('ℹ️ BACKUP: SendGrid not active (Planned for future redundancy)');
-    }
-
-    if (hasResend || hasSendGrid) {
-        checks.details.push(`✅ RECIPIENT: ${recipient}`);
-        checks.details.push('✅ Domain-independence active');
+        if (hasResend) checks.details.push('✅ PRIMARY: Resend API configured');
+        if (hasSendGrid) checks.details.push('✅ BACKUP: SendGrid configured');
+        if (hasSMTP) checks.details.push('✅ FALLBACK: SMTP configured');
     } else {
         checks.status = 'critical_failure';
         checks.details.push('❌ FATAL: No email providers configured');
+    }
+
+    if (checks.configured) {
+        checks.details.push(`✅ RECIPIENT: ${recipient}`);
+        checks.details.push(`✅ RELAY: ${provider} active`);
     }
 
     // Add security info
