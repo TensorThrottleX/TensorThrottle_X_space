@@ -2,7 +2,70 @@
 
 import React, { useState, useEffect } from 'react'
 import { useUI } from '@/components/providers/UIProvider'
-import { cn } from '@/lib/utils'
+
+function AnalogClock({ time, accent }: { time: Date; accent: string }) {
+    const hours = time.getHours() % 12
+    const minutes = time.getMinutes()
+    const seconds = time.getSeconds()
+
+    const hourDeg = hours * 30 + minutes * 0.5
+    const minuteDeg = minutes * 6 + seconds * 0.1
+    const secondDeg = seconds * 6
+
+    const toRad = (deg: number) => (deg - 90) * (Math.PI / 180)
+
+    return (
+        <svg width="20" height="20" viewBox="0 0 20 20" className="shrink-0">
+            {/* Tick marks — 12 hour markers */}
+            {Array.from({ length: 12 }).map((_, i) => {
+                const angle = toRad(i * 30)
+                return (
+                    <line
+                        key={i}
+                        x1={10 + 7.5 * Math.cos(angle)}
+                        y1={10 + 7.5 * Math.sin(angle)}
+                        x2={10 + 9 * Math.cos(angle)}
+                        y2={10 + 9 * Math.sin(angle)}
+                        stroke="currentColor"
+                        strokeWidth={i % 3 === 0 ? 0.6 : 0.35}
+                        strokeLinecap="round"
+                        opacity={i % 3 === 0 ? 0.8 : 0.4}
+                    />
+                )
+            })}
+            {/* Hour hand */}
+            <line
+                x1="10" y1="10"
+                x2={10 + 4.5 * Math.cos(toRad(hourDeg))}
+                y2={10 + 4.5 * Math.sin(toRad(hourDeg))}
+                stroke="currentColor"
+                strokeWidth="1.1"
+                strokeLinecap="round"
+            />
+            {/* Minute hand */}
+            <line
+                x1="10" y1="10"
+                x2={10 + 6 * Math.cos(toRad(minuteDeg))}
+                y2={10 + 6 * Math.sin(toRad(minuteDeg))}
+                stroke="currentColor"
+                strokeWidth="0.75"
+                strokeLinecap="round"
+                opacity={0.85}
+            />
+            {/* Second hand */}
+            <line
+                x1="10" y1="10"
+                x2={10 + 7 * Math.cos(toRad(secondDeg))}
+                y2={10 + 7 * Math.sin(toRad(secondDeg))}
+                stroke={accent}
+                strokeWidth="0.45"
+                strokeLinecap="round"
+            />
+            {/* Center cap */}
+            <circle cx="10" cy="10" r="0.7" fill={accent} />
+        </svg>
+    )
+}
 
 export function SystemClock() {
     const { renderMode, isBooting } = useUI()
@@ -28,39 +91,25 @@ export function SystemClock() {
         return `${h} : ${m} : ${s}`
     }
 
-    const title = formatTime(time)
-    const degrees = time.getSeconds() * 6
+    const accent = isBright ? '#0891b2' : '#22d3ee'
 
     return (
-        <div className="fixed top-8 right-10 z-[300] pointer-events-none select-none">
-            {/* Clock Module */}
-            <div className={cn(
-                "flex items-center gap-4 backdrop-blur-md px-4 py-2 rounded-lg border shadow-[var(--shadow-premium)]",
-                isBright ? "bg-white/80 border-black/10" : "bg-black/80 border-white/10"
-            )}>
-                {/* Analog Clock */}
-                <div className={cn(
-                    "relative w-6 h-6 rounded-full border-[1.5px] flex items-center justify-center shadow-inner",
-                    isBright ? "border-black" : "border-white"
-                )}>
-                    <div
-                        className="absolute top-1/2 left-1/2 w-0 h-0"
-                        style={{ transform: `rotate(${degrees}deg)` }}
-                    >
-                        <div className={cn(
-                            "absolute w-[1.5px] h-[9px] -translate-x-[0.75px] -translate-y-[9px]",
-                            isBright ? "bg-black" : "bg-white"
-                        )} />
-                    </div>
-                </div>
-
-                {/* Digital Clock */}
-                <div className={cn(
-                    "font-sans text-xs font-bold tracking-wider tabular-nums opacity-90",
-                    isBright ? "text-black" : "text-white"
-                )}>
-                    {title}
-                </div>
+        <div className="pointer-events-none select-none">
+            <div
+                className="flex items-center gap-2.5 backdrop-blur-xl px-4 py-2.5 border transition-all duration-500 rounded-2xl"
+                style={{
+                    backgroundColor: 'var(--adaptive-glass-bg)',
+                    borderColor: 'var(--adaptive-glass-border)',
+                    boxShadow: 'var(--adaptive-glass-shadow)',
+                }}
+            >
+                <AnalogClock time={time} accent={accent} />
+                <span
+                    className="font-sans text-[11px] font-bold tracking-wider tabular-nums"
+                    style={{ color: 'var(--adaptive-hero-color)' }}
+                >
+                    {formatTime(time)}
+                </span>
             </div>
         </div>
     )

@@ -1,0 +1,17 @@
+{
+  "title": "Death Note",
+  "subtitle": "Justice written in ink and blood",
+  "description": "A brilliant high school student discovers a supernatural notebook that allows him to kill anyone whose name he writes in it, sparking a cat-and-mouse game with the world's greatest detective.",
+  "accentColor": "#a855f7",
+  "quotes": [
+    "I am justice! I protect the innocent and punish the guilty!",
+    "A world without fear, without anxiety... is that not worth fighting for?",
+    "Kira is not a god. He is just a human who happened to find a Death Note."
+  ],
+  "characters": [
+    { "name": "Light Yagami", "role": "Kira" },
+    { "name": "L", "role": "Detective" },
+    { "name": "Ryuk", "role": "Shinigami" },
+    { "name": "Misa Amane", "role": "Second Kira" }
+  ]
+}

@@ -20,7 +20,7 @@ import React from 'react'
 import { useUI } from '@/components/providers/UIProvider'
 
 export function RenderScaler({ children }: { children: React.ReactNode }) {
-    const { uiMode } = useUI()
+    const { uiMode, themeResolved } = useUI()
 
     return (
         <div
@@ -31,7 +31,7 @@ export function RenderScaler({ children }: { children: React.ReactNode }) {
                 position: 'relative',
             }}
         >
-            {children}
+            {themeResolved ? children : null}
         </div>
     )
 }

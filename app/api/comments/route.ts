@@ -1,47 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getComments, createComment } from '@/lib/supabase'
+import { getComments, createComment, getCommentLikeCounts, getMyLikedCommentIds, getViewCounts } from '@/lib/supabase'
 import { supabase } from '@/lib/supabase'
 import { moderateComment } from '@/lib/moderation'
+import { createModerationMetadata } from '@/lib/moderation/metadata'
+import { getClientIp, createInMemoryRateLimiter, RATE_LIMIT_WINDOW_MS } from '@/lib/rate-limit'
+import { randomBytes } from 'node:crypto'
 
 export const dynamic = 'force-dynamic'
 
+const MAX_BODY_SIZE = 50_000;
+
 // ─── HYBRID RATE LIMITING ─────────────────────────────────────────
-// Layer 1: In-memory Map (fast, catches rapid repeats within same instance)
+// Layer 1: In-memory limiter (shared helper — fast, catches rapid repeats
+// within same instance; resets on cold start)
 // Layer 2: Supabase query (persistent, catches repeats across serverless cold starts)
 
-const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000 // 5 minutes
-
-// Layer 1: In-memory (best-effort, resets on cold start)
-const rateLimitMap = new Map<string, number>()
-
-function getClientIp(request: NextRequest): string {
-  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    request.headers.get('cf-connecting-ip') ||
-    'unknown'
-}
-
-/**
- * Layer 1: Fast in-memory check.
- * Returns true if rate-limited (same instance hit within window).
- */
-function isMemoryRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const lastRequest = rateLimitMap.get(ip)
-
-  if (lastRequest && (now - lastRequest) < RATE_LIMIT_WINDOW_MS) {
-    return true
-  }
-
-  // Lazy cleanup: remove old entries when we check
-  if (rateLimitMap.size > 1000) {
-    for (const [key, ts] of rateLimitMap.entries()) {
-      if (now - ts > RATE_LIMIT_WINDOW_MS * 2) rateLimitMap.delete(key)
-    }
-  }
-
-  rateLimitMap.set(ip, now)
-  return false
-}
+// Layer 1: one comment per window per IP (shared sliding-window limiter)
+const commentsMemoryLimiter = createInMemoryRateLimiter({
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  maxRequests: 1,
+})
 
 /**
  * Layer 2: Persistent Supabase check.
@@ -79,6 +57,7 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
     const slug = searchParams.get('slug')
+    const fingerprint = searchParams.get('fingerprint') || ''
 
     if (!slug || typeof slug !== 'string' || slug.trim().length === 0) {
       return NextResponse.json(
@@ -87,11 +66,33 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const comments = await getComments(slug.trim())
+    const [comments, viewCounts] = await Promise.all([
+      getComments(slug.trim()),
+      getViewCounts([slug.trim()]),
+    ])
 
-    // Always return structured response
+    // Additive enrichment: like counts + the requester's own likes
+    let commentsWithLikes: any[] = comments
+    if (comments.length > 0) {
+      const ids = comments.map((c) => c.id)
+      const [likeCounts, myLikes] = await Promise.all([
+        getCommentLikeCounts(ids),
+        getMyLikedCommentIds(ids, fingerprint),
+      ])
+      commentsWithLikes = comments.map((c) => {
+        const { metadata, edit_token, fingerprint: fp, ...safeComment } = c as any;
+        return {
+          ...safeComment,
+          like_count: likeCounts[c.id] || 0,
+          liked_by_me: myLikes.has(c.id),
+        };
+      })
+    }
+
+    // Always return structured response (viewCount is additive/backward-compatible)
     return NextResponse.json({
-      comments: comments || [],
+      comments: commentsWithLikes || [],
+      viewCount: viewCounts[slug.trim()] || 0,
       success: true,
     })
   } catch (error) {
@@ -111,7 +112,7 @@ export async function POST(request: NextRequest) {
 
     // 1. Rate limiting — Hybrid (memory + DB)
     // Layer 1: Fast in-memory check (same instance)
-    if (isMemoryRateLimited(ip)) {
+    if (!commentsMemoryLimiter.allow(ip)) {
       return NextResponse.json(
         { error: 'Too many comments. Please try again later.' },
         { status: 429 }
@@ -126,8 +127,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const body = await request.json()
-    const { postSlug, name, message, fingerprint, metrics } = body
+    const raw = await request.text()
+    if (raw.length > MAX_BODY_SIZE) {
+      return NextResponse.json({ error: 'Request payload too large' }, { status: 413 })
+    }
+    const body = JSON.parse(raw)
+    const { postSlug, name, message, fingerprint, metrics, parentId } = body
 
     // 2. Input Validation
     if (!postSlug || !name || !message) {
@@ -166,6 +171,19 @@ export async function POST(request: NextRequest) {
 
     // 5. Create Comment (or Shadow Ban)
     const isShadowBanned = moderation.shadowBan // Risk score >= 7
+    const editToken = randomBytes(24).toString('hex')
+
+    // Additive: typed moderation metadata merged into the existing JSONB
+    const modMetadata = createModerationMetadata({
+      riskScore: moderation.riskScore,
+      isShadowBanned,
+      heuristics: {
+        linkCount: moderation.metadata.linkCount,
+        profanityCount: moderation.metadata.profanityCount,
+        entropy: moderation.metadata.entropy,
+        uppercaseRatio: moderation.metadata.uppercaseRatio,
+      },
+    })
 
     // Save to DB
     const comment = await createComment(
@@ -176,8 +194,11 @@ export async function POST(request: NextRequest) {
         fingerprint: fingerprint || 'unknown',
         riskScore: moderation.riskScore,
         isShadowBanned: isShadowBanned,
+        parentId: parentId || null,
+        editToken,
         metadata: {
           ...moderation.metadata,
+          ...modMetadata,
           userAgent,
           ip, // Store hash of IP in production usually, but storing IP for admin ban matching
           reasons: moderation.reason
@@ -194,7 +215,12 @@ export async function POST(request: NextRequest) {
     // If shadow banned, we return the comment to the user so they see it, but it won't be fetched by others (GET filters it out)
     return NextResponse.json({
       ...comment,
-      status: isShadowBanned ? 'shadow_banned' : 'active'
+      status: isShadowBanned ? 'shadow_banned' : 'active',
+      // Additive client fields
+      like_count: 0,
+      liked_by_me: false,
+      edited_at: comment.edited_at ?? null,
+      edit_token: editToken, // One-time capability token for edit/delete (never re-issued by GET)
     }, { status: 201 })
 
   } catch (error) {

@@ -35,6 +35,26 @@ function setCachedPosts(posts: Post[]): void {
   postsCache = { data: posts, timestamp: Date.now() }
 }
 
+// ─── INDIVIDUAL POST CACHE ───────────────────────────────────────
+// Same TTL; also supports stale-fallback on Notion failure.
+const postCache = new Map<string, CacheEntry<Post>>()
+
+function getCachedPost(slug: string): Post | null {
+  const entry = postCache.get(slug)
+  if (!entry) return null
+  if (Date.now() - entry.timestamp > CACHE_TTL_MS) return null
+  return entry.data
+}
+
+function getStalePost(slug: string): Post | null {
+  const entry = postCache.get(slug)
+  return entry ? entry.data : null
+}
+
+function setCachedPost(slug: string, post: Post): void {
+  postCache.set(slug, { data: post, timestamp: Date.now() })
+}
+
 /**
  * Fetch all published posts from Notion database with pagination
  * Filters: published = true
@@ -115,9 +135,62 @@ export async function getAllPosts(): Promise<Post[]> {
 
 
 /**
- * Fetch single post by slug with full content blocks
+ * Recursively fetch all block children with pagination and nesting support.
+ * Handles posts with >100 blocks via cursor-based pagination.
+ * Follows has_children to fetch nested content (toggles, columns, tables, etc.).
+ * Attaches children as a .children array on the parent block.
+ * Fault-tolerant: logs errors on child failures, continues with empty children.
+ */
+async function fetchBlockChildren(blockId: string, depth: number = 0): Promise<any[]> {
+  const MAX_DEPTH = 10;
+  if (depth > MAX_DEPTH) {
+    console.warn(`[Notion] Max recursion depth reached for block ${blockId}`);
+    return [];
+  }
+
+  const allBlocks: any[] = [];
+  let cursor: string | undefined = undefined;
+
+  try {
+    while (true) {
+      const response: any = await notion.blocks.children.list({
+        block_id: blockId,
+        start_cursor: cursor,
+        page_size: 100,
+      });
+
+      for (const block of response.results) {
+        if (block.has_children) {
+          try {
+            (block as any).children = await fetchBlockChildren(block.id, depth + 1);
+          } catch (err) {
+            console.warn(`[Notion] Failed to fetch children for block ${block.id}:`, err);
+            (block as any).children = [];
+          }
+        }
+        allBlocks.push(block);
+      }
+
+      if (!response.has_more) break;
+      cursor = response.next_cursor || undefined;
+    }
+  } catch (error) {
+    console.error(`[Notion] Failed to fetch blocks for ${blockId}:`, error);
+    throw error;
+  }
+
+  return allBlocks;
+}
+
+/**
+ * Fetch single post by slug with full content blocks.
+ * Supports complete pagination and recursive nested content.
  */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  // 1. Return fresh cached copy immediately
+  const cached = getCachedPost(slug)
+  if (cached) return cached
+
   if (!DATABASE_ID || !process.env.NOTION_TOKEN) {
     console.error('Notion configuration missing')
     return null
@@ -151,15 +224,21 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     const page = response.results[0] as any
     const post = normalizePage(page)
 
-    // Fetch full content blocks
-    const blocks = await notion.blocks.children.list({
-      block_id: page.id,
-    })
+    // Fetch full content blocks with pagination + recursive nesting
+    post.content = await fetchBlockChildren(page.id);
 
-    post.content = blocks.results
+    // Cache the fully resolved post
+    setCachedPost(slug, post)
 
     return post
   } catch (error) {
+    // 2. If Notion fails, serve stale cache as fallback
+    const stale = getStalePost(slug)
+    if (stale) {
+      console.warn(`[Notion] Failed to refresh post "${slug}", serving stale cache:`, error)
+      return stale
+    }
+
     console.error(`Failed to fetch post by slug "${slug}":`, error)
     return null
   }

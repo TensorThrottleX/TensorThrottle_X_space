@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
@@ -159,7 +159,7 @@ function MobileStackedDeck({
                                 STACK_HEIGHT,
                                 "border-[1.5px] border-b-[4px] border-r-[2px]",
                                 isBright
-                                    ? "bg-white border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
+                                    ? "bg-[#F5F5F4] border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
                                     : (isCover ? "bg-black border-white/20 border-b-white/30 border-r-white/25 shadow-[var(--shadow-premium)]" : "bg-[var(--card-bg)] backdrop-blur-3xl border-white/10 border-b-white/20 border-r-white/15 shadow-[var(--shadow-premium)]")
                             )}
                             style={{
@@ -255,7 +255,7 @@ function MobileStackedDeck({
                                                             "text-[10px] font-bold tracking-wider uppercase",
                                                             isBright ? "text-black/60" : "text-white/60"
                                                         )}>
-                                                            CRITICAL_MODULE 0{content.subCards.findIndex(c => c.id === id) + 1}
+                                                            FOUNDATION_0{content.subCards.findIndex(c => c.id === id) + 1}
                                                         </span>
                                                     </div>
                                                     <div className={cn("w-8 h-px", isBright ? "bg-black/10" : "bg-white/10")} />
@@ -353,61 +353,105 @@ function MobileStackedDeck({
     )
 }
 
-// ─── MOBILE QUOTE RENDERER (Unchanged) ───
+// ─── MOBILE QUOTE RENDERER ───
+type MobilePhase = 'typing' | 'display' | 'deleting' | 'waiting'
+
+const M_CHAR_SPEED = 20
+const M_DISPLAY_DURATION = 10000
+const M_WAIT_DURATION = 1500
+
 function MobileQuoteRenderer() {
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
-    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
-    const [displayPhase, setDisplayPhase] = useState<'display' | 'erasing' | 'paused' | 'typing'>('display')
-    const [visibleText, setVisibleText] = useState(SYSTEM_QUOTES[0].text)
-    const [visibleAuthor, setVisibleAuthor] = useState(SYSTEM_QUOTES[0].author)
 
-    const ERASE_SPEED_MS = 20
-    const TYPE_SPEED_MS = 25
-    const PAUSE_DURATION_MS = 150
-    const DISPLAY_DURATION_MS = 10000
+    const [quoteIndex, setQuoteIndex] = useState(() =>
+        Math.floor(Math.random() * SYSTEM_QUOTES.length)
+    )
+    const [phase, setPhase] = useState<MobilePhase>('waiting')
+    const [visibleText, setVisibleText] = useState('')
+    const [visibleAuthor, setVisibleAuthor] = useState('')
+    const timerRef = useRef<NodeJS.Timeout | null>(null)
+    const startTimeRef = useRef<number>(0)
+    const [progressWidth, setProgressWidth] = useState(0)
+
+    const quote = SYSTEM_QUOTES[quoteIndex]
 
     useEffect(() => {
-        let timeoutId: NodeJS.Timeout
-        const runCycle = () => {
-            if (displayPhase === 'display') {
-                timeoutId = setTimeout(() => setDisplayPhase('erasing'), DISPLAY_DURATION_MS)
-            } else if (displayPhase === 'erasing') {
+        const idx = Math.floor(Math.random() * SYSTEM_QUOTES.length)
+        setQuoteIndex(idx)
+        setPhase('typing')
+    }, [])
+
+    useEffect(() => {
+        const tick = () => {
+            if (phase === 'display') {
+                const elapsed = performance.now() - startTimeRef.current
+                const pct = Math.min((elapsed / M_DISPLAY_DURATION) * 100, 100)
+                setProgressWidth(pct)
+
+                if (elapsed >= M_DISPLAY_DURATION) {
+                    setProgressWidth(100)
+                    setPhase('deleting')
+                } else {
+                    timerRef.current = setTimeout(tick, 50)
+                }
+            } else if (phase === 'deleting') {
                 if (visibleText.length > 0) {
-                    timeoutId = setTimeout(() => {
+                    timerRef.current = setTimeout(() => {
                         setVisibleText(prev => prev.slice(0, -1))
-                        if (visibleText.length < 5) setVisibleAuthor('')
-                    }, ERASE_SPEED_MS)
-                } else setDisplayPhase('paused')
-            } else if (displayPhase === 'paused') {
-                timeoutId = setTimeout(() => {
-                    const nextIndex = (currentQuoteIndex + 1) % SYSTEM_QUOTES.length
-                    setCurrentQuoteIndex(nextIndex); setVisibleAuthor('')
-                    setDisplayPhase('typing')
-                }, PAUSE_DURATION_MS)
-            } else if (displayPhase === 'typing') {
-                const target = SYSTEM_QUOTES[currentQuoteIndex]
+                    }, M_CHAR_SPEED)
+                } else {
+                    setPhase('waiting')
+                }
+            } else if (phase === 'waiting') {
+                timerRef.current = setTimeout(() => {
+                    let next = quoteIndex
+                    while (next === quoteIndex && SYSTEM_QUOTES.length > 1) {
+                        next = Math.floor(Math.random() * SYSTEM_QUOTES.length)
+                    }
+                    setQuoteIndex(next)
+                    setVisibleAuthor('')
+                    setProgressWidth(0)
+                    setPhase('typing')
+                }, M_WAIT_DURATION)
+            } else if (phase === 'typing') {
+                const target = SYSTEM_QUOTES[quoteIndex]
                 if (visibleText.length < target.text.length) {
-                    timeoutId = setTimeout(() => setVisibleText(target.text.slice(0, visibleText.length + 1)), TYPE_SPEED_MS)
-                } else { setVisibleAuthor(target.author); setDisplayPhase('display') }
+                    timerRef.current = setTimeout(() => {
+                        setVisibleText(target.text.slice(0, visibleText.length + 1))
+                    }, M_CHAR_SPEED)
+                } else {
+                    setVisibleAuthor(target.author || '')
+                    startTimeRef.current = performance.now()
+                    setProgressWidth(0)
+                    setPhase('display')
+                }
             }
         }
-        runCycle()
-        return () => clearTimeout(timeoutId)
-    }, [displayPhase, visibleText, currentQuoteIndex])
+
+        tick()
+        return () => {
+            if (timerRef.current) clearTimeout(timerRef.current)
+        }
+    }, [phase, visibleText, quoteIndex])
+
+    const showCursor = phase === 'typing' || phase === 'deleting' || phase === 'waiting'
 
     return (
         <div className="w-full px-4 pb-8 h-[500px] flex items-center">
-            <div className={cn(
-                "w-full rounded-2xl overflow-hidden transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full",
-                "border-[1.5px] border-b-[4px] border-r-[2px] shadow-[var(--shadow-premium)]",
-                renderMode === 'bright'
-                    ? "bg-white/90 border-black/10 border-b-black/20 border-r-black/15"
-                    : "bg-black/60 backdrop-blur-xl border-white/10 border-b-white/20 border-r-white/15"
-            )}>
-                <div className="absolute top-6 left-6 flex items-center gap-2">
-                    <div className={cn("w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]",
-                        displayPhase === 'typing' ? "bg-white animate-pulse" : "bg-cyan-400"
+            <div
+                className={cn(
+                    "w-full rounded-2xl overflow-hidden transition-colors duration-300 px-6 py-10 flex flex-col items-center justify-center text-center h-full relative",
+                    "border-[1.5px] border-b-[4px] border-r-[2px] shadow-[var(--shadow-premium)]",
+                    isBright
+                        ? "bg-[#F5F5F4]/90 border-black/10 border-b-black/20 border-r-black/15"
+                        : "bg-black/60 backdrop-blur-xl border-white/10 border-b-white/20 border-r-white/15"
+                )}
+            >
+                <div className="absolute top-6 left-6 flex items-center gap-2 pointer-events-none">
+                    <div className={cn(
+                        "w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-colors duration-300",
+                        phase === 'typing' ? "bg-white animate-pulse" : "bg-cyan-400"
                     )} />
                     <span className="text-xs font-bold tracking-wider text-cyan-200/70 uppercase">SYSTEM_MEMORY</span>
                 </div>
@@ -417,19 +461,54 @@ function MobileQuoteRenderer() {
                         "text-2xl font-extrabold leading-tight tracking-tighter",
                         isBright ? "text-black/95" : "text-white/95"
                     )}>
-                        "{visibleText}"
-                        <span className={cn("inline-block w-2 h-6 bg-cyan-500/50 align-middle ml-1", displayPhase === 'display' ? "opacity-0" : "animate-pulse")} />
+                        &ldquo;{visibleText}&rdquo;
+                        {showCursor && (
+                            <span className={cn(
+                                "inline-block w-[2px] h-[1.5rem] align-middle ml-1 rounded-sm animate-pulse",
+                                isBright ? "bg-black/60" : "bg-cyan-400/60"
+                            )} />
+                        )}
                     </h2>
-                    <div className="h-6 mt-4">
+                    <div className="h-8 mt-6 flex items-center justify-center">
                         {visibleAuthor && (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={cn(
-                                "text-sm font-medium uppercase",
-                                isBright ? "text-black/40" : "text-white/40"
-                            )}>
+                            <motion.span
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className={cn(
+                                    "text-sm font-medium uppercase",
+                                    isBright ? "text-black/40" : "text-white/40"
+                                )}
+                            >
                                 — {visibleAuthor}
-                            </motion.div>
+                            </motion.span>
                         )}
                     </div>
+                </div>
+
+                <div className="relative z-10 w-full my-auto">
+                    <div className={cn(
+                        "w-full h-px",
+                        isBright ? "bg-black/10" : "bg-white/5"
+                    )} />
+                    <div
+                        className={cn(
+                            "absolute top-0 left-0 h-px",
+                            isBright ? "bg-cyan-600/40" : "bg-cyan-400/40"
+                        )}
+                        style={{
+                            width: `${progressWidth}%`,
+                            boxShadow: isBright
+                                ? '0 0 8px rgba(34,211,238,0.3)'
+                                : '0 0 8px rgba(34,211,238,0.5)',
+                        }}
+                    />
+                </div>
+
+                <div className={cn(
+                    "absolute bottom-6 text-[10px] font-bold font-mono tracking-tight uppercase animate-pulse pointer-events-none",
+                    isBright ? "text-black/30" : "text-white/30"
+                )}>
+                    {phase === 'typing' ? 'LOADING_MEMORY...' : phase === 'deleting' ? 'CLEARING_BUFFER...' : phase === 'waiting' ? 'ALLOCATING_NEXT...' : 'AUTO_CYCLING'}
                 </div>
             </div>
         </div>

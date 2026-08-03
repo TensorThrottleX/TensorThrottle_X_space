@@ -1,0 +1,7 @@
+- duplication: `components/content/Feed.tsx` vs `LabFeed.tsx`, `PostCard.tsx` vs `LabPostCard.tsx`.
+- large files: `components/dashboard/CognitiveDashboard.tsx` is large (~734 lines).
+- tight coupling: Terminal (`InteractiveHome`) and Dashboard components are tightly coupled to specific layout visuals.
+- unused utilities: `components/layout/Navbar.tsx` (marked legacy/unused).
+- complex components: D3 tree animation logic (`HorizontalTree.tsx`), `RenderScaler` layout transformation math.
+- legacy code: Pre-redesign components still reside in folders despite the complete frontend redesign.
+- TODOs: "Experiment Sandbox" interactive modules (referenced in docs but unbuilt), GPU animation audit (using `transform`/`opacity` strictly).

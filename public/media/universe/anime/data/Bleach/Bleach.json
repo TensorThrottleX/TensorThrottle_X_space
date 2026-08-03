@@ -1,0 +1,17 @@
+{
+  "title": "Bleach",
+  "subtitle": "Soul reaper of the substitute badge",
+  "description": "Teenager Ichigo Kurosaki acquires the powers of a Soul Reaper and protects the living world from malevolent spirits known as Hollows.",
+  "accentColor": "#6366f1",
+  "quotes": [
+    "If you were to die now, I'd be sad. That's all.",
+    "We don't need to know how many enemies. We only need to know how many we have to defeat.",
+    "Fear is not evil. It tells you what your weakness is."
+  ],
+  "characters": [
+    { "name": "Ichigo Kurosaki", "role": "Protagonist" },
+    { "name": "Rukia Kuchiki", "role": "Soul Reaper" },
+    { "name": "Renji Abarai", "role": "Lieutenant" },
+    { "name": "Byakuya Kuchiki", "role": "Captain" }
+  ]
+}

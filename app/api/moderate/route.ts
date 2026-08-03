@@ -1,9 +1,15 @@
 import { NextResponse } from 'next/server';
 import { moderateContent } from '@/lib/moderation/decision';
 
+const MAX_BODY_SIZE = 50_000;
+
 export async function POST(req: Request) {
     try {
-        const body = await req.json();
+        const raw = await req.text();
+        if (raw.length > MAX_BODY_SIZE) {
+            return NextResponse.json({ error: 'Request payload too large' }, { status: 413 });
+        }
+        const body = JSON.parse(raw);
         const { text, context, userId } = body;
 
         if (!text || typeof text !== 'string') {

@@ -1,11 +1,12 @@
-// --- MobileBottomNav.tsx Updated ---
+'use client'
 
 import React, { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, Sun, Volume2, Layers, X, ToggleLeft, ToggleRight, Monitor, VolumeX } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Sun, Layers, X, ToggleLeft, ToggleRight, Monitor } from 'lucide-react'
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
-import { useMedia } from '@/components/providers/MediaProvider'
+import { useMediaSession } from '@/components/providers/MediaOrchestrator'
+import { assetRegistry } from '@/lib/media/UniversalAssetRegistry'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -46,7 +47,7 @@ function RotatingVinyl({ size = 20, isActive = false, isBright = false }: { size
 interface MobileNavItem {
     label: string
     href: string
-    icon: React.ElementType
+    icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>
     isAction?: boolean
 }
 
@@ -64,18 +65,21 @@ export function MobileBottomNav() {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
     const { renderMode, toggleRenderMode, setMainView, setUiMode, isBooting } = useUI()
-    const {
-        theme, setTheme,
-        soundState, setSoundIndex,
-        videoState, setVideoIndex,
-        config
-    } = useMedia()
+    // ── Session Architecture: Bottom Nav owns the GLOBAL_BACKGROUND session ──
+    const { updateSession } = useMediaSession({
+        scope: 'navigation',
+        priority: 10,
+        mode: 'GLOBAL_BACKGROUND',
+        assetPackage: assetRegistry.resolve('default', 'default')
+    })
 
     const [showControls, setShowControls] = useState(false)
     const [clickCount, setClickCount] = useState(0)
     const isBright = renderMode === 'bright'
 
     if (isBooting) return null;
+
+    const isAnimeUniverse = pathname.startsWith('/universe/anime')
 
     const isActive = (href: string): boolean => {
         if (href === '/') return pathname === '/'
@@ -89,10 +93,7 @@ export function MobileBottomNav() {
             const newCount = clickCount + 1
             setClickCount(newCount)
 
-            // Cycle: Bright -> Dark -> Custom (with video) -> Bright
-            const modes: RenderMode[] = ['bright', 'dark', 'custom']
-            const nextMode = modes[(modes.indexOf(renderMode as any) + 1) % modes.length]
-
+            const nextMode: RenderMode = renderMode === 'bright' ? 'dark' : 'bright'
             handleModeToggle(e, nextMode as RenderMode)
 
             // 3rd Click Reveal
@@ -125,36 +126,33 @@ export function MobileBottomNav() {
 
     const handleModeToggle = (e: React.MouseEvent, mode: RenderMode) => {
         toggleRenderMode(e, mode)
-        // Ensure theme matches for overlay logic
-        if (mode === 'custom') {
-            setTheme('custom')
-        } else if (mode === 'dark') {
-            setTheme('dark')
-        } else {
-            setTheme('bright')
-        }
+        // Update the Global Session's theme
+        const newAsset = assetRegistry.resolve('default', 'default')
+        newAsset.theme = mode as 'dark' | 'bright' | 'dynamic'
+        updateSession({ assetPackage: newAsset })
     }
 
     const handleNextSound = () => {
-        const totalSounds = config.sounds.length
-        let nextIndex = soundState.soundIndex + 1
-        if (nextIndex >= totalSounds) nextIndex = -1
-        setSoundIndex(nextIndex)
+        // Logic to cycle global sounds via AssetRegistry could go here.
+        // For now, toggle default audio on/off via session update.
+        const newAsset = assetRegistry.resolve('default', 'default')
+        newAsset.audioUrl = newAsset.audioUrl ? null : '/media/universe/default/audio/default/default.mp3'
+        updateSession({ assetPackage: newAsset })
     }
 
     const handleNextBackground = () => {
-        const totalVideos = config.videos.length
-        let nextIndex = videoState.index + 1
-        if (nextIndex >= totalVideos) nextIndex = -2
-        setVideoIndex(nextIndex)
+        // Cycle global backgrounds
+        updateSession({
+            assetPackage: assetRegistry.resolve('default', 'default')
+        })
     }
 
-    const activeSoundName = soundState.soundIndex >= 0 ? config.sounds[soundState.soundIndex]?.name : 'MUTED'
-    const activeVideoName = videoState.index >= 0 ? config.videos[videoState.index]?.name : (videoState.index === -1 ? 'BLACK' : 'OFF')
+    const activeSoundName = 'TUNE'
+    const activeVideoName = 'BG'
 
     return (
         <nav
-            className="mobile-bottom-nav fixed bottom-8 left-4 right-4 z-[200] backdrop-blur-3xl border rounded-full transition-colors duration-300 overflow-hidden shadow-[var(--shadow-premium)] mx-auto max-w-[400px]"
+            className="bottom-nav fixed bottom-8 left-4 right-4 z-[200] backdrop-blur-3xl border rounded-full transition-colors duration-300 overflow-hidden shadow-[var(--shadow-premium)] mx-auto max-w-[400px] lg:max-w-[700px]"
             style={{
                 backgroundColor: isBright ? 'rgba(255,255,255,0.85)' : 'rgba(15,15,15,0.85)',
                 borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
@@ -249,44 +247,34 @@ export function MobileBottomNav() {
                             <span className="text-[10px] font-semibold tracking-wide uppercase opacity-60">Back</span>
                         </button>
 
-                        <div className="w-px h-8 bg-white/10 self-center mx-1" />
+                        {!isAnimeUniverse && (
+                          <>
+                            <div className="w-px h-8 bg-white/10 self-center mx-1" />
 
-                        {/* 2. Background Control */}
-                        <button
-                            onClick={() => {
-                                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-                                handleNextBackground()
-                            }}
-                            className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
-                            style={{ color: 'var(--foreground)' }}
-                        >
-                            <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeVideoName}</span>
-                            <Monitor size={20} />
-                            <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">BG</span>
-                        </button>
+                            <button
+                                onClick={() => {
+                                    if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
+                                    handleNextBackground()
+                                }}
+                                className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
+                                style={{ color: 'var(--foreground)' }}
+                            >
+                                <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeVideoName}</span>
+                                <Monitor size={20} />
+                                <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">BG</span>
+                            </button>
 
-                        {/* 3. Audio Control */}
-                        <button
-                            onClick={() => {
-                                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-                                handleNextSound()
-                            }}
-                            className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
-                            style={{ color: soundState.soundIndex !== -1 ? '#22c55e' : 'var(--muted-foreground)' }}
-                        >
-                            <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
-                            <div className="w-10 h-10 flex items-center justify-center overflow-hidden">
-                                <AnimatePresence mode="wait">
-                                    {soundState.soundIndex === -1 ? (
-                                        <motion.div
-                                            key="muted-mobile"
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.8 }}
-                                        >
-                                            <VolumeX size={24} />
-                                        </motion.div>
-                                    ) : (
+                            <button
+                                onClick={() => {
+                                    if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
+                                    handleNextSound()
+                                }}
+                                className="flex flex-col items-center justify-center gap-1 flex-1 active:scale-95"
+                                style={{ color: '#22c55e' }}
+                            >
+                                <span className="text-[8px] font-mono opacity-50 truncate max-w-[60px]">{activeSoundName}</span>
+                                <div className="w-10 h-10 flex items-center justify-center overflow-hidden">
+                                    <AnimatePresence mode="wait">
                                         <motion.div
                                             key="playing-mobile"
                                             initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
@@ -295,11 +283,12 @@ export function MobileBottomNav() {
                                         >
                                             <RotatingVinyl size={38} isActive={true} isBright={isBright} />
                                         </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                            <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
-                        </button>
+                                    </AnimatePresence>
+                                </div>
+                                <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">Tune</span>
+                            </button>
+                          </>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

@@ -1,0 +1,150 @@
+/* Engine-owned styles only. No page content (colors of a specific theme,
+   fonts for a specific brand, etc) belongs here — pages can override via
+   their own CSS or the `theme` field on each item. */
+
+.prism-scene {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.prism-stage {
+  position: relative;
+  width: 660px;
+  max-width: 100%;
+  height: 380px;
+  perspective-origin: 50% 50%;
+}
+
+.prism-cylinder {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.prism-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.prism-card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  background: var(--prism-surface, #fff);
+  border: 0.5px solid var(--prism-border, rgba(0, 0, 0, 0.1));
+  transition: border-color 0.2s, box-shadow 0.3s, filter 0.2s;
+  overflow: hidden;
+}
+
+.prism-card-thumb {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  background: var(--prism-surface-alt, #1a1a24);
+  border-bottom: 1px solid var(--prism-border, rgba(255, 255, 255, 0.05));
+}
+
+.prism-card-thumb.placeholder {
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 100%);
+}
+
+.prism-card-text-content {
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 40%;
+}
+
+.prism-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--prism-text-primary, #1a1a18);
+  line-height: 1.2;
+}
+
+.prism-card-sub {
+  font-size: 12px;
+  color: var(--prism-text-secondary, #5f5e5a);
+  line-height: 1.4;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.prism-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 1.75rem;
+}
+
+.prism-nav-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 0.5px solid var(--prism-border-strong, rgba(0, 0, 0, 0.18));
+  background: var(--prism-surface, #fff);
+  color: var(--prism-text-primary, #1a1a18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.15s, transform 0.1s;
+}
+.prism-nav-btn:hover {
+  background: var(--prism-surface-alt, #f7f6f3);
+}
+.prism-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.prism-dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  margin-top: 5.5rem; /* Increased to account for 3D perspective scaling of active card */
+}
+
+.prism-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+  padding: 0;
+  background: var(--prism-border-stronger, rgba(0, 0, 0, 0.28));
+  transition: width 0.3s, background 0.3s;
+  cursor: pointer;
+}
+.prism-dot.active {
+  width: 20px;
+  background: var(--prism-text-primary, #1a1a18);
+}
+
+@media (max-width: 600px) {
+  .prism-stage {
+    height: 320px;
+  }
+  .prism-card-thumb {
+    height: 60%;
+  }
+  .prism-card-title {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   READING FOCUS — opt-in readability window for cinematic pages.
+
+   Design:
+   • The wrapper (.tx-reading-focus) carries --rf-p (0..1), written directly
+     by useReadingFocus via rAF — no React re-renders, no layout reads outside
+     the animation frame.
+   • .tx-reading-focus-window  — backdrop-filter strip over the reading region
+     only. Progressive blur + slight saturation/brightness/contrast reduction
+     driven purely by CSS math over --rf-p. Feathers via mask gradient so the
+     blur reads as depth-of-field, never a hard frosted edge.
+   • .tx-reading-focus-tint    — feathered dark veil + optional accent glow,
+     also driven by --rf-p. Painted above the window so it stays crisp.
+   • .tx-reading-focus-boost   — blends the global --adaptive-hero-* text
+     tokens toward reading-optimized values as focus progresses. No
+     typography or layout changes, so zero layout shift.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.tx-reading-focus {
+  --rf-p: 0;
+  --rf-blur-cap: 12px;
+  --rf-tint-cap: 0.38;
+}
+
+/* ── Backdrop window: the "reading window" strip ─────────────────────────── */
+.tx-reading-focus-window {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  will-change: backdrop-filter;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 9%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 9%, black 88%, transparent 100%);
+  -webkit-backdrop-filter:
+    blur(calc(var(--rf-p) * var(--rf-blur-cap)))
+    saturate(calc(1 - var(--rf-p) * 0.22))
+    brightness(calc(1 - var(--rf-p) * 0.16))
+    contrast(calc(1 - var(--rf-p) * 0.1));
+  backdrop-filter:
+    blur(calc(var(--rf-p) * var(--rf-blur-cap)))
+    saturate(calc(1 - var(--rf-p) * 0.22))
+    brightness(calc(1 - var(--rf-p) * 0.16))
+    contrast(calc(1 - var(--rf-p) * 0.1));
+}
+
+/* ── Tint veil: subtle darkening + accent atmosphere ─────────────────────── */
+.tx-reading-focus-tint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      ellipse at 50% 45%,
+      color-mix(in srgb, var(--rf-accent, rgb(34 211 238)) calc(var(--rf-p) * 10%), transparent) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, rgb(2 2 6) calc(var(--rf-p) * var(--rf-tint-cap) * 100%), transparent) 9%,
+      color-mix(in srgb, rgb(2 2 6) calc(var(--rf-p) * var(--rf-tint-cap) * 100%), transparent) 88%,
+      transparent 100%
+    );
+}
+
+/* ── Content plane (above window + tint) ─────────────────────────────────── */
+.tx-reading-focus-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Text optimization: blend adaptive tokens toward reading-optimized
+      values. Base values are captured here so the override never recurses. ─ */
+.tx-reading-focus-boost {
+  --rf-base-color: var(--adaptive-hero-color);
+  --rf-base-secondary: var(--adaptive-hero-secondary);
+  --rf-base-muted: var(--adaptive-hero-muted);
+
+  --adaptive-hero-color: color-mix(in srgb, var(--rf-base-color) calc((1 - var(--rf-p)) * 100%), var(--rf-hero-color, var(--rf-base-color)));
+  --adaptive-hero-secondary: color-mix(in srgb, var(--rf-base-secondary) calc((1 - var(--rf-p)) * 100%), var(--rf-hero-secondary, var(--rf-base-secondary)));
+  --adaptive-hero-muted: color-mix(in srgb, var(--rf-base-muted) calc((1 - var(--rf-p)) * 100%), var(--rf-hero-muted, var(--rf-base-muted)));
+}
+
+body.mode-dark .tx-reading-focus-boost {
+  --rf-hero-color: #ffffff;
+  --rf-hero-secondary: #e8ecf2;
+  --rf-hero-muted: #cbd2dc;
+}
+
+body.mode-bright .tx-reading-focus-boost {
+  --rf-hero-color: #080808;
+  --rf-hero-secondary: #26272b;
+  --rf-hero-muted: #3a3e46;
+}
+
+/* ── Reduced-transparency: gentler veil + blur, no JS needed ─────────────── */
+@media (prefers-reduced-transparency: reduce) {
+  .tx-reading-focus-window {
+    --rf-blur-cap: 4px;
+  }
+  .tx-reading-focus-tint {
+    --rf-tint-cap: 0.18;
+  }
+}

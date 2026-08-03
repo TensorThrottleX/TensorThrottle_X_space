@@ -1,59 +1,107 @@
-# dependencies
-node_modules
+# ==============================================================================
+# TensorThrottle X Space — Optimized Git Ignore Configuration
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Dependencies & Package Managers
+# ------------------------------------------------------------------------------
+node_modules/
 /.pnp
 .pnp.js
 
-# testing
-/coverage
+# ------------------------------------------------------------------------------
+# 2. Build Outputs & Framework Artifacts
+# ------------------------------------------------------------------------------
+.next/
+out/
+dist/
+build/
+.turbo/
+.cache/
+.parcel-cache/
+prism-engine/.next/
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# vercel
-.vercel
-
-# typescript
+# ------------------------------------------------------------------------------
+# 3. TypeScript & Compilers
+# ------------------------------------------------------------------------------
 *.tsbuildinfo
 next-env.d.ts
-
-# ide settings
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# custom runtime files
 __v0_runtime_loader.js
 __v0_devtools.tsx
 __v0_jsx-dev-runtime.ts
 
-# logs
-*.log
-debug.log
-error.log
-logs/
+# ------------------------------------------------------------------------------
+# 4. Testing & Code Coverage
+# ------------------------------------------------------------------------------
+coverage/
+.nyc_output/
+test-output/
+playwright-report/
 
-# Optional: Ignore SVG generation artifacts if needed
-/SVG_gen/node_modules/
-/SVG_gen/dist/
+# ------------------------------------------------------------------------------
+# 5. Environment Variables & Secrets
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.local.example
+*.pem
+*.key
+
+# ------------------------------------------------------------------------------
+# 6. Third-Party Services & Deployment
+# ------------------------------------------------------------------------------
+.vercel/
+.prisma/client/
+.prisma/cache/
+supabase/.temp/
+supabase/.branches/
+supabase/.cache/
+
+# ------------------------------------------------------------------------------
+# 7. IDEs & Editors
+# ------------------------------------------------------------------------------
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+*.swp
+*.swo
+
+# ------------------------------------------------------------------------------
+# 8. Operating System Files
+# ------------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+
+# ------------------------------------------------------------------------------
+# 9. Logs & Debugging
+# ------------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ------------------------------------------------------------------------------
+# 10. Scratch, Temp & Backup Files
+# ------------------------------------------------------------------------------
+scratch/
+debug/
+tmp/
+temp/
+artifacts/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.raw
+output.jpg
+test-*.js
+test-*.ts

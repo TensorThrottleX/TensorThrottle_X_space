@@ -3,6 +3,8 @@
 import React from 'react'
 import { differenceInWeeks, isValid } from 'date-fns'
 import { formatIST } from '@/lib/utils'
+import { useUI } from '@/components/providers/UIProvider'
+import { cn } from '@/lib/utils'
 
 interface StatusButtonProps {
     latestPublishedAt?: string
@@ -17,23 +19,29 @@ export function StatusButton({
     showTimestamp = true,
     align = 'start'
 }: StatusButtonProps) {
+    const { renderMode } = useUI()
+    const isBright = renderMode === 'bright'
     const pubDate = latestPublishedAt ? new Date(latestPublishedAt) : null
     const isValidDate = pubDate && isValid(pubDate)
     const weeksDiff = isValidDate ? differenceInWeeks(new Date(), pubDate!) : Infinity
     const isActive = weeksDiff < 3 // 21 days window
 
     const statusText = isActive ? 'Active' : 'Inactive'
-    const colorClass = isActive ? 'bg-emerald-500' : 'bg-red-500'
-    const shadowClass = isActive ? 'shadow-[0_0_12px_rgba(16,185,129,0.4)]' : 'shadow-[0_0_12px_rgba(239,68,68,0.4)]'
+    const dotColor = isActive ? 'bg-emerald-500' : 'bg-red-500'
 
     if (compact) {
         return (
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/10 backdrop-blur-md shadow-2xl">
-                <div className="relative flex h-1 w-1">
-                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colorClass} opacity-75`}></span>
-                    <span className={`relative inline-flex h-1 w-1 rounded-full ${colorClass} ${shadowClass}`}></span>
-                </div>
-                <span className="text-[10px] font-bold uppercase tracking-tight text-white leading-none">
+            <div className="flex items-center gap-2">
+                <span className={cn(
+                    "rounded-full",
+                    "h-[6px] w-[6px] md:h-[7px] md:w-[7px] lg:h-2 lg:w-2",
+                    dotColor,
+                    isActive && "animate-pulse"
+                )} />
+                <span className={cn(
+                    "text-xs md:text-[13px] lg:text-sm font-medium uppercase tracking-wider",
+                    isBright ? "text-black/60" : "text-white/60"
+                )}>
                     {statusText}
                 </span>
             </div>
@@ -43,12 +51,20 @@ export function StatusButton({
     return (
         <div className={`flex flex-col ${align === 'end' ? 'items-end' : 'items-start'} gap-2`}>
             {/* 3D Status Button */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/50 border border-white/10 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 hover:border-white/20 group/status">
+            <div className={cn(
+                    "inline-flex items-center gap-2.5 px-4 py-2 rounded-full backdrop-blur-xl transition-all duration-300 group/status",
+                    isBright
+                        ? "bg-white/80 border border-black/10 hover:border-black/20 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.8)]"
+                        : "bg-black/50 border border-white/10 hover:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1)]"
+                )}>
                 <div className="relative flex h-1.5 w-1.5">
-                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${colorClass} opacity-75`}></span>
-                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${colorClass} ${shadowClass} transition-transform duration-300 group-hover/status:scale-110`}></span>
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${dotColor} opacity-75`}></span>
+                    <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${dotColor} shadow-[0_0_12px_rgba(16,185,129,0.4)] transition-transform duration-300 group-hover/status:scale-110`}></span>
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-tight text-white transition-opacity duration-300 group-hover/status:opacity-100 leading-none">
+                <span className={cn(
+                        "text-[11px] font-bold uppercase tracking-tight transition-opacity duration-300 group-hover/status:opacity-100 leading-none",
+                        isBright ? "text-black/80" : "text-white"
+                )}>
                     {statusText}
                 </span>
             </div>

@@ -1,0 +1,29 @@
+-- ─────────────────────────────────────────────────────────────────────────────
+-- REMOVE REDUNDANT discussion_views_post_idx
+--
+-- Why it is redundant:
+--   * `discussion_views_daily_unique` is a B-tree on
+--     (post_slug, visitor_key, view_date) — post_slug is its LEADING column.
+--   * PostgreSQL's leftmost-prefix rule means any predicate on post_slug
+--     alone can be served by that composite index. The only post_slug-only
+--     queries the app issues are `getViewCounts` (WHERE post_slug IN (...))
+--     and the `recordDiscussionView` recount (WHERE post_slug = ?) in
+--     lib/supabase.ts — both are covered by the composite's leading column.
+--   * `discussion_views_post_idx` is a strict prefix subset of the composite:
+--     every index entry it could return is also reachable there, so it adds
+--     write amplification (an extra index to maintain per insert/upsert) and
+--     storage with no query it uniquely serves.
+--
+-- Verified with EXPLAIN ANALYZE on PostgreSQL 17 against a 300k-row
+-- synthetic load (see engineering report): after the drop both queries keep
+-- Bitmap Index Scan plans on discussion_views_daily_unique with identical
+-- execution times (IN-list: 136.3 ms → 133.9 ms; single slug: 9.32 ms →
+-- 9.34 ms) — no measurable benefit while present, none lost after removal.
+--
+-- Backward compatible: dropping a non-unique index never changes query
+-- results or the API contract. The upsert conflict arbiter is the UNIQUE
+-- composite index (verified: "Conflict Arbiter Indexes:
+-- discussion_views_daily_unique") and is untouched.
+-- ─────────────────────────────────────────────────────────────────────────────
+
+drop index if exists public.discussion_views_post_idx;

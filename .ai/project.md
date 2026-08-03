@@ -1,0 +1,7 @@
+- project purpose: Cognitive sandbox for structured experimentation. Tracks evolving ideas. Not a portfolio or product. Prioritizes process over presentation.
+- technology stack: Next.js 16 (App Router), React 19, Tailwind CSS 4, Supabase (comments/state), Notion API (CMS), D3.js, Resend/SendGrid.
+- high level architecture: Data stored in Notion -> Pulled by Next.js (SSR/ISR) -> Displayed in 3-layer UI (Background media, Overlay, Floating Content). Viewport scaling handled by ScaleEngine/RenderScaler to maintain 1920px design integrity.
+- important dependencies: `@notionhq/client`, `@supabase/supabase-js`, `d3`, `framer-motion`, `@radix-ui/*`, `next-themes`, `resend`.
+- application goals: Visible thinking, iteration > completion.
+- current maturity: Stable, complete frontend redesign (experimental UI lab).
+- major features: Cinematic media background, Notion-powered timeline feed, horizontal D3 interactive tree, integrated web terminal, 3-level comment moderation, email relay pipeline.

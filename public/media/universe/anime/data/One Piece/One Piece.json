@@ -1,0 +1,17 @@
+{
+  "title": "One Piece",
+  "subtitle": "The pirate king's grand adventure",
+  "description": "Monkey D. Luffy, a boy with a rubber body, sets sail with his diverse crew to find the legendary One Piece treasure and become the Pirate King.",
+  "accentColor": "#ef4444",
+  "quotes": [
+    "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea.",
+    "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
+    "I am not a hero. I'm a pirate."
+  ],
+  "characters": [
+    { "name": "Monkey D. Luffy", "role": "Captain" },
+    { "name": "Roronoa Zoro", "role": "First Mate" },
+    { "name": "Nami", "role": "Navigator" },
+    { "name": "Sanji", "role": "Cook" }
+  ]
+}

@@ -3,31 +3,23 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   VIEWPORT-PROPORTIONAL SCALING SYSTEM
-   ═══════════════════════════════════════════════════════════════════════════
-   
-   Design Baseline: 1920×1080 @ 16px root font
-   
-   Strategy:
-   - Root font-size is proportional to viewport width via clamp().
-   - ALL spacing, sizing, and typography use rem so they scale with root font.
-   - Fixed-position elements (sidebars, terminal, clock, logo, footer)
-     work naturally — no transform: scale() means no broken positioning.
-   - Browser zoom changes the effective viewport width → layout responds.
-   - Small screens get a proportionally smaller (but identical) layout.
-   
-   Formula: 16px at 1920px viewport → 16 / 1920 = 0.8333vw
-   clamp(10px, 0.8333vw, 18px)
-     - Min 10px prevents illegibility on very small screens
-     - Max 18px prevents over-scaling on ultrawide monitors
+   FONTS
    ═══════════════════════════════════════════════════════════════════════════ */
 
-* {
-  box-sizing: border-box;
+@font-face {
+  font-family: 'Stay Chill';
+  src: url('/fonts/StayChill-PVVD7.ttf') format('truetype');
+  font-weight: 300 800;
+  font-display: swap;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIEWPORT-PROPORTIONAL SCALING SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; }
+
 html {
-  /* PROPORTIONAL ROOT SCALE — the single source of truth */
   font-size: clamp(10px, 0.8333vw, 18px);
 }
 
@@ -35,6 +27,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100dvh;
+  font-family: 'Quicksand', sans-serif;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -42,774 +35,496 @@ body {
   overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Custom scrollbar for dark theme */
-  .scrollbar-thin {
-    scrollbar-width: thin;
-  }
-
-  .scrollbar-thumb-white\/20 {
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-  }
+code, pre, kbd, samp, .font-mono, .font-mono * {
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace !important;
 }
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .scrollbar-thin { scrollbar-width: thin; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — THEME SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer base {
 
-  /* GLOBAL DEFAULTS (NORMAL / CINEMATIC MODE) */
   :root {
-    /* Base Colors - Cinematic Dark (Now Ultra-Deep Charcoal) */
+    /* ── Surfaces ── */
     --bg-primary: 0 0% 2%;
     --background: 0 0% 2%;
+    --bg-secondary: 0 0% 4%;
+    --bg-elevated: 0 0% 5%;
+    --glass-bg: rgba(8, 8, 12, 0.5);
 
+    /* ── Text ── */
     --foreground: 210 20% 90%;
-    /* #e5e7eb */
     --text-primary: 210 20% 90%;
-
     --text-secondary: 215 16% 65%;
-    /* #9ca3af */
-    --muted-foreground: 215 16% 65%;
+    --text-muted: 0 0% 45%;
+    --heading-primary: #ffffff;
 
+    /* ── Surfaces / Cards ── */
     --card: 0 0% 5%;
-    /* fallback */
     --card-bg: rgba(0, 0, 0, 0.5);
-    /* Glass in normal mode */
     --card-foreground: 210 20% 90%;
     --card-border: rgba(255, 255, 255, 0.1);
-
     --sidebar-bg: rgba(20, 20, 20, 0.6);
     --sidebar-border: rgba(255, 255, 255, 0.1);
 
+    /* ── Theme Colors ── */
     --popover: 0 0% 5%;
     --popover-foreground: 210 20% 90%;
-
     --primary: 180 100% 50%;
-    /* Cyan */
     --primary-foreground: 0 0% 0%;
-
     --secondary: 0 0% 15%;
     --secondary-foreground: 210 20% 90%;
-
     --accent: 180 100% 50%;
     --accent-foreground: 0 0% 0%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 90%;
 
+    /* ── Borders / Inputs ── */
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 180 100% 50%;
-
     --radius: 0.5rem;
+    --glass-border: rgba(255, 255, 255, 0.1);
 
-    --heading-primary: #ffffff;
-
-    /* [FLUID_TYPOGRAPHY]: All rem-based → scales with root */
+    /* ── Typography ── */
     --font-size-h1: 3.5rem;
     --font-size-h2: 2.5rem;
     --font-size-h3: 1.75rem;
     --font-size-body: 1rem;
 
-    /* [FLUID_GEOMETRY]: Space & Panel Normalization — all rem */
+    /* ── Layout ── */
     --space-fluid-y: 3.5rem;
     --space-fluid-x: 2.5rem;
-
     --panel-max-width: 100rem;
-    /* 1600px at baseline */
     --content-max-width: 78rem;
-    /* ~1250px at baseline */
     --panel-height: 35rem;
-    /* 560px at baseline */
     --stack-offset-y: 0.75rem;
-    /* 12px at baseline */
 
-    /* Custom Tokens */
+    /* ── Component Tokens ── */
     --terminal-bg: #050505;
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --nav-bg: rgba(8, 8, 12, 0.45);
+    --nav-border: rgba(255, 255, 255, 0.05);
+
+    /* ── Globe Section ── */
+    --globe-section-bg: transparent;
+    --globe-atmosphere: rgba(34, 211, 238, 0.06);
+
+    /* ── Adaptive Luminance (defaults — overridden dynamically by useAdaptiveLuminance) ── */
+    --adaptive-hero-color: #FFFFFF;
+    --adaptive-hero-secondary: #D9DDE3;
+    --adaptive-hero-muted: #9FA8B5;
+    --adaptive-hero-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    --adaptive-hero-glow: radial-gradient(ellipse at center, rgba(34,211,238,0.12) 0%, transparent 70%);
+    --adaptive-glass-bg: rgba(8,8,12,0.5);
+    --adaptive-glass-border: rgba(255,255,255,0.06);
+    --adaptive-glass-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+
+    /* ── Shadows (defined as fallback for modes that don't override) ── */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.15);
+    --shadow-main: 0 35px 70px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    --shadow-premium: 0 80px 160px -30px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+    /* ── Overlay / Terminal ── */
+    --overlay-bg: rgba(0, 0, 0, 0.4);
+    --terminal-overlay-bg: rgba(0, 0, 0, 0.75);
+
+    /* ── Scrollbar ── */
+    --scrollbar-thumb: rgba(255, 255, 255, 0.08);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.15);
   }
 
-  /* ═══════════════ STRUCTURAL LAYERS ═══════════════ */
-
-  .bg-video,
-  .blur-layer {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -10;
-  }
-
-  .blur-layer {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    pointer-events: none;
-  }
-
-  /* GLOBAL CONTENT CONTAINER — rem-based */
-  .app-root {
-    width: 100%;
-    max-width: 100rem;
-    /* 1600px at baseline */
-    margin: 0 auto;
-    padding: 0 4rem;
-    /* 64px at baseline */
-  }
-
-  /* HEADING WIDTH CONSTRAINT */
-  .hero-header {
-    max-width: 56.25rem;
-    /* 900px at baseline */
-    margin: 0 auto;
-    text-align: center;
-    filter: drop-shadow(var(--shadow-main));
-  }
-
-  /* PRIMARY CARD SYSTEM */
-  .primary-card {
-    width: min(62.5rem, 90vw);
-    /* 1000px at baseline, 90vw fallback */
-    min-height: 30rem;
-    /* 480px at baseline */
-
-    padding: 3rem 3.5rem;
-    /* 48px 56px at baseline */
-    border-radius: 1.25rem;
-    /* 20px at baseline */
-
-    margin: 2.5rem auto 0 auto;
-    /* 40px at baseline */
-
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow-main);
-  }
-
-  /* VERTICAL BALANCE */
-  .viewport-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding-top: 2.5rem;
-    /* 40px at baseline */
-  }
-
-  /* INTERNAL CARD CENTERING */
-  .card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* SIDEBAR+TERMINAL STABILITY — fixed elements now work correctly */
-  .sidebar,
-  .terminal,
-  .floating-ui,
-  .rightbar {
-    position: fixed;
-    will-change: transform, opacity;
-  }
-
-  /* BRIGHT MODE (Engineering Lab - Refined) */
+  /* ═══════════════════════════════════════════════════════════════════════
+     BRIGHT MODE — Warm Cream Engineering Workspace
+     ═══════════════════════════════════════════════════════════════════════ */
   .mode-bright {
-    /* Base Background - Slightly deeper for shadow contrast */
-    --bg-primary: 210 20% 96%;
-    --background: 210 20% 96%;
+    /* ── Adaptive Luminance (bright-mode defaults) ── */
+    --adaptive-hero-color: #1A1A1A;
+    --adaptive-hero-secondary: #3A3A3A;
+    --adaptive-hero-muted: #555555;
+    --adaptive-hero-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    --adaptive-hero-glow: radial-gradient(ellipse at center, rgba(34,211,238,0) 0%, transparent 70%);
+    --adaptive-glass-bg: rgba(255,255,255,0.72);
+    --adaptive-glass-border: rgba(0,0,0,0.10);
+    --adaptive-glass-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
 
-    /* Text - High Contrast */
-    --foreground: 0 0% 6.7%;
-    /* #111111 */
-    --text-primary: 0 0% 6.7%;
+    /* ── Surfaces ── */
+    --bg-primary: 40 10% 96%;
+    --background: 40 10% 96%;
+    --bg-secondary: 37 12% 93%;
+    --bg-elevated: 35 13% 90%;
+    --glass-bg: rgba(255, 255, 255, 0.72);
 
-    --text-secondary: 0 0% 26.7%;
-    /* #444444 */
-    --muted-foreground: 0 0% 26.7%;
+    /* ── Text ── */
+    --foreground: 0 0% 9%;
+    --text-primary: 0 0% 9%;
+    --text-secondary: 36 6% 28%;
+    --text-muted: 0 0% 38%;
+    --heading-primary: #111111;
 
-    /* Cards - Clean White, Strong Shadow */
-    --card: 0 0% 100%;
-    /* #ffffff */
-    --card-bg: #ffffff;
-    --card-foreground: 0 0% 6.7%;
-    --card-border: rgba(0, 0, 0, 0.08);
+    /* ── Surfaces / Cards ── */
+    --card: 40 10% 96%;
+    --card-bg: #F5F3EF;
+    --card-foreground: 0 0% 9%;
+    --card-border: rgba(0, 0, 0, 0.14);
+    --sidebar-bg: #F0EDE8;
+    --sidebar-border: rgba(0, 0, 0, 0.10);
 
-    /* Sidebar - Distinct from bg */
-    --sidebar-bg: #ffffff;
-    --sidebar-border: rgba(0, 0, 0, 0.06);
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 6.7%;
-
-    --primary: 0 0% 6.7%;
-    /* #111111 */
+    /* ── Theme Colors ── */
+    --popover: 40 10% 96%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 6.7%;
-
-    --accent: 220 14% 96%;
-    --accent-foreground: 0 0% 6.7%;
-
+    --secondary: 36 8% 86%;
+    --secondary-foreground: 0 0% 9%;
+    --accent: 36 8% 86%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 0% / 0.08;
-    --input: 0 0% 90%;
-    --ring: 0 0% 6.7%;
+    /* ── Borders / Inputs ── */
+    --border: 36 6% 70%;
+    --input: 36 8% 84%;
+    --ring: 0 0% 9%;
+    --glass-border: rgba(0, 0, 0, 0.15);
 
-    --heading-primary: #000000;
+    /* ── Component Tokens ── */
+    --terminal-bg: #EBE8E3;
+    --nav-bg: rgba(255, 255, 255, 0.68);
+    --nav-border: rgba(0, 0, 0, 0.08);
 
-    /* Custom Shadows for Bright Mode - Significantly amplified for "Floating" effect */
-    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05), 0 0 10px rgba(0, 0, 0, 0.05);
-    --shadow-main: 0 35px 70px -15px rgba(0, 0, 0, 0.18), 0 15px 30px -15px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.05);
-    --shadow-premium: 0 80px 160px -30px rgba(0, 0, 0, 0.2), 0 40px 80px -40px rgba(0, 0, 0, 0.25), 0 0 80px rgba(0, 0, 0, 0.1);
+    /* ── Globe Section ── */
+    --globe-section-bg: transparent;
+    --globe-atmosphere: rgba(6, 182, 212, 0.08);
+
+    /* ── Shadows — visible but soft for cream surface ── */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.06), 0 0 10px rgba(0, 0, 0, 0.04);
+    --shadow-main: 0 35px 70px -15px rgba(0, 0, 0, 0.14), 0 15px 30px -15px rgba(0, 0, 0, 0.16), 0 0 40px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 80px 160px -30px rgba(0, 0, 0, 0.16), 0 40px 80px -40px rgba(0, 0, 0, 0.18), 0 0 80px rgba(0, 0, 0, 0.08);
     --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 0 40px rgba(0, 0, 0, 0.06);
 
-    --terminal-bg: #ffffff;
-    --glass-border: rgba(0, 0, 0, 0.15);
+    /* ── Overlay / Terminal ── */
+    --overlay-bg: rgba(240, 237, 232, 0.65);
+    --terminal-overlay-bg: rgba(240, 237, 232, 0.65);
+
+    /* ── Scrollbar ── */
+    --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+    --scrollbar-thumb-hover: rgba(0, 0, 0, 0.22);
   }
 
-  /* DARK MODE (Deep Focus - Premium Pitch Dark) */
+  /* ═══════════════════════════════════════════════════════════════════════
+     DARK MODE — Deep Focus Premium Pitch Dark
+     ═══════════════════════════════════════════════════════════════════════ */
   .mode-dark {
+    /* ── Surfaces ── */
     --bg-primary: 0 0% 2%;
-    /* #050505 - Ultra-Deep Charcoal */
     --background: 0 0% 2%;
+    --bg-secondary: 0 0% 4%;
+    --bg-elevated: 0 0% 4.5%;
+    --glass-bg: rgba(8, 8, 12, 0.5);
 
+    /* ── Text ── */
     --foreground: 210 20% 98%;
-    /* Brighter white for high contrast */
     --text-primary: 210 20% 98%;
-
     --text-secondary: 215 16% 75%;
-    /* Slightly more visible secondary text */
-    --muted-foreground: 215 16% 75%;
+    --text-muted: 0 0% 50%;
+    --heading-primary: #ffffff;
 
+    /* ── Surfaces / Cards ── */
     --card: 0 0% 4.5%;
-    /* #0b0b0b - Slightly elevated charcoal */
     --card-bg: #0b0b0b;
     --card-foreground: 210 20% 98%;
     --card-border: rgba(255, 255, 255, 0.18);
-    /* Precisely visible edges */
-
     --sidebar-bg: #050505;
     --sidebar-border: rgba(255, 255, 255, 0.1);
 
+    /* ── Theme Colors ── */
     --popover: 0 0% 4%;
     --popover-foreground: 210 20% 98%;
-
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
-
     --secondary: 0 0% 8%;
     --secondary-foreground: 210 20% 98%;
-
     --accent: 0 0% 12%;
     --accent-foreground: 210 20% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
+    /* ── Borders / Inputs ── */
     --border: 0 0% 12%;
     --input: 0 0% 10%;
     --ring: 0 0% 100%;
-
-    --heading-primary: #ffffff;
-
-    --terminal-bg: #050505;
     --glass-border: rgba(255, 255, 255, 0.18);
 
-    /* Shadow for Dark Mode - subtle but present for isolation */
+    /* ── Component Tokens ── */
+    --terminal-bg: #050505;
+    --nav-bg: rgba(8, 8, 12, 0.45);
+    --nav-border: rgba(255, 255, 255, 0.05);
+
+    /* ── Globe Section ── */
+    --globe-section-bg: transparent;
+    --globe-atmosphere: rgba(34, 211, 238, 0.06);
+
+    /* ── Adaptive Luminance (dark-mode overrides) ── */
+    --adaptive-hero-color: #FFFFFF;
+    --adaptive-hero-secondary: #D9DDE3;
+    --adaptive-hero-muted: #9FA8B5;
+    --adaptive-hero-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    --adaptive-hero-glow: radial-gradient(ellipse at center, rgba(34,211,238,0.12) 0%, transparent 70%);
+    --adaptive-glass-bg: rgba(8, 8, 12, 0.5);
+    --adaptive-glass-border: rgba(255, 255, 255, 0.06);
+    --adaptive-glass-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+
+    /* ── Shadows ── */
     --shadow-main: 0 35px 70px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
     --shadow-premium: 0 80px 160px -30px rgba(0, 0, 0, 0.85), 0 40px 80px -40px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.15);
     --shadow-soft: 0 12px 24px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
     --shadow-card: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+    /* ── Overlay / Terminal ── */
+    --overlay-bg: rgba(0, 0, 0, 0.4);
+    --terminal-overlay-bg: rgba(0, 0, 0, 0.75);
+
+    /* ── Scrollbar ── */
+    --scrollbar-thumb: rgba(255, 255, 255, 0.08);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.15);
   }
 }
 
+/* ── Base element styles ── */
+
 @layer base {
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  .blur-layer { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -10; }
+  .app-root { width: 100%; max-width: 100rem; margin: 0 auto; padding: 0 4rem; }
+  .hero-header { max-width: 56.25rem; margin: 0 auto; text-align: center; filter: drop-shadow(var(--shadow-main)); }
+  .primary-card { width: min(62.5rem, 90vw); min-height: 30rem; padding: 3rem 3.5rem; border-radius: 1.25rem; margin: 2.5rem auto 0 auto; display: flex; flex-direction: column; box-shadow: var(--shadow-main); }
+  .viewport-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 2.5rem; }
+  .card-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .sidebar, .terminal, .floating-ui, .rightbar { position: fixed; will-change: transform, opacity; }
+
+  h1, h2, h3, h4, h5, h6 { color: var(--heading-primary); transition: color 0.5s ease; }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; background-color: hsl(var(--background)) !important; }
+}
+
+/* ── Heading typography ── */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
     color: var(--heading-primary);
     transition: color 0.5s ease;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
+  * { @apply border-border; }
+  
+  /* Smooth theme transitions globally */
+  body { 
+    @apply bg-background text-foreground; 
     background-color: hsl(var(--background)) !important;
   }
+  
+  body, body *, ::before, ::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.8s;
+  }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENT LAYERS
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer components {
-  .bitcount-heading {
-    margin: 0;
+  .bitcount-heading { margin: 0; font-family: "Bitcount", "Inter", sans-serif; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; z-index: 50; }
+  .fade-in { animation: fadeIn 800ms ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    font-family: "Bitcount", "Inter", sans-serif;
-    font-weight: 800;
+  /* ── Premium Scrollbar (theme-aware via CSS vars) ── */
+  .premium-scrollbar { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent; }
+  .premium-scrollbar::-webkit-scrollbar { width: 5px; }
+  .premium-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .premium-scrollbar::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 20px; transition: background 0.3s ease; }
+  .premium-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  /* ── Tree Mode ── */
+  .tree-active .sidebar { opacity: 0.2; filter: blur(8px); transform: translateX(-40px); pointer-events: none; transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+  .tree-active .rightbar { opacity: 0.2; filter: blur(8px); transform: translateX(40px); pointer-events: none; transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+  .tree-active .desktop-only, .tree-active .clock-panel, .tree-active .trademark-logo { filter: blur(6px); opacity: 0.3; pointer-events: none; transition: all 0.7s ease; }
+  .layout.tree-active .command-shell { opacity: 0; transform: translateY(20px); pointer-events: none; }
+  .layout.tree-active .hero-title { opacity: 0; transform: translateY(-20px); pointer-events: none; }
 
-    z-index: 50;
+  .perspective-1000 { perspective: 1000px; }
+  .floating-deck { transform-style: preserve-3d; }
 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .fade-in {
-    animation: fadeIn 800ms ease-out forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* PREMIUM SCROLLBAR UTILITY */
-  .premium-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-  }
-
-  .premium-scrollbar::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  .premium-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .premium-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    transition: background 0.3s ease;
-  }
-
-  .premium-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  /* Tree Mode UI State transitions (Targeting root-level classes) */
-  .tree-active .sidebar {
-    opacity: 0.2;
-    filter: blur(8px);
-    transform: translateX(-40px);
+  /* ── Ambient Atmosphere (theme-aware via CSS vars) ── */
+  .ambient-glow {
     pointer-events: none;
-    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.06;
   }
 
-  .tree-active .rightbar {
-    opacity: 0.2;
-    filter: blur(8px);
-    transform: translateX(40px);
-    pointer-events: none;
-    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .tree-active .desktop-only,
-  .tree-active .clock-panel,
-  .tree-active .trademark-logo {
-    filter: blur(6px);
-    opacity: 0.3;
-    pointer-events: none;
-    transition: all 0.7s ease;
-  }
-
-  .layout.tree-active .command-shell {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-  }
-
-  /* Redundant but declarative rule for hero title */
-  .layout.tree-active .hero-title {
-    opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none;
-  }
-
-  /* Precision Mode Global Overrides */
-  body.mode-precision {
-    background-color: #050505 !important;
-    color: #ffffff !important;
-    --background: 0 0% 2%;
-    --foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --accent: 0 0% 100%;
-    --card: 0 0% 4.5%;
-    --card-bg: #0b0b0b;
-    --border: 0 0% 100% / 0.25;
-    --ring: 0 0% 100%;
-    --heading-primary: #ffffff;
-  }
-
-  body.mode-precision video,
-  body.mode-precision .blur-layer {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    display: none !important;
-  }
-
-  body.mode-precision .bitcount-heading {
-    color: #ffffff !important;
-  }
-
-  body.mode-precision .primary-card {
-    background-color: #050505 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-  }
-
-  body.mode-precision .sidebar,
-  body.mode-precision .rightbar,
-  body.mode-precision .mobile-bottom-nav {
-    backdrop-filter: none !important;
-    background-color: #050505 !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-  }
-
-  .secure-channel-container {
-    padding-bottom: 12.5rem;
-    padding-right: 5rem;
-    /* Enforce desktop spacing universally */
-  }
-
-  /* Force container to match desktop constraint */
-  .container {
-    max-width: 80rem !important;
-    /* 1280px at baseline */
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
+  /* ── Coffee Card ── */
   .coffee-card {
-    margin-top: 2.5rem;
-    border-radius: 1rem;
-    backdrop-filter: blur(14px);
-    background: rgba(20, 20, 20, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateY(1.5rem);
-    opacity: 0;
+    margin-top: 2.5rem; border-radius: 1rem; backdrop-filter: blur(14px);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    transform: translateY(1.5rem); opacity: 0;
     transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform, opacity;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-soft);
   }
-
-  .coffee-card.visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /* Bright Mode Override for Coffee Card */
-  .mode-bright .coffee-card {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-  }
+  .coffee-card.visible { transform: translateY(0); opacity: 1; }
 
   .coffee-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background: #FFDD00;
-    color: #000000;
-    border-radius: 0.625rem;
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    border: none;
-    box-shadow: 0 2px 8px rgba(255, 221, 0, 0.2);
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem; background: #FFDD00; color: #000000; border-radius: 0.625rem;
+    font-weight: 600; font-size: 0.875rem; transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none; border: none; box-shadow: 0 2px 8px rgba(255, 221, 0, 0.2);
   }
+  .coffee-btn:hover { transform: scale(1.02); filter: brightness(1.08); box-shadow: 0 4px 16px rgba(255, 221, 0, 0.3); }
+  .coffee-btn:active { transform: scale(0.98); }
 
-  .coffee-btn:hover {
-    transform: scale(1.02);
-    filter: brightness(1.08);
-    box-shadow: 0 4px 16px rgba(255, 221, 0, 0.3);
-  }
+  /* ── Scrutinizer States ── */
+  .input-scrutiny-0 { border-bottom: 2px solid rgba(34, 197, 94, 0.4) !important; }
+  .input-scrutiny-1 { border-color: rgba(245, 158, 11, 0.5) !important; box-shadow: 0 0 15px rgba(245, 158, 11, 0.1); }
+  .input-scrutiny-2 { border-color: rgba(239, 68, 68, 0.5) !important; animation: soft-pulse-red 2s infinite ease-in-out; }
+  .input-scrutiny-3 { border-color: rgba(239, 68, 68, 0.8) !important; box-shadow: 0 0 25px rgba(239, 68, 68, 0.2); }
+  .scrutiny-shake { animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+  @keyframes soft-pulse-red { 0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.1); } 50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.25); } }
+  @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-  .coffee-btn:active {
-    transform: scale(0.98);
-  }
-
-  /* SCRUTINIZER UI STATES */
-  .input-scrutiny-0 {
-    border-bottom: 2px solid rgba(34, 197, 94, 0.4) !important;
-  }
-
-  .input-scrutiny-1 {
-    border-color: rgba(245, 158, 11, 0.5) !important;
-    box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
-  }
-
-  .input-scrutiny-2 {
-    border-color: rgba(239, 68, 68, 0.5) !important;
-    animation: soft-pulse-red 2s infinite ease-in-out;
-  }
-
-  .input-scrutiny-3 {
-    border-color: rgba(239, 68, 68, 0.8) !important;
-    box-shadow: 0 0 25px rgba(239, 68, 68, 0.2);
-  }
-
-  .scrutiny-shake {
-    animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  }
-
-  @keyframes soft-pulse-red {
-
-    0%,
-    100% {
-      box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
-    }
-
-    50% {
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
-    }
-  }
-
-  @keyframes shake {
-
-    10%,
-    90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-
-    20%,
-    80% {
-      transform: translate3d(2px, 0, 0);
-    }
-
-    30%,
-    50%,
-    70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-
-    40%,
-    60% {
-      transform: translate3d(4px, 0, 0);
-    }
-  }
+  /* ── Secure Channel ── */
+  .secure-channel-container { padding-bottom: 12.5rem; padding-right: 5rem; }
+  .container { max-width: 80rem !important; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL THEME TRANSITIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.primary-card, .sidebar, .rightbar, nav, button, h1, h2, p, span, a, body,
+.layout, .mode-bright, .mode-dark, footer, .coffee-card, .terminal, .floating-ui {
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease, backdrop-filter 300ms ease;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    MOBILE LAYOUT SYSTEM
-   ═══════════════════════════════════════════════════════════════════════════
-   
-   Breakpoint: 1024px (lg)
-   - Below 1024px: Mobile layout with header, bottom nav, full-width content
-   - Above 1024px: Desktop layout with floating sidebars, terminal, clock
-   
-   Strategy:
-   - Desktop-only elements hidden via .desktop-only class
-   - Mobile root font-size reset to 16px (no clamp scaling)
-   - Mobile app-root has no side padding
-   - Safe area inset support for modern phones
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Desktop-only elements: hidden below 1024px */
 @media (max-width: 1023px) {
-  .desktop-only {
-    display: none !important;
-  }
-
-  /* Reset root font for mobile — use native 16px instead of clamp */
-  html {
-    font-size: 16px !important;
-  }
-
-  /* Remove desktop padding on mobile */
-  .app-root {
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-
-  /* Hide desktop sidebars & terminal that might be rendered */
-  .sidebar,
-  .command-shell,
-  .rightbar {
-    display: none !important;
-  }
-
-  /* Disable viewport-section centering on mobile */
-  .viewport-section {
-    min-height: auto;
-    padding-top: 0;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-
-  /* Full-width primary cards on mobile */
-  .primary-card {
-    width: 100% !important;
-    min-height: auto !important;
-    padding: 1.5rem !important;
-    margin: 0 !important;
-    border-radius: 1rem !important;
-  }
-
-  /* Disable footer fixed position */
-  .footer-bar {
-    display: none !important;
-  }
+  .desktop-only { display: none !important; }
+  .app-root { padding: 0 !important; max-width: 100% !important; }
+  .sidebar, .command-shell, .rightbar { display: none !important; }
+  .viewport-section { min-height: auto; padding-top: 0; align-items: flex-start; justify-content: flex-start; }
+  .primary-card { width: 100% !important; min-height: auto !important; padding: 1.5rem !important; margin: 0 !important; border-radius: 1rem !important; }
+  .footer-bar { display: none !important; }
 }
 
-/* Desktop-only: ensure desktop elements remain visible */
 @media (min-width: 1024px) {
-  .desktop-only {
-    display: contents;
-  }
-
-  /* Hide mobile elements on desktop */
-  .mobile-header,
-  .mobile-bottom-nav,
-  .mobile-layout {
-    display: none !important;
-  }
+  .desktop-only { display: contents; }
+  .mobile-header, .mobile-bottom-nav, .mobile-layout { display: none !important; }
 }
 
-/* Mobile Layout Structure */
 @media (max-width: 1023px) {
-
-  /* Ensure mobile layout fills viewport */
-  .mobile-layout {
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Safe area padding for notched phones */
-  .mobile-header {
-    padding-top: env(safe-area-inset-top, 0px);
-  }
-
-  /* Smooth scrolling for content sections */
-  .mobile-layout>div {
-    scroll-behavior: smooth;
-  }
-
-  /* Prevent horizontal overflow on mobile */
-  body {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
+  .mobile-layout { -webkit-overflow-scrolling: touch; }
+  .mobile-header { padding-top: env(safe-area-inset-top, 0px); }
+  .mobile-layout>div { scroll-behavior: smooth; }
+  body { overflow-x: hidden; max-width: 100vw; }
 }
 
-/* Mobile Touch Optimizations */
 @media (max-width: 1023px) and (hover: none) and (pointer: coarse) {
-
-  /* Larger touch targets */
-  button,
-  a {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* Remove hover effects on touch-only devices */
-  .hover\:shadow-2xl:hover,
-  .hover\:-translate-y-1:hover {
-    transform: none !important;
-    box-shadow: inherit !important;
-  }
+  button, a { min-height: 44px; min-width: 44px; }
+  .hover\:shadow-2xl:hover, .hover\:-translate-y-1:hover { transform: none !important; box-shadow: inherit !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PERFORMANCE OPTIMIZATIONS
+   PERFORMANCE
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Reduce GPU-heavy backdrop-blur on small mobile devices */
 @media (max-width: 768px) {
-  .backdrop-blur-md {
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-  }
-
-  .backdrop-blur-2xl,
-  .backdrop-blur-xl {
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-  }
-
-  .blur-layer {
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-  }
+  .backdrop-blur-md { backdrop-filter: blur(6px) !important; -webkit-backdrop-filter: blur(6px) !important; }
+  .backdrop-blur-2xl, .backdrop-blur-xl { backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; }
+  .blur-layer { }
 }
 
-/* Honor reduced-motion preference — critical for low-end devices and accessibility */
 @media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .animate-pulse,
-  .animate-spin {
-    animation: none !important;
-  }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .animate-pulse, .animate-spin { animation: none !important; }
 }
 
-/* Promote frequently-animated elements to their own compositing layer */
-.primary-card,
-.coffee-card {
-  will-change: transform, opacity;
-  contain: layout style;
-}
+.primary-card, .coffee-card { will-change: transform, opacity; contain: layout style; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   VIEW TRANSITION API - SPATIAL THEME SWITCHING
+   VIEW TRANSITION API — SPATIAL THEME SWITCHING
    ═══════════════════════════════════════════════════════════════════════════ */
-::view-transition-old(root),
+
+/* Portal Expansion — Old theme stays perfectly static and visible behind the expanding portal */
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+
+/* New theme is revealed by the expanding circle clip-path (driven from JS) */
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+  z-index: 2;
+}
+
+/* Prevent the view-transition group from applying any default animation */
+::view-transition-group(root) {
+  animation-duration: 0s;
+}
+
+@media (min-width: 1024px) {
+  .bento-grid-override .primary-card { width: 100% !important; max-width: 100% !important; margin: 0 !important; min-height: 33.75rem !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UNIVERSE ENTRY TRANSITION — DIMENSIONAL CROSSING
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes universe-entry {
+  0%   { opacity: 0; filter: blur(8px); transform: scale(0.985); }
+  100% { opacity: 1; filter: blur(0);  transform: scale(1); }
+}
+
+.universe-entry {
+  animation: universe-entry 400ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes universe-entry-reduced {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .universe-entry {
+    animation: universe-entry-reduced 200ms ease-out backwards !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INTERACTIVE TREE ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes pulse-glow {
+  0%   { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.08); }
 }

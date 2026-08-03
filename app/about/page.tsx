@@ -8,12 +8,12 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <ResponsiveContentWrapper>
+    <ResponsiveContentWrapper pageTitle="About">
       <LabContainer videoSrc="/media/videos/default-background.mp4">
         {/* Left: Floating navigation panel (Now in Root Layout) */}
 
         {/* Right: Content panel */}
-        <ContentPanel title="About" subtitle="This experimental portfolio">
+        <ContentPanel>
           <article className="space-y-8">
             <section className="space-y-3">
               <h2 className="text-2xl font-black tracking-tighter transition-colors duration-500" style={{ color: 'var(--foreground)' }}>Design Philosophy</h2>

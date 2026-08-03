@@ -1,0 +1,16 @@
+{
+  "title": "Classroom of the Elite",
+  "subtitle": "Meritocracy and manipulation",
+  "description": "A fascinating psychological thriller set in a high school where everything is determined by points and merit. It explores themes of manipulation, human nature, and the true meaning of equality, as the enigmatic Ayanokoji navigates a cutthroat environment from the shadows.",
+  "accentColor": "#dc2626",
+  "quotes": [
+    "All people are nothing but tools.",
+    "Equality is just an illusion.",
+    "I'll use whatever it takes to win."
+  ],
+  "characters": [
+    { "name": "Kiyotaka Ayanokoji", "role": "Protagonist / Mastermind" },
+    { "name": "Suzune Horikita", "role": "Ally / Leader" },
+    { "name": "Kakeru Ryuen", "role": "Antagonist" }
+  ]
+}

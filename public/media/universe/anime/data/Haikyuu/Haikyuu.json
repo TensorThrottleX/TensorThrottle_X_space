@@ -1,0 +1,16 @@
+{
+  "title": "Haikyuu!!",
+  "subtitle": "Flight of the crows",
+  "description": "A masterclass in character development and team dynamics. It showcases the beauty of volleyball and the relentless drive to improve. It teaches that physical limitations can be overcome by teamwork, strategy, and an unbreakable passion to stay on the court.",
+  "accentColor": "#f97316",
+  "quotes": [
+    "Because people don't have wings, we look for ways to fly.",
+    "As long as I'm here, you're invincible!",
+    "Talent is something you make bloom, instinct is something you polish."
+  ],
+  "characters": [
+    { "name": "Shoyo Hinata", "role": "Protagonist / Middle Blocker" },
+    { "name": "Tobio Kageyama", "role": "Setter / Genius" },
+    { "name": "Toru Oikawa", "role": "Rival / Grand King" }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Naruto",
+  "subtitle": "A shinobi's journey from outcast to hero",
+  "description": "A young ninja with a sealed demon fox inside him fights for recognition and dreams of becoming Hokage, the village's strongest leader and most respected protector. Set in a world of mystical ninja villages, the story explores the cyclical nature of hatred, the profound burden of legacy, and the indomitable power of perseverance. From his early days as a prankster desperate for attention to his pivotal role in the Fourth Great Ninja War, Naruto's journey is intertwined with the tragic descent of his rival, Sasuke Uchiha. The narrative delves deep into the political machinations of the shinobi world, the philosophical differences between true peace and forced order, and the bonds of camaraderie that transcend generations.\n\nOne of the most defining moments of this journey occurs in the aftermath of tragedy. Following the devastating loss of his mentor, Jiraiya, Naruto is forced to confront his own grief and the brutal reality of the ninja world. Rather than succumbing to despair, he travels to Mount Myoboku to master Senjutsu. Through grueling, solitary training with the toads, he learns to draw in natural energy, ultimately achieving the legendary Sage Mode. This transformation is not just a physical upgrade; it represents his evolution from a hot-headed student into a mature, philosophical warrior ready to bear the weight of his master's dream for peace.",
+  "accentColor": "#f97316",
+  "quotes": [
+    "I never go back on my word. That's my nindo: my ninja way.",
+    "A place where someone still thinks about you is a place you can call home.",
+    "Hard work is worthless for those that don't believe in themselves.",
+    "When people are protecting something truly special to them, they truly can become as strong as they can be.",
+    "If you don't like your destiny, don't accept it. Instead have the courage to change it the way you want it to be.",
+    "In the ninja world, those who break the rules are scum, that's true. But those who abandon their friends are worse than scum.",
+    "The longer you live, the more you realize that reality is just made of pain, suffering and emptiness.",
+    "Love breeds sacrifice, which in turn breeds hatred. Then you can know pain."
+  ],
+  "characters": [
+    { "name": "Naruto Uzumaki", "role": "Protagonist" },
+    { "name": "Sasuke Uchiha", "role": "Rival" },
+    { "name": "Sakura Haruno", "role": "Teammate" },
+    { "name": "Kakashi Hatake", "role": "Mentor" },
+    { "name": "Jiraiya", "role": "Toad Sage / Teacher" },
+    { "name": "Tsunade", "role": "Fifth Hokage" },
+    { "name": "Orochimaru", "role": "Sannin / Antagonist" },
+    { "name": "Itachi Uchiha", "role": "Tragic Hero" },
+    { "name": "Gaara", "role": "Kazekage / Friend" },
+    { "name": "Shikamaru Nara", "role": "Strategist" },
+    { "name": "Hinata Hyuga", "role": "Love Interest" },
+    { "name": "Neji Hyuga", "role": "Prodigy" },
+    { "name": "Rock Lee", "role": "Taijutsu Master" },
+    { "name": "Might Guy", "role": "Taijutsu Mentor" },
+    { "name": "Pain / Nagato", "role": "Leader of Akatsuki" },
+    { "name": "Madara Uchiha", "role": "Legendary Antagonist" },
+    { "name": "Obito Uchiha", "role": "Fallen Hero" },
+    { "name": "Minato Namikaze", "role": "Fourth Hokage / Father" },
+    { "name": "Kushina Uzumaki", "role": "Mother" },
+    { "name": "Kurama", "role": "Nine-Tails" }
+  ]
+}

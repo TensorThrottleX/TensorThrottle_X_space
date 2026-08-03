@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef, memo } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
-import type { Post, Comment } from '@/types/post'
-import { MessageSquare, Loader2, X } from 'lucide-react'
-import { CommentSection } from './CommentSection'
+import type { Post } from '@/types/post'
+import { MessageSquare, Loader2, X, Eye } from 'lucide-react'
+import { DiscussionPanel } from './DiscussionPanel'
 import { NotionBlockRenderer } from './NotionBlockRenderer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useUI } from '@/components/providers/UIProvider'
+import { formatCompactCount } from '@/lib/view-count'
 
 interface LabPostCardProps {
   post: Post
@@ -20,7 +21,7 @@ interface LabPostCardProps {
  * LabPostCard: Minimal, clean timeline-style post card
  * - Teaser in the list
  * - Popup Modal for full content (Premium transition)
- * - Backdrop blur and click-out to close
+ * - 💬 opens the DiscussionPanel sheet — no navigation, feed stays in place
  */
 export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }: LabPostCardProps) {
   const { renderMode } = useUI()
@@ -34,13 +35,11 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
   const [content, setContent] = useState<any[]>(post.content || [])
   const [isLoadingContent, setIsLoadingContent] = useState(false)
 
-  // State for comments
-  const [comments, setComments] = useState<Comment[]>([])
-  const [isLoadingComments, setIsLoadingComments] = useState(false)
-  const [hasLoadedComments, setHasLoadedComments] = useState(false)
-
-  // Ref for scrolling
-  const commentsRef = useRef<HTMLDivElement>(null)
+  // State for the discussion sheet
+  const [isDiscussionOpen, setIsDiscussionOpen] = useState(false)
+  const [displayCount, setDisplayCount] = useState(commentCount)
+  // Real server-side count; updated automatically after a view is recorded
+  const [displayViews, setDisplayViews] = useState(post.viewCount ?? 0)
 
   // Check if we should auto-expand based on URL
   useEffect(() => {
@@ -69,63 +68,34 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
         setIsLoadingContent(false)
       }
     }
-
-    // Load comments pre-emptively for the modal
-    if (!hasLoadedComments) {
-      setIsLoadingComments(true)
-      try {
-        const res = await fetch(`/api/comments?slug=${post.slug}`)
-        if (res.ok) {
-          const data = await res.json()
-          setComments(data.comments || [])
-          setHasLoadedComments(true)
-        }
-      } catch (error) {
-        console.error('Failed to load comments', error)
-      } finally {
-        setIsLoadingComments(false)
-      }
-    }
   }
 
-  const toggleContent = async (e: React.MouseEvent, focus?: 'comments') => {
+  const toggleContent = async (e: React.MouseEvent) => {
     e.preventDefault()
 
     // Check Navigation Context
     const categorySlug = post.category.toLowerCase().trim()
     const targetPath = `/category/${categorySlug}`
-    const focusParam = focus ? `&focus=${focus}` : ''
 
     // If we represent a category but are NOT on that category page, navigate there
-    // EXCEPT when we want to focus on comments - comments are EXCLUSIVE to the feed
-    if (!pathname.startsWith(targetPath) && !focus) {
-      router.push(`${targetPath}?post=${post.slug}${focusParam}`)
+    if (!pathname.startsWith(targetPath)) {
+      router.push(`${targetPath}?post=${post.slug}`)
       return
     }
 
-    if (isExpanded && !focus) {
+    if (isExpanded) {
       setIsExpanded(false)
       return
     }
 
     await expandPost()
-
-    if (focus === 'comments') {
-      setTimeout(() => {
-        commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-    }
   }
 
-  const onCommentClick = async (e: React.MouseEvent) => {
+  const openDiscussion = (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
-
-    // Always expand locally for comments as they are feed-exclusive
-    await expandPost()
-    setTimeout(() => {
-      commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
+    // Toggle: clicking the same 💬 icon again closes the workspace
+    setIsDiscussionOpen((o) => !o)
   }
 
   // Handle close: clear URL params if they exist so we "go back" to the feed state
@@ -138,7 +108,6 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
     const newParams = new URLSearchParams(searchParams.toString())
     if (newParams.has('post')) {
       newParams.delete('post')
-      newParams.delete('focus')
       // Push the new URL without the params, keeping scroll position if possible
       router.push(`${pathname}?${newParams.toString()}`, { scroll: false })
     }
@@ -146,12 +115,11 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
 
   // Auto-scroll when modal opens from URL param
   useEffect(() => {
-    if (isExpanded && searchParams.get('focus') === 'comments') {
+    if (isExpanded && searchParams.get('post')) {
       setTimeout(() => {
-        commentsRef.current?.scrollIntoView({ behavior: 'smooth' })
-      }, 500)
-    }
-  }, [isExpanded, searchParams])
+        document.getElementById(`post-${post.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 300)
+    }  }, [isExpanded, searchParams, post.id])
 
   return (
     <>
@@ -162,7 +130,7 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
           "group relative rounded-2xl border transition-all duration-500 cursor-pointer block px-6 py-6",
           "hover:scale-[1.01] hover:-translate-y-0.5",
           isBright
-            ? "bg-white border-black/5 shadow-[var(--shadow-premium)] hover:shadow-[var(--shadow-premium)] hover:border-black/10"
+            ? "bg-[#F5F5F4] border-black/5 shadow-[var(--shadow-premium)] hover:shadow-[var(--shadow-premium)] hover:border-black/10"
             : "bg-[#0c0c0c] border-white/5 shadow-[var(--shadow-premium)] hover:shadow-[var(--shadow-premium)] hover:border-white/10"
         )}
       >
@@ -194,15 +162,29 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
             {post.excerpt}
           </p>
 
-          {/* Comment Indicator */}
-          <div
-            className="flex items-center gap-1.5 mt-1 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group/comm"
-            onClick={onCommentClick}
-          >
-            <MessageSquare size={14} className="group-hover/comm:text-cyan-500 transition-colors" />
-            <span className="text-xs font-bold uppercase tracking-widest">
-              {commentCount > 0 ? `${commentCount}` : '0'}
-            </span>
+          {/* Comment Indicator — opens the discussion sheet in place */}
+          <div className="flex items-center gap-2 mt-1">
+            <div
+              className="flex items-center gap-1.5 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group/comm"
+              onClick={openDiscussion}
+              role="button"
+              aria-label={`Open discussion (${displayCount} ${displayCount === 1 ? 'comment' : 'comments'})`}
+            >
+              <MessageSquare size={14} className="group-hover/comm:text-cyan-500 transition-colors" />
+              <span className="text-xs font-bold uppercase tracking-widest">
+                {displayCount > 0 ? `${displayCount}` : '0'}
+              </span>
+            </div>
+            <div
+              className="flex items-center gap-1.5 opacity-40 select-none"
+              title="Views"
+              aria-hidden="true"
+            >
+              <Eye size={14} />
+              <span className="text-xs font-bold uppercase tracking-widest">
+                {formatCompactCount(displayViews)}
+              </span>
+            </div>
           </div>
         </div>
       </article>
@@ -265,27 +247,22 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
                     )}
                   </div>
                 )}
-
-                {/* Comments Section */}
-                <div ref={commentsRef} className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
-                  <div className="flex items-center gap-2 mb-8">
-                    <MessageSquare size={16} className="text-cyan-500" />
-                    <h4 className="text-sm font-bold uppercase tracking-tighter">Transmission Discussion</h4>
-                  </div>
-
-                  {isLoadingComments ? (
-                    <div className="flex justify-center py-8">
-                      <Loader2 className="h-6 w-6 animate-spin opacity-40" />
-                    </div>
-                  ) : (
-                    <CommentSection postSlug={post.slug} initialComments={comments} />
-                  )}
-                </div>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
+      {/* Discussion workspace — opened in place from the 💬 icon */}
+      <DiscussionPanel
+        post={post}
+        postSlug={post.slug}
+        postTitle={post.title}
+        open={isDiscussionOpen}
+        onClose={() => setIsDiscussionOpen(false)}
+        onCommentAdded={() => setDisplayCount((c) => c + 1)}
+        onViewRecorded={(count) => setDisplayViews(count)}
+      />
     </>
   )
 })

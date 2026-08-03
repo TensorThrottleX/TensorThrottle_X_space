@@ -78,13 +78,19 @@ async function trySMTP(payload: EmailPayload, html: string, text: string): Promi
     host: SMTP_HOST,
     port: SMTP_PORT,
     secure: SMTP_PORT === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS }
+    auth: { user: SMTP_USER, pass: SMTP_PASS },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
   });
+
+  const recipients = EMAIL_RECIPIENT.split(',').map(r => r.trim()).filter(Boolean);
+  if (recipients.length === 0) return { success: false, error: 'No valid recipients' };
 
   try {
     const info = await transporter.sendMail({
       from: `"TensorThrottleX" <${SMTP_USER}>`,
-      to: EMAIL_RECIPIENT,
+      to: recipients,
       replyTo: payload.email,
       subject: `[SMTP FALLBACK] Contact from ${payload.identity}`,
       html,

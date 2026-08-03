@@ -1,0 +1,16 @@
+{
+  "title": "Hajime no Ippo",
+  "subtitle": "The spirit of a champion",
+  "description": "A legendary boxing anime that beautifully captures the essence of hard work, discipline, and the pursuit of strength. Watching Ippo transform from a bullied high schooler into a professional boxer through relentless training is a constant source of motivation.",
+  "accentColor": "#fbbf24",
+  "quotes": [
+    "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
+    "What does it mean to be strong?",
+    "Stand up! You're not done yet!"
+  ],
+  "characters": [
+    { "name": "Ippo Makunouchi", "role": "Protagonist" },
+    { "name": "Mamoru Takamura", "role": "Mentor / Champion" },
+    { "name": "Ichiro Miyata", "role": "Rival" }
+  ]
+}

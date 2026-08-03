@@ -1,0 +1,17 @@
+{
+  "title": "Jujutsu Kaisen",
+  "subtitle": "Cursed energy, resolved will",
+  "description": "High school student Yuji Itadori swallows a cursed finger to save his friends, becoming the host of the most powerful curse in existence, and begins training as a jujutsu sorcerer.",
+  "accentColor": "#ec4899",
+  "quotes": [
+    "I don't need a reason to save people. I just save them because they're there.",
+    "You're strong. That's your flaw. You're too strong, so you've forgotten what it means to be weak.",
+    "When it comes to you, I want to be the strongest. That's my selfishness."
+  ],
+  "characters": [
+    { "name": "Yuji Itadori", "role": "Protagonist" },
+    { "name": "Megumi Fushiguro", "role": "Sorcerer" },
+    { "name": "Nobara Kugaki", "role": "Sorcerer" },
+    { "name": "Satoru Gojo", "role": "Teacher" }
+  ]
+}

@@ -85,11 +85,24 @@ export function BootLoader() {
             {stage !== 'done' && (
                 <motion.div
                     key="bootloader-root"
-                    className="fixed inset-0 z-[100] overflow-hidden transition-colors duration-700 bg-black text-white"
+                    className="fixed inset-0 z-[100] bg-black overflow-hidden transition-colors duration-700 text-white"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0, transition: { duration: 1.2, ease: "easeInOut" } }}
                 >
-                    {/* Background Layer with Dark/Light Transitions */}
+                    {/* BootLoader Background (Forest) - Render only after loading */}
+                    {stage !== 'booting' && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1.5 }}
+                            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+                            style={{ backgroundImage: 'url("/media/boot/forest.jpg")' }}
+                        />
+                    )}
+                    
+
+
+                    {/* BootLoader Overlay */}
                     <AnimatePresence mode="wait">
                         {stage === 'intro' && (
                             <motion.div
@@ -98,8 +111,7 @@ export function BootLoader() {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 1.5 }}
-                                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-                                style={{ backgroundImage: 'url("/backgrounds/forest.jpg")' }}
+                                className="absolute inset-0 z-[2] pointer-events-none"
                             >
                                 {/* Base Dark Overlay */}
                                 <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />

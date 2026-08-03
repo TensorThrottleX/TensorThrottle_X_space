@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { SubCardContent, CardContent } from '@/lib/dashboard-data'
 
 interface StackedDeckProps {
-    mode: 'purpose' | 'about'
+    mode: 'purpose' | 'about' | 'quote'
     content: CardContent
     isBright: boolean
     onInitialize: () => void
@@ -39,7 +39,7 @@ export function StackedDeck({
     }
 
     return (
-        <div className="primary-card relative perspective-1000 group items-center bg-transparent border-none shadow-none p-0 min-h-[33.75rem]">
+        <div className="primary-card relative perspective-1000 group block bg-transparent border-none shadow-none p-0 h-[33.75rem]">
             <div className="relative w-full h-full">
                 <AnimatePresence>
                     {stack.map((id, index) => {
@@ -69,7 +69,7 @@ export function StackedDeck({
                                     "absolute top-0 left-0 w-full h-full rounded-[26px] cursor-pointer overflow-hidden transition-all duration-500",
                                     "border-[1.5px] border-b-[4px] border-r-[2px]",
                                     isBright
-                                        ? "bg-white border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
+                                        ? "bg-[#F5F5F4] border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
                                         : (isCover ? "bg-[#050505] border-white/20 border-b-white/30 border-r-white/25 shadow-[var(--shadow-premium)]" : "bg-[var(--card-bg)] backdrop-blur-3xl border-white/10 border-b-white/20 border-r-white/15 shadow-[var(--shadow-premium)]")
                                 )}
                                 style={{
@@ -139,10 +139,18 @@ export function StackedDeck({
                                                         e.stopPropagation()
                                                         onInitialize()
                                                     }}
-                                                    className="group flex items-center gap-3 px-6 py-2.5 rounded-full bg-[#0B0B0B] hover:bg-[#111] border border-white/10 hover:border-white/20 transition-[background-color,border-color,box-shadow] duration-300 shadow-lg"
+                                                    className={cn(
+                                                        "group flex items-center gap-3 px-6 py-2.5 rounded-full transition-[background-color,border-color,box-shadow] duration-300 shadow-lg",
+                                                        isBright
+                                                            ? "bg-[#EFECE7] hover:bg-[#E5E2DD] border border-black/10 hover:border-black/20"
+                                                            : "bg-[#0B0B0B] hover:bg-[#111] border border-white/10 hover:border-white/20"
+                                                    )}
                                                 >
                                                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
-                                                    <span className="text-white/80 text-xs tracking-normal font-bold group-hover:text-white transition-colors">
+                                                    <span className={cn(
+                                                        "text-xs tracking-normal font-bold group-hover:text-white transition-colors",
+                                                        isBright ? "text-black/60 group-hover:text-black" : "text-white/80"
+                                                    )}>
                                                         INITIALIZE TREE
                                                     </span>
                                                 </button>
@@ -158,7 +166,7 @@ export function StackedDeck({
                                                             "text-[10px] font-bold tracking-normal uppercase",
                                                             isBright ? "text-black/60" : "text-white/60"
                                                         )}>
-                                                            CRITICAL_MODULE 0{content.subCards.findIndex(c => c.id === id) + 1}
+                                                            FOUNDATION_0{content.subCards.findIndex(c => c.id === id) + 1}
                                                         </span>
                                                     </div>
                                                     <div className={cn("w-12 h-px", isBright ? "bg-black/10" : "bg-white/10")} />
@@ -277,10 +285,18 @@ export function StackedDeck({
                                                                 e.stopPropagation()
                                                                 onInitialize()
                                                             }}
-                                                            className="group flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#0B0B0B] hover:bg-[#111] border border-white/10 hover:border-white/20 transition-[background-color,border-color] duration-300"
+                                                            className={cn(
+                                                                "group flex items-center gap-3 px-4 py-1.5 rounded-full transition-[background-color,border-color] duration-300",
+                                                                isBright
+                                                                    ? "bg-[#EFECE7] hover:bg-[#E5E2DD] border border-black/10 hover:border-black/20"
+                                                                    : "bg-[#0B0B0B] hover:bg-[#111] border border-white/10 hover:border-white/20"
+                                                            )}
                                                         >
                                                             <div className="w-1 h-1 rounded-full bg-cyan-500/80" />
-                                                            <span className="text-white/60 text-[9px] tracking-normal font-medium group-hover:text-white transition-colors">EXPLORE FULLSCREEN</span>
+                                                            <span className={cn(
+                                                                "text-[9px] tracking-normal font-medium group-hover:text-white transition-colors",
+                                                                isBright ? "text-black/50" : "text-white/60"
+                                                            )}>EXPLORE FULLSCREEN</span>
                                                         </button>
                                                     ) : (
                                                         <span className="text-cyan-500/40 font-mono text-[9px] tracking-normal uppercase">SECURE_EXPANDED_DATA</span>

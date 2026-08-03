@@ -1,0 +1,6 @@
+- Using Next.js App Router because: Unknown (Likely for React Server Components and file-based routing simplicity).
+- Using Tailwind CSS because: Flexibility and iteration speed.
+- Using Notion as CMS because: It allows raw thought storage and rapid writing without building a custom admin panel.
+- Using Supabase because: Interaction persistence (comments database).
+- Using Fixed 1920px Scaling (RenderScaler) because: To prevent layout collapse and guarantee a stable 100% zoom baseline on all devices.
+- Using 3-layer visual architecture because: To strictly separate atmosphere (background media), structure (overlay dimming), and cognition (content).

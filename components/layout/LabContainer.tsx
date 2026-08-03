@@ -9,59 +9,34 @@ interface LabContainerProps {
   videoSrc?: string
 }
 
-/**
- * LabContainer: The main three-layer experimental interface
- * Layer 1: Background video
- * Layer 2: Dark overlay
- * Layer 3: Floating content panel + side navigation
- */
 export function LabContainer({ children, videoSrc }: LabContainerProps) {
-  const { uiMode, renderMode, isTerminalOpen } = useUI()
-
-  // Video background removed to support bright/dark only
-  const showVideo = false
-
-  // Background base classes
-  const getBgClass = () => {
-    switch (renderMode) {
-      case 'bright': return 'bg-[var(--background)]'
-      case 'dark': return 'bg-[var(--background)]'
-      default: return 'bg-[var(--background)]'
-    }
-  }
+  const { uiMode, isTerminalOpen } = useUI()
 
   return (
-    <div className={`layout relative min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out 
+    <div className={`layout relative min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out
       ${uiMode === 'tree' ? 'tree-active' : ''}
-      ${getBgClass()}
     `}>
-      {/* [LAYER_2]: Substrate Overlay (Fixed Viewport Blur) 
-          - Maintains focus on the Cognitive layer
-      */}
-      <div className={`fixed inset-0 z-[-1] transition-all duration-700 ease-in-out
-          ${renderMode === 'bright'
-          ? (isTerminalOpen ? 'bg-white/60 backdrop-blur-md' : 'bg-transparent')
-          : (uiMode === 'tree' ? 'bg-black/45 backdrop-blur-[2px]' : 'bg-black/20 backdrop-blur-[1px]')}
-          ${isTerminalOpen && renderMode !== 'bright' ? 'bg-black/75 backdrop-blur-md md:bg-black/75 md:backdrop-blur-md' : ''}
-      `} />
+      {/* Video background removed — using theme-aware bg from body */}
 
-      {/* [DIM_OVERLAY]: Isolated layer to dim content when terminal is open 
-          - Sits at z-index 20, above content (z-10) but below terminal system (z-50+)
-      */}
+      {/* [LAYER_2]: Substrate Overlay — theme-aware via CSS variables */}
+      <div className={cn(
+        "fixed inset-0 z-[-1] transition-all duration-700 ease-in-out",
+        isTerminalOpen
+          ? "backdrop-blur-md"
+          : "bg-transparent backdrop-blur-none",
+        isTerminalOpen ? "bg-[var(--terminal-overlay-bg)]" : "bg-transparent"
+      )} />
+
+      {/* [DIM_OVERLAY]: Dim content when terminal is open */}
       <div className={cn(
         "fixed inset-0 z-[20] transition-all duration-500 ease-in-out pointer-events-none",
         isTerminalOpen
-          ? renderMode === 'bright'
-            ? "opacity-100 backdrop-blur-sm bg-white/50"
-            : "opacity-100 backdrop-blur-sm bg-black/40"
+          ? "opacity-100 backdrop-blur-sm bg-[var(--overlay-bg)]"
           : "opacity-0 backdrop-blur-0 bg-transparent"
       )} />
 
-      {/* [LAYER_3]: Flow Plane (Deterministic Content Stack)
-          - Normalized to allow document flow and zoom resilience
-          - Bounded by --panel-max-width for desktop density consistency
-      */}
-      <div className={`relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto transition-opacity duration-500`}>
+      {/* [LAYER_3]: Flow Plane */}
+      <div className="relative flex flex-col flex-1 w-full max-w-[var(--panel-max-width)] mx-auto transition-opacity duration-500">
         {children}
       </div>
     </div>

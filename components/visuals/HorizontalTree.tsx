@@ -78,7 +78,8 @@ const initialData: TreeNode = {
 export function HorizontalTree() {
     const svgRef = useRef<SVGSVGElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { uiMode, setUiMode } = useUI()
+    const { uiMode, setUiMode, renderMode } = useUI()
+    const isBright = renderMode === 'bright'
     const isActive = uiMode === 'tree'
 
     // Config
@@ -294,7 +295,9 @@ export function HorizontalTree() {
             {!isActive && (
                 <button
                     onClick={() => setUiMode('tree')}
-                    className="fixed top-[120px] left-[60px] z-[60] flex items-center gap-3 text-white/60 hover:text-white transition-all group pointer-events-auto"
+                    className={`fixed top-[120px] left-[60px] z-[60] flex items-center gap-3 transition-all group pointer-events-auto ${
+                        isBright ? 'text-black/50 hover:text-black' : 'text-white/60 hover:text-white'
+                    }`}
                 >
                     <div className="w-2 h-2 rounded-full bg-emerald-500/50 group-hover:bg-emerald-400 group-hover:shadow-[0_0_10px_rgba(52,211,153,0.8)] transition-all" />
                     <span className="text-sm font-mono tracking-widest uppercase opacity-80 group-hover:opacity-100">

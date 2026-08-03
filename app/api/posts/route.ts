@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAllPosts } from '@/lib/notion'
-import { getAllCommentCounts } from '@/lib/supabase'
+import { enrichPostsWithCounts } from '@/lib/enrich-posts'
+import { POSTS_PER_PAGE, MAX_PAGE_LIMIT } from '@/lib/pagination'
 
 // ISR: revalidate every 60 seconds (matches Notion cache TTL)
 // Removed conflicting `dynamic = 'force-dynamic'` which disabled caching entirely
@@ -17,16 +18,13 @@ export async function GET(request: NextRequest): Promise<NextResponse<PostsRespo
 
     // Support both page-based and cursor-based pagination
     const cursor = searchParams.get('cursor')
-    const limit = Math.min(parseInt(searchParams.get('limit') || '6', 10), 50) // Cap at 50
+    const limit = Math.min(parseInt(searchParams.get('limit') || String(POSTS_PER_PAGE), 10), MAX_PAGE_LIMIT) // Cap at MAX_PAGE_LIMIT
 
     // Fallback to page-based for backward compatibility
     const page = parseInt(searchParams.get('page') || '1', 10)
 
-    // Fetch posts and comment counts in parallel (both are cached internally)
-    const [allPosts, commentCounts] = await Promise.all([
-      getAllPosts(),
-      getAllCommentCounts()
-    ])
+    // Fetch posts (Notion, cached internally)
+    const allPosts = await getAllPosts()
 
     if (allPosts.length === 0) {
       return NextResponse.json({ posts: [], nextCursor: null })
@@ -48,11 +46,8 @@ export async function GET(request: NextRequest): Promise<NextResponse<PostsRespo
     const endIndex = startIndex + limit
     const paginatedPosts = allPosts.slice(startIndex, endIndex)
 
-    // Attach comment counts
-    const postsWithCounts = paginatedPosts.map(post => ({
-      ...post,
-      commentCount: commentCounts[post.slug] || 0
-    }))
+    // Attach real engagement counts (comments + discussion views)
+    const postsWithCounts = await enrichPostsWithCounts(paginatedPosts)
 
     // Determine if there are more posts
     const hasMore = endIndex < allPosts.length

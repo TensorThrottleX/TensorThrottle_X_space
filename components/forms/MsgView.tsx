@@ -205,7 +205,7 @@ export function MsgView(): React.ReactNode {
                 {/* [MSG_PAGE] – Guidelines */}
                 <div className={cn(
                     "p-6 rounded-2xl border backdrop-blur-md transition-all duration-500 shadow-[var(--shadow-premium)]",
-                    renderMode === 'bright' ? "bg-[#f4f4f4] border-black/5" : "bg-black/40 border-white/5"
+                    renderMode === 'bright' ? "bg-[#F5F5F4] border-black/5" : "bg-black/40 border-white/5"
                 )}>
                     <div className="flex items-start gap-4">
                         <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
@@ -264,7 +264,7 @@ export function MsgView(): React.ReactNode {
                                 className={cn(
                                     "w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors",
                                     !isNameValid && name.length > 0 ? "border-red-500/50" : "",
-                                    renderMode === 'bright' ? "bg-[#f4f4f4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white"
+                                    renderMode === 'bright' ? "bg-[#F5F5F4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white"
                                 )}
                             />
                         </div>
@@ -278,7 +278,7 @@ export function MsgView(): React.ReactNode {
                                 className={cn(
                                     "w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors",
                                     !isEmailValid && email.length > 0 ? "border-red-500/50" : "",
-                                    renderMode === 'bright' ? "bg-[#f4f4f4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white"
+                                    renderMode === 'bright' ? "bg-[#F5F5F4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white"
                                 )}
                             />
                         </div>
@@ -322,7 +322,7 @@ export function MsgView(): React.ReactNode {
                                     ? "border-red-500/50 bg-red-500/5 focus:border-red-500"
                                     : scrutiny.level === 1
                                         ? "border-amber-500/50 bg-amber-500/5 focus:border-amber-500"
-                                        : (renderMode === 'bright' ? "bg-[#f4f4f4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white")
+                                        : (renderMode === 'bright' ? "bg-[#F5F5F4] border-black/10 focus:border-black/20 text-black" : "bg-white/5 border-white/10 focus:border-cyan-500/50 text-white")
                             )}
                         />
 

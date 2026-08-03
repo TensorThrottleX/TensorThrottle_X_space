@@ -66,7 +66,6 @@ Utility:
   system              Print kernel status and modules
   mode bright         Force high-clarity render mode
   mode dark           Force deep-focus render mode
-  mode normal         Revert to standard cinematic render
   explain             Display operational system motives
   clear               Flush terminal history buffer
   home                Minimize the secure shell`;

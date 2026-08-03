@@ -1,0 +1,15 @@
+- imports: Absolute `@/`
+- aliases: N/A
+- folder conventions: Feature-based `components/*` grouping (e.g., `content`, `visuals`).
+- file naming: PascalCase for components (`LabNavigation.tsx`), camelCase/kebab-case for logic (`notion.ts`, `scale-engine`).
+- component naming: PascalCase.
+- hooks: `use-*.ts`
+- types: Centralized in `types/`
+- constants: Inline in `lib/` or `components/` usually.
+- API patterns: Serverless routes in `app/api/`. `lib/notion.ts` caches requests for 60s to avoid limits.
+- error handling: Try/catch in APIs with graceful fallbacks (e.g. Supabase fallback schema inserts).
+- state management: React context (`UIProvider`, `MediaProvider`, `ScaleEngine`). `localStorage` used for theme persistence.
+- styling: Tailwind CSS 4 with dark theme emphasis (`bg-black/80`). `globals.css` used for core variables.
+- server/client components: Mixed App router. `"use client"` on interactive components.
+- async patterns: standard async/await.
+- testing conventions: Unknown (no test suite present).

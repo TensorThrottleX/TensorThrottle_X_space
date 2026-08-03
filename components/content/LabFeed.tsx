@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import { LabPostCard } from './LabPostCard'
 import { RefreshCcw } from 'lucide-react'
 import type { Post } from '@/types/post'
+import { POSTS_PER_PAGE } from '@/lib/pagination'
 
 interface LabFeedProps {
   initialPosts: Post[]
@@ -13,8 +14,6 @@ interface PostsApiResponse {
   posts: Post[]
   nextCursor: string | null
 }
-
-const POSTS_PER_PAGE = 6
 
 /**
  * LabFeed: Clean timeline-style infinite scroll feed
@@ -26,7 +25,7 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
   const [posts, setPosts] = useState<Post[]>(initialPosts)
   const [isLoading, setIsLoading] = useState(false)
   const [nextCursor, setNextCursor] = useState<string | null>(
-    initialPosts.length >= POSTS_PER_PAGE ? '6' : null
+    initialPosts.length >= POSTS_PER_PAGE ? String(initialPosts.length) : null
   )
   const [error, setError] = useState<string | null>(null)
   const sentinelRef = useRef<HTMLDivElement>(null)
@@ -64,8 +63,7 @@ export function LabFeed({ initialPosts }: LabFeedProps) {
   }, [isLoading, nextCursor])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
+    const observer = new IntersectionObserver(      (entries) => {
         if (entries[0]?.isIntersecting && !isLoading && nextCursor) {
           loadMore()
         }

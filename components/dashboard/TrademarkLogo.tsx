@@ -21,7 +21,7 @@ export function TrademarkLogo() {
             <div
                 className={`w-10 h-10 lg:w-14 lg:h-14 rounded-full border-2 flex items-center justify-center transition-[transform,background-color,border-color,box-shadow] duration-500 cursor-pointer hover:scale-110 active:scale-95
                     ${isBright
-                        ? 'bg-white border-black/10 shadow-[var(--shadow-premium)] group-hover:bg-black group-hover:border-black'
+                        ? 'bg-[#F5F5F4] border-black/10 shadow-[var(--shadow-premium)] group-hover:bg-black group-hover:border-black'
                         : (isDark ? 'bg-black border-white/10 shadow-[var(--shadow-premium)] hover:border-white/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'bg-black border-white/20 shadow-[var(--shadow-premium)] hover:shadow-[0_0_25px_rgba(255,165,0,0.7)]')
                     }
                 `}

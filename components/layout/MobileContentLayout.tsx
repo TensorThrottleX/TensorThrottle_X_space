@@ -2,8 +2,7 @@
 
 import React from 'react'
 import { MobileHeader } from '@/components/layout/MobileHeader'
-import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
-import { MobileTerminal } from '@/components/layout/MobileTerminal'
+
 import { useUI } from '@/components/providers/UIProvider'
 
 /**
@@ -24,7 +23,7 @@ export function MobileContentLayout({
     articleCount?: number;
     latestPublishedAt?: string;
 }) {
-    const { renderMode } = useUI()
+    const { renderMode, navUtilityExpanded } = useUI()
     const isBright = renderMode === 'bright'
 
     return (
@@ -32,7 +31,7 @@ export function MobileContentLayout({
             className="mobile-layout relative min-h-screen w-full flex flex-col"
             style={{
                 backgroundColor: 'transparent',
-                paddingTop: '68px',   // Header height
+                paddingTop: navUtilityExpanded ? '112px' : '68px',   // Header height + expanded nav
                 paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))', // Bottom nav height + safe area
             }}
         >
@@ -46,8 +45,7 @@ export function MobileContentLayout({
                 {children}
             </div>
 
-            <MobileTerminal />
-            <MobileBottomNav />
+
         </div>
     )
 }

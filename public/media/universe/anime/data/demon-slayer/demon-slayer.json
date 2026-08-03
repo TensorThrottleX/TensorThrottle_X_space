@@ -1,0 +1,17 @@
+{
+  "title": "Demon Slayer",
+  "subtitle": "Breath of the sun, blade of vengeance",
+  "description": "After his family is slaughtered and his sister turned into a demon, Tanjiro Kamado joins the Demon Slayer Corps to find a cure and avenge his family.",
+  "accentColor": "#22d3ee",
+  "quotes": [
+    "Set your heart ablaze. Grit your teeth and move forward.",
+    "Life is not a game of luck. If you want to win, work hard.",
+    "No matter how many lives we save, we can never bring back the ones we lost."
+  ],
+  "characters": [
+    { "name": "Tanjiro Kamado", "role": "Protagonist" },
+    { "name": "Nezuko Kamado", "role": "Sister" },
+    { "name": "Zenitsu Agatsuma", "role": "Fellow Slayer" },
+    { "name": "Giyu Tomioka", "role": "Water Hashira" }
+  ]
+}

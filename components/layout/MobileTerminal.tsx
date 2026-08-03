@@ -111,11 +111,10 @@ export function MobileTerminal() {
             toggleBGM(true)
             response = `[CRITICAL_UPDATE]\nSystem mode elevated.\nEnhancements active.`
         }
-        else if (['mode normal', 'render normal', 'normal'].includes(cleanCmd)) { toggleRenderMode(null, 'normal'); response = `[SYSTEM_UPDATE]\nRender Mode: NORMAL (Cinematic)` }
         else if (['mode bright', 'render bright', 'bright'].includes(cleanCmd)) { toggleRenderMode(null, 'bright'); response = `[SYSTEM_UPDATE]\nRender Mode: BRIGHT (High Clarity)` }
         else if (['mode dark', 'render dark', 'dark'].includes(cleanCmd)) { toggleRenderMode(null, 'dark'); response = `[SYSTEM_UPDATE]\nRender Mode: DARK (Deep Focus)` }
         else if (['mode', 'render'].includes(cleanCmd)) {
-            const nextMode = renderMode === 'normal' ? 'bright' : renderMode === 'bright' ? 'dark' : 'normal'
+            const nextMode = renderMode === 'bright' ? 'dark' : 'bright'
             toggleRenderMode(null, nextMode)
             response = `[RENDER_TOGGLE]\nCycling render mode...`
         }
@@ -205,14 +204,14 @@ export function MobileTerminal() {
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                         className="fixed inset-0 z-[250] flex flex-col font-mono"
                         style={{
-                            backgroundColor: isBright ? '#fafafa' : '#050505',
+                            backgroundColor: isBright ? '#F5F5F4' : '#050505',
                         }}
                     >
                         {/* Mac-style Header */}
                         <div
                             className="flex items-center justify-between px-4 h-12 shrink-0 border-b"
                             style={{
-                                backgroundColor: isBright ? '#ebebeb' : '#080808',
+backgroundColor: isBright ? '#F5F5F4' : '#080808',
                                 borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.12)',
                             }}
                         >
@@ -322,7 +321,7 @@ export function MobileTerminal() {
                         <div
                             className="flex items-center gap-3 px-4 h-14 shrink-0 border-t"
                             style={{
-                                backgroundColor: isBright ? '#ebebeb' : '#080808',
+                                backgroundColor: isBright ? '#F5F5F4' : '#080808',
                                 borderColor: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.12)',
                                 paddingBottom: 'env(safe-area-inset-bottom, 0px)',
                             }}

@@ -102,7 +102,7 @@ export function SystemQuoteRenderer() {
             "primary-card relative overflow-hidden transition-colors duration-300 items-center justify-center text-center",
             "border-[1.5px] border-b-[4px] border-r-[2px]",
             renderMode === 'bright'
-                ? "bg-white border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
+                ? "bg-[#F5F5F4] border-black/10 border-b-black/20 border-r-black/15 shadow-[var(--shadow-premium)]"
                 : "bg-black/60 backdrop-blur-xl border-white/10 border-b-white/20 border-r-black/15 shadow-[var(--shadow-premium)]"
         )}>
             {/* Quote Label */}

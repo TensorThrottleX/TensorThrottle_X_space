@@ -1,21 +1,20 @@
-
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
 export async function GET() {
     const publicDir = path.join(process.cwd(), 'public');
-    const mediaBaseDir = path.join(publicDir, 'media');
+    const mediaDir = path.join(publicDir, 'media');
 
-    // Hardened deterministic paths
-    const videosDir = path.join(mediaBaseDir, 'videos');
-    const musicDir = path.join(mediaBaseDir, 'music');
+    const videosDir = path.join(mediaDir, 'backgrounds', 'video');
+    const musicDir = path.join(mediaDir, 'audio', 'bgm');
 
     const getFiles = (dir: string, publicPathPart: string, extensions: string[]) => {
         try {
             if (!fs.existsSync(dir)) return [];
             return fs.readdirSync(dir)
                 .filter(file => extensions.includes(path.extname(file).toLowerCase()))
+                .sort((a, b) => a.localeCompare(b))
                 .map(file => ({
                     name: formatName(file),
                     path: `/media/${publicPathPart}/${encodeURIComponent(file)}`
@@ -34,8 +33,8 @@ export async function GET() {
             .slice(0, 40) || 'BACKGROUND';
     };
 
-    const videos = getFiles(videosDir, 'videos', ['.mp4', '.webm']);
-    const sounds = getFiles(musicDir, 'music', ['.mp3', '.wav', '.ogg']);
+    const videos = getFiles(videosDir, 'backgrounds/video', ['.mp4', '.webm']);
+    const sounds = getFiles(musicDir, 'audio/bgm', ['.mp3', '.wav', '.ogg', '.m4a']);
 
     return NextResponse.json({ videos, sounds }, {
         headers: {

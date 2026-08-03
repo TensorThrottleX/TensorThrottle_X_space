@@ -1,0 +1,16 @@
+{
+  "title": "Blue Lock",
+  "subtitle": "Egoist striker project",
+  "description": "A radical take on sports anime that abandons the traditional power of friendship for raw, unadulterated ego. It dissects the psychology of what makes a world-class striker, emphasizing that to stand at the pinnacle, one must be willing to consume others' dreams.",
+  "accentColor": "#3b82f6",
+  "quotes": [
+    "I will be the best striker in the world.",
+    "Devour your opponents.",
+    "Football is not a game of friendship, it's a game of ego."
+  ],
+  "characters": [
+    { "name": "Yoichi Isagi", "role": "Protagonist" },
+    { "name": "Meguru Bachira", "role": "Ally / Playmaker" },
+    { "name": "Rin Itoshi", "role": "Rival" }
+  ]
+}

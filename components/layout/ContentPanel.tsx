@@ -30,7 +30,9 @@ export function ContentPanel({ children, title, subtitle, latestPublishedAt, hid
         )}
         style={{
           backgroundColor: 'var(--card-bg)',
-          backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05), transparent)',
+          backgroundImage: isBright
+            ? 'radial-gradient(circle at 50% 0%, rgba(0,0,0,0.02), transparent)'
+            : 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05), transparent)',
           borderColor: 'var(--card-border)',
         }}
       >

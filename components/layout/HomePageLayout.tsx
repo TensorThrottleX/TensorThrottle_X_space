@@ -1,167 +1,165 @@
 'use client';
-// Force rebuild: v2 (Consolidated Chunks)
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { LabContainer } from '@/components/layout/LabContainer';
-import { LabNavigation } from '@/components/layout/LabNavigation';
-import { RightFloatingBar } from '@/components/layout/RightFloatingBar';
+import { SpaceAtmosphere } from '@/components/layout/SpaceAtmosphere';
+import { ConveyorTags } from '@/components/visuals/ConveyorTags';
 import { useUI } from '@/components/providers/UIProvider';
-import { AnimatePresence } from 'framer-motion';
 
-// Lazy-load heavy components — reduces initial JS bundle by ~80KB
-// These are only rendered after user interaction or initial hydration
-const CognitiveDashboard = dynamic<{ mode?: 'purpose' | 'about' | 'quote' }>(
-    () => import('@/components/dashboard/CognitiveDashboard').then(m => ({ default: m.CognitiveDashboard })),
+
+const GlobeSection = dynamic<{ isBright: boolean; revealProgress?: number }>(
+    () => import('@/components/globe/GlobeSection').then(m => ({ default: m.GlobeSection })),
     { ssr: false }
 )
-const MsgView = dynamic<{ userId?: string }>(
-    () => import('@/components/forms/MsgView').then(m => ({ default: m.MsgView })),
-    { ssr: false }
-)
-const InteractiveHome = dynamic<{}>(
-    () => import('@/components/visuals/InteractiveHome').then(m => ({ default: m.InteractiveHome })),
+const FoundationModule = dynamic<import('@/components/dashboard/FoundationModule').FoundationModuleProps>(
+    () => import('@/components/dashboard/FoundationModule').then(m => ({ default: m.FoundationModule })),
     { ssr: false }
 )
 
-/* HOME > LAYOUT > COMPONENT > MAIN_PAGE_CONTROLLER */
 export function HomePageLayout() {
-    // [SCREENSHOT]: Used as the main layout controller. 
-    // It manages the state for 'Purpose' vs 'About' and renders the global persistent elements (Title, Toggle).
-    const { uiMode, mainView, renderMode } = useUI();
-    const [contentMode, setContentMode] = useState<'purpose' | 'about' | 'quote'>('purpose');
+    const { uiMode, mainView, renderMode, setIsTerminalOpen } = useUI();
     const isBright = renderMode === 'bright';
 
+    const globeWrapperRef = useRef<HTMLDivElement>(null);
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    const globeSectionActive = mainView === 'dashboard' && uiMode === 'default';
+
+
+
+    const computeProgress = useCallback(() => {
+        if (!globeWrapperRef.current) return 0;
+        const rect = globeWrapperRef.current.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const trigger = vh * 0.65;
+        return Math.max(0, Math.min((trigger - rect.top) / trigger, 1));
+    }, []);
+
+    // Recalculate on every scroll so revealProgress updates reactively
+    useEffect(() => {
+        const update = () => setScrollProgress(computeProgress())
+        update()
+        window.addEventListener('scroll', update, { passive: true })
+        window.addEventListener('resize', update, { passive: true })
+        return () => {
+            window.removeEventListener('scroll', update)
+            window.removeEventListener('resize', update)
+        }
+    }, [computeProgress])
+
+    // Space atmosphere progression — 0→1 as globe section enters viewport
+    const spaceProgress = scrollProgress;
+
+    // Globe reveal lags slightly behind atmosphere
+    const revealProgress = Math.max(0, Math.min((spaceProgress - 0.15) / 0.7, 1));
+
     return (
+        <>
+        <SpaceAtmosphere spaceProgress={spaceProgress} />
         <LabContainer videoSrc="/media/videos/default-background.mp4">
-            {/* [FLOW_PLANE]: Main vertical stack -> .viewport-section for Vertical Balance */}
-            <div className="viewport-section flex-col items-center w-full">
-                {/* 1. Header Title (Flow-based) -> .hero-header for Width Constraint */}
-                <AnimatePresence>
+            {/* Removed AdaptiveBackground as it causes a third theme state by overriding CSS variables */}
+
+            {/* Main scrollable content */}
+            <div className="relative z-10">
+                <AnimatePresence mode="wait">
                     {mainView === 'dashboard' && uiMode === 'default' && (
                         <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="hero-header relative w-full flex justify-center z-40 pointer-events-none select-none pb-4"
+                            key="home-hero"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0, scale: 0.96 }}
+                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            <motion.h1
-                                initial={{ opacity: 0, filter: 'blur(12px)', y: 10 }}
-                                animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-                                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-4xl md:text-6xl lg:text-7xl tracking-tight m-0 drop-shadow-2xl uppercase select-none"
-                                style={{
-                                    color: 'var(--heading-primary)',
-                                    fontFamily: '"Playfair Display", serif',
-                                    fontWeight: 900,
-                                    letterSpacing: '-0.02em',
-                                    WebkitTextStroke: isBright ? 'none' : '1.5px rgba(255,255,255,0.95)'
-                                }}
-                            >
-                                TENSOR THROTTLEX SPACE
-                            </motion.h1>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                            {/* ── Hero + Cards Section ── */}
+                            <div className="flex flex-col items-center w-full min-h-screen pt-20 lg:pt-28 pb-24 lg:pb-48">
+                                {/* ── Hero Section ── */}
+                                <div className="flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
+                                    <motion.h1
+                                        initial={{ opacity: 0, filter: 'blur(16px)', y: 30 }}
+                                        animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                                        transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                                        className="leading-[1.05] mb-3 whitespace-normal lg:whitespace-nowrap"
+                                        style={{
+                                            fontFamily: "'Stay Chill', sans-serif",
+                                            fontWeight: 700,
+                                            fontSize: 'clamp(28px, 4.5vw, 58px)',
+                                            letterSpacing: '0.02em',
+                                            color: 'var(--adaptive-hero-color)',
+                                            textShadow: 'var(--adaptive-hero-shadow)',
+                                        }}>
+                                        TensorThrottle X Space
+                                    </motion.h1>
 
+                                    <motion.h2
+                                        initial={{ opacity: 0, y: 15 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                                        style={{
+                                            fontFamily: "'Stay Chill', sans-serif",
+                                            fontWeight: 600,
+                                            fontSize: 'clamp(22px, 3.5vw, 38px)',
+                                            color: 'var(--adaptive-hero-secondary)',
+                                            letterSpacing: '-0.01em',
+                                        }}
+                                        className="mb-1"
+                                    >
+                                        Dimension for Exploration.
+                                    </motion.h2>
 
-                {/* 2. Content Toggle (Flow-based) */}
-                <AnimatePresence>
-                    {mainView === 'dashboard' && uiMode === 'default' && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="relative w-full flex justify-center z-50 pointer-events-auto py-4"
-                        >
-                            <div className="relative flex items-center rounded-full border p-1 shadow-[var(--shadow-premium)] gap-1 transition-colors duration-500"
-                                style={{
-                                    backgroundColor: isBright ? 'rgba(0,0,0,0.05)' : 'rgba(0,0,0,0.4)',
-                                    borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
-                                    backdropFilter: 'blur(12px)'
-                                }}
-                            >
-                                {/* Sliding Indicator */}
+                                    <motion.p
+                                        initial={{ opacity: 0, y: 15 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.7, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                                        style={{
+                                            fontFamily: "'Stay Chill', sans-serif",
+                                            fontWeight: 450,
+                                            fontSize: 'clamp(16px, 2.2vw, 26px)',
+                                            color: 'var(--adaptive-hero-muted)',
+                                        }}
+                                        className="mb-5"
+                                    >
+                                        Nothing Here Is Truly Finished.
+                                    </motion.p>
+                                </div>
+
+                                {/* ── Floating Tags Conveyor ── */}
                                 <motion.div
-                                    className="absolute h-[calc(100%-8px)] rounded-full shadow-inner border"
-                                    initial={false}
-                                    animate={{
-                                        x: contentMode === 'purpose' ? 0 : (contentMode === 'about' ? 114 : 228)
-                                    }}
-                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                    style={{
-                                        left: 4,
-                                        top: 4,
-                                        width: 110,
-                                        backgroundColor: isBright ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.1)',
-                                        borderColor: isBright ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.05)',
-                                    }}
-                                />
-
-                                {/* Purpose Button */}
-                                <button
-                                    onClick={() => setContentMode('purpose')}
-                                    className={`relative w-[110px] h-9 text-xs font-bold tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'purpose'
-                                        ? (isBright ? 'text-black' : 'text-white')
-                                        : (isBright ? 'text-black/40' : 'text-white/50 hover:text-white/80')
-                                        }`}
+                                    className="w-full"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                 >
-                                    PURPOSE
-                                </button>
+                                    <ConveyorTags />
+                                </motion.div>
 
-                                {/* About Button */}
-                                <button
-                                    onClick={() => setContentMode('about')}
-                                    className={`relative w-[110px] h-9 text-xs font-bold tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'about'
-                                        ? (isBright ? 'text-black' : 'text-white')
-                                        : (isBright ? 'text-black/40' : 'text-white/50 hover:text-white/80')
-                                        }`}
+                                {/* ── Foundation Cards ── */}
+                                <motion.div
+                                    className="w-full max-w-5xl mx-auto px-6 mt-8"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 1.1, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                                 >
-                                    ABOUT
-                                </button>
-
-                                {/* Quote Button */}
-                                <button
-                                    onClick={() => setContentMode('quote')}
-                                    className={`relative w-[110px] h-9 text-xs font-bold tracking-wide transition-colors duration-300 rounded-full flex items-center justify-center ${contentMode === 'quote'
-                                        ? (isBright ? 'text-black' : 'text-white')
-                                        : (isBright ? 'text-black/40' : 'text-white/50 hover:text-white/80')
-                                        }`}
-                                >
-                                    QUOTE
-                                </button>
+                                    <FoundationModule isBright={isBright} />
+                                </motion.div>
                             </div>
+
+                            {/* ── Globe Section (Chapter 2) ── */}
+                            <div ref={globeWrapperRef}>
+                                <GlobeSection isBright={isBright} revealProgress={revealProgress} />
+                            </div>
+
+                            {/* ── Footer spacer ── */}
+                            <div className="h-32" />
                         </motion.div>
                     )}
                 </AnimatePresence>
-
-                {/* 3. INTERFACE_PLANE (Independent fixed layers now in Root Layout) */}
-
-                {/* 4. DYNAMIC CENTER CONTENT (Participates in flow) */}
-                <div className="relative w-full flex-1 flex flex-col items-center">
-                    <AnimatePresence mode="wait">
-                        {mainView === 'dashboard' && (
-                            <CognitiveDashboard key="dashboard" mode={contentMode} />
-                        )}
-                    </AnimatePresence>
-                </div>
             </div>
 
-            {/* Terminal Sits ON TOP - Restrict to Home Page (Dashboard) Only */}
-            <AnimatePresence>
-                {mainView === 'dashboard' && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed inset-0 pointer-events-none z-[100]"
-                    >
-                        <InteractiveHome />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+
         </LabContainer>
+        </>
     );
 }

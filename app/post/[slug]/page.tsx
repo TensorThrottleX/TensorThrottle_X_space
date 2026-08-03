@@ -12,6 +12,8 @@ import { ResponsiveContentWrapper } from '@/components/layout/ResponsiveContentW
 // ISR: Revalidate every 1 minute
 export const revalidate = 60
 
+
+
 interface PostPageProps {
   params: Promise<{ slug: string }>
 }
@@ -132,12 +134,12 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <ResponsiveContentWrapper>
+    <ResponsiveContentWrapper pageTitle={post.title}>
       <LabContainer videoSrc="/media/videos/default-background.mp4">
         {/* Left: Floating navigation panel (Now in Root Layout) */}
 
         {/* Right: Content panel */}
-        <ContentPanel title={post.title} subtitle={post.category}>
+        <ContentPanel>
           <article className="space-y-6">
             {/* Post metadata */}
             <div className="border-b border-white/10 pb-6">

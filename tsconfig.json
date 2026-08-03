@@ -29,5 +29,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "globe 3d", "components/globe", "lib/globe-utils.ts", "prism-engine/vite.config.ts", "prism-engine/pages", "prism-engine/node_modules", "prism-engine/public", "scratch"]
 }

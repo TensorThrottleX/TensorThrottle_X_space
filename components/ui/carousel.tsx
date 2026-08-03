@@ -1,50 +1,50 @@
 'use client'
 
 import * as React from 'react'
-import useEmblaCarousel, {
-  type UseEmblaCarouselType,
+import useEmblaPrism, {
+  type UseEmblaCarouselType as UseEmblaPrismType,
 } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-type CarouselApi = UseEmblaCarouselType[1]
-type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
-type CarouselOptions = UseCarouselParameters[0]
-type CarouselPlugin = UseCarouselParameters[1]
+type PrismApi = UseEmblaPrismType[1]
+type UsePrismParameters = Parameters<typeof useEmblaPrism>
+type PrismOptions = UsePrismParameters[0]
+type PrismPlugin = UsePrismParameters[1]
 
-type CarouselProps = {
-  opts?: CarouselOptions
-  plugins?: CarouselPlugin
+type PrismProps = {
+  opts?: PrismOptions
+  plugins?: PrismPlugin
   orientation?: 'horizontal' | 'vertical'
-  setApi?: (api: CarouselApi) => void
+  setApi?: (api: PrismApi) => void
 }
 
-type CarouselContextProps = {
-  carouselRef: ReturnType<typeof useEmblaCarousel>[0]
-  api: ReturnType<typeof useEmblaCarousel>[1]
+type PrismContextProps = {
+  prismRef: ReturnType<typeof useEmblaPrism>[0]
+  api: ReturnType<typeof useEmblaPrism>[1]
   scrollPrev: () => void
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
-} & CarouselProps
+} & PrismProps
 
-const CarouselContext = React.createContext<CarouselContextProps | null>(null)
+const PrismContext = React.createContext<PrismContextProps | null>(null)
 
-function useCarousel() {
-  const context = React.useContext(CarouselContext)
+function usePrismInteraction() {
+  const context = React.useContext(PrismContext)
 
   if (!context) {
-    throw new Error('useCarousel must be used within a <Carousel />')
+    throw new Error('usePrismInteraction must be used within a <Prism />')
   }
 
   return context
 }
 
-const Carousel = React.forwardRef<
+const Prism = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & CarouselProps
+  React.HTMLAttributes<HTMLDivElement> & PrismProps
 >(
   (
     {
@@ -58,7 +58,7 @@ const Carousel = React.forwardRef<
     },
     ref,
   ) => {
-    const [carouselRef, api] = useEmblaCarousel(
+    const [prismRef, api] = useEmblaPrism(
       {
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
@@ -68,7 +68,7 @@ const Carousel = React.forwardRef<
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
 
-    const onSelect = React.useCallback((api: CarouselApi) => {
+    const onSelect = React.useCallback((api: PrismApi) => {
       if (!api) {
         return
       }
@@ -121,9 +121,9 @@ const Carousel = React.forwardRef<
     }, [api, onSelect])
 
     return (
-      <CarouselContext.Provider
+      <PrismContext.Provider
         value={{
-          carouselRef,
+          prismRef,
           api: api,
           opts,
           orientation:
@@ -139,25 +139,25 @@ const Carousel = React.forwardRef<
           onKeyDownCapture={handleKeyDown}
           className={cn('relative', className)}
           role="region"
-          aria-roledescription="carousel"
+          aria-roledescription="prism"
           {...props}
         >
           {children}
         </div>
-      </CarouselContext.Provider>
+      </PrismContext.Provider>
     )
   },
 )
-Carousel.displayName = 'Carousel'
+Prism.displayName = 'Prism'
 
-const CarouselContent = React.forwardRef<
+const PrismContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { carouselRef, orientation } = useCarousel()
+  const { prismRef, orientation } = usePrismInteraction()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={prismRef} className="overflow-hidden">
       <div
         ref={ref}
         className={cn(
@@ -170,13 +170,13 @@ const CarouselContent = React.forwardRef<
     </div>
   )
 })
-CarouselContent.displayName = 'CarouselContent'
+PrismContent.displayName = 'PrismContent'
 
-const CarouselItem = React.forwardRef<
+const PrismItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { orientation } = useCarousel()
+  const { orientation } = usePrismInteraction()
 
   return (
     <div
@@ -192,13 +192,13 @@ const CarouselItem = React.forwardRef<
     />
   )
 })
-CarouselItem.displayName = 'CarouselItem'
+PrismItem.displayName = 'PrismItem'
 
-const CarouselPrevious = React.forwardRef<
+const PrismPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const { orientation, scrollPrev, canScrollPrev } = usePrismInteraction()
 
   return (
     <Button
@@ -221,13 +221,13 @@ const CarouselPrevious = React.forwardRef<
     </Button>
   )
 })
-CarouselPrevious.displayName = 'CarouselPrevious'
+PrismPrevious.displayName = 'PrismPrevious'
 
-const CarouselNext = React.forwardRef<
+const PrismNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { orientation, scrollNext, canScrollNext } = usePrismInteraction()
 
   return (
     <Button
@@ -250,13 +250,13 @@ const CarouselNext = React.forwardRef<
     </Button>
   )
 })
-CarouselNext.displayName = 'CarouselNext'
+PrismNext.displayName = 'PrismNext'
 
 export {
-  type CarouselApi,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
+  type PrismApi,
+  Prism,
+  PrismContent,
+  PrismItem,
+  PrismPrevious,
+  PrismNext,
 }

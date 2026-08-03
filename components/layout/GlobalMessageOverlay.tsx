@@ -41,7 +41,7 @@ export function GlobalMessageOverlay() {
                     transition={{ type: "spring", damping: 30, stiffness: 300 }}
                     className={cn(
                         "fixed inset-0 z-[300] overflow-y-auto pb-20 no-scrollbar touch-pan-y",
-                        isBright ? "bg-[#f5f5f5]" : "bg-black"
+                        isBright ? "bg-[#F5F5F4]" : "bg-black"
                     )}
                     style={{ height: '100dvh' }}
                 >

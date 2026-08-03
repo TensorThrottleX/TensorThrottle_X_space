@@ -54,8 +54,6 @@ export function MobileHeader({
     const menuRef = useRef<HTMLDivElement>(null)
     const isBright = renderMode === 'bright'
 
-    if (isBooting) return null
-
     // Status logic for mobile blinker
     const pubDate = latestPublishedAt ? new Date(latestPublishedAt) : null
     const isValidDate = pubDate && isValid(pubDate)
@@ -81,6 +79,8 @@ export function MobileHeader({
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [menuOpen])
 
+    if (isBooting) return null
+
     const formatTime = (date: Date) => {
         const h = date.getHours().toString().padStart(2, '0')
         const m = date.getMinutes().toString().padStart(2, '0')
@@ -95,7 +95,7 @@ export function MobileHeader({
             <header
                 className="mobile-header fixed top-0 left-0 right-0 z-[200] backdrop-blur-xl border-b transition-colors duration-300"
                 style={{
-                    backgroundColor: isBright ? '#fafafa' : '#000000',
+                    backgroundColor: isBright ? '#F5F5F4' : '#000000',
                     borderColor: isBright ? 'rgba(0, 0, 0, 0.25)' : 'var(--glass-border)',
                     boxShadow: 'var(--shadow-premium)',
                     height: '68px'
@@ -183,7 +183,7 @@ export function MobileHeader({
                                         transition={{ duration: 0.15, ease: 'easeOut' }}
                                         className="absolute top-full right-0 mt-2 w-52 rounded-xl border overflow-hidden shadow-[var(--shadow-premium)] z-[300]"
                                         style={{
-                                            backgroundColor: isBright ? '#ffffff' : 'var(--card-bg)',
+                                            backgroundColor: isBright ? '#F5F5F4' : 'var(--card-bg)',
                                             borderColor: isBright ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
                                         }}
                                     >

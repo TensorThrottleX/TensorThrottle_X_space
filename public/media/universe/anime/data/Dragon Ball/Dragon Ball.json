@@ -1,0 +1,35 @@
+{
+  "title": "Dragon Ball",
+  "subtitle": "The ultimate battle for the universe",
+  "description": "Follow the adventures of Goku, from his childhood to adulthood, as he trains in martial arts and explores the world in search of the seven mystical orbs known as the Dragon Balls. What begins as a lighthearted journey of discovery evolves into a saga of epic proportions, spanning entire galaxies and alternate dimensions. The series explores themes of limitless potential, the thrill of pushing past one's physical and mental limits, and the importance of rivalry in achieving greatness. From defending Earth against tyrannical alien conquerors to participating in tournaments where the fate of the multiverse hangs in the balance, Goku and his allies embody the unyielding spirit of self-improvement.\n\nNowhere is this spirit more evident than during the harrowing battle on the dying planet Namek. After witnessing the ruthless murder of his best friend Krillin at the hands of the galactic tyrant Frieza, Goku's grief and pure rage shatter his limits. Lightning strikes and the ground shatters as his hair turns golden, ascending him to the legendary state of Super Saiyan. This iconic transformation forever changed the landscape of anime, symbolizing the ultimate triumph of righteous fury and the limitless depths of a warrior's resolve when everything they hold dear is taken away.",
+  "accentColor": "#eab308",
+  "quotes": [
+    "Power comes in response to a need, not a desire.",
+    "I am the hope of the universe. I am the answer to all living things that cry out for peace.",
+    "Sometimes, we have to look beyond what we want and do what's best.",
+    "It's over 9000!",
+    "Push through the pain, giving up hurts more.",
+    "I'd rather be a brainless monkey than a heartless monster.",
+    "Even the mightiest warriors experience fears. What makes them a true warrior is the courage that they possess to overcome their fears.",
+    "There's only one certainty in life. A strong man stands above and conquers all!"
+  ],
+  "characters": [
+    { "name": "Son Goku", "role": "Protagonist" },
+    { "name": "Vegeta", "role": "Rival / Prince of all Saiyans" },
+    { "name": "Piccolo", "role": "Mentor / Ally" },
+    { "name": "Bulma", "role": "Inventor / Scientist" },
+    { "name": "Son Gohan", "role": "Son / Scholar" },
+    { "name": "Krillin", "role": "Best Friend" },
+    { "name": "Master Roshi", "role": "Original Master" },
+    { "name": "Frieza", "role": "Galactic Emperor / Antagonist" },
+    { "name": "Cell", "role": "Ultimate Android" },
+    { "name": "Majin Buu", "role": "Ancient Threat" },
+    { "name": "Trunks", "role": "Time Traveler" },
+    { "name": "Android 18", "role": "Reformed Android" },
+    { "name": "Beerus", "role": "God of Destruction" },
+    { "name": "Whis", "role": "Angel / Attendant" },
+    { "name": "Broly", "role": "Legendary Super Saiyan" },
+    { "name": "Jiren", "role": "Pride Trooper" },
+    { "name": "Goku Black", "role": "Imposter / Zamasu" }
+  ]
+}

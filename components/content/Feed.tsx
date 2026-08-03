@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { PostCard } from './PostCard'
 import type { Post } from '@/types/post'
+import { POSTS_PER_PAGE } from '@/lib/pagination'
 
 interface FeedProps {
   initialPosts: Post[]
@@ -13,13 +14,11 @@ interface PostsApiResponse {
   nextCursor: string | null
 }
 
-const POSTS_PER_PAGE = 6
-
 export function Feed({ initialPosts }: FeedProps) {
   const [posts, setPosts] = useState<Post[]>(initialPosts)
   const [isLoading, setIsLoading] = useState(false)
   const [nextCursor, setNextCursor] = useState<string | null>(
-    initialPosts.length >= POSTS_PER_PAGE ? '6' : null
+    initialPosts.length >= POSTS_PER_PAGE ? String(initialPosts.length) : null
   )
   const [error, setError] = useState<string | null>(null)
 

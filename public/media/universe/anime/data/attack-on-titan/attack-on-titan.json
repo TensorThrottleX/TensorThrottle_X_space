@@ -1,0 +1,17 @@
+{
+  "title": "Attack on Titan",
+  "subtitle": "Freedom found in the jaws of despair",
+  "description": "In a world where humanity lives behind massive walls to protect themselves from man-eating Titans, young Eren Jaeger vows to exterminate them after his city is breached.",
+  "accentColor": "#84cc16",
+  "quotes": [
+    "If you win, you live. If you lose, you die. If you don't fight, you can't win.",
+    "The only ones who can change the world are those willing to give up everything.",
+    "I am free. I will keep moving forward until my enemies are destroyed."
+  ],
+  "characters": [
+    { "name": "Eren Jaeger", "role": "Protagonist" },
+    { "name": "Mikasa Ackerman", "role": "Guardian" },
+    { "name": "Armin Arlert", "role": "Strategist" },
+    { "name": "Levi Ackerman", "role": "Captain" }
+  ]
+}
