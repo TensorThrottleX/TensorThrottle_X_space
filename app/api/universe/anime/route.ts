@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readdirSync, readFileSync, existsSync } from 'fs'
+import { readdirSync, readFileSync, existsSync, statSync } from 'fs'
 import { join } from 'path'
 
 import {
@@ -54,6 +54,14 @@ export async function GET() {
     const videoFilename = findAsset(VIDEO_DIR, id, VIDEO_EXTENSIONS)
     const audioFilename = findAsset(AUDIO_DIR, id, AUDIO_EXTENSIONS)
 
+    let updatedAt = new Date().toISOString()
+    try {
+      const stats = statSync(jsonPath)
+      updatedAt = stats.mtime.toISOString()
+    } catch (e) {
+      // fallback
+    }
+
     results.push({
       id,
       title: String(parsed.title ?? id),
@@ -70,6 +78,7 @@ export async function GET() {
       coverImage: coverFilename ? coverPath(id, coverFilename) : null,
       videoUrl: videoFilename ? videoPath(id, videoFilename) : null,
       audioTracks: audioFilename ? [audioPath(id, audioFilename)] : [],
+      updatedAt,
     })
   }
 

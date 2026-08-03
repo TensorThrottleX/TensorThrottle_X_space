@@ -4,13 +4,13 @@
 // existing /universe/anime route.
 
 import type { Activity, ActivityProvider } from '@/types/activity'
-import { deriveActivityTimestamp } from '../time'
 
 interface AnimeSeries {
   id: string
   title: string
   subtitle?: string
   accentColor?: string
+  updatedAt?: string
   [key: string]: unknown
 }
 
@@ -23,7 +23,7 @@ export const animeActivityProvider: ActivityProvider = {
       const seriesList = await res.json()
       if (!Array.isArray(seriesList)) return []
       return seriesList
-        .filter((s: AnimeSeries) => s && s.id && s.title)
+        .filter((s: AnimeSeries) => s && s.id && s.title && s.updatedAt)
         .map((s: AnimeSeries) => ({
           id: `anime-${s.id}`,
           module: 'anime-universe',
@@ -31,7 +31,7 @@ export const animeActivityProvider: ActivityProvider = {
           entityId: s.id,
           title: s.title,
           action: 'updated',
-          timestamp: deriveActivityTimestamp(`anime-${s.id}`),
+          timestamp: s.updatedAt!,
           url: '/universe/anime',
           metadata: { subtitle: s.subtitle ?? null },
         } satisfies Activity))

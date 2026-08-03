@@ -11,4 +11,5 @@ export interface Anime {
   coverImage: string | null
   videoUrl: string | null
   audioTracks: string[]
+  updatedAt?: string
 }

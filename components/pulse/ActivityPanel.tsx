@@ -198,10 +198,10 @@ export function ActivityPanel({
                     <Bell size={18} />
                   </span>
                   <p className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
-                    No activity yet
+                    No recent activity.
                   </p>
                   <p className="mt-1 text-[11px]" style={{ color: dim }}>
-                    The ecosystem is quiet — check back soon.
+                    Activity will appear here as content across TensorThrottleX evolves.
                   </p>
                   <button
                     type="button"
