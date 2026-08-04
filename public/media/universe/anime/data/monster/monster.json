@@ -1,0 +1,188 @@
+{
+  "id": "monster",
+  "index": 9,
+  "title": "Monster",
+  "subtitle": "The choice to keep saving people",
+  "jpTitle": "モンスター",
+  "year": 2004,
+  "genre": "Psychological Thriller",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I started it because people called it the greatest thriller ever drawn. I kept watching because it asked a question I'd been avoiding: what do I owe the people I've already hurt?"
+  },
+  "reflection": {
+    "quote": "Johan isn't the monster of the title. The monster is the idea that some people can be written off. Tenma spends the whole story refusing to write anyone off — that's the whole battle.",
+    "tags": [
+      "human nature",
+      "choice",
+      "compassion",
+      "responsibility"
+    ],
+    "whatIKept": "Compassion can be a decision, not a feeling. Grimmer learned to smile like a textbook and still chose to use it on other people. That stayed with me.",
+    "definingScene": "Grimmer, after everything, whispering 'I am smiling.' A man who never felt a thing, deciding to be kind anyway — because it was right, not because it felt good.",
+    "whoItMadeMeThinkAbout": "The small cruelties I excuse because they're small — and the people who became who they are because someone wrote them off."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "One life over another. He made the wrong choice for the right reasons.",
+      "micro": "Episode 1"
+    },
+    {
+      "thought": "The boy he saved grows up to be the thing he feared most.",
+      "micro": "After the opera"
+    },
+    {
+      "thought": "Johan is terrifying because he's empty, not because he's cruel.",
+      "micro": "Throughout"
+    },
+    {
+      "thought": "Grimmer says 'I am smiling' and I had to pause the episode.",
+      "micro": "Later chapters"
+    },
+    {
+      "thought": "I spent a week wondering which of my compromises feed something I don't want to name.",
+      "micro": "After the finale"
+    }
+  ],
+  "cinematicMoment": {
+    "eyebrow": "The turning point",
+    "title": "The mayor or the boy.",
+    "body": "Tenma had a second — a real second — where his hand almost went to the famous man. Then he chose the boy. It's the same second everyone gets, and I keep asking myself what I would have done.",
+    "episode": "Episode 1",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Scalpel",
+        "text": "His instrument of salvation and, indirectly, of the wound. We are responsible for what we create, even accidentally.",
+        "tag": "Responsibility",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Smile",
+        "text": "Grimmer's smile is a learned behavior — and he still chooses to point it outward. Kindness is a practice, not a mood.",
+        "tag": "Choice",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Picture Book",
+        "text": "The nameless monster: a child who decides he has no name. What happens when identity is stolen before it's built.",
+        "tag": "Identity",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "I stopped believing evil is a category.",
+      "body": "Johan stopped being a villain to me and became an answer to a question: what happens to a child who is never treated as a person? I started seeing cruelty as evidence of something, not proof of someone's nature.",
+      "caption": "Monsters are made — out of people.",
+      "image": "",
+      "flip": false
+    },
+    {
+      "question": "What did I admire?",
+      "heading": "Tenma never stops running.",
+      "body": "He made one mistake, then spent the whole story trying to undo it — knowing he can't. Responsibility isn't a feeling. It's a motion you keep making.",
+      "caption": "Guilt is a compass, not a prison.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "I am smiling. I am smiling.",
+    "attribution": "— Wolfgang Grimmer"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "A tense thriller",
+      "body": "I expected a chase: genius detective hunts serial killer. The show delivered the opposite — a doctor chasing his own past."
+    },
+    "whatShifted": {
+      "heading": "The question underneath",
+      "body": "It stopped being about catching Johan and became about why he exists. Every monster in the story was made by the same machine."
+    },
+    "whatStayed": {
+      "heading": "Radical compassion",
+      "body": "Tenma's refusal to kill, even at the end, isn't weakness — it's the thesis. The only way out is refusing to write anyone off."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I notice",
+        "line": "when I dehumanize someone for convenience."
+      },
+      {
+        "verb": "I try",
+        "line": "to make compassion a practice rather than a mood."
+      },
+      {
+        "verb": "I question",
+        "line": "the small cruelties I excuse because they're small."
+      }
+    ]
+  },
+  "characters": [
+    {
+      "name": "Kenzo Tenma",
+      "role": "The mirror",
+      "mirror": "He reflected my own relationship with my mistakes: the constant motion of trying to fix what can't be fixed — and refusing to stop anyway."
+    },
+    {
+      "name": "Johan Liebert",
+      "role": "The question",
+      "mirror": "He made me uncomfortable because he's not a reason to give up on people. He's the reason you never start writing people off."
+    },
+    {
+      "name": "Wolfgang Grimmer",
+      "role": "The ideal",
+      "mirror": "He had every reason to become a monster and chose to be the warmest person in the room. I keep him as a standard."
+    }
+  ],
+  "notes": [
+    {
+      "text": "The scariest moment isn't Johan. It's realizing how many people would do exactly what he asks.",
+      "footer": "Midway through"
+    },
+    {
+      "text": "Tenma runs from his past and spends the whole show running toward it. That's just what accountability looks like.",
+      "footer": "After the finale"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "The nameless self",
+      "application": "Identity is built in childhood, and every adult I influence is either giving someone a name or taking one away."
+    },
+    {
+      "concept": "Radical compassion",
+      "application": "Treating people's worst acts as symptoms to understand, not verdicts to enforce. It doesn't excuse — it explains, and explanation is where change starts."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I keep meeting the question of what I owe the people I've already hurt — and I no longer believe the answer is nothing.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Vinland Saga",
+        "reason": "Violence traded for purpose."
+      },
+      {
+        "title": "Death Note",
+        "reason": "Intelligence without a conscience."
+      },
+      {
+        "title": "Psycho-Pass",
+        "reason": "When the system itself decides who is a criminal."
+      }
+    ]
+  }
+}

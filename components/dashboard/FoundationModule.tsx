@@ -18,7 +18,7 @@ const TABS: Tab[] = ['purpose', 'about', 'quote']
 const TAB_W = 82
 const GAP = 2
 
-export function FoundationModule({ isBright }: FoundationModuleProps) {
+export default function FoundationModule({ isBright }: FoundationModuleProps) {
   const [activeTab, setActiveTab] = useState<Tab>('purpose')
   const tabIndex = TABS.indexOf(activeTab)
 

@@ -7,12 +7,14 @@ export interface KeyboardBindingOptions {
 
 export class KeyboardInput {
   private target: Window | Document;
+  private element?: HTMLElement;
   private onNext: () => void;
   private onPrev: () => void;
   private enabled: boolean;
 
-  constructor(options: KeyboardBindingOptions) {
+  constructor(options: KeyboardBindingOptions & { element?: HTMLElement }) {
     this.target = options.target ?? window;
+    this.element = options.element;
     this.onNext = options.onNext;
     this.onPrev = options.onPrev;
     this.enabled = options.enabled ?? true;
@@ -20,6 +22,15 @@ export class KeyboardInput {
 
   private handleKeyDown = (e: KeyboardEvent) => {
     if (!this.enabled) return;
+    
+    if (this.element) {
+      const rect = this.element.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visibleHeight = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+      const visiblePercentage = visibleHeight / rect.height;
+      if (visiblePercentage < 0.5) return;
+    }
+
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
       this.onPrev();

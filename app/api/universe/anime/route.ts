@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { readdirSync, readFileSync, existsSync, statSync } from 'fs'
 import { join } from 'path'
 
+export const dynamic = 'force-dynamic'
+
 import {
   COVER_EXTENSIONS,
   VIDEO_EXTENSIONS,
@@ -25,6 +27,30 @@ function findAsset(dir: string, id: string, extensions: readonly string[]): stri
   }
   return null
 }
+
+// ── Defensive readers: absent/empty → undefined so sections hide gracefully ──
+function asString(v: unknown): string | undefined {
+  return typeof v === 'string' && v.trim() ? v.trim() : undefined
+}
+
+function asStringList(v: unknown): string[] | undefined {
+  if (!Array.isArray(v)) return undefined
+  const list = v.map((s) => (typeof s === 'string' ? s.trim() : '')).filter(Boolean)
+  return list.length ? list : undefined
+}
+
+function asStringRecord(v: unknown, keys: readonly string[]): Record<string, string> | null {
+  if (!v || typeof v !== 'object') return null
+  const rec = v as Record<string, unknown>
+  const out: Record<string, string> = {}
+  for (const k of keys) {
+    const val = rec[k]
+    out[k] = typeof val === 'string' ? val.trim() : ''
+  }
+  return keys.some((k) => out[k]) ? out : null
+}
+
+
 
 export async function GET() {
   if (!existsSync(DATA_DIR)) {
@@ -65,20 +91,24 @@ export async function GET() {
     results.push({
       id,
       title: String(parsed.title ?? id),
-      subtitle: String(parsed.subtitle ?? ''),
-      description: String(parsed.description ?? ''),
-      accentColor: String(parsed.accentColor ?? '#22d3ee'),
-      quotes: Array.isArray(parsed.quotes) ? parsed.quotes.map(String) : [],
+      subtitle: asString(parsed.subtitle) ?? '',
+      description: asString(parsed.description) ?? '',
+      accentColor: asString(parsed.accentColor) ?? '#22d3ee',
+      quotes: asStringList(parsed.quotes) ?? [],
       characters: Array.isArray(parsed.characters)
-        ? parsed.characters.map((c: unknown) => {
-            const ch = c as Record<string, unknown>
-            return { name: String(ch.name ?? ''), role: String(ch.role ?? '') }
-          })
+        ? parsed.characters
+            .map((c: unknown) => {
+              const rec = asStringRecord(c, ['name', 'role'])
+              return rec ? { name: rec.name, role: rec.role } : null
+            })
+            .filter((c): c is { name: string; role: string } => c !== null)
         : [],
       coverImage: coverFilename ? coverPath(id, coverFilename) : null,
       videoUrl: videoFilename ? videoPath(id, videoFilename) : null,
       audioTracks: audioFilename ? [audioPath(id, audioFilename)] : [],
       updatedAt,
+      // The new universal template data payload
+      narrativeData: parsed as any,
     })
   }
 

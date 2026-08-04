@@ -27,7 +27,11 @@ export function usePrismInput(options: UsePrismInputOptions) {
     const disposers: Array<() => void> = [];
 
     if (keyboard) {
-      const kb = new KeyboardInput({ onNext: next, onPrev: prev });
+      const kb = new KeyboardInput({ 
+        onNext: next, 
+        onPrev: prev,
+        element: stageRef.current ?? undefined
+      });
       kb.attach();
       disposers.push(() => kb.detach());
     }

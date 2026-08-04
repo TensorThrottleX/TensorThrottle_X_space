@@ -1,10 +1,8 @@
 'use client'
 
 import React from 'react'
-import dynamic from 'next/dynamic'
-
-const InteractiveHome = dynamic(() => import('@/components/visuals/InteractiveHome').then(m => m.InteractiveHome), { ssr: false })
-const MobileTerminal = dynamic(() => import('@/components/layout/MobileTerminal').then(m => m.MobileTerminal), { ssr: false })
+import InteractiveHome from '@/components/visuals/InteractiveHome';
+import MobileTerminal from '@/components/layout/MobileTerminal';
 
 export function GlobalTerminalRenderer() {
     return (

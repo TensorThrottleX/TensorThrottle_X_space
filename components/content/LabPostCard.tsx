@@ -5,11 +5,11 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
 import type { Post } from '@/types/post'
 import { MessageSquare, Loader2, X, Eye } from 'lucide-react'
-import { DiscussionPanel } from './DiscussionPanel'
 import { NotionBlockRenderer } from './NotionBlockRenderer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useUI } from '@/components/providers/UIProvider'
+import { useDiscussion } from '@/components/providers/DiscussionProvider'
 import { formatCompactCount } from '@/lib/view-count'
 
 interface LabPostCardProps {
@@ -35,9 +35,10 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
   const [content, setContent] = useState<any[]>(post.content || [])
   const [isLoadingContent, setIsLoadingContent] = useState(false)
 
-  // State for the discussion sheet
-  const [isDiscussionOpen, setIsDiscussionOpen] = useState(false)
-  const [displayCount, setDisplayCount] = useState(commentCount)
+  // Use the global discussion store instead of local state
+  const { openThread, optimisticCounts } = useDiscussion()
+  const displayCount = optimisticCounts[post.slug] ?? commentCount
+  
   // Real server-side count; updated automatically after a view is recorded
   const [displayViews, setDisplayViews] = useState(post.viewCount ?? 0)
 
@@ -94,8 +95,7 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
   const openDiscussion = (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
-    // Toggle: clicking the same 💬 icon again closes the workspace
-    setIsDiscussionOpen((o) => !o)
+    openThread(post)
   }
 
   // Handle close: clear URL params if they exist so we "go back" to the feed state
@@ -253,16 +253,6 @@ export const LabPostCard = memo(function LabPostCard({ post, commentCount = 0 }:
         )}
       </AnimatePresence>
 
-      {/* Discussion workspace — opened in place from the 💬 icon */}
-      <DiscussionPanel
-        post={post}
-        postSlug={post.slug}
-        postTitle={post.title}
-        open={isDiscussionOpen}
-        onClose={() => setIsDiscussionOpen(false)}
-        onCommentAdded={() => setDisplayCount((c) => c + 1)}
-        onViewRecorded={(count) => setDisplayViews(count)}
-      />
     </>
   )
 })

@@ -1,17 +1,160 @@
 {
+  "id": "death-note",
+  "index": 4,
   "title": "Death Note",
-  "subtitle": "Justice written in ink and blood",
-  "description": "A brilliant high school student discovers a supernatural notebook that allows him to kill anyone whose name he writes in it, sparking a cat-and-mouse game with the world's greatest detective.",
-  "accentColor": "#a855f7",
-  "quotes": [
-    "I am justice! I protect the innocent and punish the guilty!",
-    "A world without fear, without anxiety... is that not worth fighting for?",
-    "Kira is not a god. He is just a human who happened to find a Death Note."
+  "subtitle": "When being right becomes dangerous",
+  "jpTitle": "デスノート",
+  "year": 2006,
+  "genre": "Psychological Thriller",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I wanted to see a genius outsmart the world. I ended up watching how easily a sense of justice rots into absolute ego."
+  },
+  "reflection": {
+    "quote": "It forced me to ask a question I didn't want to: If I had absolute power and anonymity, how long before my morality became an excuse for my arrogance?",
+    "tags": [
+      "justice",
+      "ego",
+      "control",
+      "intelligence",
+      "power"
+    ],
+    "whatIKept": "Intelligence without empathy is just a highly efficient mechanism for cruelty.",
+    "definingScene": "Light laughing at Raye Penber's death. It wasn't about justice anymore — it was the thrill of outsmarting someone. The mask slipped.",
+    "whoItMadeMeThinkAbout": "The moments I have used 'being right' as an excuse to be unkind."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "He's cleaning up the world. It makes sense.",
+      "micro": "Episode 1"
+    },
+    {
+      "thought": "Wait — he just killed someone who wasn't a criminal.",
+      "micro": "The Lind L. Tailor broadcast"
+    },
+    {
+      "thought": "He doesn't care about justice. He cares about being God.",
+      "micro": "Mid-season"
+    },
+    {
+      "thought": "His intelligence is his blind spot.",
+      "micro": "The Finale"
+    }
   ],
+  "cinematicMoment": {
+    "eyebrow": "The absurdity of ego",
+    "title": "The potato chip.",
+    "body": "I'll take a potato chip... and eat it. A high schooler playing god while doing homework and eating a snack. It framed the terrifying banality of ego.",
+    "episode": "Episode 8",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Notebook",
+        "text": "The ultimate tool of unaccountability. A mirror for what we do when we think no one is watching.",
+        "tag": "Power",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Chains",
+        "text": "L and Light handcuffed together. Two sides of the same obsessive coin.",
+        "tag": "Duality",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Clock",
+        "text": "The warehouse. A man who planned everything except the moment his plan stopped mattering.",
+        "tag": "Ego",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "I stopped trusting absolute certainty.",
+      "body": "Light's downfall wasn't a lack of intelligence. It was certainty so complete that he couldn't imagine a mistake. Doubt is a necessary safety valve for the human mind.",
+      "caption": "Certainty is a trap.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "This world is rotting, and those who are making it rot deserve to die.",
+    "attribution": "— Light Yagami"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "A battle of wits",
+      "body": "I thought it was a pure intellectual chess match. I rooted for the smartest person in the room."
+    },
+    "whatShifted": {
+      "heading": "The rot of the ego",
+      "body": "I stopped watching a hero clean up the world and started watching a serial killer justify his ego."
+    },
+    "whatStayed": {
+      "heading": "The danger of righteousness",
+      "body": "The most terrible atrocities are committed by people absolutely convinced they are doing the right thing."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I question",
+        "line": "my motives when I feel a strong sense of righteous indignation."
+      },
+      {
+        "verb": "I notice",
+        "line": "when I prioritize being 'right' over being human."
+      },
+      {
+        "verb": "I try",
+        "line": "to maintain a healthy level of self-doubt."
+      }
+    ]
+  },
   "characters": [
-    { "name": "Light Yagami", "role": "Kira" },
-    { "name": "L", "role": "Detective" },
-    { "name": "Ryuk", "role": "Shinigami" },
-    { "name": "Misa Amane", "role": "Second Kira" }
-  ]
+    {
+      "name": "Light Yagami",
+      "role": "The warning",
+      "mirror": "He challenged my worship of intelligence. A brilliant mind disconnected from a moral compass just builds a more effective monster."
+    },
+    {
+      "name": "L",
+      "role": "The mirror",
+      "mirror": "He reflected the isolation of obsession. He solved the case and lived a hollow life to do it."
+    }
+  ],
+  "notes": [
+    {
+      "text": "Power doesn't corrupt. It reveals.",
+      "footer": "Throughout the series"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "The banality of evil",
+      "application": "Evil doesn't always look like a monster. Sometimes it looks like a straight-A student with a superiority complex."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I started treating my own certainty as a warning light instead of a green light.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Monster",
+        "reason": "A deeper, quieter look at the origin of evil and the choice of compassion."
+      },
+      {
+        "title": "Psycho-Pass",
+        "reason": "When the system itself decides who is a criminal."
+      }
+    ]
+  }
 }

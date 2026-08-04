@@ -32,6 +32,18 @@ export class TouchInput {
 
   private handleTouchEnd = (e: TouchEvent) => {
     if (!this.enabled || this.startX === null || this.isAnimating()) return;
+    
+    // Check if element is substantially visible
+    const rect = this.element.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visibleHeight = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+    const visiblePercentage = visibleHeight / rect.height;
+    
+    if (visiblePercentage < 0.5) {
+      this.startX = null;
+      return;
+    }
+
     const dx = e.changedTouches[0].clientX - this.startX;
     if (Math.abs(dx) > this.threshold) {
       dx < 0 ? this.onNext() : this.onPrev();

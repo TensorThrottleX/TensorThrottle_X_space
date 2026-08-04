@@ -27,12 +27,14 @@ export class Renderer {
     let filter = '';
     if (geometry.depth < 0.82) {
       const brightness = 0.55 + geometry.depth * 0.55;
-      filter = `brightness(${brightness.toFixed(3)})`;
+      const saturate = 0.38 + geometry.depth * 0.62;
+      const contrast = 0.84 + geometry.depth * 0.16;
+      filter = `brightness(${brightness.toFixed(3)}) saturate(${saturate.toFixed(3)}) contrast(${contrast.toFixed(3)})`;
     }
 
     const boxShadow =
       geometry.depth > 0.88
-        ? '0 12px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07)'
+        ? '0 18px 55px rgba(0,0,0,0.50), 0 5px 16px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 0 26px rgba(0,0,0,0.20)'
         : '';
 
     return {

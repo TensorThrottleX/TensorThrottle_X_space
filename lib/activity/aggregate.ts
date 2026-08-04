@@ -20,7 +20,7 @@ export function mergeAndSort(activities: Activity[]): Activity[] {
     if (!byId.has(a.id)) byId.set(a.id, a)
   }
   return [...byId.values()].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
   )
 }
 
@@ -32,7 +32,7 @@ export function groupActivities(activities: Activity[], now = new Date()): Activ
     { id: 'earlier', label: 'Earlier', items: [] },
   ]
   for (const a of activities) {
-    const ts = new Date(a.timestamp)
+    const ts = new Date(a.updatedAt)
     const days = differenceInCalendarDays(today, ts)
     if (days <= 0) groups[0].items.push(a)
     else if (days === 1) groups[1].items.push(a)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef, useEffect, useState } from 'react'
+import { useMemo, useRef, useEffect, useState, useCallback } from 'react'
 import type { Anime } from '@/features/anime-universe/models/Anime'
 import { Prism } from '@/prism-engine/src/prism/components/Prism'
 import type { PrismItem } from '@/prism-engine/src/prism/types/Item'
@@ -9,6 +9,10 @@ import { getAnimeAudioMuted, onAnimeAudioMutedChange } from '@/features/anime-un
 import { assetRegistry } from '@/lib/media/UniversalAssetRegistry'
 import { DefaultCardContent } from '@/prism-engine/src/prism/components/PrismCard'
 import { ReadingFocus } from '@/components/reading-focus'
+import { AnimeNarrativeTemplate } from '@/features/anime-universe/components/narrative'
+import { useScrollProgress } from '@/features/anime-universe/hooks/useScrollProgress'
+import { useEnvironmentTransition } from '@/features/anime-universe/hooks/useEnvironmentTransition'
+import './stage.css'
 
 // ── Default Universe constants ──
 const DEFAULT_ANIME: Anime = {
@@ -41,6 +45,7 @@ interface StageProps {
 
 export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageProps) {
   const hasNoAnime = isReady && animeList.length === 0
+  const stageRef = useRef<HTMLDivElement>(null)
 
   // Derive active anime from index — default when -1
   const activeAnime: Anime = useMemo(() => {
@@ -120,6 +125,30 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
     }
   }, [activeAnime.id, isMuted])
 
+  // ════════════════════════════════════════════════════════════════════
+  // SCROLL TRANSITION ENGINE — Single source of truth
+  // ════════════════════════════════════════════════════════════════════
+
+  // Track carousel interactivity as state (CSS custom props can't drive pointerEvents)
+  const [carouselActive, setCarouselActive] = useState(true)
+  // Reading phase (p > 0.4) — gates hover/cursor on the carousel via data-prism-phase
+  const [readingStarted, setReadingStarted] = useState(false)
+
+  // Environment controller writes CSS custom properties directly to stageRef
+  const { applyProgress } = useEnvironmentTransition(stageRef)
+
+  // Single global scroll progress — drives everything.
+  // Future phases (timeline, reflections, progress indicator, manuscript
+  // sections) subscribe to the same source instead of adding observers.
+  const progressRef = useScrollProgress((p) => {
+    applyProgress(p)
+    // Update carousel interactivity based on progress threshold
+    setCarouselActive(p < 0.6)
+    setReadingStarted(p > 0.4)
+  })
+
+
+
   // Synchronize active anime video (not audio) with MediaOrchestrator
   useEffect(() => {
     const videoUrl = activeAnime.videoUrl
@@ -138,19 +167,74 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
     })
   }, [activeAnime, updateSession])
 
+  // ── "Continue Exploring" navigation: carousel is the navigator ──
+  const handleExplore = useCallback((animeId: string) => {
+    const idx = animeList.findIndex((a) => a.id === animeId)
+    if (idx < 0) return
+    onIndexChange(idx)
+    // Return the reader to the reading position: one viewport down,
+    // where the environment is fully in reading mode.
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+    })
+  }, [animeList, onIndexChange])
+
   return (
     <div
+      ref={stageRef}
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '100vh',
+        minHeight: '200vh', // Enough scroll distance for full transition
         backgroundColor: 'transparent',
         overflowX: 'hidden',
-      }}
+        // Initialize CSS custom properties (overwritten by useEnvironmentTransition)
+        '--env-blur': '0px',
+        '--env-brightness': '100%',
+        '--env-saturation': '100%',
+        '--env-contrast': '100%',
+        '--env-overlay': '0',
+        '--env-vignette': '0',
+        '--carousel-scale': '1',
+        '--carousel-opacity': '1',
+        '--carousel-glow': '1',
+        '--reading-opacity': '0',
+        '--reading-ty': '80px',
+      } as React.CSSProperties}
     >
 
+      {/* ═══ Phase 1: Environmental Transition Layer ═══ */}
+      {/* Fixed overlay that filters the background video beneath */}
+      <div
+        aria-hidden
+        className="anime-stage-env"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          backgroundColor: `rgba(0, 0, 0, var(--env-overlay))`,
+          backdropFilter: `blur(var(--env-blur)) brightness(var(--env-brightness)) saturate(var(--env-saturation)) contrast(var(--env-contrast))`,
+          WebkitBackdropFilter: `blur(var(--env-blur)) brightness(var(--env-brightness)) saturate(var(--env-saturation)) contrast(var(--env-contrast))`,
+          willChange: 'backdrop-filter, background-color',
+        }}
+      />
 
-      {/* ═══ Prism Layer ═══ */}
+      {/* ═══ Phase 1: Vignette Layer ═══ */}
+      <div
+        aria-hidden
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)',
+          opacity: `var(--env-vignette)`,
+          willChange: 'opacity',
+        }}
+      />
+
+      {/* ═══ Phase 1: Carousel (Prism) Layer ═══ */}
       <div
         style={{
           position: 'relative',
@@ -161,36 +245,44 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
+          transform: `scale(var(--carousel-scale))`,
+          opacity: `var(--carousel-opacity)`,
+          pointerEvents: carouselActive ? 'auto' : 'none',
+          willChange: 'transform, opacity',
         }}
+        data-prism-phase={readingStarted ? 'read' : 'explore'}
       >
           <div
+            className="anime-prism"
             style={{
               position: 'relative',
-              '--prism-surface': 'var(--adaptive-glass-bg)',
-            '--prism-surface-alt': 'var(--adaptive-glass-bg)',
-            '--prism-border': 'var(--adaptive-glass-border)',
-            '--prism-border-strong': 'var(--adaptive-glass-border)',
-            '--prism-border-stronger': 'var(--adaptive-hero-muted)',
-            '--prism-text-primary': 'var(--adaptive-hero-color)',
-            '--prism-text-secondary': 'var(--adaptive-hero-secondary)',
-          } as React.CSSProperties}
-        >
-          <Prism
-            items={prismItems}
-            activeIndex={activeIndex + 1}
-            onChange={(idx) => onIndexChange(idx - 1)}
-            config={{
-              cardWidth: 180,
-              cardHeight: 280,
-              radius: Math.max(320, Math.round((prismItems.length * 220) / (2 * Math.PI))),
-              perspective: 1100,
-            }}
-            showNavigation={false}
-            showIndicators={true}
-            renderCard={(item) => (
-              <DefaultCardContent item={item} />
-            )}
-          />
+              '--prism-surface': 'linear-gradient(to bottom, rgba(12,12,12,0.55) 0%, rgba(18,18,18,0.72) 55%, rgba(10,10,10,0.92) 100%)',
+              '--prism-surface-alt': 'rgba(14,14,14,0.9)',
+              '--prism-border': 'rgba(255,255,255,0.045)',
+              '--prism-border-strong': 'rgba(255,255,255,0.07)',
+              '--prism-border-stronger': 'rgba(226,220,210,0.30)',
+              '--prism-text-primary': 'rgba(250,248,243,0.97)',
+              '--prism-text-secondary': 'rgba(228,222,212,0.66)',
+              // Ambient weight, driven by scroll — soft black presence, no glow
+              filter: 'drop-shadow(0 18px 55px rgba(0,0,0,calc(0.55 * var(--carousel-glow)))) drop-shadow(0 0 46px rgba(124,112,98,calc(0.05 * var(--carousel-glow))))',
+            } as React.CSSProperties}
+          >
+            <Prism
+              items={prismItems}
+              activeIndex={activeIndex + 1}
+              onChange={(idx) => onIndexChange(idx - 1)}
+              config={{
+                cardWidth: 180,
+                cardHeight: 280,
+                radius: Math.max(320, Math.round((prismItems.length * 220) / (2 * Math.PI))),
+                perspective: 1100,
+              }}
+              showNavigation={false}
+              showIndicators={true}
+              renderCard={(item) => (
+                <AnimeCardContent item={item} />
+              )}
+            />
 
         </div>
 
@@ -206,18 +298,27 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
         )}
       </div>
 
-      {/* ═══ Content Panel — wrapped in the Reading Focus window ═══ */}
-      <ReadingFocus
-        active
+      {/* ═══ Phase 2: Reading Stage ═══ */}
+      {/* The manuscript container — revealed as the environment quiets */}
+      <div
         style={{
-          zIndex: 7,
-          width: '100%',
-          '--rf-accent': activeAnime.accentColor,
-        } as React.CSSProperties}
+          position: 'relative',
+          zIndex: 8,
+          opacity: `var(--reading-opacity)`,
+          transform: `translateY(var(--reading-ty))`,
+          willChange: 'transform, opacity',
+        }}
       >
-        <ContentPanel anime={activeAnime} />
-      </ReadingFocus>
-
+        <ReadingFocus
+          active
+          style={{
+            width: '100%',
+            '--rf-accent': activeAnime.accentColor,
+          } as React.CSSProperties}
+        >
+          <ManuscriptPanel anime={activeAnime} onExplore={handleExplore} />
+        </ReadingFocus>
+      </div>
 
     </div>
   )
@@ -226,11 +327,30 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
 
 
 
+// ── Charcoal glass card content — DefaultCardContent + artwork scrim.
+//    The scrim darkens the cover's lower edge into the glass panel below
+//    without ever tinting the artwork itself.
+function AnimeCardContent({ item }: { item: PrismItem }) {
+  return (
+    <>
+      <DefaultCardContent item={item} />
+      <div className="anime-card-scrim" aria-hidden />
+    </>
+  );
+}
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// CONTENT PANEL — Animated metadata below prism
+// MANUSCRIPT PANEL — full content experience below the prism
+// Fades out → swaps the active anime's manuscript → fades in.
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-function ContentPanel({ anime }: { anime: Anime }) {
+function ManuscriptPanel({
+  anime,
+  onExplore,
+}: {
+  anime: Anime
+  onExplore?: (animeId: string) => void
+}) {
   const [displayed, setDisplayed] = useState(anime)
   const [opacity, setOpacity] = useState(1)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -251,135 +371,23 @@ function ContentPanel({ anime }: { anime: Anime }) {
     }
   }, [anime, displayed.id])
 
-  const isDefault = displayed.id === 'default'
-
   return (
     <div
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: 1000,
         margin: '0 auto',
-        padding: '40px clamp(24px, 5vw, 80px) 120px',
         opacity,
         transition: `opacity ${FADE_MS}ms ease`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
       }}
     >
-      <div style={{ maxWidth: 800 }}>
-        {/* Title */}
-        <h2
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 700,
-            fontSize: 'clamp(28px, 3.5vw, 42px)',
-            color: 'var(--adaptive-hero-color)',
-            margin: '0 0 10px 0',
-            letterSpacing: '-0.01em',
-            lineHeight: 1.2,
-          }}
-        >
-          {displayed.title}
-        </h2>
-
-        {/* Subtitle */}
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 400,
-            fontSize: 'clamp(14px, 1.5vw, 18px)',
-            color: displayed.accentColor,
-            margin: '0 0 24px 0',
-            opacity: 0.9,
-            letterSpacing: '0.02em',
-          }}
-        >
-          {displayed.subtitle}
-        </p>
-
-        {/* Description */}
-        {displayed.description && (
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 400,
-              fontSize: 'clamp(14px, 1.2vw, 16px)',
-              color: 'var(--adaptive-hero-muted)',
-              margin: '0 auto 32px auto',
-              lineHeight: 1.7,
-              maxWidth: 720,
-            }}
-          >
-            {displayed.description}
-          </p>
-        )}
-
-        {/* Metadata tags */}
-        {!isDefault && (
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 24 }}>
-            {displayed.characters.map((c) => (
-              <span
-                key={c.name}
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: 12,
-                  fontWeight: 500,
-                  color: 'var(--adaptive-hero-secondary)',
-                  background: 'var(--adaptive-glass-bg)',
-                  border: '1px solid var(--adaptive-glass-border)',
-                  borderRadius: 20,
-                  padding: '6px 14px',
-                  letterSpacing: '0.03em',
-                  backdropFilter: 'blur(10px)',
-                }}
-              >
-                {c.name}
-                <span style={{ opacity: 0.5, marginLeft: 6 }}>·</span>
-                <span style={{ opacity: 0.5, marginLeft: 6 }}>{c.role}</span>
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Quote */}
-        {displayed.quotes.length > 0 && (
-          <blockquote
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(14px, 1.5vw, 18px)',
-              color: 'var(--adaptive-hero-muted)',
-              margin: '20px auto',
-              padding: '16px 24px',
-              borderLeft: `3px solid ${displayed.accentColor}`,
-              borderRight: `3px solid ${displayed.accentColor}`,
-              background: `linear-gradient(90deg, ${displayed.accentColor}15 0%, transparent 20%, transparent 80%, ${displayed.accentColor}15 100%)`,
-              borderRadius: 8,
-              lineHeight: 1.6,
-              maxWidth: 600,
-            }}
-          >
-            "{displayed.quotes[0]}"
-          </blockquote>
-        )}
-
-        {/* Accent underline */}
-        <div
-          style={{
-            marginTop: 40,
-            height: 3,
-            width: 80,
-            borderRadius: 2,
-            backgroundColor: displayed.accentColor,
-            opacity: 0.8,
-            margin: '40px auto 0 auto',
-            boxShadow: `0 0 10px ${displayed.accentColor}`,
-          }}
-        />
-      </div>
+      {displayed.narrativeData ? (
+        <AnimeNarrativeTemplate data={displayed.narrativeData} />
+      ) : (
+        <div style={{ padding: '100px', textAlign: 'center', color: 'var(--paper-60)' }}>
+          No narrative data available for this anime.
+        </div>
+      )}
     </div>
   )
 }

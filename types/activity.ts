@@ -5,46 +5,26 @@
 // only consumes this interface. New modules can register a provider without
 // touching the center, the types below, or any existing page.
 
-export type ActivityAction = 'published' | 'updated' | 'added' | 'expanded'
-
-/** Known modules (union is a convenience index; `module` itself is a string
- *  so brand-new modules register without any type edits). */
-export const KNOWN_MODULES = [
-  'feed',
-  'thoughts',
-  'projects',
-  'experiments',
-  'manifold',
-  'anime-universe',
-  'music-nebula',
-  'universe',
-] as const
+export type ActivityAction = 'Created' | 'Updated' | 'Published' | 'Archived' | 'Deleted' | 'Restored' | 'Hidden' | 'Pinned' | 'Featured' | 'Expanded' | string
 
 export interface Activity {
-  /** Stable unique id — dedupes and drives read-state. */
   id: string
-  /** Registering module id (e.g. 'anime-universe', 'thoughts'). */
-  module: string
-  /** Entity kind inside the module (e.g. 'post', 'series', 'album'). */
+  source: string
   entityType: string
-  /** Entity identifier inside the module (e.g. slug, series id). */
   entityId: string
-  title: string
   action: ActivityAction
-  /** ISO timestamp — the moment this event happened. */
-  timestamp: string
-  /** Existing route to open when the activity is clicked. */
+  title: string
+  description: string
   url: string
-  /** Optional module-specific payload (counts, subtitles, tags...). */
+  icon: string
+  priority: number
+  visibility: 'public' | 'private' | 'unlisted'
+  createdAt: string
+  updatedAt: string
   metadata?: Record<string, unknown>
 }
 
-/**
- * Provider contract — one per module. `load` must never throw: the center
- * degrades gracefully when a provider is unavailable (it treats a rejected
- * or thrown load as "no activity").
- */
-export interface ActivityProvider {
+export interface ActivityPublisher {
   id: string
-  load(signal?: AbortSignal): Promise<Activity[]>
+  publish(): Promise<Activity[]>
 }

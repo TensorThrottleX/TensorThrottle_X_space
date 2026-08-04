@@ -8,5 +8,59 @@
     "Every protagonist begins as an outcast.",
     "Growth happens when you refuse to give up.",
     "The strongest characters are the ones who feel the most."
-  ]
+  ],
+  "id": "default",
+  "index": 0,
+  "jpTitle": "Anime Universe",
+  "year": 2024,
+  "genre": "Anime",
+  "poster": "",
+  "entry": {
+    "breathQuote": "The stories we love become part of who we are."
+  },
+  "reflection": {
+    "quote": "",
+    "tags": [
+      "Anime",
+      "Journey",
+      "Reflection"
+    ],
+    "whatIKept": "",
+    "definingScene": "A moment that changed the perspective.",
+    "whoItMadeMeThinkAbout": "A connection to real life."
+  },
+  "thoughtCascade": [],
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": []
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "First Impression",
+      "body": ""
+    },
+    "whatShifted": {
+      "heading": "What Changed",
+      "body": ""
+    },
+    "whatStayed": {
+      "heading": "What Stayed",
+      "body": ""
+    }
+  },
+  "cinematicMoment": null,
+  "altMemories": [],
+  "pullQuote": null,
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": []
+  },
+  "characters": [],
+  "notes": [],
+  "ideas": [],
+  "continueJourney": {
+    "because": "Because this reshaped how I think",
+    "prompt": "Continue the thought",
+    "recommendations": []
+  }
 }

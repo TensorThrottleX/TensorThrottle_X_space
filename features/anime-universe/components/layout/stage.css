@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIME UNIVERSE STAGE — scroll-driven atmosphere (Phase 1 & 2).
+
+   Page-level gating that the environment controller cannot express via CSS
+   custom properties alone:
+   • Reading phase: the carousel is a quiet silhouette — no pointer cursor.
+   • prefers-reduced-motion: cinematic filters collapse instantly (no blur
+     transitions); the overlay veil still darkens for readability.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Reading mode: carousel is decorative, not interactive ─────────────── */
+[data-prism-phase='read'] .prism-card {
+  cursor: default;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CHARCOAL GLASS CARDS — smoked black glass treatment for the Prism carousel.
+
+   Replaces the blue-tinted glass with layered charcoal tones. The artwork is
+   never tinted: the vertical scrim only darkens the cover's lower edge so it
+   melts into the near-opaque black panel that carries the title.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Smoked glass: faint backdrop blur, soft low-light border, inner depth */
+.anime-prism .prism-card-face {
+  backdrop-filter: blur(8px) saturate(0.92);
+  -webkit-backdrop-filter: blur(8px) saturate(0.92);
+  border-width: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 22px rgba(0, 0, 0, 0.30),
+    0 0 46px rgba(130, 118, 104, 0.05);
+}
+
+/* Artwork scrim — vertical fall-off so the cover stays visible up top
+   while its lower edge disappears into the ink below. */
+.anime-card-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(10, 10, 10, 0.10) 32%,
+    rgba(12, 12, 12, 0.38) 56%,
+    rgba(16, 16, 16, 0.68) 80%,
+    rgba(20, 20, 20, 0.90) 100%
+  );
+}
+
+/* Active card: brighter, higher contrast, slightly more present */
+.anime-prism .prism-card[aria-selected='true'] .prism-card-face {
+  filter: brightness(1.05) contrast(1.06);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Typography — bright warm-white titles, soft gray subtitles,
+   deep enough contrast to float above the smoked glass */
+.anime-prism .prism-card-title {
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.85);
+}
+
+.anime-prism .prism-card-sub {
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Placeholder surface (no cover art) — neutral charcoal, no blue */
+.anime-prism .prism-card-thumb.placeholder {
+  background: linear-gradient(135deg, rgba(14, 14, 14, 0.9) 0%, rgba(22, 22, 22, 0.92) 100%);
+}
+
+/* ── Reduced motion: drop the cinematic backdrop blur and the reading
+      window's depth-of-field instantly. Text stays readable via the
+      quantization-safe overlay veil (--env-overlay). ───────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .anime-stage-env {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .tx-reading-focus {
+    --rf-blur-cap: 0px;
+    --rf-tint-cap: 0.15;
+  }
+}

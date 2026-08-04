@@ -1,35 +1,159 @@
 {
+  "id": "Dragon Ball",
+  "index": 2,
   "title": "Dragon Ball",
-  "subtitle": "The ultimate battle for the universe",
-  "description": "Follow the adventures of Goku, from his childhood to adulthood, as he trains in martial arts and explores the world in search of the seven mystical orbs known as the Dragon Balls. What begins as a lighthearted journey of discovery evolves into a saga of epic proportions, spanning entire galaxies and alternate dimensions. The series explores themes of limitless potential, the thrill of pushing past one's physical and mental limits, and the importance of rivalry in achieving greatness. From defending Earth against tyrannical alien conquerors to participating in tournaments where the fate of the multiverse hangs in the balance, Goku and his allies embody the unyielding spirit of self-improvement.\n\nNowhere is this spirit more evident than during the harrowing battle on the dying planet Namek. After witnessing the ruthless murder of his best friend Krillin at the hands of the galactic tyrant Frieza, Goku's grief and pure rage shatter his limits. Lightning strikes and the ground shatters as his hair turns golden, ascending him to the legendary state of Super Saiyan. This iconic transformation forever changed the landscape of anime, symbolizing the ultimate triumph of righteous fury and the limitless depths of a warrior's resolve when everything they hold dear is taken away.",
-  "accentColor": "#eab308",
-  "quotes": [
-    "Power comes in response to a need, not a desire.",
-    "I am the hope of the universe. I am the answer to all living things that cry out for peace.",
-    "Sometimes, we have to look beyond what we want and do what's best.",
-    "It's over 9000!",
-    "Push through the pain, giving up hurts more.",
-    "I'd rather be a brainless monkey than a heartless monster.",
-    "Even the mightiest warriors experience fears. What makes them a true warrior is the courage that they possess to overcome their fears.",
-    "There's only one certainty in life. A strong man stands above and conquers all!"
+  "subtitle": "The joy of becoming stronger",
+  "jpTitle": "ドラゴンボール",
+  "year": 1984,
+  "genre": "Shōnen",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I started watching because it was on TV. I kept watching because I had never seen anyone so genuinely happy to find out they weren't the best."
+  },
+  "reflection": {
+    "quote": "It wasn't about saving the world. It was about the sheer, unadulterated joy of discovering your limits and then quietly walking past them.",
+    "tags": [
+      "curiosity",
+      "improvement",
+      "playfulness",
+      "transcendence"
+    ],
+    "whatIKept": "Losing isn't a failure — it's new information. An opponent is just a mirror showing you where you can still grow.",
+    "definingScene": "Goku laughing when a fight gets difficult. He isn't stressed by the gap in power. He's exhilarated by the room for improvement.",
+    "whoItMadeMeThinkAbout": "The version of myself that used to quit when I wasn't immediately good at something."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "He's not angry. He's excited.",
+      "micro": "The World Martial Arts Tournament"
+    },
+    {
+      "thought": "Losing isn't a failure. It's just data.",
+      "micro": "Training arcs"
+    },
+    {
+      "thought": "He doesn't want to conquer. He wants to play.",
+      "micro": "Against Piccolo"
+    },
+    {
+      "thought": "The goal isn't to be the best. It's to be better than yesterday.",
+      "micro": "Super Saiyan"
+    }
   ],
+  "cinematicMoment": {
+    "eyebrow": "The defining choice",
+    "title": "Letting Vegeta live.",
+    "body": "Goku asks Krillin to spare Vegeta. Not from a grand moral framework — from pure curiosity. He just wanted to see if he could surpass him next time. It stripped the ego out of competition.",
+    "episode": "Saiyan Saga",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Gravity Chamber",
+        "text": "The physical isolation of doing the work when no one is watching.",
+        "tag": "Discipline",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Senzu Bean",
+        "text": "Healing your opponent just to keep the test fair.",
+        "tag": "Integrity",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Tournament",
+        "text": "A stage where being beaten is part of the fun, not part of the insult.",
+        "tag": "Playfulness",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "I stopped seeing competition as a threat.",
+      "body": "Someone being better than me wasn't an insult — it was a roadmap. Goku looks at a stronger opponent and says, 'Thank you for showing me what's possible.'",
+      "caption": "Curiosity over ego.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "Power comes in response to a need, not a desire.",
+    "attribution": "— Goku"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "People screaming and powering up",
+      "body": "I thought it was just about dominating the opponent. A raw power fantasy."
+    },
+    "whatShifted": {
+      "heading": "The smile in the face of defeat",
+      "body": "Goku's smile while losing. The opponent is just a measuring stick for your own potential."
+    },
+    "whatStayed": {
+      "heading": "Self-transcendence",
+      "body": "The training arc is the point of the story, not the final battle. Life is the same way."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I try",
+        "line": "to treat failure as data rather than an indictment of my worth."
+      },
+      {
+        "verb": "I question",
+        "line": "why I get frustrated when someone is better than me, instead of getting curious."
+      },
+      {
+        "verb": "I notice",
+        "line": "when my ego gets in the way of my ability to learn."
+      }
+    ]
+  },
   "characters": [
-    { "name": "Son Goku", "role": "Protagonist" },
-    { "name": "Vegeta", "role": "Rival / Prince of all Saiyans" },
-    { "name": "Piccolo", "role": "Mentor / Ally" },
-    { "name": "Bulma", "role": "Inventor / Scientist" },
-    { "name": "Son Gohan", "role": "Son / Scholar" },
-    { "name": "Krillin", "role": "Best Friend" },
-    { "name": "Master Roshi", "role": "Original Master" },
-    { "name": "Frieza", "role": "Galactic Emperor / Antagonist" },
-    { "name": "Cell", "role": "Ultimate Android" },
-    { "name": "Majin Buu", "role": "Ancient Threat" },
-    { "name": "Trunks", "role": "Time Traveler" },
-    { "name": "Android 18", "role": "Reformed Android" },
-    { "name": "Beerus", "role": "God of Destruction" },
-    { "name": "Whis", "role": "Angel / Attendant" },
-    { "name": "Broly", "role": "Legendary Super Saiyan" },
-    { "name": "Jiren", "role": "Pride Trooper" },
-    { "name": "Goku Black", "role": "Imposter / Zamasu" }
-  ]
+    {
+      "name": "Son Goku",
+      "role": "The ideal",
+      "mirror": "He challenged me to approach difficulty with a smile — to see obstacles as invitations to play."
+    },
+    {
+      "name": "Vegeta",
+      "role": "The mirror",
+      "mirror": "He reflected the toxic side of ambition: status over growth. Watching him unlearn his pride was like watching my own ego dismantle."
+    }
+  ],
+  "notes": [
+    {
+      "text": "If you only fight battles you know you can win, you never actually grow.",
+      "footer": "Namek Arc"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "The Training Arc",
+      "application": "Life is 90% preparation and 10% execution. You have to learn to love the gravity chamber."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I now measure my life in 'better than yesterday' — and I'm okay with how slow that looks.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Hajime no Ippo",
+        "reason": "The purest distillation of hard work and love of the craft."
+      },
+      {
+        "title": "Hunter x Hunter",
+        "reason": "When the joy of discovery meets the reality of consequences."
+      }
+    ]
+  }
 }

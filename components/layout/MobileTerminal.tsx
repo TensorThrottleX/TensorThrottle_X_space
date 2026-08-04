@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
  * Triggered via a floating action button.
  * Reuses all command logic from InteractiveHome but with mobile-native UX.
  */
-export function MobileTerminal() {
+export default function MobileTerminal() {
     const router = useRouter()
     const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
     const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res'; text: string }[]>([])

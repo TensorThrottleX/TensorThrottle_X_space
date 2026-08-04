@@ -8,7 +8,7 @@ const VALID_SECTIONS = new Set([
   'library', 'museum', 'memory',
 ])
 
-export function UniverseTransition({ children }: { children: React.ReactNode }) {
+export default function UniverseTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const section = pathname.startsWith('/universe/')
     ? pathname.split('/')[2]

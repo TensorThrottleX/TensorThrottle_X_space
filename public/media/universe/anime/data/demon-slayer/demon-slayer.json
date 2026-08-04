@@ -9,9 +9,259 @@
     "No matter how many lives we save, we can never bring back the ones we lost."
   ],
   "characters": [
-    { "name": "Tanjiro Kamado", "role": "Protagonist" },
-    { "name": "Nezuko Kamado", "role": "Sister" },
-    { "name": "Zenitsu Agatsuma", "role": "Fellow Slayer" },
-    { "name": "Giyu Tomioka", "role": "Water Hashira" }
-  ]
+    {
+      "name": "Tanjiro Kamado",
+      "role": "Protagonist",
+      "mirror": "Tanjiro is my model of the complete human: fierce enough to kill, gentle enough to weep over it. He normalized the coexistence of opposites in me — strength and softness, ambition and compassion."
+    },
+    {
+      "name": "Nezuko Kamado",
+      "role": "Sister",
+      "mirror": "She proved that who you are can survive what you become. When the world gives you a monstrous role, the most radical act is refusing to play it."
+    },
+    {
+      "name": "Zenitsu Agatsuma",
+      "role": "Fellow Slayer"
+    },
+    {
+      "name": "Giyu Tomioka",
+      "role": "Water Hashira"
+    },
+    {
+      "name": "Rengoku Kyojuro",
+      "role": "Flame Hashira",
+      "mirror": "His way of living — 'set your heart ablaze' — became my endurance framework. He dies undefeated not because he wins but because he never cools down."
+    }
+  ],
+  "heroReflection": "Demon Slayer is the rare story where the hero's kindness is not his weakness — it is his weapon. Tanjiro cries for the demons he kills, and somehow that makes him more lethal, not less. I wanted to understand how that worked. It changed how I think about empathy.",
+  "corePerspective": "I watched Demon Slayer at a point where I had convinced myself that being effective meant being hard — that gentleness was a luxury I couldn't afford. Tanjiro dismantled that belief in a single scene: the sword that kills the demon is held by the same hand that mourns it. The show argues, again and again, that understanding your enemy is not sentiment — it is strategy. It gives you the information hardness can't reach. This matters to me because it gave me permission to be soft and ambitious at the same time, and to stop treating compassion as a tax on my potential.",
+  "insights": [
+    {
+      "title": "What hit hardest",
+      "body": "That every demon is a person with a story. Rui, the spider demon, was a sick child who wanted family. The show never lets you forget that monsters are made, and it made me stop drawing clean lines between 'us' and 'them.'"
+    },
+    {
+      "title": "The idea I kept",
+      "body": "'Set your heart ablaze.' I kept Rengoku's fire not as a motivational poster but as a practical instruction: to endure, you need an internal temperature that outlasts the external cold. I literally check my own 'flame' when I'm running on empty."
+    },
+    {
+      "title": "How I see it today",
+      "body": "I used to read Tanjiro's kindness as naive. Now I understand it as the most durable form of resilience — he can grieve and continue, and that combination is what makes him unbeatable. Grief-proofed people are the strongest people."
+    }
+  ],
+  "journey": [
+    {
+      "stage": "First Impression",
+      "text": "Beautiful animation, a familiar revenge plot. I enjoyed the craft and assumed the story would be simple: boy slays demons, finds cure, done."
+    },
+    {
+      "stage": "What Changed",
+      "text": "The first time Tanjiro sincerely thanks a demon for its human memories before ending it. The show redefined what 'winning' meant for me — it stopped being about destruction and became about witness."
+    },
+    {
+      "stage": "The Turning Point",
+      "text": "Rengoku's death in the Mugen Train arc. A pillar of flame dies standing, protecting children, with a smile. I understood then that the show's real subject is how people choose to spend their final strength."
+    },
+    {
+      "stage": "What Stayed",
+      "text": "Nezuko. A demon who refuses to eat humans because of love — her devotion as the counter-evidence to the show's own premise. She stayed with me as proof that identity is chosen, not written."
+    },
+    {
+      "stage": "How it affects my thinking today",
+      "text": "I ask myself a question borrowed from the show's logic: if this were my last day of strength, where would I spend it? The answer always reorganizes my priorities — usually toward people, not projects."
+    }
+  ],
+  "characterInfluences": [
+    {
+      "name": "Tanjiro Kamado",
+      "role": "Protagonist",
+      "influence": "Tanjiro is my model of the complete human: fierce enough to kill, gentle enough to weep over it. He normalized the coexistence of opposites in me — strength and softness, ambition and compassion."
+    },
+    {
+      "name": "Rengoku Kyojuro",
+      "role": "Flame Hashira",
+      "influence": "His way of living — 'set your heart ablaze' — became my endurance framework. He dies undefeated not because he wins but because he never cools down."
+    },
+    {
+      "name": "Nezuko Kamado",
+      "role": "Sister",
+      "influence": "She proved that who you are can survive what you become. When the world gives you a monstrous role, the most radical act is refusing to play it."
+    }
+  ],
+  "definingMoments": [
+    {
+      "title": "The farewell to Rengoku",
+      "context": "Mugen Train arc",
+      "text": "Rengoku dies kneeling, blade still drawn, smiling at the sunrise. Tanjiro's grief is total — and then he stands, carrying the flame forward.",
+      "idea": "Grief is not the end of strength. It is the transfer of it. The people you lose keep fighting through the ones who remain."
+    },
+    {
+      "title": "Daki's mirror",
+      "context": "Entertainment District arc",
+      "text": "The demon Daki has been a monster for a century, but her brother's memory still rules her. Tanjiro doesn't just fight her — he understands her, and the understanding is what disarms her.",
+      "idea": "Comprehension is a combat skill. The person who truly understands an enemy has already half-won."
+    },
+    {
+      "title": "Nezuko in the sun",
+      "context": "Season 1 finale",
+      "text": "After decades of demonkind's fundamental rule, Nezuko steps into sunlight — and does not burn. Love literally rewrites the rules of the world.",
+      "idea": "Some limits are real, and some are just agreements nobody has tested. Devotion is a legitimate test."
+    }
+  ],
+  "quotesWorthCarrying": [
+    {
+      "quote": "Set your heart ablaze. Grit your teeth and move forward.",
+      "speaker": "Rengoku Kyojuro",
+      "why": "My operating manual for hard seasons: intensity is not optional, it is the survival mechanism. I say it to myself before every difficult meeting."
+    },
+    {
+      "quote": "It's not always about what you can do with your strength. It's about what you choose to do with it.",
+      "speaker": "Tanjiro Kamado",
+      "why": "The show's thesis in one line. Capacity is neutral; choice is character. It helped me stop measuring myself by capability and start measuring myself by direction."
+    }
+  ],
+  "realLifeReflection": [
+    "Demon Slayer changed my default response to people who have done wrong. I used to lead with judgment; now I lead with the question 'what happened to you?' — not to excuse, but because Tanjiro proved that understanding an enemy is the fastest route to defeating the actual problem instead of the person. In real life this converts conflicts into conversations faster than any tactic I had before.",
+    "The flame metaphor became literal practice. I keep a short list of things that 'ignite' me — work, people, ideas — and I deliberately steer my energy toward them when I feel myself cooling. The show convinced me that sustained effort is not a matter of willpower but of placement: put your heart near fuel."
+  ],
+  "continueExploring": [
+    {
+      "id": "Bleach",
+      "title": "Bleach",
+      "note": "Another kind-hearted swordsman whose love becomes his blade — with an edgier, more complex mythology."
+    },
+    {
+      "id": "Naruto",
+      "title": "Naruto",
+      "note": "The same compassionate-protagonist engine: understanding the enemy as the path to peace, built on a grander scale."
+    },
+    {
+      "id": "jujutsu-kaisen",
+      "title": "Jujutsu Kaisen",
+      "note": "If Demon Slayer's kindness were stripped away: same monsters, same swords, crueler answers to the same questions."
+    }
+  ],
+  "id": "demon-slayer",
+  "index": 0,
+  "jpTitle": "Demon Slayer",
+  "year": 2024,
+  "genre": "Anime",
+  "poster": "",
+  "entry": {
+    "breathQuote": "Set your heart ablaze. Grit your teeth and move forward."
+  },
+  "reflection": {
+    "quote": "Demon Slayer is the rare story where the hero's kindness is not his weakness — it is his weapon. Tanjiro cries for the demons he kills, and somehow that makes him more lethal, not less. I wanted to understand how that worked. It changed how I think about empathy.",
+    "tags": [
+      "Anime",
+      "Journey",
+      "Reflection"
+    ],
+    "whatIKept": "I watched Demon Slayer at a point where I had convinced myself that being effective meant being hard — that gentleness was a luxury I couldn't afford. Tanjiro dismantled that belief in a single scene: the sword that kills the demon is held by the same hand that mourns it. The show argues, again and again, that understanding your enemy is not sentiment — it is strategy. It gives you the information hardness can't reach. This matters to me because it gave me permission to be soft and ambitious at the same time, and to stop treating compassion as a tax on my potential.",
+    "definingScene": "A moment that changed the perspective.",
+    "whoItMadeMeThinkAbout": "A connection to real life."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "That every demon is a person with a story. Rui, the spider demon, was a sick child who wanted family. The show never lets you forget that monsters are made, and it made me stop drawing clean lines between 'us' and 'them.'",
+      "micro": "What hit hardest"
+    },
+    {
+      "thought": "'Set your heart ablaze.' I kept Rengoku's fire not as a motivational poster but as a practical instruction: to endure, you need an internal temperature that outlasts the external cold. I literally check my own 'flame' when I'm running on empty.",
+      "micro": "The idea I kept"
+    },
+    {
+      "thought": "I used to read Tanjiro's kindness as naive. Now I understand it as the most durable form of resilience — he can grieve and continue, and that combination is what makes him unbeatable. Grief-proofed people are the strongest people.",
+      "micro": "How I see it today"
+    }
+  ],
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "What hit hardest",
+        "text": "That every demon is a person with a story. Rui, the spider demon, was a sick child who wanted family. The show never lets you forget that monsters are made, and it made me stop drawing clean lines between 'us' and 'them.'",
+        "tag": "Insight",
+        "image": ""
+      },
+      {
+        "symbol": "◈",
+        "title": "The idea I kept",
+        "text": "'Set your heart ablaze.' I kept Rengoku's fire not as a motivational poster but as a practical instruction: to endure, you need an internal temperature that outlasts the external cold. I literally check my own 'flame' when I'm running on empty.",
+        "tag": "Insight",
+        "image": ""
+      },
+      {
+        "symbol": "◈",
+        "title": "How I see it today",
+        "text": "I used to read Tanjiro's kindness as naive. Now I understand it as the most durable form of resilience — he can grieve and continue, and that combination is what makes him unbeatable. Grief-proofed people are the strongest people.",
+        "tag": "Insight",
+        "image": ""
+      }
+    ]
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "First Impression",
+      "body": "Beautiful animation, a familiar revenge plot. I enjoyed the craft and assumed the story would be simple: boy slays demons, finds cure, done."
+    },
+    "whatShifted": {
+      "heading": "What Changed",
+      "body": "The first time Tanjiro sincerely thanks a demon for its human memories before ending it. The show redefined what 'winning' meant for me — it stopped being about destruction and became about witness."
+    },
+    "whatStayed": {
+      "heading": "What Stayed",
+      "body": "Nezuko. A demon who refuses to eat humans because of love — her devotion as the counter-evidence to the show's own premise. She stayed with me as proof that identity is chosen, not written."
+    }
+  },
+  "cinematicMoment": {
+    "eyebrow": "Mugen Train arc",
+    "title": "The farewell to Rengoku",
+    "body": "Rengoku dies kneeling, blade still drawn, smiling at the sunrise. Tanjiro's grief is total — and then he stands, carrying the flame forward. Grief is not the end of strength. It is the transfer of it. The people you lose keep fighting through the ones who remain.",
+    "episode": "",
+    "image": ""
+  },
+  "altMemories": [
+    {
+      "question": "Daki's mirror",
+      "heading": "Entertainment District arc",
+      "body": "The demon Daki has been a monster for a century, but her brother's memory still rules her. Tanjiro doesn't just fight her — he understands her, and the understanding is what disarms her.",
+      "caption": "Comprehension is a combat skill. The person who truly understands an enemy has already half-won.",
+      "image": "",
+      "flip": false
+    },
+    {
+      "question": "Nezuko in the sun",
+      "heading": "Season 1 finale",
+      "body": "After decades of demonkind's fundamental rule, Nezuko steps into sunlight — and does not burn. Love literally rewrites the rules of the world.",
+      "caption": "Some limits are real, and some are just agreements nobody has tested. Devotion is a legitimate test.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "Set your heart ablaze. Grit your teeth and move forward.",
+    "attribution": "Rengoku Kyojuro"
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I reflect",
+        "line": "Demon Slayer changed my default response to people who have done wrong. I used to lead with judgment; now I lead with the question 'what happened to you?' — not to excuse, but because Tanjiro proved that understanding an enemy is the fastest route to defeating the actual problem instead of the person. In real life this converts conflicts into conversations faster than any tactic I had before."
+      },
+      {
+        "verb": "I reflect",
+        "line": "The flame metaphor became literal practice. I keep a short list of things that 'ignite' me — work, people, ideas — and I deliberately steer my energy toward them when I feel myself cooling. The show convinced me that sustained effort is not a matter of willpower but of placement: put your heart near fuel."
+      }
+    ]
+  },
+  "notes": [],
+  "ideas": [],
+  "continueJourney": {
+    "because": "Because this reshaped how I think",
+    "prompt": "Continue the thought",
+    "recommendations": []
+  }
 }

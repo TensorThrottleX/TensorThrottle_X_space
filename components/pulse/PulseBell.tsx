@@ -10,9 +10,6 @@ import { getActivities, hasUnseenActivity } from '@/lib/activity/store'
 import { localStorageReadStore } from '@/lib/activity/read-state'
 import { ActivityPanel } from './ActivityPanel'
 
-// Side effect: publish the built-in activity providers into the registry.
-import '@/lib/activity/providers'
-
 /**
  * Pulse — the ecosystem activity center.
  *

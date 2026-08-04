@@ -260,6 +260,7 @@ function CommentRow({
   parentMap,
   newCommentIds,
   flat,
+  isFocused,
 }: {
   node: CommentNode
   depth: number
@@ -275,6 +276,7 @@ function CommentRow({
   newCommentIds?: Set<string>
   /** Windowed mode — children render as separate sibling rows, not inlined. */
   flat?: boolean
+  isFocused?: boolean
 }) {
   const { renderMode } = useUI()
   const isBright = renderMode === 'bright'
@@ -313,14 +315,20 @@ function CommentRow({
 
   return (
     <motion.div
+      id={`comment-${comment.id}`}
       layout
       className={`relative ${flat && isRoot ? 'mb-7' : ''}`}
       initial={{ opacity: 0, y: isNew ? 6 : 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={{ 
+        opacity: 1, 
+        y: 0,
+        backgroundColor: isFocused ? (isBright ? 'rgba(34,211,238,0.1)' : 'rgba(34,211,238,0.15)') : 'transparent' 
+      }}
       transition={{
         duration: isNew ? 0.45 : 0.4,
         delay: isNew ? 0 : enterDelay,
         ease: EASE_SMOOTH,
+        backgroundColor: { duration: 1.5, ease: 'easeOut', delay: 0.5 }
       }}
       onMouseEnter={() => setHoveredId(comment.id)}
       onMouseLeave={() => setHoveredId((cur) => (cur === comment.id ? null : cur))}
@@ -541,6 +549,7 @@ function CommentRow({
                     onCommentDeleted={onCommentDeleted}
                     parentMap={parentMap}
                     newCommentIds={newCommentIds}
+                    isFocused={reply.comment.id === (flat ? undefined : undefined)} // Not passing it down explicitly to children unless checking id
                   />
                 ))}
                 {remaining > 0 && (
@@ -583,6 +592,7 @@ export function ThreadedDiscussion({
   autoFocusTop,
   rootComposerPlaceholder,
   newCommentIds,
+  focusedCommentId,
   scrollRef,
 }: {
   postSlug: string
@@ -595,6 +605,7 @@ export function ThreadedDiscussion({
   autoFocusTop?: boolean
   rootComposerPlaceholder?: string
   newCommentIds?: Set<string>
+  focusedCommentId?: string
   /** Scroll container for windowed mode (DiscussionPanel). Null → viewport. */
   scrollRef?: React.RefObject<HTMLDivElement | null>
 }) {
@@ -660,6 +671,43 @@ export function ThreadedDiscussion({
       return next
     })
   }, [newCommentIds, parentMap])
+
+  // Auto-expand ancestors for focusedCommentId and scroll it into view
+  useEffect(() => {
+    if (!focusedCommentId) return
+
+    const expandChain: string[] = []
+    let p = parentMap.get(focusedCommentId)
+    while (p) {
+      if (!expandChain.includes(p)) expandChain.push(p)
+      p = parentMap.get(p)
+    }
+
+    if (expandChain.length > 0) {
+      setCollapsedIds((cur) => {
+        const next = new Set(cur)
+        for (const id of expandChain) next.delete(id)
+        return next
+      })
+      setChildLimits((cur) => {
+        const next = new Map(cur)
+        for (const id of expandChain) next.set(id, Infinity)
+        return next
+      })
+    }
+
+    // Scroll to the element after a short delay to allow mounting
+    setTimeout(() => {
+      const el = document.getElementById(`comment-${focusedCommentId}`)
+      if (el && scrollRef?.current) {
+        scrollRef.current.scrollTo({
+          top: el.offsetTop - 100,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
+
+  }, [focusedCommentId, parentMap, scrollRef])
 
   const toggleCollapsed = useCallback((id: string) => {
     userToggledRef.current = true
@@ -780,6 +828,7 @@ export function ThreadedDiscussion({
                 parentMap={parentMap}
                 newCommentIds={newCommentIds}
                 flat
+                isFocused={row.node.comment.id === focusedCommentId}
               />
             ))}
             {bottomPad > 0 && <div aria-hidden style={{ height: bottomPad }} />}
@@ -802,6 +851,7 @@ export function ThreadedDiscussion({
                   onCommentDeleted={handleDeleted}
                   parentMap={parentMap}
                   newCommentIds={newCommentIds}
+                  isFocused={node.comment.id === focusedCommentId}
                 />
               </div>
             ))}

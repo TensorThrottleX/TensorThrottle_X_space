@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 import { NAV_COMMANDS, SYSTEM_MOTIVES, HELP_TEXT } from '@/lib/terminal-commands'
 
-export function InteractiveHome(): React.ReactNode {
+export default function InteractiveHome(): React.ReactNode {
   const router = useRouter()
   const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
   const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res', text: string }[]>([])

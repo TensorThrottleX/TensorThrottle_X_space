@@ -1,17 +1,192 @@
 {
+  "id": "jujutsu-kaisen",
+  "index": 7,
   "title": "Jujutsu Kaisen",
-  "subtitle": "Cursed energy, resolved will",
-  "description": "High school student Yuji Itadori swallows a cursed finger to save his friends, becoming the host of the most powerful curse in existence, and begins training as a jujutsu sorcerer.",
-  "accentColor": "#ec4899",
-  "quotes": [
-    "I don't need a reason to save people. I just save them because they're there.",
-    "You're strong. That's your flaw. You're too strong, so you've forgotten what it means to be weak.",
-    "When it comes to you, I want to be the strongest. That's my selfishness."
+  "subtitle": "The strength that doesn't need an audience",
+  "jpTitle": "呪術廻戦",
+  "year": 2020,
+  "genre": "Shōnen",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I came for the fights and stayed for the wage. It was the first action show where the strongest character I knew had a job, a schedule, and a quiet hatred of overtime."
+  },
+  "reflection": {
+    "quote": "It kept telling me everyone is going to die — and then it kept making me care anyway. That's when I understood what it was really about: choosing purpose despite the expiration date.",
+    "tags": [
+      "responsibility",
+      "professionalism",
+      "discipline",
+      "mortality"
+    ],
+    "whatIKept": "You can carry something heavy without needing anyone to know it's heavy. Nanami never made his burden visible — he just carried it, every day, until he couldn't.",
+    "definingScene": "Nanami walking into Shibuya knowing he won't walk out. No rage. No monologue. Just a man finishing what he accepted long ago.",
+    "whoItMadeMeThinkAbout": "My father, the morning he drove three hours in silence to help me move apartments, and drove back without once asking for thanks."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "The animation is stunning. I told myself this was just spectacle.",
+      "micro": "Episode 1"
+    },
+    {
+      "thought": "Wait — he's not fighting to win. He's fighting because it's his job.",
+      "micro": "Episode 11"
+    },
+    {
+      "thought": "That scene with Nanami stayed in my head for three days.",
+      "micro": "Episode 17"
+    },
+    {
+      "thought": "I paused. I rewound. I watched it again without sound.",
+      "micro": "Shibuya Arc"
+    },
+    {
+      "thought": "I understood something about my father I didn't have words for before.",
+      "micro": "After finishing"
+    }
   ],
+  "cinematicMoment": {
+    "eyebrow": "The turning point",
+    "title": "He walked in knowing he wouldn't walk out.",
+    "body": "No music swell. No slow-motion last breath. Just a man with a clear understanding of what the job required, and a quiet decision to do it completely.",
+    "episode": "Shibuya Incident Arc",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Overtime",
+        "text": "Nanami clocks out of his office job and into a worse one. Showing up for work that's yours is the whole discipline.",
+        "tag": "Discipline",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Finger",
+        "text": "Yuji swallows it to save someone else's life. He didn't choose his inheritance — he chose what direction to carry it.",
+        "tag": "Responsibility",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Expiration Date",
+        "text": "Everyone dies anyway. The show never lets you forget it — and it never lets you use it as an excuse.",
+        "tag": "Mortality",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "My definition of strength got smaller and more precise.",
+      "body": "Strength used to mean capability. Now it means execution without drama — doing the thing without needing the thing to feel meaningful in the moment.",
+      "caption": "Strength without an audience.",
+      "image": "",
+      "flip": false
+    },
+    {
+      "question": "What caught my attention?",
+      "heading": "The fight choreography is a distraction. Deliberately.",
+      "body": "The action exists to pull you past your guard. Before you realize it, you're attached to people the story is about to take from you. That's not style — that's architecture.",
+      "caption": "The real trap is caring.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "You're strong. That's your flaw. You're too strong, so you've forgotten what it means to be weak.",
+    "attribution": "— Gojo Satoru"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "The animation pulled me in first",
+      "body": "Fast, fluid, technically stunning. I thought I was watching a sport — spectacular choreography. For a while, that was enough."
+    },
+    "whatShifted": {
+      "heading": "Then Nanami walked onscreen",
+      "body": "Someone who had seen through the fantasy of heroism and continued anyway. Not for glory — because the alternative was letting someone else bear it."
+    },
+    "whatStayed": {
+      "heading": "Strength without sentiment",
+      "body": "Not every hard thing deserves a narrative arc. Some things you do quietly, completely, without asking the universe to acknowledge the difficulty."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I notice",
+        "line": "when I'm adding drama to something that doesn't need it."
+      },
+      {
+        "verb": "I question",
+        "line": "whether my idea of strength requires an audience."
+      },
+      {
+        "verb": "I try",
+        "line": "to finish what I start without needing it to feel heroic."
+      },
+      {
+        "verb": "I avoid",
+        "line": "the word 'sacrifice' for what was just ordinary responsibility."
+      }
+    ]
+  },
   "characters": [
-    { "name": "Yuji Itadori", "role": "Protagonist" },
-    { "name": "Megumi Fushiguro", "role": "Sorcerer" },
-    { "name": "Nobara Kugaki", "role": "Sorcerer" },
-    { "name": "Satoru Gojo", "role": "Teacher" }
-  ]
+    {
+      "name": "Nanami Kento",
+      "role": "The mirror",
+      "mirror": "He showed me professionalism divorced from ego. He hates the system he works in and continues anyway, because someone has to. I think about that every time I'm tempted to make my frustration visible."
+    },
+    {
+      "name": "Itadori Yuji",
+      "role": "The question",
+      "mirror": "What do you do with a terrible inheritance? He didn't choose his situation. He chose what direction to carry it."
+    },
+    {
+      "name": "Gojo Satoru",
+      "role": "The contrast",
+      "mirror": "Confidence so complete it doesn't require validation is disarming. Not arrogance — certainty. I spent a long time thinking they were the same thing."
+    }
+  ],
+  "notes": [
+    {
+      "text": "The show keeps reminding you that everyone is going to die. And then it keeps making you care anyway. That's the whole point.",
+      "footer": "Midway through season 1"
+    },
+    {
+      "text": "I don't think Nanami wanted to be remembered. I think he just wanted to have done it right.",
+      "footer": "After the Shibuya arc"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "Cursed energy as unprocessed emotion",
+      "application": "Negative things accumulate invisibly and become destructive when not released. I started scheduling deliberate decompression after this."
+    },
+    {
+      "concept": "Domain expansion as total presence",
+      "application": "Forcing your environment to match your internal state. Total focus is a weapon — and most people never deploy it."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I still ask myself — before I complain about a long day — whether I'm doing the work for the work's sake or for the audience.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Vinland Saga",
+        "reason": "What happens after you abandon the idea of vengeance."
+      },
+      {
+        "title": "Monster",
+        "reason": "What defines a person who chooses not to be saved."
+      },
+      {
+        "title": "Mushishi",
+        "reason": "Stillness as the highest form of understanding."
+      }
+    ]
+  }
 }

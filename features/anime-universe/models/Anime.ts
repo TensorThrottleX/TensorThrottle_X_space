@@ -1,4 +1,5 @@
 import type { Character } from './Character'
+import type { AnimeNarrativeData } from '../components/narrative'
 
 export interface Anime {
   id: string
@@ -12,4 +13,7 @@ export interface Anime {
   videoUrl: string | null
   audioTracks: string[]
   updatedAt?: string
+
+  // The new universal template data payload
+  narrativeData?: AnimeNarrativeData
 }

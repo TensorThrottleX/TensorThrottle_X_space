@@ -1,16 +1,160 @@
 {
+  "id": "ClassroomOfTheElite",
+  "index": 6,
   "title": "Classroom of the Elite",
-  "subtitle": "Meritocracy and manipulation",
-  "description": "A fascinating psychological thriller set in a high school where everything is determined by points and merit. It explores themes of manipulation, human nature, and the true meaning of equality, as the enigmatic Ayanokoji navigates a cutthroat environment from the shadows.",
-  "accentColor": "#dc2626",
-  "quotes": [
-    "All people are nothing but tools.",
-    "Equality is just an illusion.",
-    "I'll use whatever it takes to win."
+  "subtitle": "Observation and emotional restraint",
+  "jpTitle": "ようこそ実力至上主義の教室へ",
+  "year": 2017,
+  "genre": "Psychological",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I thought it was a show about high school drama. It turned out to be a masterclass in watching people reveal what they actually value."
+  },
+  "reflection": {
+    "quote": "Ayanokoji introduced me to total emotional restraint. I started asking how much of my energy I waste reacting to things I should just be observing.",
+    "tags": [
+      "observation",
+      "strategy",
+      "restraint",
+      "systems",
+      "reading people"
+    ],
+    "whatIKept": "Leverage belongs to the person who needs the least validation.",
+    "definingScene": "The season one ending monologue. The chilling realization that he views everyone as tools. It recontextualized every 'helpful' thing he had done.",
+    "whoItMadeMeThinkAbout": "The parts of the corporate world where systems thinking replaces empathy."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "He's just lazy and unmotivated.",
+      "micro": "Episode 1"
+    },
+    {
+      "thought": "Wait — he engineered that entire outcome without taking credit.",
+      "micro": "Mid-season"
+    },
+    {
+      "thought": "He isn't helping them. He's arranging them.",
+      "micro": "The Island Exam"
+    },
+    {
+      "thought": "He doesn't want to win. He wants to not be bothered.",
+      "micro": "Season Finale"
+    }
   ],
+  "cinematicMoment": {
+    "eyebrow": "The mask slips",
+    "title": "The inner monologue.",
+    "body": "After a whole season of seeming to learn the value of friendship, the voiceover reveals the truth: 'I've never once thought of you as an ally. All people are nothing but tools.' A terrifying display of absolute detachment.",
+    "episode": "Season 1 Finale",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Points",
+        "text": "A system that commodifies behavior. It made me look at how society tracks our worth.",
+        "tag": "Systems",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Shadows",
+        "text": "Controlling the room without standing at the podium. The power of invisibility.",
+        "tag": "Strategy",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Monologue",
+        "text": "The voice inside that shows the gap between what people do and why they do it.",
+        "tag": "Reading People",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "I learned the value of silence.",
+      "body": "I used to speak up to prove I understood. This show taught me that giving away your perspective for free reduces your leverage. Sometimes the smartest move is to let people underestimate you.",
+      "caption": "Silence is data collection.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "As long as I win in the end, that's all that matters.",
+    "attribution": "— Kiyotaka Ayanokoji"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "A standard school hierarchy",
+      "body": "I expected an underdog story — D-Class proves everyone wrong with the power of friendship."
+    },
+    "whatShifted": {
+      "heading": "The hidden puppeteer",
+      "body": "The protagonist wasn't learning to care. He was learning how the pieces moved on the board."
+    },
+    "whatStayed": {
+      "heading": "Emotional detachment",
+      "body": "The stark utility of separating emotions from objectives. A dangerous path, but highly effective."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I try",
+        "line": "to observe a room before deciding how to participate in it."
+      },
+      {
+        "verb": "I notice",
+        "line": "how often people give away their leverage just to feel heard."
+      },
+      {
+        "verb": "I question",
+        "line": "the underlying systems that dictate why people act the way they do."
+      }
+    ]
+  },
   "characters": [
-    { "name": "Kiyotaka Ayanokoji", "role": "Protagonist / Mastermind" },
-    { "name": "Suzune Horikita", "role": "Ally / Leader" },
-    { "name": "Kakeru Ryuen", "role": "Antagonist" }
-  ]
+    {
+      "name": "Kiyotaka Ayanokoji",
+      "role": "The extreme",
+      "mirror": "He challenged my need for validation — the absolute extreme of systems thinking without empathy."
+    },
+    {
+      "name": "Suzune Horikita",
+      "role": "The mirror",
+      "mirror": "She reflected the trap of believing intelligence alone is enough, without understanding social dynamics."
+    }
+  ],
+  "notes": [
+    {
+      "text": "People will tell you who they are if you're quiet enough to let them.",
+      "footer": "Personal Note"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "Information asymmetry",
+      "application": "The person who knows the most while revealing the least controls the interaction."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I stopped performing my understanding and started keeping it.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Code Geass",
+        "reason": "When strategy and manipulation are used to change the world."
+      },
+      {
+        "title": "Death Note",
+        "reason": "The battle of intellects where visibility is fatal."
+      }
+    ]
+  }
 }

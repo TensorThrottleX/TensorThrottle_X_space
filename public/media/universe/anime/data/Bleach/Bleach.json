@@ -1,17 +1,160 @@
 {
+  "id": "Bleach",
+  "index": 5,
   "title": "Bleach",
-  "subtitle": "Soul reaper of the substitute badge",
-  "description": "Teenager Ichigo Kurosaki acquires the powers of a Soul Reaper and protects the living world from malevolent spirits known as Hollows.",
-  "accentColor": "#6366f1",
-  "quotes": [
-    "If you were to die now, I'd be sad. That's all.",
-    "We don't need to know how many enemies. We only need to know how many we have to defeat.",
-    "Fear is not evil. It tells you what your weakness is."
+  "subtitle": "Carrying invisible burdens",
+  "jpTitle": "ブリーチ",
+  "year": 2004,
+  "genre": "Shōnen",
+  "poster": "",
+  "entry": {
+    "breathQuote": "It was the aesthetic that pulled me in. It was the quiet, unspoken weight of duty that made me stay."
+  },
+  "reflection": {
+    "quote": "Ichigo never wanted to be a hero. He just refused to let the people in his immediate vicinity get hurt. That distinction reshaped my whole definition of responsibility.",
+    "tags": [
+      "identity",
+      "duty",
+      "burden",
+      "confidence",
+      "protection"
+    ],
+    "whatIKept": "You don't need a grand, world-saving philosophy to act. 'I just want to protect my friends' is a complete and sufficient moral code.",
+    "definingScene": "Ichigo arriving at Sokyoku Hill. No words — just planting the sword and stopping the execution. The quiet confidence of knowing exactly what you're there to do.",
+    "whoItMadeMeThinkAbout": "People who do the heavy lifting in silence, without demanding a parade for their efforts."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "He's always scowling, but he always helps.",
+      "micro": "Episode 1"
+    },
+    {
+      "thought": "He doesn't care about Soul Society's politics. He cares about Rukia.",
+      "micro": "Soul Society Arc"
+    },
+    {
+      "thought": "The sword is a reflection of his internal clarity.",
+      "micro": "Bankai training"
+    },
+    {
+      "thought": "He fights his own inner hollow. The enemy is literally his own instinct.",
+      "micro": "Arrancar Arc"
+    }
   ],
+  "cinematicMoment": {
+    "eyebrow": "The moment of arrival",
+    "title": "Sokyoku Hill.",
+    "body": "The execution is underway. The captains are assembled. Ichigo just appears and shatters the un-shatterable. It wasn't the power level — it was the gravitational pull of someone who has resolved their internal conflict.",
+    "episode": "Episode 54",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Mask",
+        "text": "The darkness inside, made physical. You don't defeat it. You learn to control it.",
+        "tag": "Integration",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Rain",
+        "text": "The inner world flooding when despair takes over. The perfect visual for a bad mental state.",
+        "tag": "Mental State",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Sword",
+        "text": "Zangetsu is the honest self. Your weapon is what you're willing to be when no one is directing you.",
+        "tag": "Identity",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "I stopped looking for a grand purpose.",
+      "body": "I used to stress about my 'mission.' Ichigo made me realize your purpose can just be the people standing next to you. You don't need to save the world — just your corner of it.",
+      "caption": "Micro-duty over macro-philosophy.",
+      "image": "",
+      "flip": false
+    }
+  ],
+  "pullQuote": {
+    "text": "If miracles only happen once, what are they called the second time?",
+    "attribution": "— Ichigo Kurosaki"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "Style and swords",
+      "body": "I came for the character designs and the oversized weapons. It felt impossibly cool."
+    },
+    "whatShifted": {
+      "heading": "The internal landscape",
+      "body": "The real battles were inside the characters' minds. Their swords were literally their souls."
+    },
+    "whatStayed": {
+      "heading": "Quiet resolve",
+      "body": "Not screaming your ideals — just showing up and doing the work."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I try",
+        "line": "to focus my energy on protecting the people in my immediate radius."
+      },
+      {
+        "verb": "I notice",
+        "line": "when the rain starts falling inside, and address my mental state instead of fighting through it."
+      },
+      {
+        "verb": "I question",
+        "line": "rules and traditions that demand suffering in the name of duty."
+      }
+    ]
+  },
   "characters": [
-    { "name": "Ichigo Kurosaki", "role": "Protagonist" },
-    { "name": "Rukia Kuchiki", "role": "Soul Reaper" },
-    { "name": "Renji Abarai", "role": "Lieutenant" },
-    { "name": "Byakuya Kuchiki", "role": "Captain" }
-  ]
+    {
+      "name": "Ichigo Kurosaki",
+      "role": "The anchor",
+      "mirror": "He challenged me to stop agonizing over the 'why' and just focus on the 'what' — protect what's in front of you."
+    },
+    {
+      "name": "Byakuya Kuchiki",
+      "role": "The mirror",
+      "mirror": "He reflected rigid adherence to rules over empathy, and the painful process of unlearning it. I saw my own stubbornness in him."
+    }
+  ],
+  "notes": [
+    {
+      "text": "Your blade reflects your soul. If you're hesitating, it becomes dull.",
+      "footer": "Zangetsu's teaching"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "The Inner World",
+      "application": "Your external capability is tied to your internal clarity. You can't win outside if it's raining inside."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I learned to carry weight without announcing it — and to protect my corner of the world.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Jujutsu Kaisen",
+        "reason": "A modern continuation of the aesthetic of duty and curses."
+      },
+      {
+        "title": "Demon Slayer",
+        "reason": "Carrying the burden of protection with absolute empathy."
+      }
+    ]
+  }
 }

@@ -48,6 +48,9 @@ import { GlobalTerminalRenderer } from "@/components/layout/GlobalTerminalRender
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav"
 import { PulseBell } from "@/components/pulse/PulseBell"
 import { FoxProvider } from "@/fox-companion"
+import { DiscussionProvider } from "@/components/providers/DiscussionProvider"
+import { GlobalDiscussionOverlay } from "@/components/layout/GlobalDiscussionOverlay"
+import { DiscussionEntry } from "@/components/pulse/DiscussionEntry"
 
 export default function RootLayout({
   children,
@@ -67,44 +70,28 @@ export default function RootLayout({
         }} />
         <UIProvider>
           <MediaOrchestrator>
-            <FoxProvider>
+            <DiscussionProvider>
+              <FoxProvider>
 
               <RenderScaler>
                 <AppStartupGate>
-                  {/* ── Center Header Region ────────────────────────────────────────────
-                      Independent fixed container that owns ONLY the Navigation's centering.
-                      `justify-center` is viewport-relative, so the nav is dead-center
-                      regardless of anything else in the header. The nav never depends on a
-                      utility cluster: no shared grid, no spacer, no translate, no margins.
-                      Hidden on mobile via CSS (.desktop-only). */}
                   <div className="desktop-only">
                     <div className="fixed inset-x-0 top-1 z-[150] flex justify-center pointer-events-none">
                       <TopFloatingBar />
                     </div>
                   </div>
 
-                  {/* ── Top-Right Utility Region ───────────────────────────────────────
-                      Independent fixed container that owns ONLY the Pulse + Clock cluster.
-                      The cluster is grouped here (flex gap-3) and justified to the viewport's
-                      right edge — its placement depends on nothing but this region. On
-                      viewports below xl the centered nav + right cluster cannot share one row
-                      without overlap (measured: cluster 213px wide vs only ~130px of free
-                      space to the nav's right edge at 1024px, and ~208px at 1180px), so this
-                      region drops the cluster onto its own second row (top-[96px], clearing
-                      the 76px nav band); at >= xl it rides the same top band as the nav
-                      (aligned to the 76px bar height) with a verified clearance of >=15px
-                      between nav and cluster at every width >=1280px. Both thresholds are
-                      owned by THIS region, not the nav. The nav's centering is never coupled
-                      here. */}
                   <div className="desktop-only">
-                    <div className="fixed inset-x-0 top-[96px] z-[150] flex justify-end pointer-events-none xl:top-1 xl:h-[76px] xl:items-center">
-                      <div className="flex items-center gap-3 pr-8 pointer-events-auto">
+                    <div className="fixed inset-x-0 top-[96px] z-[150] flex justify-end pointer-events-none xl:top-1 xl:h-[76px] xl:items-center xl:pr-12">
+                      <div className="flex items-center gap-5 pointer-events-auto">
+                        <DiscussionEntry variant="desktop" />
                         <PulseBell variant="desktop" />
                         <SystemClock />
                       </div>
                     </div>
                   </div>
                   <div className="lg:hidden">
+                    <DiscussionEntry variant="mobile" />
                     <PulseBell variant="mobile" />
                   </div>
                   <div className="lg:hidden">
@@ -121,6 +108,7 @@ export default function RootLayout({
 
                   <GlobalMessageOverlay />
                   <GlobalTerminalRenderer />
+                  <GlobalDiscussionOverlay />
 
                   <div className="desktop-only">
                     <GlobalFooter />
@@ -131,6 +119,7 @@ export default function RootLayout({
                 </AppStartupGate>
               </RenderScaler>
             </FoxProvider>
+            </DiscussionProvider>
           </MediaOrchestrator>
         </UIProvider>
       </body>

@@ -1,0 +1,146 @@
+{
+  "id": "jujutsu-kaisen",
+  "index": 23,
+  "title": "Jujutsu Kaisen",
+  "subtitle": "Cursed energy, resolved will",
+  "jpTitle": "呪術廻戦",
+  "year": 2020,
+  "genre": "Shōnen",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I didn't watch this for the fights. I watched it because something in the first five minutes felt like a question I hadn't known how to ask."
+  },
+  "reflection": {
+    "quote": "Anime was never just entertainment for me. It became a collection of perspectives that quietly shaped the way I think, question, fail, and grow.",
+    "tags": ["resolve", "duty", "cursed will", "discipline"],
+    "whatIKept": "Carrying weight others cannot see is its own form of strength. Nanami never made his burden visible — he simply carried it, every day, until he couldn't.",
+    "definingScene": "Nanami walking into Shibuya knowing he won't walk out. No rage. No monologue. Just a man finishing what he accepted long ago.",
+    "whoItMadeMeThinkAbout": "My father, the morning he drove three hours in silence to help me move apartments and drove back without once asking for thanks."
+  },
+  "thoughtCascade": [
+    { "thought": "The animation is stunning — I told myself this was just spectacle.", "micro": "Episode 1" },
+    { "thought": "Wait. He's not fighting to win. He's fighting because it's his job.", "micro": "Episode 11" },
+    { "thought": "That scene with Nanami stayed in my head for three days.", "micro": "Episode 17" },
+    { "thought": "I paused here. I rewound. I watched it again without sound.", "micro": "Shibuya Arc" },
+    { "thought": "I understood something about my father I didn't have words for before.", "micro": "After finishing" }
+  ],
+  "cinematicMoment": {
+    "eyebrow": "The moment everything changed",
+    "title": "He walked in knowing he wouldn't walk out.",
+    "body": "There was no music swell. No slow-motion last breath. Just a man with a clear understanding of what the job required, and a quiet decision to do it completely.",
+    "episode": "Jujutsu Kaisen · Shibuya Incident Arc",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "What I Kept",
+        "text": "You can carry something heavy without needing anyone to know it's heavy.",
+        "tag": "Nanami Kento",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Scene",
+        "text": "A man finishing his duty in silence. I've rewatched it six times and cried twice.",
+        "tag": "Shibuya · Episode 7",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Mirror",
+        "text": "My father. Three hours of driving. Not a single word about what it cost him.",
+        "tag": "Real life",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What caught my attention?",
+      "heading": "The fight choreography was a distraction. Deliberately.",
+      "body": "The action exists to pull you past your guard. Before you realize it, you're attached to people the story is about to take from you. That's not a stylistic choice — it's architecture.",
+      "caption": "The real trap is caring about Nanami",
+      "image": "",
+      "flip": false
+    },
+    {
+      "question": "What quietly changed?",
+      "heading": "My definition of strength got smaller and more precise.",
+      "body": "Strength used to mean capability. Now it means execution without drama. Doing the thing without needing the thing to feel meaningful in the moment. Nanami taught me that.",
+      "caption": null,
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "The strongest characters don't fight for victory. They fight because not fighting would be worse.",
+    "attribution": "— what I understood, eventually"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "The animation pulled me in first",
+      "body": "Fast, fluid, technically stunning. I thought I was watching a sport — characters throwing energy in beautifully choreographed sequences. I expected spectacle, and I got it. For a while, that was enough."
+    },
+    "whatShifted": {
+      "heading": "Then Nanami walked onscreen",
+      "body": "Here was someone who had seen through the fantasy of heroism and continued anyway. Not because he believed in glory — he explicitly didn't — but because the alternative was to let someone else bear it. That distinction changed how I watched everything that followed."
+    },
+    "whatStayed": {
+      "heading": "Strength without sentiment is the rarest kind",
+      "body": "I still use this as a standard. Not every hard thing deserves a narrative arc around it. Some things you do quietly, completely, without asking the universe to acknowledge the difficulty."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      { "verb": "I notice", "line": "when I'm adding drama to something that doesn't need it." },
+      { "verb": "I question", "line": "whether my idea of strength requires an audience." },
+      { "verb": "I try", "line": "to finish what I start without needing it to feel heroic." },
+      { "verb": "I avoid", "line": "the word 'sacrifice' for anything that was just ordinary responsibility." }
+    ]
+  },
+  "characters": [
+    {
+      "name": "Nanami Kento",
+      "role": "The mirror",
+      "mirror": "He showed me what professionalism looks like when divorced from ego. He hates the system he works in. He continues anyway, precisely because someone has to. I think about this every time I'm tempted to make my frustration visible."
+    },
+    {
+      "name": "Itadori Yuji",
+      "role": "The question",
+      "mirror": "What do you do with a terrible inheritance? He didn't choose his situation. He chose what direction to carry it. That distinction became important to me in 2023 in ways I didn't expect."
+    },
+    {
+      "name": "Gojo Satoru",
+      "role": "The contrast",
+      "mirror": "Confidence so complete it doesn't require validation is genuinely disarming. Not arrogance — certainty. I spent a long time thinking they were the same thing."
+    }
+  ],
+  "notes": [
+    { "text": "The show keeps reminding you that everyone is going to die. And then it keeps making you care anyway. That's the whole point.", "footer": "Midway through season 1" },
+    { "text": "I don't think Nanami wanted to be remembered. I think he just wanted to have done it right.", "footer": "After the Shibuya arc" },
+    { "text": "Gege knows exactly when you've gotten comfortable. That's when he acts.", "footer": "Personal annotation" }
+  ],
+  "ideas": [
+    {
+      "concept": "Cursed energy as unprocessed emotion",
+      "application": "The system works as a metaphor: negative things accumulate invisibly and become destructive when not released. I started scheduling deliberate decompression after this."
+    },
+    {
+      "concept": "Domain expansion as total presence",
+      "application": "Forcing your environment to match your internal state completely. A reminder that total focus is a weapon, not a default mode — and that most people never deploy it."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because this reshaped how I think about carrying weight",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      { "title": "Vinland Saga", "reason": "What happens after you abandon the idea of vengeance" },
+      { "title": "Monster", "reason": "What defines a person when they choose not to be saved" },
+      { "title": "Mushishi", "reason": "Stillness as the highest form of understanding" }
+    ]
+  }
+}

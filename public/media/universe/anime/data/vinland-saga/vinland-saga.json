@@ -1,0 +1,188 @@
+{
+  "id": "vinland-saga",
+  "index": 8,
+  "title": "Vinland Saga",
+  "subtitle": "The strength that refuses the sword",
+  "jpTitle": "ヴィンランド・サガ",
+  "year": 2019,
+  "genre": "Seinen",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I came for the Vikings — the shield walls, the raids, violence drawn beautifully. I think I was at a stage where I wanted strength to be simple."
+  },
+  "reflection": {
+    "quote": "It took me two seasons to realize the strongest man in the story was the one who refused to fight. I kept waiting for the twist. The twist was the whole point.",
+    "tags": [
+      "violence",
+      "forgiveness",
+      "purpose",
+      "true strength"
+    ],
+    "whatIKept": "Revenge is a job you can't quit and never get paid for. Thorfinn spent a decade making it his whole identity, and the show never let me admire him for it.",
+    "definingScene": "The knife left in the dirt. After ten years of carrying it, he simply walked away and started working a field — no speech, no thunder. I'd never seen strength look like that.",
+    "whoItMadeMeThinkAbout": "The grudges I still carry — and what my life would look like if I put them down."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "This is a revenge story. I know where it's going.",
+      "micro": "Episode 1"
+    },
+    {
+      "thought": "Wait — the warrior he admires is the one who refused to fight.",
+      "micro": "Thors' death"
+    },
+    {
+      "thought": "A decade of hatred hasn't made him strong. It's made him hollow.",
+      "micro": "Season 1 finale"
+    },
+    {
+      "thought": "He threw the knife away and something in my chest loosened.",
+      "micro": "The Farm Arc"
+    },
+    {
+      "thought": "I rewatched the wheat field scene three times.",
+      "micro": "Season 2"
+    }
+  ],
+  "cinematicMoment": {
+    "eyebrow": "The turning point",
+    "title": "The knife in the dirt.",
+    "body": "All those years, all that hatred, and he just left it in the ground. He didn't forgive — he released. I had confused the two my whole life.",
+    "episode": "Season 2 · The Farm Arc",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Knife",
+        "text": "Left in the ground. You can walk away from your own anger — it doesn't have to write the rest of your sentence.",
+        "tag": "Release",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Field",
+        "text": "Ordinary work done with your hands, until the poison leaves. Healing looks boring.",
+        "tag": "Repair",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Line",
+        "text": "'I have no enemies.' Not a slogan — a way of seeing that ends the war before it starts.",
+        "tag": "Purpose",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "I stopped calling anger 'motivation.'",
+      "body": "I used the same fuel Thorfinn did — resentment as a productivity hack. Watching a decade of it produce nothing but exhaustion made me audit my own.",
+      "caption": "Hatred is expensive fuel.",
+      "image": "",
+      "flip": false
+    },
+    {
+      "question": "What did I misunderstand?",
+      "heading": "I thought Askeladd was the villain.",
+      "body": "He was the mirror — a man who used everyone's hatred as fuel, including Thorfinn's. He showed me how clever people cash in other people's pain.",
+      "caption": "The puppet masters live among us.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "You have no enemies. No one in this world has enemies.",
+    "attribution": "— Thors"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "A brutal revenge saga",
+      "body": "I expected a samurai-in-a-shield-wall story: blood, honor, and a satisfying kill."
+    },
+    "whatShifted": {
+      "heading": "The farm changed everything",
+      "body": "Half a season of planting wheat and hauling timber — and it was the most radical thing the show could do. Work, not war, as the path back to yourself."
+    },
+    "whatStayed": {
+      "heading": "True strength",
+      "body": "The man who needs no sword. Not a pacifist creed — an engineering decision about what actually works."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I notice",
+        "line": "when I'm rehearsing an old grievance instead of doing the work in front of me."
+      },
+      {
+        "verb": "I try",
+        "line": "to leave the knife in the ground."
+      },
+      {
+        "verb": "I question",
+        "line": "what I'd do with all the energy my anger has been holding hostage."
+      }
+    ]
+  },
+  "characters": [
+    {
+      "name": "Thorfinn",
+      "role": "The mirror",
+      "mirror": "He reflected the years of my own life I spent running on resentment. Watching him stop was watching a door open."
+    },
+    {
+      "name": "Askeladd",
+      "role": "The discomfort",
+      "mirror": "He showed me how easy it is to be the smartest person in the room and the emptiest. I recognized the trick before I recognized the cost."
+    },
+    {
+      "name": "Einar",
+      "role": "The challenge",
+      "mirror": "He chooses kindness with both eyes open. He taught me that gentleness is a practice, not a personality."
+    }
+  ],
+  "notes": [
+    {
+      "text": "Revenge is a job you can't quit and never get paid for.",
+      "footer": "Season 1"
+    },
+    {
+      "text": "The strongest warrior in the show refuses to hold a sword. I keep coming back to why that feels true.",
+      "footer": "Rewatch, Season 2"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "True strength",
+      "application": "Strength as the ability to not respond — to absorb the opening and decline it."
+    },
+    {
+      "concept": "The new land",
+      "application": "Forgiveness as a destination you sail toward, not a single arrival. You have to keep the ship pointed."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I stopped believing my anger was my best work.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Monster",
+        "reason": "What the absence of compassion does to a person."
+      },
+      {
+        "title": "Attack on Titan",
+        "reason": "What revenge makes of a nation."
+      },
+      {
+        "title": "Mushishi",
+        "reason": "Stillness as the highest form of understanding."
+      }
+    ]
+  }
+}

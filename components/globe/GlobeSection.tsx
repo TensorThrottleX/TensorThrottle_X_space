@@ -9,7 +9,7 @@ interface GlobeSectionProps {
     revealProgress?: number
 }
 
-export function GlobeSection({ isBright, revealProgress = 1 }: GlobeSectionProps) {
+export default function GlobeSection({ isBright, revealProgress = 1 }: GlobeSectionProps) {
     const sectionRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(sectionRef, { amount: 0.5, once: false })
     const [hasEverEntered, setHasEverEntered] = useState(false)

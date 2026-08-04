@@ -1,17 +1,165 @@
 {
+  "id": "attack-on-titan",
+  "index": 3,
   "title": "Attack on Titan",
-  "subtitle": "Freedom found in the jaws of despair",
-  "description": "In a world where humanity lives behind massive walls to protect themselves from man-eating Titans, young Eren Jaeger vows to exterminate them after his city is breached.",
-  "accentColor": "#84cc16",
-  "quotes": [
-    "If you win, you live. If you lose, you die. If you don't fight, you can't win.",
-    "The only ones who can change the world are those willing to give up everything.",
-    "I am free. I will keep moving forward until my enemies are destroyed."
+  "subtitle": "When certainty disappears",
+  "jpTitle": "進撃の巨人",
+  "year": 2013,
+  "genre": "Seinen",
+  "poster": "",
+  "entry": {
+    "breathQuote": "I thought I was watching a survival story about good versus evil. I didn't realize I was watching the dismantling of moral certainty."
+  },
+  "reflection": {
+    "quote": "It taught me that the most dangerous person in any room is the one who has completely stopped doubting their own righteousness.",
+    "tags": [
+      "perspective",
+      "freedom",
+      "cycles",
+      "truth",
+      "morality"
+    ],
+    "whatIKept": "Everyone is acting perfectly rationally based on the story they were told. There is no villain's seat in the theater of the world — only different seat assignments.",
+    "definingScene": "Reiner and Bertholdt on the wall. A world-shattering truth delivered with exhausted weariness. It wasn't a villain's monologue. It was tired soldiers.",
+    "whoItMadeMeThinkAbout": "Anyone I have ever quickly filed under 'enemy' without understanding their context."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "The monsters are just outside.",
+      "micro": "Season 1"
+    },
+    {
+      "thought": "Wait. The monsters are inside.",
+      "micro": "Season 2"
+    },
+    {
+      "thought": "We are the monsters to someone else.",
+      "micro": "Season 3"
+    },
+    {
+      "thought": "Everyone is just acting on the story they were told.",
+      "micro": "Season 4"
+    }
   ],
+  "cinematicMoment": {
+    "eyebrow": "The turning point",
+    "title": "The Basement Reveal.",
+    "body": "The walls weren't protecting them from monsters. They were protecting them from the truth. The moment the outside world existed, I started looking for the walls in my own beliefs.",
+    "episode": "Season 3",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Ocean",
+        "text": "A destination that was supposed to be freedom, and turned out to be just another boundary.",
+        "tag": "Disillusionment",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Forest",
+        "text": "The cycle of hatred made physical. We have to lead the children out of it.",
+        "tag": "Legacy",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Door",
+        "text": "The basement door. Knowledge you can't un-know once it's opened.",
+        "tag": "Truth",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What quietly changed?",
+      "heading": "My definition of freedom.",
+      "body": "I used to think freedom was the ultimate virtue. Eren showed me that freedom pursued without empathy is just tyranny by another name.",
+      "caption": "Freedom as a weapon.",
+      "image": "",
+      "flip": false
+    }
+  ],
+  "pullQuote": {
+    "text": "Everyone had to be drunk on something to keep pushing on. Everyone was a slave to something.",
+    "attribution": "— Kenny Ackerman"
+  },
+  "timeline": {
+    "firstImpression": {
+      "heading": "A brutal action series",
+      "body": "I came for the spectacle — ODM gear, titans, constant peril. A clean fight between humanity and monsters."
+    },
+    "whatShifted": {
+      "heading": "The loss of the moral high ground",
+      "body": "The story crossed the ocean, and I was forced to empathize with the people who caused the first three seasons."
+    },
+    "whatStayed": {
+      "heading": "The danger of narrative",
+      "body": "Propaganda and historical narrative are deadlier than any physical weapon."
+    }
+  },
+  "todayBlock": {
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I notice",
+        "line": "when I am too sure that I'm the protagonist of a conflict."
+      },
+      {
+        "verb": "I question",
+        "line": "what information I'm missing that makes the other person's actions perfectly rational to them."
+      },
+      {
+        "verb": "I try",
+        "line": "to find the 'walls' I've built around my own worldview."
+      }
+    ]
+  },
   "characters": [
-    { "name": "Eren Jaeger", "role": "Protagonist" },
-    { "name": "Mikasa Ackerman", "role": "Guardian" },
-    { "name": "Armin Arlert", "role": "Strategist" },
-    { "name": "Levi Ackerman", "role": "Captain" }
-  ]
+    {
+      "name": "Eren Yeager",
+      "role": "The warning",
+      "mirror": "He showed me how easily the desire to protect your own can curdle into the willingness to destroy everything else."
+    },
+    {
+      "name": "Erwin Smith",
+      "role": "The burden",
+      "mirror": "He reflected the terrible cost of leadership — the willingness to become a demon for the sake of the truth."
+    },
+    {
+      "name": "Gabi Braun",
+      "role": "The mirror",
+      "mirror": "She made me uncomfortable because she is exactly what Eren was. Conditioning shapes our entire reality."
+    }
+  ],
+  "notes": [
+    {
+      "text": "If you only look at the world from inside your walls, you will eventually burn everything outside them.",
+      "footer": "The Rumbling"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "Perspectivism",
+      "application": "There is no absolute truth in human conflict, only competing narratives."
+    }
+  ],
+  "continueJourney": {
+    "because": "Because I now distrust anyone — including myself — who has stopped doubting.",
+    "prompt": "Continue the thought",
+    "recommendations": [
+      {
+        "title": "Vinland Saga",
+        "reason": "What happens when you decide you have no enemies."
+      },
+      {
+        "title": "Code Geass",
+        "reason": "The cost of carrying the world's hatred."
+      }
+    ]
+  }
 }

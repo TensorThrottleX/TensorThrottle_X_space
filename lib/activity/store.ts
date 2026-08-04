@@ -6,7 +6,6 @@
 // Failures fall back to the last good snapshot — graceful degradation.
 
 import type { Activity } from '@/types/activity'
-import { loadAllActivities } from './registry'
 import { mergeAndSort } from './aggregate'
 
 const TTL_MS = 60_000
@@ -25,11 +24,16 @@ export async function getActivities(force = false): Promise<Activity[]> {
     return memoryCache.activities
   }
   try {
-    const fresh = mergeAndSort(await loadAllActivities())
+    const res = await fetch('/api/activity')
+    if (!res.ok) throw new Error('Failed to load activities')
+    
+    const raw = await res.json()
+    const fresh = mergeAndSort(raw)
     memoryCache = { activities: fresh, at: Date.now() }
     persistMiniCache(fresh)
     return fresh
-  } catch {
+  } catch (err) {
+    console.error('Pulse fetch failed:', err)
     return memoryCache?.activities ?? []
   }
 }
@@ -38,7 +42,7 @@ function persistMiniCache(activities: Activity[]) {
   try {
     const mini: MiniActivity[] = activities
       .slice(0, MAX_CACHE_ITEMS)
-      .map((a) => ({ id: a.id, timestamp: a.timestamp }))
+      .map((a) => ({ id: a.id, timestamp: a.updatedAt }))
     window.localStorage.setItem(CACHE_KEY, JSON.stringify(mini))
   } catch {
     /* storage blocked — indicator degrades silently */

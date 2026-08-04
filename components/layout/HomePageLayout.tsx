@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import dynamic from 'next/dynamic';
+
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { LabContainer } from '@/components/layout/LabContainer';
@@ -9,17 +9,12 @@ import { SpaceAtmosphere } from '@/components/layout/SpaceAtmosphere';
 import { ConveyorTags } from '@/components/visuals/ConveyorTags';
 import { useUI } from '@/components/providers/UIProvider';
 
+import type { FoundationModuleProps } from '@/components/dashboard/FoundationModule';
 
-const GlobeSection = dynamic<{ isBright: boolean; revealProgress?: number }>(
-    () => import('@/components/globe/GlobeSection').then(m => ({ default: m.GlobeSection })),
-    { ssr: false }
-)
-const FoundationModule = dynamic<import('@/components/dashboard/FoundationModule').FoundationModuleProps>(
-    () => import('@/components/dashboard/FoundationModule').then(m => ({ default: m.FoundationModule })),
-    { ssr: false }
-)
+import GlobeSection from '@/components/globe/GlobeSection';
+import FoundationModule from '@/components/dashboard/FoundationModule';
 
-export function HomePageLayout() {
+export default function HomePageLayout() {
     const { uiMode, mainView, renderMode, setIsTerminalOpen } = useUI();
     const isBright = renderMode === 'bright';
 

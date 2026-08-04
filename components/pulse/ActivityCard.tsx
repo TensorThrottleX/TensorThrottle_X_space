@@ -13,21 +13,30 @@ import {
   Globe,
   Newspaper,
   Sparkles,
+  LucideIcon
 } from 'lucide-react'
 import type { Activity } from '@/types/activity'
-import { getModuleMeta, formatAction } from '@/lib/activity/modules'
 import { hexToRgba } from '@/lib/activity/colors'
 import { useUI } from '@/components/providers/UIProvider'
 
-const MODULE_ICONS: Record<string, React.ComponentType<{ size?: number | string }>> = {
-  thoughts: Lightbulb,
-  projects: FolderKanban,
-  experiments: FlaskConical,
-  manifold: Network,
-  'anime-universe': Clapperboard,
-  'music-nebula': Music,
-  universe: Globe,
-  feed: Newspaper,
+const ICON_MAP: Record<string, LucideIcon> = {
+  Lightbulb,
+  FolderKanban,
+  FlaskConical,
+  Network,
+  Clapperboard,
+  Music,
+  Globe,
+  Newspaper,
+  Sparkles
+}
+
+const PALETTE = ['#f59e0b', '#a78bfa', '#34d399', '#22d3ee', '#fb7185', '#c084fc', '#60a5fa']
+
+function getAccent(seed: string) {
+  let hash = 0
+  for (let i = 0; i < seed.length; i++) hash = seed.charCodeAt(i) + ((hash << 5) - hash)
+  return PALETTE[Math.abs(hash) % PALETTE.length]
 }
 
 export function ActivityCard({
@@ -43,9 +52,11 @@ export function ActivityCard({
 }) {
   const { renderMode } = useUI()
   const isBright = renderMode === 'bright'
-  const meta = getModuleMeta(activity.module)
-  const Icon = MODULE_ICONS[meta.iconKey] ?? Sparkles
-  const badge = activity.action === 'updated' ? 'Updated' : 'New'
+  
+  const Icon = ICON_MAP[activity.icon] || Sparkles
+
+  const accent = getAccent(activity.source)
+  const badge = activity.action === 'Updated' ? 'Updated' : 'New'
   const baseBg = unread
     ? (isBright ? 'rgba(34,211,238,0.06)' : 'rgba(34,211,238,0.08)')
     : 'transparent'
@@ -69,7 +80,7 @@ export function ActivityCard({
     >
       <span
         className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
-        style={{ backgroundColor: hexToRgba(meta.accent, 0.13), color: meta.accent }}
+        style={{ backgroundColor: hexToRgba(accent, 0.13), color: accent }}
       >
         <Icon size={15} />
       </span>
@@ -80,25 +91,25 @@ export function ActivityCard({
             className="text-[9px] font-mono font-bold uppercase tracking-wider shrink-0"
             style={{ color: isBright ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.45)' }}
           >
-            {meta.name}
+            {activity.source}
           </span>
           <span
             className="rounded-full px-1.5 py-px text-[8px] font-bold uppercase tracking-wide shrink-0"
-            style={{ backgroundColor: hexToRgba(meta.accent, 0.15), color: meta.accent }}
+            style={{ backgroundColor: hexToRgba(accent, 0.15), color: accent }}
           >
             {badge}
           </span>
           {unread && (
             <span
               className="h-1.5 w-1.5 rounded-full shrink-0"
-              style={{ backgroundColor: meta.accent, boxShadow: `0 0 6px ${meta.accent}` }}
+              style={{ backgroundColor: accent, boxShadow: `0 0 6px ${accent}` }}
             />
           )}
           <span
             className="ml-auto text-[9.5px] shrink-0"
             style={{ color: isBright ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.3)' }}
           >
-            {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
+            {formatDistanceToNow(new Date(activity.updatedAt), { addSuffix: true })}
           </span>
         </div>
 
@@ -112,7 +123,7 @@ export function ActivityCard({
           className="mt-0.5 text-[9.5px] font-medium"
           style={{ color: isBright ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.26)' }}
         >
-          {formatAction(activity.action)} · {activity.entityType}
+          {activity.action} · {activity.entityType}
         </p>
       </div>
     </motion.button>

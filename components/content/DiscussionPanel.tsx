@@ -32,6 +32,7 @@ interface DiscussionPanelProps {
   onViewRecorded?: (viewCount: number) => void
   /** Optional rich metadata (category, date, views...) for the sticky header. */
   post?: Post
+  focusedCommentId?: string
 }
 
 function StatItem({
@@ -78,7 +79,7 @@ function StatItem({
  * The threaded engine, moderation pipeline, optimistic updates and composer
  * are reused unchanged.
  */
-export function DiscussionPanel({ postSlug, postTitle, open, onClose, onCommentAdded, onViewRecorded, post }: DiscussionPanelProps) {
+export function DiscussionPanel({ postSlug, postTitle, open, onClose, onCommentAdded, onViewRecorded, post, focusedCommentId }: DiscussionPanelProps) {
   const { renderMode } = useUI()
   const isBright = renderMode === 'bright'
   const isMobile = useIsMobile()
@@ -470,6 +471,7 @@ export function DiscussionPanel({ postSlug, postTitle, open, onClose, onCommentA
                     onCommentUpdated={handleCommentUpdated}
                     onCommentDeleted={handleCommentDeleted}
                     newCommentIds={newCommentIds}
+                    focusedCommentId={focusedCommentId}
                     scrollRef={scrollRef}
                   />
                 </>
