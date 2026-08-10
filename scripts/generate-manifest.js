@@ -216,6 +216,37 @@ if (fs.existsSync(UNIVERSE_DIR)) {
   }
 }
 
+// 3. Generate General Media Registry (videos & sounds)
+const formatName = (filename) => {
+  return path.parse(filename).name
+    .replace(/-/g, ' ')
+    .replace(/_/g, ' ')
+    .toUpperCase()
+    .slice(0, 40) || 'BACKGROUND';
+};
+
+const getFiles = (dir, publicPathPart, extensions) => {
+  try {
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir)
+      .filter(file => extensions.includes(path.extname(file).toLowerCase()))
+      .sort((a, b) => a.localeCompare(b))
+      .map(file => ({
+        name: formatName(file),
+        path: `/media/${publicPathPart}/${encodeURIComponent(file)}`
+      }));
+  } catch (error) {
+    console.error(`Error reading directory ${dir}:`, error);
+    return [];
+  }
+};
+
+const BACKGROUNDS_VIDEO_DIR = path.join(PUBLIC_DIR, 'media/backgrounds/video');
+const AUDIO_BGM_DIR = path.join(PUBLIC_DIR, 'media/audio/bgm');
+
+const videos = getFiles(BACKGROUNDS_VIDEO_DIR, 'backgrounds/video', ['.mp4', '.webm']);
+const sounds = getFiles(AUDIO_BGM_DIR, 'audio/bgm', ['.mp3', '.wav', '.ogg', '.m4a']);
+
 // Write outputs
 const outputDir = path.join(__dirname, '../features/anime-universe/assets');
 if (!fs.existsSync(outputDir)) {
@@ -223,6 +254,9 @@ if (!fs.existsSync(outputDir)) {
 }
 fs.writeFileSync(path.join(outputDir, 'registry.json'), JSON.stringify(animeList, null, 2));
 fs.writeFileSync(path.join(outputDir, 'activities-universe.json'), JSON.stringify(activities, null, 2));
+fs.writeFileSync(path.join(outputDir, 'media-registry.json'), JSON.stringify({ videos, sounds }, null, 2));
+
 console.log(`Generated manifest assets successfully!`);
 console.log(`- Anime Registry: ${animeList.length} items`);
 console.log(`- Universe Activities: ${activities.length} items`);
+console.log(`- Media Registry: ${videos.length} videos, ${sounds.length} sounds`);

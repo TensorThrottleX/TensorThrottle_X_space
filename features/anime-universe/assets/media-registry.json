@@ -1,0 +1,46 @@
+{
+  "videos": [
+    {
+      "name": "1 CAVE",
+      "path": "/media/backgrounds/video/1_Cave.mp4"
+    },
+    {
+      "name": "2 SHORE",
+      "path": "/media/backgrounds/video/2_Shore.mp4"
+    },
+    {
+      "name": "3 SUZUME",
+      "path": "/media/backgrounds/video/3_Suzume.mp4"
+    },
+    {
+      "name": "4 GALAXY",
+      "path": "/media/backgrounds/video/4_Galaxy.mp4"
+    },
+    {
+      "name": "5 ROTATION",
+      "path": "/media/backgrounds/video/5_Rotation.mp4"
+    },
+    {
+      "name": "6 UNIVERSE",
+      "path": "/media/backgrounds/video/6_Universe.mp4"
+    }
+  ],
+  "sounds": [
+    {
+      "name": "1 AMBIENT BGM",
+      "path": "/media/audio/bgm/1_ambient-bgm.mp3"
+    },
+    {
+      "name": "2 BLUE BIRD",
+      "path": "/media/audio/bgm/2_Blue_Bird.mp3"
+    },
+    {
+      "name": "3 SUZUME",
+      "path": "/media/audio/bgm/3_Suzume.mp3"
+    },
+    {
+      "name": "4 TANJIRO NO UTA",
+      "path": "/media/audio/bgm/4_Tanjiro_no_Uta.mp3"
+    }
+  ]
+}
