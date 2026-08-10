@@ -196,6 +196,7 @@ export default function MobileTerminal() {
                 logCommand(inputValue, matches.join('  '))
             }
         }
+    }
 
     return (
         <>

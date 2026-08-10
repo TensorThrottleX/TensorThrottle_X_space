@@ -256,6 +256,7 @@ export default function InteractiveHome(): React.ReactNode {
         logCommand(inputValue, matches.join('  '))
       }
     }
+  }
 
   const isBright = renderMode === 'bright'
 
