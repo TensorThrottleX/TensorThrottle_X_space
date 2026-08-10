@@ -75,6 +75,7 @@ export default function RootLayout({
               <FoxProvider>
 
               <RenderScaler>
+                <SystemCoreOrb />
                 <AppStartupGate>
                   <div className="desktop-only">
                     <div className="fixed inset-x-0 top-[96px] z-[150] flex justify-start pointer-events-none xl:top-1 xl:h-[76px] xl:items-center xl:pl-12">
@@ -109,7 +110,6 @@ export default function RootLayout({
                   <div className="desktop-only">
                     <BottomFloatingBar />
                   </div>
-                  <SystemCoreOrb />
 
                   <main className="app-root relative z-10">
                     {children}
