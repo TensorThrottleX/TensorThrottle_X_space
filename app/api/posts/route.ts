@@ -3,9 +3,7 @@ import { getAllPosts } from '@/lib/notion'
 import { enrichPostsWithCounts } from '@/lib/enrich-posts'
 import { POSTS_PER_PAGE, MAX_PAGE_LIMIT } from '@/lib/pagination'
 
-// ISR: revalidate every 60 seconds (matches Notion cache TTL)
-// Removed conflicting `dynamic = 'force-dynamic'` which disabled caching entirely
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 interface PostsResponse {
   posts: any[]
