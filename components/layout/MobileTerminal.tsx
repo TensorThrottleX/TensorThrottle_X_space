@@ -104,12 +104,41 @@ export default function MobileTerminal() {
         let response = ''
 
         if (cleanCmd === 'help') {
-            try {
-                response = getHelpText({ isUniverseContext })
-                if (!response) response = 'Error: empty help text.'
-            } catch (e: any) {
-                response = `Error: ${e.message}`
+            let help = `[SYSTEM_MANUAL]
+AVAILABLE EXECUTABLES AND DIRECTIVES:
+
+Platform:
+  universe            Enter the Universe
+  anime               Enter Anime Universe`;
+
+            if (isUniverseContext) {
+                help += `
+  anime philosophy    Read Anime Philosophy`;
             }
+
+            help += `
+
+Navigation:
+  open feed           Load real-time thought stream
+  open projects       View deployed engineering architectures
+  open thoughts       Read structured philosophy
+  open experiments    Access volatile test modules
+  open manifold       Enter the intersection node
+  open about          Load core identity and context
+
+Network:
+  twitter             Establish connection to X
+  github              Access code repository
+  email               Initiate direct comms protocol
+
+Utility:
+  system              Print kernel status and modules
+  mode bright         Force high-clarity render mode
+  mode dark           Force deep-focus render mode
+  explain             Display operational system motives
+  clear               Flush terminal history buffer
+  home                Minimize the secure shell`;
+            response = help;
         }
         else if (cleanCmd === 'universe') {
             response = 'Entering Universe...'
