@@ -1,4 +1,6 @@
 {
+  "id": "One Piece",
+  "index": 11,
   "title": "One Piece",
   "subtitle": "The pirate king's grand adventure",
   "description": "Monkey D. Luffy, a boy with a rubber body, sets sail with his diverse crew to find the legendary One Piece treasure and become the Pirate King.",
@@ -8,145 +10,17 @@
     "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
     "I am not a hero. I'm a pirate."
   ],
-  "characters": [
-    {
-      "name": "Monkey D. Luffy",
-      "role": "Captain",
-      "mirror": "Luffy taught me that leadership is not wisdom — it is the refusal to let anyone in your care fall. He is the reason I show up for people before I understand them."
-    },
-    {
-      "name": "Roronoa Zoro",
-      "role": "First Mate",
-      "mirror": "Zoro's code — a promise is a debt, and a debt is paid — gave me my standard for commitment. I make fewer promises now, and I keep them absolutely."
-    },
-    {
-      "name": "Nami",
-      "role": "Navigator",
-      "mirror": "Nami showed me that asking for help is the strongest move in the game. Her 'help me, Luffy' after years of self-reliance is one of the bravest moments in the series."
-    },
-    {
-      "name": "Sanji",
-      "role": "Cook"
-    }
-  ],
-  "heroReflection": "One Piece is the story that taught me what loyalty actually is: not agreement, not comfort — the willingness to go to war for someone's dream because it is theirs. Luffy made me redefine the whole purpose of a crew, and by extension, of friendship.",
-  "corePerspective": "I started One Piece skeptical of its length and stayed because of a single radical claim: that freedom is not the absence of responsibility but the possession of a dream so clear it organizes your whole life. Luffy is the freest character in fiction, and he is also the most bound — bound by his word, by his crew, by every promise he makes. The series matters to me personally because I spent years confusing freedom with unattachment. One Piece demonstrated, over a thousand chapters, that the opposite is true: you are free when you are fully committed. Every arc is proof — a crewmate's dream becomes a war, and the war is where they become most themselves.",
-  "insights": [
-    {
-      "title": "What hit hardest",
-      "body": "That each crewmate joins through their wound — Nami's village, Zoro's promise, Sanji's past. The crew is assembled from broken people who get repaired by being believed in. I now see friendship as repair work, not decoration."
-    },
-    {
-      "title": "The idea I kept",
-      "body": "Zoro's refusal to ever lose to the same enemy twice, and his promise to a dead girl that he would become the world's best swordsman. A promise made to the dead is a vow that can't be renegotiated. I started making those."
-    },
-    {
-      "title": "How I see it today",
-      "body": "I used to think dreams were private. One Piece convinced me a dream is a social object — it becomes real the moment someone else agrees to help carry it. The crew is the technology that turns fantasy into fact."
-    }
-  ],
-  "journey": [
-    {
-      "stage": "First Impression",
-      "text": "A rubber pirate who screams. I bounced off it twice — the art, the length, the apparent silliness. I had no idea I was looking at the most serious story about loyalty ever drawn."
-    },
-    {
-      "stage": "What Changed",
-      "text": "Arlong Park. Luffy destroys a tyrant's park with his bare hands, not for treasure but because Nami — who had betrayed him an hour ago — asked for help. I understood the show's engine: every arc is someone's dream being honored."
-    },
-    {
-      "stage": "The Turning Point",
-      "text": "The goodbye at Water 7. The crew is being torn apart, and Usopp — the weakest member — has the courage to challenge the captain he loves. The show let conflict be real and still hold the family together. It rearranged how I see disagreement."
-    },
-    {
-      "stage": "What Stayed",
-      "text": "Zoro's scene before the time skip — asking the Pirate King to trade his life to save his captain, and then standing in the path of an admiral alone. The idea that a crewmate's life has priority over the captain's own stayed with me."
-    },
-    {
-      "stage": "How it affects my thinking today",
-      "text": "I ask myself: whose dream am I carrying? One Piece convinced me that having at least one person whose dream I treat as a war is the difference between a life and a schedule."
-    }
-  ],
-  "characterInfluences": [
-    {
-      "name": "Monkey D. Luffy",
-      "role": "Captain",
-      "influence": "Luffy taught me that leadership is not wisdom — it is the refusal to let anyone in your care fall. He is the reason I show up for people before I understand them."
-    },
-    {
-      "name": "Roronoa Zoro",
-      "role": "First Mate",
-      "influence": "Zoro's code — a promise is a debt, and a debt is paid — gave me my standard for commitment. I make fewer promises now, and I keep them absolutely."
-    },
-    {
-      "name": "Nami",
-      "role": "Navigator",
-      "influence": "Nami showed me that asking for help is the strongest move in the game. Her 'help me, Luffy' after years of self-reliance is one of the bravest moments in the series."
-    }
-  ],
-  "definingMoments": [
-    {
-      "title": "'Help me, Luffy'",
-      "context": "Arlong Park arc",
-      "text": "Nami, who has schemed alone for years to buy back her village, breaks in front of Luffy and finally says the words. He doesn't ask why. He just walks.",
-      "idea": "The strongest ask is the simplest one. And the most powerful response is not understanding — it is action."
-    },
-    {
-      "title": "Zoro's promise at Baratie",
-      "context": "Baratie arc",
-      "text": "Zoro swears on a dead girl's name that he will never lose again — and the series treats that promise as an unbreakable law from that moment forward.",
-      "idea": "Promises made to the dead cannot be negotiated with. They become the bones of a character."
-    },
-    {
-      "title": "The going away — 'Raise the flag'",
-      "context": "Wano arc",
-      "text": "Luffy declares war on the entire world government by raising a flag over an island of people who trusted him, knowing it means the navy will come for all of them.",
-      "idea": "Freedom is declared, not granted. And declaring it publicly is what makes it real."
-    }
-  ],
-  "quotesWorthCarrying": [
-    {
-      "quote": "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea.",
-      "speaker": "Monkey D. Luffy",
-      "why": "The cleanest definition of ambition I know: not dominance, but the maximum version of your own life. I measure my goals against it now."
-    },
-    {
-      "quote": "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
-      "speaker": "Dr. Hiluluk",
-      "why": "It redefined death for me — and therefore life. As long as the dream is alive, the person is alive. I keep my dreams public, because shared dreams cannot be quietly forgotten."
-    }
-  ],
-  "realLifeReflection": [
-    "One Piece changed my standard for friendship. I used to curate relationships by convenience; now I ask which of my people have dreams I would 'go to war' for. The difference is measurable — the crew I keep is smaller and infinitely stronger, and the show is why.",
-    "It also gave me a definition of freedom I can actually use: freedom as commitment. I stopped trying to keep every option open — the most exhausting strategy — and started closing doors loudly, the way Luffy picks a direction and never apologizes. Being fully committed turns out to feel exactly like freedom."
-  ],
-  "continueExploring": [
-    {
-      "id": "Naruto",
-      "title": "Naruto",
-      "note": "The same found-family engine and dream-driven protagonist, told through a village instead of a sea."
-    },
-    {
-      "id": "Dragon Ball",
-      "title": "Dragon Ball",
-      "note": "The joyful ancestor: another unstoppable, hungry-for-adventure hero who collects rivals and friends."
-    },
-    {
-      "id": "HajimeNoIppo",
-      "title": "Hajime no Ippo",
-      "note": "A quieter, grittier take on the same theme: a gentle person who becomes unstoppable for the people he loves."
-    }
-  ],
-  "id": "One Piece",
-  "index": 0,
   "jpTitle": "One Piece",
   "year": 2024,
   "genre": "Anime",
   "poster": "",
+  "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
   "entry": {
+    "_guide": "Layout: Centered giant text. Limit 15-40 words.",
     "breathQuote": "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea."
   },
   "reflection": {
+    "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
     "quote": "One Piece is the story that taught me what loyalty actually is: not agreement, not comfort — the willingness to go to war for someone's dream because it is theirs. Luffy made me redefine the whole purpose of a crew, and by extension, of friendship.",
     "tags": [
       "Anime",
@@ -154,8 +28,8 @@
       "Reflection"
     ],
     "whatIKept": "I started One Piece skeptical of its length and stayed because of a single radical claim: that freedom is not the absence of responsibility but the possession of a dream so clear it organizes your whole life. Luffy is the freest character in fiction, and he is also the most bound — bound by his word, by his crew, by every promise he makes. The series matters to me personally because I spent years confusing freedom with unattachment. One Piece demonstrated, over a thousand chapters, that the opposite is true: you are free when you are fully committed. Every arc is proof — a crewmate's dream becomes a war, and the war is where they become most themselves.",
-    "definingScene": "A moment that changed the perspective.",
-    "whoItMadeMeThinkAbout": "A connection to real life."
+    "definingScene": "Nami, who has schemed alone for years to buy back her village, breaks in front of Luffy and finally says the words. He doesn't ask why. He just walks.",
+    "whoItMadeMeThinkAbout": "One Piece changed my standard for friendship. I used to curate relationships by convenience; now I ask which of my people have dreams I would 'go to war' for. The difference is measurable — the crew I keep is smaller and infinitely stronger, and the show is why."
   },
   "thoughtCascade": [
     {
@@ -171,7 +45,17 @@
       "micro": "How I see it today"
     }
   ],
+  "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+  "cinematicMoment": {
+    "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+    "eyebrow": "Baratie arc",
+    "title": "Zoro's promise at Baratie",
+    "body": "Zoro swears on a dead girl's name that he will never lose again — and the series treats that promise as an unbreakable law from that moment forward. Promises made to the dead cannot be negotiated with. They become the bones of a character.",
+    "episode": "",
+    "image": ""
+  },
   "memoryCards": {
+    "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
     "question": "What stayed with me after the screen went dark?",
     "cards": [
       {
@@ -198,6 +82,7 @@
     ]
   },
   "timeline": {
+    "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
     "firstImpression": {
       "heading": "First Impression",
       "body": "A rubber pirate who screams. I bounced off it twice — the art, the length, the apparent silliness. I had no idea I was looking at the most serious story about loyalty ever drawn."
@@ -211,36 +96,24 @@
       "body": "Zoro's scene before the time skip — asking the Pirate King to trade his life to save his captain, and then standing in the path of an admiral alone. The idea that a crewmate's life has priority over the captain's own stayed with me."
     }
   },
-  "cinematicMoment": {
-    "eyebrow": "Arlong Park arc",
-    "title": "'Help me, Luffy'",
-    "body": "Nami, who has schemed alone for years to buy back her village, breaks in front of Luffy and finally says the words. He doesn't ask why. He just walks. The strongest ask is the simplest one. And the most powerful response is not understanding — it is action.",
-    "episode": "",
-    "image": ""
-  },
   "altMemories": [
-    {
-      "question": "Zoro's promise at Baratie",
-      "heading": "Baratie arc",
-      "body": "Zoro swears on a dead girl's name that he will never lose again — and the series treats that promise as an unbreakable law from that moment forward.",
-      "caption": "Promises made to the dead cannot be negotiated with. They become the bones of a character.",
-      "image": "",
-      "flip": false
-    },
     {
       "question": "The going away — 'Raise the flag'",
       "heading": "Wano arc",
       "body": "Luffy declares war on the entire world government by raising a flag over an island of people who trusted him, knowing it means the navy will come for all of them.",
       "caption": "Freedom is declared, not granted. And declaring it publicly is what makes it real.",
       "image": "",
-      "flip": true
+      "flip": false
     }
   ],
+  "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
   "pullQuote": {
-    "text": "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea.",
-    "attribution": "Monkey D. Luffy"
+    "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+    "text": "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
+    "attribution": "Dr. Hiluluk"
   },
   "todayBlock": {
+    "_guide": "Layout: Grid layout. Line: 30-70 words.",
     "intro": "Because of this story, today...",
     "items": [
       {
@@ -253,11 +126,42 @@
       }
     ]
   },
+  "characters": [
+    {
+      "name": "Monkey D. Luffy",
+      "role": "Captain",
+      "mirror": "Luffy taught me that leadership is not wisdom — it is the refusal to let anyone in your care fall. He is the reason I show up for people before I understand them."
+    },
+    {
+      "name": "Roronoa Zoro",
+      "role": "First Mate",
+      "mirror": "Zoro's code — a promise is a debt, and a debt is paid — gave me my standard for commitment. I make fewer promises now, and I keep them absolutely."
+    },
+    {
+      "name": "Nami",
+      "role": "Navigator",
+      "mirror": "Nami showed me that asking for help is the strongest move in the game. Her 'help me, Luffy' after years of self-reliance is one of the bravest moments in the series."
+    }
+  ],
+  "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
   "notes": [],
   "ideas": [],
   "continueJourney": {
     "because": "Because this reshaped how I think",
     "prompt": "Continue the thought",
-    "recommendations": []
+    "recommendations": [
+      {
+        "title": "Naruto",
+        "reason": "The same found-family engine and dream-driven protagonist, told through a village instead of a sea."
+      },
+      {
+        "title": "Dragon Ball",
+        "reason": "The joyful ancestor: another unstoppable, hungry-for-adventure hero who collects rivals and friends."
+      },
+      {
+        "title": "Hajime no Ippo",
+        "reason": "A quieter, grittier take on the same theme: a gentle person who becomes unstoppable for the people he loves."
+      }
+    ]
   }
 }

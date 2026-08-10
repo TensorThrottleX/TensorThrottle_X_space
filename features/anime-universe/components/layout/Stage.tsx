@@ -15,8 +15,10 @@ import { useEnvironmentTransition } from '@/features/anime-universe/hooks/useEnv
 import './stage.css'
 
 // ── Default Universe constants ──
-const DEFAULT_ANIME: Anime = {
+// Fallback when the API has no 'default' entry (unlikely — local dev always ships it).
+const FALLBACK_DEFAULT_ANIME: Anime = {
   id: 'default',
+  index: 0,
   title: 'Anime Universe',
   subtitle: 'Stories that shaped my mindset',
   description: 'Anime is more than entertainment. It is a lens through which I have learned resilience, empathy, discipline, and the courage to question everything.',
@@ -38,32 +40,40 @@ const CONTENT_DELAY_MS = 150
 
 interface StageProps {
   animeList: Anime[]
+  defaultUniverse?: Anime | null
   activeIndex: number
   onIndexChange: (index: number) => void
   isReady: boolean
 }
 
-export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageProps) {
+export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, isReady }: StageProps) {
   const hasNoAnime = isReady && animeList.length === 0
   const stageRef = useRef<HTMLDivElement>(null)
+
+  // The 'default' universe is the ambient environment card — its narrative
+  // backs the manuscript until the user rotates to an actual anime.
+  const defaultAnime: Anime = useMemo(() => {
+    if (defaultUniverse) return defaultUniverse
+    return FALLBACK_DEFAULT_ANIME
+  }, [defaultUniverse])
 
   // Derive active anime from index — default when -1
   const activeAnime: Anime = useMemo(() => {
     if (activeIndex >= 0 && activeIndex < animeList.length) {
       return animeList[activeIndex]
     }
-    return DEFAULT_ANIME
-  }, [activeIndex, animeList])
+    return defaultAnime
+  }, [activeIndex, animeList, defaultAnime])
 
   // ── Prism items: default + all anime ──
   const prismItems: PrismItem[] = useMemo(() => [
     {
       id: 'default',
-      title: DEFAULT_ANIME.title,
-      subtitle: DEFAULT_ANIME.subtitle,
-      thumbnail: DEFAULT_ANIME.coverImage ?? undefined,
-      cover: DEFAULT_ANIME.coverImage ?? undefined,
-      customData: DEFAULT_ANIME as any,
+      title: defaultAnime.title,
+      subtitle: defaultAnime.subtitle,
+      thumbnail: defaultAnime.coverImage ?? undefined,
+      cover: defaultAnime.coverImage ?? undefined,
+      customData: defaultAnime as any,
     },
     ...animeList.map(a => ({
       id: a.id,
@@ -73,7 +83,7 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
       cover: a.coverImage ?? undefined,
       customData: a as any,
     })),
-  ], [animeList])
+  ], [animeList, defaultAnime])
 
   // ── Scoped Media Session (takes priority over Global Nav Session) ──
   const initialAssetPackage = useMemo(() => {
@@ -98,32 +108,58 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
   const [isMuted, setIsMuted] = useState(getAnimeAudioMuted())
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  if (!audioRef.current && typeof Audio !== 'undefined') {
+    audioRef.current = new Audio()
+    audioRef.current.muted = getAnimeAudioMuted()
+  }
+
   useEffect(() => onAnimeAudioMutedChange(setIsMuted), [])
 
   useEffect(() => {
-    const src = (activeAnime.audioTracks && activeAnime.audioTracks.length > 0)
-      ? activeAnime.audioTracks[0]
-      : null
     if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.src = ''
+      audioRef.current.muted = isMuted;
     }
-    if (src) {
-      const el = audioRef.current ?? new Audio()
-      el.src = src
-      el.loop = true
-      el.muted = isMuted
+  }, [isMuted])
+
+  useEffect(() => {
+    const tracks = activeAnime.audioTracks || []
+    if (!audioRef.current) return;
+    const el = audioRef.current;
+
+    if (tracks.length === 0) {
+      el.pause()
+      el.src = ''
+      return
+    }
+    
+    let currentTrackIndex = 0;
+    
+    const playTrack = (index: number) => {
+      if (index >= tracks.length) {
+        index = 0;
+      }
+      currentTrackIndex = index;
+      el.src = tracks[currentTrackIndex]
+      el.loop = tracks.length === 1;
       el.volume = 0.35
       el.play().catch(() => {})
-      audioRef.current = el
     }
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.src = ''
+
+    const handleEnded = () => {
+      if (tracks.length > 1) {
+        playTrack(currentTrackIndex + 1)
       }
     }
-  }, [activeAnime.id, isMuted])
+
+    el.addEventListener('ended', handleEnded)
+    playTrack(0)
+    
+    return () => {
+      el.removeEventListener('ended', handleEnded)
+      el.pause()
+      el.src = ''
+    }
+  }, [activeAnime.id])
 
   // ════════════════════════════════════════════════════════════════════
   // SCROLL TRANSITION ENGINE — Single source of truth
@@ -296,6 +332,29 @@ export function Stage({ animeList, activeIndex, onIndexChange, isReady }: StageP
             No anime installed.
           </div>
         )}
+
+        {/* Scroll Indicator to prompt user to scroll down for the manuscript */}
+        {!hasNoAnime && (
+          <div 
+            className="anime-scroll-indicator-wrapper" 
+            aria-hidden
+            style={{ 
+              position: 'absolute',
+              bottom: '18%', 
+              left: '50%',
+              transform: 'translateX(-50%)',
+              opacity: 'var(--indicator-opacity)',
+              pointerEvents: 'none',
+              animation: 'fadeInUp 2s 1s ease-out both',
+            }}
+          >
+            <div className="anime-scroll-indicator">
+              <div className="scroll-dot-line"></div>
+              <span>read more</span>
+              <div className="scroll-dot-line with-arrow"></div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ═══ Phase 2: Reading Stage ═══ */}
@@ -356,7 +415,9 @@ function ManuscriptPanel({
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    if (anime.id === displayed.id) return
+    // Swap when the selection OR its narrative payload changes — the default
+    // universe keeps id 'default' but gains its narrative after the API fetch.
+    if (anime.id === displayed.id && anime.narrativeData === displayed.narrativeData) return
 
     // Fade out, swap content, fade in
     setOpacity(0)
@@ -369,7 +430,7 @@ function ManuscriptPanel({
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
-  }, [anime, displayed.id])
+  }, [anime, displayed.id, displayed.narrativeData])
 
   return (
     <div

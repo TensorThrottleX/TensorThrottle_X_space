@@ -3,6 +3,7 @@ import type { AnimeNarrativeData } from '../components/narrative'
 
 export interface Anime {
   id: string
+  index: number
   title: string
   subtitle: string
   description: string

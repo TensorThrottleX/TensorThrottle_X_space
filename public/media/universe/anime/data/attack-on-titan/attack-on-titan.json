@@ -1,16 +1,19 @@
 {
   "id": "attack-on-titan",
-  "index": 3,
+  "index": 5,
   "title": "Attack on Titan",
   "subtitle": "When certainty disappears",
   "jpTitle": "進撃の巨人",
   "year": 2013,
   "genre": "Seinen",
   "poster": "",
+  "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
   "entry": {
+    "_guide": "Layout: Centered giant text. Limit 15-40 words.",
     "breathQuote": "I thought I was watching a survival story about good versus evil. I didn't realize I was watching the dismantling of moral certainty."
   },
   "reflection": {
+    "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
     "quote": "It taught me that the most dangerous person in any room is the one who has completely stopped doubting their own righteousness.",
     "tags": [
       "perspective",
@@ -41,7 +44,9 @@
       "micro": "Season 4"
     }
   ],
+  "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
   "cinematicMoment": {
+    "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
     "eyebrow": "The turning point",
     "title": "The Basement Reveal.",
     "body": "The walls weren't protecting them from monsters. They were protecting them from the truth. The moment the outside world existed, I started looking for the walls in my own beliefs.",
@@ -49,6 +54,7 @@
     "image": ""
   },
   "memoryCards": {
+    "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
     "question": "What stayed with me after the screen went dark?",
     "cards": [
       {
@@ -84,11 +90,14 @@
       "flip": false
     }
   ],
+  "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
   "pullQuote": {
+    "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
     "text": "Everyone had to be drunk on something to keep pushing on. Everyone was a slave to something.",
     "attribution": "— Kenny Ackerman"
   },
   "timeline": {
+    "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
     "firstImpression": {
       "heading": "A brutal action series",
       "body": "I came for the spectacle — ODM gear, titans, constant peril. A clean fight between humanity and monsters."
@@ -103,6 +112,7 @@
     }
   },
   "todayBlock": {
+    "_guide": "Layout: Grid layout. Line: 30-70 words.",
     "intro": "Because of this story, today...",
     "items": [
       {
@@ -136,6 +146,7 @@
       "mirror": "She made me uncomfortable because she is exactly what Eren was. Conditioning shapes our entire reality."
     }
   ],
+  "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
   "notes": [
     {
       "text": "If you only look at the world from inside your walls, you will eventually burn everything outside them.",

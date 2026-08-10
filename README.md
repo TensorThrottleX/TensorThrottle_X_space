@@ -16,7 +16,7 @@ It acts as a live reasoning space where thoughts are authored elsewhere, rendere
 
 Conventional content platforms force a binary choice: either lock discussions behind a mandatory account wall to prevent spam, or allow open anonymity and drown in abuse. Furthermore, most systems tightly couple the authoring database with the presentation layer, creating monolithic structures that are difficult to scale and slow to render.
 
-TensorThrottle X Space exists to reject both compromises. It explores how far a decoupled architecture can go when identity is stripped away and replaced with cryptographic capabilities.
+TensorThrottle X exists to reject both compromises. It explores how far a decoupled architecture can go when identity is stripped away and replaced with cryptographic capabilities.
 
 ## What problem does it challenge?
 
@@ -178,7 +178,7 @@ All database changes must be proposed as idempotent, forward-only SQL migrations
 
 ## Where is the project heading?
 
-TensorThrottle X Space is a stable foundation, but it is not finished. The architecture was designed to support extensions that are not yet implemented.
+TensorThrottle X is a stable foundation, but it is not finished. The architecture was designed to support extensions that are not yet implemented.
 
 In the future, heuristic moderation will be replaced by asynchronous large language models capable of contextual sentiment analysis. The static search will be replaced by vector embeddings and semantic routing. The ephemeral fingerprints will evolve into a persistent, zero-knowledge trust system, allowing anonymous users to build reputation over time without ever revealing who they are.
 

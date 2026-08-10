@@ -1,16 +1,19 @@
 {
   "id": "jujutsu-kaisen",
-  "index": 7,
+  "index": 8,
   "title": "Jujutsu Kaisen",
   "subtitle": "The strength that doesn't need an audience",
   "jpTitle": "呪術廻戦",
   "year": 2020,
   "genre": "Shōnen",
   "poster": "",
+  "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
   "entry": {
+    "_guide": "Layout: Centered giant text. Limit 15-40 words.",
     "breathQuote": "I came for the fights and stayed for the wage. It was the first action show where the strongest character I knew had a job, a schedule, and a quiet hatred of overtime."
   },
   "reflection": {
+    "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
     "quote": "It kept telling me everyone is going to die — and then it kept making me care anyway. That's when I understood what it was really about: choosing purpose despite the expiration date.",
     "tags": [
       "responsibility",
@@ -44,7 +47,9 @@
       "micro": "After finishing"
     }
   ],
+  "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
   "cinematicMoment": {
+    "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
     "eyebrow": "The turning point",
     "title": "He walked in knowing he wouldn't walk out.",
     "body": "No music swell. No slow-motion last breath. Just a man with a clear understanding of what the job required, and a quiet decision to do it completely.",
@@ -52,6 +57,7 @@
     "image": ""
   },
   "memoryCards": {
+    "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
     "question": "What stayed with me after the screen went dark?",
     "cards": [
       {
@@ -95,11 +101,14 @@
       "flip": true
     }
   ],
+  "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
   "pullQuote": {
+    "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
     "text": "You're strong. That's your flaw. You're too strong, so you've forgotten what it means to be weak.",
     "attribution": "— Gojo Satoru"
   },
   "timeline": {
+    "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
     "firstImpression": {
       "heading": "The animation pulled me in first",
       "body": "Fast, fluid, technically stunning. I thought I was watching a sport — spectacular choreography. For a while, that was enough."
@@ -114,6 +123,7 @@
     }
   },
   "todayBlock": {
+    "_guide": "Layout: Grid layout. Line: 30-70 words.",
     "intro": "Because of this story, today...",
     "items": [
       {
@@ -151,6 +161,7 @@
       "mirror": "Confidence so complete it doesn't require validation is disarming. Not arrogance — certainty. I spent a long time thinking they were the same thing."
     }
   ],
+  "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
   "notes": [
     {
       "text": "The show keeps reminding you that everyone is going to die. And then it keeps making you care anyway. That's the whole point.",

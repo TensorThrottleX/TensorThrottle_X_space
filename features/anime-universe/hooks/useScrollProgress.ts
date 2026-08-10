@@ -65,6 +65,11 @@ export function useScrollProgress(onChange?: (progress: number) => void) {
 
     return () => {
       if (frameRef.current) cancelAnimationFrame(frameRef.current)
+      // Reset to 0 — React StrictMode double-invokes effects in dev
+      // (mount → cleanup → mount); without this the second mount inherits a
+      // stale, cancelled rAF id and every future scroll early-returns,
+      // freezing all scroll-driven transitions (blank reading stage).
+      frameRef.current = 0
       motionMq.removeEventListener('change', readPrefs)
       window.removeEventListener('scroll', scheduleFrame)
       window.removeEventListener('resize', scheduleFrame)

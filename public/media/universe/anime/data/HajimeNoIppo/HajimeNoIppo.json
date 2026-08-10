@@ -1,7 +1,7 @@
 {
   "title": "Hajime no Ippo",
-  "subtitle": "The spirit of a champion",
-  "description": "A legendary boxing anime that beautifully captures the essence of hard work, discipline, and the pursuit of strength. Watching Ippo transform from a bullied high schooler into a professional boxer through relentless training is a constant source of motivation.",
+  "subtitle": "The first anime that showed me what real hard work actually means",
+  "description": "Hajime no Ippo was special because it was the first anime that made hard work feel real to me. Before Ippo, I understood training mostly through the language of shōnen: train harder, unlock something new, become stronger, defeat the next opponent. Ippo stripped away that fantasy and showed me the physical reality underneath it. Roadwork. Conditioning. Repetition. Weight cuts. Getting hit. Getting tired. Losing. Being corrected. Starting again. Ippo, Takamura and Kamogawa are all beasts, but what makes them beasts is not simply natural talent, status or some special destiny. It is their sheer will, relentlessness and refusal to stop. Takamura cutting himself down to make weight and then stepping into the ring against Brian Hawk showed me how extreme commitment can become. Kamogawa's battles showed me something even deeper: sometimes the person standing in front of you has every reason to lose, and still refuses to bow down. And Ippo himself taught me never to look down on someone simply because they don't look powerful yet. Hajime no Ippo didn't make me admire strength because it was flashy. It made me respect strength because I finally understood what it costs to build.",
   "accentColor": "#fbbf24",
   "quotes": [
     "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
@@ -11,160 +11,176 @@
   "characters": [
     {
       "name": "Ippo Makunouchi",
-      "role": "Protagonist",
-      "mirror": "Ippo taught me that humility is not weakness in the ring of life — it is what lets you keep learning after every hit. He is the reason I stay coachable."
+      "role": "The proof",
+      "mirror": "Ippo taught me that someone does not have to look powerful to become powerful. He begins as a quiet, bullied, ordinary kid, but his willingness to learn, endure, adapt and keep standing makes him impossible to look down on. He represents the part of me that believes being behind is not the same as being incapable."
     },
     {
       "name": "Mamoru Takamura",
-      "role": "Mentor / Champion",
-      "mirror": "Takamura is the mentor archetype I emulate: loud, demanding, and secretly devoted. He taught me that pushing someone is a form of respect when you never stop believing they can rise."
+      "role": "The beast",
+      "mirror": "Takamura represents the most extreme form of ambition I understand. He is loud, arrogant and ridiculous, but underneath all of it is an almost frightening commitment to becoming the best. His weight loss and battle against Brian Hawk showed me that the person everyone sees in the ring is built from sacrifices almost nobody sees."
     },
     {
-      "name": "Ichiro Miyata",
-      "role": "Rival",
-      "mirror": "Miyata showed me the value of a worthy opponent — someone whose excellence keeps you honest. I actively seek people better than me now, because Ippo's rival taught me they are fuel, not threat."
+      "name": "Genji Kamogawa",
+      "role": "The will",
+      "mirror": "Kamogawa represents something deeper than talent or physical strength: refusal. His battles taught me that sometimes circumstances give you every reason to bow down, and strength is simply deciding that you won't. He represents the kind of will that keeps moving even after the body has reached its limits."
     }
   ],
-  "heroReflection": "Hajime no Ippo is the story that told me, with a boxer's honesty, that there are no shortcuts — only rounds. It is the quietest radical show I know: an entire epic built on the belief that discipline is a love language.",
-  "corePerspective": "I watched Ippo as a bookish kid who was terrified of physicality — of sports, of confrontation, of my own body. The show followed a boy exactly like that into a boxing ring and showed him becoming strong the slow way: mitt work, roadwork, drills, and an endless willingness to be corrected. What mattered to me personally was the ordinariness of it. There is no chosen-one status, no magic. Ippo wins his first fight because his mentor forced him to run before dawn, and that was the first time a story made discipline look like something I could actually have. It rewired my relationship with effort from fantasy to habit, and it still functions as the strongest argument I know for boring consistency.",
+  "heroReflection": "Hajime no Ippo is the story that finally made the word 'hard work' feel honest to me. It doesn't promise that effort guarantees victory. It doesn't pretend everyone who trains will become a champion. It shows people working brutally hard and still losing. And somehow, that made the victories mean more. Ippo taught me discipline. Takamura taught me intensity. Kamogawa taught me will. Together, they showed me that the beast someone becomes is often built long before anyone gets to see it.",
+  "corePerspective": "I watched Hajime no Ippo and realized that I had been admiring the result of hard work without really understanding the work itself. Ippo doesn't become strong because the story decides he is special. He becomes strong because he runs, trains, gets corrected, gets hurt, learns and comes back. Takamura takes that idea to another level. Watching him cut weight for Brian Hawk made me understand that sometimes the difference between wanting something and actually committing to it is the amount of discomfort you are willing to accept. Then there is Kamogawa, whose history showed me a completely different kind of strength—the kind that does not depend on having the better circumstances. He fought people who had advantages over him and simply refused to bow down. That stayed with me. Hajime no Ippo made me stop asking only how talented someone is. I started asking what they repeatedly did when nobody was watching.",
   "insights": [
     {
       "title": "What hit hardest",
-      "body": "That Ippo's power is not his talent — it is his willingness to be hurt and stay standing. The show reframed pain from an enemy to a curriculum. I stopped avoiding hard things and started booking them."
+      "body": "The realization that Ippo's strength isn't simply his punching power. It is his willingness to keep learning after being hit, keep standing after being hurt and keep returning after losing. The show made pain feel less like proof that something was impossible and more like information about what still needed to be developed."
     },
     {
       "title": "The idea I kept",
-      "body": "The Dempsey Roll — a technique that isn't a trick but a whole life of footwork compressed into motion. It taught me that what looks like brilliance is usually a thousand unglamorous reps nobody saw."
+      "body": "The Dempsey Roll. What looks spectacular when it finally appears is actually the visible result of countless invisible repetitions. Footwork, timing, conditioning, balance and technique all accumulate until something that looks almost effortless becomes possible. It changed how I look at skill itself."
     },
     {
       "title": "How I see it today",
-      "body": "I used to chase 'moves' — clever shortcuts in work and life. Ippo convinced me the move is a byproduct of the base: run the roads, hit the mitts, and the technique appears on its own."
+      "body": "I used to be attracted to the result—the clever move, the breakthrough, the moment someone suddenly became better. Ippo made me much more interested in the boring foundation underneath it. Run the road. Drill the basics. Accept correction. Repeat. The impressive moment is usually only the final layer of something that has been built for a very long time."
     }
   ],
   "journey": [
     {
       "stage": "First Impression",
-      "text": "A boxing anime about a bullied kid. I expected sentimentality and got something far more serious: an almost documentary attention to the craft of fighting."
+      "text": "A boxing anime about a bullied kid. I expected another story about becoming stronger. What I didn't expect was how seriously the show would take the process of becoming strong."
     },
     {
       "stage": "What Changed",
-      "text": "Ippo's first roadwork session. The show spent whole episodes on breath, form, and the ache of it — and I realized this was not a show about boxing. It was a show about the anatomy of becoming."
+      "text": "Ippo's training and roadwork. The show made me watch the parts that most stories skip—the breathing, exhaustion, repetition, conditioning and correction. I realized this wasn't really about boxing. It was about what a person is willing to repeatedly do in order to become someone different."
     },
     {
       "stage": "The Turning Point",
-      "text": "The Date fight. Ippo loses — clearly, honestly — and the show lets him lose and grow from it. I had never seen a 'hero' lose so cleanly and continue. It made failure feel like a room you walk through, not a wall."
+      "text": "Takamura's weight cut and his fight against Brian Hawk. That was when hard work stopped feeling like an inspirational concept and became something physical. Watching what Takamura was willing to put his body through made me understand that commitment can have a real cost."
     },
     {
       "stage": "What Stayed",
-      "text": "Takamura's presence. A mentor who is harsh, absurd, and unshakably devoted. Ippo stayed with me as proof that you do not need a gentle teacher — you need a teacher who will not let you quit."
+      "text": "Kamogawa. His past showed me a form of strength that goes beyond talent or physical advantage. Even when he was outmatched, he refused to bow down. That image of sheer will stayed with me more than almost any victory."
     },
     {
       "stage": "How it affects my thinking today",
-      "text": "I run my own 'roadwork' — the daily non-negotiable reps in my craft that no one sees. Every time I skip them, I hear the show asking what kind of fighter I think I am."
+      "text": "I now think of every serious skill as having its own roadwork. There are fundamentals that nobody applauds, repetitions that feel boring and days where progress is almost invisible. But those are the rounds that eventually create the person capable of performing when it actually matters."
     }
   ],
   "characterInfluences": [
     {
       "name": "Ippo Makunouchi",
       "role": "Protagonist",
-      "influence": "Ippo taught me that humility is not weakness in the ring of life — it is what lets you keep learning after every hit. He is the reason I stay coachable."
+      "influence": "Ippo taught me that humility is not weakness. He is constantly willing to admit what he doesn't know, listen to people better than him and learn from every mistake. He also taught me never to judge someone's ceiling from their starting point."
     },
     {
       "name": "Mamoru Takamura",
       "role": "Mentor / Champion",
-      "influence": "Takamura is the mentor archetype I emulate: loud, demanding, and secretly devoted. He taught me that pushing someone is a form of respect when you never stop believing they can rise."
+      "influence": "Takamura showed me the frightening side of ambition. He doesn't simply want to be good; he is willing to reorganize his entire life around becoming exceptional. His weight cuts and Brian Hawk fight made me understand that ambition becomes real when your behavior is willing to pay its price."
     },
     {
       "name": "Ichiro Miyata",
       "role": "Rival",
-      "influence": "Miyata showed me the value of a worthy opponent — someone whose excellence keeps you honest. I actively seek people better than me now, because Ippo's rival taught me they are fuel, not threat."
+      "influence": "Miyata showed me that discipline doesn't always look loud. His strength comes from precision, technical refinement and an almost obsessive attention to detail. He represents the part of mastery that comes from making something cleaner and sharper rather than simply pushing harder."
     }
   ],
   "definingMoments": [
     {
-      "title": "The first spar",
+      "title": "The first training",
       "context": "Kamogawa Gym",
-      "text": "Ippo, terrified, trades blows with a professional and discovers something in himself: when you stop being afraid of the hit, the hitting becomes simple.",
-      "idea": "Courage is not the absence of fear; it is the decision to spend it. Fear is a currency, and Ippo taught me to budget it."
+      "text": "Ippo begins with almost none of the qualities people normally associate with a fighter. He is afraid, inexperienced and physically unprepared. But the moment he starts training, the story begins showing how an ordinary person can slowly become extraordinary through repetition.",
+      "idea": "You don't need to begin powerful. You need to begin willing."
     },
     {
       "title": "The loss to Date",
       "context": "Japan championship arc",
-      "text": "Ippo fights the reigning champion and loses on a single counterpunch. The next morning he is back at the gym, asking what he did wrong.",
-      "idea": "The championship is not the person who never loses — it is the person who turns losses into curriculum the fastest."
+      "text": "Ippo loses to a champion who is simply more experienced and more complete. The important part is not that the hero loses. It is what he does afterward. He looks at the loss, tries to understand it and keeps learning.",
+      "idea": "A loss becomes useful when you are willing to study it instead of protecting your ego from it."
     },
     {
       "title": "The Dempsey Roll is born",
       "context": "Training arc",
-      "text": "Months of invisible footwork culminate in a technique that bends the geometry of the ring. Nobody sees the process; everyone sees the move.",
-      "idea": "What looks like sudden genius is always accumulated practice wearing a disguise."
+      "text": "Months of invisible work eventually become a technique that looks spectacular from the outside. The audience sees the movement. Ippo knows how many repetitions, mistakes and corrections created it.",
+      "idea": "What looks like talent is often accumulated discipline wearing a disguise."
     }
   ],
   "quotesWorthCarrying": [
     {
       "quote": "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
       "speaker": "Narrator",
-      "why": "The honest version of the hustle myth: no guarantees, but no exceptions either. It keeps me off the lottery ticket of luck."
+      "why": "This is the version of hard work I believe more after Ippo: there are no guarantees. Effort does not automatically make you the winner. But nobody reaches the highest levels without having paid for them through effort."
     },
     {
       "quote": "What does it mean to be strong?",
       "speaker": "Takamura Mamoru",
-      "why": "The question the whole show orbits. I keep it open in my life instead of answering it once — strength keeps meaning something new each season."
+      "why": "This question stayed with me because the series never gives one simple answer. Strength can be endurance, discipline, courage, technical ability, willpower, sacrifice or the ability to stand back up. The answer keeps changing as the person asking it changes."
     }
   ],
   "realLifeReflection": [
-    "Ippo installed a daily practice in my life: the 'roadwork hour.' Whatever my main craft, I spend the first unglamorous hour on fundamentals nobody applauds. The show's thesis — that the champion is built in invisible morning reps — has proven truer in my career than any productivity advice I have read.",
-    "It also cured my fear of failure as an event. Ippo loses major fights and continues, and I borrowed that structure: after every setback I run a one-sentence post-fight review — what did I do wrong, what do I drill next. Failure stopped being an identity and became a step in a process I can actually follow."
+    "Ippo gave me the idea of my own 'roadwork': the fundamentals that have to happen whether I feel motivated or not. If I want to become good at something, I cannot only chase breakthroughs. I have to respect the repetitive work that creates them.",
+    "It also changed how I think about failure. Ippo loses, other fighters lose, and hard work does not magically protect anyone from defeat. Instead of treating failure as proof that the effort was pointless, I can treat it like a post-fight review: what went wrong, what did I learn, and what needs to be trained next."
   ],
   "continueExploring": [
     {
       "id": "BlueLock",
       "title": "Blue Lock",
-      "note": "The same discipline engine, pointed at ambition and ego instead of humility — Ippo's aggressive twin."
+      "note": "The same hunger to become exceptional, but with ego and individual ambition pushed much further."
     },
     {
       "id": "Haikyuu",
       "title": "Haikyuu!!",
-      "note": "The joyful sibling: same building-up of ordinary people through craft, with teams instead of gloves."
+      "note": "The next evolution of the idea: if Ippo taught me how an individual becomes stronger, Haikyuu taught me what happens when different strengths learn to work together."
     },
     {
       "id": "Dragon Ball",
       "title": "Dragon Ball",
-      "note": "The root of every training-montage story ever told — the original temple of getting stronger on purpose."
+      "note": "The anime that made me love the idea of becoming stronger; Ippo became the story that taught me what becoming stronger actually costs."
     }
   ],
   "id": "HajimeNoIppo",
-  "index": 0,
+  "index": 3,
   "jpTitle": "Hajime no Ippo",
   "year": 2024,
   "genre": "Anime",
-  "poster": "",
+  "poster": "https://wallpapers.com/hajime-no-ippo",
   "entry": {
     "breathQuote": "Not everyone who works hard is rewarded, but all those who succeed have worked hard."
   },
   "reflection": {
-    "quote": "Hajime no Ippo is the story that told me, with a boxer's honesty, that there are no shortcuts — only rounds. It is the quietest radical show I know: an entire epic built on the belief that discipline is a love language.",
+    "quote": "Hajime no Ippo is the story that told me, with a boxer's honesty, that there are no shortcuts—only rounds. It was the first anime that made me understand that the people I call beasts are not necessarily born that way. They become beasts through will, repetition, sacrifice and an almost unreasonable refusal to stop.",
     "tags": [
       "Anime",
       "Journey",
       "Reflection"
     ],
-    "whatIKept": "I watched Ippo as a bookish kid who was terrified of physicality — of sports, of confrontation, of my own body. The show followed a boy exactly like that into a boxing ring and showed him becoming strong the slow way: mitt work, roadwork, drills, and an endless willingness to be corrected. What mattered to me personally was the ordinariness of it. There is no chosen-one status, no magic. Ippo wins his first fight because his mentor forced him to run before dawn, and that was the first time a story made discipline look like something I could actually have. It rewired my relationship with effort from fantasy to habit, and it still functions as the strongest argument I know for boring consistency.",
-    "definingScene": "A moment that changed the perspective.",
-    "whoItMadeMeThinkAbout": "A connection to real life."
+    "whatIKept": "I kept the idea that strength has a process. Ippo, Takamura and Kamogawa are all powerful in completely different ways, but none of their strength feels empty because the story makes me see what sits underneath it. Roadwork. Training. Pain. Failure. Correction. Discipline. Will. Ippo made me respect the person behind the result, not just the result itself.",
+    "definingScene": "Takamura's weight cut before his fight with Brian Hawk.",
+    "whoItMadeMeThinkAbout": "The version of myself that sometimes wants the result before fully accepting the process required to create it."
   },
   "thoughtCascade": [
     {
-      "thought": "That Ippo's power is not his talent — it is his willingness to be hurt and stay standing. The show reframed pain from an enemy to a curriculum. I stopped avoiding hard things and started booking them.",
+      "thought": "That Ippo's power is not his talent—it is his willingness to keep standing and learning.",
       "micro": "What hit hardest"
     },
     {
-      "thought": "The Dempsey Roll — a technique that isn't a trick but a whole life of footwork compressed into motion. It taught me that what looks like brilliance is usually a thousand unglamorous reps nobody saw.",
+      "thought": "The Dempsey Roll is thousands of invisible repetitions compressed into one visible movement.",
       "micro": "The idea I kept"
     },
     {
-      "thought": "I used to chase 'moves' — clever shortcuts in work and life. Ippo convinced me the move is a byproduct of the base: run the roads, hit the mitts, and the technique appears on its own.",
-      "micro": "How I see it today"
+      "thought": "Takamura's weight cut made me realize what it looks like when ambition becomes physical sacrifice.",
+      "micro": "The moment that changed me"
+    },
+    {
+      "thought": "Kamogawa showed me that sometimes sheer will can matter even when you don't have the same advantages as the person standing across from you.",
+      "micro": "The Kamogawa lesson"
+    },
+    {
+      "thought": "Ippo isn't someone you can look down on just because he doesn't look powerful.",
+      "micro": "The lesson about potential"
+    },
+    {
+      "thought": "Hard work doesn't guarantee that you'll win.",
+      "micro": "The uncomfortable truth"
+    },
+    {
+      "thought": "But without hard work, you may never discover how far you could actually go.",
+      "micro": "What stayed"
     }
   ],
   "memoryCards": {
@@ -172,87 +188,103 @@
     "cards": [
       {
         "symbol": "◈",
-        "title": "What hit hardest",
-        "text": "That Ippo's power is not his talent — it is his willingness to be hurt and stay standing. The show reframed pain from an enemy to a curriculum. I stopped avoiding hard things and started booking them.",
-        "tag": "Insight",
-        "image": ""
+        "title": "The Roadwork",
+        "text": "The invisible foundation. Running, conditioning, repeating fundamentals and doing the work when there is no audience to impress.",
+        "tag": "Discipline",
+        "image": "https://wallpapers.com/hajime-no-ippo"
       },
       {
         "symbol": "◈",
-        "title": "The idea I kept",
-        "text": "The Dempsey Roll — a technique that isn't a trick but a whole life of footwork compressed into motion. It taught me that what looks like brilliance is usually a thousand unglamorous reps nobody saw.",
-        "tag": "Insight",
-        "image": ""
+        "title": "The Weight Cut",
+        "text": "Takamura showed me that serious ambition has a cost. The person who walks into the ring has already been built through sacrifices nobody watching the fight can fully see.",
+        "tag": "Sacrifice",
+        "image": "https://wallpapers.com/hajime-no-ippo"
       },
       {
         "symbol": "◈",
-        "title": "How I see it today",
-        "text": "I used to chase 'moves' — clever shortcuts in work and life. Ippo convinced me the move is a byproduct of the base: run the roads, hit the mitts, and the technique appears on its own.",
-        "tag": "Insight",
-        "image": ""
+        "title": "The Dempsey Roll",
+        "text": "A spectacular technique created by countless repetitions. It taught me that mastery often looks like talent only after the work has been hidden underneath it.",
+        "tag": "Mastery",
+        "image": "https://wallpapers.com/hajime-no-ippo"
       }
     ]
   },
   "timeline": {
     "firstImpression": {
       "heading": "First Impression",
-      "body": "A boxing anime about a bullied kid. I expected sentimentality and got something far more serious: an almost documentary attention to the craft of fighting."
+      "body": "A boxing anime about a bullied kid. I expected another story where the protagonist eventually becomes powerful. I didn't expect the show to take the process itself so seriously."
     },
     "whatShifted": {
       "heading": "What Changed",
-      "body": "Ippo's first roadwork session. The show spent whole episodes on breath, form, and the ache of it — and I realized this was not a show about boxing. It was a show about the anatomy of becoming."
+      "body": "The training. Roadwork, conditioning, mitts, repetition and correction made me realize that I was watching something different. Strength wasn't appearing magically. It was being constructed piece by piece."
     },
     "whatStayed": {
       "heading": "What Stayed",
-      "body": "Takamura's presence. A mentor who is harsh, absurd, and unshakably devoted. Ippo stayed with me as proof that you do not need a gentle teacher — you need a teacher who will not let you quit."
+      "body": "The idea that the beast someone becomes is built through choices nobody sees. Ippo, Takamura and Kamogawa all made me respect discipline differently because their strength has a history behind it."
     }
   },
   "cinematicMoment": {
-    "eyebrow": "Kamogawa Gym",
-    "title": "The first spar",
-    "body": "Ippo, terrified, trades blows with a professional and discovers something in himself: when you stop being afraid of the hit, the hitting becomes simple. Courage is not the absence of fear; it is the decision to spend it. Fear is a currency, and Ippo taught me to budget it.",
+    "eyebrow": "The moment hard work became real",
+    "title": "Takamura vs. Brian Hawk",
+    "body": "Takamura's weight cut and the fight against Brian Hawk became one of the clearest images of what Hajime no Ippo means to me. He was already an extraordinary fighter, but the fight showed the cost behind that ability. The weight loss, the exhaustion, the preparation and then the violence of the fight itself made his strength feel earned rather than gifted. I wasn't simply watching a powerful character win. I was watching the accumulated result of an almost frightening amount of will.",
     "episode": "",
-    "image": ""
+    "image": "https://wallpapers.com/hajime-no-ippo"
   },
   "altMemories": [
     {
       "question": "The loss to Date",
-      "heading": "Japan championship arc",
-      "body": "Ippo fights the reigning champion and loses on a single counterpunch. The next morning he is back at the gym, asking what he did wrong.",
-      "caption": "The championship is not the person who never loses — it is the person who turns losses into curriculum the fastest.",
-      "image": "",
+      "heading": "Losing doesn't erase the work",
+      "body": "Ippo loses to Date, and the story doesn't treat that loss as proof that his training was meaningless. The loss becomes information. There is something to understand, something to correct and something to build toward.",
+      "caption": "A loss can be a result without becoming an identity.",
+      "image": "https://wallpapers.com/hajime-no-ippo",
       "flip": false
     },
     {
       "question": "The Dempsey Roll is born",
-      "heading": "Training arc",
-      "body": "Months of invisible footwork culminate in a technique that bends the geometry of the ring. Nobody sees the process; everyone sees the move.",
-      "caption": "What looks like sudden genius is always accumulated practice wearing a disguise.",
-      "image": "",
+      "heading": "The visible result of invisible work",
+      "body": "The Dempsey Roll looks extraordinary because the audience sees the finished movement. But the real story is everything that came before it: repetition, footwork, conditioning, timing and correction.",
+      "caption": "Everyone sees the technique. Almost nobody sees what built it.",
+      "image": "https://wallpapers.com/hajime-no-ippo",
       "flip": true
     }
   ],
   "pullQuote": {
-    "text": "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
-    "attribution": "Narrator"
+    "text": "I used to think hard work meant trying harder. Ippo taught me that it means being willing to repeat what matters long after the excitement disappears.",
+    "attribution": "What Hajime no Ippo became to me"
   },
   "todayBlock": {
     "intro": "Because of this story, today...",
     "items": [
       {
         "verb": "I reflect",
-        "line": "Ippo installed a daily practice in my life: the 'roadwork hour.' Whatever my main craft, I spend the first unglamorous hour on fundamentals nobody applauds. The show's thesis — that the champion is built in invisible morning reps — has proven truer in my career than any productivity advice I have read."
+        "line": "on whether I am actually willing to do the boring work required for the things I say I want."
       },
       {
-        "verb": "I reflect",
-        "line": "It also cured my fear of failure as an event. Ippo loses major fights and continues, and I borrowed that structure: after every setback I run a one-sentence post-fight review — what did I do wrong, what do I drill next. Failure stopped being an identity and became a step in a process I can actually follow."
+        "verb": "I respect",
+        "line": "the invisible repetitions behind every skill that looks effortless."
+      },
+      {
+        "verb": "I remember",
+        "line": "that being behind someone does not automatically mean I am incapable of reaching them."
+      },
+      {
+        "verb": "I question",
+        "line": "whether I am searching for a shortcut when what I actually need is more fundamentals."
+      },
+      {
+        "verb": "I try",
+        "line": "to turn failure into something specific I can learn from instead of something vague I can feel bad about."
+      },
+      {
+        "verb": "I ask",
+        "line": "the question that Ippo keeps alive: what does it actually mean to be strong?"
       }
     ]
   },
   "notes": [],
   "ideas": [],
   "continueJourney": {
-    "because": "Because this reshaped how I think",
+    "because": "Because this was the first anime that made me genuinely respect hard work rather than simply admire the results it produces.",
     "prompt": "Continue the thought",
     "recommendations": []
   }

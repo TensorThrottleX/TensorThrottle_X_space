@@ -1,16 +1,19 @@
 {
   "id": "vinland-saga",
-  "index": 8,
+  "index": 14,
   "title": "Vinland Saga",
   "subtitle": "The strength that refuses the sword",
   "jpTitle": "ヴィンランド・サガ",
   "year": 2019,
   "genre": "Seinen",
-  "poster": "",
+  "poster": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2041&auto=format&fit=crop",
+  "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
   "entry": {
+    "_guide": "Layout: Centered giant text. Limit 15-40 words.",
     "breathQuote": "I came for the Vikings — the shield walls, the raids, violence drawn beautifully. I think I was at a stage where I wanted strength to be simple."
   },
   "reflection": {
+    "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
     "quote": "It took me two seasons to realize the strongest man in the story was the one who refused to fight. I kept waiting for the twist. The twist was the whole point.",
     "tags": [
       "violence",
@@ -44,14 +47,17 @@
       "micro": "Season 2"
     }
   ],
+  "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
   "cinematicMoment": {
+    "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
     "eyebrow": "The turning point",
     "title": "The knife in the dirt.",
     "body": "All those years, all that hatred, and he just left it in the ground. He didn't forgive — he released. I had confused the two my whole life.",
     "episode": "Season 2 · The Farm Arc",
-    "image": ""
+    "image": "https://images.unsplash.com/photo-1590232497672-0198083c2718?q=80&w=2000&auto=format&fit=crop"
   },
   "memoryCards": {
+    "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
     "question": "What stayed with me after the screen went dark?",
     "cards": [
       {
@@ -59,21 +65,21 @@
         "title": "The Knife",
         "text": "Left in the ground. You can walk away from your own anger — it doesn't have to write the rest of your sentence.",
         "tag": "Release",
-        "image": ""
+        "image": "https://images.unsplash.com/photo-1589104764834-8c8574163cb5?q=80&w=1000&auto=format&fit=crop"
       },
       {
         "symbol": "◇",
         "title": "The Field",
         "text": "Ordinary work done with your hands, until the poison leaves. Healing looks boring.",
         "tag": "Repair",
-        "image": ""
+        "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop"
       },
       {
         "symbol": "○",
         "title": "The Line",
         "text": "'I have no enemies.' Not a slogan — a way of seeing that ends the war before it starts.",
         "tag": "Purpose",
-        "image": ""
+        "image": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000&auto=format&fit=crop"
       }
     ]
   },
@@ -83,7 +89,7 @@
       "heading": "I stopped calling anger 'motivation.'",
       "body": "I used the same fuel Thorfinn did — resentment as a productivity hack. Watching a decade of it produce nothing but exhaustion made me audit my own.",
       "caption": "Hatred is expensive fuel.",
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1501432781167-c0cad9dc5dbb?q=80&w=1000&auto=format&fit=crop",
       "flip": false
     },
     {
@@ -91,15 +97,18 @@
       "heading": "I thought Askeladd was the villain.",
       "body": "He was the mirror — a man who used everyone's hatred as fuel, including Thorfinn's. He showed me how clever people cash in other people's pain.",
       "caption": "The puppet masters live among us.",
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1000&auto=format&fit=crop",
       "flip": true
     }
   ],
+  "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
   "pullQuote": {
+    "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
     "text": "You have no enemies. No one in this world has enemies.",
     "attribution": "— Thors"
   },
   "timeline": {
+    "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
     "firstImpression": {
       "heading": "A brutal revenge saga",
       "body": "I expected a samurai-in-a-shield-wall story: blood, honor, and a satisfying kill."
@@ -114,6 +123,7 @@
     }
   },
   "todayBlock": {
+    "_guide": "Layout: Grid layout. Line: 30-70 words.",
     "intro": "Because of this story, today...",
     "items": [
       {
@@ -147,6 +157,7 @@
       "mirror": "He chooses kindness with both eyes open. He taught me that gentleness is a practice, not a personality."
     }
   ],
+  "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
   "notes": [
     {
       "text": "Revenge is a job you can't quit and never get paid for.",

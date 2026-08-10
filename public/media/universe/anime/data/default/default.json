@@ -1,66 +1,201 @@
 {
-  "title": "Anime Universe",
-  "subtitle": "Stories that changed how I think",
-  "description": "Anime is more than entertainment. It is a lens through which I have learned resilience, empathy, discipline, and the courage to question everything. Each world in this collection represents a philosophy, an emotion, or a lesson that reshaped how I see my own path.",
-  "accentColor": "#22d3ee",
-  "quotes": [
-    "The stories we love become part of who we are.",
-    "Every protagonist begins as an outcast.",
-    "Growth happens when you refuse to give up.",
-    "The strongest characters are the ones who feel the most."
-  ],
   "id": "default",
   "index": 0,
-  "jpTitle": "Anime Universe",
-  "year": 2024,
-  "genre": "Anime",
+  "title": "Anime Universe",
+  "subtitle": "Stories that stayed",
+  "jpTitle": "物語の余韻",
+  "year": null,
+  "genre": "Personal Archive",
   "poster": "",
   "entry": {
-    "breathQuote": "The stories we love become part of who we are."
+    "breathQuote": "I don't think I watch stories just to know what happens next anymore. Some stories end when the screen goes dark. Others follow me a little further, quietly changing the way I think, the things I notice, or the questions I ask myself."
   },
   "reflection": {
-    "quote": "",
+    "quote": "Maybe the value of a story isn't always in what it teaches me. Sometimes it's simply in what it makes me notice about myself.",
     "tags": [
-      "Anime",
-      "Journey",
-      "Reflection"
+      "stories",
+      "perspective",
+      "growth",
+      "memory",
+      "reflection"
     ],
-    "whatIKept": "",
-    "definingScene": "A moment that changed the perspective.",
-    "whoItMadeMeThinkAbout": "A connection to real life."
+    "whatIKept": "I started seeing anime as more than something to watch between other things. Some stories gave me a new way to look at friendship. Some made me question what I thought strength meant. Some made me uncomfortable. Some gave me hope when I didn't particularly need it. And some simply stayed in my head for reasons I couldn't explain at first. I don't want to force a lesson out of every story. I just want to notice what remains after the excitement is gone.",
+    "definingScene": "The quiet moments are probably what stayed with me the most. A character sitting alone. Someone deciding to keep going. Two people talking after everything has already changed. A small gesture that would be easy to miss if I was only watching for the plot. Those moments remind me that stories don't always need to shout to mean something.",
+    "whoItMadeMeThinkAbout": "The characters first. Then the people around me. And eventually myself. The strange thing about good stories is that I can start by watching someone else's life and somehow end up thinking about my own."
   },
-  "thoughtCascade": [],
+  "thoughtCascade": [
+    {
+      "thought": "I just want to see what happens.",
+      "micro": "At first"
+    },
+    {
+      "thought": "Why did that scene stay with me?",
+      "micro": "A little later"
+    },
+    {
+      "thought": "Maybe this story was showing me something about myself.",
+      "micro": "Some stories"
+    },
+    {
+      "thought": "Maybe I don't have to understand exactly why it mattered. Maybe it's enough that it did.",
+      "micro": "Eventually"
+    }
+  ],
+  "cinematicMoment": {
+    "eyebrow": "When the story becomes something else",
+    "title": "After the ending.",
+    "body": "The interesting part of a story isn't always the ending. Sometimes it is what happens afterward, when there is no next episode to explain what you should feel. A scene comes back while I'm walking somewhere. A character's decision suddenly makes more sense. A line I barely noticed starts sounding different. That's when I know a story has moved beyond entertainment and become part of the way I remember something.",
+    "episode": "After the screen goes dark",
+    "image": ""
+  },
   "memoryCards": {
-    "question": "What stayed with me after the screen went dark?",
-    "cards": []
+    "question": "What do I actually remember?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "The Feeling",
+        "text": "Sometimes I forget the exact episode but remember exactly how it felt to watch it. That feeling is part of the memory too.",
+        "tag": "Emotion",
+        "image": ""
+      },
+      {
+        "symbol": "◇",
+        "title": "The Question",
+        "text": "The stories I value most don't always give me answers. Sometimes they leave me with a question I didn't know I needed to ask.",
+        "tag": "Curiosity",
+        "image": ""
+      },
+      {
+        "symbol": "○",
+        "title": "The Change",
+        "text": "Not every story changes me dramatically. Sometimes it just makes me pause before thinking or judging the next time something similar happens.",
+        "tag": "Growth",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What changed about watching?",
+      "heading": "I stopped trying to take something from every story.",
+      "body": "I don't need every anime to teach me a life lesson. Sometimes I can simply enjoy it. Sometimes I can admire the characters, the art, the music, the absurdity of it all. And sometimes something deeper happens naturally. I think the difference matters. Meaning feels more genuine when I don't force it.",
+      "caption": "Not every story needs a lesson.",
+      "image": "",
+      "flip": false
+    },
+    {
+      "question": "Why keep an archive?",
+      "heading": "Because I forget how I used to think.",
+      "body": "Writing these thoughts down gives me something more than a list of shows. It gives me little snapshots of who I was when I watched them. Maybe I'll read these years later and disagree with half of what I wrote. That's okay. The archive isn't supposed to prove that I was right. It's supposed to show that I was here, thinking about something.",
+      "caption": "A record of what stayed.",
+      "image": "",
+      "flip": true
+    }
+  ],
+  "pullQuote": {
+    "text": "I don't want to remember only what I watched. I want to remember what it made me notice.",
+    "attribution": "— Why I keep these stories here"
   },
   "timeline": {
     "firstImpression": {
-      "heading": "First Impression",
-      "body": ""
+      "heading": "At first, they were just stories",
+      "body": "I watched because the characters were interesting, the worlds were beautiful, the fights were exciting, or I simply wanted to know what happened next. There was nothing wrong with that. Sometimes entertainment is enough."
     },
     "whatShifted": {
-      "heading": "What Changed",
-      "body": ""
+      "heading": "Then some stories stayed",
+      "body": "Every once in a while, something followed me after the episode ended. A decision. A relationship. A failure. A quiet moment. I started noticing that the stories I remembered most weren't always the ones with the biggest moments."
     },
     "whatStayed": {
-      "heading": "What Stayed",
-      "body": ""
+      "heading": "Now I pay attention to what remains",
+      "body": "I still watch for fun. I still get excited. I still get attached to characters and completely lose track of time. But when something stays with me, I want to understand why. Not because every story needs to become profound, but because the things that stay are usually worth looking at."
     }
   },
-  "cinematicMoment": null,
-  "altMemories": [],
-  "pullQuote": null,
   "todayBlock": {
-    "intro": "Because of this story, today...",
-    "items": []
+    "intro": "Because of these stories, today...",
+    "items": [
+      {
+        "verb": "I notice",
+        "line": "the small moments that exist between the big events."
+      },
+      {
+        "verb": "I remember",
+        "line": "that a character can be fictional and still make a real feeling easier to understand."
+      },
+      {
+        "verb": "I allow",
+        "line": "myself to enjoy something without needing to turn it into a lesson."
+      },
+      {
+        "verb": "I keep",
+        "line": "the stories that gave me a reason to think a little longer after they ended."
+      }
+    ]
   },
-  "characters": [],
-  "notes": [],
-  "ideas": [],
+  "characters": [
+    {
+      "name": "The Protagonist",
+      "role": "The person becoming",
+      "mirror": "I keep noticing how many protagonists begin without knowing who they are supposed to become. They fail, change their minds, lose people, make mistakes and keep moving. That feels more honest to me than the idea that growth is supposed to be clean."
+    },
+    {
+      "name": "The Rival",
+      "role": "The comparison",
+      "mirror": "Rivals remind me how easy it is to measure my own progress against someone else's. Sometimes that pushes me forward. Sometimes it only makes me forget that I am walking a different path."
+    },
+    {
+      "name": "The Quiet Character",
+      "role": "The unnoticed",
+      "mirror": "The characters I remember most aren't always the loudest ones. Sometimes it is the person who stays, listens, helps quietly, or keeps going without anyone celebrating it. I think I value that kind of strength more now."
+    }
+  ],
+  "notes": [
+    {
+      "text": "Some stories are entertainment. Some become memories. A few become part of how I think.",
+      "footer": "Why this exists"
+    },
+    {
+      "text": "I don't need every story to change me. I just want to notice when one does.",
+      "footer": "Watching without forcing meaning"
+    },
+    {
+      "text": "Maybe growing up is partly realizing how many different ways there are to be strong.",
+      "footer": "Something stories keep reminding me"
+    },
+    {
+      "text": "The episode ended. The thought didn't.",
+      "footer": "The part after watching"
+    }
+  ],
+  "ideas": [
+    {
+      "concept": "Stories as mirrors",
+      "application": "I try to notice which characters I understand immediately and which ones frustrate me. Sometimes the strongest reaction tells me something about my own values, fears or assumptions."
+    },
+    {
+      "concept": "Growth is not linear",
+      "application": "Stories remind me that people can move forward, fall back, change their minds and still be growing. I try to give myself some of that same room."
+    },
+    {
+      "concept": "Meaning doesn't have to be forced",
+      "application": "I don't want to turn every piece of entertainment into philosophy. Sometimes I just enjoy a story. When something genuinely stays with me, I let the meaning appear naturally instead of searching for a lesson."
+    },
+    {
+      "concept": "Memory is part of the experience",
+      "application": "I keep these reflections because I know I'll eventually forget details. What I don't want to forget is how a story made me think at a particular point in my life."
+    }
+  ],
   "continueJourney": {
-    "because": "Because this reshaped how I think",
-    "prompt": "Continue the thought",
-    "recommendations": []
+    "because": "There are still stories I haven't seen, ideas I haven't encountered, and versions of myself I haven't met yet. I don't know which story will stay next. That's probably the interesting part.",
+    "prompt": "Find the next story",
+    "recommendations": [
+      {
+        "title": "Explore the universe",
+        "reason": "Pick a story without knowing exactly what it will leave behind."
+      },
+      {
+        "title": "Revisit an old favorite",
+        "reason": "Sometimes the story hasn't changed. You have."
+      }
+    ]
   }
 }

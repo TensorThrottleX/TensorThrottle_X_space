@@ -86,3 +86,57 @@
     --rf-tint-cap: 0.15;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLL INDICATOR
+   ═══════════════════════════════════════════════════════════════════════════ */
+.anime-scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: stageBreathe 3s 1.5s ease-in-out infinite both;
+}
+
+.anime-scroll-indicator span {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.scroll-dot-line {
+  width: 1px;
+  height: 24px;
+  border-left: 1px dotted rgba(255, 255, 255, 0.4);
+  position: relative;
+}
+
+.scroll-dot-line.with-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  border-right: 1px solid rgba(255, 255, 255, 0.45);
+  transform: rotate(45deg);
+}
+
+@keyframes stageBreathe {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: translateY(0); 
+  }
+  50% { 
+    opacity: 0.9; 
+    transform: translateY(6px); 
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 15px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}

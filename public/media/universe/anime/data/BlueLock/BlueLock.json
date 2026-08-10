@@ -1,4 +1,6 @@
 {
+  "id": "BlueLock",
+  "index": 4,
   "title": "Blue Lock",
   "subtitle": "Egoist striker project",
   "description": "A radical take on sports anime that abandons the traditional power of friendship for raw, unadulterated ego. It dissects the psychology of what makes a world-class striker, emphasizing that to stand at the pinnacle, one must be willing to consume others' dreams.",
@@ -8,6 +10,122 @@
     "Devour your opponents.",
     "Football is not a game of friendship, it's a game of ego."
   ],
+  "jpTitle": "Blue Lock",
+  "year": 2024,
+  "genre": "Anime",
+  "poster": "",
+  "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+  "entry": {
+    "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+    "breathQuote": "People who can't decide anything for themselves and just flow with the crowd will never be the best in the world at anything."
+  },
+  "reflection": {
+    "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+    "quote": "Blue Lock made me confront something I had spent years politely hiding from myself: that my humility was often just fear wearing good manners. This show believes ambition is not the problem — pretending not to have it is.",
+    "tags": [
+      "Anime",
+      "Journey",
+      "Reflection"
+    ],
+    "whatIKept": "I grew up being praised for being 'chill' — for not wanting things too loudly. Blue Lock looked directly at that persona and called it what it is: a lack of a goal sharp enough to be selfish about. The series strips friendship away from competition and asks what is left when you have to win alone, against people you like. It was uncomfortable, then clarifying. It matters to me because it gave me permission to want things specifically, publicly, and competitively — and it gave me a framework for turning jealousy into measurement rather than resentment.",
+    "definingScene": "In a dying moment of a losing game, Isagi's vision sharpens and he sees the field as a flow of possibilities — and chooses the one selfish path that wins.",
+    "whoItMadeMeThinkAbout": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
+  },
+  "thoughtCascade": [
+    {
+      "thought": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
+      "micro": "What hit hardest"
+    },
+    {
+      "thought": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
+      "micro": "The idea I kept"
+    },
+    {
+      "thought": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
+      "micro": "How I see it today"
+    }
+  ],
+  "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+  "cinematicMoment": {
+    "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+    "eyebrow": "First Selection",
+    "title": "Bachira's monster",
+    "body": "Bachira confesses he is scared of the 'monster' inside him that loves football too much. The show's answer: keep the monster, give it a target. The thing you fear about yourself is often your best instrument. The work is aim, not amputation.",
+    "episode": "",
+    "image": "https://i.pinimg.com/736x/c7/c8/f8/c7c8f83f7253a0a301ebfcec0e7afe29.jpg"
+  },
+  "memoryCards": {
+    "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+    "question": "What stayed with me after the screen went dark?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "What hit hardest",
+        "text": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
+        "tag": "Insight",
+        "image": ""
+      },
+      {
+        "symbol": "◈",
+        "title": "The idea I kept",
+        "text": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
+        "tag": "Insight",
+        "image": "https://i.pinimg.com/736x/c7/c8/f8/c7c8f83f7253a0a301ebfcec0e7afe29.jpg"
+      },
+      {
+        "symbol": "◈",
+        "title": "How I see it today",
+        "text": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
+        "tag": "Insight",
+        "image": ""
+      }
+    ]
+  },
+  "timeline": {
+    "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+    "firstImpression": {
+      "heading": "First Impression",
+      "body": "A sports anime about soccer where everyone is a jerk. I almost quit in the first episode — the language of 'ego' and 'devouring' felt like a parody of masculinity."
+    },
+    "whatShifted": {
+      "heading": "What Changed",
+      "body": "Isagi's first 'world-class moment' — his perception of the field reorganizing around a single selfish idea. I realized the show was not about soccer at all. It was about the moment a vague person finally forms a specific ambition."
+    },
+    "whatStayed": {
+      "heading": "What Stayed",
+      "body": "Bachira's line that his inner monster only came out when he found a rival who saw him. The idea that ambition needs an audience — someone to beat — stayed with me as a practical truth."
+    }
+  },
+  "altMemories": [
+    {
+      "question": "The Team Z elimination game",
+      "heading": "End of First Selection",
+      "body": "Isagi's team plays to survive, and he must decide whether to score himself or set up a teammate — knowing only one of them stays.",
+      "caption": "Kindness and ambition collide most painfully at decision points. The choice reveals what you actually value, regardless of what you say.",
+      "image": "",
+      "flip": false
+    }
+  ],
+  "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+  "pullQuote": {
+    "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+    "text": "It's the people who take the first shot that change the world, right?",
+    "attribution": "Yoichi Isagi"
+  },
+  "todayBlock": {
+    "_guide": "Layout: Grid layout. Line: 30-70 words.",
+    "intro": "Because of this story, today...",
+    "items": [
+      {
+        "verb": "I reflect",
+        "line": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
+      },
+      {
+        "verb": "I reflect",
+        "line": "It also changed how I approach collaboration. I used to soften my wants to keep the peace. Now I state them loudly and early, trusting that people who can't handle a specific ambition were never going to be good collaborators anyway. The teams I build now run on aligned egos, and they work better."
+      }
+    ]
+  },
   "characters": [
     {
       "name": "Yoichi Isagi",
@@ -25,235 +143,25 @@
       "mirror": "Rin showed me the shape of disciplined obsession: talent plus a mission it serves without question. He is a warning about aim, but a masterclass in intensity."
     }
   ],
-  "heroReflection": "Blue Lock made me confront something I had spent years politely hiding from myself: that my humility was often just fear wearing good manners. This show believes ambition is not the problem — pretending not to have it is.",
-  "corePerspective": "I grew up being praised for being 'chill' — for not wanting things too loudly. Blue Lock looked directly at that persona and called it what it is: a lack of a goal sharp enough to be selfish about. The series strips friendship away from competition and asks what is left when you have to win alone, against people you like. It was uncomfortable, then clarifying. It matters to me because it gave me permission to want things specifically, publicly, and competitively — and it gave me a framework for turning jealousy into measurement rather than resentment.",
-  "insights": [
-    {
-      "title": "What hit hardest",
-      "body": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly."
-    },
-    {
-      "title": "The idea I kept",
-      "body": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it."
-    },
-    {
-      "title": "How I see it today",
-      "body": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align."
-    }
-  ],
-  "journey": [
-    {
-      "stage": "First Impression",
-      "text": "A sports anime about soccer where everyone is a jerk. I almost quit in the first episode — the language of 'ego' and 'devouring' felt like a parody of masculinity."
-    },
-    {
-      "stage": "What Changed",
-      "text": "Isagi's first 'world-class moment' — his perception of the field reorganizing around a single selfish idea. I realized the show was not about soccer at all. It was about the moment a vague person finally forms a specific ambition."
-    },
-    {
-      "stage": "The Turning Point",
-      "text": "When Isagi stops scoring for validation and starts scoring to exist in his own story. His selfishness stops being destructive and becomes the thing everyone relies on. That reversal made me rethink my own reluctance to lead."
-    },
-    {
-      "stage": "What Stayed",
-      "text": "Bachira's line that his inner monster only came out when he found a rival who saw him. The idea that ambition needs an audience — someone to beat — stayed with me as a practical truth."
-    },
-    {
-      "stage": "How it affects my thinking today",
-      "text": "I now ask myself one question before every project: would I still want this if no one praised me for it? If the answer is no, I don't start. Blue Lock taught me to distinguish ambition from appetite."
-    }
-  ],
-  "characterInfluences": [
-    {
-      "name": "Yoichi Isagi",
-      "role": "Protagonist",
-      "influence": "Isagi is me if I were brave: a person who stops playing to avoid losing and starts playing to prove a specific idea. His growth is the template I use to upgrade my own goal-setting."
-    },
-    {
-      "name": "Meguru Bachira",
-      "role": "Ally / Playmaker",
-      "influence": "He taught me that joy is a competitive weapon. Bachira plays for the pure thrill of the collision — and he is unstoppable because of it. I try to keep a Bachira channel open in my own work."
-    },
-    {
-      "name": "Rin Itoshi",
-      "role": "Rival",
-      "influence": "Rin showed me the shape of disciplined obsession: talent plus a mission it serves without question. He is a warning about aim, but a masterclass in intensity."
-    }
-  ],
-  "definingMoments": [
-    {
-      "title": "The first 'world-class moment'",
-      "context": "First Selection, Isagi's awakening",
-      "text": "In a dying moment of a losing game, Isagi's vision sharpens and he sees the field as a flow of possibilities — and chooses the one selfish path that wins.",
-      "idea": "Clarity arrives when you finally let yourself want one thing completely. Ambition is a lens, not a flaw."
-    },
-    {
-      "title": "Bachira's monster",
-      "context": "First Selection",
-      "text": "Bachira confesses he is scared of the 'monster' inside him that loves football too much. The show's answer: keep the monster, give it a target.",
-      "idea": "The thing you fear about yourself is often your best instrument. The work is aim, not amputation."
-    },
-    {
-      "title": "The Team Z elimination game",
-      "context": "End of First Selection",
-      "text": "Isagi's team plays to survive, and he must decide whether to score himself or set up a teammate — knowing only one of them stays.",
-      "idea": "Kindness and ambition collide most painfully at decision points. The choice reveals what you actually value, regardless of what you say."
-    }
-  ],
-  "quotesWorthCarrying": [
-    {
-      "quote": "People who can't decide anything for themselves and just flow with the crowd will never be the best in the world at anything.",
-      "speaker": "Jinpachi Ego",
-      "why": "The harshest true thing in the show. It moved me from 'I'll figure it out' to actually choosing — direction is a decision, made early and repeatedly."
-    },
-    {
-      "quote": "It's the people who take the first shot that change the world, right?",
-      "speaker": "Yoichi Isagi",
-      "why": "My excuse was always that I needed to be ready. Blue Lock convinced me that readiness is a myth and the shot itself creates the world that fits it."
-    }
-  ],
-  "realLifeReflection": [
-    "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process.",
-    "It also changed how I approach collaboration. I used to soften my wants to keep the peace. Now I state them loudly and early, trusting that people who can't handle a specific ambition were never going to be good collaborators anyway. The teams I build now run on aligned egos, and they work better."
-  ],
-  "continueExploring": [
-    {
-      "id": "Haikyuu",
-      "title": "Haikyuu!!",
-      "note": "The mirror universe: the same hunger and growth, expressed through genuine teamwork instead of ego — the healthiest rivalry in anime."
-    },
-    {
-      "id": "HajimeNoIppo",
-      "title": "Hajime no Ippo",
-      "note": "A quieter study of the same engine: a shy person becoming relentless, told with deep craft."
-    },
-    {
-      "id": "ClassroomOfTheElite",
-      "title": "Classroom of the Elite",
-      "note": "If Blue Lock's ego theory were applied to school and manipulation instead of soccer. The same cold logic, zero warmth."
-    }
-  ],
-  "id": "BlueLock",
-  "index": 0,
-  "jpTitle": "Blue Lock",
-  "year": 2024,
-  "genre": "Anime",
-  "poster": "",
-  "entry": {
-    "breathQuote": "I will be the best striker in the world."
-  },
-  "reflection": {
-    "quote": "Blue Lock made me confront something I had spent years politely hiding from myself: that my humility was often just fear wearing good manners. This show believes ambition is not the problem — pretending not to have it is.",
-    "tags": [
-      "Anime",
-      "Journey",
-      "Reflection"
-    ],
-    "whatIKept": "I grew up being praised for being 'chill' — for not wanting things too loudly. Blue Lock looked directly at that persona and called it what it is: a lack of a goal sharp enough to be selfish about. The series strips friendship away from competition and asks what is left when you have to win alone, against people you like. It was uncomfortable, then clarifying. It matters to me because it gave me permission to want things specifically, publicly, and competitively — and it gave me a framework for turning jealousy into measurement rather than resentment.",
-    "definingScene": "A moment that changed the perspective.",
-    "whoItMadeMeThinkAbout": "A connection to real life."
-  },
-  "thoughtCascade": [
-    {
-      "thought": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
-      "micro": "What hit hardest"
-    },
-    {
-      "thought": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
-      "micro": "The idea I kept"
-    },
-    {
-      "thought": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
-      "micro": "How I see it today"
-    }
-  ],
-  "memoryCards": {
-    "question": "What stayed with me after the screen went dark?",
-    "cards": [
-      {
-        "symbol": "◈",
-        "title": "What hit hardest",
-        "text": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
-        "tag": "Insight",
-        "image": ""
-      },
-      {
-        "symbol": "◈",
-        "title": "The idea I kept",
-        "text": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
-        "tag": "Insight",
-        "image": ""
-      },
-      {
-        "symbol": "◈",
-        "title": "How I see it today",
-        "text": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
-        "tag": "Insight",
-        "image": ""
-      }
-    ]
-  },
-  "timeline": {
-    "firstImpression": {
-      "heading": "First Impression",
-      "body": "A sports anime about soccer where everyone is a jerk. I almost quit in the first episode — the language of 'ego' and 'devouring' felt like a parody of masculinity."
-    },
-    "whatShifted": {
-      "heading": "What Changed",
-      "body": "Isagi's first 'world-class moment' — his perception of the field reorganizing around a single selfish idea. I realized the show was not about soccer at all. It was about the moment a vague person finally forms a specific ambition."
-    },
-    "whatStayed": {
-      "heading": "What Stayed",
-      "body": "Bachira's line that his inner monster only came out when he found a rival who saw him. The idea that ambition needs an audience — someone to beat — stayed with me as a practical truth."
-    }
-  },
-  "cinematicMoment": {
-    "eyebrow": "First Selection, Isagi's awakening",
-    "title": "The first 'world-class moment'",
-    "body": "In a dying moment of a losing game, Isagi's vision sharpens and he sees the field as a flow of possibilities — and chooses the one selfish path that wins. Clarity arrives when you finally let yourself want one thing completely. Ambition is a lens, not a flaw.",
-    "episode": "",
-    "image": ""
-  },
-  "altMemories": [
-    {
-      "question": "Bachira's monster",
-      "heading": "First Selection",
-      "body": "Bachira confesses he is scared of the 'monster' inside him that loves football too much. The show's answer: keep the monster, give it a target.",
-      "caption": "The thing you fear about yourself is often your best instrument. The work is aim, not amputation.",
-      "image": "",
-      "flip": false
-    },
-    {
-      "question": "The Team Z elimination game",
-      "heading": "End of First Selection",
-      "body": "Isagi's team plays to survive, and he must decide whether to score himself or set up a teammate — knowing only one of them stays.",
-      "caption": "Kindness and ambition collide most painfully at decision points. The choice reveals what you actually value, regardless of what you say.",
-      "image": "",
-      "flip": true
-    }
-  ],
-  "pullQuote": {
-    "text": "People who can't decide anything for themselves and just flow with the crowd will never be the best in the world at anything.",
-    "attribution": "Jinpachi Ego"
-  },
-  "todayBlock": {
-    "intro": "Because of this story, today...",
-    "items": [
-      {
-        "verb": "I reflect",
-        "line": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
-      },
-      {
-        "verb": "I reflect",
-        "line": "It also changed how I approach collaboration. I used to soften my wants to keep the peace. Now I state them loudly and early, trusting that people who can't handle a specific ambition were never going to be good collaborators anyway. The teams I build now run on aligned egos, and they work better."
-      }
-    ]
-  },
+  "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
   "notes": [],
   "ideas": [],
   "continueJourney": {
     "because": "Because this reshaped how I think",
     "prompt": "Continue the thought",
-    "recommendations": []
+    "recommendations": [
+      {
+        "title": "Haikyuu!!",
+        "reason": "The mirror universe: the same hunger and growth, expressed through genuine teamwork instead of ego — the healthiest rivalry in anime."
+      },
+      {
+        "title": "Hajime no Ippo",
+        "reason": "A quieter study of the same engine: a shy person becoming relentless, told with deep craft."
+      },
+      {
+        "title": "Classroom of the Elite",
+        "reason": "If Blue Lock's ego theory were applied to school and manipulation instead of soccer. The same cold logic, zero warmth."
+      }
+    ]
   }
 }

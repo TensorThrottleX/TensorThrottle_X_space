@@ -44,6 +44,8 @@ export interface AnimeNarrativeData {
     body: string
     episode: string
     image: string
+    video?: string
+    rotateImage?: boolean
   }
   memoryCards: {
     question: string

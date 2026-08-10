@@ -6,7 +6,6 @@ import 'd3-transition' // CRITICAL: side-effect patches Selection.prototype.tran
 import { useUI } from '@/components/providers/UIProvider'
 import { TREE_ANIMATION_CONFIG } from '@/lib/tree-animations'
 
-console.log("__HORIZONTAL_TREE_V10_LOADED__");
 
 // Chainable instant fallback
 function createInstantChainable(sel: any) {

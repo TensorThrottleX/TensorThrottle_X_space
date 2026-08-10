@@ -91,15 +91,10 @@ function computeAbsolutePositions(map: Map<string, PositionedNode>, id = 'root',
 }
 
 function assignPositions(node: TreeNode): { map: Map<string, PositionedNode> } {
-  console.log('--- Pipeline Trace: assignPositions ---')
-  console.log('KNOWLEDGE_TREE Valid Data:', !!node && typeof node === 'object' && node.name !== undefined)
   const map = new Map<string, PositionedNode>()
   buildTree(node, 0, 'root', map)
-  console.log('buildTree - root created:', map.has('root'))
-  console.log('buildTree - nodeMap size:', map.size)
   computeAbsolutePositions(map, 'root', 0)
   const rootNode = map.get('root')
-  console.log('computeAbsolutePositions - root coordinates finite:', rootNode ? (Number.isFinite(rootNode.x) && Number.isFinite(rootNode.y)) : false)
   return { map }
 }
 
@@ -183,24 +178,8 @@ export function KnowledgeTree({
   )
 
   useEffect(() => {
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-    console.log('[Tree Diagnostics]')
-    console.log('Tree Loaded:', !!data)
-    console.log('Root ID: root')
-    console.log('Tree Data Valid:', !!data && typeof data === 'object')
-    console.log('NodeMap Size:', nodeMap.size)
-    console.log('Root Exists:', !!nodeMap.get('root'))
-    console.log('Expanded IDs:', Array.from(expandedIds).join(','))
-    console.log('Visible Set Size:', visibleSet.size)
-    console.log('Visible Nodes:', nodes.length)
-    console.log('Visible Edges:', edges.length)
-    console.log('Root Coordinates:', nodeMap.get('root')?.x, nodeMap.get('root')?.y)
-    console.log('First Child Count:', nodeMap.get('root')?.children.length)
     setTimeout(() => {
-      console.log('SVG Nodes Rendered:', svgRef.current?.querySelectorAll('g[data-node]').length || 0)
-      console.log('SVG Edges Rendered:', svgRef.current?.querySelectorAll('line').length || 0)
     }, 100)
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
   }, [data, nodeMap, nodes, edges, expandedIds, view, visibleSet])
 
   // Which nodes are newly visible (for pulse animation)

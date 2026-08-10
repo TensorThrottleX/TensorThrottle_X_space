@@ -141,7 +141,6 @@ export function useRenderStrategy(
         applyPresentation(newStrategy, cached)
       } else {
         if (cached) {
-          console.log(`[useRenderStrategy] Discarding stale cache for ${currentSrc}: version ${cached._strategyVersion} !== ${STRATEGY_VERSION}`)
           presentationCache.current.delete(currentSrc)
         }
         if (asset?.isAnalyzed && asset.resolution.width > 0) {

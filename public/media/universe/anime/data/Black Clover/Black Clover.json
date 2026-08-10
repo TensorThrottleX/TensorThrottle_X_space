@@ -1,0 +1,60 @@
+{
+  "title": "Black Clover",
+  "jpTitle": "ブラッククローバー",
+  "subtitle": "Magic is everything, but I'll prove them wrong.",
+  "year": "2017",
+  "genre": "Shōnen / Action / Fantasy",
+  "accentColor": "#6b7280",
+  "index": 15,
+  "poster": "",
+  "reflection": {
+    "quote": "Even without magic, I will become the Wizard King!",
+    "author": "Asta"
+  },
+  "thePhilosophy": {
+    "heading": "Never Giving Up is My Magic",
+    "paragraphs": [
+      "In a world where magic is everything, Asta is born with none. While everyone else relies on natural talent and mana, he builds his body and relies purely on his unbreakable spirit.",
+      "Black Clover isn't just about underdogs; it's about the relentless refusal to accept the limitations the world places on you."
+    ]
+  },
+  "cascadeOfThoughts": [
+    {
+      "thought": "Can hard work really surpass natural talent?",
+      "micro": "The eternal question"
+    },
+    {
+      "thought": "When everyone looks down on you, do you shrink or shout louder?",
+      "micro": "Volume as a weapon"
+    }
+  ],
+  "cinematicMoment": {
+    "eyebrow": "The Anti-Magic Boy",
+    "title": "Asta's Grimoire.",
+    "body": "When hope seemed completely lost and he was about to give up his dream, a corrupted, five-leaf grimoire chose him. It didn't grant him magic—it gave him the power to destroy it.",
+    "episode": "Episode 1",
+    "image": ""
+  },
+  "memoryCards": {
+    "question": "What defines the Black Bulls?",
+    "cards": [
+      {
+        "symbol": "◈",
+        "title": "Misfits",
+        "text": "A squad made entirely of outcasts, rejects, and bizarre personalities who somehow form the strongest family.",
+        "tag": "Found Family",
+        "image": ""
+      }
+    ]
+  },
+  "altMemories": [
+    {
+      "question": "What separates Asta and Yuno?",
+      "heading": "Two paths, one destination.",
+      "body": "Yuno is loved by mana; Asta is rejected by it. Yet, they both push each other to the absolute limit. Their rivalry isn't built on hatred, but on pure, absolute mutual respect.",
+      "caption": "A rivalry without toxicity.",
+      "image": "",
+      "flip": false
+    }
+  ]
+}

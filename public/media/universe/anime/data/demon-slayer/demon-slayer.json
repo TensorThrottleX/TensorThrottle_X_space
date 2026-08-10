@@ -1,267 +1,273 @@
 {
-  "title": "Demon Slayer",
-  "subtitle": "Breath of the sun, blade of vengeance",
-  "description": "After his family is slaughtered and his sister turned into a demon, Tanjiro Kamado joins the Demon Slayer Corps to find a cure and avenge his family.",
-  "accentColor": "#22d3ee",
-  "quotes": [
-    "Set your heart ablaze. Grit your teeth and move forward.",
-    "Life is not a game of luck. If you want to win, work hard.",
-    "No matter how many lives we save, we can never bring back the ones we lost."
-  ],
-  "characters": [
-    {
-      "name": "Tanjiro Kamado",
-      "role": "Protagonist",
-      "mirror": "Tanjiro is my model of the complete human: fierce enough to kill, gentle enough to weep over it. He normalized the coexistence of opposites in me — strength and softness, ambition and compassion."
-    },
-    {
-      "name": "Nezuko Kamado",
-      "role": "Sister",
-      "mirror": "She proved that who you are can survive what you become. When the world gives you a monstrous role, the most radical act is refusing to play it."
-    },
-    {
-      "name": "Zenitsu Agatsuma",
-      "role": "Fellow Slayer"
-    },
-    {
-      "name": "Giyu Tomioka",
-      "role": "Water Hashira"
-    },
-    {
-      "name": "Rengoku Kyojuro",
-      "role": "Flame Hashira",
-      "mirror": "His way of living — 'set your heart ablaze' — became my endurance framework. He dies undefeated not because he wins but because he never cools down."
-    }
-  ],
-  "heroReflection": "Demon Slayer is the rare story where the hero's kindness is not his weakness — it is his weapon. Tanjiro cries for the demons he kills, and somehow that makes him more lethal, not less. I wanted to understand how that worked. It changed how I think about empathy.",
-  "corePerspective": "I watched Demon Slayer at a point where I had convinced myself that being effective meant being hard — that gentleness was a luxury I couldn't afford. Tanjiro dismantled that belief in a single scene: the sword that kills the demon is held by the same hand that mourns it. The show argues, again and again, that understanding your enemy is not sentiment — it is strategy. It gives you the information hardness can't reach. This matters to me because it gave me permission to be soft and ambitious at the same time, and to stop treating compassion as a tax on my potential.",
-  "insights": [
-    {
-      "title": "What hit hardest",
-      "body": "That every demon is a person with a story. Rui, the spider demon, was a sick child who wanted family. The show never lets you forget that monsters are made, and it made me stop drawing clean lines between 'us' and 'them.'"
-    },
-    {
-      "title": "The idea I kept",
-      "body": "'Set your heart ablaze.' I kept Rengoku's fire not as a motivational poster but as a practical instruction: to endure, you need an internal temperature that outlasts the external cold. I literally check my own 'flame' when I'm running on empty."
-    },
-    {
-      "title": "How I see it today",
-      "body": "I used to read Tanjiro's kindness as naive. Now I understand it as the most durable form of resilience — he can grieve and continue, and that combination is what makes him unbeatable. Grief-proofed people are the strongest people."
-    }
-  ],
-  "journey": [
-    {
-      "stage": "First Impression",
-      "text": "Beautiful animation, a familiar revenge plot. I enjoyed the craft and assumed the story would be simple: boy slays demons, finds cure, done."
-    },
-    {
-      "stage": "What Changed",
-      "text": "The first time Tanjiro sincerely thanks a demon for its human memories before ending it. The show redefined what 'winning' meant for me — it stopped being about destruction and became about witness."
-    },
-    {
-      "stage": "The Turning Point",
-      "text": "Rengoku's death in the Mugen Train arc. A pillar of flame dies standing, protecting children, with a smile. I understood then that the show's real subject is how people choose to spend their final strength."
-    },
-    {
-      "stage": "What Stayed",
-      "text": "Nezuko. A demon who refuses to eat humans because of love — her devotion as the counter-evidence to the show's own premise. She stayed with me as proof that identity is chosen, not written."
-    },
-    {
-      "stage": "How it affects my thinking today",
-      "text": "I ask myself a question borrowed from the show's logic: if this were my last day of strength, where would I spend it? The answer always reorganizes my priorities — usually toward people, not projects."
-    }
-  ],
-  "characterInfluences": [
-    {
-      "name": "Tanjiro Kamado",
-      "role": "Protagonist",
-      "influence": "Tanjiro is my model of the complete human: fierce enough to kill, gentle enough to weep over it. He normalized the coexistence of opposites in me — strength and softness, ambition and compassion."
-    },
-    {
-      "name": "Rengoku Kyojuro",
-      "role": "Flame Hashira",
-      "influence": "His way of living — 'set your heart ablaze' — became my endurance framework. He dies undefeated not because he wins but because he never cools down."
-    },
-    {
-      "name": "Nezuko Kamado",
-      "role": "Sister",
-      "influence": "She proved that who you are can survive what you become. When the world gives you a monstrous role, the most radical act is refusing to play it."
-    }
-  ],
-  "definingMoments": [
-    {
-      "title": "The farewell to Rengoku",
-      "context": "Mugen Train arc",
-      "text": "Rengoku dies kneeling, blade still drawn, smiling at the sunrise. Tanjiro's grief is total — and then he stands, carrying the flame forward.",
-      "idea": "Grief is not the end of strength. It is the transfer of it. The people you lose keep fighting through the ones who remain."
-    },
-    {
-      "title": "Daki's mirror",
-      "context": "Entertainment District arc",
-      "text": "The demon Daki has been a monster for a century, but her brother's memory still rules her. Tanjiro doesn't just fight her — he understands her, and the understanding is what disarms her.",
-      "idea": "Comprehension is a combat skill. The person who truly understands an enemy has already half-won."
-    },
-    {
-      "title": "Nezuko in the sun",
-      "context": "Season 1 finale",
-      "text": "After decades of demonkind's fundamental rule, Nezuko steps into sunlight — and does not burn. Love literally rewrites the rules of the world.",
-      "idea": "Some limits are real, and some are just agreements nobody has tested. Devotion is a legitimate test."
-    }
-  ],
-  "quotesWorthCarrying": [
-    {
-      "quote": "Set your heart ablaze. Grit your teeth and move forward.",
-      "speaker": "Rengoku Kyojuro",
-      "why": "My operating manual for hard seasons: intensity is not optional, it is the survival mechanism. I say it to myself before every difficult meeting."
-    },
-    {
-      "quote": "It's not always about what you can do with your strength. It's about what you choose to do with it.",
-      "speaker": "Tanjiro Kamado",
-      "why": "The show's thesis in one line. Capacity is neutral; choice is character. It helped me stop measuring myself by capability and start measuring myself by direction."
-    }
-  ],
-  "realLifeReflection": [
-    "Demon Slayer changed my default response to people who have done wrong. I used to lead with judgment; now I lead with the question 'what happened to you?' — not to excuse, but because Tanjiro proved that understanding an enemy is the fastest route to defeating the actual problem instead of the person. In real life this converts conflicts into conversations faster than any tactic I had before.",
-    "The flame metaphor became literal practice. I keep a short list of things that 'ignite' me — work, people, ideas — and I deliberately steer my energy toward them when I feel myself cooling. The show convinced me that sustained effort is not a matter of willpower but of placement: put your heart near fuel."
-  ],
-  "continueExploring": [
-    {
-      "id": "Bleach",
-      "title": "Bleach",
-      "note": "Another kind-hearted swordsman whose love becomes his blade — with an edgier, more complex mythology."
-    },
-    {
-      "id": "Naruto",
-      "title": "Naruto",
-      "note": "The same compassionate-protagonist engine: understanding the enemy as the path to peace, built on a grander scale."
-    },
-    {
-      "id": "jujutsu-kaisen",
-      "title": "Jujutsu Kaisen",
-      "note": "If Demon Slayer's kindness were stripped away: same monsters, same swords, crueler answers to the same questions."
-    }
-  ],
   "id": "demon-slayer",
-  "index": 0,
-  "jpTitle": "Demon Slayer",
-  "year": 2024,
-  "genre": "Anime",
+  "index": 4,
+  "title": "Demon Slayer",
+  "subtitle": "What remains human",
+  "jpTitle": "鬼滅の刃",
+  "year": 2019,
+  "genre": "Shōnen",
   "poster": "",
+
   "entry": {
-    "breathQuote": "Set your heart ablaze. Grit your teeth and move forward."
+    "breathQuote": "I thought Demon Slayer was going to be a story about defeating demons. Somewhere along the way, it became a story about what it takes to remain human when life gives you every reason not to."
   },
+
   "reflection": {
-    "quote": "Demon Slayer is the rare story where the hero's kindness is not his weakness — it is his weapon. Tanjiro cries for the demons he kills, and somehow that makes him more lethal, not less. I wanted to understand how that worked. It changed how I think about empathy.",
+    "quote": "What stayed with me was how often strength and humanity existed together. The strongest people weren't always the cruelest or most dominant. Some were the ones who could endure terrible things without letting those things decide what kind of person they became.",
     "tags": [
-      "Anime",
-      "Journey",
-      "Reflection"
+      "purity",
+      "resolve",
+      "humanity",
+      "strength",
+      "humility"
     ],
-    "whatIKept": "I watched Demon Slayer at a point where I had convinced myself that being effective meant being hard — that gentleness was a luxury I couldn't afford. Tanjiro dismantled that belief in a single scene: the sword that kills the demon is held by the same hand that mourns it. The show argues, again and again, that understanding your enemy is not sentiment — it is strategy. It gives you the information hardness can't reach. This matters to me because it gave me permission to be soft and ambitious at the same time, and to stop treating compassion as a tax on my potential.",
-    "definingScene": "A moment that changed the perspective.",
-    "whoItMadeMeThinkAbout": "A connection to real life."
+    "whatIKept": "Demon Slayer made me think about the kind of person I want to remain when life becomes difficult. Tanjiro showed me that being kind doesn't have to mean being weak. Rengoku showed me that sometimes courage is simply refusing to step back. Akaza made me think about how much of a person survives underneath everything that happens to them. Muichiro reminded me that age doesn't decide what someone can endure or become. Gyomei showed me that real strength can make someone more compassionate toward weakness instead of looking down on it.",
+    "definingScene": "Rengoku's final moments stayed with me because he never seemed to negotiate with his resolve. Even when the opponent was stronger, even when his body was failing, he kept fighting until the end. There was something very simple about it: he knew he might lose, but that didn't change what he believed he should do.",
+    "whoItMadeMeThinkAbout": "People who remain kind after being hurt. People who keep going without needing anyone to promise them that they will win. People who are stronger than they appear. And myself, especially when I start thinking that circumstances should decide what I am allowed to become."
   },
+
   "thoughtCascade": [
     {
-      "thought": "That every demon is a person with a story. Rui, the spider demon, was a sick child who wanted family. The show never lets you forget that monsters are made, and it made me stop drawing clean lines between 'us' and 'them.'",
-      "micro": "What hit hardest"
+      "thought": "Tanjiro is just unusually kind.",
+      "micro": "At first"
     },
     {
-      "thought": "'Set your heart ablaze.' I kept Rengoku's fire not as a motivational poster but as a practical instruction: to endure, you need an internal temperature that outlasts the external cold. I literally check my own 'flame' when I'm running on empty.",
-      "micro": "The idea I kept"
+      "thought": "How does someone stay this gentle after everything he has seen?",
+      "micro": "As it deepened"
     },
     {
-      "thought": "I used to read Tanjiro's kindness as naive. Now I understand it as the most durable form of resilience — he can grieve and continue, and that combination is what makes him unbeatable. Grief-proofed people are the strongest people.",
-      "micro": "How I see it today"
+      "thought": "Maybe strength doesn't have to make someone harder.",
+      "micro": "Rengoku"
+    },
+    {
+      "thought": "What actually makes someone human?",
+      "micro": "Akaza"
+    },
+    {
+      "thought": "Maybe what happens to me matters less than what I choose to become because of it.",
+      "micro": "What stayed"
     }
   ],
+
+  "cinematicMoment": {
+    "eyebrow": "The moment I understood the kind of strength this story valued",
+    "title": "Rengoku's last stand.",
+    "body": "Rengoku knew he was facing something stronger than himself. He knew how badly he was injured. None of that changed what he believed he had to do. He didn't fight because victory was guaranteed. He fought because there were people behind him who needed him to stand there. That stayed with me. Sometimes courage isn't believing you will win. It is deciding that the possibility of losing doesn't give you permission to stop.",
+    "episode": "Mugen Train",
+    "image": ""
+  },
+
   "memoryCards": {
-    "question": "What stayed with me after the screen went dark?",
+    "question": "What stayed with me after Demon Slayer?",
     "cards": [
       {
         "symbol": "◈",
-        "title": "What hit hardest",
-        "text": "That every demon is a person with a story. Rui, the spider demon, was a sick child who wanted family. The show never lets you forget that monsters are made, and it made me stop drawing clean lines between 'us' and 'them.'",
-        "tag": "Insight",
+        "title": "Purity",
+        "text": "Tanjiro showed me that staying kind after being hurt is not weakness. Sometimes protecting the good inside you is one of the hardest things you can do.",
+        "tag": "Humanity",
         "image": ""
       },
       {
-        "symbol": "◈",
-        "title": "The idea I kept",
-        "text": "'Set your heart ablaze.' I kept Rengoku's fire not as a motivational poster but as a practical instruction: to endure, you need an internal temperature that outlasts the external cold. I literally check my own 'flame' when I'm running on empty.",
-        "tag": "Insight",
+        "symbol": "◇",
+        "title": "The Flame",
+        "text": "Rengoku made determination feel simple. Keep moving. Protect what is in front of you. Stay ablaze until you cannot take another step.",
+        "tag": "Resolve",
         "image": ""
       },
       {
-        "symbol": "◈",
-        "title": "How I see it today",
-        "text": "I used to read Tanjiro's kindness as naive. Now I understand it as the most durable form of resilience — he can grieve and continue, and that combination is what makes him unbeatable. Grief-proofed people are the strongest people.",
-        "tag": "Insight",
+        "symbol": "○",
+        "title": "What Remains",
+        "text": "Akaza made me question whether humanity is only about appearance. Maybe it is also about the values, desires and rules someone refuses to abandon.",
+        "tag": "Identity",
         "image": ""
       }
     ]
   },
-  "timeline": {
-    "firstImpression": {
-      "heading": "First Impression",
-      "body": "Beautiful animation, a familiar revenge plot. I enjoyed the craft and assumed the story would be simple: boy slays demons, finds cure, done."
-    },
-    "whatShifted": {
-      "heading": "What Changed",
-      "body": "The first time Tanjiro sincerely thanks a demon for its human memories before ending it. The show redefined what 'winning' meant for me — it stopped being about destruction and became about witness."
-    },
-    "whatStayed": {
-      "heading": "What Stayed",
-      "body": "Nezuko. A demon who refuses to eat humans because of love — her devotion as the counter-evidence to the show's own premise. She stayed with me as proof that identity is chosen, not written."
-    }
-  },
-  "cinematicMoment": {
-    "eyebrow": "Mugen Train arc",
-    "title": "The farewell to Rengoku",
-    "body": "Rengoku dies kneeling, blade still drawn, smiling at the sunrise. Tanjiro's grief is total — and then he stands, carrying the flame forward. Grief is not the end of strength. It is the transfer of it. The people you lose keep fighting through the ones who remain.",
-    "episode": "",
-    "image": ""
-  },
+
   "altMemories": [
     {
-      "question": "Daki's mirror",
-      "heading": "Entertainment District arc",
-      "body": "The demon Daki has been a monster for a century, but her brother's memory still rules her. Tanjiro doesn't just fight her — he understands her, and the understanding is what disarms her.",
-      "caption": "Comprehension is a combat skill. The person who truly understands an enemy has already half-won.",
+      "question": "What changed about strength?",
+      "heading": "I stopped seeing kindness as the opposite of strength.",
+      "body": "Tanjiro could fight, endure pain and make difficult decisions without losing his ability to feel compassion. That combination stayed with me. Life can make you harder, but becoming harder isn't the only way to become stronger.",
+      "caption": "You can become stronger without becoming colder.",
       "image": "",
       "flip": false
     },
     {
-      "question": "Nezuko in the sun",
-      "heading": "Season 1 finale",
-      "body": "After decades of demonkind's fundamental rule, Nezuko steps into sunlight — and does not burn. Love literally rewrites the rules of the world.",
-      "caption": "Some limits are real, and some are just agreements nobody has tested. Devotion is a legitimate test.",
+      "question": "What does strength ask of you?",
+      "heading": "The stronger I become, the more responsible I should become.",
+      "body": "Gyomei made me think about this differently. If strength only makes someone look down on those who cannot keep up, then maybe it has not taught them enough. Real strength should make you understand how difficult weakness can be, because you know what it means to struggle too.",
+      "caption": "Strength should create understanding.",
       "image": "",
       "flip": true
     }
   ],
+
   "pullQuote": {
-    "text": "Set your heart ablaze. Grit your teeth and move forward.",
-    "attribution": "Rengoku Kyojuro"
+    "text": "Maybe becoming stronger isn't about becoming harder. Maybe it is about becoming strong enough to remain yourself.",
+    "attribution": "— What I took from Demon Slayer"
   },
+
+  "timeline": {
+    "firstImpression": {
+      "heading": "I thought it was about killing demons",
+      "body": "At first, Demon Slayer felt straightforward. Tanjiro had lost his family, Nezuko had become a demon, and the goal was clear: become strong enough to protect her and defeat the demons standing in the way."
+    },
+    "whatShifted": {
+      "heading": "Then the line between strength and humanity became harder to ignore",
+      "body": "The story kept showing people who were powerful for completely different reasons. Some had immense physical strength. Some had extraordinary will. Some had survived things that should have broken them. But the characters I respected most were often the ones who remained human while becoming stronger."
+    },
+    "whatStayed": {
+      "heading": "I started thinking about what I want strength to make me",
+      "body": "I don't want strength to make me arrogant or disconnected from people who struggle more than I do. I want it to make me more capable while also making me more understanding. Demon Slayer made me think that perhaps the real test of strength isn't what you can overpower, but what you can endure without losing yourself."
+    }
+  },
+
   "todayBlock": {
     "intro": "Because of this story, today...",
     "items": [
       {
-        "verb": "I reflect",
-        "line": "Demon Slayer changed my default response to people who have done wrong. I used to lead with judgment; now I lead with the question 'what happened to you?' — not to excuse, but because Tanjiro proved that understanding an enemy is the fastest route to defeating the actual problem instead of the person. In real life this converts conflicts into conversations faster than any tactic I had before."
+        "verb": "I notice",
+        "line": "when difficulty starts making me colder instead of simply making me stronger."
       },
       {
-        "verb": "I reflect",
-        "line": "The flame metaphor became literal practice. I keep a short list of things that 'ignite' me — work, people, ideas — and I deliberately steer my energy toward them when I feel myself cooling. The show convinced me that sustained effort is not a matter of willpower but of placement: put your heart near fuel."
+        "verb": "I remember",
+        "line": "that being kind after being hurt can require more strength than becoming bitter."
+      },
+      {
+        "verb": "I try",
+        "line": "to keep moving even when success isn't guaranteed."
+      },
+      {
+        "verb": "I believe",
+        "line": "that becoming stronger should make me more understanding of people who are still struggling."
       }
     ]
   },
-  "notes": [],
-  "ideas": [],
+
+  "characters": [
+    {
+      "name": "Tanjiro Kamado",
+      "role": "The purity",
+      "mirror": "Tanjiro made me think about how difficult it is to remain genuinely good after life gives you reasons to become bitter. He suffers more than most people could imagine, but his suffering doesn't erase his compassion. He can fight someone and still understand that they once had a life of their own. What I took from him is that purity isn't never experiencing darkness. It is seeing it and still choosing not to become it."
+    },
+    {
+      "name": "Kyojuro Rengoku",
+      "role": "The flame",
+      "mirror": "Rengoku taught me something very simple: when you believe something matters, don't back down just because the person standing against you is stronger. He didn't need a guarantee that he would win. He simply refused to stop protecting the people behind him. His final fight made determination feel less like confidence and more like commitment. Stay ablaze. Keep moving. Give everything you have until there is nothing left to give."
+    },
+    {
+      "name": "Akaza",
+      "role": "The humanity beneath the monster",
+      "mirror": "Akaza made me think about whether appearance is enough to decide what someone is. He became a demon and committed terrible acts, but even then he retained rules and boundaries that came from the person he had once been. His refusal to eat or destroy women stayed with me because it showed that something from his old values had survived. It made me think that identity isn't only what the outside becomes. Our values, desires, memories and choices also tell us who we are."
+    },
+    {
+      "name": "Muichiro Tokito",
+      "role": "The possibility",
+      "mirror": "Muichiro made me think about how little age actually tells us about someone. He was incredibly young, yet he endured things that would overwhelm many adults and eventually became someone capable of standing among the strongest. His story reminded me that age is only a number attached to where someone is in time. What matters more is what they endure, what they learn, and what they choose to do with the person they are becoming."
+    },
+    {
+      "name": "Gyomei Himejima",
+      "role": "The strength",
+      "mirror": "Gyomei made me think about what should happen when someone becomes genuinely strong. I don't see his strength as something that separates him from weaker people. It seems to make him more aware of how fragile people can be. His power comes with humility, responsibility and compassion. That stayed with me because I think real strength should make you understand weakness better, not make you ashamed of it."
+    }
+  ],
+
+  "characterMemories": [
+    {
+      "question": "What did Tanjiro change for me?",
+      "heading": "Kindness can survive almost anything.",
+      "body": "Tanjiro showed me that being gentle doesn't mean being unable to fight. He can be decisive when he needs to be and still feel compassion afterward. I like that contradiction. It suggests that strength and kindness aren't opposites. Maybe the stronger person is sometimes the one who has enough control not to let pain decide how they treat everyone else.",
+      "caption": "Stay soft without becoming weak.",
+      "image": ""
+    },
+    {
+      "question": "What did Rengoku leave behind?",
+      "heading": "Give everything while you still can.",
+      "body": "Rengoku's final stand stayed with me because there was no promise of victory. He simply knew what he was responsible for in that moment. The opponent was stronger. His body was failing. None of that changed his decision. He kept the flame alive until the very end.",
+      "caption": "You don't need certainty to keep going.",
+      "image": ""
+    },
+    {
+      "question": "What did Akaza make me question?",
+      "heading": "Is humanity only what the world can see?",
+      "body": "Akaza made me uncomfortable in an interesting way. Becoming a demon changed his body and his life, but parts of his old values still existed underneath. His rules about women were not enough to redeem everything he did, but they showed me that a person can become deeply corrupted without every part of their previous identity disappearing. It made me think about how complicated human nature can be.",
+      "caption": "The outside doesn't tell the entire story.",
+      "image": ""
+    },
+    {
+      "question": "What did Muichiro remind me?",
+      "heading": "Age doesn't decide your potential.",
+      "body": "Muichiro was so young, yet his experiences forced him to mature in ways most people never have to. His story made me think less about how old someone is and more about what they have endured, what they have learned and what they choose to become from it.",
+      "caption": "Time is measured in years. Growth isn't.",
+      "image": ""
+    },
+    {
+      "question": "What does Gyomei represent?",
+      "heading": "Strength should make you humble.",
+      "body": "Gyomei's strength never felt like a reason to look down on others. If anything, being strong seemed to make him more aware of how fragile people can be. That is the kind of strength I respect most: the kind that gives you more ability without giving you less empathy.",
+      "caption": "The strongest should understand the fragile.",
+      "image": ""
+    },
+    {
+      "question": "What did Giyu make me understand?",
+      "heading": "You can carry guilt and still choose to live forward.",
+      "body": "Giyu carries the feeling that he survived when others didn't, and for a long time that seems to make him question whether he deserves the position he holds. But he doesn't stop protecting people because of it. He keeps moving, even when he doesn't feel like the person who should have been left standing. That made me think about how survival itself can sometimes feel complicated. Maybe honoring the people we lose isn't always about staying stuck in what happened. Sometimes it is about using the life that remains well.",
+      "caption": "Sometimes continuing is its own way of remembering.",
+      "image": ""
+    }
+  ],
+
+  "notes": [
+    {
+      "text": "You can be kind without being weak, and strong without becoming cruel.",
+      "footer": "What Tanjiro left me"
+    },
+    {
+      "text": "Sometimes courage is simply refusing to step back when someone else needs you to stand.",
+      "footer": "The flame"
+    },
+    {
+      "text": "What happened to someone matters. But so does what they choose to do with what happened.",
+      "footer": "The possibility of choice"
+    },
+    {
+      "text": "The strongest person in the room should not be the one who makes everyone else feel small.",
+      "footer": "What strength should become"
+    }
+  ],
+
+  "ideas": [
+    {
+      "concept": "Purity without weakness",
+      "application": "I don't want kindness to mean being unable to stand up for myself. Tanjiro made me think that compassion and strength can exist in the same person."
+    },
+    {
+      "concept": "Resolve without certainty",
+      "application": "I don't always need to know that I will succeed before I begin. Sometimes the important thing is deciding what is worth giving everything I have to."
+    },
+    {
+      "concept": "Identity beyond appearance",
+      "application": "A person's appearance, position or circumstances don't always tell the whole story. Values, choices and the things someone refuses to abandon can reveal another part of who they are."
+    },
+    {
+      "concept": "Strength with humility",
+      "application": "The more capable I become, the more I want to remember what struggling feels like. Ability should create responsibility and understanding, not superiority."
+    }
+  ],
+
   "continueJourney": {
-    "because": "Because this reshaped how I think",
+    "because": "Demon Slayer left me thinking about a kind of strength that doesn't require losing humanity. I want to keep finding stories where people are tested by pain, power and circumstances, and where the real question is what they choose to become.",
     "prompt": "Continue the thought",
-    "recommendations": []
+    "recommendations": [
+      {
+        "title": "Vinland Saga",
+        "reason": "What happens when strength built through violence is no longer enough, and someone has to decide what kind of person they actually want to become."
+      },
+      {
+        "title": "Hunter x Hunter",
+        "reason": "What happens when good intentions, ambition and morality become much more complicated than they first appear."
+      }
+    ]
   }
 }

@@ -24,7 +24,6 @@ export class CropStrategy {
 
     if (!asset || !viewport) {
       log.push({ step: 'crop', decision: 'default_cover', reason: 'Missing asset or viewport', confidence: 0 })
-      console.log(`[CropStrategy] MISSING asset=${!!asset} viewport=${!!viewport} → default_cover`)
       return this.defaultCover(log)
     }
 
@@ -41,7 +40,6 @@ export class CropStrategy {
 
     if (diff < 0.08) {
       log.push({ step: 'crop', decision: 'match_cover', reason: `Near-perfect aspect match (${diff.toFixed(3)})`, confidence: 0.95 })
-      console.log(`[CropStrategy] match_cover: va=${va.toFixed(3)} sa=${sa.toFixed(3)} diff=${diff.toFixed(3)}`)
       return { ...this.defaultCover(log), objectPosition: position, strategyName: 'match_cover', confidence: 0.95 }
     }
 
@@ -59,7 +57,6 @@ export class CropStrategy {
           reason: `Subject at ${(subCenter * 100).toFixed(0)}%, offset ${clamped.toFixed(0)}%`,
           confidence: 0.85,
         })
-        console.log(`[CropStrategy] subject_aware_horizontal: pos=${pos}`)
         return {
           objectFit: 'cover', objectPosition: pos,
           cropRegion: subject, scale: 1, zoom: 1,
@@ -75,7 +72,6 @@ export class CropStrategy {
         reason: `Vertical subject at ${(subCenter * 100).toFixed(0)}%`,
         confidence: 0.8,
       })
-      console.log(`[CropStrategy] subject_aware_vertical: pos=${pos}`)
       return {
         objectFit: 'cover', objectPosition: pos,
         cropRegion: subject, scale: 1, zoom: 1,
@@ -87,7 +83,6 @@ export class CropStrategy {
     if (diff > 0.5) {
       if (va > sa * 1.5) {
         log.push({ step: 'crop', decision: 'ultrawide_cover', reason: 'Ultrawide video on narrower viewport — cover applied', confidence: 0.75 })
-        console.log(`[CropStrategy] ultrawide_cover: va=${va.toFixed(3)} sa=${sa.toFixed(3)} va>sa*1.5=${va > sa * 1.5}`)
         return {
           objectFit: 'cover', objectPosition: position,
           cropRegion: null, scale: 1, zoom: 1,
@@ -97,7 +92,6 @@ export class CropStrategy {
       }
       if (sa > va * 1.5) {
         log.push({ step: 'crop', decision: 'portrait_cover', reason: 'Portrait video on wider viewport — cover applied', confidence: 0.75 })
-        console.log(`[CropStrategy] portrait_cover: va=${va.toFixed(3)} sa=${sa.toFixed(3)} sa>va*1.5=${sa > va * 1.5}`)
         return {
           objectFit: 'cover', objectPosition: position,
           cropRegion: null, scale: 1, zoom: 1,
@@ -109,7 +103,6 @@ export class CropStrategy {
 
     if (asset.safeCropRegion && diff > 0.3) {
       log.push({ step: 'crop', decision: 'safe_crop', reason: 'Using computed safe crop region', confidence: 0.7 })
-      console.log(`[CropStrategy] safe_crop: region=${JSON.stringify(asset.safeCropRegion)}`)
       return {
         objectFit: 'cover', objectPosition: position,
         cropRegion: asset.safeCropRegion, scale: 1, zoom: 1,
@@ -118,7 +111,6 @@ export class CropStrategy {
       }
     }
 
-    console.log(`[CropStrategy] default_cover: va=${va.toFixed(3)} sa=${sa.toFixed(3)} diff=${diff.toFixed(3)} bias=${bias}`)
     log.push({ step: 'crop', decision: 'default_cover', reason: `Standard cover (diff=${diff.toFixed(2)})`, confidence: 0.6 })
     return { ...this.defaultCover(log), objectPosition: position, strategyName: 'mismatch_cover', confidence: 0.6 }
   }

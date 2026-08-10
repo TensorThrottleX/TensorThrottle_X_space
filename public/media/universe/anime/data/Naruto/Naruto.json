@@ -1,104 +1,117 @@
 {
-  "id": "Naruto",
-  "index": 1,
+  "id": "naruto",
+  "index": 2,
   "title": "Naruto",
-  "subtitle": "How belonging changes a person",
+  "subtitle": "Hope in people",
   "jpTitle": "ナルト",
   "year": 2002,
   "genre": "Shōnen",
   "poster": "",
   "entry": {
-    "breathQuote": "At that stage of my life, I wasn't looking for action. I was looking for proof that being an outsider wasn't a permanent condition."
+    "breathQuote": "I thought Naruto was about becoming strong enough to be acknowledged. By the end, I felt like it was asking something much harder: can I still believe in people after seeing what made them become who they are?"
   },
   "reflection": {
-    "quote": "I kept waiting for the story to be about becoming the strongest. It never was. It was always about the terrible, exhausting work of forcing the world to acknowledge you exist.",
+    "quote": "Naruto made me realize that people are rarely just what they look like from the outside. There is usually a story behind the person, and sometimes understanding that story is the difference between judging someone and actually seeing them.",
     "tags": [
-      "growth",
-      "loneliness",
-      "acceptance",
-      "purpose"
+      "hope",
+      "belief",
+      "perspective",
+      "humanity",
+      "understanding"
     ],
-    "whatIKept": "Loneliness isn't just an emotion, it's a physical weight. And the people who survive it don't just get stronger — they get kinder.",
-    "definingScene": "Sitting alone on the swing, watching everyone else go home to their parents. I didn't need anyone to explain it. I recognized the silence.",
-    "whoItMadeMeThinkAbout": "The kid I was in middle school, trying entirely too hard to be noticed — because being annoying felt better than being invisible."
+    "whatIKept": "What stayed with me most was how rarely anyone in Naruto was simply good or evil. Almost everyone had been shaped by something. Loss. Loneliness. Fear. War. Family. Someone they loved. Someone they lost. Someone who changed the way they saw the world. That doesn't make every decision right, and it doesn't erase responsibility. But it made me realize that before I decide what someone is, there is usually a story I don't know yet.",
+    "definingScene": "Naruto standing against Nagato's pain stayed with me because Naruto had every reason to hate him. Nagato had taken people Naruto loved and caused enormous suffering. Naruto could have answered that pain with more pain. Instead, he asked why. He tried to understand where the hatred came from. He didn't pretend the pain was acceptable. He simply refused to believe that pain had to be the final answer.",
+    "whoItMadeMeThinkAbout": "People I have judged too quickly. People who became difficult because life gave them very little reason to trust others. People who looked cold when they were actually hurt. People whose actions I understood only after I knew more of their story. And myself — because sometimes I want to be understood for the reasons behind my actions while forgetting that other people deserve that same patience."
   },
   "thoughtCascade": [
     {
-      "thought": "I noticed the swing before anything else.",
-      "micro": "Episode 1"
+      "thought": "Naruto just wants everyone to recognize him.",
+      "micro": "At first"
     },
     {
-      "thought": "The adults weren't protecting him. They were ignoring him.",
-      "micro": "The Village"
+      "thought": "Why did so many of these people become like this?",
+      "micro": "As the world opened"
     },
     {
-      "thought": "He wasn't fighting for glory. He was fighting to exist.",
-      "micro": "The Exams"
+      "thought": "They weren't born carrying all this hatred.",
+      "micro": "The deeper story"
     },
     {
-      "thought": "He forgave the people who hurt him because holding on would just create more of what he hated.",
-      "micro": "The Pain Arc"
+      "thought": "Maybe people become who they are through everything and everyone they meet.",
+      "micro": "What changed"
+    },
+    {
+      "thought": "And maybe hope is believing they don't have to stay that way.",
+      "micro": "By the end"
     }
   ],
   "cinematicMoment": {
-    "eyebrow": "The turning point",
-    "title": "Iruka's tears.",
-    "body": "It wasn't a magical jutsu that saved him. It was the first time an adult looked at him and didn't see a monster. Iruka didn't fix Naruto's life — he interrupted the isolation. It rearranged my understanding of what saving someone actually looks like.",
-    "episode": "Episode 1",
-    "image": ""
+    "eyebrow": "The moment I understood what Naruto was really about",
+    "title": "Naruto and Nagato.",
+    "body": "Naruto had every reason to hate Nagato. Nagato had caused enormous pain, and Naruto could have answered that pain with more of the same. Instead, he asked why. Not to excuse him, but to understand him. That moment changed how I looked at the entire story. Naruto wasn't saying that everyone is innocent. It was saying that if I can understand how someone became who they are, maybe I can stop the same pain from creating another person like them.",
+    "episode": "Naruto Shippuden",
+    "image": "/media/universe/anime/data/Naruto/jiraya-moment.png"
   },
   "memoryCards": {
-    "question": "What stayed with me after the screen went dark?",
+    "question": "What stayed with me after Naruto ended?",
     "cards": [
       {
         "symbol": "◈",
-        "title": "The Swing",
-        "text": "The physical shape of isolation. A reminder that visibility is a basic human need.",
-        "tag": "Silence",
+        "title": "Hope",
+        "text": "Hope isn't pretending that everything will be okay. Sometimes it is simply refusing to believe that the worst thing someone has done is the only thing they can ever become.",
+        "tag": "Hope",
         "image": ""
       },
       {
         "symbol": "◇",
-        "title": "The Headband",
-        "text": "A symbol of being seen. It changed how I treat the need to be validated.",
-        "tag": "Acceptance",
+        "title": "The Story",
+        "text": "Almost everyone carries something I cannot see. The person I meet is usually the result of many things that happened before I arrived.",
+        "tag": "Perspective",
         "image": ""
       },
       {
         "symbol": "○",
-        "title": "The Promise",
-        "text": "Never going back on a word. Not out of pride — because your word is the only thing you actually own.",
-        "tag": "Integrity",
+        "title": "The Choice",
+        "text": "Circumstances can shape someone without completely deciding who they become. At some point, there is still a choice about what happens next.",
+        "tag": "Choice",
         "image": ""
       }
     ]
   },
   "altMemories": [
     {
-      "question": "What quietly changed?",
-      "heading": "I stopped romanticizing the 'lone wolf' trope.",
-      "body": "Sasuke chose isolation; Naruto fought his way out of it. I realized which one actually costs more. Building connections is infinitely harder than burning them.",
-      "caption": "The real strength is staying open.",
+      "question": "What changed in the way I see people?",
+      "heading": "I became slower to call someone evil.",
+      "body": "Naruto made me realize how little of a person I actually see when I meet them. I see the reaction, the attitude, the decision. I usually don't see the years that created it. That doesn't mean every person is secretly good or that every action should be forgiven. It means I should be careful before reducing a whole person to the worst thing I know about them.",
+      "caption": "A person is bigger than the part I happened to see.",
       "image": "",
       "flip": false
+    },
+    {
+      "question": "What did hope become?",
+      "heading": "Believing that people can still change.",
+      "body": "Hope became less about expecting a perfect future and more about believing that the present doesn't have to be permanent. Someone can be shaped by terrible things and still choose something different. Sometimes all they need is one person who believes there is still something worth saving.",
+      "caption": "The past explains. It doesn't always have to decide.",
+      "image": "",
+      "flip": true
     }
   ],
   "pullQuote": {
-    "text": "When a person has something important to protect, that's when they can become truly strong.",
-    "attribution": "— Haku"
+    "text": "I don't think Naruto taught me that everyone is good. It taught me to look for the person underneath what happened to them.",
+    "attribution": "— What I took from Naruto"
   },
   "timeline": {
     "firstImpression": {
-      "heading": "A loud kid pulling pranks",
-      "body": "I thought it was just comedy. A protagonist who was annoying for the sake of being annoying."
+      "heading": "I thought it was about becoming strong",
+      "body": "At the beginning, Naruto felt like a story about a lonely kid who wanted recognition. I cared about the training, the rivalries, the missions and eventually seeing everyone become stronger."
     },
     "whatShifted": {
-      "heading": "Why he did it",
-      "body": "The pranks were a survival mechanism. He vandalized the Hokage faces because negative attention was the only alternative to being completely invisible."
+      "heading": "Then everyone started getting a story",
+      "body": "The people who first looked like enemies slowly became people with histories. Gaara had his loneliness. Nagato had his war. Obito had his loss. Itachi had his burden. Sasuke had his grief. The more I learned about people, the harder it became to see them as simply good or bad."
     },
     "whatStayed": {
-      "heading": "Empathy as a weapon",
-      "body": "You can redirect pain into empathy instead of revenge. Your trauma can be the exact mechanism you use to understand others."
+      "heading": "I started believing in people differently",
+      "body": "Not by believing that everyone is innocent. I don't think that is true. I started believing that most people are shaped by something, and that understanding what shaped them matters. Naruto's greatest strength wasn't that he could defeat people. It was that he could still believe there was something human inside them."
     }
   },
   "todayBlock": {
@@ -106,58 +119,124 @@
     "items": [
       {
         "verb": "I notice",
-        "line": "when someone is acting out just to be seen."
+        "line": "when I am judging someone's behavior without knowing what might have shaped it."
       },
       {
         "verb": "I question",
-        "line": "the urge to isolate myself when things get difficult."
+        "line": "whether I am seeing the whole person or only the part of them that affected me."
       },
       {
         "verb": "I try",
-        "line": "to be the person who breaks the cycle of ignoring the ones who don't fit in."
+        "line": "to understand where someone's reaction comes from before deciding what kind of person they are."
+      },
+      {
+        "verb": "I remember",
+        "line": "that understanding someone does not mean excusing them, and believing in someone does not mean ignoring what they have done."
       }
     ]
   },
   "characters": [
     {
       "name": "Naruto Uzumaki",
-      "role": "The challenge",
-      "mirror": "He took every reason to be bitter and turned it into a reason to be kind. I quietly measure my own resilience against that choice."
+      "role": "The hope",
+      "mirror": "Naruto became meaningful to me because he kept believing in people even after seeing the worst they could become. His belief wasn't blind. He saw the pain, anger and damage. He simply refused to believe those things were the entire person. More than anything, he made me believe that a person's past can explain them without having to decide who they become."
     },
     {
-      "name": "Sasuke Uchiha",
-      "role": "The discomfort",
-      "mirror": "He reflected the part of me that wants to burn bridges when I get hurt. He showed me where that path actually leads."
+      "name": "Kakashi Hatake",
+      "role": "The quiet strength",
+      "mirror": "At first I liked Kakashi because he was analytical, calm and powerful. But I only really understood him near the end of Shippuden. When Obito returned one final time and they said goodbye, I suddenly saw the whole person behind the mask. His father. His teammates. Rin. Minato. Obito. So much loss had passed through his life, and yet he kept showing up for the next generation. He wasn't flashy or extravagant. He simply carried what happened to him and kept moving. That made him much more meaningful to me than any of his abilities ever did."
     },
     {
-      "name": "Gaara",
-      "role": "The warning",
-      "mirror": "The mirror of what happens when the isolation wins. He made me realize that love is the only thing that actually interrupts the cycle of violence."
+      "name": "Jiraiya",
+      "role": "The belief",
+      "mirror": "Jiraiya made me think about what it means to believe in someone before you know what they will become. He wasn't perfect, and he failed in ways that mattered. But he kept looking for the person who could carry the hope he couldn't finish himself. With Naruto, his belief slowly became something bigger than teaching techniques. He gave Naruto a way to believe in himself, and even when Jiraiya was gone, what he believed in continued through him."
+    },
+    {
+      "name": "Itachi Uchiha",
+      "role": "The hidden story",
+      "mirror": "Itachi reminded me how incomplete judgment can be when I only know the visible part of someone's life. For a long time, he looked like a person who had simply chosen something unforgivable. Then the story showed what existed behind that image. It didn't make everything simple, but it made me realize how dangerous it can be to judge an entire person from the part of their story that I happen to know."
+    },
+    {
+      "name": "Nagato",
+      "role": "The cycle",
+      "mirror": "Nagato made the idea of inherited pain feel real to me. He wanted peace, but the world he experienced taught him that peace had to come through fear and destruction. What affected me wasn't simply that he was wrong. It was that I could understand how he arrived there. He showed me how someone can sincerely believe they are protecting the world while being shaped by a completely broken understanding of what peace means."
+    },
+    {
+      "name": "Hinata Hyuga",
+      "role": "The first believer",
+      "mirror": "Hinata's relationship with Naruto never felt like a normal love story to me. What stayed with me was that her admiration came before Naruto had proved himself to anyone. Before Pain. Before the recognition. Before the victories. She saw his determination when almost everyone else saw a loud, unsuccessful kid who would never become anything. She didn't admire him because he had already become great. She admired him because he kept trying to become someone he believed he could be. That made her affection feel deeper to me than simply falling in love with a person. She acknowledged something in Naruto before the rest of the world was willing to see it."
+    }
+  ],
+  "kakashiMemories": [
+    {
+      "question": "Why did I understand Kakashi so late?",
+      "heading": "Because I was looking at his surface.",
+      "body": "For most of Naruto, Kakashi was the cool sensei who always seemed to have everything under control. I noticed the intelligence, the Sharingan, the calm attitude and the jokes. I didn't notice how much of that calmness had been built around loss.",
+      "caption": "Sometimes you understand a character only after understanding what they survived.",
+      "image": ""
+    },
+    {
+      "question": "What did the final goodbye with Obito show me?",
+      "heading": "The weight behind the quiet.",
+      "body": "When Kakashi received Obito's final gift and they said goodbye, I stopped thinking about how powerful the Double Mangekyo Sharingan was. I thought about everything Kakashi had already lost. His father. His comrades. Rin. His sensei. Obito. Suddenly the entire character felt different.",
+      "caption": "The moment the power stopped mattering.",
+      "image": ""
+    },
+    {
+      "question": "Why does Kakashi stay with me?",
+      "heading": "He kept carrying people who were no longer there.",
+      "body": "Kakashi didn't erase his past. He carried it. And somehow he still became someone who could guide Naruto, Sasuke and Sakura. That is what made him feel human to me. He wasn't strong because life had been kind to him. He was strong because life hadn't been kind, and he still chose to care about what came next.",
+      "caption": "Sometimes hope is simply continuing to care.",
+      "image": ""
     }
   ],
   "notes": [
     {
-      "text": "Pain doesn't automatically make you deep. It's what you do with it that matters.",
-      "footer": "After the Pain Arc"
+      "text": "Most people are carrying a story I haven't heard yet.",
+      "footer": "What Naruto changed in me"
+    },
+    {
+      "text": "Understanding why someone became who they are doesn't mean I have to agree with what they did.",
+      "footer": "Understanding is not approval"
+    },
+    {
+      "text": "People can be shaped by their circumstances without being completely defined by them.",
+      "footer": "Choice"
+    },
+    {
+      "text": "Maybe hope is believing there is still something worth saving in someone.",
+      "footer": "The belief Naruto left me with"
     }
   ],
   "ideas": [
     {
-      "concept": "Empathy as a tactical advantage",
-      "application": "Understanding someone's pain is often more effective than overpowering them."
+      "concept": "Hope in people",
+      "application": "I want to leave some room for the possibility that people can change. Not because everyone will, but because deciding that someone can never be anything else can become its own kind of blindness."
+    },
+    {
+      "concept": "People are shaped",
+      "application": "I try to remember that behavior usually has a history. Family, loss, loneliness, fear, friendship and circumstance can shape a person in ways I may never fully see."
+    },
+    {
+      "concept": "Understanding without excusing",
+      "application": "Understanding someone's reasons does not require me to call their actions right. I can recognize the humanity behind a decision while still believing the decision was wrong."
+    },
+    {
+      "concept": "The possibility of another choice",
+      "application": "Circumstances can influence who someone becomes, but they don't always have to decide what happens next. That is where I think hope becomes meaningful."
     }
   ],
   "continueJourney": {
-    "because": "Because I stopped waiting to be offered belonging, and started building it.",
+    "because": "Naruto left me wanting stories that don't make people simple. Stories where hope isn't naive, where pain has consequences, and where understanding someone doesn't erase what they have done. I want to keep finding stories that make me look at people a little more carefully.",
     "prompt": "Continue the thought",
     "recommendations": [
       {
-        "title": "Mob Psycho 100",
-        "reason": "What happens when being special matters less than being kind."
+        "title": "Vinland Saga",
+        "reason": "What happens when someone who has been shaped by violence begins searching for another way to live."
       },
       {
-        "title": "My Hero Academia",
-        "reason": "Carrying a legacy you weren't born with."
+        "title": "Attack on Titan",
+        "reason": "What happens when understanding the other side makes it harder to decide who the enemy really is."
       }
     ]
   }

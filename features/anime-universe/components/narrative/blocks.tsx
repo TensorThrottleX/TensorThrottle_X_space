@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import type { AnimeNarrativeData } from './AnimeNarrativeTemplate'
+import { useImageOrientation } from '../../hooks/useImageOrientation'
 
 export function Divider({ label }: { label: string }) {
   return (
@@ -59,19 +60,23 @@ export function HeroSplit({ data }: { data: AnimeNarrativeData }) {
         </div>
       </div>
       <div className="hero-right reveal-right">
-        <p className="hero-tagline">{data.subtitle}</p>
-        <blockquote className="hero-reflection-quote">{data.reflection.quote}</blockquote>
-        <div className="hero-tags">
-          {data.reflection.tags.map((t, i) => (
-            <span key={i} className="hero-tag">{t}</span>
-          ))}
-        </div>
+        {data.subtitle && <p className="hero-tagline">{data.subtitle}</p>}
+        {data.reflection?.quote && <blockquote className="hero-reflection-quote">{data.reflection.quote}</blockquote>}
+        
+        {data.reflection?.tags && data.reflection.tags.length > 0 && (
+          <div className="hero-tags">
+            {data.reflection.tags.map((t, i) => (
+              <span key={i} className="hero-tag">{t}</span>
+            ))}
+          </div>
+        )}
+        
         <div className="reflection-cards">
           {[
-            { label: 'What I Kept', text: data.reflection.whatIKept },
-            { label: 'Defining Scene', text: data.reflection.definingScene },
-            { label: 'Who It Made Me Think About', text: data.reflection.whoItMadeMeThinkAbout },
-          ].map((c, i) => (
+            { label: 'What I Kept', text: data.reflection?.whatIKept },
+            { label: 'Defining Scene', text: data.reflection?.definingScene },
+            { label: 'Who It Made Me Think About', text: data.reflection?.whoItMadeMeThinkAbout },
+          ].filter(c => c.text).map((c, i) => (
             <div key={i} className="rc" style={{ transitionDelay: `${i * 140}ms` }}>
               <div className="rc-label">{c.label}</div>
               <div className="rc-text">{c.text}</div>
@@ -100,11 +105,36 @@ export function ThoughtCascade({ data }: { data: AnimeNarrativeData }) {
 
 export function CinematicMoment({ data }: { data: AnimeNarrativeData }) {
   const cm = data.cinematicMoment
+  const rawImage = cm.image?.trim()
+  const orientation = useImageOrientation(rawImage)
+  
+  // Intelligently auto-rotate if the image is portrait
+  const shouldRotate = orientation === 'portrait'
+
   return (
     <div className="cinematic-moment reveal-scale">
-      <div className={`cm-bg ${cm.image ? 'has-img' : ''}`}>
-        {cm.image ? (
-          <img className="cm-bg-img" src={cm.image} alt="" />
+      <div className={`cm-bg ${rawImage ? 'has-img' : ''}`}>
+        {rawImage ? (
+          <img 
+            className="cm-bg-img" 
+            src={rawImage} 
+            alt="" 
+            style={shouldRotate ? {
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '150vh', // Ensures it covers the screen when rotated
+              height: '100vw',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              transform: 'translate(-50%, -50%) rotate(90deg)'
+            } : { 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover', 
+              objectPosition: 'center' 
+            }} 
+          />
         ) : (
           <div className="cm-bg-pattern"></div>
         )}

@@ -20,6 +20,7 @@ export interface AtmosphereValues {
   carouselOpacity: number  // 1 → 0.70
   carouselInteractive: boolean // true when exploration phase
   carouselGlowOpacity: number  // 1 → 0.3
+  indicatorOpacity: number // 1 → 0 (quick fade out)
 
   // Reading panel state (Phase 2)
   readingOpacity: number     // 0 → 1
@@ -74,6 +75,7 @@ export function useEnvironmentTransition(
     s.setProperty('--carousel-scale', `${values.carouselScale}`)
     s.setProperty('--carousel-opacity', `${values.carouselOpacity}`)
     s.setProperty('--carousel-glow', `${values.carouselGlowOpacity}`)
+    s.setProperty('--indicator-opacity', `${values.indicatorOpacity}`)
 
     // Reading panel
     s.setProperty('--reading-opacity', `${values.readingOpacity}`)
@@ -111,10 +113,14 @@ function computeAtmosphere(progress: number): AtmosphereValues {
   const carouselOpacity = lerp(1, 0.70, carouselP)
   const carouselGlowOpacity = lerp(1, 0.3, carouselP)
   const carouselInteractive = p < 0.6
+  
+  // Indicator fades out quickly (in the first 25% of scroll)
+  const indicatorP = Math.min(p / 0.25, 1)
+  const indicatorOpacity = lerp(1, 0, indicatorP)
 
   // ── Reading panel (Phase 2) ──
-  // Reading reveal begins at 40% scroll, fully revealed by 85%
-  const readingP = Math.max(0, Math.min((p - 0.4) / 0.45, 1))
+  // Reading reveal begins at 15% scroll, fully revealed by 75%
+  const readingP = Math.max(0, Math.min((p - 0.15) / 0.60, 1))
   // Smoothstep for the reading reveal
   const readingEased = readingP * readingP * (3 - 2 * readingP)
   const readingOpacity = readingEased
@@ -132,6 +138,7 @@ function computeAtmosphere(progress: number): AtmosphereValues {
     carouselOpacity,
     carouselInteractive,
     carouselGlowOpacity,
+    indicatorOpacity,
     readingOpacity,
     readingTranslateY,
     readingActive,
