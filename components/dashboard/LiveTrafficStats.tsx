@@ -53,7 +53,7 @@ export function LiveTrafficStats() {
                     "font-mono text-xs font-bold tracking-widest",
                     isBright ? "text-black/80" : "text-white/80"
                 )}>
-                    {totalVisits.toLocaleString()} <span className="opacity-40 text-[9px] uppercase ml-1">Total</span>
+                    {totalVisits.toLocaleString()} <span className="opacity-40 text-[9px] uppercase ml-1">Views</span>
                 </span>
             </div>
         </div>
