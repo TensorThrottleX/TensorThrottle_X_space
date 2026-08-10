@@ -78,7 +78,7 @@ export default function RootLayout({
                 <SystemCoreOrb />
                 <AppStartupGate>
                   {/* Traffic Stats: Desktop top-left mirror, Mobile top-left */}
-                  <div className="fixed top-6 left-6 z-[150] lg:inset-x-0 lg:top-[96px] lg:left-auto lg:flex lg:justify-start pointer-events-none xl:top-1 xl:h-[76px] xl:items-center xl:pl-12">
+                  <div className="fixed top-6 left-6 z-[150] lg:inset-x-0 lg:top-[96px] lg:flex lg:justify-start pointer-events-none xl:top-1 xl:h-[76px] xl:items-center xl:pl-12">
                     <div className="flex items-center gap-5 pointer-events-auto">
                       <LiveTrafficStats />
                     </div>
