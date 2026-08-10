@@ -11,7 +11,7 @@ export default function InteractiveHome(): React.ReactNode {
   const router = useRouter()
   const pathname = usePathname()
   const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
-  const isUniverseContext = pathname.startsWith('/universe')
+  const isUniverseContext = pathname?.startsWith('/universe') || false
   const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res', text: string }[]>([])
   const [historyLog, setHistoryLog] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
