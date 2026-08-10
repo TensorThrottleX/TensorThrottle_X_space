@@ -44,7 +44,7 @@ export function SystemCoreOrb() {
 
   return (
     <motion.div
-      className="fixed top-6 right-6 lg:top-auto lg:right-auto lg:bottom-6 lg:left-6 z-[300] pointer-events-auto select-none outline-none cursor-pointer"
+      className="fixed z-[300] pointer-events-auto select-none outline-none cursor-pointer max-lg:top-6 max-lg:right-6 max-lg:bottom-auto max-lg:left-auto lg:bottom-6 lg:left-6 lg:top-auto lg:right-auto"
       style={{ width: 48, height: 48 }}
       role="presentation"
       aria-label="System Core"

@@ -27,7 +27,7 @@ export function LiveTrafficStats() {
 
     return (
         <div 
-            className="flex items-center gap-6 px-5 py-2 rounded-full border transition-colors duration-300 pointer-events-auto"
+            className="flex items-center gap-6 px-4 py-2.5 rounded-2xl border transition-colors duration-300 pointer-events-auto"
             style={{
                 backgroundColor: 'var(--adaptive-glass-bg)',
                 borderColor: 'var(--adaptive-glass-border)',
