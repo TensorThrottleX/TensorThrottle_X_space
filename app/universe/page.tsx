@@ -1,176 +1,167 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { universeItems } from '@/src/data/universe'
-import { Sparkles, ChevronRight, PlayCircle, Music, Ghost, FlaskConical, Library, LibraryBig, Box } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
-
-const iconMap: Record<string, React.ReactNode> = {
-  anime: <PlayCircle size={24} />,
-  music: <Music size={24} />,
-  'fox-den': <Ghost size={24} />,
-  'secret-lab': <FlaskConical size={24} />,
-  library: <Library size={24} />,
-  museum: <LibraryBig size={24} />,
-  memory: <Box size={24} />,
-}
+import { ArrowRight } from 'lucide-react'
 
 export default function UniversePage() {
   const { renderMode } = useUI()
   const isBright = renderMode === 'bright'
 
-  const activeItems = universeItems.filter(item => item.enabled)
-  const disabledItems = universeItems.filter(item => !item.enabled)
+  const textColor = isBright ? "text-neutral-900" : "text-neutral-100"
+  const mutedColor = isBright ? "text-neutral-500" : "text-neutral-400"
+  const faintColor = isBright ? "text-neutral-400" : "text-neutral-600"
+  const dividerColor = isBright ? "border-neutral-200" : "border-neutral-800"
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+  const activeDimensions = [
+    {
+      id: '01',
+      label: 'ANIME UNIVERSE',
+      progression: 'Stories → perspective → mindset',
+      description: 'The stories that changed the way I think, question, endure and understand people.',
+      route: '/universe/anime'
+    },
+    {
+      id: '02',
+      label: 'MUSIC NEBULA',
+      progression: 'Sound → memory → emotion',
+      description: 'The sounds that became attached to moments, places and versions of me.',
+      route: '/universe/music'
+    },
+    {
+      id: '03',
+      label: 'FOX DEN',
+      progression: 'Curiosity → conversation → exploration',
+      description: "A space for Lumi, experiments, questions and things I haven't figured out yet.",
+      route: '/universe/fox-den'
     }
-  }
+  ]
 
-  const itemAnim = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 24 } }
-  }
+  const futureDimensions = [
+    'SECRET LAB',
+    'LIBRARY',
+    'MUSEUM',
+    'MEMORY GALLERY'
+  ]
 
   return (
-    <div className="min-h-screen pt-32 pb-40 px-6 max-w-2xl mx-auto flex flex-col gap-12">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex flex-col gap-4"
-      >
-        <div className="flex items-center gap-3 mb-2">
-          <div className={cn(
-            "p-3 rounded-2xl",
-            isBright ? "bg-black/5 text-black" : "bg-white/10 text-cyan-400"
-          )}>
-            <Sparkles size={28} />
-          </div>
-          <h1 className={cn(
-            "text-4xl font-bold tracking-tight",
-            isBright ? "text-black" : "text-white"
-          )}>
-            The Universe
-          </h1>
-        </div>
-        <p className={cn(
-          "text-lg",
-          isBright ? "text-black/60" : "text-white/60"
-        )}>
-          Explore the different dimensions of TensorThrottleX. Each universe represents a distinct facet of my journey, interests, and experiments.
+    <div className="min-h-screen pt-32 pb-40 px-6 max-w-3xl mx-auto flex flex-col font-sans selection:bg-cyan-500/30">
+      
+      {/* 1. INTRODUCTION */}
+      <section className="mb-28">
+        <p className={cn("text-xs font-medium tracking-[0.2em] mb-10 uppercase", faintColor)}>
+          The Universe
         </p>
-      </motion.div>
+        <h1 className={cn("text-4xl md:text-5xl font-light tracking-tight leading-tight mb-8", textColor)}>
+          Different dimensions.<br/>
+          One journey.
+        </h1>
+        <p className={cn("text-lg md:text-xl leading-relaxed max-w-2xl font-light", mutedColor)}>
+          TensorThrottle X is not one collection of interests.<br className="hidden md:block"/>
+          It is a collection of perspectives — different places for the stories, sounds, experiments and questions that have shaped the journey.
+        </p>
+      </section>
 
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="flex flex-col gap-4"
-      >
-        <h2 className={cn(
-          "text-sm font-semibold tracking-widest uppercase mb-2",
-          isBright ? "text-black/40" : "text-white/40"
-        )}>
-          Active Dimensions
+      {/* 2. THE IDEA */}
+      <section className="mb-32 max-w-2xl">
+        <h2 className={cn("text-xl md:text-2xl font-light mb-6", textColor)}>
+          Not everything belongs in one place.
         </h2>
-        
-        {activeItems.map((item) => (
-          <motion.div key={item.id} variants={itemAnim}>
-            <Link href={item.route} className="block group">
-              <div className={cn(
-                "p-5 rounded-3xl border transition-all duration-300 flex items-center justify-between",
-                isBright 
-                  ? "bg-white/50 border-black/5 hover:bg-black/5 hover:border-black/10 hover:shadow-lg" 
-                  : "bg-black/40 border-white/5 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] backdrop-blur-xl"
-              )}>
-                <div className="flex items-center gap-5">
-                  <div className={cn(
-                    "w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110",
-                    isBright ? "bg-black/5 text-black/70 group-hover:text-black group-hover:bg-black/10" : "bg-white/5 text-white/70 group-hover:text-cyan-400 group-hover:bg-cyan-400/10"
-                  )}>
-                    {iconMap[item.id] || <Sparkles size={24} />}
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <h3 className={cn(
-                      "text-xl font-bold transition-colors duration-300",
-                      isBright ? "text-black/80 group-hover:text-black" : "text-white/80 group-hover:text-white"
-                    )}>
-                      {item.title}
-                    </h3>
-                    <p className={cn(
-                      "text-sm",
-                      isBright ? "text-black/50" : "text-white/50"
-                    )}>
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-                <div className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:translate-x-1",
-                  isBright ? "text-black/30 group-hover:text-black group-hover:bg-black/5" : "text-white/30 group-hover:text-cyan-400 group-hover:bg-cyan-400/10"
-                )}>
-                  <ChevronRight size={20} strokeWidth={2.5} />
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
-      </motion.div>
+        <p className={cn("text-base md:text-lg leading-relaxed font-light", mutedColor)}>
+          The Universe separates different forms of exploration into their own dimensions, allowing each perspective to exist in the environment that suits it best.
+        </p>
+      </section>
 
-      {disabledItems.length > 0 && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="flex flex-col gap-4 mt-8"
-        >
-          <h2 className={cn(
-            "text-sm font-semibold tracking-widest uppercase mb-2",
-            isBright ? "text-black/30" : "text-white/30"
-          )}>
-            Locked Dimensions
-          </h2>
+      {/* 3. DIMENSION DIRECTIVE */}
+      <section className="mb-32">
+        <p className={cn("text-xs font-medium tracking-[0.2em] mb-12 uppercase", faintColor)}>
+          The Dimensions
+        </p>
+
+        <div className="flex flex-col">
+          {/* Top Divider */}
+          <div className={cn("w-full border-t border-[0.5px]", dividerColor)} />
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {disabledItems.map((item) => (
-              <div key={item.id} className={cn(
-                "p-4 rounded-2xl border flex items-center gap-4 opacity-50 grayscale",
-                isBright ? "bg-black/5 border-black/5" : "bg-white/5 border-white/5"
-              )}>
-                <div className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center",
-                  isBright ? "bg-black/10 text-black/50" : "bg-white/10 text-white/50"
-                )}>
-                  {iconMap[item.id] || <Sparkles size={20} />}
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <h3 className={cn(
-                    "text-sm font-bold truncate",
-                    isBright ? "text-black" : "text-white"
-                  )}>
-                    {item.title}
-                  </h3>
-                  <p className={cn(
-                    "text-xs truncate",
-                    isBright ? "text-black/60" : "text-white/60"
-                  )}>
-                    Coming soon...
+          {activeDimensions.map((dim, i) => (
+            <Link 
+              key={dim.id} 
+              href={dim.route}
+              className={cn(
+                "group block py-12 transition-transform duration-500 hover:translate-x-1",
+                i !== activeDimensions.length - 1 ? cn("border-b border-[0.5px]", dividerColor) : ""
+              )}
+            >
+              <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+                
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-1">
+                    <span className={cn("text-2xl font-light transition-colors duration-500", mutedColor, "group-hover:" + textColor)}>
+                      {dim.id}
+                    </span>
+                    <span className={cn("text-xs md:text-sm font-semibold tracking-widest uppercase mt-4 transition-colors duration-500", faintColor, "group-hover:" + textColor)}>
+                      {dim.label}
+                    </span>
+                    <span className={cn("text-sm md:text-base font-light italic mt-1", mutedColor)}>
+                      {dim.progression}
+                    </span>
+                  </div>
+                  
+                  <p className={cn("text-lg md:text-xl font-light leading-relaxed max-w-xl mt-4", textColor)}>
+                    &ldquo;{dim.description}&rdquo;
                   </p>
                 </div>
+
+                {/* Arrow */}
+                <div className="self-end md:self-auto md:mt-8">
+                  <ArrowRight className={cn(
+                    "w-6 h-6 transition-all duration-500 opacity-20 group-hover:opacity-100 group-hover:translate-x-1",
+                    textColor
+                  )} strokeWidth={1} />
+                </div>
+
               </div>
-            ))}
-          </div>
-        </motion.div>
-      )}
+            </Link>
+          ))}
+          {/* Bottom Divider */}
+          <div className={cn("w-full border-t border-[0.5px]", dividerColor)} />
+        </div>
+      </section>
+
+      {/* 4. FUTURE DIMENSIONS */}
+      <section className="mb-48">
+        <p className={cn("text-xs font-medium tracking-[0.2em] mb-10 uppercase", faintColor)}>
+          Still Forming
+        </p>
+        <div className="flex flex-col gap-6 max-w-2xl">
+          {futureDimensions.map((title) => (
+            <div key={title} className="flex items-center gap-4">
+              <div className={cn("w-1 h-1 rounded-full", isBright ? "bg-neutral-300" : "bg-neutral-700")} />
+              <span className={cn("text-sm font-light tracking-wider uppercase", faintColor)}>
+                {title}
+              </span>
+              <span className={cn("text-[9px] font-medium tracking-widest uppercase opacity-40", faintColor)}>
+                (FORMING)
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. CLOSING STATEMENT */}
+      <section className="pb-20 text-center flex flex-col items-center justify-center">
+        <h2 className={cn("text-2xl md:text-3xl font-light mb-8 leading-tight", textColor)}>
+          This isn&apos;t a collection of interests.<br/>
+          It&apos;s a collection of perspectives.
+        </h2>
+        <p className={cn("text-sm md:text-base font-light leading-loose text-center", mutedColor)}>
+          Some dimensions are open.<br/>
+          Some are being built.<br/>
+          Some haven&apos;t been discovered yet.
+        </p>
+      </section>
+
     </div>
   )
 }
