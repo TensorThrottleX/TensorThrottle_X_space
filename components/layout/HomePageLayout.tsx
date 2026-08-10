@@ -78,14 +78,14 @@ export default function HomePageLayout() {
                                         transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
                                         className="leading-[1.05] mb-3 whitespace-normal lg:whitespace-nowrap"
                                         style={{
-                                            fontFamily: "'Stay Chill', sans-serif",
-                                            fontWeight: 700,
+                                            fontFamily: "'Playfair Display', serif",
+                                            fontWeight: 900,
                                             fontSize: 'clamp(28px, 4.5vw, 58px)',
                                             letterSpacing: '0.02em',
                                             color: 'var(--adaptive-hero-color)',
                                             textShadow: 'var(--adaptive-hero-shadow)',
                                         }}>
-                                        TensorThrottle X Space
+                                        TENSORTHROTTLE X SPACE
                                     </motion.h1>
 
                                     <motion.h2
