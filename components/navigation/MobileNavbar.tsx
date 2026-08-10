@@ -151,11 +151,11 @@ export function MobileNavbar() {
       <AnimatePresence>
         {navUtilityExpanded && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-12 left-0 right-0 rounded-2xl border backdrop-blur-[28px] shadow-2xl overflow-hidden"
+            className="fixed top-12 left-0 right-0 rounded-none border-b backdrop-blur-[28px] shadow-2xl overflow-hidden z-[140]"
             style={{
               backgroundColor: 'var(--glass-bg)',
               borderColor: 'var(--glass-border)',
