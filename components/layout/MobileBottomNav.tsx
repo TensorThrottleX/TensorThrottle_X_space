@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, List, Folder, FlaskConical, Sun, Layers, X, ToggleLeft, ToggleRight, Monitor } from 'lucide-react'
+import { Home, List, Folder, FlaskConical, Sun, Layers, X, ToggleLeft, ToggleRight, Monitor, Sparkles } from 'lucide-react'
 import { useTransition } from 'react'
 import { useUI, RenderMode } from '@/components/providers/UIProvider'
 import { useMediaSession } from '@/components/providers/MediaOrchestrator'
@@ -57,6 +57,7 @@ const mobileNavItems: MobileNavItem[] = [
     { label: 'Projects', href: '/category/projects', icon: Folder },
     { label: 'Experiments', href: '/category/experiments', icon: FlaskConical },
     { label: 'Manifold', href: '/category/manifold', icon: Layers },
+    { label: 'Universe', href: '/universe', icon: Sparkles },
     { label: 'B/W', href: '#bw', icon: ToggleLeft, isAction: true },
 ]
 
