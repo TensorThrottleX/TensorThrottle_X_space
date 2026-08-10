@@ -10,20 +10,10 @@ export function LiveTrafficStats() {
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
 
-    // Mock data for the indicators
-    const [activeUsers, setActiveUsers] = useState(42)
-    const [totalVisits, setTotalVisits] = useState(14829)
-
-    // Simulate slight fluctuations in active users
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveUsers(prev => {
-                const change = Math.floor(Math.random() * 5) - 2 // -2 to +2
-                return Math.max(1, prev + change)
-            })
-        }, 5000)
-        return () => clearInterval(interval)
-    }, [])
+    // Real-time tracking will replace this when the Presence/Analytics API is connected.
+    // For now, initialized to 0 to avoid displaying fake dummy data.
+    const [activeUsers, setActiveUsers] = useState(0)
+    const [totalVisits, setTotalVisits] = useState(0)
 
     return (
         <div 
