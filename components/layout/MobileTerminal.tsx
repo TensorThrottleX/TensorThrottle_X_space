@@ -177,7 +177,7 @@ export default function MobileTerminal() {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.2 }}
                         onClick={() => setIsTerminalOpen(true)}
-                        className="fixed bottom-32 right-5 z-[190] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-all duration-300 hover:ring-[1.5px] hover:ring-black"
+                        className="fixed bottom-32 right-5 z-[190] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-all duration-300 hover:ring-[1.5px] hover:ring-black pointer-events-auto"
                         style={{
                             backgroundColor: 'var(--card-bg)',
                             borderColor: 'var(--card-border)',
@@ -202,7 +202,7 @@ export default function MobileTerminal() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 50 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed inset-0 z-[250] flex flex-col font-mono"
+                        className="fixed inset-0 z-[250] flex flex-col font-mono pointer-events-auto"
                         style={{
                             backgroundColor: isBright ? '#F5F5F4' : '#050505',
                         }}

@@ -5,7 +5,7 @@ import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { useUI } from '@/components/providers/UIProvider'
 
 export function SystemCoreOrb() {
-  const { renderMode, setIsTerminalOpen } = useUI()
+  const { renderMode } = useUI()
   const reduced = useReducedMotion()
   const controls = useAnimationControls()
   const isBright = renderMode === 'bright'
@@ -23,7 +23,6 @@ export function SystemCoreOrb() {
   }, [reduced, controls])
 
   const handleTap = useCallback(() => {
-    setIsTerminalOpen(prev => !prev)
     if (reduced) return
 
     controls.start({
