@@ -140,7 +140,15 @@ export default function InteractiveHome(): React.ReactNode {
     }
 
     if (cleanCmd === 'help') {
-      response = getHelpText({ isUniverseContext })
+      try {
+        response = getHelpText({ isUniverseContext: isUniverseContext || false })
+        console.log('Help text response length:', response?.length)
+        if (!response) {
+          response = 'Error: getHelpText returned empty or undefined.'
+        }
+      } catch (e: any) {
+        response = `Error generating help text: ${e.message}`
+      }
     }
     else if (cleanCmd === 'universe') {
       response = 'Entering Universe...'

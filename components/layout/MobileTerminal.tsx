@@ -17,7 +17,7 @@ export default function MobileTerminal() {
     const router = useRouter()
     const pathname = usePathname()
     const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
-    const isUniverseContext = pathname.startsWith('/universe')
+    const isUniverseContext = pathname?.startsWith('/universe') || false
     const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res'; text: string }[]>([])
     const [historyLog, setHistoryLog] = useState<string[]>([])
     const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -104,7 +104,12 @@ export default function MobileTerminal() {
         let response = ''
 
         if (cleanCmd === 'help') {
-            response = getHelpText({ isUniverseContext })
+            try {
+                response = getHelpText({ isUniverseContext })
+                if (!response) response = 'Error: empty help text.'
+            } catch (e: any) {
+                response = `Error: ${e.message}`
+            }
         }
         else if (cleanCmd === 'universe') {
             response = 'Entering Universe...'
