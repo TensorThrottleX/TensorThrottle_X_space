@@ -42,6 +42,7 @@ import { MobileNavbar } from "@/components/navigation/MobileNavbar"
 import { BottomFloatingBar } from "@/components/layout/BottomFloatingBar"
 import { SystemCoreOrb } from "@/components/dashboard/SystemCoreOrb"
 import { AppStartupGate } from "@/components/layout/AppStartupGate"
+import { LiveTrafficStats } from "@/components/dashboard/LiveTrafficStats"
 
 import { GlobalMessageOverlay } from "@/components/layout/GlobalMessageOverlay"
 import { GlobalTerminalRenderer } from "@/components/layout/GlobalTerminalRenderer"
@@ -75,6 +76,14 @@ export default function RootLayout({
 
               <RenderScaler>
                 <AppStartupGate>
+                  <div className="desktop-only">
+                    <div className="fixed inset-x-0 top-[96px] z-[150] flex justify-start pointer-events-none xl:top-1 xl:h-[76px] xl:items-center xl:pl-12">
+                      <div className="flex items-center gap-5 pointer-events-auto">
+                        <LiveTrafficStats />
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="desktop-only">
                     <div className="fixed inset-x-0 top-1 z-[150] flex justify-center pointer-events-none">
                       <TopFloatingBar />
