@@ -1,0 +1,272 @@
+[
+  {
+    "id": "universe-anime-Black Clover",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "Black Clover",
+    "action": "Updated",
+    "title": "Black Clover",
+    "description": "Magic is everything, but I'll prove them wrong.",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T06:09:54.228Z",
+    "updatedAt": "2026-08-10T06:09:54.228Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-Bleach",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "Bleach",
+    "action": "Updated",
+    "title": "Bleach",
+    "description": "Carrying invisible burdens",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.528Z",
+    "updatedAt": "2026-08-09T18:03:51.528Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-BlueLock",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "BlueLock",
+    "action": "Updated",
+    "title": "Blue Lock",
+    "description": "Egoist striker project",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.548Z",
+    "updatedAt": "2026-08-09T18:03:51.548Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-ClassroomOfTheElite",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "ClassroomOfTheElite",
+    "action": "Updated",
+    "title": "Classroom of the Elite",
+    "description": "Observation and emotional restraint",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.552Z",
+    "updatedAt": "2026-08-09T18:03:51.552Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-Dragon Ball",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "Dragon Ball",
+    "action": "Updated",
+    "title": "Dragon Ball",
+    "description": "The joy of becoming stronger",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T03:06:12.274Z",
+    "updatedAt": "2026-08-10T03:06:12.274Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-Haikyuu",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "Haikyuu",
+    "action": "Updated",
+    "title": "Haikyuu!!",
+    "description": "Flight of the crows",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T03:03:42.296Z",
+    "updatedAt": "2026-08-10T03:03:42.296Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-HajimeNoIppo",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "HajimeNoIppo",
+    "action": "Updated",
+    "title": "Hajime no Ippo",
+    "description": "The first anime that showed me what real hard work actually means",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T03:03:47.840Z",
+    "updatedAt": "2026-08-10T03:03:47.840Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-Naruto",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "Naruto",
+    "action": "Updated",
+    "title": "Naruto",
+    "description": "Hope in people",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T06:07:38.747Z",
+    "updatedAt": "2026-08-10T06:07:38.747Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-One Piece",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "One Piece",
+    "action": "Updated",
+    "title": "One Piece",
+    "description": "The pirate king's grand adventure",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.576Z",
+    "updatedAt": "2026-08-09T18:03:51.576Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-attack-on-titan",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "attack-on-titan",
+    "action": "Updated",
+    "title": "Attack on Titan",
+    "description": "When certainty disappears",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.580Z",
+    "updatedAt": "2026-08-09T18:03:51.580Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-death-note",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "death-note",
+    "action": "Updated",
+    "title": "Death Note",
+    "description": "When being right becomes dangerous",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.584Z",
+    "updatedAt": "2026-08-09T18:03:51.584Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-default",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "default",
+    "action": "Updated",
+    "title": "Anime Universe",
+    "description": "Stories that stayed",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T03:12:14.944Z",
+    "updatedAt": "2026-08-10T03:12:14.944Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-demon-slayer",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "demon-slayer",
+    "action": "Updated",
+    "title": "Demon Slayer",
+    "description": "What remains human",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T06:54:07.904Z",
+    "updatedAt": "2026-08-10T06:54:07.904Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-jujutsu-kaisen",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "jujutsu-kaisen",
+    "action": "Updated",
+    "title": "Jujutsu Kaisen",
+    "description": "The strength that doesn't need an audience",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-10T03:03:51.443Z",
+    "updatedAt": "2026-08-10T03:03:51.443Z",
+    "metadata": {
+      "section": "anime"
+    }
+  },
+  {
+    "id": "universe-anime-vinland-saga",
+    "source": "Universe: Anime",
+    "entityType": "card",
+    "entityId": "vinland-saga",
+    "action": "Updated",
+    "title": "Vinland Saga",
+    "description": "The strength that refuses the sword",
+    "url": "/universe/anime",
+    "icon": "Clapperboard",
+    "priority": 2,
+    "visibility": "public",
+    "createdAt": "2026-08-09T18:03:51.605Z",
+    "updatedAt": "2026-08-09T18:03:51.605Z",
+    "metadata": {
+      "section": "anime"
+    }
+  }
+]

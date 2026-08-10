@@ -1,0 +1,3243 @@
+[
+  {
+    "id": "default",
+    "index": 0,
+    "title": "Anime Universe",
+    "subtitle": "Stories that stayed",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "The Protagonist",
+        "role": "The person becoming"
+      },
+      {
+        "name": "The Rival",
+        "role": "The comparison"
+      },
+      {
+        "name": "The Quiet Character",
+        "role": "The unnoticed"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/default/default.jpg",
+    "videoUrl": "/media/universe/anime/video/default/default.mp4",
+    "audioTracks": [],
+    "updatedAt": "2026-08-10T03:12:14.944Z",
+    "narrativeData": {
+      "id": "default",
+      "index": 0,
+      "title": "Anime Universe",
+      "subtitle": "Stories that stayed",
+      "jpTitle": "物語の余韻",
+      "year": null,
+      "genre": "Personal Archive",
+      "poster": "",
+      "entry": {
+        "breathQuote": "I don't think I watch stories just to know what happens next anymore. Some stories end when the screen goes dark. Others follow me a little further, quietly changing the way I think, the things I notice, or the questions I ask myself."
+      },
+      "reflection": {
+        "quote": "Maybe the value of a story isn't always in what it teaches me. Sometimes it's simply in what it makes me notice about myself.",
+        "tags": [
+          "stories",
+          "perspective",
+          "growth",
+          "memory",
+          "reflection"
+        ],
+        "whatIKept": "I started seeing anime as more than something to watch between other things. Some stories gave me a new way to look at friendship. Some made me question what I thought strength meant. Some made me uncomfortable. Some gave me hope when I didn't particularly need it. And some simply stayed in my head for reasons I couldn't explain at first. I don't want to force a lesson out of every story. I just want to notice what remains after the excitement is gone.",
+        "definingScene": "The quiet moments are probably what stayed with me the most. A character sitting alone. Someone deciding to keep going. Two people talking after everything has already changed. A small gesture that would be easy to miss if I was only watching for the plot. Those moments remind me that stories don't always need to shout to mean something.",
+        "whoItMadeMeThinkAbout": "The characters first. Then the people around me. And eventually myself. The strange thing about good stories is that I can start by watching someone else's life and somehow end up thinking about my own."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "I just want to see what happens.",
+          "micro": "At first"
+        },
+        {
+          "thought": "Why did that scene stay with me?",
+          "micro": "A little later"
+        },
+        {
+          "thought": "Maybe this story was showing me something about myself.",
+          "micro": "Some stories"
+        },
+        {
+          "thought": "Maybe I don't have to understand exactly why it mattered. Maybe it's enough that it did.",
+          "micro": "Eventually"
+        }
+      ],
+      "cinematicMoment": {
+        "eyebrow": "When the story becomes something else",
+        "title": "After the ending.",
+        "body": "The interesting part of a story isn't always the ending. Sometimes it is what happens afterward, when there is no next episode to explain what you should feel. A scene comes back while I'm walking somewhere. A character's decision suddenly makes more sense. A line I barely noticed starts sounding different. That's when I know a story has moved beyond entertainment and become part of the way I remember something.",
+        "episode": "After the screen goes dark",
+        "image": ""
+      },
+      "memoryCards": {
+        "question": "What do I actually remember?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Feeling",
+            "text": "Sometimes I forget the exact episode but remember exactly how it felt to watch it. That feeling is part of the memory too.",
+            "tag": "Emotion",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Question",
+            "text": "The stories I value most don't always give me answers. Sometimes they leave me with a question I didn't know I needed to ask.",
+            "tag": "Curiosity",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Change",
+            "text": "Not every story changes me dramatically. Sometimes it just makes me pause before thinking or judging the next time something similar happens.",
+            "tag": "Growth",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What changed about watching?",
+          "heading": "I stopped trying to take something from every story.",
+          "body": "I don't need every anime to teach me a life lesson. Sometimes I can simply enjoy it. Sometimes I can admire the characters, the art, the music, the absurdity of it all. And sometimes something deeper happens naturally. I think the difference matters. Meaning feels more genuine when I don't force it.",
+          "caption": "Not every story needs a lesson.",
+          "image": "",
+          "flip": false
+        },
+        {
+          "question": "Why keep an archive?",
+          "heading": "Because I forget how I used to think.",
+          "body": "Writing these thoughts down gives me something more than a list of shows. It gives me little snapshots of who I was when I watched them. Maybe I'll read these years later and disagree with half of what I wrote. That's okay. The archive isn't supposed to prove that I was right. It's supposed to show that I was here, thinking about something.",
+          "caption": "A record of what stayed.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "pullQuote": {
+        "text": "I don't want to remember only what I watched. I want to remember what it made me notice.",
+        "attribution": "— Why I keep these stories here"
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "At first, they were just stories",
+          "body": "I watched because the characters were interesting, the worlds were beautiful, the fights were exciting, or I simply wanted to know what happened next. There was nothing wrong with that. Sometimes entertainment is enough."
+        },
+        "whatShifted": {
+          "heading": "Then some stories stayed",
+          "body": "Every once in a while, something followed me after the episode ended. A decision. A relationship. A failure. A quiet moment. I started noticing that the stories I remembered most weren't always the ones with the biggest moments."
+        },
+        "whatStayed": {
+          "heading": "Now I pay attention to what remains",
+          "body": "I still watch for fun. I still get excited. I still get attached to characters and completely lose track of time. But when something stays with me, I want to understand why. Not because every story needs to become profound, but because the things that stay are usually worth looking at."
+        }
+      },
+      "todayBlock": {
+        "intro": "Because of these stories, today...",
+        "items": [
+          {
+            "verb": "I notice",
+            "line": "the small moments that exist between the big events."
+          },
+          {
+            "verb": "I remember",
+            "line": "that a character can be fictional and still make a real feeling easier to understand."
+          },
+          {
+            "verb": "I allow",
+            "line": "myself to enjoy something without needing to turn it into a lesson."
+          },
+          {
+            "verb": "I keep",
+            "line": "the stories that gave me a reason to think a little longer after they ended."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "The Protagonist",
+          "role": "The person becoming",
+          "mirror": "I keep noticing how many protagonists begin without knowing who they are supposed to become. They fail, change their minds, lose people, make mistakes and keep moving. That feels more honest to me than the idea that growth is supposed to be clean."
+        },
+        {
+          "name": "The Rival",
+          "role": "The comparison",
+          "mirror": "Rivals remind me how easy it is to measure my own progress against someone else's. Sometimes that pushes me forward. Sometimes it only makes me forget that I am walking a different path."
+        },
+        {
+          "name": "The Quiet Character",
+          "role": "The unnoticed",
+          "mirror": "The characters I remember most aren't always the loudest ones. Sometimes it is the person who stays, listens, helps quietly, or keeps going without anyone celebrating it. I think I value that kind of strength more now."
+        }
+      ],
+      "notes": [
+        {
+          "text": "Some stories are entertainment. Some become memories. A few become part of how I think.",
+          "footer": "Why this exists"
+        },
+        {
+          "text": "I don't need every story to change me. I just want to notice when one does.",
+          "footer": "Watching without forcing meaning"
+        },
+        {
+          "text": "Maybe growing up is partly realizing how many different ways there are to be strong.",
+          "footer": "Something stories keep reminding me"
+        },
+        {
+          "text": "The episode ended. The thought didn't.",
+          "footer": "The part after watching"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Stories as mirrors",
+          "application": "I try to notice which characters I understand immediately and which ones frustrate me. Sometimes the strongest reaction tells me something about my own values, fears or assumptions."
+        },
+        {
+          "concept": "Growth is not linear",
+          "application": "Stories remind me that people can move forward, fall back, change their minds and still be growing. I try to give myself some of that same room."
+        },
+        {
+          "concept": "Meaning doesn't have to be forced",
+          "application": "I don't want to turn every piece of entertainment into philosophy. Sometimes I just enjoy a story. When something genuinely stays with me, I let the meaning appear naturally instead of searching for a lesson."
+        },
+        {
+          "concept": "Memory is part of the experience",
+          "application": "I keep these reflections because I know I'll eventually forget details. What I don't want to forget is how a story made me think at a particular point in my life."
+        }
+      ],
+      "continueJourney": {
+        "because": "There are still stories I haven't seen, ideas I haven't encountered, and versions of myself I haven't met yet. I don't know which story will stay next. That's probably the interesting part.",
+        "prompt": "Find the next story",
+        "recommendations": [
+          {
+            "title": "Explore the universe",
+            "reason": "Pick a story without knowing exactly what it will leave behind."
+          },
+          {
+            "title": "Revisit an old favorite",
+            "reason": "Sometimes the story hasn't changed. You have."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "Dragon Ball",
+    "index": 1,
+    "title": "Dragon Ball",
+    "subtitle": "The joy of becoming stronger",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Son Goku",
+        "role": "The ideal"
+      },
+      {
+        "name": "Vegeta",
+        "role": "The mirror"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/Dragon%20Ball/Dragon%20Ball.jpg",
+    "videoUrl": "/media/universe/anime/video/Dragon%20Ball/Dragon%20ball.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Dragon%20Ball/Dragon%20Ball.m4a"
+    ],
+    "updatedAt": "2026-08-10T03:06:12.274Z",
+    "narrativeData": {
+      "id": "Dragon Ball",
+      "index": 1,
+      "title": "Dragon Ball",
+      "subtitle": "The joy of becoming stronger",
+      "jpTitle": "ドラゴンボール",
+      "year": 1984,
+      "genre": "Shōnen",
+      "poster": "",
+      "entry": {
+        "breathQuote": "I started watching Dragon Ball because it was just another anime on TV. I kept watching because Goku showed me something I had never understood about strength before: becoming stronger could actually be fun."
+      },
+      "reflection": {
+        "quote": "Dragon Ball was probably the first anime that made me fall in love with the process of becoming rather than simply the result of winning. Goku never seemed obsessed with proving that he was already the strongest. He wanted to find out what was beyond him. Every stronger opponent, every defeat, every new technique and every impossible training session became another invitation to discover what he could become.",
+        "tags": [
+          "curiosity",
+          "improvement",
+          "playfulness",
+          "transcendence"
+        ],
+        "whatIKept": "Dragon Ball taught me that losing doesn't necessarily mean that I was not good enough. Sometimes it simply means I have discovered the edge of what I currently know. A stronger opponent is not automatically someone I should resent. They can be evidence that a higher level exists. That changed the way I think about improvement. Instead of only asking how to win, I started asking what the person who beat me has that I don't have yet.",
+        "definingScene": "Goku smiling when a fight becomes difficult. That smile stayed with me because it represents something deeper than confidence. He isn't excited because he knows he will win. He is excited because he has finally found something that can push him beyond the person he currently is.",
+        "whoItMadeMeThinkAbout": "The version of myself that used to become frustrated when I wasn't immediately good at something. Dragon Ball made me want to become the kind of person who can look at a difficult problem, a stronger person or a new ceiling and feel curiosity before insecurity."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "He's not angry. He's excited.",
+          "micro": "The World Martial Arts Tournament"
+        },
+        {
+          "thought": "Maybe losing doesn't mean I failed. Maybe it just showed me where I stop.",
+          "micro": "Training arcs"
+        },
+        {
+          "thought": "He doesn't want to dominate everyone. He genuinely wants to know how far he can go.",
+          "micro": "Against Piccolo"
+        },
+        {
+          "thought": "The point isn't reaching the final form. The point is discovering that there is always another level.",
+          "micro": "Super Saiyan"
+        }
+      ],
+      "cinematicMoment": {
+        "eyebrow": "The defining choice",
+        "title": "Letting Vegeta live.",
+        "body": "Goku asks Krillin to spare Vegeta because he wants another chance to fight him. On the surface it is an almost ridiculous decision. But to me it captures the purest part of Goku's relationship with competition. Vegeta wasn't simply an enemy to eliminate. He was proof that Goku still had somewhere to go. The stronger opponent became a reason to keep training. It stripped competition of some of its bitterness and replaced it with curiosity: if someone can reach this level, maybe I can reach it too.",
+        "episode": "Saiyan Saga",
+        "image": ""
+      },
+      "memoryCards": {
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Gravity Chamber",
+            "text": "The idea that the most important work happens when nobody is watching. Training isn't punishment before the real story begins. Training is the story. The gravity chamber became a metaphor for the private work required to become someone capable of handling the next level.",
+            "tag": "Discipline",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Senzu Bean",
+            "text": "The strange integrity of giving an opponent another chance to fight at their best. Dragon Ball made competition feel less like hatred and more like two people testing the limits of what they can become.",
+            "tag": "Integrity",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Tournament",
+            "text": "A place where being beaten does not have to be humiliating. You can lose, learn exactly why you lost, respect the person who defeated you and come back stronger. Competition became a classroom rather than an insult.",
+            "tag": "Playfulness",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "I stopped seeing competition as a threat.",
+          "body": "Dragon Ball slowly changed the way I look at people who are ahead of me. Someone being stronger, smarter or more capable than me does not automatically make me smaller. Sometimes they are simply showing me a level I haven't reached yet. Goku looks at a stronger opponent and becomes curious. I wanted to learn that response instead of immediately turning comparison into insecurity.",
+          "caption": "Curiosity over insecurity. Growth over comparison.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "pullQuote": {
+        "text": "Power comes in response to a need, not a desire.",
+        "attribution": "— Goku"
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "People screaming and powering up",
+          "body": "At first I saw Dragon Ball as the ultimate power fantasy. Stronger fighters, bigger attacks, transformations and increasingly impossible battles. It was exciting, but I thought the entire point was simply to become powerful enough to defeat whoever stood in front of you."
+        },
+        "whatShifted": {
+          "heading": "The smile in the face of defeat",
+          "body": "What eventually caught me wasn't the transformation. It was Goku's attitude toward the person stronger than him. He could be losing and still look genuinely excited. The opponent wasn't proof that he was inadequate. The opponent was proof that there was more of himself waiting to be discovered."
+        },
+        "whatStayed": {
+          "heading": "Self-transcendence",
+          "body": "The training arc became more important to me than the final battle. The transformation is only a visible moment. The real change happens through repetition, failure, discipline, experimentation and returning to the same problem until the person who started the process is no longer the same person who finishes it."
+        }
+      },
+      "todayBlock": {
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I try",
+            "line": "to treat failure as information about where my current ability ends rather than as a judgment about who I am."
+          },
+          {
+            "verb": "I question",
+            "line": "why I become frustrated when someone is better than me instead of asking what their ability can teach me."
+          },
+          {
+            "verb": "I notice",
+            "line": "when my ego turns comparison into insecurity instead of using comparison as information."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Son Goku",
+          "role": "The ideal",
+          "mirror": "Goku represents the version of strength I admire most: someone who can become extraordinarily powerful without losing his curiosity or joy. He doesn't need to hate an obstacle to overcome it. He can laugh at something difficult, learn from it and come back wanting to see what happens next."
+        },
+        {
+          "name": "Vegeta",
+          "role": "The mirror",
+          "mirror": "Vegeta represents the side of ambition that I recognize in myself but also have to be careful with. His obsession with being superior initially makes strength about status, pride and proving that he is better. Watching him slowly discover that growth matters more than recognition made me think about the difference between wanting to become stronger and needing everyone to know that you are stronger."
+        }
+      ],
+      "notes": [
+        {
+          "text": "If you only fight battles you already know you can win, you never discover what you are capable of becoming.",
+          "footer": "The lesson I kept from Dragon Ball"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "The Training Arc",
+          "application": "The battle is only the visible part of growth. Most transformation happens in the invisible repetition beforehand. You have to learn to enjoy the process of becoming capable, not just the moment when everyone finally sees the result."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because Dragon Ball taught me one of the simplest ideas that still influences how I think: I don't have to be the strongest person in the room today. I just have to remain curious enough, disciplined enough and willing enough to discover what I could become tomorrow.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Hajime no Ippo",
+            "reason": "The purest distillation of the training philosophy Dragon Ball made me love: ordinary people becoming extraordinary through discipline, repetition and an unwillingness to stop."
+          },
+          {
+            "title": "Hunter x Hunter",
+            "reason": "A deeper exploration of curiosity, growth and what happens when becoming stronger starts carrying real psychological and moral consequences."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "Naruto",
+    "index": 2,
+    "title": "Naruto",
+    "subtitle": "Hope in people",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Naruto Uzumaki",
+        "role": "The hope"
+      },
+      {
+        "name": "Kakashi Hatake",
+        "role": "The quiet strength"
+      },
+      {
+        "name": "Jiraiya",
+        "role": "The belief"
+      },
+      {
+        "name": "Itachi Uchiha",
+        "role": "The hidden story"
+      },
+      {
+        "name": "Nagato",
+        "role": "The cycle"
+      },
+      {
+        "name": "Hinata Hyuga",
+        "role": "The first believer"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/Naruto/Naruto.jpg",
+    "videoUrl": "/media/universe/anime/video/Naruto/Naruto.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Naruto/Naruto%201.m4a",
+      "/media/universe/anime/audio/Naruto/Naruto%202.mp3"
+    ],
+    "updatedAt": "2026-08-10T06:07:38.747Z",
+    "narrativeData": {
+      "id": "naruto",
+      "index": 2,
+      "title": "Naruto",
+      "subtitle": "Hope in people",
+      "jpTitle": "ナルト",
+      "year": 2002,
+      "genre": "Shōnen",
+      "poster": "",
+      "entry": {
+        "breathQuote": "I thought Naruto was about becoming strong enough to be acknowledged. By the end, I felt like it was asking something much harder: can I still believe in people after seeing what made them become who they are?"
+      },
+      "reflection": {
+        "quote": "Naruto made me realize that people are rarely just what they look like from the outside. There is usually a story behind the person, and sometimes understanding that story is the difference between judging someone and actually seeing them.",
+        "tags": [
+          "hope",
+          "belief",
+          "perspective",
+          "humanity",
+          "understanding"
+        ],
+        "whatIKept": "What stayed with me most was how rarely anyone in Naruto was simply good or evil. Almost everyone had been shaped by something. Loss. Loneliness. Fear. War. Family. Someone they loved. Someone they lost. Someone who changed the way they saw the world. That doesn't make every decision right, and it doesn't erase responsibility. But it made me realize that before I decide what someone is, there is usually a story I don't know yet.",
+        "definingScene": "Naruto standing against Nagato's pain stayed with me because Naruto had every reason to hate him. Nagato had taken people Naruto loved and caused enormous suffering. Naruto could have answered that pain with more pain. Instead, he asked why. He tried to understand where the hatred came from. He didn't pretend the pain was acceptable. He simply refused to believe that pain had to be the final answer.",
+        "whoItMadeMeThinkAbout": "People I have judged too quickly. People who became difficult because life gave them very little reason to trust others. People who looked cold when they were actually hurt. People whose actions I understood only after I knew more of their story. And myself — because sometimes I want to be understood for the reasons behind my actions while forgetting that other people deserve that same patience."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "Naruto just wants everyone to recognize him.",
+          "micro": "At first"
+        },
+        {
+          "thought": "Why did so many of these people become like this?",
+          "micro": "As the world opened"
+        },
+        {
+          "thought": "They weren't born carrying all this hatred.",
+          "micro": "The deeper story"
+        },
+        {
+          "thought": "Maybe people become who they are through everything and everyone they meet.",
+          "micro": "What changed"
+        },
+        {
+          "thought": "And maybe hope is believing they don't have to stay that way.",
+          "micro": "By the end"
+        }
+      ],
+      "cinematicMoment": {
+        "eyebrow": "The moment I understood what Naruto was really about",
+        "title": "Naruto and Nagato.",
+        "body": "Naruto had every reason to hate Nagato. Nagato had caused enormous pain, and Naruto could have answered that pain with more of the same. Instead, he asked why. Not to excuse him, but to understand him. That moment changed how I looked at the entire story. Naruto wasn't saying that everyone is innocent. It was saying that if I can understand how someone became who they are, maybe I can stop the same pain from creating another person like them.",
+        "episode": "Naruto Shippuden",
+        "image": "/media/universe/anime/data/Naruto/jiraya-moment.png"
+      },
+      "memoryCards": {
+        "question": "What stayed with me after Naruto ended?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "Hope",
+            "text": "Hope isn't pretending that everything will be okay. Sometimes it is simply refusing to believe that the worst thing someone has done is the only thing they can ever become.",
+            "tag": "Hope",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Story",
+            "text": "Almost everyone carries something I cannot see. The person I meet is usually the result of many things that happened before I arrived.",
+            "tag": "Perspective",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Choice",
+            "text": "Circumstances can shape someone without completely deciding who they become. At some point, there is still a choice about what happens next.",
+            "tag": "Choice",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What changed in the way I see people?",
+          "heading": "I became slower to call someone evil.",
+          "body": "Naruto made me realize how little of a person I actually see when I meet them. I see the reaction, the attitude, the decision. I usually don't see the years that created it. That doesn't mean every person is secretly good or that every action should be forgiven. It means I should be careful before reducing a whole person to the worst thing I know about them.",
+          "caption": "A person is bigger than the part I happened to see.",
+          "image": "",
+          "flip": false
+        },
+        {
+          "question": "What did hope become?",
+          "heading": "Believing that people can still change.",
+          "body": "Hope became less about expecting a perfect future and more about believing that the present doesn't have to be permanent. Someone can be shaped by terrible things and still choose something different. Sometimes all they need is one person who believes there is still something worth saving.",
+          "caption": "The past explains. It doesn't always have to decide.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "pullQuote": {
+        "text": "I don't think Naruto taught me that everyone is good. It taught me to look for the person underneath what happened to them.",
+        "attribution": "— What I took from Naruto"
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "I thought it was about becoming strong",
+          "body": "At the beginning, Naruto felt like a story about a lonely kid who wanted recognition. I cared about the training, the rivalries, the missions and eventually seeing everyone become stronger."
+        },
+        "whatShifted": {
+          "heading": "Then everyone started getting a story",
+          "body": "The people who first looked like enemies slowly became people with histories. Gaara had his loneliness. Nagato had his war. Obito had his loss. Itachi had his burden. Sasuke had his grief. The more I learned about people, the harder it became to see them as simply good or bad."
+        },
+        "whatStayed": {
+          "heading": "I started believing in people differently",
+          "body": "Not by believing that everyone is innocent. I don't think that is true. I started believing that most people are shaped by something, and that understanding what shaped them matters. Naruto's greatest strength wasn't that he could defeat people. It was that he could still believe there was something human inside them."
+        }
+      },
+      "todayBlock": {
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I notice",
+            "line": "when I am judging someone's behavior without knowing what might have shaped it."
+          },
+          {
+            "verb": "I question",
+            "line": "whether I am seeing the whole person or only the part of them that affected me."
+          },
+          {
+            "verb": "I try",
+            "line": "to understand where someone's reaction comes from before deciding what kind of person they are."
+          },
+          {
+            "verb": "I remember",
+            "line": "that understanding someone does not mean excusing them, and believing in someone does not mean ignoring what they have done."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Naruto Uzumaki",
+          "role": "The hope",
+          "mirror": "Naruto became meaningful to me because he kept believing in people even after seeing the worst they could become. His belief wasn't blind. He saw the pain, anger and damage. He simply refused to believe those things were the entire person. More than anything, he made me believe that a person's past can explain them without having to decide who they become."
+        },
+        {
+          "name": "Kakashi Hatake",
+          "role": "The quiet strength",
+          "mirror": "At first I liked Kakashi because he was analytical, calm and powerful. But I only really understood him near the end of Shippuden. When Obito returned one final time and they said goodbye, I suddenly saw the whole person behind the mask. His father. His teammates. Rin. Minato. Obito. So much loss had passed through his life, and yet he kept showing up for the next generation. He wasn't flashy or extravagant. He simply carried what happened to him and kept moving. That made him much more meaningful to me than any of his abilities ever did."
+        },
+        {
+          "name": "Jiraiya",
+          "role": "The belief",
+          "mirror": "Jiraiya made me think about what it means to believe in someone before you know what they will become. He wasn't perfect, and he failed in ways that mattered. But he kept looking for the person who could carry the hope he couldn't finish himself. With Naruto, his belief slowly became something bigger than teaching techniques. He gave Naruto a way to believe in himself, and even when Jiraiya was gone, what he believed in continued through him."
+        },
+        {
+          "name": "Itachi Uchiha",
+          "role": "The hidden story",
+          "mirror": "Itachi reminded me how incomplete judgment can be when I only know the visible part of someone's life. For a long time, he looked like a person who had simply chosen something unforgivable. Then the story showed what existed behind that image. It didn't make everything simple, but it made me realize how dangerous it can be to judge an entire person from the part of their story that I happen to know."
+        },
+        {
+          "name": "Nagato",
+          "role": "The cycle",
+          "mirror": "Nagato made the idea of inherited pain feel real to me. He wanted peace, but the world he experienced taught him that peace had to come through fear and destruction. What affected me wasn't simply that he was wrong. It was that I could understand how he arrived there. He showed me how someone can sincerely believe they are protecting the world while being shaped by a completely broken understanding of what peace means."
+        },
+        {
+          "name": "Hinata Hyuga",
+          "role": "The first believer",
+          "mirror": "Hinata's relationship with Naruto never felt like a normal love story to me. What stayed with me was that her admiration came before Naruto had proved himself to anyone. Before Pain. Before the recognition. Before the victories. She saw his determination when almost everyone else saw a loud, unsuccessful kid who would never become anything. She didn't admire him because he had already become great. She admired him because he kept trying to become someone he believed he could be. That made her affection feel deeper to me than simply falling in love with a person. She acknowledged something in Naruto before the rest of the world was willing to see it."
+        }
+      ],
+      "kakashiMemories": [
+        {
+          "question": "Why did I understand Kakashi so late?",
+          "heading": "Because I was looking at his surface.",
+          "body": "For most of Naruto, Kakashi was the cool sensei who always seemed to have everything under control. I noticed the intelligence, the Sharingan, the calm attitude and the jokes. I didn't notice how much of that calmness had been built around loss.",
+          "caption": "Sometimes you understand a character only after understanding what they survived.",
+          "image": ""
+        },
+        {
+          "question": "What did the final goodbye with Obito show me?",
+          "heading": "The weight behind the quiet.",
+          "body": "When Kakashi received Obito's final gift and they said goodbye, I stopped thinking about how powerful the Double Mangekyo Sharingan was. I thought about everything Kakashi had already lost. His father. His comrades. Rin. His sensei. Obito. Suddenly the entire character felt different.",
+          "caption": "The moment the power stopped mattering.",
+          "image": ""
+        },
+        {
+          "question": "Why does Kakashi stay with me?",
+          "heading": "He kept carrying people who were no longer there.",
+          "body": "Kakashi didn't erase his past. He carried it. And somehow he still became someone who could guide Naruto, Sasuke and Sakura. That is what made him feel human to me. He wasn't strong because life had been kind to him. He was strong because life hadn't been kind, and he still chose to care about what came next.",
+          "caption": "Sometimes hope is simply continuing to care.",
+          "image": ""
+        }
+      ],
+      "notes": [
+        {
+          "text": "Most people are carrying a story I haven't heard yet.",
+          "footer": "What Naruto changed in me"
+        },
+        {
+          "text": "Understanding why someone became who they are doesn't mean I have to agree with what they did.",
+          "footer": "Understanding is not approval"
+        },
+        {
+          "text": "People can be shaped by their circumstances without being completely defined by them.",
+          "footer": "Choice"
+        },
+        {
+          "text": "Maybe hope is believing there is still something worth saving in someone.",
+          "footer": "The belief Naruto left me with"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Hope in people",
+          "application": "I want to leave some room for the possibility that people can change. Not because everyone will, but because deciding that someone can never be anything else can become its own kind of blindness."
+        },
+        {
+          "concept": "People are shaped",
+          "application": "I try to remember that behavior usually has a history. Family, loss, loneliness, fear, friendship and circumstance can shape a person in ways I may never fully see."
+        },
+        {
+          "concept": "Understanding without excusing",
+          "application": "Understanding someone's reasons does not require me to call their actions right. I can recognize the humanity behind a decision while still believing the decision was wrong."
+        },
+        {
+          "concept": "The possibility of another choice",
+          "application": "Circumstances can influence who someone becomes, but they don't always have to decide what happens next. That is where I think hope becomes meaningful."
+        }
+      ],
+      "continueJourney": {
+        "because": "Naruto left me wanting stories that don't make people simple. Stories where hope isn't naive, where pain has consequences, and where understanding someone doesn't erase what they have done. I want to keep finding stories that make me look at people a little more carefully.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Vinland Saga",
+            "reason": "What happens when someone who has been shaped by violence begins searching for another way to live."
+          },
+          {
+            "title": "Attack on Titan",
+            "reason": "What happens when understanding the other side makes it harder to decide who the enemy really is."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "HajimeNoIppo",
+    "index": 3,
+    "title": "Hajime no Ippo",
+    "subtitle": "The first anime that showed me what real hard work actually means",
+    "description": "Hajime no Ippo was special because it was the first anime that made hard work feel real to me. Before Ippo, I understood training mostly through the language of shōnen: train harder, unlock something new, become stronger, defeat the next opponent. Ippo stripped away that fantasy and showed me the physical reality underneath it. Roadwork. Conditioning. Repetition. Weight cuts. Getting hit. Getting tired. Losing. Being corrected. Starting again. Ippo, Takamura and Kamogawa are all beasts, but what makes them beasts is not simply natural talent, status or some special destiny. It is their sheer will, relentlessness and refusal to stop. Takamura cutting himself down to make weight and then stepping into the ring against Brian Hawk showed me how extreme commitment can become. Kamogawa's battles showed me something even deeper: sometimes the person standing in front of you has every reason to lose, and still refuses to bow down. And Ippo himself taught me never to look down on someone simply because they don't look powerful yet. Hajime no Ippo didn't make me admire strength because it was flashy. It made me respect strength because I finally understood what it costs to build.",
+    "accentColor": "#fbbf24",
+    "quotes": [
+      "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
+      "What does it mean to be strong?",
+      "Stand up! You're not done yet!"
+    ],
+    "characters": [
+      {
+        "name": "Ippo Makunouchi",
+        "role": "The proof"
+      },
+      {
+        "name": "Mamoru Takamura",
+        "role": "The beast"
+      },
+      {
+        "name": "Genji Kamogawa",
+        "role": "The will"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/HajimeNoIppo/HajimeNoIppo.jpg",
+    "videoUrl": "/media/universe/anime/video/HajimeNoIppo/Hajime%20No%20Ippo.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Hajime%20no%20ippo/Hajime%20no%20ippo.m4a"
+    ],
+    "updatedAt": "2026-08-10T03:03:47.840Z",
+    "narrativeData": {
+      "title": "Hajime no Ippo",
+      "subtitle": "The first anime that showed me what real hard work actually means",
+      "description": "Hajime no Ippo was special because it was the first anime that made hard work feel real to me. Before Ippo, I understood training mostly through the language of shōnen: train harder, unlock something new, become stronger, defeat the next opponent. Ippo stripped away that fantasy and showed me the physical reality underneath it. Roadwork. Conditioning. Repetition. Weight cuts. Getting hit. Getting tired. Losing. Being corrected. Starting again. Ippo, Takamura and Kamogawa are all beasts, but what makes them beasts is not simply natural talent, status or some special destiny. It is their sheer will, relentlessness and refusal to stop. Takamura cutting himself down to make weight and then stepping into the ring against Brian Hawk showed me how extreme commitment can become. Kamogawa's battles showed me something even deeper: sometimes the person standing in front of you has every reason to lose, and still refuses to bow down. And Ippo himself taught me never to look down on someone simply because they don't look powerful yet. Hajime no Ippo didn't make me admire strength because it was flashy. It made me respect strength because I finally understood what it costs to build.",
+      "accentColor": "#fbbf24",
+      "quotes": [
+        "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
+        "What does it mean to be strong?",
+        "Stand up! You're not done yet!"
+      ],
+      "characters": [
+        {
+          "name": "Ippo Makunouchi",
+          "role": "The proof",
+          "mirror": "Ippo taught me that someone does not have to look powerful to become powerful. He begins as a quiet, bullied, ordinary kid, but his willingness to learn, endure, adapt and keep standing makes him impossible to look down on. He represents the part of me that believes being behind is not the same as being incapable."
+        },
+        {
+          "name": "Mamoru Takamura",
+          "role": "The beast",
+          "mirror": "Takamura represents the most extreme form of ambition I understand. He is loud, arrogant and ridiculous, but underneath all of it is an almost frightening commitment to becoming the best. His weight loss and battle against Brian Hawk showed me that the person everyone sees in the ring is built from sacrifices almost nobody sees."
+        },
+        {
+          "name": "Genji Kamogawa",
+          "role": "The will",
+          "mirror": "Kamogawa represents something deeper than talent or physical strength: refusal. His battles taught me that sometimes circumstances give you every reason to bow down, and strength is simply deciding that you won't. He represents the kind of will that keeps moving even after the body has reached its limits."
+        }
+      ],
+      "heroReflection": "Hajime no Ippo is the story that finally made the word 'hard work' feel honest to me. It doesn't promise that effort guarantees victory. It doesn't pretend everyone who trains will become a champion. It shows people working brutally hard and still losing. And somehow, that made the victories mean more. Ippo taught me discipline. Takamura taught me intensity. Kamogawa taught me will. Together, they showed me that the beast someone becomes is often built long before anyone gets to see it.",
+      "corePerspective": "I watched Hajime no Ippo and realized that I had been admiring the result of hard work without really understanding the work itself. Ippo doesn't become strong because the story decides he is special. He becomes strong because he runs, trains, gets corrected, gets hurt, learns and comes back. Takamura takes that idea to another level. Watching him cut weight for Brian Hawk made me understand that sometimes the difference between wanting something and actually committing to it is the amount of discomfort you are willing to accept. Then there is Kamogawa, whose history showed me a completely different kind of strength—the kind that does not depend on having the better circumstances. He fought people who had advantages over him and simply refused to bow down. That stayed with me. Hajime no Ippo made me stop asking only how talented someone is. I started asking what they repeatedly did when nobody was watching.",
+      "insights": [
+        {
+          "title": "What hit hardest",
+          "body": "The realization that Ippo's strength isn't simply his punching power. It is his willingness to keep learning after being hit, keep standing after being hurt and keep returning after losing. The show made pain feel less like proof that something was impossible and more like information about what still needed to be developed."
+        },
+        {
+          "title": "The idea I kept",
+          "body": "The Dempsey Roll. What looks spectacular when it finally appears is actually the visible result of countless invisible repetitions. Footwork, timing, conditioning, balance and technique all accumulate until something that looks almost effortless becomes possible. It changed how I look at skill itself."
+        },
+        {
+          "title": "How I see it today",
+          "body": "I used to be attracted to the result—the clever move, the breakthrough, the moment someone suddenly became better. Ippo made me much more interested in the boring foundation underneath it. Run the road. Drill the basics. Accept correction. Repeat. The impressive moment is usually only the final layer of something that has been built for a very long time."
+        }
+      ],
+      "journey": [
+        {
+          "stage": "First Impression",
+          "text": "A boxing anime about a bullied kid. I expected another story about becoming stronger. What I didn't expect was how seriously the show would take the process of becoming strong."
+        },
+        {
+          "stage": "What Changed",
+          "text": "Ippo's training and roadwork. The show made me watch the parts that most stories skip—the breathing, exhaustion, repetition, conditioning and correction. I realized this wasn't really about boxing. It was about what a person is willing to repeatedly do in order to become someone different."
+        },
+        {
+          "stage": "The Turning Point",
+          "text": "Takamura's weight cut and his fight against Brian Hawk. That was when hard work stopped feeling like an inspirational concept and became something physical. Watching what Takamura was willing to put his body through made me understand that commitment can have a real cost."
+        },
+        {
+          "stage": "What Stayed",
+          "text": "Kamogawa. His past showed me a form of strength that goes beyond talent or physical advantage. Even when he was outmatched, he refused to bow down. That image of sheer will stayed with me more than almost any victory."
+        },
+        {
+          "stage": "How it affects my thinking today",
+          "text": "I now think of every serious skill as having its own roadwork. There are fundamentals that nobody applauds, repetitions that feel boring and days where progress is almost invisible. But those are the rounds that eventually create the person capable of performing when it actually matters."
+        }
+      ],
+      "characterInfluences": [
+        {
+          "name": "Ippo Makunouchi",
+          "role": "Protagonist",
+          "influence": "Ippo taught me that humility is not weakness. He is constantly willing to admit what he doesn't know, listen to people better than him and learn from every mistake. He also taught me never to judge someone's ceiling from their starting point."
+        },
+        {
+          "name": "Mamoru Takamura",
+          "role": "Mentor / Champion",
+          "influence": "Takamura showed me the frightening side of ambition. He doesn't simply want to be good; he is willing to reorganize his entire life around becoming exceptional. His weight cuts and Brian Hawk fight made me understand that ambition becomes real when your behavior is willing to pay its price."
+        },
+        {
+          "name": "Ichiro Miyata",
+          "role": "Rival",
+          "influence": "Miyata showed me that discipline doesn't always look loud. His strength comes from precision, technical refinement and an almost obsessive attention to detail. He represents the part of mastery that comes from making something cleaner and sharper rather than simply pushing harder."
+        }
+      ],
+      "definingMoments": [
+        {
+          "title": "The first training",
+          "context": "Kamogawa Gym",
+          "text": "Ippo begins with almost none of the qualities people normally associate with a fighter. He is afraid, inexperienced and physically unprepared. But the moment he starts training, the story begins showing how an ordinary person can slowly become extraordinary through repetition.",
+          "idea": "You don't need to begin powerful. You need to begin willing."
+        },
+        {
+          "title": "The loss to Date",
+          "context": "Japan championship arc",
+          "text": "Ippo loses to a champion who is simply more experienced and more complete. The important part is not that the hero loses. It is what he does afterward. He looks at the loss, tries to understand it and keeps learning.",
+          "idea": "A loss becomes useful when you are willing to study it instead of protecting your ego from it."
+        },
+        {
+          "title": "The Dempsey Roll is born",
+          "context": "Training arc",
+          "text": "Months of invisible work eventually become a technique that looks spectacular from the outside. The audience sees the movement. Ippo knows how many repetitions, mistakes and corrections created it.",
+          "idea": "What looks like talent is often accumulated discipline wearing a disguise."
+        }
+      ],
+      "quotesWorthCarrying": [
+        {
+          "quote": "Not everyone who works hard is rewarded, but all those who succeed have worked hard.",
+          "speaker": "Narrator",
+          "why": "This is the version of hard work I believe more after Ippo: there are no guarantees. Effort does not automatically make you the winner. But nobody reaches the highest levels without having paid for them through effort."
+        },
+        {
+          "quote": "What does it mean to be strong?",
+          "speaker": "Takamura Mamoru",
+          "why": "This question stayed with me because the series never gives one simple answer. Strength can be endurance, discipline, courage, technical ability, willpower, sacrifice or the ability to stand back up. The answer keeps changing as the person asking it changes."
+        }
+      ],
+      "realLifeReflection": [
+        "Ippo gave me the idea of my own 'roadwork': the fundamentals that have to happen whether I feel motivated or not. If I want to become good at something, I cannot only chase breakthroughs. I have to respect the repetitive work that creates them.",
+        "It also changed how I think about failure. Ippo loses, other fighters lose, and hard work does not magically protect anyone from defeat. Instead of treating failure as proof that the effort was pointless, I can treat it like a post-fight review: what went wrong, what did I learn, and what needs to be trained next."
+      ],
+      "continueExploring": [
+        {
+          "id": "BlueLock",
+          "title": "Blue Lock",
+          "note": "The same hunger to become exceptional, but with ego and individual ambition pushed much further."
+        },
+        {
+          "id": "Haikyuu",
+          "title": "Haikyuu!!",
+          "note": "The next evolution of the idea: if Ippo taught me how an individual becomes stronger, Haikyuu taught me what happens when different strengths learn to work together."
+        },
+        {
+          "id": "Dragon Ball",
+          "title": "Dragon Ball",
+          "note": "The anime that made me love the idea of becoming stronger; Ippo became the story that taught me what becoming stronger actually costs."
+        }
+      ],
+      "id": "HajimeNoIppo",
+      "index": 3,
+      "jpTitle": "Hajime no Ippo",
+      "year": 2024,
+      "genre": "Anime",
+      "poster": "https://wallpapers.com/hajime-no-ippo",
+      "entry": {
+        "breathQuote": "Not everyone who works hard is rewarded, but all those who succeed have worked hard."
+      },
+      "reflection": {
+        "quote": "Hajime no Ippo is the story that told me, with a boxer's honesty, that there are no shortcuts—only rounds. It was the first anime that made me understand that the people I call beasts are not necessarily born that way. They become beasts through will, repetition, sacrifice and an almost unreasonable refusal to stop.",
+        "tags": [
+          "Anime",
+          "Journey",
+          "Reflection"
+        ],
+        "whatIKept": "I kept the idea that strength has a process. Ippo, Takamura and Kamogawa are all powerful in completely different ways, but none of their strength feels empty because the story makes me see what sits underneath it. Roadwork. Training. Pain. Failure. Correction. Discipline. Will. Ippo made me respect the person behind the result, not just the result itself.",
+        "definingScene": "Takamura's weight cut before his fight with Brian Hawk.",
+        "whoItMadeMeThinkAbout": "The version of myself that sometimes wants the result before fully accepting the process required to create it."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "That Ippo's power is not his talent—it is his willingness to keep standing and learning.",
+          "micro": "What hit hardest"
+        },
+        {
+          "thought": "The Dempsey Roll is thousands of invisible repetitions compressed into one visible movement.",
+          "micro": "The idea I kept"
+        },
+        {
+          "thought": "Takamura's weight cut made me realize what it looks like when ambition becomes physical sacrifice.",
+          "micro": "The moment that changed me"
+        },
+        {
+          "thought": "Kamogawa showed me that sometimes sheer will can matter even when you don't have the same advantages as the person standing across from you.",
+          "micro": "The Kamogawa lesson"
+        },
+        {
+          "thought": "Ippo isn't someone you can look down on just because he doesn't look powerful.",
+          "micro": "The lesson about potential"
+        },
+        {
+          "thought": "Hard work doesn't guarantee that you'll win.",
+          "micro": "The uncomfortable truth"
+        },
+        {
+          "thought": "But without hard work, you may never discover how far you could actually go.",
+          "micro": "What stayed"
+        }
+      ],
+      "memoryCards": {
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Roadwork",
+            "text": "The invisible foundation. Running, conditioning, repeating fundamentals and doing the work when there is no audience to impress.",
+            "tag": "Discipline",
+            "image": "https://wallpapers.com/hajime-no-ippo"
+          },
+          {
+            "symbol": "◈",
+            "title": "The Weight Cut",
+            "text": "Takamura showed me that serious ambition has a cost. The person who walks into the ring has already been built through sacrifices nobody watching the fight can fully see.",
+            "tag": "Sacrifice",
+            "image": "https://wallpapers.com/hajime-no-ippo"
+          },
+          {
+            "symbol": "◈",
+            "title": "The Dempsey Roll",
+            "text": "A spectacular technique created by countless repetitions. It taught me that mastery often looks like talent only after the work has been hidden underneath it.",
+            "tag": "Mastery",
+            "image": "https://wallpapers.com/hajime-no-ippo"
+          }
+        ]
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "First Impression",
+          "body": "A boxing anime about a bullied kid. I expected another story where the protagonist eventually becomes powerful. I didn't expect the show to take the process itself so seriously."
+        },
+        "whatShifted": {
+          "heading": "What Changed",
+          "body": "The training. Roadwork, conditioning, mitts, repetition and correction made me realize that I was watching something different. Strength wasn't appearing magically. It was being constructed piece by piece."
+        },
+        "whatStayed": {
+          "heading": "What Stayed",
+          "body": "The idea that the beast someone becomes is built through choices nobody sees. Ippo, Takamura and Kamogawa all made me respect discipline differently because their strength has a history behind it."
+        }
+      },
+      "cinematicMoment": {
+        "eyebrow": "The moment hard work became real",
+        "title": "Takamura vs. Brian Hawk",
+        "body": "Takamura's weight cut and the fight against Brian Hawk became one of the clearest images of what Hajime no Ippo means to me. He was already an extraordinary fighter, but the fight showed the cost behind that ability. The weight loss, the exhaustion, the preparation and then the violence of the fight itself made his strength feel earned rather than gifted. I wasn't simply watching a powerful character win. I was watching the accumulated result of an almost frightening amount of will.",
+        "episode": "",
+        "image": "https://wallpapers.com/hajime-no-ippo"
+      },
+      "altMemories": [
+        {
+          "question": "The loss to Date",
+          "heading": "Losing doesn't erase the work",
+          "body": "Ippo loses to Date, and the story doesn't treat that loss as proof that his training was meaningless. The loss becomes information. There is something to understand, something to correct and something to build toward.",
+          "caption": "A loss can be a result without becoming an identity.",
+          "image": "https://wallpapers.com/hajime-no-ippo",
+          "flip": false
+        },
+        {
+          "question": "The Dempsey Roll is born",
+          "heading": "The visible result of invisible work",
+          "body": "The Dempsey Roll looks extraordinary because the audience sees the finished movement. But the real story is everything that came before it: repetition, footwork, conditioning, timing and correction.",
+          "caption": "Everyone sees the technique. Almost nobody sees what built it.",
+          "image": "https://wallpapers.com/hajime-no-ippo",
+          "flip": true
+        }
+      ],
+      "pullQuote": {
+        "text": "I used to think hard work meant trying harder. Ippo taught me that it means being willing to repeat what matters long after the excitement disappears.",
+        "attribution": "What Hajime no Ippo became to me"
+      },
+      "todayBlock": {
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I reflect",
+            "line": "on whether I am actually willing to do the boring work required for the things I say I want."
+          },
+          {
+            "verb": "I respect",
+            "line": "the invisible repetitions behind every skill that looks effortless."
+          },
+          {
+            "verb": "I remember",
+            "line": "that being behind someone does not automatically mean I am incapable of reaching them."
+          },
+          {
+            "verb": "I question",
+            "line": "whether I am searching for a shortcut when what I actually need is more fundamentals."
+          },
+          {
+            "verb": "I try",
+            "line": "to turn failure into something specific I can learn from instead of something vague I can feel bad about."
+          },
+          {
+            "verb": "I ask",
+            "line": "the question that Ippo keeps alive: what does it actually mean to be strong?"
+          }
+        ]
+      },
+      "notes": [],
+      "ideas": [],
+      "continueJourney": {
+        "because": "Because this was the first anime that made me genuinely respect hard work rather than simply admire the results it produces.",
+        "prompt": "Continue the thought",
+        "recommendations": []
+      }
+    }
+  },
+  {
+    "id": "BlueLock",
+    "index": 4,
+    "title": "Blue Lock",
+    "subtitle": "Egoist striker project",
+    "description": "A radical take on sports anime that abandons the traditional power of friendship for raw, unadulterated ego. It dissects the psychology of what makes a world-class striker, emphasizing that to stand at the pinnacle, one must be willing to consume others' dreams.",
+    "accentColor": "#3b82f6",
+    "quotes": [
+      "I will be the best striker in the world.",
+      "Devour your opponents.",
+      "Football is not a game of friendship, it's a game of ego."
+    ],
+    "characters": [
+      {
+        "name": "Yoichi Isagi",
+        "role": "Protagonist"
+      },
+      {
+        "name": "Meguru Bachira",
+        "role": "Ally / Playmaker"
+      },
+      {
+        "name": "Rin Itoshi",
+        "role": "Rival"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/BlueLock/BlueLock.png",
+    "videoUrl": "/media/universe/anime/video/Blue%20Lock/Blue%20Lock.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Blue%20Lock/Blue%20Lock%201.m4a",
+      "/media/universe/anime/audio/Blue%20Lock/Blue%20Lock%202.m4a"
+    ],
+    "updatedAt": "2026-08-09T18:03:51.548Z",
+    "narrativeData": {
+      "id": "BlueLock",
+      "index": 4,
+      "title": "Blue Lock",
+      "subtitle": "Egoist striker project",
+      "description": "A radical take on sports anime that abandons the traditional power of friendship for raw, unadulterated ego. It dissects the psychology of what makes a world-class striker, emphasizing that to stand at the pinnacle, one must be willing to consume others' dreams.",
+      "accentColor": "#3b82f6",
+      "quotes": [
+        "I will be the best striker in the world.",
+        "Devour your opponents.",
+        "Football is not a game of friendship, it's a game of ego."
+      ],
+      "jpTitle": "Blue Lock",
+      "year": 2024,
+      "genre": "Anime",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "People who can't decide anything for themselves and just flow with the crowd will never be the best in the world at anything."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "Blue Lock made me confront something I had spent years politely hiding from myself: that my humility was often just fear wearing good manners. This show believes ambition is not the problem — pretending not to have it is.",
+        "tags": [
+          "Anime",
+          "Journey",
+          "Reflection"
+        ],
+        "whatIKept": "I grew up being praised for being 'chill' — for not wanting things too loudly. Blue Lock looked directly at that persona and called it what it is: a lack of a goal sharp enough to be selfish about. The series strips friendship away from competition and asks what is left when you have to win alone, against people you like. It was uncomfortable, then clarifying. It matters to me because it gave me permission to want things specifically, publicly, and competitively — and it gave me a framework for turning jealousy into measurement rather than resentment.",
+        "definingScene": "In a dying moment of a losing game, Isagi's vision sharpens and he sees the field as a flow of possibilities — and chooses the one selfish path that wins.",
+        "whoItMadeMeThinkAbout": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
+          "micro": "What hit hardest"
+        },
+        {
+          "thought": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
+          "micro": "The idea I kept"
+        },
+        {
+          "thought": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
+          "micro": "How I see it today"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "First Selection",
+        "title": "Bachira's monster",
+        "body": "Bachira confesses he is scared of the 'monster' inside him that loves football too much. The show's answer: keep the monster, give it a target. The thing you fear about yourself is often your best instrument. The work is aim, not amputation.",
+        "episode": "",
+        "image": "https://i.pinimg.com/736x/c7/c8/f8/c7c8f83f7253a0a301ebfcec0e7afe29.jpg"
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "What hit hardest",
+            "text": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
+            "tag": "Insight",
+            "image": ""
+          },
+          {
+            "symbol": "◈",
+            "title": "The idea I kept",
+            "text": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
+            "tag": "Insight",
+            "image": "https://i.pinimg.com/736x/c7/c8/f8/c7c8f83f7253a0a301ebfcec0e7afe29.jpg"
+          },
+          {
+            "symbol": "◈",
+            "title": "How I see it today",
+            "text": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
+            "tag": "Insight",
+            "image": ""
+          }
+        ]
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "First Impression",
+          "body": "A sports anime about soccer where everyone is a jerk. I almost quit in the first episode — the language of 'ego' and 'devouring' felt like a parody of masculinity."
+        },
+        "whatShifted": {
+          "heading": "What Changed",
+          "body": "Isagi's first 'world-class moment' — his perception of the field reorganizing around a single selfish idea. I realized the show was not about soccer at all. It was about the moment a vague person finally forms a specific ambition."
+        },
+        "whatStayed": {
+          "heading": "What Stayed",
+          "body": "Bachira's line that his inner monster only came out when he found a rival who saw him. The idea that ambition needs an audience — someone to beat — stayed with me as a practical truth."
+        }
+      },
+      "altMemories": [
+        {
+          "question": "The Team Z elimination game",
+          "heading": "End of First Selection",
+          "body": "Isagi's team plays to survive, and he must decide whether to score himself or set up a teammate — knowing only one of them stays.",
+          "caption": "Kindness and ambition collide most painfully at decision points. The choice reveals what you actually value, regardless of what you say.",
+          "image": "",
+          "flip": false
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "It's the people who take the first shot that change the world, right?",
+        "attribution": "Yoichi Isagi"
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I reflect",
+            "line": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
+          },
+          {
+            "verb": "I reflect",
+            "line": "It also changed how I approach collaboration. I used to soften my wants to keep the peace. Now I state them loudly and early, trusting that people who can't handle a specific ambition were never going to be good collaborators anyway. The teams I build now run on aligned egos, and they work better."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Yoichi Isagi",
+          "role": "Protagonist",
+          "mirror": "Isagi is me if I were brave: a person who stops playing to avoid losing and starts playing to prove a specific idea. His growth is the template I use to upgrade my own goal-setting."
+        },
+        {
+          "name": "Meguru Bachira",
+          "role": "Ally / Playmaker",
+          "mirror": "He taught me that joy is a competitive weapon. Bachira plays for the pure thrill of the collision — and he is unstoppable because of it. I try to keep a Bachira channel open in my own work."
+        },
+        {
+          "name": "Rin Itoshi",
+          "role": "Rival",
+          "mirror": "Rin showed me the shape of disciplined obsession: talent plus a mission it serves without question. He is a warning about aim, but a masterclass in intensity."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [],
+      "ideas": [],
+      "continueJourney": {
+        "because": "Because this reshaped how I think",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Haikyuu!!",
+            "reason": "The mirror universe: the same hunger and growth, expressed through genuine teamwork instead of ego — the healthiest rivalry in anime."
+          },
+          {
+            "title": "Hajime no Ippo",
+            "reason": "A quieter study of the same engine: a shy person becoming relentless, told with deep craft."
+          },
+          {
+            "title": "Classroom of the Elite",
+            "reason": "If Blue Lock's ego theory were applied to school and manipulation instead of soccer. The same cold logic, zero warmth."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "demon-slayer",
+    "index": 4,
+    "title": "Demon Slayer",
+    "subtitle": "What remains human",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Tanjiro Kamado",
+        "role": "The purity"
+      },
+      {
+        "name": "Kyojuro Rengoku",
+        "role": "The flame"
+      },
+      {
+        "name": "Akaza",
+        "role": "The humanity beneath the monster"
+      },
+      {
+        "name": "Muichiro Tokito",
+        "role": "The possibility"
+      },
+      {
+        "name": "Gyomei Himejima",
+        "role": "The strength"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/demon-slayer/demon-slayer.jpg",
+    "videoUrl": "/media/universe/anime/video/demon-slayer/demon-slayer.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/demon-slayer/demon-slayer.m4a"
+    ],
+    "updatedAt": "2026-08-10T06:54:07.904Z",
+    "narrativeData": {
+      "id": "demon-slayer",
+      "index": 4,
+      "title": "Demon Slayer",
+      "subtitle": "What remains human",
+      "jpTitle": "鬼滅の刃",
+      "year": 2019,
+      "genre": "Shōnen",
+      "poster": "",
+      "entry": {
+        "breathQuote": "I thought Demon Slayer was going to be a story about defeating demons. Somewhere along the way, it became a story about what it takes to remain human when life gives you every reason not to."
+      },
+      "reflection": {
+        "quote": "What stayed with me was how often strength and humanity existed together. The strongest people weren't always the cruelest or most dominant. Some were the ones who could endure terrible things without letting those things decide what kind of person they became.",
+        "tags": [
+          "purity",
+          "resolve",
+          "humanity",
+          "strength",
+          "humility"
+        ],
+        "whatIKept": "Demon Slayer made me think about the kind of person I want to remain when life becomes difficult. Tanjiro showed me that being kind doesn't have to mean being weak. Rengoku showed me that sometimes courage is simply refusing to step back. Akaza made me think about how much of a person survives underneath everything that happens to them. Muichiro reminded me that age doesn't decide what someone can endure or become. Gyomei showed me that real strength can make someone more compassionate toward weakness instead of looking down on it.",
+        "definingScene": "Rengoku's final moments stayed with me because he never seemed to negotiate with his resolve. Even when the opponent was stronger, even when his body was failing, he kept fighting until the end. There was something very simple about it: he knew he might lose, but that didn't change what he believed he should do.",
+        "whoItMadeMeThinkAbout": "People who remain kind after being hurt. People who keep going without needing anyone to promise them that they will win. People who are stronger than they appear. And myself, especially when I start thinking that circumstances should decide what I am allowed to become."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "Tanjiro is just unusually kind.",
+          "micro": "At first"
+        },
+        {
+          "thought": "How does someone stay this gentle after everything he has seen?",
+          "micro": "As it deepened"
+        },
+        {
+          "thought": "Maybe strength doesn't have to make someone harder.",
+          "micro": "Rengoku"
+        },
+        {
+          "thought": "What actually makes someone human?",
+          "micro": "Akaza"
+        },
+        {
+          "thought": "Maybe what happens to me matters less than what I choose to become because of it.",
+          "micro": "What stayed"
+        }
+      ],
+      "cinematicMoment": {
+        "eyebrow": "The moment I understood the kind of strength this story valued",
+        "title": "Rengoku's last stand.",
+        "body": "Rengoku knew he was facing something stronger than himself. He knew how badly he was injured. None of that changed what he believed he had to do. He didn't fight because victory was guaranteed. He fought because there were people behind him who needed him to stand there. That stayed with me. Sometimes courage isn't believing you will win. It is deciding that the possibility of losing doesn't give you permission to stop.",
+        "episode": "Mugen Train",
+        "image": ""
+      },
+      "memoryCards": {
+        "question": "What stayed with me after Demon Slayer?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "Purity",
+            "text": "Tanjiro showed me that staying kind after being hurt is not weakness. Sometimes protecting the good inside you is one of the hardest things you can do.",
+            "tag": "Humanity",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Flame",
+            "text": "Rengoku made determination feel simple. Keep moving. Protect what is in front of you. Stay ablaze until you cannot take another step.",
+            "tag": "Resolve",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "What Remains",
+            "text": "Akaza made me question whether humanity is only about appearance. Maybe it is also about the values, desires and rules someone refuses to abandon.",
+            "tag": "Identity",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What changed about strength?",
+          "heading": "I stopped seeing kindness as the opposite of strength.",
+          "body": "Tanjiro could fight, endure pain and make difficult decisions without losing his ability to feel compassion. That combination stayed with me. Life can make you harder, but becoming harder isn't the only way to become stronger.",
+          "caption": "You can become stronger without becoming colder.",
+          "image": "",
+          "flip": false
+        },
+        {
+          "question": "What does strength ask of you?",
+          "heading": "The stronger I become, the more responsible I should become.",
+          "body": "Gyomei made me think about this differently. If strength only makes someone look down on those who cannot keep up, then maybe it has not taught them enough. Real strength should make you understand how difficult weakness can be, because you know what it means to struggle too.",
+          "caption": "Strength should create understanding.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "pullQuote": {
+        "text": "Maybe becoming stronger isn't about becoming harder. Maybe it is about becoming strong enough to remain yourself.",
+        "attribution": "— What I took from Demon Slayer"
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "I thought it was about killing demons",
+          "body": "At first, Demon Slayer felt straightforward. Tanjiro had lost his family, Nezuko had become a demon, and the goal was clear: become strong enough to protect her and defeat the demons standing in the way."
+        },
+        "whatShifted": {
+          "heading": "Then the line between strength and humanity became harder to ignore",
+          "body": "The story kept showing people who were powerful for completely different reasons. Some had immense physical strength. Some had extraordinary will. Some had survived things that should have broken them. But the characters I respected most were often the ones who remained human while becoming stronger."
+        },
+        "whatStayed": {
+          "heading": "I started thinking about what I want strength to make me",
+          "body": "I don't want strength to make me arrogant or disconnected from people who struggle more than I do. I want it to make me more capable while also making me more understanding. Demon Slayer made me think that perhaps the real test of strength isn't what you can overpower, but what you can endure without losing yourself."
+        }
+      },
+      "todayBlock": {
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I notice",
+            "line": "when difficulty starts making me colder instead of simply making me stronger."
+          },
+          {
+            "verb": "I remember",
+            "line": "that being kind after being hurt can require more strength than becoming bitter."
+          },
+          {
+            "verb": "I try",
+            "line": "to keep moving even when success isn't guaranteed."
+          },
+          {
+            "verb": "I believe",
+            "line": "that becoming stronger should make me more understanding of people who are still struggling."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Tanjiro Kamado",
+          "role": "The purity",
+          "mirror": "Tanjiro made me think about how difficult it is to remain genuinely good after life gives you reasons to become bitter. He suffers more than most people could imagine, but his suffering doesn't erase his compassion. He can fight someone and still understand that they once had a life of their own. What I took from him is that purity isn't never experiencing darkness. It is seeing it and still choosing not to become it."
+        },
+        {
+          "name": "Kyojuro Rengoku",
+          "role": "The flame",
+          "mirror": "Rengoku taught me something very simple: when you believe something matters, don't back down just because the person standing against you is stronger. He didn't need a guarantee that he would win. He simply refused to stop protecting the people behind him. His final fight made determination feel less like confidence and more like commitment. Stay ablaze. Keep moving. Give everything you have until there is nothing left to give."
+        },
+        {
+          "name": "Akaza",
+          "role": "The humanity beneath the monster",
+          "mirror": "Akaza made me think about whether appearance is enough to decide what someone is. He became a demon and committed terrible acts, but even then he retained rules and boundaries that came from the person he had once been. His refusal to eat or destroy women stayed with me because it showed that something from his old values had survived. It made me think that identity isn't only what the outside becomes. Our values, desires, memories and choices also tell us who we are."
+        },
+        {
+          "name": "Muichiro Tokito",
+          "role": "The possibility",
+          "mirror": "Muichiro made me think about how little age actually tells us about someone. He was incredibly young, yet he endured things that would overwhelm many adults and eventually became someone capable of standing among the strongest. His story reminded me that age is only a number attached to where someone is in time. What matters more is what they endure, what they learn, and what they choose to do with the person they are becoming."
+        },
+        {
+          "name": "Gyomei Himejima",
+          "role": "The strength",
+          "mirror": "Gyomei made me think about what should happen when someone becomes genuinely strong. I don't see his strength as something that separates him from weaker people. It seems to make him more aware of how fragile people can be. His power comes with humility, responsibility and compassion. That stayed with me because I think real strength should make you understand weakness better, not make you ashamed of it."
+        }
+      ],
+      "characterMemories": [
+        {
+          "question": "What did Tanjiro change for me?",
+          "heading": "Kindness can survive almost anything.",
+          "body": "Tanjiro showed me that being gentle doesn't mean being unable to fight. He can be decisive when he needs to be and still feel compassion afterward. I like that contradiction. It suggests that strength and kindness aren't opposites. Maybe the stronger person is sometimes the one who has enough control not to let pain decide how they treat everyone else.",
+          "caption": "Stay soft without becoming weak.",
+          "image": ""
+        },
+        {
+          "question": "What did Rengoku leave behind?",
+          "heading": "Give everything while you still can.",
+          "body": "Rengoku's final stand stayed with me because there was no promise of victory. He simply knew what he was responsible for in that moment. The opponent was stronger. His body was failing. None of that changed his decision. He kept the flame alive until the very end.",
+          "caption": "You don't need certainty to keep going.",
+          "image": ""
+        },
+        {
+          "question": "What did Akaza make me question?",
+          "heading": "Is humanity only what the world can see?",
+          "body": "Akaza made me uncomfortable in an interesting way. Becoming a demon changed his body and his life, but parts of his old values still existed underneath. His rules about women were not enough to redeem everything he did, but they showed me that a person can become deeply corrupted without every part of their previous identity disappearing. It made me think about how complicated human nature can be.",
+          "caption": "The outside doesn't tell the entire story.",
+          "image": ""
+        },
+        {
+          "question": "What did Muichiro remind me?",
+          "heading": "Age doesn't decide your potential.",
+          "body": "Muichiro was so young, yet his experiences forced him to mature in ways most people never have to. His story made me think less about how old someone is and more about what they have endured, what they have learned and what they choose to become from it.",
+          "caption": "Time is measured in years. Growth isn't.",
+          "image": ""
+        },
+        {
+          "question": "What does Gyomei represent?",
+          "heading": "Strength should make you humble.",
+          "body": "Gyomei's strength never felt like a reason to look down on others. If anything, being strong seemed to make him more aware of how fragile people can be. That is the kind of strength I respect most: the kind that gives you more ability without giving you less empathy.",
+          "caption": "The strongest should understand the fragile.",
+          "image": ""
+        },
+        {
+          "question": "What did Giyu make me understand?",
+          "heading": "You can carry guilt and still choose to live forward.",
+          "body": "Giyu carries the feeling that he survived when others didn't, and for a long time that seems to make him question whether he deserves the position he holds. But he doesn't stop protecting people because of it. He keeps moving, even when he doesn't feel like the person who should have been left standing. That made me think about how survival itself can sometimes feel complicated. Maybe honoring the people we lose isn't always about staying stuck in what happened. Sometimes it is about using the life that remains well.",
+          "caption": "Sometimes continuing is its own way of remembering.",
+          "image": ""
+        }
+      ],
+      "notes": [
+        {
+          "text": "You can be kind without being weak, and strong without becoming cruel.",
+          "footer": "What Tanjiro left me"
+        },
+        {
+          "text": "Sometimes courage is simply refusing to step back when someone else needs you to stand.",
+          "footer": "The flame"
+        },
+        {
+          "text": "What happened to someone matters. But so does what they choose to do with what happened.",
+          "footer": "The possibility of choice"
+        },
+        {
+          "text": "The strongest person in the room should not be the one who makes everyone else feel small.",
+          "footer": "What strength should become"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Purity without weakness",
+          "application": "I don't want kindness to mean being unable to stand up for myself. Tanjiro made me think that compassion and strength can exist in the same person."
+        },
+        {
+          "concept": "Resolve without certainty",
+          "application": "I don't always need to know that I will succeed before I begin. Sometimes the important thing is deciding what is worth giving everything I have to."
+        },
+        {
+          "concept": "Identity beyond appearance",
+          "application": "A person's appearance, position or circumstances don't always tell the whole story. Values, choices and the things someone refuses to abandon can reveal another part of who they are."
+        },
+        {
+          "concept": "Strength with humility",
+          "application": "The more capable I become, the more I want to remember what struggling feels like. Ability should create responsibility and understanding, not superiority."
+        }
+      ],
+      "continueJourney": {
+        "because": "Demon Slayer left me thinking about a kind of strength that doesn't require losing humanity. I want to keep finding stories where people are tested by pain, power and circumstances, and where the real question is what they choose to become.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Vinland Saga",
+            "reason": "What happens when strength built through violence is no longer enough, and someone has to decide what kind of person they actually want to become."
+          },
+          {
+            "title": "Hunter x Hunter",
+            "reason": "What happens when good intentions, ambition and morality become much more complicated than they first appear."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "attack-on-titan",
+    "index": 5,
+    "title": "Attack on Titan",
+    "subtitle": "When certainty disappears",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Eren Yeager",
+        "role": "The warning"
+      },
+      {
+        "name": "Erwin Smith",
+        "role": "The burden"
+      },
+      {
+        "name": "Gabi Braun",
+        "role": "The mirror"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/attack-on-titan/attack-on-titan.jpg",
+    "videoUrl": "/media/universe/anime/video/attack-on-titan/Attack%20on%20Titans.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/attack-on-titan/attack-on-titan.m4a"
+    ],
+    "updatedAt": "2026-08-09T18:03:51.580Z",
+    "narrativeData": {
+      "id": "attack-on-titan",
+      "index": 5,
+      "title": "Attack on Titan",
+      "subtitle": "When certainty disappears",
+      "jpTitle": "進撃の巨人",
+      "year": 2013,
+      "genre": "Seinen",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "I thought I was watching a survival story about good versus evil. I didn't realize I was watching the dismantling of moral certainty."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "It taught me that the most dangerous person in any room is the one who has completely stopped doubting their own righteousness.",
+        "tags": [
+          "perspective",
+          "freedom",
+          "cycles",
+          "truth",
+          "morality"
+        ],
+        "whatIKept": "Everyone is acting perfectly rationally based on the story they were told. There is no villain's seat in the theater of the world — only different seat assignments.",
+        "definingScene": "Reiner and Bertholdt on the wall. A world-shattering truth delivered with exhausted weariness. It wasn't a villain's monologue. It was tired soldiers.",
+        "whoItMadeMeThinkAbout": "Anyone I have ever quickly filed under 'enemy' without understanding their context."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "The monsters are just outside.",
+          "micro": "Season 1"
+        },
+        {
+          "thought": "Wait. The monsters are inside.",
+          "micro": "Season 2"
+        },
+        {
+          "thought": "We are the monsters to someone else.",
+          "micro": "Season 3"
+        },
+        {
+          "thought": "Everyone is just acting on the story they were told.",
+          "micro": "Season 4"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "The turning point",
+        "title": "The Basement Reveal.",
+        "body": "The walls weren't protecting them from monsters. They were protecting them from the truth. The moment the outside world existed, I started looking for the walls in my own beliefs.",
+        "episode": "Season 3",
+        "image": ""
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Ocean",
+            "text": "A destination that was supposed to be freedom, and turned out to be just another boundary.",
+            "tag": "Disillusionment",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Forest",
+            "text": "The cycle of hatred made physical. We have to lead the children out of it.",
+            "tag": "Legacy",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Door",
+            "text": "The basement door. Knowledge you can't un-know once it's opened.",
+            "tag": "Truth",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "My definition of freedom.",
+          "body": "I used to think freedom was the ultimate virtue. Eren showed me that freedom pursued without empathy is just tyranny by another name.",
+          "caption": "Freedom as a weapon.",
+          "image": "",
+          "flip": false
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "Everyone had to be drunk on something to keep pushing on. Everyone was a slave to something.",
+        "attribution": "— Kenny Ackerman"
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "A brutal action series",
+          "body": "I came for the spectacle — ODM gear, titans, constant peril. A clean fight between humanity and monsters."
+        },
+        "whatShifted": {
+          "heading": "The loss of the moral high ground",
+          "body": "The story crossed the ocean, and I was forced to empathize with the people who caused the first three seasons."
+        },
+        "whatStayed": {
+          "heading": "The danger of narrative",
+          "body": "Propaganda and historical narrative are deadlier than any physical weapon."
+        }
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I notice",
+            "line": "when I am too sure that I'm the protagonist of a conflict."
+          },
+          {
+            "verb": "I question",
+            "line": "what information I'm missing that makes the other person's actions perfectly rational to them."
+          },
+          {
+            "verb": "I try",
+            "line": "to find the 'walls' I've built around my own worldview."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Eren Yeager",
+          "role": "The warning",
+          "mirror": "He showed me how easily the desire to protect your own can curdle into the willingness to destroy everything else."
+        },
+        {
+          "name": "Erwin Smith",
+          "role": "The burden",
+          "mirror": "He reflected the terrible cost of leadership — the willingness to become a demon for the sake of the truth."
+        },
+        {
+          "name": "Gabi Braun",
+          "role": "The mirror",
+          "mirror": "She made me uncomfortable because she is exactly what Eren was. Conditioning shapes our entire reality."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [
+        {
+          "text": "If you only look at the world from inside your walls, you will eventually burn everything outside them.",
+          "footer": "The Rumbling"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Perspectivism",
+          "application": "There is no absolute truth in human conflict, only competing narratives."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because I now distrust anyone — including myself — who has stopped doubting.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Vinland Saga",
+            "reason": "What happens when you decide you have no enemies."
+          },
+          {
+            "title": "Code Geass",
+            "reason": "The cost of carrying the world's hatred."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "Bleach",
+    "index": 6,
+    "title": "Bleach",
+    "subtitle": "Carrying invisible burdens",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Ichigo Kurosaki",
+        "role": "The anchor"
+      },
+      {
+        "name": "Byakuya Kuchiki",
+        "role": "The mirror"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/Bleach/Bleach.jpg",
+    "videoUrl": "/media/universe/anime/video/Bleach/Bleach.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Bleach/Bleach.m4a"
+    ],
+    "updatedAt": "2026-08-09T18:03:51.528Z",
+    "narrativeData": {
+      "id": "Bleach",
+      "index": 6,
+      "title": "Bleach",
+      "subtitle": "Carrying invisible burdens",
+      "jpTitle": "ブリーチ",
+      "year": 2004,
+      "genre": "Shōnen",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "It was the aesthetic that pulled me in. It was the quiet, unspoken weight of duty that made me stay."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "Ichigo never wanted to be a hero. He just refused to let the people in his immediate vicinity get hurt. That distinction reshaped my whole definition of responsibility.",
+        "tags": [
+          "identity",
+          "duty",
+          "burden",
+          "confidence",
+          "protection"
+        ],
+        "whatIKept": "You don't need a grand, world-saving philosophy to act. 'I just want to protect my friends' is a complete and sufficient moral code.",
+        "definingScene": "Ichigo arriving at Sokyoku Hill. No words — just planting the sword and stopping the execution. The quiet confidence of knowing exactly what you're there to do.",
+        "whoItMadeMeThinkAbout": "People who do the heavy lifting in silence, without demanding a parade for their efforts."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "He's always scowling, but he always helps.",
+          "micro": "Episode 1"
+        },
+        {
+          "thought": "He doesn't care about Soul Society's politics. He cares about Rukia.",
+          "micro": "Soul Society Arc"
+        },
+        {
+          "thought": "The sword is a reflection of his internal clarity.",
+          "micro": "Bankai training"
+        },
+        {
+          "thought": "He fights his own inner hollow. The enemy is literally his own instinct.",
+          "micro": "Arrancar Arc"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "The moment of arrival",
+        "title": "Sokyoku Hill.",
+        "body": "The execution is underway. The captains are assembled. Ichigo just appears and shatters the un-shatterable. It wasn't the power level — it was the gravitational pull of someone who has resolved their internal conflict.",
+        "episode": "Episode 54",
+        "image": ""
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Mask",
+            "text": "The darkness inside, made physical. You don't defeat it. You learn to control it.",
+            "tag": "Integration",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Rain",
+            "text": "The inner world flooding when despair takes over. The perfect visual for a bad mental state.",
+            "tag": "Mental State",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Sword",
+            "text": "Zangetsu is the honest self. Your weapon is what you're willing to be when no one is directing you.",
+            "tag": "Identity",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "I stopped looking for a grand purpose.",
+          "body": "I used to stress about my 'mission.' Ichigo made me realize your purpose can just be the people standing next to you. You don't need to save the world — just your corner of it.",
+          "caption": "Micro-duty over macro-philosophy.",
+          "image": "",
+          "flip": false
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "If miracles only happen once, what are they called the second time?",
+        "attribution": "— Ichigo Kurosaki"
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "Style and swords",
+          "body": "I came for the character designs and the oversized weapons. It felt impossibly cool."
+        },
+        "whatShifted": {
+          "heading": "The internal landscape",
+          "body": "The real battles were inside the characters' minds. Their swords were literally their souls."
+        },
+        "whatStayed": {
+          "heading": "Quiet resolve",
+          "body": "Not screaming your ideals — just showing up and doing the work."
+        }
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I try",
+            "line": "to focus my energy on protecting the people in my immediate radius."
+          },
+          {
+            "verb": "I notice",
+            "line": "when the rain starts falling inside, and address my mental state instead of fighting through it."
+          },
+          {
+            "verb": "I question",
+            "line": "rules and traditions that demand suffering in the name of duty."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Ichigo Kurosaki",
+          "role": "The anchor",
+          "mirror": "He challenged me to stop agonizing over the 'why' and just focus on the 'what' — protect what's in front of you."
+        },
+        {
+          "name": "Byakuya Kuchiki",
+          "role": "The mirror",
+          "mirror": "He reflected rigid adherence to rules over empathy, and the painful process of unlearning it. I saw my own stubbornness in him."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [
+        {
+          "text": "Your blade reflects your soul. If you're hesitating, it becomes dull.",
+          "footer": "Zangetsu's teaching"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "The Inner World",
+          "application": "Your external capability is tied to your internal clarity. You can't win outside if it's raining inside."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because I learned to carry weight without announcing it — and to protect my corner of the world.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Jujutsu Kaisen",
+            "reason": "A modern continuation of the aesthetic of duty and curses."
+          },
+          {
+            "title": "Demon Slayer",
+            "reason": "Carrying the burden of protection with absolute empathy."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ClassroomOfTheElite",
+    "index": 7,
+    "title": "Classroom of the Elite",
+    "subtitle": "Observation and emotional restraint",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Kiyotaka Ayanokoji",
+        "role": "The extreme"
+      },
+      {
+        "name": "Suzune Horikita",
+        "role": "The mirror"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/ClassroomOfTheElite/ClassroomOfTheElite.png",
+    "videoUrl": "/media/universe/anime/video/Class%20Room%20of%20the%20Elites/Class%20Room%20of%20the%20Elites.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Class%20room%20of%20the%20elites/class%20room%20of%20the%20elites.m4a"
+    ],
+    "updatedAt": "2026-08-09T18:03:51.552Z",
+    "narrativeData": {
+      "id": "ClassroomOfTheElite",
+      "index": 7,
+      "title": "Classroom of the Elite",
+      "subtitle": "Observation and emotional restraint",
+      "jpTitle": "ようこそ実力至上主義の教室へ",
+      "year": 2017,
+      "genre": "Psychological",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "I thought it was a show about high school drama. It turned out to be a masterclass in watching people reveal what they actually value."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "Ayanokoji introduced me to total emotional restraint. I started asking how much of my energy I waste reacting to things I should just be observing.",
+        "tags": [
+          "observation",
+          "strategy",
+          "restraint",
+          "systems",
+          "reading people"
+        ],
+        "whatIKept": "Leverage belongs to the person who needs the least validation.",
+        "definingScene": "The season one ending monologue. The chilling realization that he views everyone as tools. It recontextualized every 'helpful' thing he had done.",
+        "whoItMadeMeThinkAbout": "The parts of the corporate world where systems thinking replaces empathy."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "He's just lazy and unmotivated.",
+          "micro": "Episode 1"
+        },
+        {
+          "thought": "Wait — he engineered that entire outcome without taking credit.",
+          "micro": "Mid-season"
+        },
+        {
+          "thought": "He isn't helping them. He's arranging them.",
+          "micro": "The Island Exam"
+        },
+        {
+          "thought": "He doesn't want to win. He wants to not be bothered.",
+          "micro": "Season Finale"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "The mask slips",
+        "title": "The inner monologue.",
+        "body": "After a whole season of seeming to learn the value of friendship, the voiceover reveals the truth: 'I've never once thought of you as an ally. All people are nothing but tools.' A terrifying display of absolute detachment.",
+        "episode": "Season 1 Finale",
+        "image": ""
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Points",
+            "text": "A system that commodifies behavior. It made me look at how society tracks our worth.",
+            "tag": "Systems",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Shadows",
+            "text": "Controlling the room without standing at the podium. The power of invisibility.",
+            "tag": "Strategy",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Monologue",
+            "text": "The voice inside that shows the gap between what people do and why they do it.",
+            "tag": "Reading People",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "I learned the value of silence.",
+          "body": "I used to speak up to prove I understood. This show taught me that giving away your perspective for free reduces your leverage. Sometimes the smartest move is to let people underestimate you.",
+          "caption": "Silence is data collection.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "As long as I win in the end, that's all that matters.",
+        "attribution": "— Kiyotaka Ayanokoji"
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "A standard school hierarchy",
+          "body": "I expected an underdog story — D-Class proves everyone wrong with the power of friendship."
+        },
+        "whatShifted": {
+          "heading": "The hidden puppeteer",
+          "body": "The protagonist wasn't learning to care. He was learning how the pieces moved on the board."
+        },
+        "whatStayed": {
+          "heading": "Emotional detachment",
+          "body": "The stark utility of separating emotions from objectives. A dangerous path, but highly effective."
+        }
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I try",
+            "line": "to observe a room before deciding how to participate in it."
+          },
+          {
+            "verb": "I notice",
+            "line": "how often people give away their leverage just to feel heard."
+          },
+          {
+            "verb": "I question",
+            "line": "the underlying systems that dictate why people act the way they do."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Kiyotaka Ayanokoji",
+          "role": "The extreme",
+          "mirror": "He challenged my need for validation — the absolute extreme of systems thinking without empathy."
+        },
+        {
+          "name": "Suzune Horikita",
+          "role": "The mirror",
+          "mirror": "She reflected the trap of believing intelligence alone is enough, without understanding social dynamics."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [
+        {
+          "text": "People will tell you who they are if you're quiet enough to let them.",
+          "footer": "Personal Note"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Information asymmetry",
+          "application": "The person who knows the most while revealing the least controls the interaction."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because I stopped performing my understanding and started keeping it.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Code Geass",
+            "reason": "When strategy and manipulation are used to change the world."
+          },
+          {
+            "title": "Death Note",
+            "reason": "The battle of intellects where visibility is fatal."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "jujutsu-kaisen",
+    "index": 8,
+    "title": "Jujutsu Kaisen",
+    "subtitle": "The strength that doesn't need an audience",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Nanami Kento",
+        "role": "The mirror"
+      },
+      {
+        "name": "Itadori Yuji",
+        "role": "The question"
+      },
+      {
+        "name": "Gojo Satoru",
+        "role": "The contrast"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/jujutsu-kaisen/jujutsu-kaisen.jpg",
+    "videoUrl": "/media/universe/anime/video/jujutsu-kaisen/jujutsu-kaisen.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/jujutsu-kaisen/Jujutsu%20kaisen%201.m4a",
+      "/media/universe/anime/audio/jujutsu-kaisen/jujutsu%20kaisen%202.m4a"
+    ],
+    "updatedAt": "2026-08-10T03:03:51.443Z",
+    "narrativeData": {
+      "id": "jujutsu-kaisen",
+      "index": 8,
+      "title": "Jujutsu Kaisen",
+      "subtitle": "The strength that doesn't need an audience",
+      "jpTitle": "呪術廻戦",
+      "year": 2020,
+      "genre": "Shōnen",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "I came for the fights and stayed for the wage. It was the first action show where the strongest character I knew had a job, a schedule, and a quiet hatred of overtime."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "It kept telling me everyone is going to die — and then it kept making me care anyway. That's when I understood what it was really about: choosing purpose despite the expiration date.",
+        "tags": [
+          "responsibility",
+          "professionalism",
+          "discipline",
+          "mortality"
+        ],
+        "whatIKept": "You can carry something heavy without needing anyone to know it's heavy. Nanami never made his burden visible — he just carried it, every day, until he couldn't.",
+        "definingScene": "Nanami walking into Shibuya knowing he won't walk out. No rage. No monologue. Just a man finishing what he accepted long ago.",
+        "whoItMadeMeThinkAbout": "My father, the morning he drove three hours in silence to help me move apartments, and drove back without once asking for thanks."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "The animation is stunning. I told myself this was just spectacle.",
+          "micro": "Episode 1"
+        },
+        {
+          "thought": "Wait — he's not fighting to win. He's fighting because it's his job.",
+          "micro": "Episode 11"
+        },
+        {
+          "thought": "That scene with Nanami stayed in my head for three days.",
+          "micro": "Episode 17"
+        },
+        {
+          "thought": "I paused. I rewound. I watched it again without sound.",
+          "micro": "Shibuya Arc"
+        },
+        {
+          "thought": "I understood something about my father I didn't have words for before.",
+          "micro": "After finishing"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "The turning point",
+        "title": "He walked in knowing he wouldn't walk out.",
+        "body": "No music swell. No slow-motion last breath. Just a man with a clear understanding of what the job required, and a quiet decision to do it completely.",
+        "episode": "Shibuya Incident Arc",
+        "image": ""
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Overtime",
+            "text": "Nanami clocks out of his office job and into a worse one. Showing up for work that's yours is the whole discipline.",
+            "tag": "Discipline",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Finger",
+            "text": "Yuji swallows it to save someone else's life. He didn't choose his inheritance — he chose what direction to carry it.",
+            "tag": "Responsibility",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Expiration Date",
+            "text": "Everyone dies anyway. The show never lets you forget it — and it never lets you use it as an excuse.",
+            "tag": "Mortality",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "My definition of strength got smaller and more precise.",
+          "body": "Strength used to mean capability. Now it means execution without drama — doing the thing without needing the thing to feel meaningful in the moment.",
+          "caption": "Strength without an audience.",
+          "image": "",
+          "flip": false
+        },
+        {
+          "question": "What caught my attention?",
+          "heading": "The fight choreography is a distraction. Deliberately.",
+          "body": "The action exists to pull you past your guard. Before you realize it, you're attached to people the story is about to take from you. That's not style — that's architecture.",
+          "caption": "The real trap is caring.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "You're strong. That's your flaw. You're too strong, so you've forgotten what it means to be weak.",
+        "attribution": "— Gojo Satoru"
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "The animation pulled me in first",
+          "body": "Fast, fluid, technically stunning. I thought I was watching a sport — spectacular choreography. For a while, that was enough."
+        },
+        "whatShifted": {
+          "heading": "Then Nanami walked onscreen",
+          "body": "Someone who had seen through the fantasy of heroism and continued anyway. Not for glory — because the alternative was letting someone else bear it."
+        },
+        "whatStayed": {
+          "heading": "Strength without sentiment",
+          "body": "Not every hard thing deserves a narrative arc. Some things you do quietly, completely, without asking the universe to acknowledge the difficulty."
+        }
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I notice",
+            "line": "when I'm adding drama to something that doesn't need it."
+          },
+          {
+            "verb": "I question",
+            "line": "whether my idea of strength requires an audience."
+          },
+          {
+            "verb": "I try",
+            "line": "to finish what I start without needing it to feel heroic."
+          },
+          {
+            "verb": "I avoid",
+            "line": "the word 'sacrifice' for what was just ordinary responsibility."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Nanami Kento",
+          "role": "The mirror",
+          "mirror": "He showed me professionalism divorced from ego. He hates the system he works in and continues anyway, because someone has to. I think about that every time I'm tempted to make my frustration visible."
+        },
+        {
+          "name": "Itadori Yuji",
+          "role": "The question",
+          "mirror": "What do you do with a terrible inheritance? He didn't choose his situation. He chose what direction to carry it."
+        },
+        {
+          "name": "Gojo Satoru",
+          "role": "The contrast",
+          "mirror": "Confidence so complete it doesn't require validation is disarming. Not arrogance — certainty. I spent a long time thinking they were the same thing."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [
+        {
+          "text": "The show keeps reminding you that everyone is going to die. And then it keeps making you care anyway. That's the whole point.",
+          "footer": "Midway through season 1"
+        },
+        {
+          "text": "I don't think Nanami wanted to be remembered. I think he just wanted to have done it right.",
+          "footer": "After the Shibuya arc"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Cursed energy as unprocessed emotion",
+          "application": "Negative things accumulate invisibly and become destructive when not released. I started scheduling deliberate decompression after this."
+        },
+        {
+          "concept": "Domain expansion as total presence",
+          "application": "Forcing your environment to match your internal state. Total focus is a weapon — and most people never deploy it."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because I still ask myself — before I complain about a long day — whether I'm doing the work for the work's sake or for the audience.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Vinland Saga",
+            "reason": "What happens after you abandon the idea of vengeance."
+          },
+          {
+            "title": "Monster",
+            "reason": "What defines a person who chooses not to be saved."
+          },
+          {
+            "title": "Mushishi",
+            "reason": "Stillness as the highest form of understanding."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "Haikyuu",
+    "index": 10,
+    "title": "Haikyuu!!",
+    "subtitle": "Flight of the crows",
+    "description": "A masterclass in character development and team dynamics. It showcases the beauty of volleyball and the relentless drive to improve. It teaches that physical limitations can be overcome by teamwork, strategy, and an unbreakable passion to stay on the court.",
+    "accentColor": "#f97316",
+    "quotes": [
+      "Because people don't have wings, we look for ways to fly.",
+      "As long as I'm here, you're invincible!",
+      "Talent is something you make bloom, instinct is something you polish."
+    ],
+    "characters": [
+      {
+        "name": "Shoyo Hinata",
+        "role": "Protagonist / Middle Blocker"
+      },
+      {
+        "name": "Tobio Kageyama",
+        "role": "Setter / Genius"
+      },
+      {
+        "name": "Toru Oikawa",
+        "role": "Rival / Grand King"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/Haikyuu/Haikyuu.png",
+    "videoUrl": "/media/universe/anime/video/Haikyu/Haikyu.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Haikyu/Haikyu.m4a"
+    ],
+    "updatedAt": "2026-08-10T03:03:42.296Z",
+    "narrativeData": {
+      "title": "Haikyuu!!",
+      "subtitle": "Flight of the crows",
+      "description": "A masterclass in character development and team dynamics. It showcases the beauty of volleyball and the relentless drive to improve. It teaches that physical limitations can be overcome by teamwork, strategy, and an unbreakable passion to stay on the court.",
+      "accentColor": "#f97316",
+      "quotes": [
+        "Because people don't have wings, we look for ways to fly.",
+        "As long as I'm here, you're invincible!",
+        "Talent is something you make bloom, instinct is something you polish."
+      ],
+      "characters": [
+        {
+          "name": "Shoyo Hinata",
+          "role": "Protagonist / Middle Blocker",
+          "mirror": "Hinata is my proof that 'not built for this' is a starting condition, not a verdict. His jump — higher than physics should allow — became my metaphor for effort that refuses its ceiling."
+        },
+        {
+          "name": "Tobio Kageyama",
+          "role": "Setter / Genius",
+          "mirror": "He taught me that talent is a responsibility, not a possession. Watching the arrogant genius learn to serve others' strengths changed how I use my own skills in teams."
+        },
+        {
+          "name": "Toru Oikawa",
+          "role": "Rival / Grand King",
+          "mirror": "Oikawa showed me the shape of healthy ambition under unfair conditions: resent the ceiling, then spend that resentment as fuel. He is why I don't feel guilty about wanting to win."
+        }
+      ],
+      "heroReflection": "",
+      "corePerspective": "",
+      "insights": [],
+      "journey": [],
+      "characterInfluences": [],
+      "definingMoments": [],
+      "quotesWorthCarrying": [],
+      "realLifeReflection": [],
+      "continueExploring": [],
+      "id": "Haikyuu",
+      "index": 10,
+      "jpTitle": "Haikyuu!!",
+      "year": 2024,
+      "genre": "Anime",
+      "poster": "",
+      "entry": {
+        "breathQuote": "Because people don't have wings, we look for ways to fly."
+      },
+      "reflection": {
+        "quote": "Haikyuu is the story that taught me that height is not destiny — that the things you lack are just the starting point of the thing you build. A short kid with a volleyball convinced me that joy and discipline are the same muscle.",
+        "tags": [
+          "Anime",
+          "Journey",
+          "Reflection"
+        ],
+        "whatIKept": "I watched Haikyuu during a stretch when I felt permanently behind — smaller, slower, later than everyone who seemed to be winning. Hinata is the exact answer to that feeling: a player who is physically disadvantaged at every level and chooses to be a problem anyway. What mattered to me personally is that the show never hand-waves the disadvantage. Hinata is small and stays small; he wins by redefining the game around what he has. It reframed my own deficits as design constraints rather than verdicts. And its real subject — that growth is a team sport and the team is the technology — reshaped how I think about work, friendship, and what 'support' actually means.",
+        "definingScene": "Two teenagers who hate each other synchronize a set and a spike so fast the blockers can't react. The ball hits the floor before the sound of the hit.",
+        "whoItMadeMeThinkAbout": "Haikyuu changed how I run teams. I used to assemble groups of individually strong people; the show convinced me the real asset is the 'we' — so now I invest in repetition, in shared vocabulary, in the boring thousandth rep that makes two people think as one. It is the least glamorous work and the most effective."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "Oikawa's arc. The 'genius vs. hard worker' tension is usually resolved with a speech about hard work — Haikyuu lets Oikawa lose anyway, and keeps him dignified. I felt seen and warned at the same time.",
+          "micro": "What hit hardest"
+        },
+        {
+          "thought": "The quick attack — two people moving as one, without looking. It is the most beautiful cooperation I have ever seen depicted: trust as a physical skill, built by thousands of repetitions. I now train my working relationships the same way.",
+          "micro": "The idea I kept"
+        },
+        {
+          "thought": "I used to think excellence was individual. Haikyuu convinced me the real unit of excellence is the pair — the 'we' that becomes faster than either 'I.' I look for my quick attack partners in every team now.",
+          "micro": "How I see it today"
+        }
+      ],
+      "memoryCards": {
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "What hit hardest",
+            "text": "Oikawa's arc. The 'genius vs. hard worker' tension is usually resolved with a speech about hard work — Haikyuu lets Oikawa lose anyway, and keeps him dignified. I felt seen and warned at the same time.",
+            "tag": "Insight",
+            "image": ""
+          },
+          {
+            "symbol": "◈",
+            "title": "The idea I kept",
+            "text": "The quick attack — two people moving as one, without looking. It is the most beautiful cooperation I have ever seen depicted: trust as a physical skill, built by thousands of repetitions. I now train my working relationships the same way.",
+            "tag": "Insight",
+            "image": ""
+          },
+          {
+            "symbol": "◈",
+            "title": "How I see it today",
+            "text": "I used to think excellence was individual. Haikyuu convinced me the real unit of excellence is the pair — the 'we' that becomes faster than either 'I.' I look for my quick attack partners in every team now.",
+            "tag": "Insight",
+            "image": ""
+          }
+        ]
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "First Impression",
+          "body": "A cheerful sports anime about volleyball — a sport I knew nothing about. I expected warmth and cliches and almost missed the show's ferocity."
+        },
+        "whatShifted": {
+          "heading": "What Changed",
+          "body": "The Karasuno vs. Aoba Johsai match. Hinata leaps for a ball he cannot reach, and the camera holds on his determination — I realized this was not about volleyball. It was about the gap between what you can do and what you refuse to settle for."
+        },
+        "whatStayed": {
+          "heading": "What Stayed",
+          "body": "The refrain that 'volleyball is a place where you can find out who you are.' I carried the idea that any arena — sport, code, writing — is a mirror more than a contest."
+        }
+      },
+      "cinematicMoment": {
+        "eyebrow": "Recurring motif",
+        "title": "Hinata's leap",
+        "body": "Every time Hinata jumps, the frame slows and he climbs beyond what his height should allow. The animation itself lies — beautifully, deliberately — about his limits. The people around you will believe your flight even when physics doesn't. Ambition is a social phenomenon.",
+        "episode": "",
+        "image": ""
+      },
+      "altMemories": [
+        {
+          "question": "Kageyama's apology",
+          "heading": "Aoba Johsai rematch",
+          "body": "The genius setter, who built his whole identity on being right, tells his team plainly: 'I'm the reason we lost.'",
+          "caption": "The strongest people can say the truest sentences. Accountability is not weakness; it is the engine of improvement.",
+          "image": "",
+          "flip": false
+        }
+      ],
+      "pullQuote": {
+        "text": "Talent is something you make bloom, instinct is something you polish.",
+        "attribution": "Tobio Kageyama"
+      },
+      "todayBlock": {
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I reflect",
+            "line": "Haikyuu changed how I run teams. I used to assemble groups of individually strong people; the show convinced me the real asset is the 'we' — so now I invest in repetition, in shared vocabulary, in the boring thousandth rep that makes two people think as one. It is the least glamorous work and the most effective."
+          },
+          {
+            "verb": "I reflect",
+            "line": "It also gave me a healthy relationship with my own ceilings. I still compete with people who started ahead — but instead of envying their start, I copy their process the way Hinata studies his blockers. Envy converted to study is a complete productivity system, and this show is where I learned it."
+          }
+        ]
+      },
+      "notes": [],
+      "ideas": [],
+      "continueJourney": {
+        "because": "Because this reshaped how I think",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Blue Lock",
+            "reason": "The same hunger, the same growth, but ego replaces teamwork — the perfect counterpoint to Haikyuu's philosophy."
+          },
+          {
+            "title": "Hajime no Ippo",
+            "reason": "Another underestimated protagonist who builds himself through discipline — with fists instead of a volleyball."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "One Piece",
+    "index": 11,
+    "title": "One Piece",
+    "subtitle": "The pirate king's grand adventure",
+    "description": "Monkey D. Luffy, a boy with a rubber body, sets sail with his diverse crew to find the legendary One Piece treasure and become the Pirate King.",
+    "accentColor": "#ef4444",
+    "quotes": [
+      "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea.",
+      "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
+      "I am not a hero. I'm a pirate."
+    ],
+    "characters": [
+      {
+        "name": "Monkey D. Luffy",
+        "role": "Captain"
+      },
+      {
+        "name": "Roronoa Zoro",
+        "role": "First Mate"
+      },
+      {
+        "name": "Nami",
+        "role": "Navigator"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/One%20Piece/One%20Piece.jpg",
+    "videoUrl": "/media/universe/anime/video/One%20Piece/One%20Piece.mp4",
+    "audioTracks": [],
+    "updatedAt": "2026-08-09T18:03:51.576Z",
+    "narrativeData": {
+      "id": "One Piece",
+      "index": 11,
+      "title": "One Piece",
+      "subtitle": "The pirate king's grand adventure",
+      "description": "Monkey D. Luffy, a boy with a rubber body, sets sail with his diverse crew to find the legendary One Piece treasure and become the Pirate King.",
+      "accentColor": "#ef4444",
+      "quotes": [
+        "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea.",
+        "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
+        "I am not a hero. I'm a pirate."
+      ],
+      "jpTitle": "One Piece",
+      "year": 2024,
+      "genre": "Anime",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "I don't want to conquer anything. I just think the Pirate King is the freest man on the sea."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "One Piece is the story that taught me what loyalty actually is: not agreement, not comfort — the willingness to go to war for someone's dream because it is theirs. Luffy made me redefine the whole purpose of a crew, and by extension, of friendship.",
+        "tags": [
+          "Anime",
+          "Journey",
+          "Reflection"
+        ],
+        "whatIKept": "I started One Piece skeptical of its length and stayed because of a single radical claim: that freedom is not the absence of responsibility but the possession of a dream so clear it organizes your whole life. Luffy is the freest character in fiction, and he is also the most bound — bound by his word, by his crew, by every promise he makes. The series matters to me personally because I spent years confusing freedom with unattachment. One Piece demonstrated, over a thousand chapters, that the opposite is true: you are free when you are fully committed. Every arc is proof — a crewmate's dream becomes a war, and the war is where they become most themselves.",
+        "definingScene": "Nami, who has schemed alone for years to buy back her village, breaks in front of Luffy and finally says the words. He doesn't ask why. He just walks.",
+        "whoItMadeMeThinkAbout": "One Piece changed my standard for friendship. I used to curate relationships by convenience; now I ask which of my people have dreams I would 'go to war' for. The difference is measurable — the crew I keep is smaller and infinitely stronger, and the show is why."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "That each crewmate joins through their wound — Nami's village, Zoro's promise, Sanji's past. The crew is assembled from broken people who get repaired by being believed in. I now see friendship as repair work, not decoration.",
+          "micro": "What hit hardest"
+        },
+        {
+          "thought": "Zoro's refusal to ever lose to the same enemy twice, and his promise to a dead girl that he would become the world's best swordsman. A promise made to the dead is a vow that can't be renegotiated. I started making those.",
+          "micro": "The idea I kept"
+        },
+        {
+          "thought": "I used to think dreams were private. One Piece convinced me a dream is a social object — it becomes real the moment someone else agrees to help carry it. The crew is the technology that turns fantasy into fact.",
+          "micro": "How I see it today"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "Baratie arc",
+        "title": "Zoro's promise at Baratie",
+        "body": "Zoro swears on a dead girl's name that he will never lose again — and the series treats that promise as an unbreakable law from that moment forward. Promises made to the dead cannot be negotiated with. They become the bones of a character.",
+        "episode": "",
+        "image": ""
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "What hit hardest",
+            "text": "That each crewmate joins through their wound — Nami's village, Zoro's promise, Sanji's past. The crew is assembled from broken people who get repaired by being believed in. I now see friendship as repair work, not decoration.",
+            "tag": "Insight",
+            "image": ""
+          },
+          {
+            "symbol": "◈",
+            "title": "The idea I kept",
+            "text": "Zoro's refusal to ever lose to the same enemy twice, and his promise to a dead girl that he would become the world's best swordsman. A promise made to the dead is a vow that can't be renegotiated. I started making those.",
+            "tag": "Insight",
+            "image": ""
+          },
+          {
+            "symbol": "◈",
+            "title": "How I see it today",
+            "text": "I used to think dreams were private. One Piece convinced me a dream is a social object — it becomes real the moment someone else agrees to help carry it. The crew is the technology that turns fantasy into fact.",
+            "tag": "Insight",
+            "image": ""
+          }
+        ]
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "First Impression",
+          "body": "A rubber pirate who screams. I bounced off it twice — the art, the length, the apparent silliness. I had no idea I was looking at the most serious story about loyalty ever drawn."
+        },
+        "whatShifted": {
+          "heading": "What Changed",
+          "body": "Arlong Park. Luffy destroys a tyrant's park with his bare hands, not for treasure but because Nami — who had betrayed him an hour ago — asked for help. I understood the show's engine: every arc is someone's dream being honored."
+        },
+        "whatStayed": {
+          "heading": "What Stayed",
+          "body": "Zoro's scene before the time skip — asking the Pirate King to trade his life to save his captain, and then standing in the path of an admiral alone. The idea that a crewmate's life has priority over the captain's own stayed with me."
+        }
+      },
+      "altMemories": [
+        {
+          "question": "The going away — 'Raise the flag'",
+          "heading": "Wano arc",
+          "body": "Luffy declares war on the entire world government by raising a flag over an island of people who trusted him, knowing it means the navy will come for all of them.",
+          "caption": "Freedom is declared, not granted. And declaring it publicly is what makes it real.",
+          "image": "",
+          "flip": false
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "When do you think people die? When they are shot through the heart? No. When they forget their dreams.",
+        "attribution": "Dr. Hiluluk"
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I reflect",
+            "line": "One Piece changed my standard for friendship. I used to curate relationships by convenience; now I ask which of my people have dreams I would 'go to war' for. The difference is measurable — the crew I keep is smaller and infinitely stronger, and the show is why."
+          },
+          {
+            "verb": "I reflect",
+            "line": "It also gave me a definition of freedom I can actually use: freedom as commitment. I stopped trying to keep every option open — the most exhausting strategy — and started closing doors loudly, the way Luffy picks a direction and never apologizes. Being fully committed turns out to feel exactly like freedom."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Monkey D. Luffy",
+          "role": "Captain",
+          "mirror": "Luffy taught me that leadership is not wisdom — it is the refusal to let anyone in your care fall. He is the reason I show up for people before I understand them."
+        },
+        {
+          "name": "Roronoa Zoro",
+          "role": "First Mate",
+          "mirror": "Zoro's code — a promise is a debt, and a debt is paid — gave me my standard for commitment. I make fewer promises now, and I keep them absolutely."
+        },
+        {
+          "name": "Nami",
+          "role": "Navigator",
+          "mirror": "Nami showed me that asking for help is the strongest move in the game. Her 'help me, Luffy' after years of self-reliance is one of the bravest moments in the series."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [],
+      "ideas": [],
+      "continueJourney": {
+        "because": "Because this reshaped how I think",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Naruto",
+            "reason": "The same found-family engine and dream-driven protagonist, told through a village instead of a sea."
+          },
+          {
+            "title": "Dragon Ball",
+            "reason": "The joyful ancestor: another unstoppable, hungry-for-adventure hero who collects rivals and friends."
+          },
+          {
+            "title": "Hajime no Ippo",
+            "reason": "A quieter, grittier take on the same theme: a gentle person who becomes unstoppable for the people he loves."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "death-note",
+    "index": 13,
+    "title": "Death Note",
+    "subtitle": "When being right becomes dangerous",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Light Yagami",
+        "role": "The warning"
+      },
+      {
+        "name": "L",
+        "role": "The mirror"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/death-note/death-note.jpg",
+    "videoUrl": "/media/universe/anime/video/death-note/death-note.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/death-note/death-note.m4a"
+    ],
+    "updatedAt": "2026-08-09T18:03:51.584Z",
+    "narrativeData": {
+      "id": "death-note",
+      "index": 13,
+      "title": "Death Note",
+      "subtitle": "When being right becomes dangerous",
+      "jpTitle": "デスノート",
+      "year": 2006,
+      "genre": "Psychological Thriller",
+      "poster": "",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "I wanted to see a genius outsmart the world. I ended up watching how easily a sense of justice rots into absolute ego."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "It forced me to ask a question I didn't want to: If I had absolute power and anonymity, how long before my morality became an excuse for my arrogance?",
+        "tags": [
+          "justice",
+          "ego",
+          "control",
+          "intelligence",
+          "power"
+        ],
+        "whatIKept": "Intelligence without empathy is just a highly efficient mechanism for cruelty.",
+        "definingScene": "Light laughing at Raye Penber's death. It wasn't about justice anymore — it was the thrill of outsmarting someone. The mask slipped.",
+        "whoItMadeMeThinkAbout": "The moments I have used 'being right' as an excuse to be unkind."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "He's cleaning up the world. It makes sense.",
+          "micro": "Episode 1"
+        },
+        {
+          "thought": "Wait — he just killed someone who wasn't a criminal.",
+          "micro": "The Lind L. Tailor broadcast"
+        },
+        {
+          "thought": "He doesn't care about justice. He cares about being God.",
+          "micro": "Mid-season"
+        },
+        {
+          "thought": "His intelligence is his blind spot.",
+          "micro": "The Finale"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "The absurdity of ego",
+        "title": "The potato chip.",
+        "body": "I'll take a potato chip... and eat it. A high schooler playing god while doing homework and eating a snack. It framed the terrifying banality of ego.",
+        "episode": "Episode 8",
+        "image": ""
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Notebook",
+            "text": "The ultimate tool of unaccountability. A mirror for what we do when we think no one is watching.",
+            "tag": "Power",
+            "image": ""
+          },
+          {
+            "symbol": "◇",
+            "title": "The Chains",
+            "text": "L and Light handcuffed together. Two sides of the same obsessive coin.",
+            "tag": "Duality",
+            "image": ""
+          },
+          {
+            "symbol": "○",
+            "title": "The Clock",
+            "text": "The warehouse. A man who planned everything except the moment his plan stopped mattering.",
+            "tag": "Ego",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "I stopped trusting absolute certainty.",
+          "body": "Light's downfall wasn't a lack of intelligence. It was certainty so complete that he couldn't imagine a mistake. Doubt is a necessary safety valve for the human mind.",
+          "caption": "Certainty is a trap.",
+          "image": "",
+          "flip": true
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "This world is rotting, and those who are making it rot deserve to die.",
+        "attribution": "— Light Yagami"
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "A battle of wits",
+          "body": "I thought it was a pure intellectual chess match. I rooted for the smartest person in the room."
+        },
+        "whatShifted": {
+          "heading": "The rot of the ego",
+          "body": "I stopped watching a hero clean up the world and started watching a serial killer justify his ego."
+        },
+        "whatStayed": {
+          "heading": "The danger of righteousness",
+          "body": "The most terrible atrocities are committed by people absolutely convinced they are doing the right thing."
+        }
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I question",
+            "line": "my motives when I feel a strong sense of righteous indignation."
+          },
+          {
+            "verb": "I notice",
+            "line": "when I prioritize being 'right' over being human."
+          },
+          {
+            "verb": "I try",
+            "line": "to maintain a healthy level of self-doubt."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Light Yagami",
+          "role": "The warning",
+          "mirror": "He challenged my worship of intelligence. A brilliant mind disconnected from a moral compass just builds a more effective monster."
+        },
+        {
+          "name": "L",
+          "role": "The mirror",
+          "mirror": "He reflected the isolation of obsession. He solved the case and lived a hollow life to do it."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [
+        {
+          "text": "Power doesn't corrupt. It reveals.",
+          "footer": "Throughout the series"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "The banality of evil",
+          "application": "Evil doesn't always look like a monster. Sometimes it looks like a straight-A student with a superiority complex."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because I started treating my own certainty as a warning light instead of a green light.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Monster",
+            "reason": "A deeper, quieter look at the origin of evil and the choice of compassion."
+          },
+          {
+            "title": "Psycho-Pass",
+            "reason": "When the system itself decides who is a criminal."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "vinland-saga",
+    "index": 14,
+    "title": "Vinland Saga",
+    "subtitle": "The strength that refuses the sword",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
+    "characters": [
+      {
+        "name": "Thorfinn",
+        "role": "The mirror"
+      },
+      {
+        "name": "Askeladd",
+        "role": "The discomfort"
+      },
+      {
+        "name": "Einar",
+        "role": "The challenge"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/vinland-saga/vinland-saga.jpg",
+    "videoUrl": "/media/universe/anime/video/Vinland%20Saga/Vinland%20Saga.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/vinland%20saga/vinland%20saga%201.m4a",
+      "/media/universe/anime/audio/vinland%20saga/Vinland%20saga%202.m4a"
+    ],
+    "updatedAt": "2026-08-09T18:03:51.605Z",
+    "narrativeData": {
+      "id": "vinland-saga",
+      "index": 14,
+      "title": "Vinland Saga",
+      "subtitle": "The strength that refuses the sword",
+      "jpTitle": "ヴィンランド・サガ",
+      "year": 2019,
+      "genre": "Seinen",
+      "poster": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2041&auto=format&fit=crop",
+      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
+      "entry": {
+        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
+        "breathQuote": "I came for the Vikings — the shield walls, the raids, violence drawn beautifully. I think I was at a stage where I wanted strength to be simple."
+      },
+      "reflection": {
+        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
+        "quote": "It took me two seasons to realize the strongest man in the story was the one who refused to fight. I kept waiting for the twist. The twist was the whole point.",
+        "tags": [
+          "violence",
+          "forgiveness",
+          "purpose",
+          "true strength"
+        ],
+        "whatIKept": "Revenge is a job you can't quit and never get paid for. Thorfinn spent a decade making it his whole identity, and the show never let me admire him for it.",
+        "definingScene": "The knife left in the dirt. After ten years of carrying it, he simply walked away and started working a field — no speech, no thunder. I'd never seen strength look like that.",
+        "whoItMadeMeThinkAbout": "The grudges I still carry — and what my life would look like if I put them down."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "This is a revenge story. I know where it's going.",
+          "micro": "Episode 1"
+        },
+        {
+          "thought": "Wait — the warrior he admires is the one who refused to fight.",
+          "micro": "Thors' death"
+        },
+        {
+          "thought": "A decade of hatred hasn't made him strong. It's made him hollow.",
+          "micro": "Season 1 finale"
+        },
+        {
+          "thought": "He threw the knife away and something in my chest loosened.",
+          "micro": "The Farm Arc"
+        },
+        {
+          "thought": "I rewatched the wheat field scene three times.",
+          "micro": "Season 2"
+        }
+      ],
+      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
+      "cinematicMoment": {
+        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
+        "eyebrow": "The turning point",
+        "title": "The knife in the dirt.",
+        "body": "All those years, all that hatred, and he just left it in the ground. He didn't forgive — he released. I had confused the two my whole life.",
+        "episode": "Season 2 · The Farm Arc",
+        "image": "https://images.unsplash.com/photo-1590232497672-0198083c2718?q=80&w=2000&auto=format&fit=crop"
+      },
+      "memoryCards": {
+        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Knife",
+            "text": "Left in the ground. You can walk away from your own anger — it doesn't have to write the rest of your sentence.",
+            "tag": "Release",
+            "image": "https://images.unsplash.com/photo-1589104764834-8c8574163cb5?q=80&w=1000&auto=format&fit=crop"
+          },
+          {
+            "symbol": "◇",
+            "title": "The Field",
+            "text": "Ordinary work done with your hands, until the poison leaves. Healing looks boring.",
+            "tag": "Repair",
+            "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop"
+          },
+          {
+            "symbol": "○",
+            "title": "The Line",
+            "text": "'I have no enemies.' Not a slogan — a way of seeing that ends the war before it starts.",
+            "tag": "Purpose",
+            "image": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000&auto=format&fit=crop"
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What quietly changed?",
+          "heading": "I stopped calling anger 'motivation.'",
+          "body": "I used the same fuel Thorfinn did — resentment as a productivity hack. Watching a decade of it produce nothing but exhaustion made me audit my own.",
+          "caption": "Hatred is expensive fuel.",
+          "image": "https://images.unsplash.com/photo-1501432781167-c0cad9dc5dbb?q=80&w=1000&auto=format&fit=crop",
+          "flip": false
+        },
+        {
+          "question": "What did I misunderstand?",
+          "heading": "I thought Askeladd was the villain.",
+          "body": "He was the mirror — a man who used everyone's hatred as fuel, including Thorfinn's. He showed me how clever people cash in other people's pain.",
+          "caption": "The puppet masters live among us.",
+          "image": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1000&auto=format&fit=crop",
+          "flip": true
+        }
+      ],
+      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
+      "pullQuote": {
+        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
+        "text": "You have no enemies. No one in this world has enemies.",
+        "attribution": "— Thors"
+      },
+      "timeline": {
+        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
+        "firstImpression": {
+          "heading": "A brutal revenge saga",
+          "body": "I expected a samurai-in-a-shield-wall story: blood, honor, and a satisfying kill."
+        },
+        "whatShifted": {
+          "heading": "The farm changed everything",
+          "body": "Half a season of planting wheat and hauling timber — and it was the most radical thing the show could do. Work, not war, as the path back to yourself."
+        },
+        "whatStayed": {
+          "heading": "True strength",
+          "body": "The man who needs no sword. Not a pacifist creed — an engineering decision about what actually works."
+        }
+      },
+      "todayBlock": {
+        "_guide": "Layout: Grid layout. Line: 30-70 words.",
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I notice",
+            "line": "when I'm rehearsing an old grievance instead of doing the work in front of me."
+          },
+          {
+            "verb": "I try",
+            "line": "to leave the knife in the ground."
+          },
+          {
+            "verb": "I question",
+            "line": "what I'd do with all the energy my anger has been holding hostage."
+          }
+        ]
+      },
+      "characters": [
+        {
+          "name": "Thorfinn",
+          "role": "The mirror",
+          "mirror": "He reflected the years of my own life I spent running on resentment. Watching him stop was watching a door open."
+        },
+        {
+          "name": "Askeladd",
+          "role": "The discomfort",
+          "mirror": "He showed me how easy it is to be the smartest person in the room and the emptiest. I recognized the trick before I recognized the cost."
+        },
+        {
+          "name": "Einar",
+          "role": "The challenge",
+          "mirror": "He chooses kindness with both eyes open. He taught me that gentleness is a practice, not a personality."
+        }
+      ],
+      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
+      "notes": [
+        {
+          "text": "Revenge is a job you can't quit and never get paid for.",
+          "footer": "Season 1"
+        },
+        {
+          "text": "The strongest warrior in the show refuses to hold a sword. I keep coming back to why that feels true.",
+          "footer": "Rewatch, Season 2"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "True strength",
+          "application": "Strength as the ability to not respond — to absorb the opening and decline it."
+        },
+        {
+          "concept": "The new land",
+          "application": "Forgiveness as a destination you sail toward, not a single arrival. You have to keep the ship pointed."
+        }
+      ],
+      "continueJourney": {
+        "because": "Because I stopped believing my anger was my best work.",
+        "prompt": "Continue the thought",
+        "recommendations": [
+          {
+            "title": "Monster",
+            "reason": "What the absence of compassion does to a person."
+          },
+          {
+            "title": "Attack on Titan",
+            "reason": "What revenge makes of a nation."
+          },
+          {
+            "title": "Mushishi",
+            "reason": "Stillness as the highest form of understanding."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "Black Clover",
+    "index": 15,
+    "title": "Black Clover",
+    "subtitle": "Magic is everything, but I'll prove them wrong.",
+    "description": "",
+    "accentColor": "#6b7280",
+    "quotes": [],
+    "characters": [],
+    "coverImage": "/media/universe/anime/cover/Black%20Clover/Black%20Clover.jpg",
+    "videoUrl": "/media/universe/anime/video/Black%20Clover/Black%20Clover.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Black%20Clover/Black%20Clover.m4a"
+    ],
+    "updatedAt": "2026-08-10T06:09:54.228Z",
+    "narrativeData": {
+      "title": "Black Clover",
+      "jpTitle": "ブラッククローバー",
+      "subtitle": "Magic is everything, but I'll prove them wrong.",
+      "year": "2017",
+      "genre": "Shōnen / Action / Fantasy",
+      "accentColor": "#6b7280",
+      "index": 15,
+      "poster": "",
+      "reflection": {
+        "quote": "Even without magic, I will become the Wizard King!",
+        "author": "Asta"
+      },
+      "thePhilosophy": {
+        "heading": "Never Giving Up is My Magic",
+        "paragraphs": [
+          "In a world where magic is everything, Asta is born with none. While everyone else relies on natural talent and mana, he builds his body and relies purely on his unbreakable spirit.",
+          "Black Clover isn't just about underdogs; it's about the relentless refusal to accept the limitations the world places on you."
+        ]
+      },
+      "cascadeOfThoughts": [
+        {
+          "thought": "Can hard work really surpass natural talent?",
+          "micro": "The eternal question"
+        },
+        {
+          "thought": "When everyone looks down on you, do you shrink or shout louder?",
+          "micro": "Volume as a weapon"
+        }
+      ],
+      "cinematicMoment": {
+        "eyebrow": "The Anti-Magic Boy",
+        "title": "Asta's Grimoire.",
+        "body": "When hope seemed completely lost and he was about to give up his dream, a corrupted, five-leaf grimoire chose him. It didn't grant him magic—it gave him the power to destroy it.",
+        "episode": "Episode 1",
+        "image": ""
+      },
+      "memoryCards": {
+        "question": "What defines the Black Bulls?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "Misfits",
+            "text": "A squad made entirely of outcasts, rejects, and bizarre personalities who somehow form the strongest family.",
+            "tag": "Found Family",
+            "image": ""
+          }
+        ]
+      },
+      "altMemories": [
+        {
+          "question": "What separates Asta and Yuno?",
+          "heading": "Two paths, one destination.",
+          "body": "Yuno is loved by mana; Asta is rejected by it. Yet, they both push each other to the absolute limit. Their rivalry isn't built on hatred, but on pure, absolute mutual respect.",
+          "caption": "A rivalry without toxicity.",
+          "image": "",
+          "flip": false
+        }
+      ]
+    }
+  }
+]

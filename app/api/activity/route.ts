@@ -1,18 +1,7 @@
 import { NextResponse } from 'next/server'
-import { readdirSync, readFileSync, existsSync, statSync } from 'fs'
-import { join } from 'path'
+import activitiesUniverse from '@/features/anime-universe/assets/activities-universe.json'
 import { getAllPosts } from '@/lib/notion'
 import type { Activity } from '@/types/activity'
-
-// Helper to safely get mtime
-function getMTime(path: string): string {
-  try {
-    const stats = statSync(path)
-    return stats.mtime.toISOString()
-  } catch {
-    return new Date().toISOString()
-  }
-}
 
 // 1. Notion Publisher
 async function publishNotionActivity(): Promise<Activity[]> {
@@ -54,65 +43,9 @@ async function publishNotionActivity(): Promise<Activity[]> {
   }
 }
 
-// 2. Universe Auto-Discovery Publisher
+// 2. Universe Activities (using static pre-compiled data)
 async function publishUniverseActivity(): Promise<Activity[]> {
-  const activities: Activity[] = []
-  const UNIVERSE_DIR = join(process.cwd(), 'public/media/universe')
-  
-  if (!existsSync(UNIVERSE_DIR)) return activities
-  
-  try {
-    const sections = readdirSync(UNIVERSE_DIR, { withFileTypes: true }).filter(e => e.isDirectory())
-    
-    for (const section of sections) {
-      const sectionName = section.name // e.g., 'anime', 'music', 'fox-den'
-      const dataDir = join(UNIVERSE_DIR, sectionName, 'data')
-      
-      if (!existsSync(dataDir)) continue
-      
-      const entities = readdirSync(dataDir, { withFileTypes: true }).filter(e => e.isDirectory())
-      
-      for (const entity of entities) {
-        const entityId = entity.name
-        const jsonPath = join(dataDir, entityId, `${entityId}.json`)
-        
-        if (!existsSync(jsonPath)) continue
-        
-        try {
-          const raw = readFileSync(jsonPath, 'utf-8')
-          const parsed = JSON.parse(raw)
-          const updatedAt = getMTime(jsonPath)
-          
-          let icon = 'Globe'
-          if (sectionName.toLowerCase() === 'anime') icon = 'Clapperboard'
-          if (sectionName.toLowerCase() === 'music') icon = 'Music'
-
-          activities.push({
-            id: `universe-${sectionName}-${entityId}`,
-            source: `Universe: ${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}`,
-            entityType: 'card',
-            entityId,
-            action: 'Updated',
-            title: String(parsed.title ?? entityId),
-            description: String(parsed.subtitle ?? parsed.description ?? ''),
-            url: `/universe/${sectionName}`,
-            icon,
-            priority: 2,
-            visibility: 'public',
-            createdAt: updatedAt,
-            updatedAt,
-            metadata: { section: sectionName }
-          })
-        } catch (err) {
-          // Skip invalid entities
-        }
-      }
-    }
-  } catch (err) {
-    console.error('Universe Publisher Error:', err)
-  }
-  
-  return activities
+  return activitiesUniverse as Activity[]
 }
 
 export const revalidate = 60
