@@ -82,7 +82,7 @@ export function MobileHomeLayout() {
                             </div>
 
                             {/* Content Mode Tabs */}
-                            <div className="flex justify-center py-3 px-4">
+                            <div className="flex justify-center pt-3 pb-8 px-4">
                                 <div
                                     className="relative flex items-center rounded-full p-[3px] gap-[2px] w-full max-w-[260px] backdrop-blur-xl"
                                     style={{
