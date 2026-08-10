@@ -1,19 +1,80 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { Eye } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
+import { supabase } from '@/lib/supabase'
+import { getBrowserFingerprint } from '@/lib/fingerprint'
 
 export function LiveTrafficStats() {
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
 
-    // Real-time tracking will replace this when the Presence/Analytics API is connected.
-    // For now, initialized to 0 to avoid displaying fake dummy data.
     const [activeUsers, setActiveUsers] = useState(0)
     const [totalVisits, setTotalVisits] = useState(0)
+
+    useEffect(() => {
+        let mounted = true;
+        let room: any = null;
+
+        const initRealtimeStats = async () => {
+            const fingerprint = await getBrowserFingerprint();
+            if (!mounted) return;
+
+            // 1. Global View Counter (debounced server-side daily per fingerprint)
+            try {
+                const res = await fetch('/api/views', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ postSlug: '__global_site_visits__', visitorKey: fingerprint })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (mounted && data.viewCount != null) {
+                        setTotalVisits(data.viewCount);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to sync views", err);
+            }
+
+            // 2. Real-time Active Users via Supabase Presence
+            if (supabase) {
+                room = supabase.channel('global_traffic', {
+                    config: {
+                        presence: {
+                            key: fingerprint,
+                        },
+                    },
+                });
+
+                room
+                    .on('presence', { event: 'sync' }, () => {
+                        const state = room.presenceState();
+                        if (!mounted) return;
+                        const count = Object.keys(state).length;
+                        setActiveUsers(count > 0 ? count : 1);
+                    })
+                    .subscribe(async (status: string) => {
+                        if (status === 'SUBSCRIBED') {
+                            await room.track({ online_at: new Date().toISOString() });
+                        }
+                    });
+            } else {
+                setActiveUsers(1); // fallback if no supabase connection
+            }
+        };
+
+        initRealtimeStats();
+
+        return () => {
+            mounted = false;
+            if (room && supabase) {
+                supabase.removeChannel(room);
+            }
+        };
+    }, []);
 
     return (
         <div 
