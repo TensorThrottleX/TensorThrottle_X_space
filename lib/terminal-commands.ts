@@ -46,8 +46,20 @@ export const SYSTEM_MOTIVES = `System Motives:
 6. ABOUT
    Core identity and operator context.`;
 
-export const HELP_TEXT = `[SYSTEM_MANUAL]
+export function getHelpText(context?: { isUniverseContext?: boolean }) {
+  let help = `[SYSTEM_MANUAL]
 AVAILABLE EXECUTABLES AND DIRECTIVES:
+
+Platform:
+  universe            Enter the Universe
+  anime               Enter Anime Universe`;
+
+  if (context?.isUniverseContext) {
+    help += `
+  anime philosophy    Read Anime Philosophy`;
+  }
+
+  help += `
 
 Navigation:
   open feed           Load real-time thought stream
@@ -69,3 +81,6 @@ Utility:
   explain             Display operational system motives
   clear               Flush terminal history buffer
   home                Minimize the secure shell`;
+
+  return help;
+}

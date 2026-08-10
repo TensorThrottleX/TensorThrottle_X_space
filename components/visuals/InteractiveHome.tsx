@@ -1,15 +1,17 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useUI } from '@/components/providers/UIProvider'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
-import { NAV_COMMANDS, SYSTEM_MOTIVES, HELP_TEXT } from '@/lib/terminal-commands'
+import { NAV_COMMANDS, SYSTEM_MOTIVES, getHelpText } from '@/lib/terminal-commands'
 
 export default function InteractiveHome(): React.ReactNode {
   const router = useRouter()
+  const pathname = usePathname()
   const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
+  const isUniverseContext = pathname.startsWith('/universe')
   const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res', text: string }[]>([])
   const [historyLog, setHistoryLog] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -138,7 +140,26 @@ export default function InteractiveHome(): React.ReactNode {
     }
 
     if (cleanCmd === 'help') {
-      response = HELP_TEXT
+      response = getHelpText({ isUniverseContext })
+    }
+    else if (cleanCmd === 'universe') {
+      response = 'Entering Universe...'
+      setUiMode('default')
+      setTimeout(() => { router.push('/universe'); setIsTerminalOpen(false) }, 600)
+    }
+    else if (cleanCmd === 'anime') {
+      response = 'Entering Anime Universe...'
+      setUiMode('default')
+      setTimeout(() => { router.push('/universe/anime'); setIsTerminalOpen(false) }, 600)
+    }
+    else if (cleanCmd === 'anime philosophy') {
+      if (isUniverseContext) {
+        response = 'Opening: Why I Watch...'
+        setUiMode('default')
+        setTimeout(() => { router.push('/universe/anime/default'); setIsTerminalOpen(false) }, 600)
+      } else {
+        response = 'Command not recognized.\nType "help" to see available commands.'
+      }
     }
     else if (cleanCmd === 'system') {
       response = `System diagnostics ready.\nKernel: Vercel_Standard_v2\nModules: Notion_API, Framer_Motion, Tree_Engine_v2\nStatus: ACCELERATED`
@@ -223,8 +244,18 @@ export default function InteractiveHome(): React.ReactNode {
         setHistoryIndex(newIndex)
         setInputValue(historyLog[newIndex])
       }
+    } else if (e.key === 'Tab') {
+      e.preventDefault()
+      const availableCommands = ['help', 'system', 'clear', 'cls', 'home', 'explain', 'universe', 'anime', ...Object.keys(NAV_COMMANDS).map(k => `open ${k}`)]
+      if (isUniverseContext) availableCommands.push('anime philosophy')
+      
+      const matches = availableCommands.filter(c => c.startsWith(inputValue.toLowerCase()))
+      if (matches.length === 1) {
+        setInputValue(matches[0])
+      } else if (matches.length > 1) {
+        logCommand(inputValue, matches.join('  '))
+      }
     }
-  }
 
   const isBright = renderMode === 'bright'
 

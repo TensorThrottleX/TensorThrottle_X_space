@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Terminal, X as XClose } from 'lucide-react'
 import { useUI } from '@/components/providers/UIProvider'
-import { useRouter } from 'next/navigation'
-import { HELP_TEXT } from '@/lib/terminal-commands'
+import { usePathname, useRouter } from 'next/navigation'
+import { getHelpText } from '@/lib/terminal-commands'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -15,7 +15,9 @@ import { cn } from '@/lib/utils'
  */
 export default function MobileTerminal() {
     const router = useRouter()
+    const pathname = usePathname()
     const { renderMode, toggleRenderMode, isTerminalOpen, setIsTerminalOpen, setUiMode } = useUI()
+    const isUniverseContext = pathname.startsWith('/universe')
     const [commandHistory, setCommandHistory] = useState<{ type: 'cmd' | 'res'; text: string }[]>([])
     const [historyLog, setHistoryLog] = useState<string[]>([])
     const [historyIndex, setHistoryIndex] = useState<number | null>(null)
@@ -102,7 +104,26 @@ export default function MobileTerminal() {
         let response = ''
 
         if (cleanCmd === 'help') {
-            response = HELP_TEXT
+            response = getHelpText({ isUniverseContext })
+        }
+        else if (cleanCmd === 'universe') {
+            response = 'Entering Universe...'
+            setUiMode('default')
+            setTimeout(() => { router.push('/universe'); setIsTerminalOpen(false) }, 600)
+        }
+        else if (cleanCmd === 'anime') {
+            response = 'Entering Anime Universe...'
+            setUiMode('default')
+            setTimeout(() => { router.push('/universe/anime'); setIsTerminalOpen(false) }, 600)
+        }
+        else if (cleanCmd === 'anime philosophy') {
+            if (isUniverseContext) {
+                response = 'Opening: Why I Watch...'
+                setUiMode('default')
+                setTimeout(() => { router.push('/universe/anime/default'); setIsTerminalOpen(false) }, 600)
+            } else {
+                response = 'Command not recognized.\nType "help" to see available commands.'
+            }
         }
         else if (cleanCmd === 'system') {
             response = `System diagnostics ready.\nKernel: Vercel_Standard_v2\nModules: Notion_API, Framer_Motion\nHidden states may be toggled.`
@@ -163,8 +184,18 @@ export default function MobileTerminal() {
             const newIndex = historyIndex + 1
             if (newIndex >= historyLog.length) { setHistoryIndex(null); setInputValue(historyDraft) }
             else { setHistoryIndex(newIndex); setInputValue(historyLog[newIndex]) }
+        } else if (e.key === 'Tab') {
+            e.preventDefault()
+            const availableCommands = ['help', 'system', 'clear', 'cls', 'home', 'explain', 'universe', 'anime', 'open feed', 'open projects', 'open thoughts', 'open experiments', 'open manifold', 'open about']
+            if (isUniverseContext) availableCommands.push('anime philosophy')
+            
+            const matches = availableCommands.filter(c => c.startsWith(inputValue.toLowerCase()))
+            if (matches.length === 1) {
+                setInputValue(matches[0])
+            } else if (matches.length > 1) {
+                logCommand(inputValue, matches.join('  '))
+            }
         }
-    }
 
     return (
         <>
