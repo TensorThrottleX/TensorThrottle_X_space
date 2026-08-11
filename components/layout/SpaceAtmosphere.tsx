@@ -5,6 +5,7 @@ import { useUI } from '@/components/providers/UIProvider'
 
 interface SpaceAtmosphereProps {
     spaceProgress: number
+    hideNebula?: boolean
 }
 
 interface Star {
@@ -94,7 +95,7 @@ function ShootingStarLine({ star, isBright }: { star: ShootingStar; isBright: bo
     )
 }
 
-export function SpaceAtmosphere({ spaceProgress }: SpaceAtmosphereProps) {
+    export function SpaceAtmosphere({ spaceProgress, hideNebula = false }: SpaceAtmosphereProps) {
     const { renderMode } = useUI()
     const isBright = renderMode === 'bright'
     const stars = useMemo(() => generateStars(), [])
@@ -144,7 +145,7 @@ export function SpaceAtmosphere({ spaceProgress }: SpaceAtmosphereProps) {
                 }
             `}</style>
             <div
-                className="fixed inset-0 z-[4] pointer-events-none overflow-hidden"
+                className={`fixed inset-0 pointer-events-none overflow-hidden ${hideNebula ? 'z-0 bg-[#00040a]' : 'z-[4]'}`}
                 style={{
                     opacity,
                     transition: 'opacity 0.8s ease-out',
@@ -152,18 +153,20 @@ export function SpaceAtmosphere({ spaceProgress }: SpaceAtmosphereProps) {
                 }}
             >
                 {/* Space dust / nebula gradient */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        opacity: Math.min(spaceProgress * 0.6, 0.3),
-                        transition: 'opacity 0.8s ease-out',
-                        background: `
-                            radial-gradient(ellipse at 20% 30%, rgba(100,60,180,0.06) 0%, transparent 50%),
-                            radial-gradient(ellipse at 80% 70%, rgba(30,80,160,0.05) 0%, transparent 50%),
-                            radial-gradient(ellipse at 50% 50%, rgba(60,30,120,0.03) 0%, transparent 60%)
-                        `,
-                    }}
-                />
+                {!hideNebula && (
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            opacity: Math.min(spaceProgress * 0.6, 0.3),
+                            transition: 'opacity 0.8s ease-out',
+                            background: `
+                                radial-gradient(ellipse at 20% 30%, rgba(100,60,180,0.06) 0%, transparent 50%),
+                                radial-gradient(ellipse at 80% 70%, rgba(30,80,160,0.05) 0%, transparent 50%),
+                                radial-gradient(ellipse at 50% 50%, rgba(60,30,120,0.03) 0%, transparent 60%)
+                            `,
+                        }}
+                    />
+                )}
 
                 {/* Stars */}
                 {stars.map(star => (

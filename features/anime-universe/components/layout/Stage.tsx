@@ -1,4 +1,5 @@
 'use client'
+import React from 'react';
 
 import { useMemo, useRef, useEffect, useState, useCallback } from 'react'
 import type { Anime } from '@/features/anime-universe/models/Anime'

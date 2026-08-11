@@ -1,0 +1,50 @@
+[
+  {
+    "id": "music_bh_1",
+    "cluster": "felt",
+    "title": "Example Song in felt",
+    "artist": "Unknown Artist",
+    "album": "Unknown Album",
+    "genre": "felt",
+    "mood": [
+      "felt"
+    ],
+    "year": 2024,
+    "source": "local",
+    "audioUrl": "/media/universe/music-blackhole/felt/example-song.mp3",
+    "memory": "This is a placeholder description for a song in the felt category.",
+    "meaning": "Reason for this song being here."
+  },
+  {
+    "id": "music_bh_2",
+    "cluster": "inspired",
+    "title": "Example Song in inspired",
+    "artist": "Unknown Artist",
+    "album": "Unknown Album",
+    "genre": "inspired",
+    "mood": [
+      "inspired"
+    ],
+    "year": 2024,
+    "source": "local",
+    "audioUrl": "/media/universe/music-blackhole/inspired/example-song.mp3",
+    "memory": "This is a placeholder description for a song in the inspired category.",
+    "meaning": "Reason for this song being here."
+  },
+  {
+    "id": "music_bh_3",
+    "cluster": "lifelong",
+    "title": "Example Song in lifelong",
+    "artist": "Unknown Artist",
+    "album": "Unknown Album",
+    "genre": "lifelong",
+    "mood": [
+      "lifelong"
+    ],
+    "year": 2024,
+    "source": "local",
+    "audioUrl": "/media/universe/music-blackhole/lifelong/example-song.mp3",
+    "memory": "This is a placeholder description for a song in the lifelong category.",
+    "meaning": "Reason for this song being here."
+  }
+]

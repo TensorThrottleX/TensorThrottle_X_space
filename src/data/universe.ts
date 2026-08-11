@@ -18,7 +18,7 @@ export const universeItems: UniverseItem[] = [
   },
   {
     id: 'music',
-    title: 'Music Nebula',
+    title: 'Music Blackhole',
     description: 'The soundtrack behind my journey.',
     icon: '',
     route: '/universe/music',

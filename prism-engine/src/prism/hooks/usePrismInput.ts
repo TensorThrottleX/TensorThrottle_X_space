@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { KeyboardInput } from '../input/Keyboard';
 import { MouseInput } from '../input/Mouse';

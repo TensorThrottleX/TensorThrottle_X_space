@@ -85,7 +85,7 @@ export default function HomePageLayout() {
                                             color: 'var(--adaptive-hero-color)',
                                             textShadow: 'var(--adaptive-hero-shadow)',
                                         }}>
-                                        TensorThrottle X Space
+                                        TensorThrottle X Space 
                                     </motion.h1>
 
                                     <motion.h2

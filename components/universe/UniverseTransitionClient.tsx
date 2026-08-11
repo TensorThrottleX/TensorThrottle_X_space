@@ -1,14 +1,14 @@
 'use client'
 
+import React, { useEffect, useState, useRef, ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState, useRef } from 'react'
 
 const VALID_SECTIONS = new Set([
   'anime', 'music', 'fox-den', 'secret-lab',
   'library', 'museum', 'memory',
 ])
 
-export default function UniverseTransition({ children }: { children: React.ReactNode }) {
+export default function UniverseTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const section = pathname.startsWith('/universe/')
     ? pathname.split('/')[2]
