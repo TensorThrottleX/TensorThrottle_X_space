@@ -23,17 +23,17 @@ export function CinematicIntro({ onComplete }: { onComplete?: () => void }) {
     const t2 = setTimeout(() => setStage(2), 1500);
     // 4.5s - ENTER THE UNIVERSE
     const t4 = setTimeout(() => setStage(4), 4500);
-    // 5.0s - Fade out (was 5.8s in music, user requested 5.0-5.8s)
-    const t5 = setTimeout(() => setStage(5), 5200);
+    // 5.8s - Fade out
+    const t5 = setTimeout(() => setStage(5), 5800);
     
-    // 6.0s - Complete
+    // 6.6s - Complete
     const t6 = setTimeout(() => {
       setVisible(false);
       if (typeof window !== 'undefined') {
         localStorage.setItem("anime-universe-intro-seen", "true");
       }
       onComplete?.();
-    }, 6000); // Wait for the fade out transition (600-900ms)
+    }, 6600); // Wait for the fade out transition (600-900ms)
 
     return () => {
       clearTimeout(t1); clearTimeout(t2); clearTimeout(t4); clearTimeout(t5); clearTimeout(t6);
