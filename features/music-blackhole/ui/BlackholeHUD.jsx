@@ -73,6 +73,8 @@ function MiniPlayer({ engine, tracks }) {
     return () => cancelAnimationFrame(raf);
   }, [engine, currentSong]);
 
+  const [isDragging, setIsDragging] = useState(false);
+
   if (!currentSong) return null;
 
   const handleTogglePlay = () => {
@@ -100,7 +102,6 @@ function MiniPlayer({ engine, tracks }) {
     }
   };
 
-  const [isDragging, setIsDragging] = useState(false);
 
   const updateSeek = (e) => {
     if (!progressLineRef.current || !engine?.audio) return;
