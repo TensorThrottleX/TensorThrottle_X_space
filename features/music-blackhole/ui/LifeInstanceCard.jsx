@@ -555,7 +555,7 @@ export default function LifeInstanceCard({ track, engine, onPointerEnter, onPoin
                     <path d="M19 20L9 12l10-8v16zM5 19h2V5H5v14z" />
                   </svg>
                 </button>
-                <button className="ctrl-btn" onClick={togglePlay} disabled={!currentSong.hasAudio} style={{ color: isPlaying ? '#ffffff' : '#666666' }}>
+                <button className="ctrl-btn" onClick={handleTogglePlay} disabled={!currentSong.hasAudio} style={{ color: isPlaying ? '#ffffff' : '#666666' }}>
                   {isPlaying ? (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
