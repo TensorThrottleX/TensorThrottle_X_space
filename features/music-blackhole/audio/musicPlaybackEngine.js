@@ -141,16 +141,18 @@ export class MusicPlaybackEngine {
     this._fadeRaf = requestAnimationFrame(step);
   }
 
-  /** Play a track. If something else is playing, it's faded out first. */
   async play(track, startPaused = false) {
     if (!track) return;
     const token = ++this._playToken;
     const outgoing = this.audio;
+    
+    // Immediately stop, reset, and unload the previous track
     if (outgoing) {
-      this._fade(outgoing, outgoing.volume, 0, () => {
-        outgoing.pause();
-        outgoing.src = "";
-      });
+      if (this._fadeRaf) cancelAnimationFrame(this._fadeRaf);
+      outgoing.pause();
+      outgoing.currentTime = 0;
+      outgoing.removeAttribute('src');
+      outgoing.load();
     }
 
     this.currentTrack = track;
@@ -169,7 +171,9 @@ export class MusicPlaybackEngine {
 
     const audio = new Audio(url);
     audio.preload = "auto";
-    audio.volume = 0;
+    audio.volume = 1;
+    audio.currentTime = 0;
+    
     audio.onended = () => {
       if (this.currentTrack?.id === track.id) {
         this.currentTrack = null;
@@ -197,28 +201,26 @@ export class MusicPlaybackEngine {
     }
 
     if (token !== this._playToken) {
-      if (!startPaused) audio.pause();
+      if (!startPaused) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
       return;
     }
 
     this.audio = audio;
     this.status = startPaused ? "paused" : "playing";
     this._emit();
-    if (!startPaused) {
-      this._fade(audio, 0, 1);
-    } else {
-      audio.volume = 1; // if it's paused, just set it to 1 so when it resumes it's ready, wait, resume fades from 0 to 1 anyway, but let's leave it at 0, or 1. Actually resume fades from 0 to 1, so 0 is fine.
-    }
   }
 
   stop() {
     this._playToken++; // invalidate any in-flight play()
     if (this.audio) {
-      const audio = this.audio;
-      this._fade(audio, audio.volume, 0, () => {
-        audio.pause();
-        audio.src = "";
-      });
+      if (this._fadeRaf) cancelAnimationFrame(this._fadeRaf);
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      this.audio.removeAttribute('src');
+      this.audio.load();
     }
     this.audio = null;
     this.currentTrack = null;
@@ -228,11 +230,10 @@ export class MusicPlaybackEngine {
 
   pause() {
     if (this.audio && this.status === "playing") {
-      this._fade(this.audio, this.audio.volume, 0, () => {
-        if (this.audio) this.audio.pause();
-        this.status = "paused";
-        this._emit();
-      });
+      if (this._fadeRaf) cancelAnimationFrame(this._fadeRaf);
+      this.audio.pause();
+      this.status = "paused";
+      this._emit();
     }
   }
 
@@ -241,7 +242,6 @@ export class MusicPlaybackEngine {
       this.audio.play().then(() => {
         this.status = "playing";
         this._emit();
-        this._fade(this.audio, 0, 1);
       }).catch(() => {
         this.status = "error";
         this._emit();
@@ -275,7 +275,8 @@ export class MusicPlaybackEngine {
     if (this._fadeRaf) cancelAnimationFrame(this._fadeRaf);
     if (this.audio) {
       this.audio.pause();
-      this.audio.src = "";
+      this.audio.removeAttribute('src');
+      this.audio.load();
     }
     this._listeners.clear();
   }

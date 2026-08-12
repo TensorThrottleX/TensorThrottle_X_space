@@ -6,6 +6,8 @@ type UIMode = 'default' | 'tree'
 export type RenderMode = 'bright' | 'dark'
 type MainView = 'dashboard' | 'msg'
 
+const BOOT_ENTERED_KEY = 'tensor-space-entered'
+
 interface UIContextType {
     uiMode: UIMode
     setUiMode: React.Dispatch<React.SetStateAction<UIMode>>
@@ -18,6 +20,7 @@ interface UIContextType {
     setMainView: React.Dispatch<React.SetStateAction<MainView>>
     isBooting: boolean
     setIsBooting: React.Dispatch<React.SetStateAction<boolean>>
+    enterSpace: () => void
     navUtilityExpanded: boolean
     setNavUtilityExpanded: React.Dispatch<React.SetStateAction<boolean>>
     themeResolved: boolean
@@ -35,6 +38,7 @@ const DEFAULT_CONTEXT: UIContextType = {
     setMainView: () => { },
     isBooting: false,
     setIsBooting: () => { },
+    enterSpace: () => { },
     navUtilityExpanded: false,
     setNavUtilityExpanded: () => { },
     themeResolved: false
@@ -53,9 +57,33 @@ export function UIProvider({ children }: { children: ReactNode }) {
     })
     const [isTerminalOpen, setIsTerminalOpen] = useState(false)
     const [mainView, setMainView] = useState<MainView>('dashboard')
+
+    // Boot state stays `true` until one of two things happens:
+    //  - a returning user has already entered the space (persisted flag → resolved pre-paint below)
+    //  - the user explicitly clicks "Enter the Space" (enterSpace())
+    // It is never reset by navigation, remounts, or page effects.
     const [isBooting, setIsBooting] = useState<boolean>(true)
     const [navUtilityExpanded, setNavUtilityExpanded] = useState(false)
     const [themeResolved, setThemeResolved] = useState(false)
+
+    // Resolve persisted entry state before first paint so returning users
+    // land directly in the application — no BootLoader flash.
+    useLayoutEffect(() => {
+        if (typeof window !== 'undefined') {
+            try {
+                if (localStorage.getItem(BOOT_ENTERED_KEY) === 'true') {
+                    setIsBooting(false)
+                }
+            } catch { }
+        }
+    }, [])
+
+    const enterSpace = () => {
+        try {
+            localStorage.setItem(BOOT_ENTERED_KEY, 'true')
+        } catch { }
+        setIsBooting(false)
+    }
 
     // Initialize from localStorage before paint — matches inline script in layout.tsx
     useLayoutEffect(() => {
@@ -279,6 +307,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
             isTerminalOpen, setIsTerminalOpen,
             mainView, setMainView,
             isBooting, setIsBooting,
+            enterSpace,
             navUtilityExpanded, setNavUtilityExpanded,
             themeResolved
         }}>

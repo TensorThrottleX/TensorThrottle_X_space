@@ -4,19 +4,13 @@ import { useEffect, useState } from 'react'
 import { fetchAnimeList } from '@/features/anime-universe/assets/loader'
 import { AnimeLayout } from '@/features/anime-universe/components/layout/AnimeLayout'
 import { CinematicIntro } from '@/features/anime-universe/components/layout/CinematicIntro'
-import { useUI } from '@/components/providers/UIProvider'
 import type { Anime } from '@/features/anime-universe/models/Anime'
 
 export function AnimeUniverse({ initialSlug }: { initialSlug?: string }) {
-  const { setIsBooting } = useUI()
   const [animeList, setAnimeList] = useState<Anime[]>([])
   const [defaultUniverse, setDefaultUniverse] = useState<Anime | null>(null)
   const [activeIndex, setActiveIndex] = useState(-1)
   const [isReady, setIsReady] = useState(false)
-
-  useEffect(() => {
-    setIsBooting(false)
-  }, [setIsBooting])
 
   useEffect(() => {
     fetchAnimeList()

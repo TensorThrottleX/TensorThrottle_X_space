@@ -621,14 +621,15 @@ function GravitationalGlow() {
 // MAIN EXPORT
 // ═══════════════════════════════════════════════════════════════════════════
 
-export default function BlackHoleCore({ reducedMotion, interactionActive }) {
+export default function BlackHoleCore({ reducedMotion, interactionActive, cardFocus }) {
   const globalTimeRef = useRef(0);
   const timeScaleRef = useRef(1);
   const targetTimeScaleRef = useRef(1);
   const debounceRef = useRef(null);
 
   useEffect(() => {
-    if (interactionActive) {
+    // CARD_FOCUS — hard freeze; no easing back up while a card is open.
+    if (interactionActive || cardFocus) {
       if (debounceRef.current) clearTimeout(debounceRef.current);
       targetTimeScaleRef.current = 0;
       timeScaleRef.current = 0; // immediate snap

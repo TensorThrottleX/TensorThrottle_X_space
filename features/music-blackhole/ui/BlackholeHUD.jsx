@@ -42,7 +42,13 @@ function MiniPlayer({ engine, tracks }) {
 
     const unsub = engine.subscribe((state) => {
       if (state.track) {
-        setCurrentSong(state.track);
+        setCurrentSong((prev) => {
+          if (prev?.id !== state.track.id) {
+            setProgress(0);
+            setCurrentTime(0);
+          }
+          return state.track;
+        });
         const parent = tracks.find(t => t.songs?.some(s => s.id === state.track.id));
         if (parent && parent.songs) {
           setParentTrack(parent);

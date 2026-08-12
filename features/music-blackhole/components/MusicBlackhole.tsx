@@ -43,11 +43,15 @@ function BloomPass({ enableBloom }: { enableBloom: boolean }) {
 // toward its position over ~600ms. The camera doesn't teleport — it
 // glides. When deselected, target returns to origin (the black hole).
 
-function CameraFocus({ selectedTrack, controlsRef }: { selectedTrack: any; controlsRef: React.RefObject<any> }) {
+function CameraFocus({ selectedTrack, controlsRef, frozen }: { selectedTrack: any; controlsRef: React.RefObject<any>; frozen: boolean }) {
   const targetVec = useRef(new THREE.Vector3(0, 0, 0));
   const currentTarget = useRef(new THREE.Vector3(0, 0, 0));
+  const frozenRef = useRef(frozen);
+  useEffect(() => { frozenRef.current = frozen; }, [frozen]);
 
   useFrame(() => {
+    // CARD_FOCUS — freeze camera interpolation at its exact current state.
+    if (frozenRef.current) return;
     const controls = controlsRef.current;
     if (!controls) return;
 
@@ -95,6 +99,12 @@ export default function MusicBlackhole({
   const [reduceMotion, setReduceMotion] = useState(false);
   const [announcement, setAnnouncement] = useState("");
   const controlsRef = useRef<any>(null);
+
+  // Global interaction state machine:
+  //   WORLD_ACTIVE — full orbital simulation running
+  //   CARD_FOCUS   — a Life Instance Card is open; entire orbital world frozen
+  const interactionMode = selectedId ? "CARD_FOCUS" : "WORLD_ACTIVE";
+  const cardFocus = interactionMode === "CARD_FOCUS";
 
   const { tracks, clusters } = useMemo(() => {
     return rawTracks.length > 0 ? buildBlackhole(rawTracks) : EMPTY_BLACKHOLE;
@@ -182,15 +192,16 @@ export default function MusicBlackhole({
           resize={{ scroll: false }}
         >
 
-          <ParallaxRig reducedMotion={reduceMotion}>
+          <ParallaxRig reducedMotion={reduceMotion} frozen={cardFocus}>
             <group rotation={[0.4, 0, 0.4]}>
-              <BlackHoleCore reducedMotion={reduceMotion} interactionActive={interactionActive} />
+              <BlackHoleCore reducedMotion={reduceMotion} interactionActive={interactionActive} cardFocus={cardFocus} />
                 <SolarSystem
                   tracks={tracks}
                   hoveredId={hoveredId}
                   selectedId={selectedId}
                   reducedMotion={reduceMotion}
                   interactionActive={interactionActive}
+                  cardFocus={cardFocus}
                   onHover={handleHover}
                   onSelect={(track: any) => { handleSelect(track); }}
                   onDoubleClick={(track: any) => { 
@@ -211,14 +222,14 @@ export default function MusicBlackhole({
             )}
           </ParallaxRig>
 
-          {/* Camera focus follows selected track */}
-          <CameraFocus selectedTrack={selectedTrack} controlsRef={controlsRef} />
+          {/* Camera focus follows selected track — frozen while a card is open */}
+          <CameraFocus selectedTrack={selectedTrack} controlsRef={controlsRef} frozen={cardFocus} />
 
           <OrbitControls 
             ref={controlsRef}
             enablePan={false}
-            enableZoom={true}
-            enableRotate={true}
+            enableZoom={!cardFocus}
+            enableRotate={!cardFocus}
             autoRotate={false}
             minDistance={8}
             maxDistance={300}
@@ -249,7 +260,7 @@ export default function MusicBlackhole({
             tracks={tracks}
           />
         </div>
-        <KeyboardStarList tracks={tracks} selectedId={selectedId} onFocusTrack={handleSelect} />
+        <KeyboardStarList tracks={tracks} selectedId={selectedId} onFocusTrack={cardFocus ? () => {} : handleSelect} />
         
         {/* Cinematic First-Visit Intro */}
         <CinematicIntro onComplete={() => {}} />

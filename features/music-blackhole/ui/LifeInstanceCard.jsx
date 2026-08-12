@@ -74,8 +74,13 @@ export default function LifeInstanceCard({ track, engine, onPointerEnter, onPoin
     if (typeof engine.getState === 'function') {
       const state = engine.getState();
       setIsPlaying(state.track?.id === currentSong?.id && state.status === "playing");
-    } else if (engine.currentTrack?.id === currentSong?.id && engine.audio && !engine.audio.paused) {
-      setIsPlaying(true);
+    } else {
+      const active = engine.currentTrack?.id === currentSong?.id && engine.audio && !engine.audio.paused;
+      setIsPlaying(!!active);
+      if (!active && engine.currentTrack?.id !== currentSong?.id) {
+        setProgress(0);
+        setCurrentTime(0);
+      }
     }
     
     const unsub = engine.subscribe((state) => {
@@ -475,14 +480,40 @@ export default function LifeInstanceCard({ track, engine, onPointerEnter, onPoin
             color: #888888;
             text-transform: uppercase;
           }
+
+          .life-instance-closer {
+            flex-shrink: 0;
+            padding: 18px 32px 22px 32px;
+            border-top: 1px solid #1c1c1c;
+            background: #0a0a0a;
+          }
+          .closer-label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #555555;
+            margin-bottom: 10px;
+            font-weight: 600;
+          }
+          .closer-quote {
+            font-size: 14px;
+            line-height: 1.55;
+            color: #cccccc;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            white-space: pre-wrap;
+          }
         `}</style>
         
-        {/* Stop propagation on pointer events to prevent outside click from closing the card */}
+        {/* Stop propagation on pointer events to prevent outside click from closing the card.
+            Wheel/touch isolation keeps card scrolling from ever reaching the 3D canvas. */}
         <div 
           className={`life-instance-card ${mounted ? 'mounted' : ''}`}
           onPointerDown={(e) => e.stopPropagation()}
           onPointerUp={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
           onPointerEnter={onPointerEnter}
           onPointerLeave={onPointerLeave}
         >
@@ -593,6 +624,14 @@ export default function LifeInstanceCard({ track, engine, onPointerEnter, onPoin
             </div>
             
           </div>
+
+          {/* Closing thought — sourced from the song's hardHittingLine */}
+          {currentSong.hardHittingLine && (
+            <div className="life-instance-closer">
+              <div className="closer-label">MOST HITTING LINE</div>
+              <div className="closer-quote">“{currentSong.hardHittingLine}”</div>
+            </div>
+          )}
         </div>
       </Html>
     </group>

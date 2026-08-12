@@ -50,6 +50,7 @@ function CinematicPlanet({
   onSelect,
   onDoubleClick,
   reducedMotion,
+  cardFocus,
   orbitTimeRef,
   timeScaleRef
 }) {
@@ -62,7 +63,8 @@ function CinematicPlanet({
   const worldPos = useMemo(() => new THREE.Vector3(), []);
   
   useFrame((state, delta) => {
-    if (reducedMotion) return;
+    // CARD_FOCUS — full simulation freeze: no orbital phase, no self-rotation.
+    if (reducedMotion || cardFocus) return;
     const currentDelta = delta * (timeScaleRef?.current ?? 1);
     
     // Self rotation
@@ -103,10 +105,15 @@ function CinematicPlanet({
       
       <group 
         ref={groupRef}
-        onPointerOver={(e) => { e.stopPropagation(); onHover(data); document.body.style.cursor = 'pointer'; }}
-        onPointerOut={(e) => { onHover(null); document.body.style.cursor = 'auto'; }}
-        onPointerUp={(e) => { e.stopPropagation(); onSelect(data); }}
-        onDoubleClick={(e) => { e.stopPropagation(); if (onDoubleClick) onDoubleClick(data); }}
+        {...(cardFocus ? {
+          // CARD_FOCUS — raycasting disabled: no hover, no select, no double-click
+          raycast: () => null,
+        } : {
+          onPointerOver: (e) => { e.stopPropagation(); onHover(data); document.body.style.cursor = 'pointer'; },
+          onPointerOut: (e) => { onHover(null); document.body.style.cursor = 'auto'; },
+          onPointerUp: (e) => { e.stopPropagation(); onSelect(data); },
+          onDoubleClick: (e) => { e.stopPropagation(); if (onDoubleClick) onDoubleClick(data); },
+        })}
       >
         <mesh ref={meshRef} renderOrder={10}>
           <sphereGeometry args={[data.planet.size, 64, 64]} />
@@ -136,7 +143,7 @@ function CinematicPlanet({
 
 // ─── CENTRAL IDENTITY & MUSICAL STRINGS ──────────────────────────────────────
 
-function MusicalStrings({ tracks, active }) {
+function MusicalStrings({ tracks, active, frozen }) {
   const lineRef = useRef();
   const matRef = useRef();
 
@@ -147,8 +154,14 @@ function MusicalStrings({ tracks, active }) {
     return geo;
   }, [tracks]);
 
+  const frozenRef = useRef(frozen);
+  useEffect(() => { frozenRef.current = frozen; }, [frozen]);
+
   useFrame((state, delta) => {
     if (!lineRef.current || !matRef.current) return;
+    
+    // CARD_FOCUS — freeze the string resonance at its current state.
+    if (frozenRef.current) return;
     
     // Smooth opacity transition (300-700ms)
     const targetOpacity = active ? 0.35 : 0;
@@ -197,12 +210,16 @@ function MusicalStrings({ tracks, active }) {
   );
 }
 
-function CentralIdentity({ tracks }) {
+function CentralIdentity({ tracks, frozen }) {
   const [active, setActive] = useState(false);
   const glowRef = useRef();
   const uiRef = useRef();
+  const frozenRef = useRef(frozen);
+  useEffect(() => { frozenRef.current = frozen; }, [frozen]);
 
   useFrame((state, delta) => {
+    // CARD_FOCUS — freeze glow/idle animations at their exact current state.
+    if (frozenRef.current) return;
     if (glowRef.current) {
       const targetOpacity = active ? 0.6 : 0;
       glowRef.current.opacity = THREE.MathUtils.lerp(glowRef.current.opacity, targetOpacity, delta * 3);
@@ -220,8 +237,8 @@ function CentralIdentity({ tracks }) {
       <mesh 
         visible={false} 
         args={[new THREE.SphereGeometry(7.0, 16, 16)]} 
-        onPointerOver={(e) => { e.stopPropagation(); setActive(true); document.body.style.cursor = 'pointer'; }}
-        onPointerOut={() => { setActive(false); document.body.style.cursor = 'auto'; }}
+        onPointerOver={frozen ? undefined : (e) => { e.stopPropagation(); setActive(true); document.body.style.cursor = 'pointer'; }}
+        onPointerOut={frozen ? undefined : () => { setActive(false); document.body.style.cursor = 'auto'; }}
       />
 
       {/* Central Glow (subtly brightens on hover) */}
@@ -238,7 +255,7 @@ function CentralIdentity({ tracks }) {
       </mesh>
 
       {/* Musical Strings connecting to Life Moments */}
-      <MusicalStrings tracks={tracks} active={active} />
+      <MusicalStrings tracks={tracks} active={active} frozen={frozen} />
 
       {/* Central Card using SongCard visual language */}
       <Html center zIndexRange={[60, 0]} style={{ pointerEvents: "none" }}>
@@ -312,7 +329,8 @@ export default function SolarSystem({
   onSelect,
   onDoubleClick,
   reducedMotion,
-  interactionActive
+  interactionActive,
+  cardFocus
 }) {
   const { camera } = useThree();
   
@@ -366,12 +384,13 @@ export default function SolarSystem({
           onSelect={onSelect}
           onDoubleClick={onDoubleClick}
           reducedMotion={reducedMotion}
+          cardFocus={cardFocus}
           orbitTimeRef={orbitTimeRef}
           timeScaleRef={timeScaleRef}
         />
       ))}
 
-      <CentralIdentity tracks={tracks} />
+      <CentralIdentity tracks={tracks} frozen={cardFocus} />
     </group>
   );
 }

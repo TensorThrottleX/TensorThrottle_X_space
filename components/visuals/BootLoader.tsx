@@ -26,7 +26,7 @@ const AdaptiveImage = ({ basePath, alt, className }: { basePath: string; alt?: s
 };
 
 export function BootLoader() {
-    const { setIsBooting, renderMode, toggleRenderMode } = useUI()
+    const { enterSpace, renderMode, toggleRenderMode } = useUI()
     const isBright = renderMode === 'bright'
     const [stage, setStage] = useState<'booting' | 'intro' | 'done'>('booting')
     const [progress, setProgress] = useState(0)
@@ -699,7 +699,7 @@ export function BootLoader() {
                                                 </motion.p>
                                                 <motion.button
                                                     variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } }}
-                                                    onClick={() => { setStage('done'); setIsBooting(false); }}
+                                                    onClick={() => { enterSpace(); setStage('done'); }}
                                                     className={`group relative overflow-hidden px-14 py-5 rounded-full font-medium tracking-wide transition-all shadow-xl hover:-translate-y-1 active:scale-95 flex items-center justify-center min-w-[200px] ${isBright ? 'bg-black text-white hover:bg-black/90' : 'bg-white text-black hover:bg-white/90'}`}
                                                     style={{ fontFamily: '"Alfa Slab One", serif', letterSpacing: '0.1em' }}
                                                 >

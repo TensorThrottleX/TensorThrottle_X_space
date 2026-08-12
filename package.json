@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@11.21.0",
   "scripts": {
-    "dev": "set NODE_OPTIONS=--max-old-space-size=4096 && next dev",
+    "dev": "set NODE_OPTIONS=--max-old-space-size=4096 && next dev --webpack",
     "build": "node scripts/generate-manifest.js && next build",
     "start": "next start",
     "lint": "next lint"
