@@ -5,7 +5,7 @@ export function CinematicIntro({ onComplete }: { onComplete?: () => void }) {
   const [visible, setVisible] = useState(() => {
     if (typeof window === 'undefined') return true;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-    if (localStorage.getItem("anime-universe-intro-seen")) return false;
+    // localStorage check removed temporarily for review
     return true;
   });
 
@@ -30,7 +30,7 @@ export function CinematicIntro({ onComplete }: { onComplete?: () => void }) {
     const t6 = setTimeout(() => {
       setVisible(false);
       if (typeof window !== 'undefined') {
-        localStorage.setItem("anime-universe-intro-seen", "true");
+        // localStorage.setItem("anime-universe-intro-seen", "true");
       }
       onComplete?.();
     }, 6600); // Wait for the fade out transition (600-900ms)
@@ -63,8 +63,9 @@ export function CinematicIntro({ onComplete }: { onComplete?: () => void }) {
         opacity: stage >= 1 ? 1 : 0,
         transform: stage >= 1 ? "translateY(0)" : "translateY(10px)",
         transition: "opacity 1s ease, transform 1s ease",
-        fontSize: 12, letterSpacing: "0.25em",
-        color: "rgba(255,255,255,0.4)",
+        fontSize: 14, letterSpacing: "0.25em",
+        fontWeight: 700,
+        color: "rgba(255,255,255,0.7)",
         textTransform: "uppercase",
         marginBottom: 32
       }}>
@@ -75,13 +76,15 @@ export function CinematicIntro({ onComplete }: { onComplete?: () => void }) {
         opacity: stage >= 2 ? 1 : 0,
         transform: stage >= 2 ? "translateY(0)" : "translateY(15px)",
         transition: "opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
-        fontSize: 32, fontWeight: 300,
+        fontSize: 28, fontWeight: 300,
         letterSpacing: "0.02em",
-        lineHeight: 1.3,
+        lineHeight: 1.4,
         marginBottom: 64
       }}>
-        Some stories are watched.<br/>
-        Others become a part of you.
+        Worlds we never lived in.<br/>
+        Characters we never met.<br/>
+        Yet somehow, they changed us.<br/>
+        And stayed with us.
       </div>
 
       <div style={{

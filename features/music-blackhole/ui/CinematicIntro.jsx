@@ -5,7 +5,7 @@ export default function CinematicIntro({ onComplete }) {
   const [visible, setVisible] = useState(() => {
     if (typeof window === 'undefined') return true;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-    if (localStorage.getItem("music-blackhole-intro-seen")) return false;
+    // localStorage check removed temporarily for review
     return true;
   });
 
@@ -28,11 +28,10 @@ export default function CinematicIntro({ onComplete }) {
     // 5.8s - Fade out
     const t5 = setTimeout(() => setStage(5), 5800);
     
-    // 6.6s - Complete
     const t6 = setTimeout(() => {
       setVisible(false);
       if (typeof window !== 'undefined') {
-        localStorage.setItem("music-blackhole-intro-seen", "true");
+        // localStorage.setItem("music-blackhole-intro-seen", "true");
       }
       onComplete?.();
     }, 6600); // Wait for the fade out transition
