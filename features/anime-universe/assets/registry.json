@@ -250,7 +250,7 @@
     "audioTracks": [
       "/media/universe/anime/audio/Dragon%20Ball/Dragon%20Ball.m4a"
     ],
-    "updatedAt": "2026-08-10T03:06:12.274Z",
+    "updatedAt": "2026-08-12T10:12:45.557Z",
     "narrativeData": {
       "id": "Dragon Ball",
       "index": 1,
@@ -298,7 +298,7 @@
         "title": "Letting Vegeta live.",
         "body": "Goku asks Krillin to spare Vegeta because he wants another chance to fight him. On the surface it is an almost ridiculous decision. But to me it captures the purest part of Goku's relationship with competition. Vegeta wasn't simply an enemy to eliminate. He was proof that Goku still had somewhere to go. The stronger opponent became a reason to keep training. It stripped competition of some of its bitterness and replaced it with curiosity: if someone can reach this level, maybe I can reach it too.",
         "episode": "Saiyan Saga",
-        "image": ""
+        "image": "https://i.pinimg.com/736x/56/82/6a/56826ad882d1c587b9e1c5b94a8dbf8b.jpg"
       },
       "memoryCards": {
         "question": "What stayed with me after the screen went dark?",
@@ -308,7 +308,7 @@
             "title": "The Gravity Chamber",
             "text": "The idea that the most important work happens when nobody is watching. Training isn't punishment before the real story begins. Training is the story. The gravity chamber became a metaphor for the private work required to become someone capable of handling the next level.",
             "tag": "Discipline",
-            "image": ""
+            "image": "https://static.wikia.nocookie.net/dragonball/images/d/da/VegetaStruggling.Ep.124.png/revision/latest?cb=20220814224423"
           },
           {
             "symbol": "◇",
@@ -322,7 +322,7 @@
             "title": "The Tournament",
             "text": "A place where being beaten does not have to be humiliating. You can lose, learn exactly why you lost, respect the person who defeated you and come back stronger. Competition became a classroom rather than an insult.",
             "tag": "Playfulness",
-            "image": ""
+            "image": "https://static.wikia.nocookie.net/dragonball/images/f/f6/Tournament_of_Power_Arena.png/revision/latest/scale-to-width-down/1000?cb=20210610013850"
           }
         ]
       },
@@ -446,10 +446,12 @@
       }
     ],
     "coverImage": "/media/universe/anime/cover/Naruto/Naruto.jpg",
-    "videoUrl": "/media/universe/anime/video/Naruto/Naruto.mp4",
+    "videoUrl": "/media/universe/anime/video/Naruto/Naruto%201.mp4",
     "audioTracks": [
       "/media/universe/anime/audio/Naruto/Naruto%201.m4a",
-      "/media/universe/anime/audio/Naruto/Naruto%202.mp3"
+      "/media/universe/anime/audio/Naruto/Naruto%202.m4a",
+      "/media/universe/anime/audio/Naruto/Naruto%203.mp3",
+      "/media/universe/anime/audio/Naruto/Naruto%204.m4a"
     ],
     "updatedAt": "2026-08-10T06:07:38.747Z",
     "narrativeData": {
@@ -1021,201 +1023,230 @@
     }
   },
   {
-    "id": "BlueLock",
-    "index": 4,
-    "title": "Blue Lock",
-    "subtitle": "Egoist striker project",
-    "description": "A radical take on sports anime that abandons the traditional power of friendship for raw, unadulterated ego. It dissects the psychology of what makes a world-class striker, emphasizing that to stand at the pinnacle, one must be willing to consume others' dreams.",
-    "accentColor": "#3b82f6",
-    "quotes": [
-      "I will be the best striker in the world.",
-      "Devour your opponents.",
-      "Football is not a game of friendship, it's a game of ego."
-    ],
+    "id": "attack-on-titan",
+    "index": 3,
+    "title": "Attack on Titan",
+    "subtitle": "When certainty disappears",
+    "description": "",
+    "accentColor": "#22d3ee",
+    "quotes": [],
     "characters": [
       {
-        "name": "Yoichi Isagi",
-        "role": "Protagonist"
+        "name": "Eren Yeager",
+        "role": "The warning"
       },
       {
-        "name": "Meguru Bachira",
-        "role": "Ally / Playmaker"
+        "name": "Erwin Smith",
+        "role": "The burden"
       },
       {
-        "name": "Rin Itoshi",
-        "role": "Rival"
+        "name": "Levi Ackerman",
+        "role": "The standard"
       }
     ],
-    "coverImage": "/media/universe/anime/cover/BlueLock/BlueLock.png",
-    "videoUrl": "/media/universe/anime/video/Blue%20Lock/Blue%20Lock.mp4",
+    "coverImage": "/media/universe/anime/cover/attack-on-titan/attack-on-titan.jpg",
+    "videoUrl": "/media/universe/anime/video/attack-on-titan/Attack%20on%20Titans.mp4",
     "audioTracks": [
-      "/media/universe/anime/audio/Blue%20Lock/Blue%20Lock%201.m4a",
-      "/media/universe/anime/audio/Blue%20Lock/Blue%20Lock%202.m4a"
+      "/media/universe/anime/audio/attack-on-titan/attack-on-titan.m4a"
     ],
-    "updatedAt": "2026-08-09T18:03:51.548Z",
+    "updatedAt": "2026-08-12T10:14:25.713Z",
     "narrativeData": {
-      "id": "BlueLock",
-      "index": 4,
-      "title": "Blue Lock",
-      "subtitle": "Egoist striker project",
-      "description": "A radical take on sports anime that abandons the traditional power of friendship for raw, unadulterated ego. It dissects the psychology of what makes a world-class striker, emphasizing that to stand at the pinnacle, one must be willing to consume others' dreams.",
-      "accentColor": "#3b82f6",
-      "quotes": [
-        "I will be the best striker in the world.",
-        "Devour your opponents.",
-        "Football is not a game of friendship, it's a game of ego."
-      ],
-      "jpTitle": "Blue Lock",
-      "year": 2024,
-      "genre": "Anime",
+      "id": "attack-on-titan",
+      "index": 3,
+      "title": "Attack on Titan",
+      "subtitle": "When certainty disappears",
+      "jpTitle": "進撃の巨人",
+      "year": 2013,
+      "genre": "Seinen",
       "poster": "",
-      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
       "entry": {
-        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
-        "breathQuote": "People who can't decide anything for themselves and just flow with the crowd will never be the best in the world at anything."
+        "breathQuote": "I started watching Attack on Titan thinking I knew who the monsters were. By the end, I was more interested in asking why people become what they become, and how easily I can call someone wrong when I only know half their story."
       },
       "reflection": {
-        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
-        "quote": "Blue Lock made me confront something I had spent years politely hiding from myself: that my humility was often just fear wearing good manners. This show believes ambition is not the problem — pretending not to have it is.",
+        "quote": "What stayed with me wasn't the question of who was right. It was how quickly my idea of right and wrong changed when I was finally shown what the other side had lived through.",
         "tags": [
-          "Anime",
-          "Journey",
-          "Reflection"
+          "perspective",
+          "freedom",
+          "truth",
+          "morality",
+          "responsibility"
         ],
-        "whatIKept": "I grew up being praised for being 'chill' — for not wanting things too loudly. Blue Lock looked directly at that persona and called it what it is: a lack of a goal sharp enough to be selfish about. The series strips friendship away from competition and asks what is left when you have to win alone, against people you like. It was uncomfortable, then clarifying. It matters to me because it gave me permission to want things specifically, publicly, and competitively — and it gave me a framework for turning jealousy into measurement rather than resentment.",
-        "definingScene": "In a dying moment of a losing game, Isagi's vision sharpens and he sees the field as a flow of possibilities — and chooses the one selfish path that wins.",
-        "whoItMadeMeThinkAbout": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
+        "whatIKept": "I learned to be more careful with certainty. When I first see someone doing something I think is wrong, my first instinct is usually to judge the action. AOT made me think about what came before it. What did they lose? What were they taught? What were they afraid of? That doesn't make every action acceptable. It just reminds me that understanding someone and agreeing with them are two completely different things.",
+        "definingScene": "The ocean. I had spent so much time watching the characters fight just to reach that moment. So when they finally got there, I expected it to feel like freedom. Instead, Eren looked across the ocean and saw another enemy. That stayed with me because sometimes we imagine that one achievement, one place, or one answer will finally make everything feel complete. Then we reach it and realize the world is still there.",
+        "whoItMadeMeThinkAbout": "People I have judged from a distance. People whose decisions I couldn't understand because I didn't know what they had been through. And eventually, myself — especially the moments when I felt completely certain that my way of seeing something was the only reasonable one."
       },
       "thoughtCascade": [
         {
-          "thought": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
-          "micro": "What hit hardest"
+          "thought": "They're the monsters. We just need to survive.",
+          "micro": "At first"
         },
         {
-          "thought": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
-          "micro": "The idea I kept"
+          "thought": "Why are they doing this?",
+          "micro": "Then"
         },
         {
-          "thought": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
-          "micro": "How I see it today"
+          "thought": "They were afraid too.",
+          "micro": "The world opened up"
+        },
+        {
+          "thought": "If both sides think they're protecting themselves, who gets to decide who's the villain?",
+          "micro": "Everything changed"
         }
       ],
-      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
       "cinematicMoment": {
-        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
-        "eyebrow": "First Selection",
-        "title": "Bachira's monster",
-        "body": "Bachira confesses he is scared of the 'monster' inside him that loves football too much. The show's answer: keep the monster, give it a target. The thing you fear about yourself is often your best instrument. The work is aim, not amputation.",
-        "episode": "",
-        "image": "https://i.pinimg.com/736x/c7/c8/f8/c7c8f83f7253a0a301ebfcec0e7afe29.jpg"
+        "eyebrow": "The moment everything changed",
+        "title": "The Basement.",
+        "body": "I thought the basement would finally explain everything. It did. But instead of making the story simpler, it made it much bigger. The truth didn't feel like an answer. It felt like a responsibility. Once I knew what was outside the walls, I couldn't go back to believing the world was as simple as I had imagined it.",
+        "episode": "Season 3",
+        "image": ""
       },
       "memoryCards": {
-        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
         "question": "What stayed with me after the screen went dark?",
         "cards": [
           {
             "symbol": "◈",
-            "title": "What hit hardest",
-            "text": "The idea that teamwork can be a crutch. In every other sports story, passing is virtue. Blue Lock showed me that hiding inside the group is often just fear of being seen missing. I recognized my own habit instantly.",
-            "tag": "Insight",
+            "title": "The Ocean",
+            "text": "I thought reaching the ocean meant reaching freedom. Then I realized that sometimes we reach the thing we wanted and discover that our real struggle has only changed.",
+            "tag": "Freedom",
             "image": ""
           },
           {
-            "symbol": "◈",
-            "title": "The idea I kept",
-            "text": "The concept of 'devouring' — absorbing another player's weapon into your own game. I now treat envy as an intake mechanism: when I want what someone has, I study precisely what they did to get it.",
-            "tag": "Insight",
-            "image": "https://i.pinimg.com/736x/c7/c8/f8/c7c8f83f7253a0a301ebfcec0e7afe29.jpg"
+            "symbol": "◇",
+            "title": "The Other Side",
+            "text": "The people I hated stopped being ideas. They became people with names, families, fear, childhoods and reasons. Understanding them didn't make their actions right. It made judging them harder.",
+            "tag": "Perspective",
+            "image": ""
           },
           {
-            "symbol": "◈",
-            "title": "How I see it today",
-            "text": "I no longer believe ego is the opposite of team. Blue Lock's best players are the ones whose ego becomes the team's engine. The healthiest teams I have been on were full of people with loud, specific ambitions that happened to align.",
-            "tag": "Insight",
+            "symbol": "○",
+            "title": "The Walls",
+            "text": "The walls weren't only around the characters. I started noticing the walls I build in my own head whenever I decide I already know the truth.",
+            "tag": "Certainty",
             "image": ""
           }
         ]
       },
-      "timeline": {
-        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
-        "firstImpression": {
-          "heading": "First Impression",
-          "body": "A sports anime about soccer where everyone is a jerk. I almost quit in the first episode — the language of 'ego' and 'devouring' felt like a parody of masculinity."
-        },
-        "whatShifted": {
-          "heading": "What Changed",
-          "body": "Isagi's first 'world-class moment' — his perception of the field reorganizing around a single selfish idea. I realized the show was not about soccer at all. It was about the moment a vague person finally forms a specific ambition."
-        },
-        "whatStayed": {
-          "heading": "What Stayed",
-          "body": "Bachira's line that his inner monster only came out when he found a rival who saw him. The idea that ambition needs an audience — someone to beat — stayed with me as a practical truth."
-        }
-      },
       "altMemories": [
         {
-          "question": "The Team Z elimination game",
-          "heading": "End of First Selection",
-          "body": "Isagi's team plays to survive, and he must decide whether to score himself or set up a teammate — knowing only one of them stays.",
-          "caption": "Kindness and ambition collide most painfully at decision points. The choice reveals what you actually value, regardless of what you say.",
+          "question": "What quietly changed?",
+          "heading": "I became suspicious of certainty.",
+          "body": "I used to think being sure meant I understood something. AOT made me realize that sometimes certainty just means I haven't looked from far enough away. Now, when I feel completely justified, I try to ask what I might be missing.",
+          "caption": "Being certain and being right are not the same thing.",
           "image": "",
           "flip": false
+        },
+        {
+          "question": "What did freedom become?",
+          "heading": "Something heavier than I expected.",
+          "body": "I used to think freedom mostly meant being able to choose whatever I wanted. AOT made me think about what comes after the choice. If my freedom hurts someone else, I still have to carry that consequence. Having a choice doesn't remove responsibility.",
+          "caption": "Freedom also means owning what you choose.",
+          "image": "",
+          "flip": true
         }
       ],
-      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
       "pullQuote": {
-        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
-        "text": "It's the people who take the first shot that change the world, right?",
-        "attribution": "Yoichi Isagi"
+        "text": "I don't need to agree with someone to understand them. And understanding them doesn't mean I have to excuse what they did.",
+        "attribution": "— What I took from AOT"
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "I thought I knew the story",
+          "body": "Titans. Walls. Survival. Revenge. I thought I was watching a story about humans fighting monsters. I had already decided who deserved to win."
+        },
+        "whatShifted": {
+          "heading": "Then the world got bigger",
+          "body": "The further I went, the harder it became to divide everyone into good people and bad people. The enemy had a history. They had families. They were scared too. They had their own version of the story."
+        },
+        "whatStayed": {
+          "heading": "I stopped trusting simple answers",
+          "body": "AOT didn't make me believe that everyone is secretly good. It made me more careful about deciding that someone is simply bad. There can be reasons behind a person without those reasons becoming an excuse."
+        }
       },
       "todayBlock": {
-        "_guide": "Layout: Grid layout. Line: 30-70 words.",
         "intro": "Because of this story, today...",
         "items": [
           {
-            "verb": "I reflect",
-            "line": "Blue Lock gave me a vocabulary for ambition I never had. I now keep a literal list of 'weapons' — skills I have absorbed from people I admire — and a list of 'devours': the specific gaps I want to close next. It turned envy from an emotion into an intake process."
+            "verb": "I notice",
+            "line": "when I start turning someone into a villain before I actually understand what happened."
           },
           {
-            "verb": "I reflect",
-            "line": "It also changed how I approach collaboration. I used to soften my wants to keep the peace. Now I state them loudly and early, trusting that people who can't handle a specific ambition were never going to be good collaborators anyway. The teams I build now run on aligned egos, and they work better."
+            "verb": "I question",
+            "line": "whether I know enough to be as certain as I feel."
+          },
+          {
+            "verb": "I try",
+            "line": "to understand the reason behind someone's decision before deciding what that person is."
+          },
+          {
+            "verb": "I remember",
+            "line": "that understanding someone does not require me to agree with them."
           }
         ]
       },
       "characters": [
         {
-          "name": "Yoichi Isagi",
-          "role": "Protagonist",
-          "mirror": "Isagi is me if I were brave: a person who stops playing to avoid losing and starts playing to prove a specific idea. His growth is the template I use to upgrade my own goal-setting."
+          "name": "Eren Yeager",
+          "role": "The warning",
+          "mirror": "I understood his desire for freedom more than I expected to. That's what made his journey uncomfortable. He reminded me that wanting something deeply doesn't automatically make everything I do for it right."
         },
         {
-          "name": "Meguru Bachira",
-          "role": "Ally / Playmaker",
-          "mirror": "He taught me that joy is a competitive weapon. Bachira plays for the pure thrill of the collision — and he is unstoppable because of it. I try to keep a Bachira channel open in my own work."
+          "name": "Erwin Smith",
+          "role": "The burden",
+          "mirror": "Erwin made me think about decisions where there is no clean answer. Sometimes leadership means choosing between terrible options and accepting that someone will have to carry the weight of that choice."
         },
         {
-          "name": "Rin Itoshi",
-          "role": "Rival",
-          "mirror": "Rin showed me the shape of disciplined obsession: talent plus a mission it serves without question. He is a warning about aim, but a masterclass in intensity."
+          "name": "Levi Ackerman",
+          "role": "The standard",
+          "mirror": "Levi showed me a kind of strength that doesn't need to be loud. Do what needs to be done. Protect who you can. Accept what you couldn't save. Keep moving without pretending it didn't hurt."
         }
       ],
-      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
-      "notes": [],
-      "ideas": [],
+      "notes": [
+        {
+          "text": "Maybe the scariest wall is the one I stop noticing.",
+          "footer": "What the walls meant to me"
+        },
+        {
+          "text": "AOT didn't make me believe everyone is good. It made me more careful about deciding who isn't.",
+          "footer": "Perspective"
+        },
+        {
+          "text": "Sometimes the truth doesn't make life easier. It just makes ignorance impossible.",
+          "footer": "The Basement"
+        },
+        {
+          "text": "Freedom sounds beautiful until you realize someone has to live with the consequences of what you choose.",
+          "footer": "The cost of freedom"
+        }
+      ],
+      "ideas": [
+        {
+          "concept": "Perspectivism",
+          "application": "I try to remember that two people can make completely different decisions because they are looking at completely different worlds. Before judging someone's decision, I want to understand the information, fear and experiences behind it."
+        },
+        {
+          "concept": "The danger of certainty",
+          "application": "When I feel completely certain that I understand someone or something, I try to look again. Not because every side is equally right, but because my view is still only one part of the picture."
+        },
+        {
+          "concept": "Freedom and responsibility",
+          "application": "Having the freedom to choose doesn't mean the choice is free. Every choice affects something outside of me, and growing up means learning to carry those consequences instead of only celebrating the freedom."
+        },
+        {
+          "concept": "Understanding is not approval",
+          "application": "I learned that understanding why someone became who they are doesn't mean I have to defend what they did. I can understand the person, reject the action, and still refuse to reduce them to one label."
+        }
+      ],
       "continueJourney": {
-        "because": "Because this reshaped how I think",
+        "because": "Because AOT left me with a strange kind of doubt. Not doubt in everything, but doubt in the part of me that thinks it has already understood everything. It made me want stories that keep asking what happens when the answer isn't as simple as I wanted it to be.",
         "prompt": "Continue the thought",
         "recommendations": [
           {
-            "title": "Haikyuu!!",
-            "reason": "The mirror universe: the same hunger and growth, expressed through genuine teamwork instead of ego — the healthiest rivalry in anime."
+            "title": "Vinland Saga",
+            "reason": "What happens when you stop measuring strength by how many enemies you can defeat."
           },
           {
-            "title": "Hajime no Ippo",
-            "reason": "A quieter study of the same engine: a shy person becoming relentless, told with deep craft."
-          },
-          {
-            "title": "Classroom of the Elite",
-            "reason": "If Blue Lock's ego theory were applied to school and manipulation instead of soccer. The same cold logic, zero warmth."
+            "title": "Code Geass",
+            "reason": "What happens when you knowingly become the person the world will hate because you believe the future you want is worth the cost."
           }
         ]
       }
@@ -1513,211 +1544,6 @@
           {
             "title": "Hunter x Hunter",
             "reason": "What happens when good intentions, ambition and morality become much more complicated than they first appear."
-          }
-        ]
-      }
-    }
-  },
-  {
-    "id": "attack-on-titan",
-    "index": 5,
-    "title": "Attack on Titan",
-    "subtitle": "When certainty disappears",
-    "description": "",
-    "accentColor": "#22d3ee",
-    "quotes": [],
-    "characters": [
-      {
-        "name": "Eren Yeager",
-        "role": "The warning"
-      },
-      {
-        "name": "Erwin Smith",
-        "role": "The burden"
-      },
-      {
-        "name": "Gabi Braun",
-        "role": "The mirror"
-      }
-    ],
-    "coverImage": "/media/universe/anime/cover/attack-on-titan/attack-on-titan.jpg",
-    "videoUrl": "/media/universe/anime/video/attack-on-titan/Attack%20on%20Titans.mp4",
-    "audioTracks": [
-      "/media/universe/anime/audio/attack-on-titan/attack-on-titan.m4a"
-    ],
-    "updatedAt": "2026-08-09T18:03:51.580Z",
-    "narrativeData": {
-      "id": "attack-on-titan",
-      "index": 5,
-      "title": "Attack on Titan",
-      "subtitle": "When certainty disappears",
-      "jpTitle": "進撃の巨人",
-      "year": 2013,
-      "genre": "Seinen",
-      "poster": "",
-      "_guide_hero": "Layout: Title (1-4 words), jpTitle (1-3 words), subtitle (3-6 words). Poster is right split image (2:3 portrait).",
-      "entry": {
-        "_guide": "Layout: Centered giant text. Limit 15-40 words.",
-        "breathQuote": "I thought I was watching a survival story about good versus evil. I didn't realize I was watching the dismantling of moral certainty."
-      },
-      "reflection": {
-        "_guide": "Layout: Right column split. Quote: 20-50 words. Tags: 2-4 items. Cards: 30-70 words.",
-        "quote": "It taught me that the most dangerous person in any room is the one who has completely stopped doubting their own righteousness.",
-        "tags": [
-          "perspective",
-          "freedom",
-          "cycles",
-          "truth",
-          "morality"
-        ],
-        "whatIKept": "Everyone is acting perfectly rationally based on the story they were told. There is no villain's seat in the theater of the world — only different seat assignments.",
-        "definingScene": "Reiner and Bertholdt on the wall. A world-shattering truth delivered with exhausted weariness. It wasn't a villain's monologue. It was tired soldiers.",
-        "whoItMadeMeThinkAbout": "Anyone I have ever quickly filed under 'enemy' without understanding their context."
-      },
-      "thoughtCascade": [
-        {
-          "thought": "The monsters are just outside.",
-          "micro": "Season 1"
-        },
-        {
-          "thought": "Wait. The monsters are inside.",
-          "micro": "Season 2"
-        },
-        {
-          "thought": "We are the monsters to someone else.",
-          "micro": "Season 3"
-        },
-        {
-          "thought": "Everyone is just acting on the story they were told.",
-          "micro": "Season 4"
-        }
-      ],
-      "_guide_thoughtCascade": "Layout: Left-aligned timeline. Thought: 20-45 words. Micro: 2-5 words.",
-      "cinematicMoment": {
-        "_guide": "Layout: Full width dark section. Body: 40-80 words. Image: 16:9 landscape.",
-        "eyebrow": "The turning point",
-        "title": "The Basement Reveal.",
-        "body": "The walls weren't protecting them from monsters. They were protecting them from the truth. The moment the outside world existed, I started looking for the walls in my own beliefs.",
-        "episode": "Season 3",
-        "image": ""
-      },
-      "memoryCards": {
-        "_guide": "Layout: Hovering glass cards. Question: 5-12 words. Cards: text 30-50 words.",
-        "question": "What stayed with me after the screen went dark?",
-        "cards": [
-          {
-            "symbol": "◈",
-            "title": "The Ocean",
-            "text": "A destination that was supposed to be freedom, and turned out to be just another boundary.",
-            "tag": "Disillusionment",
-            "image": ""
-          },
-          {
-            "symbol": "◇",
-            "title": "The Forest",
-            "text": "The cycle of hatred made physical. We have to lead the children out of it.",
-            "tag": "Legacy",
-            "image": ""
-          },
-          {
-            "symbol": "○",
-            "title": "The Door",
-            "text": "The basement door. Knowledge you can't un-know once it's opened.",
-            "tag": "Truth",
-            "image": ""
-          }
-        ]
-      },
-      "altMemories": [
-        {
-          "question": "What quietly changed?",
-          "heading": "My definition of freedom.",
-          "body": "I used to think freedom was the ultimate virtue. Eren showed me that freedom pursued without empathy is just tyranny by another name.",
-          "caption": "Freedom as a weapon.",
-          "image": "",
-          "flip": false
-        }
-      ],
-      "_guide_altMemories": "Layout: Alternating split layout. Body: 50-100 words. Image: 1:1 or 4:5.",
-      "pullQuote": {
-        "_guide": "Layout: Giant dramatic quote. Text: 10-30 words.",
-        "text": "Everyone had to be drunk on something to keep pushing on. Everyone was a slave to something.",
-        "attribution": "— Kenny Ackerman"
-      },
-      "timeline": {
-        "_guide": "Layout: Center timeline nodes. Body: 30-60 words.",
-        "firstImpression": {
-          "heading": "A brutal action series",
-          "body": "I came for the spectacle — ODM gear, titans, constant peril. A clean fight between humanity and monsters."
-        },
-        "whatShifted": {
-          "heading": "The loss of the moral high ground",
-          "body": "The story crossed the ocean, and I was forced to empathize with the people who caused the first three seasons."
-        },
-        "whatStayed": {
-          "heading": "The danger of narrative",
-          "body": "Propaganda and historical narrative are deadlier than any physical weapon."
-        }
-      },
-      "todayBlock": {
-        "_guide": "Layout: Grid layout. Line: 30-70 words.",
-        "intro": "Because of this story, today...",
-        "items": [
-          {
-            "verb": "I notice",
-            "line": "when I am too sure that I'm the protagonist of a conflict."
-          },
-          {
-            "verb": "I question",
-            "line": "what information I'm missing that makes the other person's actions perfectly rational to them."
-          },
-          {
-            "verb": "I try",
-            "line": "to find the 'walls' I've built around my own worldview."
-          }
-        ]
-      },
-      "characters": [
-        {
-          "name": "Eren Yeager",
-          "role": "The warning",
-          "mirror": "He showed me how easily the desire to protect your own can curdle into the willingness to destroy everything else."
-        },
-        {
-          "name": "Erwin Smith",
-          "role": "The burden",
-          "mirror": "He reflected the terrible cost of leadership — the willingness to become a demon for the sake of the truth."
-        },
-        {
-          "name": "Gabi Braun",
-          "role": "The mirror",
-          "mirror": "She made me uncomfortable because she is exactly what Eren was. Conditioning shapes our entire reality."
-        }
-      ],
-      "_guide_characters": "Layout: List layout. Mirror: 30-60 words.",
-      "notes": [
-        {
-          "text": "If you only look at the world from inside your walls, you will eventually burn everything outside them.",
-          "footer": "The Rumbling"
-        }
-      ],
-      "ideas": [
-        {
-          "concept": "Perspectivism",
-          "application": "There is no absolute truth in human conflict, only competing narratives."
-        }
-      ],
-      "continueJourney": {
-        "because": "Because I now distrust anyone — including myself — who has stopped doubting.",
-        "prompt": "Continue the thought",
-        "recommendations": [
-          {
-            "title": "Vinland Saga",
-            "reason": "What happens when you decide you have no enemies."
-          },
-          {
-            "title": "Code Geass",
-            "reason": "The cost of carrying the world's hatred."
           }
         ]
       }
@@ -2539,6 +2365,331 @@
             "reason": "Another underestimated protagonist who builds himself through discipline — with fists instead of a volleyball."
           }
         ]
+      }
+    }
+  },
+  {
+    "id": "BlueLock",
+    "index": 10.5,
+    "title": "Blue Lock",
+    "subtitle": "The ego that refuses to die",
+    "description": "Blue Lock gave me a completely different definition of will. Every other anime talks about determination, dedication, power, resilience, and rising after falling. Blue Lock made me ask a more uncomfortable question: what happens when all of those things disappear? What is left when you have no motivation, no confidence, no natural advantage, no one cheering for you, and nothing external forcing you forward? For me, the answer was ego. Not arrogance. Not looking down on people. Not believing I am automatically better than everyone else. Ego is the part of me that says this is my life, this is what I want, and I refuse to let myself become someone who gives up on it. That is why Isagi and Jinpachi Ego hit me so hard. Neither is simply defined by natural talent. Their real weapon is their willingness to change themselves repeatedly if that is what winning requires. If the version of me that exists today cannot win, then that version has to die. I will learn, adapt, rebuild, and become someone else. Again and again. That is what Blue Lock's ego means to me.",
+    "accentColor": "#3b82f6",
+    "quotes": [
+      "I will be the best striker in the world.",
+      "Devour your opponents.",
+      "Football is not a game of friendship, it's a game of ego."
+    ],
+    "characters": [
+      {
+        "name": "Yoichi Isagi",
+        "role": "The self-rebuilder"
+      },
+      {
+        "name": "Meguru Bachira",
+        "role": "The inner fire"
+      },
+      {
+        "name": "Rin Itoshi",
+        "role": "The obsession"
+      }
+    ],
+    "coverImage": "/media/universe/anime/cover/BlueLock/BlueLock.png",
+    "videoUrl": "/media/universe/anime/video/Blue%20Lock/Blue%20Lock.mp4",
+    "audioTracks": [
+      "/media/universe/anime/audio/Blue%20Lock/Blue%20Lock%201.m4a",
+      "/media/universe/anime/audio/Blue%20Lock/Blue%20Lock%202.m4a"
+    ],
+    "updatedAt": "2026-08-13T06:49:17.897Z",
+    "narrativeData": {
+      "title": "Blue Lock",
+      "subtitle": "The ego that refuses to die",
+      "description": "Blue Lock gave me a completely different definition of will. Every other anime talks about determination, dedication, power, resilience, and rising after falling. Blue Lock made me ask a more uncomfortable question: what happens when all of those things disappear? What is left when you have no motivation, no confidence, no natural advantage, no one cheering for you, and nothing external forcing you forward? For me, the answer was ego. Not arrogance. Not looking down on people. Not believing I am automatically better than everyone else. Ego is the part of me that says this is my life, this is what I want, and I refuse to let myself become someone who gives up on it. That is why Isagi and Jinpachi Ego hit me so hard. Neither is simply defined by natural talent. Their real weapon is their willingness to change themselves repeatedly if that is what winning requires. If the version of me that exists today cannot win, then that version has to die. I will learn, adapt, rebuild, and become someone else. Again and again. That is what Blue Lock's ego means to me.",
+      "accentColor": "#3b82f6",
+      "quotes": [
+        "I will be the best striker in the world.",
+        "Devour your opponents.",
+        "Football is not a game of friendship, it's a game of ego."
+      ],
+      "characters": [
+        {
+          "name": "Yoichi Isagi",
+          "role": "The self-rebuilder",
+          "mirror": "Isagi represents the part of me that refuses to remain loyal to an old version of myself. He is not terrifying because he is always the most talented person in the room. He is terrifying because when something stops working, he is willing to destroy his old understanding of himself and rebuild it. He doesn't ask how to preserve who he was. He asks what he needs to become to win."
+        },
+        {
+          "name": "Meguru Bachira",
+          "role": "The inner fire",
+          "mirror": "Bachira represents the part of me that wants to enjoy the process instead of turning everything into pressure. His monster is not something he suppresses just because other people don't understand it. He accepts the strange, obsessive and instinctive part of himself and turns it into something that makes him dangerous."
+        },
+        {
+          "name": "Rin Itoshi",
+          "role": "The obsession",
+          "mirror": "Rin represents the colder side of ambition—the part that can become completely consumed by one objective. I don't relate to everything about him, but I understand the intensity of having something inside you that refuses to let you settle. He shows what happens when ambition becomes sharp enough to cut away everything that distracts from the goal."
+        }
+      ],
+      "heroReflection": "Blue Lock made me realize that I had misunderstood ego. I used to associate ego with arrogance, selfishness and looking down on other people. Blue Lock made me see another form of it: the refusal to abandon yourself. The belief that your life belongs to you, your goals belong to you, and you are responsible for becoming the person capable of achieving them. Ego is what remains when nobody is coming to save you. It is the voice that says: if the current version of me cannot do it, then I will change the current version of me. I will learn something new, sacrifice something old, rebuild myself, and try again.",
+      "corePerspective": "What hit me hardest about Blue Lock was that it didn't just tell me to work harder. Every anime tells you that. Blue Lock asked what actually drives the work. What makes someone keep going when motivation disappears? What makes someone look at a person better than them and refuse to accept that as the end of their story? For me, that driving force is ego—not arrogance, but ownership. Cristiano Ronaldo is one of the clearest real-world examples of the kind of ego I mean: an extraordinary belief that he can keep demanding more from himself, backed by an almost obsessive commitment to the work. Isagi embodies the same principle differently. He doesn't remain attached to one identity. If his current weapon isn't enough, he evolves. If his understanding is wrong, he abandons it. If another player has something he needs, he studies it, absorbs it and turns it into part of himself. That is what makes Blue Lock so powerful to me. Winning isn't simply becoming stronger. Sometimes winning means becoming someone who did not exist yesterday.",
+      "insights": [
+        {
+          "title": "What hit hardest",
+          "body": "The idea that determination itself is not enough. You need something underneath it that keeps demanding movement when motivation disappears. Blue Lock gave that force a name: ego. Not the ego that says 'I am better than everyone.' The ego that says 'I refuse to abandon what I decided matters to me.'"
+        },
+        {
+          "title": "The idea I kept",
+          "body": "Isagi's ability to devour and reconstruct himself. If another player has a weapon that can take me somewhere I cannot currently reach, I don't have to hate them for having it. I can study it, understand it, adapt it and eventually make it mine. Growth sometimes means killing your attachment to the person you used to be."
+        },
+        {
+          "title": "How I see it today",
+          "body": "I don't see ego as the enemy of humility anymore. I can admit that someone is better than me today without accepting that they have to remain better than me forever. I can respect another person's ability while still wanting to surpass it. That tension doesn't have to become hatred. It can become fuel."
+        }
+      ],
+      "journey": [
+        {
+          "stage": "First Impression",
+          "text": "A football anime where everyone talks like they are trying to become the main character of the universe. The obsession with ego initially felt excessive. I thought it was simply another exaggerated sports philosophy."
+        },
+        {
+          "stage": "What Changed",
+          "text": "Isagi's evolution. I started noticing that he wasn't simply becoming stronger in the traditional sense. He was constantly replacing his understanding of himself. Every time he reached a ceiling, he questioned the identity that had brought him there. That was when I realized Blue Lock was talking about something much bigger than football."
+        },
+        {
+          "stage": "The Turning Point",
+          "text": "The idea that if the current version of yourself cannot win, you have to destroy that version and create another one. That hit me harder than any transformation scene in other anime. Most protagonists protect their identity while growing. Isagi is willing to dismantle his identity if it has become a limitation."
+        },
+        {
+          "stage": "What Stayed",
+          "text": "The idea of an internal fire. Every person talks about willpower, dedication and hard work, but Blue Lock made me ask what keeps that machine running. For me, ego is that engine. It is the refusal to let myself become irrelevant in my own life."
+        },
+        {
+          "stage": "How it affects my thinking today",
+          "text": "I now look at improvement less as adding things to myself and more as replacing things that no longer work. If an old habit, mindset, skill or identity is holding me back, I don't want to protect it simply because it is familiar. If winning requires a different version of me, then I have to become that version."
+        }
+      ],
+      "characterInfluences": [
+        {
+          "name": "Yoichi Isagi",
+          "role": "Protagonist",
+          "influence": "Isagi taught me the value of radical self-reinvention. He doesn't romanticize who he was yesterday. He keeps asking what he needs to become next. His greatest weapon is not one fixed ability—it is his ability to understand the game, understand himself and evolve faster than the people around him."
+        },
+        {
+          "name": "Meguru Bachira",
+          "role": "Ally / Playmaker",
+          "influence": "Bachira taught me that the strange part of yourself does not always need to be controlled. Sometimes the obsession, curiosity or instinct that other people don't understand is exactly where your uniqueness comes from. His 'monster' became something he learned to play with instead of something he needed to kill."
+        },
+        {
+          "name": "Rin Itoshi",
+          "role": "Rival",
+          "influence": "Rin showed me what happens when ambition becomes almost completely concentrated around one objective. His intensity reminds me that wanting something badly enough changes how you train, think, compete and even how you interpret failure."
+        }
+      ],
+      "definingMoments": [
+        {
+          "title": "Isagi's awakening",
+          "context": "First Selection",
+          "text": "Isagi begins to understand that the field is not simply a collection of positions and players. It is a constantly changing system of possibilities, and he can become the person who reads and controls those possibilities. His awakening is not simply gaining a new technique. It is gaining a new way of seeing himself.",
+          "idea": "Sometimes growth begins when you stop asking what you currently are and start asking what you could become."
+        },
+        {
+          "title": "Bachira's monster",
+          "context": "First Selection",
+          "text": "Bachira's inner monster represents the part of him that wants to play, create and find someone capable of understanding him. Instead of destroying that strange internal voice, he learns to use it.",
+          "idea": "The part of you that seems excessive, obsessive or strange can become your greatest weapon if you learn how to aim it."
+        },
+        {
+          "title": "Destroying the old self",
+          "context": "Isagi's evolution",
+          "text": "The most powerful idea for me is not any particular goal. It is Isagi's willingness to abandon an identity once it stops being useful. If the version of him that exists today cannot win, he does not beg the world to change. He changes himself.",
+          "idea": "If the old version of me cannot reach the future I want, I have to let that version end."
+        }
+      ],
+      "quotesWorthCarrying": [
+        {
+          "quote": "People who can't decide anything for themselves and just flow with the crowd will never be the best in the world at anything.",
+          "speaker": "Jinpachi Ego",
+          "why": "This hit me because it attacks passivity at its root. A person can have talent, intelligence and opportunity, but if they never decide what they actually want, they are always living according to someone else's direction. Ego made me understand that choosing your own goal is itself an act of power."
+        },
+        {
+          "quote": "No matter how much you knock on someone's heart, in the end you can't change them. That's why you have to be the one to change yourself.",
+          "speaker": "Yoichi Isagi",
+          "why": "This became one of the ideas I carry outside Blue Lock. You cannot force another person to understand you, change their nature, want what you want or become who you need them to be. The only person you have direct authority over is yourself. If the situation will not change, then sometimes you have to become the variable that does."
+        }
+      ],
+      "realLifeReflection": [
+        "Blue Lock gave me a different relationship with ego. I don't want ego to mean that I think I am automatically better than everyone else. I want it to mean that I take responsibility for my own potential. I can respect someone who is ahead of me and still want to surpass them. I can admit that I am behind and still refuse to accept that as my permanent position.",
+        "The biggest lesson for me is self-reinvention. If something I am doing isn't working, I don't want to protect it simply because it is part of who I have been. If winning requires me to learn something new, change my habits, change my strategy or become a different version of myself, then that is the price. If it means winning, I will destroy my old self and rebuild again—as many times as it takes."
+      ],
+      "continueExploring": [
+        {
+          "id": "Haikyuu",
+          "title": "Haikyuu!!",
+          "note": "The beautiful counterpoint: Haikyuu taught me how strength can emerge from synchronization with other people, while Blue Lock taught me why I still need an individual identity strong enough to contribute something unique."
+        },
+        {
+          "id": "HajimeNoIppo",
+          "title": "Hajime no Ippo",
+          "note": "The physical counterpart to Blue Lock's psychological fire. Ippo showed me what relentless discipline looks like when the ego has to survive round after round."
+        },
+        {
+          "id": "ClassroomOfTheElite",
+          "title": "Classroom of the Elite",
+          "note": "A colder exploration of self-control, strategy and individual superiority, where the battlefield is intelligence rather than football."
+        }
+      ],
+      "id": "BlueLock",
+      "index": 10.5,
+      "jpTitle": "ブルーロック",
+      "year": 2024,
+      "genre": "Anime",
+      "poster": "https://bluelock-anime-en.com/",
+      "entry": {
+        "breathQuote": "I will be the best striker in the world."
+      },
+      "reflection": {
+        "quote": "Blue Lock gave me the language for something I had felt but couldn't properly explain. Every other story told me to have willpower, dedication and resilience. Blue Lock made me ask what creates those things in the first place. For me, it is ego—the part of myself that refuses to disappear. Not arrogance. Not superiority. Ownership. The belief that this is my life and I am responsible for becoming capable of winning it.",
+        "tags": [
+          "Anime",
+          "Journey",
+          "Reflection"
+        ],
+        "whatIKept": "I kept the idea that ego can be protective rather than destructive. It can be the internal force that keeps you moving when nobody else believes in you. Isagi's greatest strength isn't that he never fails. It is that he refuses to let failure define the next version of him. He studies what defeated him, absorbs what he needs and rebuilds. That is the kind of ego I want: not 'I am already the best,' but 'I refuse to stop becoming someone who could be.'",
+        "definingScene": "The moment Isagi realizes that if the current version of himself cannot win, he has to evolve beyond that version.",
+        "whoItMadeMeThinkAbout": "The version of myself that sometimes becomes attached to familiar habits, identities or limitations simply because they are familiar."
+      },
+      "thoughtCascade": [
+        {
+          "thought": "Everyone talks about willpower. But what keeps the will alive when motivation disappears?",
+          "micro": "The question Blue Lock gave me"
+        },
+        {
+          "thought": "Ego doesn't have to mean arrogance. It can mean refusing to abandon yourself.",
+          "micro": "The idea I kept"
+        },
+        {
+          "thought": "Isagi doesn't just improve his skills. He repeatedly destroys his understanding of himself and builds a better one.",
+          "micro": "Isagi's evolution"
+        },
+        {
+          "thought": "If someone is better than me, I can either resent them or study them.",
+          "micro": "Devouring"
+        },
+        {
+          "thought": "Cristiano Ronaldo made this philosophy feel real outside anime: an enormous ego backed by an enormous willingness to work.",
+          "micro": "The real-world parallel"
+        },
+        {
+          "thought": "I don't have to become the best version of myself once. I may have to become a different version of myself repeatedly.",
+          "micro": "Self-reinvention"
+        },
+        {
+          "thought": "Sometimes the person I have to defeat is the version of me that has become comfortable.",
+          "micro": "The real opponent"
+        }
+      ],
+      "memoryCards": {
+        "question": "What stayed with me after the screen went dark?",
+        "cards": [
+          {
+            "symbol": "◈",
+            "title": "The Ego",
+            "text": "Not arrogance. Not superiority. The refusal to abandon yourself or surrender ownership of the life you want.",
+            "tag": "Identity",
+            "image": "https://bluelock-anime-en.com/"
+          },
+          {
+            "symbol": "◈",
+            "title": "The Devour",
+            "text": "When someone has something I lack, I can study it instead of resenting it. Their strength becomes information about what I could become.",
+            "tag": "Growth",
+            "image": "https://bluelock-anime-en.com/"
+          },
+          {
+            "symbol": "◈",
+            "title": "The Rebirth",
+            "text": "If the current version of me cannot win, I don't have to protect that version. I can dismantle it, learn again and rebuild.",
+            "tag": "Reinvention",
+            "image": "https://bluelock-anime-en.com/"
+          }
+        ]
+      },
+      "timeline": {
+        "firstImpression": {
+          "heading": "First Impression",
+          "body": "At first, Blue Lock looked like an exaggerated football anime where everyone was obsessed with themselves. The language of ego, devouring and becoming the world's best felt almost absurd."
+        },
+        "whatShifted": {
+          "heading": "What Changed",
+          "body": "I started understanding that the show wasn't really attacking teamwork. It was attacking passivity. It wanted each player to know what they wanted badly enough to take responsibility for it. That distinction completely changed how I understood the word ego."
+        },
+        "whatStayed": {
+          "heading": "What Stayed",
+          "body": "The idea that the strongest driving force has to come from somewhere inside you. Motivation can disappear. Praise can disappear. People can leave. Talent can reach a ceiling. But if there is something inside you that refuses to let you surrender your own future, you can keep rebuilding."
+        }
+      },
+      "cinematicMoment": {
+        "eyebrow": "The philosophy that stayed",
+        "title": "Destroy the old self",
+        "body": "The most powerful Blue Lock idea for me isn't a particular goal or match. It is Isagi's willingness to change himself completely when the old version stops being enough. He doesn't spend his energy demanding that the world become easier for him. He evolves. He learns another weapon. He changes how he sees the field. He changes how he sees himself. If winning requires another version of him, he becomes that version. That idea hit me because it turns self-improvement into something more radical than simply adding skills. Sometimes growth means letting an old identity die.",
+        "episode": "",
+        "image": "https://bluelock-anime-en.com/"
+      },
+      "altMemories": [
+        {
+          "question": "Is ego really selfishness?",
+          "heading": "The ego that protects you",
+          "body": "Blue Lock changed my definition of ego. I don't see it as believing I am better than everyone else. I see it as refusing to let other people's opinions, failures, circumstances or expectations decide what I am allowed to become. It is ownership of my own ambition.",
+          "caption": "Ego is not 'I am already the best.' It is 'I refuse to stop becoming.'",
+          "image": "https://bluelock-anime-en.com/",
+          "flip": false
+        },
+        {
+          "question": "What does Isagi teach me?",
+          "heading": "Change yourself first",
+          "body": "You can spend your entire life trying to change other people. You can keep asking someone to understand you, support you, become different or give you what you need. Isagi's philosophy points somewhere else: you control your own evolution. If the environment doesn't change, change the person entering it.",
+          "caption": "You cannot rebuild another person. You can rebuild yourself.",
+          "image": "https://bluelock-anime-en.com/",
+          "flip": true
+        }
+      ],
+      "pullQuote": {
+        "text": "If it means winning, I'll destroy my old self and be reborn again as many times as it takes.",
+        "attribution": "What Blue Lock became to me"
+      },
+      "todayBlock": {
+        "intro": "Because of this story, today...",
+        "items": [
+          {
+            "verb": "I reflect",
+            "line": "on whether my goals are actually mine or whether I am unconsciously living according to what other people expect from me."
+          },
+          {
+            "verb": "I remember",
+            "line": "that ego doesn't have to mean arrogance. It can simply mean taking ownership of my own potential."
+          },
+          {
+            "verb": "I study",
+            "line": "people who are ahead of me instead of automatically treating their success as a threat."
+          },
+          {
+            "verb": "I question",
+            "line": "whether an old version of myself is becoming the very thing preventing the next version from existing."
+          },
+          {
+            "verb": "I accept",
+            "line": "that becoming better may require me to abandon habits, identities and assumptions that once felt like part of who I was."
+          },
+          {
+            "verb": "I remind",
+            "line": "myself that motivation can disappear, but I can still choose to keep moving because the decision belongs to me."
+          }
+        ]
+      },
+      "notes": [],
+      "ideas": [],
+      "continueJourney": {
+        "because": "Because Blue Lock taught me that becoming stronger isn't always about adding more power to the person I already am. Sometimes it means having the courage to destroy the version of myself that has reached its limit and rebuild from the ground up. It gave me a name for the thing underneath discipline: ego—not the need to be above everyone else, but the refusal to abandon my own potential.",
+        "prompt": "Continue the thought",
+        "recommendations": []
       }
     }
   },

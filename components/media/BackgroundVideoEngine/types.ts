@@ -10,6 +10,7 @@ export interface BackgroundVideoConfig {
   filter?: string
   /** Disable Picture-in-Picture / pop-out / remote playback for decorative background videos */
   disablePip?: boolean
+  loop?: boolean
 }
 
 export interface BackgroundVideoState {

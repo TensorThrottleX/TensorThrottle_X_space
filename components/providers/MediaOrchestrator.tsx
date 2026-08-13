@@ -25,6 +25,8 @@ export interface MediaSession {
   audioEnabled?: boolean
   /** Prevent the background video from being detached into Picture-in-Picture / a floating player */
   disablePip?: boolean
+  loopVideo?: boolean
+  crossfade?: boolean
   capabilities?: MediaSessionCapabilities
 }
 
@@ -120,10 +122,11 @@ export function MediaOrchestrator({ children }: { children: React.ReactNode }) {
         <AdaptiveRenderingPipeline
           src={activeSession?.videoEnabled !== false ? (activeSession?.assetPackage.videoUrl ?? null) : null}
           context={renderContext}
-          crossfade={true}
+          crossfade={activeSession?.crossfade ?? true}
           opacity={(!isVideoDisabled && activeSession?.videoEnabled !== false) ? 1 : 0}
           className="z-[-1]"
           disablePip={activeSession?.disablePip === true}
+          loop={activeSession?.loopVideo ?? true}
         />
       )}
 

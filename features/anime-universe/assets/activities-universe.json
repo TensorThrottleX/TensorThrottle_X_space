@@ -42,13 +42,13 @@
     "entityId": "BlueLock",
     "action": "Updated",
     "title": "Blue Lock",
-    "description": "Egoist striker project",
+    "description": "The ego that refuses to die",
     "url": "/universe/anime",
     "icon": "Clapperboard",
     "priority": 2,
     "visibility": "public",
-    "createdAt": "2026-08-09T18:03:51.548Z",
-    "updatedAt": "2026-08-09T18:03:51.548Z",
+    "createdAt": "2026-08-13T06:49:17.897Z",
+    "updatedAt": "2026-08-13T06:49:17.897Z",
     "metadata": {
       "section": "anime"
     }
@@ -83,8 +83,8 @@
     "icon": "Clapperboard",
     "priority": 2,
     "visibility": "public",
-    "createdAt": "2026-08-10T03:06:12.274Z",
-    "updatedAt": "2026-08-10T03:06:12.274Z",
+    "createdAt": "2026-08-12T10:12:45.557Z",
+    "updatedAt": "2026-08-12T10:12:45.557Z",
     "metadata": {
       "section": "anime"
     }
@@ -173,8 +173,8 @@
     "icon": "Clapperboard",
     "priority": 2,
     "visibility": "public",
-    "createdAt": "2026-08-09T18:03:51.580Z",
-    "updatedAt": "2026-08-09T18:03:51.580Z",
+    "createdAt": "2026-08-12T10:14:25.713Z",
+    "updatedAt": "2026-08-12T10:14:25.713Z",
     "metadata": {
       "section": "anime"
     }

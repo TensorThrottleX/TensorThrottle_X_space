@@ -13,6 +13,7 @@ import { ReadingFocus } from '@/components/reading-focus'
 import { AnimeNarrativeTemplate } from '@/features/anime-universe/components/narrative'
 import { useScrollProgress } from '@/features/anime-universe/hooks/useScrollProgress'
 import { useEnvironmentTransition } from '@/features/anime-universe/hooks/useEnvironmentTransition'
+import { useAnimeBackgroundSequencer } from '@/features/anime-universe/components/background/hooks/useAnimeBackgroundSequencer'
 import './stage.css'
 
 // ── Default Universe constants ──
@@ -98,6 +99,8 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
     assetPackage: initialAssetPackage,
     audioEnabled: false,
     disablePip: true,
+    crossfade: false,
+    loopVideo: initialAssetPackage.videoUrl ? initialAssetPackage.videoUrl.indexOf('Naruto') === -1 : true, // Rough fallback before effect
     capabilities: {
       supportsBackgroundSwitch: false,
       supportsAudioToggle: false,
@@ -132,9 +135,9 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
       el.src = ''
       return
     }
-    
+
     let currentTrackIndex = 0;
-    
+
     const playTrack = (index: number) => {
       if (index >= tracks.length) {
         index = 0;
@@ -143,7 +146,7 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
       el.src = tracks[currentTrackIndex]
       el.loop = tracks.length === 1;
       el.volume = 0.35
-      el.play().catch(() => {})
+      el.play().catch(() => { })
     }
 
     const handleEnded = () => {
@@ -154,7 +157,7 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
 
     el.addEventListener('ended', handleEnded)
     playTrack(0)
-    
+
     return () => {
       el.removeEventListener('ended', handleEnded)
       el.pause()
@@ -186,9 +189,12 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
 
 
 
+  // Sequence background video automatically if there are multiple videos
+  const { currentVideoUrl: activeVideoUrl, isSingleVideo } = useAnimeBackgroundSequencer(activeAnime)
+
   // Synchronize active anime video (not audio) with MediaOrchestrator
   useEffect(() => {
-    const videoUrl = activeAnime.videoUrl
+    const videoUrl = activeVideoUrl
     const coverUrl = activeAnime.coverImage
 
     updateSession({
@@ -200,9 +206,11 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
         coverUrl,
         theme: 'dark',
         metadataUrl: null
-      }
+      },
+      loopVideo: isSingleVideo,
+      crossfade: false
     })
-  }, [activeAnime, updateSession])
+  }, [activeAnime, activeVideoUrl, isSingleVideo, updateSession])
 
   // ── "Continue Exploring" navigation: carousel is the navigator ──
   const handleExplore = useCallback((animeId: string) => {
@@ -289,37 +297,37 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
         }}
         data-prism-phase={readingStarted ? 'read' : 'explore'}
       >
-          <div
-            className="anime-prism"
-            style={{
-              position: 'relative',
-              '--prism-surface': 'linear-gradient(to bottom, rgba(12,12,12,0.55) 0%, rgba(18,18,18,0.72) 55%, rgba(10,10,10,0.92) 100%)',
-              '--prism-surface-alt': 'rgba(14,14,14,0.9)',
-              '--prism-border': 'rgba(255,255,255,0.045)',
-              '--prism-border-strong': 'rgba(255,255,255,0.07)',
-              '--prism-border-stronger': 'rgba(226,220,210,0.30)',
-              '--prism-text-primary': 'rgba(250,248,243,0.97)',
-              '--prism-text-secondary': 'rgba(228,222,212,0.66)',
-              // Ambient weight, driven by scroll — soft black presence, no glow
-              filter: 'drop-shadow(0 18px 55px rgba(0,0,0,calc(0.55 * var(--carousel-glow)))) drop-shadow(0 0 46px rgba(124,112,98,calc(0.05 * var(--carousel-glow))))',
-            } as React.CSSProperties}
-          >
-            <Prism
-              items={prismItems}
-              activeIndex={activeIndex + 1}
-              onChange={(idx) => onIndexChange(idx - 1)}
-              config={{
-                cardWidth: 180,
-                cardHeight: 280,
-                radius: Math.max(320, Math.round((prismItems.length * 220) / (2 * Math.PI))),
-                perspective: 1100,
-              }}
-              showNavigation={false}
-              showIndicators={true}
-              renderCard={(item) => (
-                <AnimeCardContent item={item} />
-              )}
-            />
+        <div
+          className="anime-prism"
+          style={{
+            position: 'relative',
+            '--prism-surface': 'linear-gradient(to bottom, rgba(12,12,12,0.55) 0%, rgba(18,18,18,0.72) 55%, rgba(10,10,10,0.92) 100%)',
+            '--prism-surface-alt': 'rgba(14,14,14,0.9)',
+            '--prism-border': 'rgba(255,255,255,0.045)',
+            '--prism-border-strong': 'rgba(255,255,255,0.07)',
+            '--prism-border-stronger': 'rgba(226,220,210,0.30)',
+            '--prism-text-primary': 'rgba(250,248,243,0.97)',
+            '--prism-text-secondary': 'rgba(228,222,212,0.66)',
+            // Ambient weight, driven by scroll — soft black presence, no glow
+            filter: 'drop-shadow(0 18px 55px rgba(0,0,0,calc(0.55 * var(--carousel-glow)))) drop-shadow(0 0 46px rgba(124,112,98,calc(0.05 * var(--carousel-glow))))',
+          } as React.CSSProperties}
+        >
+          <Prism
+            items={prismItems}
+            activeIndex={activeIndex + 1}
+            onChange={(idx) => onIndexChange(idx - 1)}
+            config={{
+              cardWidth: 180,
+              cardHeight: 280,
+              radius: Math.max(320, Math.round((prismItems.length * 220) / (2 * Math.PI))),
+              perspective: 1100,
+            }}
+            showNavigation={false}
+            showIndicators={true}
+            renderCard={(item) => (
+              <AnimeCardContent item={item} />
+            )}
+          />
 
         </div>
 
@@ -336,12 +344,12 @@ export function Stage({ animeList, defaultUniverse, activeIndex, onIndexChange, 
 
         {/* Scroll Indicator to prompt user to scroll down for the manuscript */}
         {!hasNoAnime && (
-          <div 
-            className="anime-scroll-indicator-wrapper" 
+          <div
+            className="anime-scroll-indicator-wrapper"
             aria-hidden
-            style={{ 
+            style={{
               position: 'absolute',
-              bottom: '18%', 
+              bottom: '18%',
               left: '50%',
               transform: 'translateX(-50%)',
               opacity: 'var(--indicator-opacity)',

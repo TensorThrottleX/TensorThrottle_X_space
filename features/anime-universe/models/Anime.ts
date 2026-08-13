@@ -12,6 +12,7 @@ export interface Anime {
   characters: Character[]
   coverImage: string | null
   videoUrl: string | null
+  videoUrls?: string[]
   audioTracks: string[]
   updatedAt?: string
 

@@ -156,6 +156,7 @@ export const BackgroundVideoEngine = forwardRef<{ reanalyze: () => void }, Backg
       isAnalyzing: _isAnalyzing,
       onRuntimeMetrics,
       disablePip = false,
+      loop = true,
     } = props
 
     const strategy = strategyProp ?? createDefaultStrategy()
@@ -338,7 +339,7 @@ export const BackgroundVideoEngine = forwardRef<{ reanalyze: () => void }, Backg
               ref={videoARef}
               src={activeSrc ?? undefined}
               autoPlay
-              loop
+              loop={loop}
               muted
               playsInline
               preload={strategy.preloadStrategy}
@@ -365,7 +366,7 @@ export const BackgroundVideoEngine = forwardRef<{ reanalyze: () => void }, Backg
               ref={videoBRef}
               src={activeSrc ?? undefined}
               autoPlay
-              loop
+              loop={loop}
               muted
               playsInline
               preload={strategy.preloadStrategy}
@@ -405,7 +406,6 @@ export const BackgroundVideoEngine = forwardRef<{ reanalyze: () => void }, Backg
             width: '100vw',
             height: '100vh',
             overflow: 'hidden',
-            zIndex: 5,
             ...(!isVisible ? { display: 'none' } : {}),
           }}
         >
@@ -413,7 +413,7 @@ export const BackgroundVideoEngine = forwardRef<{ reanalyze: () => void }, Backg
             ref={videoARef}
             src={activeSrc ?? undefined}
             autoPlay
-            loop
+            loop={loop}
             muted
             playsInline
             preload={strategy.preloadStrategy}

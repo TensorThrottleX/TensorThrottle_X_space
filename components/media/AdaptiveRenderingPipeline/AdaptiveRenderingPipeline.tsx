@@ -17,6 +17,7 @@ export interface AdaptiveRenderingPipelineProps {
   children?: React.ReactNode
   enableTelemetry?: boolean
   disablePip?: boolean
+  loop?: boolean
 }
 
 export const AdaptiveRenderingPipeline = forwardRef<
@@ -34,6 +35,7 @@ export const AdaptiveRenderingPipeline = forwardRef<
     children,
     enableTelemetry = false,
     disablePip = false,
+    loop = true,
   } = props
 
   const {
@@ -64,6 +66,7 @@ export const AdaptiveRenderingPipeline = forwardRef<
       className={className}
       onRuntimeMetrics={handleRuntimeMetrics}
       disablePip={disablePip}
+      loop={loop}
     >
       {children}
     </BackgroundVideoEngine>
